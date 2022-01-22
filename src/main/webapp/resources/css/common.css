@@ -349,7 +349,7 @@ hr{
 
 .main_content3 > div > div:nth-child(2){
     width: 380px;
-    height: 340px;
+    height: 380px;
     border: none;
     border-radius: 50%;
     position: relative;
@@ -359,30 +359,28 @@ hr{
 
 .main_content3 > div > div:nth-child(2) > div{
     width: 100%;
-    height: 434px;
+    height: 475px;
     position: absolute;
-    bottom: -17px;
-    left: 0px;
-    border-bottom-left-radius: 45%;
-    border-bottom-right-radius: 45%;
-    background-image: url(../imgs/profile1.png);
+    bottom: 0px;
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
+    background: url(../images/profile1.png) no-repeat center center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-x: -10px;
-    background-position-y: -10px;
+    background-position-y: 22px;
 }
 
 /* 메인 컨텐트 4 */
 
 .main_content4{
-    height: 620px;
+    height: 695px;
     margin: 0 auto;
     position: relative;
 }
 
 .main_content4_bc{
     /* background-color: #f8f8f8; */
-    background-color: #A59999;
+    background-color: #f8f8f8;
     height: 70%;
     position: absolute;
     width: 100%;
@@ -394,32 +392,71 @@ hr{
     position: absolute;
     width: 75%;
     height: 100%;
-    border: 1px solid black;
     margin: 0 auto;
     left: 0;
     right: 0;
+    justify-content: space-between;
+    padding-top: 75px;
 }
-.main_content4_content > div:first-child{
-    width: 35%;
+.main_content4_content_left{
+    width: 28%;
     height: 100%;
 
 }
 
 .main_content4_content > div:last-child{
-    width: 65.5%;
+    width: 65%;
     height: 100%;
     
 }
 
 .main_content4_content > div:first-child > div:first-child{
-    border: 2px solid #000;
-    width: 7em;
+    width: 6em;
     height: 38px;
     border-radius: 38px;
     text-align: center;
     padding: 8px 0;
     font-size: 15px;
     font-weight: 600;
+    color: rgb(92 92 92);
+    border: 2.5px solid rgb(92 92 92);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.main_content4_content > div:first-child > div:nth-child(2){
+    height: 580px;
+    width: 100%;
+}
+
+.main_content4_content_left_item{
+    padding: 20px 20px;
+    border-bottom: 1px solid #f1f1f1;
+    display: flex;
+}
+
+.main_content4_content_left_item > div:first-child{
+    letter-spacing: 1px;
+}
+
+.main_content4_content_left_item > div:first-child > span:first-child{
+    font-size: 46px;
+    font-weight: bold;
+}
+
+.main_content4_content_left_item > div:first-child > span:last-child{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.main_content4_content_left_item > div:last-child{
+    margin-left: 10px;
+    padding-top: 8px;
+}
+
+.main_content4_content_left_item > div:last-child > p{
+    font-size: 19px;
+    font-weight: 500;
 }
 
 
@@ -427,7 +464,10 @@ hr{
 
 
 
-
+.main_content4_content_postit{
+    width: 100%;
+    height: 280px;
+}
 
 
 
