@@ -37,9 +37,9 @@
 	<!--<beans:bean id="chatHandler"
 				class="edu.kh.fin.chat.websocket.ChatWebsocketHandler" />
 -->
-	<websocket:handlers>
-
 		<!-- 웹소켓과 매핑할 요청 주소 -->
+	<!--<websocket:handlers>
+
 		<websocket:mapping handler="chatHandler"
 						   path="/chat" />
 
@@ -50,7 +50,7 @@
 
 		<websocket:sockjs/>
 
-	</websocket:handlers>
+	</websocket:handlers>-->
 
 	<!-- AOP + proxy -->
 	<aop:aspectj-autoproxy/>
