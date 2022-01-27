@@ -1,0 +1,156 @@
+.main_content div > .title{font-size:26px; height:64px; line-height:62px; margin: 40px 0 60px 20px;}
+
+/* 상담 예약 조회(s) */
+.appointment{margin:20px;}
+
+.appointment > .select-area{width:100%; text-align:right; margin:10px 0;}
+.appointment > .select-area > select{width:100px; height:30px;}
+.appointment > .select-area > select > option {width:100px; height:30px;}
+
+.appointment_list > ul > li{height:46px; line-height:44px; clear:both;}
+.appointment_list > ul > li > div{float:left; width:20%; text-align:center; height:46px; line-height:44px;}
+.appointment_list > ul > li:first-child > div{font-size:18px; font-weight:bold; border-bottom:1px solid #666;}
+
+.appointment_list > ul > li > .img_div{display:none;}
+
+/* 상담 예약 조회(e) */
+
+
+/* 지난 상담 내역(s) */
+.appointmentPast{margin:20px;}
+
+.appointmentPast_list > ul > li > div{float:left; width:16%; text-align:center; height:46px; line-height:44px; letter-spacing: -1px;}
+.appointmentPast_list > ul > li > div:nth-child(2), .appointmentPast_list > ul > li > div:last-child{width:18%;} 
+.appointmentPast_list > ul > li:first-child > div{font-size:18px; font-weight:bold; border-bottom:1px solid #666;}
+.appointmentPast_list > ul > li{height:46px; line-height:44px; clear:both;}
+
+.appointmentPast_list > ul > li > .img_div{display:none;}
+.appointmentPast_list > ul > li > div:last-child > .btn{width:48%; padding:3px 0px; margin:0 1%;}
+.appointmentPast_list > ul > li > div:last-child > .btn:hover{background-color:#E5D4C5;}
+/* 지난 상담 내역(e) */
+
+
+/* 감정 기록(s) */
+.emotion_diary{margin:40px;}
+.emotion_diary .sub_title{margin:20px auto; width: 100%; text-align: center; font-size: 24px;}
+.emotion_diary > .progress_area{margin-left:15%;}
+
+.progress_statistic > .progress_bar{height:48px; line-height:46px; font-size:18px;}
+.progress_statistic > .progress_bar > .name{width:25%; display:inline-block;}
+.progress_statistic > .progress_bar > progress{width:70%; height:20px; vertical-align:middle;}
+
+progress{color: #E5D4C5; font-size: .6em; line-height: 1.5em; text-indent: .5em; width: 15em; height: 1.8em; border: 1px solid #ddd; border-radius:25px; background: #fff;}
+progress::-webkit-progress-bar{background:#ededed; border-radius: 0 25px 25px 0;}
+progress.type01::-webkit-progress-value{background:#8EED97; border-radius: 25px;}
+progress.type02::-webkit-progress-value{background:#EDD88E; border-radius: 25px;}
+progress.type03::-webkit-progress-value{background:#ED8E8E; border-radius: 25px;}
+progress.type04::-webkit-progress-value{background:#00f7d6; border-radius: 25px;}
+progress::-moz-progress-bar{background:#E5D4C5;}
+
+.emotion_diary > .option_area{margin-left:15%; margin-top:40px;}
+.emotion_diary > .option_area > .option_statistic > ul > li{float:left; width:20%; min-width:90px; height:36px; line-height:34px; text-align:center;}
+.emotion_diary > .option_area > .option_statistic > ul::after{content:""; display:block; clear:both;}
+.emotion_diary > .option_area > .agree_area{height: 36px; line-height: 34px; text-align: right; margin: 20px;}
+
+.emotion_diary > .diary_area{margin-left:15%; margin-top:40px;}
+.emotion_diary > .diary_area > textarea{width:100%; height:72px; resize:none; border-radius:10px;}
+.emotion_diary > .diary_area > .agree_area{height: 36px; line-height: 34px; text-align: right; margin: 20px;}
+
+.emotion_diary > .submit_area{margin-left:15%; margin-top:40px; text-align: center;}
+.emotion_diary > .submit_area > button{width: 30%; height:36px; margin:0 10px;}
+/* 감정 기록(e) */
+
+
+/* 감정 기록(s) */
+
+.highlight a{background-color : #E5D4C5 !important;background-image :none !important; color: #000 !important; font-weight:bold !important; border-color: #E5D4C5;}
+.emotion_record{margin:40px;}
+.emotion_record > .regist_area{margin-left:15%; text-align: center;}
+.emotion_record > .regist_area > .sub_title{margin:20px auto; width: 100%; text-align: center; font-size: 24px;}
+.emotion_record > .regist_area > a > .emotion_regist{margin: 0px auto 40px; width: 50%; height: 50px; line-height: 48px; border-radius: 10px; border: 1px solid #ddd; background: #E5D4C5; color: #fff;}
+.emotion_record > .calendar_area{margin-left:15%;}
+.emotion_record > .progress_area{margin-left:15%; margin-top:80px;}
+
+.emotion_record > .option_area{margin-left:15%; margin-top:80px;}
+.emotion_record > .option_area > .option_statistic > ul > li{float:left; width:20%; min-width:90px; height:36px; line-height:34px; text-align:center;}
+.emotion_record > .option_area > .option_statistic > ul::after{content:""; display:block; clear:both;}
+
+.emotion_record > .diary_area{margin-left:15%; margin-top:80px;}
+.emotion_record > .diary_area > textarea{width:100%; height:72px; resize:none; border-radius:10px;}
+/* 감정 기록(s) */
+
+@media screen and (max-width: 950px) {
+    /* 상담 예약 조회(s) */
+    .appointment_list > ul > li > div{font-size:13px;}
+    .appointment_list > ul > li:first-child > div{font-size:15px;}
+    /* 상담 예약 조회(e) */
+
+    /* 지난 상담 내역(s) */
+    .appointmentPast{margin:20px 0;}
+    .appointmentPast_list > ul > li > div{font-size:13px;}
+    .appointmentPast_list > ul > li:first-child > div{font-size:13px;}
+    /* 지난 상담 내역(e) */
+
+    /* 감정 기록(s)*/
+    .emotion_diary .sub_title{font-size: 20px; letter-spacing:-1px;}
+    .progress_statistic > .progress_bar{font-size:14px;}
+    /* 감정 기록(e)*/
+}
+
+/* 모바일 */
+@media screen and (max-width: 768px) {
+    /* 상담 예약 조회(s) */
+    .appointment > .title{font-size:24px; border-bottom:1px solid #000; margin:0;}
+    .appointment_list > ul > li:first-child{display:none;}
+    .appointment_list > ul > li{width: 100%; height:100px; position: relative; padding:5px 0; border-bottom:1px solid #666;}
+    .appointment_list > ul > li > div{text-align: left; float:left; margin-left:10px; font-size:13px;}
+    .appointment_list > ul > li > .img_div{display:inline-block; width:90px; height:90px; margin:0;}
+    .appointment_list > ul > li > .img_div > img{width:90px; height:90px;}
+    .appointment_list > ul > li > .date_div{width:75px; height:20px; line-height:18px; margin-top:6px;}
+    .appointment_list > ul > li > .time_div{width:calc(100% - 200px); height:20px; line-height:18px; margin-left:0; margin-top:6px;}
+    .appointment_list > ul > li > .profession_div{width:calc(100% - 110px); height:20px; line-height:18px;}
+    .appointment_list > ul > li > .profession_div::after{content: " 상담사";}
+    .appointment_list > ul > li > .category_div{font-size:16px; height:40px; line-height:38px;}
+    .appointment_list > ul > li > .status_div{clear: both; position: absolute; right: 0; width:80px; height: 50px; top: 25px; font-size:16px; margin:0;}
+    /* 상담 예약 조회(e) */
+
+    /* 지난 상담 내역(s) */
+    .appointment > .title{font-size:24px; border-bottom:1px solid #000; margin:0;}
+    .appointmentPast_list > ul > li:first-child{display:none;}
+    .appointmentPast_list > ul > li{width: 100%; height:100px; position: relative; padding:5px 0; border-bottom:1px solid #666;}
+    .appointmentPast_list > ul > li > div{text-align: left; float:left; margin-left:10px; font-size:13px; letter-spacing:0;}
+
+    .appointmentPast_list > ul > li > div:nth-child(2){width:75px;}
+    .appointmentPast_list > ul > li > div:last-child{width:100px;}
+
+    .appointmentPast_list > ul > li > .img_div{display:inline-block; width:90px; height:90px; margin:0;}
+    .appointmentPast_list > ul > li > .img_div > img{width:90px; height:90px;}
+    .appointmentPast_list > ul > li > .date_div{width:75px; height:20px; line-height:18px; margin-top:6px;}
+    .appointmentPast_list > ul > li > .time_div{width:calc(100% - 200px); height:20px; line-height:18px; margin-left:0; margin-top:6px;}
+    .appointmentPast_list > ul > li > .profession_div{width:calc(100% - 110px); height:20px; line-height:18px;}
+    .appointmentPast_list > ul > li > .profession_div::after{content: " 상담사";}
+    .appointmentPast_list > ul > li > .category_div{font-size:16px; height:40px; line-height:38px; width:50px;}
+    .appointmentPast_list > ul > li > .status_div{font-size:16px; height:40px; line-height:38px; width:50px;}
+    .appointmentPast_list > ul > li > .review_div{clear: both; position: absolute; right: 0; width:80px; height: 50px; top: 25px; font-size:16px; margin:0; text-align:center;}
+    /* 지난 상담 내역(e) */
+
+    /* 감정 기록 등록(s) */
+    .emotion_diary > .progress_area{margin:40px auto 20px;}
+    .progress_statistic{border:1px solid #ddd; border-radius: 10px; padding:20px;}
+    .progress_statistic > .progress_bar{height:75px;}
+    .progress_statistic > .progress_bar > .name{display:block; height:28px;}
+    .progress_statistic > .progress_bar > progress{width:100%;}
+
+    .emotion_diary > .option_area{margin:40px auto 20px;}
+    .option_statistic{border:1px solid #ddd; border-radius: 10px; padding:20px;}
+    .emotion_diary > .diary_area{margin:40px auto 20px;}
+    .emotion_diary > .diary_area > textarea{height:100px;}
+    .emotion_diary > .submit_area{margin:40px auto 20px;}
+    /* 감정 기록 등록(e) */
+
+
+   
+}
+
+
+
