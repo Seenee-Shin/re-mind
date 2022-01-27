@@ -23,4 +23,17 @@ public class MyController {
 
         return "my/appointmentPast";
     }
+
+    @RequestMapping("emotionDiary")
+    public String emotionDiary() {
+
+        return "my/emotionDiary";
+    }
+
+    @RequestMapping("emotionRecord")
+    public String emotionRecord() {
+
+        return "my/emotionRecord";
+    }
+
 }
