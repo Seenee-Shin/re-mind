@@ -34,38 +34,21 @@
 	<!-- @Scheduled 어노테이션 -->
 	<task:annotation-driven/>
 
-<<<<<<< HEAD
+		<!-- 웹소켓과 매핑할 요청 주소 -->
 	<!--<beans:bean id="chatHandler"
 				class="edu.kh.fin.chat.websocket.ChatWebsocketHandler" />
--->
-		<!-- 웹소켓과 매핑할 요청 주소 -->
-	<!--<websocket:handlers>
-
+	<websocket:handlers>
 		<websocket:mapping handler="chatHandler"
 						   path="/chat" />
-=======
-<!--	<beans:bean id="chatHandler"-->
-<!--				class="edu.kh.fin.chat.websocket.ChatWebsocketHandler" />-->
 
-<!--	<websocket:handlers>-->
->>>>>>> 4395944328194d8f0af44b08d800415a64aacaaa
+		<websocket:handshake-interceptors>
+			<beans:bean
+					class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
 
-<!--		&lt;!&ndash; 웹소켓과 매핑할 요청 주소 &ndash;&gt;-->
-<!--		<websocket:mapping handler="chatHandler"-->
-<!--						   path="/chat" />-->
+		<websocket:sockjs/>
 
-<!--		<websocket:handshake-interceptors>-->
-<!--			<beans:bean-->
-<!--					class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>-->
-<!--		</websocket:handshake-interceptors>-->
-
-<<<<<<< HEAD
 	</websocket:handlers>-->
-=======
-<!--		<websocket:sockjs/>-->
-
-<!--	</websocket:handlers>-->
->>>>>>> 4395944328194d8f0af44b08d800415a64aacaaa
 
 	<!-- AOP + proxy -->
 	<aop:aspectj-autoproxy/>
