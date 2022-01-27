@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%-- JSTL c태그 사용을 위한 taglib 추가 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
         </section>
     <!-- 메인 -->
@@ -15,4 +14,9 @@
         </article>
     </section>
     </footer>
-    <script src="../../js/common.js"></script>
+
+        <!-- Swiper JS -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+        <script src="${contextPath}/resources/js/common/common.js"></script>
+        <script src="${contextPath}/resources/js/common/main.js"></script>
