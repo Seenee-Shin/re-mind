@@ -26,21 +26,21 @@
 			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%p] %m%n" />
 		</layout>
 	</appender>
-	
+
 	<!-- Application Loggers -->
 	<logger name="edu.kh.mind">
 		<level value="info" />
 	</logger>
-	
+
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
-	
+
 	<logger name="org.springframework.beans">
 		<level value="info" />
 	</logger>
-	
+
 	<logger name="org.springframework.context">
 		<level value="info" />
 	</logger>
@@ -55,5 +55,5 @@
 		<appender-ref ref="console" />
 		<appender-ref ref="dailyRollingFile" />
 	</root>
-	
+
 </log4j:configuration>

@@ -8,9 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
 
     <!-- modal + popup -->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my.css">
+
+    <!-- 글꼴 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap"
+          rel="stylesheet">
+    <!-- 애니메이션 효과 라이브러리 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- 스와이퍼 CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <!-- 아이콘 -->
     <script src="https://kit.fontawesome.com/5e0a99db98.js" crossorigin="anonymous"></script>
@@ -122,6 +133,3 @@
                 </li>
             </ul>
         </article>
-
-
-

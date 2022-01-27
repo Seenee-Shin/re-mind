@@ -3,13 +3,14 @@ const togle = document.querySelector('.headermenu_togle')
 const menu = document.querySelector('.dep1')
 const sub_menu = document.querySelectorAll('.dep2')
 
-togle.addEventListener('click', ()=>{
-    menu.classList.toggle('active')
-})
+// togle.addEventListener('click', ()=>{
+//     menu.classList.toggle('active')
+// })
 
-menu.addEventListener('click',()=>{
+// menu.addEventListener('click',()=>{
+    
+// })
 
-})
 
 
 const closePopup = document.querySelectorAll(".close_popup_btn");
@@ -23,8 +24,6 @@ for(let i =0; i< closePopup.length; i++) {
         modal.style.display = "none";
         // 팝업 내용 지우기
         layerPopupContent.innerHTML = "";
-
+        
     });
 }
-
-
