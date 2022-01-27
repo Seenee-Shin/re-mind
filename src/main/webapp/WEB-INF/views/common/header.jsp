@@ -47,7 +47,7 @@
         <article class="header_menu_wrap">
             <ul class="dep1">
                 <li>
-                    <a href="#">상담예약123</a> <p class="menu_toggle">+</p>
+                    <a href="#">상담예약</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
                         <li><a href="#">상담사 찾기</a></li>
                         <li><a href="#">상담센터 찾기</a></li>
@@ -102,6 +102,7 @@
 <main>
     <section class="main_wrap">
         <!-- 사이드 메뉴가 없는 부분은 지우고 사용 -->
+        <c:if test="${!requestScope.header.equals('main')}">
         <article class="dark-brown side_menu">
             <h3>마이페이지</h3>
             <ul>
@@ -133,3 +134,4 @@
                 </li>
             </ul>
         </article>
+        </c:if>
