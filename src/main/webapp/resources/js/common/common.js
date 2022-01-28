@@ -28,3 +28,11 @@ for(let i =0; i< closePopup.length; i++) {
         layerPopupContent.innerHTML = "";
     });
 }
+
+// popup open
+function layerPopup (layerPopup) {
+    $(".layer_popup_content").load("../popup/" + layerPopup, function () {
+        $(".modal").show();
+        $(".popup_wrap").show();
+    });
+}
