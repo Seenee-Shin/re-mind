@@ -217,7 +217,7 @@ if(window.innerWidth > 1200){
     })
 }else if(window.innerWidth <= 1200){
     menuWarp.css("top", (innerHeight - 60) + "px").css("height", innerHeight);
-    $(".upArrow > img").attr("src", "images/upload.png");
+    $(".upArrow > img").attr("src", contextPath + "/resources/images/my/upload.png");
 
     // menuWarp, menuView 클릭 시
     $(document).on("click", menuAll, function(){
@@ -244,12 +244,12 @@ if(window.innerWidth > 1200){
 
     $(document).on("click", ".upArrow", function(){
 
-        if($(".upArrow > img").attr("src") == "images/upload.png"){
-            $(".upArrow > img").attr("src", "images/arrow-down-sign-to-navigate.png")
+        if($(".upArrow > img").attr("src") == contextPath + "/resources/images/my/upload.png"){
+            $(".upArrow > img").attr("src", contextPath + "/resources/images/my/arrow-down-sign-to-navigate.png")
             menuWarp.css("top", "0");
 
         }else{
-            $(".upArrow > img").attr("src", "images/upload.png");
+            $(".upArrow > img").attr("src", contextPath + "/resources/images/my/upload.png");
             menuWarp.css("top", (innerHeight - 60) + "px");
 
         }

@@ -61,7 +61,7 @@
             </div>
 
             <div class="opImg">
-                <img src="images/options.png">
+                <img src="${contextPath}/resources/images/my/options.png">
                 <div>수정하기</div>
                 <div>삭제하기</div>
             </div>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="opImg">
-                <img src="images/options.png">
+                <img src="${contextPath}/resources/images/my/options.png">
                 <div>수정하기</div>
                 <div>삭제하기</div>
             </div>

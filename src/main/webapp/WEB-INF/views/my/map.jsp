@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,10 +20,10 @@
 <div id="map" style="width: 100%; text-align: center;">
     <div id="menu-warp">
         <div class="upArrow" style="text-align: center; cursor: pointer; height: 30px;">
-            <img width="15" height="15" src="images/upload.png">
+            <img width="15" height="15" src="${contextPath}/resources/images/my/upload.png">
         </div>
         <div class="option" style="text-align: center; cursor: pointer;">
-            내 위치로 이동<img width="15" height="15" src="images/gps.png">
+            내 위치로 이동<img width="15" height="15" src="${contextPath}/resources/images/my/gps.png">
         </div>
         <hr>
         <ul id="placesList">
@@ -117,7 +118,7 @@
                 <div class="map-info">
 
                     <div class="img-img" style="width: 20%;">
-                        <img src="images/premium-icon-hospital-3606564.png">
+                        <img src="${contextPath}/resources/images/my/premium-icon-hospital-3606564.png">
                         <!-- <div style="font-size: 28px; text-align: center; line-height: 60px;">1</div> -->
                     </div>
 
@@ -134,7 +135,7 @@
                 <div class="map-info">
 
                     <div class="img-img" style="width: 20%;">
-                        <img src="images/premium-icon-hospital-3606564.png">
+                        <img src="${contextPath}/resources/images/my/premium-icon-hospital-3606564.png">
                     </div>
 
                     <div class="container" style="width: 75%; display: inline-block;">
@@ -150,7 +151,7 @@
                 <div class="map-info">
 
                     <div class="img-img" style="width: 20%;">
-                        <img src="images/premium-icon-hospital-3606564.png">
+                        <img src="${contextPath}/resources/images/my/premium-icon-hospital-3606564.png">
                     </div>
 
                     <div class="container" style="width: 75%; display: inline-block;">
@@ -239,6 +240,9 @@
 
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9cc932f2cb179a77079e2c667dab98a&libraries=services"></script> -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9cc932f2cb179a77079e2c667dab98a&libraries=services,clusterer,drawing"></script>
+<script>
+    const contextPath = "${contextPath}";
+</script>
 <script src="${contextPath}/resources/js/my/map.js"></script>
 </body>
 
