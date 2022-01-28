@@ -13,6 +13,8 @@
     <!-- modal + popup -->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my.css">
 
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
+
     <!-- 글꼴 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +36,22 @@
 4. 만약 와이어프레임이 정확하지 않거나 헷갈리는 부분은 피그마에서 확인 후 단톡에 질문해 주세요
 5.  width는 %로 정해줍니다.
 -->
+
+<!-- modal (close : layer_popup)-->
+<div class="modal close_popup_btn"></div>
+<div class="popup_wrap" style="display:none;">
+    <!-- 작성 부분 -->
+    <div class="layer_popup">
+        <!-- <div class="layer-popup popup_500"> -->
+        <!-- 닫기 버튼 -->
+        <div class="close_popup">
+            <a class="close_popup_btn"><img src="${contextPath}/resources/images/icon/close_btn.png"></a>
+        </div>
+        <div class="layer_popup_content"></div>
+    </div>
+    <!-- //작성 부분 -->
+</div>
+<!-- //modal (close : layer_popup)-->
 
 <header>
     <!-- 헤더 -->
