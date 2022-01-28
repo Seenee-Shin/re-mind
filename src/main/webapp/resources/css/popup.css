@@ -29,6 +29,8 @@
 .signup_box{padding:40px;}
 .signup_box > .input_wrap{display:inline-block; width:100%;}
 .signup_box > .input_wrap > .input_area{display:inline-block; width:47%;}
+
+
 @media screen and (max-width: 768px) {
     .signup_box{padding:0 40px;}
     .signup_box > .input_wrap > .input_area{width:100%;}

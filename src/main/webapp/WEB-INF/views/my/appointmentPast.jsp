@@ -38,7 +38,7 @@
 					<div class="category_div">채팅</div>
 					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
 					<div class="review_div">
-						<button type="button" class="btn">작성</button>
+						<button type="button" class="btn">후기작성</button>
 					</div>
 				</li>
 				<li>
@@ -49,7 +49,7 @@
 					<div class="category_div">채팅</div>
 					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
 					<div class="review_div">
-						<button type="button" class="btn">상세</button>
+						<button type="button" class="btn">상세내역</button>
 					</div>
 				</li>
 				<li>
@@ -60,7 +60,7 @@
 					<div class="category_div">채팅</div>
 					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
 					<div class="review_div">
-						<button type="button" class="btn">작성</button>
+						<button type="button" class="btn">후기작성</button>
 					</div>
 				</li>
 			</ul>

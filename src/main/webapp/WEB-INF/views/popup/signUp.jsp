@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
+<link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
+
 
 <div id="signup_area">
 	<div class="top_title_wrap">
