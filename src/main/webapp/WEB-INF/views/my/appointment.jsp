@@ -6,6 +6,7 @@
 <!-- header include -->
 <jsp:include page="../common/header.jsp"></jsp:include>
 
+
 <article class="main_content">
 	<div class="appointment">
 		<div class="title">상담 예약 조회</div>
@@ -80,5 +81,9 @@
 
 
 </script>
+
+</body>
+</html>
+
 
 
