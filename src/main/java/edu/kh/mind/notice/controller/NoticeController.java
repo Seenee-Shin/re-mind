@@ -19,7 +19,7 @@ public class NoticeController {
 	@RequestMapping("list")
 	public String noticeList(Model model) {
 		
-		model.addAttribute("css", "noticeList");
+		model.addAttribute("css", "notice/noticeList");
 		
 		return "notice/noticeList";
 	}
@@ -27,7 +27,7 @@ public class NoticeController {
 	@RequestMapping("view")
 	public String noticeView(Model model) {
 		
-		model.addAttribute("css", "noticeView");
+		model.addAttribute("css", "notice/noticeView");
 		
 		return "notice/noticeView";
 	}
