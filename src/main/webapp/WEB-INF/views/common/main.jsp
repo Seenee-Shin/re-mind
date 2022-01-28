@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
 <!-- header include -->
-<jsp:include page="${contextPath}/WEB-INF/views/common/header.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 <!-- 메인 배너 -->
 <article class="main_banner">
     <div>
@@ -387,4 +387,4 @@
 
 
 <!-- footer include -->
-<jsp:include page="${contextPath}/WEB-INF/views/common/footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"></jsp:include>
