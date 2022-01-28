@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -19,22 +20,22 @@
 
 <div id="map" style="width: 100%; text-align: center;">
     <div id="menu-warp">
-        <div class="upArrow" style="text-align: center; cursor: pointer; height: 30px;">
-            <img width="15" height="15" src="${contextPath}/resources/images/my/upload.png">
+        <div class="upArrow">
+            <i class="fas fa-angle-up"></i>
         </div>
-        <div class="option" style="text-align: center; cursor: pointer;">
-            내 위치로 이동<img width="15" height="15" src="${contextPath}/resources/images/my/gps.png">
+        <div class="option" >
+            내 위치로 이동 <i class="fas fa-location-arrow" style="margin-left: 10px; color:#A59999;"></i>
         </div>
         <hr>
         <ul id="placesList">
             <li class="item">
                 <div class="info">
 
-                    <div class="img" style="width: 20%;">
+                    <div class="img" >
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE6---2DCrVkPCe2Bao73LEY-THyen07CuEg&usqp=CAU">
                     </div>
 
-                    <div class="container" style="width: 75%; display: inline-block;">
+                    <div class="container">
                         <h3>류관현 <span style="color: chocolate;">마스터 상담사</span></h3>
                         <h5>
                             온라인상담 |
@@ -59,11 +60,11 @@
             <li class="item">
                 <div class="info">
 
-                    <div class="img" style="width: 20%;">
+                    <div class="img" >
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE6---2DCrVkPCe2Bao73LEY-THyen07CuEg&usqp=CAU">
                     </div>
 
-                    <div class="container" style="width: 75%; display: inline-block;">
+                    <div class="container">
                         <h3>조용진 <span style="color: chocolate;">전문 상담사</span></h3>
                         <h5>
                             온라인상담 |
@@ -88,11 +89,11 @@
             <li class="item">
                 <div class="info">
 
-                    <div class="img" style="width: 20%;">
+                    <div class="img" >
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE6---2DCrVkPCe2Bao73LEY-THyen07CuEg&usqp=CAU">
                     </div>
 
-                    <div class="container" style="width: 75%; display: inline-block;">
+                    <div class="container">
                         <h3>서승준 <span style="color: chocolate;">전문 상담사</span></h3>
                         <h5>
                             온라인상담 |
@@ -117,15 +118,15 @@
             <li class="item">
                 <div class="map-info">
 
-                    <div class="img-img" style="width: 20%;">
+                    <div class="img-img" >
                         <img src="${contextPath}/resources/images/my/premium-icon-hospital-3606564.png">
                         <!-- <div style="font-size: 28px; text-align: center; line-height: 60px;">1</div> -->
                     </div>
 
-                    <div class="container" style="width: 75%; display: inline-block;">
-                        <h3 style="margin-bottom: 10px;">루비병원</h3>
+                    <div class="container" >
+                        <h3>루비병원</h3>
                         <div style="margin-bottom: 10px;">심리 상담 센터</div>
-                        <div style="margin-bottom: 10px;">219m(distance) | 서울 중구 명동9길 21 4층</div>
+                        <div>219m(distance) | 서울 중구 명동9길 21 4층</div>
                         <div style="margin-bottom: 10px;">02-000-0000</div>
                     </div>
 
@@ -134,15 +135,15 @@
             <li class="item">
                 <div class="map-info">
 
-                    <div class="img-img" style="width: 20%;">
+                    <div class="img-img" >
                         <img src="${contextPath}/resources/images/my/premium-icon-hospital-3606564.png">
                     </div>
 
-                    <div class="container" style="width: 75%; display: inline-block;">
-                        <h3 style="margin-bottom: 10px;">나사랑병원</h3>
-                        <div style="margin-bottom: 10px;">심리 상담 센터</div>
-                        <div style="margin-bottom: 10px;">428m(distance) | 서울 중구 충무로1가</div>
-                        <div style="margin-bottom: 10px;">02-000-0000</div>
+                    <div class="container" >
+                        <h3 >나사랑병원</h3>
+                        <div>심리 상담 센터</div>
+                        <div>428m(distance) | 서울 중구 충무로1가</div>
+                        <div>02-000-0000</div>
                     </div>
 
                 </div>
@@ -150,15 +151,15 @@
             <li class="item">
                 <div class="map-info">
 
-                    <div class="img-img" style="width: 20%;">
+                    <div class="img-img">
                         <img src="${contextPath}/resources/images/my/premium-icon-hospital-3606564.png">
                     </div>
 
-                    <div class="container" style="width: 75%; display: inline-block;">
-                        <h3 style="margin-bottom: 10px;">노원구 청소년상담복지센터</h3>
-                        <div style="margin-bottom: 10px;">심리 상담 센터</div>
-                        <div style="margin-bottom: 10px;">14km(distance) | 서울특별시 노원구 덕릉로 777</div>
-                        <div style="margin-bottom: 10px;">02-000-0000</div>
+                    <div class="container">
+                        <h3 >노원구 청소년상담복지센터</h3>
+                        <div >심리 상담 센터</div>
+                        <div>14km(distance) | 서울특별시 노원구 덕릉로 777</div>
+                        <div>02-000-0000</div>
                     </div>
 
                 </div>
