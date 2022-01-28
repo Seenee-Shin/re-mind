@@ -15,6 +15,16 @@ public class BoardController {
 
 	@Autowired
     private BoardService service;
+	//-------- 모바일 댓글창 --------------
+	
+	@RequestMapping("moblieComment")
+    public String mobileCommentView(Model model) {
+    	
+    	model.addAttribute("css", "board/mobileComment");
+    	model.addAttribute("header", "main");
+    	 
+        return "board/mobilComment";
+    }
 
 	//--------------자유게시판--------------------
     @RequestMapping("freeList")
@@ -66,6 +76,15 @@ public class BoardController {
     	model.addAttribute("header", "community");
     	 
         return "board/worryList";
+    }
+    
+    @RequestMapping("worryView")
+    public String worryBoardView(Model model) {
+    	
+    	model.addAttribute("css", "board/worryView");
+    	model.addAttribute("header", "community");
+    	 
+        return "board/worryView";
     }
     
     @RequestMapping("worryUpdate")
