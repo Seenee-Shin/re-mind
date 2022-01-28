@@ -6,14 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>마음연구소 RE:mind</title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
 
-    <!-- modal + popup -->
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my.css">
 
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
 
     <!-- 글꼴 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,35 +118,58 @@
     <section class="main_wrap">
         <!-- 사이드 메뉴가 없는 부분은 지우고 사용 -->
         <c:if test="${!requestScope.header.equals('main')}">
-        <article class="dark-brown side_menu">
-            <h3>마이페이지</h3>
-            <ul>
-                <li><a href="#">증상기록</a></li>
-                <hr>
-                <li><a href="#">마이상담</a>
-                    <ul>
-                        <li><a href="#">상담 예약 조회</a></li>
-                        <li><a href="#">지난 상담 내역</a></li>
-                        <li><a href="#">상담후기</a></li>
-                        <li><a href="#">찜한 상담사</a></li>
-                    </ul>
-                </li>
-                <hr>
-                <li><a href="#">마이활동</a>
-                    <ul>
-                        <li><a href="#">게시글 내역</a></li>
-                        <li><a href="#">쪽지</a></li>
-                        <li><a href="#">문의사항</a></li>
-                        <li><a href="#">차단한 회원</a></li>
-                    </ul>
-                </li>
-                <hr>
-                <li><a href="#">마이정보</a>
-                    <ul>
-                        <li><a href="">회원정보 수정</a></li>
-                        <li><a href="">회원탈퇴</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </article>
+        
+	        <c:choose>
+	        	<c:when test="${requestScope.header.equals('community')}">
+		            <section class="dark-brown side_menu">
+		                <h3>커뮤니티</h3>
+		                <hr>
+		                <ul class="side_menu_dep1">
+		                    <li class="w_side_menu"><a href="#">자유게시판</a></li>
+		                    <li class="m_side_menu"><a href="#">자유</a></li>
+		                    <li class="w_side_menu"><a href="#">고민상담 게시판</a> </li>
+		                    <li class="m_side_menu"><a href="#">고민상담</a></li>
+		                    <li class="w_side_menu"><a href="#">마인드포스팃</a></li>
+		                    <li class="m_side_menu"><a href="#">포스팃</a></li>
+		                    <li class="w_side_menu"><a href="#">털어놓기</a></li>
+		                    <li class="m_side_menu"><a href="#">털어놓기</a></li>
+		                </ul>
+		            </section>
+	        	</c:when>
+	        	
+	        	
+	        	<c:otherwise>
+			        <article class="dark-brown side_menu">
+			            <h3>마이페이지</h3>
+			            <ul>
+			                <li><a href="#">증상기록</a></li>
+			                <hr>
+			                <li><a href="#">마이상담</a>
+			                    <ul>
+			                        <li><a href="#">상담 예약 조회</a></li>
+			                        <li><a href="#">지난 상담 내역</a></li>
+			                        <li><a href="#">상담후기</a></li>
+			                        <li><a href="#">찜한 상담사</a></li>
+			                    </ul>
+			                </li>
+			                <hr>
+			                <li><a href="#">마이활동</a>
+			                    <ul>
+			                        <li><a href="#">게시글 내역</a></li>
+			                        <li><a href="#">쪽지</a></li>
+			                        <li><a href="#">문의사항</a></li>
+			                        <li><a href="#">차단한 회원</a></li>
+			                    </ul>
+			                </li>
+			                <hr>
+			                <li><a href="#">마이정보</a>
+			                    <ul>
+			                        <li><a href="">회원정보 수정</a></li>
+			                        <li><a href="">회원탈퇴</a></li>
+			                    </ul>
+			                </li>
+			            </ul>
+			        </article>
+	        	</c:otherwise>
+	        </c:choose>
         </c:if>
