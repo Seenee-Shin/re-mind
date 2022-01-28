@@ -12,18 +12,27 @@ const sub_menu = document.querySelectorAll('.dep2')
 // })
 
 
-
+// modal close + popup close
 const closePopup = document.querySelectorAll(".close_popup_btn");
 const modal = document.querySelector(".modal");
+const popupWrap = document.querySelector(".popup_wrap");
 const layerPopupContent = document.querySelector(".layer_popup_content");
-// modal close + popup close
 for(let i =0; i< closePopup.length; i++) {
     closePopup[i].addEventListener("click", () => {
         console.log("TEST");
         // 모달 close
         modal.style.display = "none";
+        popupWrap.style.display = "none";
+
         // 팝업 내용 지우기
         layerPopupContent.innerHTML = "";
-        
+    });
+}
+
+// popup open
+function layerPopup (layerPopup) {
+    $(".layer_popup_content").load("../popup/" + layerPopup, function () {
+        $(".modal").show();
+        $(".popup_wrap").show();
     });
 }

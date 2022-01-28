@@ -7,24 +7,17 @@
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <article class="main_content">
-	<div class="appointment">
-		<div class="title">상담 예약 조회</div>
-		<div class="select-area">
-			<select>
-				<option>전체</option>
-				<option>상담 대기</option>
-				<option>상담 완료</option>
-				<option>상담 취소</option>
-			</select>
-		</div>
-		<div class="appointment_list">
+	<div class="appointmentPast">
+		<div class="title">지난 상담 내역</div>
+		<div class="appointmentPast_list">
 			<ul>
 				<li>
-					<div>예약 날짜</div>
-					<div>예약 시간</div>
+					<div>날짜</div>
+					<div>시간</div>
 					<div>상담사</div>
-					<div>상담 유형</div>
-					<div>상태</div>
+					<div>유형</div>
+					<div>내용</div>
+					<div>후기</div>
 				</li>
 				<li>
 					<div class="img_div"><img src="../../images/sample1.jpg"></div>
@@ -32,7 +25,10 @@
 					<div class="time_div">15:00</div>
 					<div class="profession_div">이덕희</div>
 					<div class="category_div">채팅</div>
-					<div class="status_div">상담 예약</div><!-- 상담 대기 일때 취소 가능-->
+					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
+					<div class="review_div">
+						<button type="button" class="btn">상세</button>
+					</div>
 				</li>
 				<li>
 					<div class="img_div"><img src="../../images/sample1.jpg"></div>
@@ -40,7 +36,10 @@
 					<div class="time_div">09:00</div>
 					<div class="profession_div">이덕희</div>
 					<div class="category_div">채팅</div>
-					<div class="status_div">상담 대기</div><!-- 상담 대기 일때 취소 가능-->
+					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
+					<div class="review_div">
+						<button type="button" class="btn">작성</button>
+					</div>
 				</li>
 				<li>
 					<div class="img_div"><img src="../../images/sample1.jpg"></div>
@@ -48,7 +47,10 @@
 					<div class="time_div">13:00</div>
 					<div class="profession_div">이덕희</div>
 					<div class="category_div">채팅</div>
-					<div class="status_div">상담 취소</div><!-- 상담 대기 일때 취소 가능-->
+					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
+					<div class="review_div">
+						<button type="button" class="btn">상세</button>
+					</div>
 				</li>
 				<li>
 					<div class="img_div"><img src="../../images/sample1.jpg"></div>
@@ -56,14 +58,13 @@
 					<div class="time_div">11:00</div>
 					<div class="profession_div">이덕희</div>
 					<div class="category_div">채팅</div>
-					<div class="status_div">상담 완료</div><!-- 상담 대기 일때 취소 가능-->
+					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
+					<div class="review_div">
+						<button type="button" class="btn">작성</button>
+					</div>
 				</li>
-
-
 			</ul>
 		</div>
-
-
 	</div>
 
 
@@ -71,14 +72,4 @@
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
-
-<script>
-	$(".profession_div").on("click", function () {
-		layerPopup("signUp");
-	})
-
-
-
-</script>
-
 

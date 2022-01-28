@@ -13,6 +13,8 @@
     <!-- modal + popup -->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my.css">
 
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
+
     <!-- 글꼴 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +37,22 @@
 5.  width는 %로 정해줍니다.
 -->
 
+<!-- modal (close : layer_popup)-->
+<div class="modal close_popup_btn"></div>
+<div class="popup_wrap" style="display:none;">
+    <!-- 작성 부분 -->
+    <div class="layer_popup">
+        <!-- <div class="layer-popup popup_500"> -->
+        <!-- 닫기 버튼 -->
+        <div class="close_popup">
+            <a class="close_popup_btn"><img src="${contextPath}/resources/images/icon/close_btn.png"></a>
+        </div>
+        <div class="layer_popup_content"></div>
+    </div>
+    <!-- //작성 부분 -->
+</div>
+<!-- //modal (close : layer_popup)-->
+
 <header>
     <!-- 헤더 -->
     <section class="header_wrap">
@@ -47,7 +65,7 @@
         <article class="header_menu_wrap">
             <ul class="dep1">
                 <li>
-                    <a href="#">상담예약123</a> <p class="menu_toggle">+</p>
+                    <a href="#">상담예약</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
                         <li><a href="#">상담사 찾기</a></li>
                         <li><a href="#">상담센터 찾기</a></li>
@@ -102,6 +120,7 @@
 <main>
     <section class="main_wrap">
         <!-- 사이드 메뉴가 없는 부분은 지우고 사용 -->
+        <c:if test="${!requestScope.header.equals('main')}">
         <article class="dark-brown side_menu">
             <h3>마이페이지</h3>
             <ul>
@@ -133,3 +152,4 @@
                 </li>
             </ul>
         </article>
+        </c:if>
