@@ -1,0 +1,190 @@
+
+
+.main_content{
+    padding-left: 30px;
+    font-size: 18px;
+}
+
+.study{
+    padding-top: 80px;
+}
+
+.study p:nth-child(1){
+    font-size: 25px;
+}
+
+.study p:nth-child(2){
+    margin-top: 15px;
+}
+
+.study_title{
+    margin-top: 45px;
+    background-color: #f8f8f8;
+    height: 150px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.study_title p{
+    line-height: 120%;
+    
+}
+
+.study_title button{
+    margin-top: 10px;
+    width: 80px;
+    height: 40px;
+    background-color: #E5D4C5;
+    border : none;
+    border-radius: 10px;
+    font-size: 15px;
+    color : white;
+}
+
+
+.study_content{
+    width: 100%;
+    margin-top : 45px;
+    border-top : 1px solid #454545;
+    padding-top: 35px;
+}
+
+.image_wrap{
+    width : 100%;
+    padding-bottom: 100%;
+    background: url(/image/연구소.png) 100% 100% / 100% 100% no-repeat;
+    position: relative;
+}
+
+/*.study_content  img{
+    width: 100%;
+}
+*/
+
+.item{
+    width: 10%;
+    height: 10%;
+    background: url(/image/비커\ \(1\).png) 100% 100% / 100% 100% no-repeat;
+    position: absolute;
+    line-height: 18px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.item p {
+    padding-top: 25%;
+    color: #454545;
+    padding-left : 5px;
+    
+}
+
+
+.item.active{
+    cursor: move;
+}
+
+
+
+.pagination{
+    width: 360px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top : 30px;
+    margin-bottom: 150px;
+}
+
+.pagination li{
+    width : 36px;
+    height : 36px;
+    font-size : 20px;
+    line-height: 34px;
+    text-align: center;
+}
+
+.select_pg{
+    background-color: #E5D4C5;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.select_pg a {
+    color: #ffffff;
+}
+
+
+.m_side_menu{
+    display: none;
+}
+
+
+
+
+/* ----------모바일 --------------- */
+@media screen and (max-width: 768px){
+
+
+    .main_content{
+       padding-left: 0;
+       margin-left : 5px;
+       padding-right: 5px;
+    }
+
+
+    .item{
+        width : 15%;
+        height: 15%;
+        font-size: 13px;
+    }
+
+
+    .pagination{
+        width: 300px;
+        margin-bottom: 30px;
+    }
+    
+     .pagination li{
+        width : 30px;
+        height : 30px;
+        font-size : 15px;
+        line-height: 30px;
+    }
+    
+    footer{
+        display: none;
+     }
+
+     .side_menu{
+        display: block;
+        height: 105px;
+    }
+    .side_menu>h3{
+        margin-bottom: 15px;
+    
+    }
+
+    
+    .side_menu_dep1{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    
+    
+    .side_menu>ul>li>a{
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+    
+    .w_side_menu{
+        display: none;
+    }
+    .m_side_menu{
+        text-align: center;
+        display: block;
+        line-height: 23px;
+    }
+
+
+
+}
