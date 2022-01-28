@@ -22,6 +22,7 @@ public class HomeController {
 	public String home(Model model) {
 
 		model.addAttribute("header", "main");
+		model.addAttribute("css", "main");
 
 		return "common/main";
 

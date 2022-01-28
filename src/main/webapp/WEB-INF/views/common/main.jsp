@@ -383,8 +383,6 @@
     </div>
 </article>
 
-</section>
-
 
 <!-- footer include -->
 <jsp:include page="footer.jsp"></jsp:include>
