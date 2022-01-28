@@ -21,6 +21,7 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <script src="${contextPath}/resources/js/common/common.js"></script>
+    <script src="${contextPath}/resources/js/selftest/selftest.js"></script>
 
 </body>
 </html>

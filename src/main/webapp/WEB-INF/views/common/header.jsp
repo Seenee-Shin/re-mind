@@ -9,6 +9,9 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftest_result.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftestForm.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mb_selftest.css">
 
     <!-- modal + popup -->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my.css">

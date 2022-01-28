@@ -4,8 +4,7 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
 <!-- header include -->
-<jsp:include page="header.jsp"></jsp:include>
-<%--<script src="${contextPath}/resources/js/common/common.js"></script>--%>
+<jsp:include page="${contextPath}/WEB-INF/views/common/header.jsp"></jsp:include>
 <!-- 메인 배너 -->
 <article class="main_banner">
     <div>
@@ -22,7 +21,6 @@
     <p>나의 상태가 궁금하다면 ?</p>
     <div>
         <p>무료 자가진단</p>
-        <i class="fas fa-plus"></i>
     </div>
     <div>
         <div>
@@ -61,7 +59,6 @@
             <p>자신의 이야기를 들려주세요.</p>
             <div>
                 <p>커뮤니티</p>
-                <i class="fas fa-plus"></i>
             </div>
         </div>
         <div>
@@ -389,9 +386,5 @@
 </section>
 
 
-<!-- header include -->
-<jsp:include page="footer.jsp"></jsp:include>
-
-<script src="${contextPath}/resources/js/common/main.js"></script>
-
-
+<!-- footer include -->
+<jsp:include page="${contextPath}/WEB-INF/views/common/footer.jsp"></jsp:include>
