@@ -18,13 +18,16 @@ public class BoardController {
 
     @RequestMapping("freeList")
     public String freeBoardList(Model model) {
-    	 model.addAttribute("header", "community");
+    	
+    	model.addAttribute("css", "board/freeList");
+    	model.addAttribute("header", "community");
     	 
         return "board/freeList";
     }
     
     @RequestMapping("freeView")
     public String freeBoardView(Model model) {
+    	model.addAttribute("css", "board/freeView");
     	model.addAttribute("header", "community");
     	
     	return "board/freeView";
@@ -32,6 +35,7 @@ public class BoardController {
     
     @RequestMapping("freeInsert")
     public String freeBoardInsert(Model model) {
+    	model.addAttribute("css", "board/freeList");
     	model.addAttribute("header", "community");
     	
     	return "board/freeList";
@@ -39,6 +43,7 @@ public class BoardController {
     
     @RequestMapping("freeUpdate")
     public String freeBoardUpdate(Model model) {
+    	model.addAttribute("css", "board/freeList");
     	model.addAttribute("header", "community");
     	
     	return "board/freeView";
@@ -47,7 +52,7 @@ public class BoardController {
     @RequestMapping("freeDelete")
     public String freeBoarDelete(Model model) {
     	model.addAttribute("header", "community");
-    	
+    	model.addAttribute("css", "board/update");
     	return "board/freeList";
     }
 

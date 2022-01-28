@@ -6,14 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>마음연구소 RE:mind</title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
 
-    <!-- modal + popup -->
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my.css">
 
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
 
     <!-- 글꼴 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,6 +118,7 @@
     <section class="main_wrap">
         <!-- 사이드 메뉴가 없는 부분은 지우고 사용 -->
         <c:if test="${!requestScope.header.equals('main')}">
+        
         <article class="dark-brown side_menu">
             <h3>마이페이지</h3>
             <ul>
