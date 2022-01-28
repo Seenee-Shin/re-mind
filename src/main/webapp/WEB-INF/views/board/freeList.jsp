@@ -163,15 +163,15 @@
 
                     <!-- 공감수 표시 -->
                         <div class="like_warp">
-                            <img src="img/smile.png" alt="">
+                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
                             <p>2</p>
-                            <img src="img/hug.png" alt="">
+                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
                             <p>2</p>
-                            <img src="img/amazed.png" alt="">
+                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
                             <p>2</p>
-                            <img src="img/angry.png" alt="">
+                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
                             <p>2</p>
-                            <img src="img/crying.png" alt="">
+                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
                             <p>2</p>
                         </div>
                     </div>
