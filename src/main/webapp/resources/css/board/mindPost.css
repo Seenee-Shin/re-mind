@@ -52,7 +52,7 @@
 .image_wrap{
     width : 100%;
     padding-bottom: 100%;
-    background: url(/image/연구소.png) 100% 100% / 100% 100% no-repeat;
+    background: url(../../images/board/mindPost/연구소.png) 100% 100% / 100% 100% no-repeat;
     position: relative;
 }
 
@@ -64,7 +64,7 @@
 .item{
     width: 10%;
     height: 10%;
-    background: url(/image/비커\ \(1\).png) 100% 100% / 100% 100% no-repeat;
+    background: url(../../images/board/mindPost/비커\ \(1\).png) 100% 100% / 100% 100% no-repeat;
     position: absolute;
     line-height: 18px;
     text-align: center;
