@@ -10,11 +10,25 @@ public class selftestController {
 
     private selftestService service;
 
+
+
     @RequestMapping("selftestForm")
     public String selftestForm(){
 
-        return "/selftest/selftestForm";
+        return "selftest/selftestForm";
+    }
 
+
+    @RequestMapping("mbSelftest")
+    public String mbSelftest(){
+
+        return "selftest/mbSelftest";
+    }
+
+    @RequestMapping("selftestResult")
+    public String selftestResult(){
+
+        return "selftest/selftestResult";
     }
 
 

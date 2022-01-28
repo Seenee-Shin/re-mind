@@ -15,7 +15,7 @@
     <div>나의 마음건강을 체크해보세요.</div>
     <div>심리 자가진단 테스트</div>
   </div>
-  <form method="" class="self_content_form">
+  <form method="get" class="self_content_form">
     <div class="self_content_option">
       <div class="self_content_option1">
         <div>우울증</div>

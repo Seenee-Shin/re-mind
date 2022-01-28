@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
 <article class="layer_popup">
-    <form>
+    <form method="GET">
         <div class="selftest_modal">
             <div class="selftest_modal_title">
                 자존감 자가진단 결과

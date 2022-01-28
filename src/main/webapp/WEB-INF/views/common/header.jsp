@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftestForm.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mb_selftest.css">
     <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
-
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mb-selftest.css">
 
 
 
