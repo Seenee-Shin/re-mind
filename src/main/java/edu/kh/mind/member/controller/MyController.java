@@ -43,47 +43,50 @@ public class MyController {
     }
 
     @GetMapping("counselor")
-    public String counselor(){
+    public String counselor(Model model){
+    	model.addAttribute("css", "my/counselor");
         return "my/counselor";
     }
 
     @GetMapping("enquiry")
-    public String enquiry(){
+    public String enquiry(Model model){
+    	model.addAttribute("css", "my/enquiry");
         return "my/enquiry";
     }
 
     @GetMapping("letterList")
-    public String letterList(){
+    public String letterList(Model model){
+    	model.addAttribute("css", "my/enquiry");
         return "my/letterList";
     }
 
     @GetMapping("map")
-    public String map(){
+    public String map(Model model){
         return "my/map";
     }
 
     @GetMapping("muteMember")
-    public String muteMember(){
+    public String muteMember(Model model){
         return "my/muteMember";
     }
 
     @GetMapping("myBoardList")
-    public String myBoardList(){
+    public String myBoardList(Model model){
         return "my/myBoardList";
     }
 
     @GetMapping("postscript")
-    public String postscript(){
+    public String postscript(Model model){
         return "my/postscript";
     }
 
     @GetMapping("secession")
-    public String secession(){
+    public String secession(Model model){
         return "my/secession";
     }
 
     @GetMapping("updateMyInfo")
-    public String updateMyInfo(){
+    public String updateMyInfo(Model model){
         return "my/updateMyInfo";
     }
 }
