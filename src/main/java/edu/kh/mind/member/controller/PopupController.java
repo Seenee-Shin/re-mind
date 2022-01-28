@@ -14,7 +14,6 @@ public class PopupController {
 	public String layerPopup(@PathVariable("layerPopup") String layerPopup, Model model) {
 		
 		model.addAttribute("css", "popup");
-		System.out.println(layerPopup);
 		return "popup/" + layerPopup;
 	}
 
