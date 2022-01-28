@@ -9,8 +9,8 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="아이디" />
-		<property name="password" value="비밀번호" />
+		<property name="username" value="mental" />
+		<property name="password" value="care9876!" />
 		<!-- defaultAutoCommit: SQL 수행 후 자동 COMMIT 설정. (기본값 : true) -->
 		<property name="defaultAutoCommit" value="false" />
 		<!-- 커넥션 풀 설정 -->
