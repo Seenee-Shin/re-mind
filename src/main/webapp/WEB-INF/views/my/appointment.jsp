@@ -75,10 +75,10 @@
 
 <script>
 	$(".profession_div").on("click", function () {
-		$(".modal").show();
-		$(".popup_wrap").show();
-		$(".layer_popup_content").load("../popup/signUp");
+		layerPopup("signUp");
 	})
+
+
 
 </script>
 
