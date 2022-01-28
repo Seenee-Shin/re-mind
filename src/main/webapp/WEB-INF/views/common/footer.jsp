@@ -22,5 +22,3 @@
 
     <script src="${contextPath}/resources/js/common/common.js"></script>
 
-</body>
-</html>

@@ -394,4 +394,5 @@
 
 <script src="${contextPath}/resources/js/common/main.js"></script>
 
-
+</body>
+</html>
