@@ -26,8 +26,8 @@ vertical-align: baseline;
   color:#515151;
 }
 
-button, textarea, input, select{
-  font-family: 'Noto Sans KR', sans-serif;
+button, textarea, input, select,span{
+  font-family: 'Noto Sans KR', sans-serif; font-size: 15px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
