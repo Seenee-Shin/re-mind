@@ -8,7 +8,6 @@
 
 <article class="main_content">
     <div class="secession-page">회원탈퇴</div>
-    <hr>
     <div class="secession-body">
         <span class="title">회원 탈퇴 유의사항</span>
         <span class="content">
@@ -21,8 +20,8 @@
                     </span>
     </div>
     <div class="ok-pass">
-        <div class="passtext">비밀변호를 입력해주세요.</div>
         <div class="password">
+	        <div class="passtext">비밀번호 : </div>
             <input class="inputPass" type="password">
         </div>
     </div>
