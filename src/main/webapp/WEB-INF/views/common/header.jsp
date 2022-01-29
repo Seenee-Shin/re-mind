@@ -11,6 +11,14 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
     <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
 
+    <!--
+    css 파일 추가 하지 말고
+    controller에서
+    model.addAttribute("css", "css파일명"); 추가해주세요
+
+    ex)model.addAttribute("css", "my");
+    -->
+
 <%--    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftest_result.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftestForm.css">
