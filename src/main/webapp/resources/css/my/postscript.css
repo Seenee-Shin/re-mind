@@ -1,18 +1,27 @@
-.main_content{padding: 60px 0 0 20px;}
-.postscript-page{font-weight: bold; font-size: 28px; color: rgb(138, 138, 138); display: inline-block;}
-
-.postscript-info{display: flex; font-weight: bold;}
+body>*{font-size: 15px}
+.main_content{padding: 60px 0 0 30px;}
+.postscript-page{font-weight: 700; font-size: 20px; display: inline-block; margin-bottom: 20px;}
+.postscriptWrap{margin-top: 10px; border-top: 1px solid #ededed;}
+.postscript-info{display: flex; font-weight: bold;  margin-top: 10px;     align-items: center;
+    margin-bottom: 5px;}
 
 
 .date{width: 22%; min-width: 22%;}
 .pro-name{width: 26%; min-width: 26%;}
 .chat{width: 9%; min-width: 9%;}
 .star-img{width: 20%; min-width: 20%;}
-.date, .chat, .star-img, .pro-name, .cdBtn{width: 20%; display: flex; text-align: left;}
-.cdBtn{width: 50%; text-align: end; justify-content: end;}
-.update, .delete{border: none; width: 45%; border-radius: 5px; background-color: #ccc; cursor: pointer;}
+.date, .chat, .star-img, .pro-name, .cdBtn{width: 20%; text-align: center;}
+.cdBtn{width: 50%; text-align: center; justify-content: end; }
+.cdBtn>button{color: white; border: none; width: 46%; border-radius: 5px;cursor: pointer; height: 25px;}
+.update{ background-color: #A59999;  }
+.delete{background-color: #E5D4C5;}
 
-.postscript{background-color: rgb(230, 230, 230); margin-top: 5px; margin-bottom: 10px; padding: 20px;}
+.m-star-img{
+	display: none;
+}
+
+.postscript{background-color:#FCF7F3; margin-top: 5px; margin-bottom: 10px; padding: 20px; min-height: 115px;
+}
 
 
 /* 모달창 */
@@ -74,7 +83,7 @@
     cursor: pointer;
     text-shadow: 1px 1px 2px gray;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #modal .content {
@@ -104,8 +113,13 @@
 
 @media screen and (max-width: 768px)  {
     .main_content{padding: 0;}
+    .postscript-page {margin-left: 10px; margin-top: 30px;}
+    .postscript-info{    margin: 10px; font-size: 15px; font-weight: 600;}
+    
     .board-page{margin-left: 20px;}
     .footer_wrap{display: none;}
+    .star-img{display: none}
+    .m-star-img{display: block; margin-bottom: 10px}
 
     .side_menu{display: inline-block;}
     .side_menu > ul{display: flex;}
