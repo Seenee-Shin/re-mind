@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="professionMapper">
+
+    <resultMap id="professionHospital_rm" type="ProfessionHospital">
+        <id property="professionNo" column="PROFESSION_NO"/>
+        <result property="hospitalName" column="HOSPITAL_NM"/>
+        <result property="hospitalAddress" column="HOSPITAL_ADDR"/>
+        <result property="hospitalPhone" column="HOSPITAL_PHONE"/>
+        <result property="businessNo" column="BUSINESS_NO"/>
+    </resultMap>
+
+    <select id="loadProMap" resultMap="professionHospital_rm">
+        SELECT *
+        FROM PROFESSION_HOSPITAL
+    </select>
+
+</mapper>

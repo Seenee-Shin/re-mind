@@ -93,8 +93,8 @@ thead > tr > th:nth-child(4), td:nth-child(4){width: 25%;}
 
 }@media screen and (max-width: 950px) and (min-width: 768px)  {
 
-    table{font-size: 15px;}
-    .div-btn{font-size: 15px;}
+    table{font-size: 14px;}
+    .div-btn{font-size: 14px;}
 	.div-btn-info {margin-top: 20px;}
     .board-info{display: none;}
 }@media screen and (min-width: 950px) {

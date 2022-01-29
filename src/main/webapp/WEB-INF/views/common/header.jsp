@@ -7,6 +7,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마음연구소 RE:mind</title>
+
+    <%-- 카카오로그인 API JS 라이브러리 삭제 ㄴㄴ --%>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">

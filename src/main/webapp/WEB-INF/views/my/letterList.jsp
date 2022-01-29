@@ -70,7 +70,6 @@
 
 </article>
 
-<jsp:include page="../popup/letter.jsp"></jsp:include>
 
 
 
