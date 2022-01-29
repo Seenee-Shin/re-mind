@@ -3,9 +3,9 @@ const togle = document.querySelector('.headermenu_togle')
 const menu = document.querySelector('.dep1')
 const sub_menu = document.querySelectorAll('.dep2')
 
-// togle.addEventListener('click', ()=>{
-//     menu.classList.toggle('active')
-// })
+togle.addEventListener('click', ()=>{
+    menu.classList.toggle('active')
+})
 
 // menu.addEventListener('click',()=>{
     
@@ -19,7 +19,6 @@ const popupWrap = document.querySelector(".popup_wrap");
 const layerPopupContent = document.querySelector(".layer_popup_content");
 for(let i =0; i< closePopup.length; i++) {
     closePopup[i].addEventListener("click", () => {
-        console.log("TEST");
         // 모달 close
         modal.style.display = "none";
         popupWrap.style.display = "none";
@@ -31,8 +30,14 @@ for(let i =0; i< closePopup.length; i++) {
 
 // popup open
 function layerPopup (layerPopup) {
-    $(".layer_popup_content").load("../popup/" + layerPopup, function () {
+    $(".layer_popup_content").load(contextPath + "/popup/" + layerPopup, function () {
         $(".modal").show();
         $(".popup_wrap").show();
     });
 }
+
+// login button
+const loginBtn = document.querySelector(".login_btn");
+loginBtn.addEventListener("click", () => {
+   layerPopup("loginType");
+});

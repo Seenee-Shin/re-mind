@@ -6,22 +6,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>마음연구소 RE:mind</title>
+    
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
-
-    <!-- modal + popup -->
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my.css">
-
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
+
+    <!--
+    css 파일 추가 하지 말고
+    controller에서
+    model.addAttribute("css", "css파일명"); 추가해주세요
+
+    ex)model.addAttribute("css", "my");
+    -->
+
+<%--    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftest_result.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftestForm.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mb_selftest.css">--%>
 
 
 
     <!-- 글꼴 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- 애니메이션 효과 라이브러리 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- 스와이퍼 CSS -->
@@ -106,7 +115,7 @@
                 <li ><!-- 로그인 했으면 로그아웃 버튼 보이기
                             로그인 안했으면 회원가입 -->
                     <!-- <a href=""> 회원가입 </a>  -->
-                    <a href="#">로그아웃</a>
+                    <a href="#" class="login_btn">로그인</a>
                 </li>
             </ul>
             <a href="#" class="headermenu_togle">
@@ -123,35 +132,58 @@
     <section class="main_wrap">
         <!-- 사이드 메뉴가 없는 부분은 지우고 사용 -->
         <c:if test="${!requestScope.header.equals('main')}">
-        <article class="dark-brown side_menu">
-            <h3>마이페이지</h3>
-            <ul>
-                <li><a href="#">증상기록</a></li>
-                <hr>
-                <li><a href="#">마이상담</a>
-                    <ul>
-                        <li><a href="#">상담 예약 조회</a></li>
-                        <li><a href="#">지난 상담 내역</a></li>
-                        <li><a href="#">상담후기</a></li>
-                        <li><a href="#">찜한 상담사</a></li>
-                    </ul>
-                </li>
-                <hr>
-                <li><a href="#">마이활동</a>
-                    <ul>
-                        <li><a href="#">게시글 내역</a></li>
-                        <li><a href="#">쪽지</a></li>
-                        <li><a href="#">문의사항</a></li>
-                        <li><a href="#">차단한 회원</a></li>
-                    </ul>
-                </li>
-                <hr>
-                <li><a href="#">마이정보</a>
-                    <ul>
-                        <li><a href="">회원정보 수정</a></li>
-                        <li><a href="">회원탈퇴</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </article>
+        
+	        <c:choose>
+	        	<c:when test="${requestScope.header.equals('community')}">
+		            <section class="dark-brown side_menu">
+		                <h3>커뮤니티</h3>
+		                <hr>
+		                <ul class="side_menu_dep1">
+		                    <li class="w_side_menu"><a href="#">자유게시판</a></li>
+		                    <li class="m_side_menu"><a href="#">자유</a></li>
+		                    <li class="w_side_menu"><a href="#">고민상담 게시판</a> </li>
+		                    <li class="m_side_menu"><a href="#">고민상담</a></li>
+		                    <li class="w_side_menu"><a href="#">마인드포스팃</a></li>
+		                    <li class="m_side_menu"><a href="#">포스팃</a></li>
+		                    <li class="w_side_menu"><a href="#">털어놓기</a></li>
+		                    <li class="m_side_menu"><a href="#">털어놓기</a></li>
+		                </ul>
+		            </section>
+	        	</c:when>
+	        	
+	        	
+	        	<c:otherwise>
+			        <article class="dark-brown side_menu">
+			            <h3>마이페이지</h3>
+			            <ul>
+			                <li><a href="#">증상기록</a></li>
+			                <hr>
+			                <li><a href="#">마이상담</a>
+			                    <ul>
+			                        <li><a href="#">상담 예약 조회</a></li>
+			                        <li><a href="#">지난 상담 내역</a></li>
+			                        <li><a href="#">상담후기</a></li>
+			                        <li><a href="#">찜한 상담사</a></li>
+			                    </ul>
+			                </li>
+			                <hr>
+			                <li><a href="#">마이활동</a>
+			                    <ul>
+			                        <li><a href="#">게시글 내역</a></li>
+			                        <li><a href="#">쪽지</a></li>
+			                        <li><a href="#">문의사항</a></li>
+			                        <li><a href="#">차단한 회원</a></li>
+			                    </ul>
+			                </li>
+			                <hr>
+			                <li><a href="#">마이정보</a>
+			                    <ul>
+			                        <li><a href="">회원정보 수정</a></li>
+			                        <li><a href="">회원탈퇴</a></li>
+			                    </ul>
+			                </li>
+			            </ul>
+			        </article>
+	        	</c:otherwise>
+	        </c:choose>
         </c:if>

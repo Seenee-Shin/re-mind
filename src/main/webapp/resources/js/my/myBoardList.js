@@ -7,8 +7,8 @@ function colorSet(){
     const view = $(".board-view");
 
     for(let i = 0; i < view.length; i++){
-        if(i % 2 == 0)  view.eq(i).css("background-color", "rgb(236, 236, 236)");
-        else            view.eq(i).css("background-color", "rgb(220, 220, 220)");
+        if(i % 2 == 0)  view.eq(i).css("background-color", "#FCF7F3");
+        else            view.eq(i).css("background-color", "white");
     }
 }
 colorSet();
