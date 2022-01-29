@@ -12,8 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ChatController {
 
-	@Autowired
-	private ChatService service;
+//	@Autowired
+//	private ChatService service;
 
 	@RequestMapping("/chat/{chatRoomNo}")
 	public String chatJoin(@PathVariable("chatRoomNo") int chatRoomNo, RedirectAttributes ra, Model model) {
