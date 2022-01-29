@@ -5,6 +5,15 @@ if (/Mobile|Android/i.test(navigator.userAgent)) {
     console.log(":web");
 }
 
+
+// 결과창 모달 호출
+$(".selfTest-next-btn").on("click",function (){
+
+    layerPopup("selftestResult");
+
+    return false;
+});
+
 //     window.onload = function() {
  
 //     function onClick() {
