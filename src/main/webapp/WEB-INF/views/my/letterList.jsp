@@ -70,42 +70,14 @@
 
 </article>
 
-<div id="modal" class="modal-overlay" style="display: none;">
-    <div class="modal-window">
-        <div class="title">
-            <div class="postscript-page" style="color: white;">쪽지</div>
-        </div>
-        <div class="close-area">X</div>
-    </div>
-    <div class="content">
-        <div class="postscript-img">
+<jsp:include page="../popup/letter.jsp"></jsp:include>
 
-            <div class="postscript-cut">
-                TO. 이덕희 상담사
-            </div>
-        </div>
-        <textarea class="content-textarea"></textarea>
-        <div id="con">
 
-            <button class="content-update">답장</button>
-            <button class="content-delete">취소</button>
-        </div>
-
-    </div>
-</div>
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script src="${contextPath}/resources/js/my/letterList.js"></script>
 <script>
-    const closeBtn = modal.querySelector(".close-area")
-    closeBtn.addEventListener("click", e => {
-        modal.style.display = "none"
-    });
-    modal.addEventListener("click", e => {
-        const evTarget = e.target
-        if (evTarget.classList.contains("modal-overlay")) {
-            modal.style.display = "none"
-        }
-    });
+
+
 </script>
