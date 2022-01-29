@@ -12,8 +12,7 @@ public class PopupController {
 
 	@RequestMapping(value="{layerPopup}", method= RequestMethod.GET)
 	public String layerPopup(@PathVariable("layerPopup") String layerPopup, Model model) {
-		
-		model.addAttribute("css", "popup");
+
 		return "popup/" + layerPopup;
 	}
 

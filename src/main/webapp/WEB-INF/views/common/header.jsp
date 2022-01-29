@@ -8,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마음연구소 RE:mind</title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
+
+<%--    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftest_result.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftestForm.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mb_selftest.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mb_selftest.css">--%>
     <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
 
 
@@ -105,7 +107,7 @@
                 <li ><!-- 로그인 했으면 로그아웃 버튼 보이기
                             로그인 안했으면 회원가입 -->
                     <!-- <a href=""> 회원가입 </a>  -->
-                    <a href="#">로그아웃</a>
+                    <a href="#" class="login_btn">로그인</a>
                 </li>
             </ul>
             <a href="#" class="headermenu_togle">
