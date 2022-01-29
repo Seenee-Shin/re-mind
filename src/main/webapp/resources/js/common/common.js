@@ -19,7 +19,6 @@ const popupWrap = document.querySelector(".popup_wrap");
 const layerPopupContent = document.querySelector(".layer_popup_content");
 for(let i =0; i< closePopup.length; i++) {
     closePopup[i].addEventListener("click", () => {
-        console.log("TEST");
         // 모달 close
         modal.style.display = "none";
         popupWrap.style.display = "none";

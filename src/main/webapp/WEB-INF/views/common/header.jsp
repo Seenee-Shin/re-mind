@@ -7,10 +7,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마음연구소 RE:mind</title>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">D
     <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
 
 
+=======
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
+
+<%--    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftest_result.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/selftestForm.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mb_selftest.css">--%>
+>>>>>>> 0fae633c7563205a6d25ed61514fea70830f5bf2
 
 
     <!-- 글꼴 -->
