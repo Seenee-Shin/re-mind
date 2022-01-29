@@ -20,8 +20,8 @@ public class BoardController {
 	@RequestMapping("moblieComment")
     public String mobileCommentView(Model model) {
     	
-    	model.addAttribute("css", "board/mobileComment");
-    	model.addAttribute("header", "main");
+    	model.addAttribute("css", "board/mobileComment"); //각 페이지 css 추가 태그 
+    	model.addAttribute("header", "main"); //헤더구분 사이드메뉴가 없는 페이지일 경우 main작성  
     	 
         return "board/mobilComment";
     }
