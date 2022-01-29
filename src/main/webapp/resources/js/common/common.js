@@ -31,8 +31,14 @@ for(let i =0; i< closePopup.length; i++) {
 
 // popup open
 function layerPopup (layerPopup) {
-    $(".layer_popup_content").load("../popup/" + layerPopup, function () {
+    $(".layer_popup_content").load(contextPath + "/popup/" + layerPopup, function () {
         $(".modal").show();
         $(".popup_wrap").show();
     });
 }
+
+// login button
+const loginBtn = document.querySelector(".login_btn");
+loginBtn.addEventListener("click", () => {
+   layerPopup("loginType");
+});
