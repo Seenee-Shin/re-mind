@@ -2,13 +2,13 @@
 /* --------------------------- modal --------------------------- */
 .modal{z-index: 5000; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); position: fixed; display:none;}
 .popup_wrap{position:absolute; top:0; bottom:0; left:0; right:0; display:flex; align-items:center; justify-content: center; display:-webkit-flex; -webkit-align-item: center; -webkit-justify-content: center;}
-.layer_popup{z-index: 5100; background:#fff; height: 50%; width:100%; max-width:750px; border-radius:10px; overflow:hidden;}
+.layer_popup{z-index: 5100; background:#fff;  width:100%; max-width:750px; border-radius:10px; overflow:hidden;}
 
 /* login(s) */
 .top_title_wrap {text-align: center; margin:40px auto 0;}
-.top_title_wrap > .title{ font-size:48px; font-weight:bold; height:70px; line-height:68px;}
-.login_box {padding: 40px;}
-.login_box .login_method a {display: block; background: #bbbbbb; padding: 15px; border-radius: 25px; font-weight: bold; color: #000; text-align: center; font-size: 15px; margin-bottom: 20px;}
+.top_title_wrap > .title{ font-size:25px; font-weight:bold; height:70px; line-height:68px;}
+.login_box {padding: 15px 200px 15px 200px;}
+.login_box .login_method a {display: block; background: #a59999; padding: 18px; border-radius: 25px; font-weight: bold; color: #ffffff; text-align: center; font-size: 15px; margin-bottom: 20px;}
 .sign_up_wrap {display: flex; justify-content: space-evenly; margin:40px auto 20px;}
 /* login(e) */
 /* email login(s) */
@@ -16,11 +16,11 @@
 .email_login_box > .input_wrap > .input_div > div{margin:10px 0;}
 .email_login_box > .input_wrap > .input_div > .login_input{border:none; border-bottom:1px solid #000; width:100%; height:24px;}
 .submit_area{margin:40px; text-align: center;}
-.submit_area > button{height: 36px; width: 70%; font-size: 16px; font-weight: bold; border: 1px solid #666; border-radius: 5px; cursor: pointer;}
+.submit_area > button{height: 50px; width: 70%; font-size: 16px; font-weight: 500; border: none; background: #a59999; color : #ffffff; border-radius: 10px; cursor: pointer;}
 /* email login(e) */
 
 /* sign up(s) */
-.signup_box{padding:40px;}
+.signup_box{padding:5px 50px 15px 50px;}
 .signup_box > .input_wrap{display:inline-block; width:100%;}
 .signup_box > .input_wrap > .input_area{display:inline-block; width:47%;}
 
