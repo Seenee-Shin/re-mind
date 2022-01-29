@@ -3,6 +3,7 @@ package edu.kh.mind.selftest;
 import edu.kh.mind.selftest.model.service.selftestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/selftest/*")
@@ -25,10 +26,10 @@ public class selftestController {
         return "selftest/mbSelftest";
     }
 
-    @RequestMapping("selftestResult")
+    @RequestMapping(value = "selftestResult", method = RequestMethod.POST)
     public String selftestResult(){
 
-        return "selftest/selftestResult";
+        return "selftestResult";
     }
 
 

@@ -15,7 +15,7 @@
     <div>나의 마음건강을 체크해보세요.</div>
     <div>심리 자가진단 테스트</div>
   </div>
-  <form method="get" class="self_content_form">
+  <form method="POST" class="self_content_form">
     <div class="self_content_option">
       <div class="self_content_option1">
         <div>우울증</div>
@@ -58,7 +58,7 @@
     <!-- 버튼 -->
     <div class="selfTest_btn">
       <button class="selfTest_prev_btn">이전</button>
-      <button class="selfTest_next_btn">다음</button>
+      <button id="selfTest_next_btn" class="selfTest_next_btn">다음</button>
     </div>
     <button type="button" class="mb_selfTest_btn">테스트 진행</button>
   </form>
@@ -66,3 +66,6 @@
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
+<script>
+
+</script>
