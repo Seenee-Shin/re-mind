@@ -2,6 +2,7 @@ package edu.kh.mind.member.controller;
 
 import edu.kh.mind.member.model.service.MyService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +45,11 @@ public class MyController {
 
     @GetMapping("counselor")
     public String counselor(Model model){
+<<<<<<< HEAD
+        model.addAttribute("css", "");
+=======
     	model.addAttribute("css", "my/counselor");
+>>>>>>> d92c7935652b423330a423f5efe9afd78b405754
         return "my/counselor";
     }
 

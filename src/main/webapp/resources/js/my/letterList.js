@@ -23,8 +23,12 @@ $(document).on("click", ".message-view", function(){
     const msg = $(this).children().eq(1).text();
     const date = $(this).children().eq(2).text();
 
-    $("#modal").css("display", "flex");
-    $(".postscript-cut").text("TO. " + per);
+
+
+    layerPopup("letter");
+    // $("#letter_area").css("display", "block");
+
+    // $(".layer_popup_content").css("width", "500px").css("height", "500px");
 
 });
 
