@@ -18,28 +18,56 @@
 		</div>
 		<div class="sign_up_wrap">
 			<span>아직 계정이 없으신가요?</span>
-			<a href="#self">회원가입</a>
+			<a href="javascript:layerPopup('signUp');">회원가입</a>
 		</div>
 	</div>
 </div>
 
 <script>
 	Kakao.init('f9cc932f2cb179a77079e2c667dab98a');
+	Kakao.isInitialized();
 	// console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
+	function loginWithKakao() {
+		Kakao.Auth.authorize({
+			redirectUri: 'http://localhost:9000/mind/login/loginpage_kakao_callback'
+		});
+	}
+
+
 	//카카오로그인
 	function kakaoLogin() {
 		Kakao.Auth.login({
 			scope: 'profile_nickname, profile_image, account_email, gender, age_range, birthday', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
 			success: function(response) {
-				console.log(response) // 로그인 성공하면 받아오는 데이터
+				console.log(response)
+				Kakao.Auth.setAccessToken(response.access_token);
+
+				// console.log(response) // 로그인 성공하면 받아오는 데이터
 				window.Kakao.API.request({ // 사용자 정보 가져오기
 					url: '/v2/user/me',
 					success: (res) => {
-						const kakao_account = res.kakao_account;
-						console.log(kakao_account);
+						const kakaoAccount = res.kakao_account;
+
+						$.ajax({
+							url: "login/kakao",
+							aysnc:false, // 동기식 변경
+							method:"POST",
+							data:{
+								"kakaoEmail": kakaoAccount.email,
+								"kakaoGender": kakaoAccount.gender,
+								"kakaonickname":kakaoAccount.profile.nickname},
+							success:function (result){
+
+							},
+							error:function (req, sta, er){
+
+							}
+						});
 					}
 				});
-				// window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
+
+				// window.location.href='/mind' //리다이렉트 되는 코드
 			},
 			fail: function(error) {
 				console.log(error);
