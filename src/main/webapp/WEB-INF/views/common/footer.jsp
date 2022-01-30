@@ -25,7 +25,10 @@
         const contextPath = "${contextPath}";
     </script>
     <script src="${contextPath}/resources/js/common/common.js"></script>
+    <script src="${contextPath}/resources/js/common/main.js"></script>
+
     <script src="${contextPath}/resources/js/selftest/selftest.js"></script>
+    <script src="${contextPath}/resources/js/google/googleAPI.js"></script>
 
 </body>
 </html>

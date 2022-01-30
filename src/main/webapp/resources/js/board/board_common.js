@@ -26,7 +26,9 @@ let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mSc
 	console.log(optionLable)
 	
 	 postOption.forEach((option, i) => {
-		 if (i == 3 || i == 7) return;
+
+		if(!option) return;
+		
 		if(option.checked){
 			optionLable[i].classList.remove("light_brown_bg")
 			optionLable[i].classList.add("dark_brown_bg")

@@ -141,6 +141,8 @@ main{
   clear: both;
   line-height: 98px;
   text-align: center;
+  
+    margin-top: 250px;
 }
 /* -------------푸터 고정 --------------- */
 
@@ -160,6 +162,13 @@ main{
   height: 100px;
   float: left;
 }
+.header_logo_wrap>img{
+	    margin: auto;
+    width: 130px;
+    margin-top: 40px;
+}
+
+
 .header_menu_wrap> ul{
   list-style: none;
   font-weight: 550;
@@ -306,6 +315,12 @@ a{
       width: 70%;
       clear: both;
   }
+  .header_logo_wrap>img{
+	    margin: auto;
+    width: 100px;
+    margin-top: 35px;
+    margin-left: 20px;
+}
   .header_menu_wrap {
       width: 100%;
   }
