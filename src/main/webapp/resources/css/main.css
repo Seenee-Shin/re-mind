@@ -19,6 +19,9 @@
     font-size: 90px;
     font-style: italic;
     font-weight: bold;
+    animation: backInDown;
+    animation-duration: 2s;
+    animation-delay: 0.3s;
   }
   
   .main_banner_btn {
