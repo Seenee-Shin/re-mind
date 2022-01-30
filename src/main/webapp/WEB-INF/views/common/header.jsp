@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마음연구소 RE:mind</title>
 
+
     <%-- 카카오로그인 API JS 라이브러리 삭제 ㄴㄴ --%>
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     
@@ -42,6 +43,7 @@
 
     <!-- 아이콘 -->
     <script src="https://kit.fontawesome.com/5e0a99db98.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <!--
@@ -79,6 +81,7 @@
         <!-- 헤더 메뉴 -->
         <article class="header_menu_wrap">
             <ul class="dep1">
+
                 <li>
                     <a href="#">상담예약</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
-<!-- header include -->
+<%-- <!-- header include -->
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <article class="main_content">
@@ -12,6 +12,6 @@
 </article>
 
 <!-- header include -->
-<jsp:include page="../common/footer.jsp"></jsp:include>
+<jsp:include page="../common/footer.jsp"></jsp:include> --%>
 </body>
 </html>

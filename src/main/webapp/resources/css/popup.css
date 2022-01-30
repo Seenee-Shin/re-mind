@@ -8,7 +8,7 @@
 .top_title_wrap {text-align: center; margin:40px auto 0;}
 .top_title_wrap > .title{ font-size:25px; font-weight:bold; height:70px; line-height:68px;}
 .login_box {padding: 15px 200px 15px 200px;}
-.login_box .login_method a {display: block; background: #a59999; padding: 18px; border-radius: 25px; font-weight: bold; color: #ffffff; text-align: center; font-size: 15px; margin-bottom: 20px;}
+.login_box .login_method a{display: block; background: #a59999; padding: 18px; border-radius: 25px; font-weight: bold; color: #ffffff; text-align: center; font-size: 15px; margin-bottom: 20px;}
 .sign_up_wrap {display: flex; justify-content: space-evenly; margin:40px auto 20px;}
 /* login(e) */
 /* email login(s) */
