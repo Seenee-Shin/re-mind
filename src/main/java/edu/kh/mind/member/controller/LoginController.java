@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -23,7 +24,8 @@ public class LoginController {
     private LoginService service;
 
     @PostMapping("kakao")
-    public String kakaoLogin(String kakaoEmail, String kakaoGender, String kakaonickname){
+    @ResponseBody
+    public int kakaoLogin(String kakaoEmail, String kakaoGender, String kakaonickname){
 
         if(kakaoGender.equals("male"))  kakaoGender = "남";
         else                            kakaoGender = "여";
@@ -37,13 +39,7 @@ public class LoginController {
 
         int result = service.kakaoLogin(map);
 
-        return null;
-    }
-
-    @RequestMapping(value = "/loginpage_kakao_callback", method = RequestMethod.GET)
-    public String kakaoCallback(){
-
-        return null;
+        return result;
     }
 
 

@@ -23,16 +23,18 @@ function optionValidate(){
 	
 let postOption =[comment, scrap, like,anon,mComment, mScrap,mLike,mAnon]
 let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mScrapLable,mLikeLable,mAnonLable]
+	console.log(optionLable)
 	
 	 postOption.forEach((option, i) => {
+		 if (i == 3 || i == 7) return;
 		if(option.checked){
 			optionLable[i].classList.remove("light_brown_bg")
 			optionLable[i].classList.add("dark_brown_bg")
 			
 			if(i == 0 || i == 4)   optionLable[i].innerText = "댓글 비허용";
-	        if(i == 1 || i == 5)   optionLable[i].innerText = "스크랩 비허용";
-	        if(i == 2 || i == 6)   optionLable[i].innerText = "공감 비허용";
-	        if(i == 3 || i == 7)   optionLable[i].innerText = "익명 OFF";
+	        else if(i == 1 || i == 5)   optionLable[i].innerText = "스크랩 비허용";
+			else if(i == 2 || i == 6)   optionLable[i].innerText = "공감 비허용";
+			else if(i == 3 || i == 7)   optionLable[i].innerText = "익명 OFF";
 
 		}else{
 			option.unchecked
@@ -40,11 +42,11 @@ let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mSc
 			optionLable[i].classList.add("light_brown_bg")
 			
 	        if(i == 0 || i == 4)   optionLable[i].innerText = "댓글 허용";
-         	if(i == 1 || i == 5)   optionLable[i].innerText = "스크랩 허용";
-         	if(i == 2 || i == 6)   optionLable[i].innerText = "공감 허용";
-	        if(i == 3 || i == 7)   optionLable[i].innerText = "익명 ON";
+			else if(i == 1 || i == 5)   optionLable[i].innerText = "스크랩 허용";
+			else if(i == 2 || i == 6)   optionLable[i].innerText = "공감 허용";
+			else if(i == 3 || i == 7)   optionLable[i].innerText = "익명 ON";
 		}
-	})
+	});
 	
 }
 
