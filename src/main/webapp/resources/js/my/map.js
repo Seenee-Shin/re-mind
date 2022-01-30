@@ -213,7 +213,14 @@ function makeProList(){
         const divCon = $('<div class="container" style="width: 75%; display: inline-block;">');
         const divH3 = $('<h3 style="margin-bottom: 10px;">' + proHospName[i] + '</h3>');
         const divDepartment = $('<div style="margin-bottom: 10px;">심리 상담 센터</div>');
-        const divDistance = $('<div style="margin-bottom: 10px;"> ' + distance[i] + 'm | ' + proAddress[i] + '</div>');
+
+        let divDistance;
+        if(distance[i] > 1000){
+            distance[i] = Math.floor(distance[i] / 1000);
+            divDistance = $('<div style="margin-bottom: 10px;"> ' + distance[i] + 'km | ' + proAddress[i] + '</div>');
+        }else{
+            divDistance = $('<div style="margin-bottom: 10px;"> ' + distance[i] + 'm | ' + proAddress[i] + '</div>');
+        }
         const divPhone = $('<div style="margin-bottom: 10px;">' + proBusinessNo[i] + '</div>');
 
         divCon.append(divH3, divDepartment, divDistance, divPhone);
