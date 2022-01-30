@@ -25,6 +25,9 @@ let postOption =[comment, scrap, like,anon,mComment, mScrap,mLike,mAnon]
 let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mScrapLable,mLikeLable,mAnonLable]
 	
 	 postOption.forEach((option, i) => {
+		
+		if(!option) return;
+		
 		if(option.checked){
 			optionLable[i].classList.remove("light_brown_bg")
 			optionLable[i].classList.add("dark_brown_bg")
