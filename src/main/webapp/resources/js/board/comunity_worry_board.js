@@ -1,25 +1,30 @@
-
 /* 카테고리 여닫기 */
 const categoryBtn = document.querySelector("#worryCategoryBtn")
+const openCategoryBtn = document.querySelector("#openCategoryBtn")
+const postCategory = document.querySelector("#openCategoryBtn + .worry_category_wrap")
 const category = document.querySelector(".worry_category_wrap")
 const togleModal = ()=>{
     category.classList.toggle("hidden")
 }
 
+const postTogleModal = ()=>{
+    postCategory.classList.toggle("hidden")
+}
 
 const openModal = ()=>{
-    modal.classList.remove("hidden")
+    postModal.classList.remove("hidden")
 }
 const closeModal = ()=>{
-    modal.classList.add("hidden")
+    postModal.classList.add("hidden")
 }
 categoryBtn.addEventListener("click",togleModal)
+openCategoryBtn.addEventListener("click",postTogleModal)
 
 
 /* 모달창 열기 */
 
 const openBtn = document.querySelector("#openModal")
-const modal =  document.querySelector(".modal")
+const postModal =  document.querySelector(".postModal")
 const closeBtn = document.querySelector("#closeModal")
 
 openBtn.addEventListener("click", openModal)

@@ -93,9 +93,25 @@
 	                        </a>
 	                        
 	                        <div class="write_option_area">
-	                            <button type="button" id="comment" class="option_btn light_brown_bg" onclick="">댓글 허용</button>
-	                            <button type="button" id="scrap" class="option_btn light_brown_bg" onclick="">스크랩 허용</button>
-	                            <button type="button" id="like" class="option_btn light_brown_bg" onclick="">공감 허용</button>
+		                        <div class="check_box_wrap">
+	                                <label for="comment" class="option_btn light_brown_bg">댓글허용
+	                                    <input type="checkbox" name="writeOption" value="" id="comment">
+	                                </label>
+	                            </div>
+	
+	                            <div class="check_box_wrap">
+	                                <label for="scrap" class="option_btn light_brown_bg">스크랩허용
+	                                    <input type="checkbox"  name="writeOption" value="" id="scarp">
+	                                    
+	                                </label>
+	                            </div>
+	                            
+	                            <div class="check_box_wrap">
+	                                <label for="like" class="option_btn light_brown_bg"> 공감 허용
+	                                    <input type="checkbox"  name="writeOption" value="" id="like">
+	
+	                                </label>
+	                        	</div>	
 	                        </div>
 	                        
 	                    </div>

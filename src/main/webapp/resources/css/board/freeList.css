@@ -83,7 +83,7 @@ input:focus, textarea:focus, select:focus{
     margin-left: 5px;
 }
 
-.check_box_wrap>label>input[type="checkbox"]{
+.check_box_wrap>input[type="checkbox"]{
     display: none;
 }
 

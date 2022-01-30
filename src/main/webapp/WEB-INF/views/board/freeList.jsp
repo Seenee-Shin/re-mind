@@ -37,23 +37,20 @@
                         
                         <div class="write_option_area">
                             <div class="check_box_wrap">
-                                <label for="mComment" class="light_brown_bg">댓글허용
-                                    <input type="checkbox"  name="writeOption" value="" id="mComment" checked>
-                                </label>
+                                <label for="comment" class="light_brown_bg"> 댓글허용 </label>
+                                <input type="checkbox"  name="writeOption" value="comment" id="comment" onclick="optionValidate();">
                             </div>
 
                             <div class="check_box_wrap">
-                                <label for="mScrap" class="light_brown_bg">스크랩허용
-                                    <input type="checkbox"  name="writeOption" value="" id="mScarp" checked>
+                                <label for="scrap" class="light_brown_bg">스크랩허용</label>
+								<input type="checkbox"  name="writeOption" value="scarp" id="scarp" onclick="optionValidate();">
                                     
-                                </label>
                             </div>
                             
                             <div class="check_box_wrap">
-                                <label for="mLike" class="light_brown_bg"> 공감 허용
-                                    <input type="checkbox"  name="writeOption" value="" id="mLike" checked>
+                                <label for="like" class="light_brown_bg"> 공감 허용</label>
+                                <input type="checkbox"  name="writeOption" value="like" id="like" onclick="optionValidate();">
 
-                                </label>
                             </div>
                             
                         </div>
@@ -88,21 +85,21 @@
     
                                         <div class="write_option_area">
                                             <div class="check_box_wrap">
-                                                <label for="comment" class="light_brown_bg">댓글허용
-                                                    <input type="checkbox" name="writeOption" value="" id="comment" checked>
+                                                <label for="comment" class="light_brown_bg"><p>댓글허용</p>
+                                                    <input type="checkbox" name="writeOption" value="1" id="comment"  onclick="optionValidate();">
                                                 </label>
                                             </div>
     
                                             <div class="check_box_wrap">
                                                 <label for="scrap" class="light_brown_bg">스크랩허용
-                                                    <input type="checkbox"  name="writeOption" value="" id="scarp" checked>
+                                                    <input type="checkbox"  name="writeOption" value="1" id="scarp"  onclick="optionValidate();">
                                                     
                                                 </label>
                                             </div>
                                             
                                             <div class="check_box_wrap">
                                                 <label for="like" class="light_brown_bg"> 공감 허용
-                                                    <input type="checkbox"  name="writeOption" value="" id="like" checked>
+                                                    <input type="checkbox"  name="writeOption" value="1" id="like"  onclick="optionValidate();">
     
                                                 </label>
                                             </div>
