@@ -74,7 +74,7 @@
     <!-- 헤더 -->
     <section class="header_wrap">
         <article class="header_logo_wrap">
-            <img src="" alt="">
+            <img src="${contextPath}/resources/images/remind_logo.png" alt="">
         </article>
 
 
