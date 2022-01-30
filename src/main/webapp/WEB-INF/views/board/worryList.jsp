@@ -84,16 +84,16 @@
 	                </div>
 	
 	                <!-- 글작성 모달창 -->
-	                <div class="modal hidden">
-	                    <div class="modal_overlay"></div>
+	                <div class="postModal hidden">
+	                    <div class="postModal_overlay"></div>
 	                    <div class="board_write_warp">
 	                        <div id="free_board_write">
 	                            <i id="closeModal" class="fas fa-times"></i>
 	                            <h4>고민 작성하기</h4>
 	
-	                            <div class="worry_category_wrap">
-	                                <p>카테고리</p>
-	                                <div class="worry_category">
+	                            <button type="button" class="submit_btn dark_brown_bg" id="openCategoryBtn" >카테고리</button>
+	                            <div class="worry_category_wrap hidden">
+									<div class="worry_category">
 	
 	                                    <div class="check_box_wrap">
 	                                        <label for="normal" class="dark-brown dark_brown_border"> 
@@ -140,7 +140,9 @@
 	                                    
 	                                </div>
 	                            </div>
-	
+								<div class="post_title">
+									<input type="text" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요">
+								</div>
 	                            <div class="writing">
 	                                <textarea class="grey_bg" name="" id="post_textarea" rows="15" placeholder="무슨 고민이 있나요?"></textarea>
 	                            </div>
@@ -162,7 +164,7 @@
 	                            
 	                            <div class="check_box_wrap">
 	                                <label for="like" class="light_brown_bg white"> 공감 허용
-	                                    <input type="checkbox" id="like"  name="write_option" value="like">
+	                                    <input type="checkbox" id="like"  name="write_option" value="like" >
 	
 	                                </label>
 	                            </div>
@@ -236,14 +238,9 @@
 	        
 	        </section>
 	    </div>
-	
-	
-	
 	</main>
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_worry_board.js"></script>
 
-</body>
-</html>

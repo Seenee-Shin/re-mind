@@ -25,7 +25,6 @@
         const contextPath = "${contextPath}";
     </script>
     <script src="${contextPath}/resources/js/common/common.js"></script>
-
     <script src="${contextPath}/resources/js/selftest/selftest.js"></script>
 
 

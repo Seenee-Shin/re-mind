@@ -57,7 +57,7 @@ public class BoardController {
     	model.addAttribute("css", "board/update");
     	model.addAttribute("header", "community");
     	
-    	return "board/freeView";
+    	return "board/freeUpdate";
     }
     
     @RequestMapping("freeDelete")
@@ -92,7 +92,7 @@ public class BoardController {
     	model.addAttribute("css", "board/update");
     	model.addAttribute("header", "community");
     	
-    	return "board/freeView";
+    	return "board/worryUpdate";
     }
     
 
