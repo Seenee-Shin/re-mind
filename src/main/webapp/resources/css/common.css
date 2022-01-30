@@ -65,6 +65,17 @@ input[type='radio']:checked {background:url('../images/icon/radio_active.png') n
 
 @media (hover: hover) {}
 
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+
+.clear-both{
+    clear: both
+}
+
 
 /* ----------- 눌러눌러 버튼버튼 ---------- */
 

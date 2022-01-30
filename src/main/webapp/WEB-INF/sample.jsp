@@ -8,7 +8,6 @@
 
 <article class="main_content">
 
-
 </article>
 
 <!-- header include -->

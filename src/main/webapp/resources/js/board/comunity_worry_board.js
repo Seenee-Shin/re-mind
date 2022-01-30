@@ -13,9 +13,13 @@ const postTogleModal = ()=>{
 
 const openModal = ()=>{
     postModal.classList.remove("hidden")
+    /*뒷창 고정*/
+    $('body').css("overflow", "hidden");
 }
 const closeModal = ()=>{
     postModal.classList.add("hidden")
+    /*뒷창고정 해제*/
+    $('body').css("overflow", "scroll");
 }
 categoryBtn.addEventListener("click",togleModal)
 openCategoryBtn.addEventListener("click",postTogleModal)
@@ -100,3 +104,6 @@ $(".dark-brown").on("click", function(){
         text.css("display", "flex");
     }
 });
+
+
+
