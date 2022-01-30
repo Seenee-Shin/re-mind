@@ -2,27 +2,27 @@
 const comment = document.querySelector("#comment")
 const scrap = document.querySelector("#scrap")
 const like = document.querySelector("#like")
-const ano = document.querySelector("#ano")
+const anon = document.querySelector("#anon")
 const mComment = document.querySelector("#mComment")
 const mScrap = document.querySelector("#mScrap")
 const mLike = document.querySelector("#mLike")
-const mAno = document.querySelector("#mAno")
+const mAnon = document.querySelector("#mAnon")
 
 const commentLable = document.querySelector("label[for='comment']")
 const scrapLable = document.querySelector("label[for='scrap']")
 const likeLable = document.querySelector("label[for='like']")
-const anoLable = document.querySelector("label[for='ano']")
+const anonLable = document.querySelector("label[for='anon']")
 const mCommentLable = document.querySelector("label[for='mComment']")
 const mScrapLable = document.querySelector("label[for='mScrap']")
 const mLikeLable = document.querySelector("label[for='mLike']")
-const mAnoLable = document.querySelector("label[for='mAno']")
+const mAnonLable = document.querySelector("label[for='mAnon']")
 
 
 
 function optionValidate(){
 	
-let postOption =[comment, scrap, like,ano,mComment, mScrap,mLike,mAno]
-let optionLable= [commentLable,scrapLable,likeLable,anoLable,mCommentLable, mScrapLable,mLikeLable,mAnoLable]
+let postOption =[comment, scrap, like,anon,mComment, mScrap,mLike,mAnon]
+let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mScrapLable,mLikeLable,mAnonLable]
 	
 	 postOption.forEach((option, i) => {
 		if(option.checked){
