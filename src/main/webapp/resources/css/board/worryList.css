@@ -1,7 +1,5 @@
 .white{color: white;}
-.dark_brown_border{
-    border: 1px solid #A59999;
-}
+
 
 
 
@@ -97,21 +95,26 @@ select{
 
 }
 
+.check_box_wrap>input[type="radio"]{
+    display: none;
+}
+
+
 /* 글작성 textarea */
 
 /* 글작성 모달  */
-.modal{
+.postModal{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     }
 
-.modal_overlay{
+.postModal_overlay{
     background-color: rgba(0,0,0,0.6);
     width: 100%;
     height: 100%;
@@ -125,6 +128,9 @@ select{
 }
 .board_write_warp{
     width: 50%;
+    height:80%;
+    overflow:scroll;
+     -ms-overflow-style: none;
     background-color: white;
     padding-bottom: 10px;
     border: 1px solid #ededed;
@@ -134,13 +140,23 @@ select{
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     border-radius: 25px;
 }
+.board_write_warp::-webkit-scrollbar{ display:none; }
+
+.post_title{
+	margin-top: 20px;
+}
+
+.post_title>input{
+	border:1px solid #ededed;
+	width: 100%;
+}
 
 #free_board_write >.writing >textarea{
     resize: none;
     display: block;
     width: 100%;
     border: 0px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 #free_board_write >.writing >textarea::placeholder{
@@ -203,10 +219,7 @@ select{
     margin-left: 5px;
 }
 
-.check_box_wrap>label>input[type="checkbox"]{
-    display: none;
-}
-.check_box_wrap>label>input[type="radio"]{
+.check_box_wrap>input[type="checkbox"]{
     display: none;
 }
 
@@ -217,10 +230,19 @@ select{
     height: 28px;
     font-size: 13px;
     text-align: center;
+    border: 0px solid;
+    color: white;
     font-weight: 500;
     cursor: pointer;
     line-height: 27px;
 }
+
+
+.dark_brown_border{
+    border: 1px solid #A59999!important;
+    color:#A59999!important
+}
+
 
 .write_option_area{
     margin-top: 10px;
@@ -248,6 +270,10 @@ select{
     color: white;
     font-weight: 500;
     cursor: pointer;
+
+}
+#openCategoryBtn{
+	    display: flow-root;
 }
 .board_write_warp>.btn_area>a>i{
     font-size: 25px;
@@ -273,11 +299,12 @@ select{
     border-top: 0px;
 }
 
-.board_list_content>a{
+
+
+.writer_pic_wrap+a{
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 180px;
 }
 .posting_info{
     width: 100%;
@@ -286,6 +313,30 @@ select{
 }
 .board_flex_wrap{
     display: flex;
+}
+.writer_pic_wrap >.userMenu{
+	width: 65px;
+    position: relative;
+    left: 10px;
+    top: 5px;
+}
+
+.writer_pic_wrap>.writer_pic{
+	cursor: pointer;
+}
+
+.writer_pic_wrap >.userMenu>li{
+	cursor:pointer;
+	height: 30px;
+    font-size: 15px;
+    text-align: center;
+    border: 1px solid #ededed;
+    border-top : 0px;
+    line-height: 25px;
+}
+.writer_pic_wrap >.userMenu>li:nth-child(1){
+    border-top: 1px solid #ededed;
+
 }
 
 .writer_id{    
@@ -308,6 +359,7 @@ display: inline-block;
     font-size: 15px;
     font-weight: 400;
     color: rgb(91, 91, 91);
+    cursor: pointer;
 }
 
 .writer_id>p:nth-last-child(2){
@@ -324,6 +376,7 @@ display: inline-block;
     margin: 10px;
     width: 90%;
     margin-top: 0px;
+    text-align: left;
 }
 
 /* 공감 & 댓글 아이콘 */
@@ -431,10 +484,9 @@ display: inline-block;
         padding: 10px;
     }
     .board_write_warp{
-        min-height: 80px;
+        min-height:70%;
         width: 100%;
         border-radius: 0px;
-        display: flex;
         flex-direction: column;
         justify-content: center;
     }

@@ -193,7 +193,7 @@
         </div>
 
         <!-- /link/to/이름,위도,경도	https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212 -->
-        <div onclick="window.open(loadSearch());" style="position: absolute; right: 0; top: 35px; border: 1px solid #ccc;
+        <div onclick="window.open(loadSearch());" style="position: absolute; right: 0; top: 45px; border: 1px solid #ccc;
                 width: 70px; min-width: 70px; text-align: center; height: 30px; line-height: 28px;
                 background-color: rgba(84, 127, 207, 0.452); cursor: pointer;">
             길찾기
@@ -227,15 +227,8 @@
 </div>
 
 <script>
-    var hospLocation = [];
-    var hospLocationSplit = [];
 
-    var hospiName;
-
-    for(let i = 0; i < $(".map-info").length; i++){
-        hospLocation[i] = $(".map-info").eq(i).children().last().children().last().prev().text()
-        hospLocationSplit[i] = hospLocation[i].split("| ")[1];
-    }
+    const contextP = "${contextPath}";
 
 </script>
 

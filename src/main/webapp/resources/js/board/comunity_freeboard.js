@@ -13,15 +13,23 @@ const closeModal = ()=>{
     mPosting.classList.add("hidden")
 }
 
+
+function setMobile(){
+   writing.readOnly=true
+   writing.value = ""
+   writing.onclick = openModal
+   closeBtn.onclick = closeModal
+}
+
+if(innerWidth <= 768){
+   setMobile();
+}
 window.onresize = function(){
     var innerWidth = window.innerWidth;
     var innerHeight = window.innerHeight;
     
-    if(innerWidth <= 768){
-        writing.readOnly=true
-        writing.value = ""
-        writing.onclick = openModal
-        closeBtn.onclick = closeModal
+   if(innerWidth <= 768){
+      setMobile();
 
     }else{
         writing.readOnly=false
@@ -30,9 +38,6 @@ window.onresize = function(){
     }
 
 }
-
-
-
 
 /* 모바일 대댓글 토글 */
 const child = document.querySelectorAll(".comment_view child")

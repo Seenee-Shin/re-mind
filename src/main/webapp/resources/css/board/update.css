@@ -72,6 +72,7 @@ input:focus, textarea:focus, select:focus{
     margin-top: 10px;
     margin-left: 15px;
     margin-bottom: 10px;
+    display: flex;
 }
 .option_btn {
     border-radius: 15px;
