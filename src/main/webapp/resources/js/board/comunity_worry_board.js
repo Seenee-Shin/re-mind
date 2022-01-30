@@ -13,9 +13,13 @@ const postTogleModal = ()=>{
 
 const openModal = ()=>{
     postModal.classList.remove("hidden")
+    /*뒷창 고정*/
+    $('body').css("overflow", "hidden");
 }
 const closeModal = ()=>{
     postModal.classList.add("hidden")
+    /*뒷창고정 해제*/
+    $('body').css("overflow", "scroll");
 }
 categoryBtn.addEventListener("click",togleModal)
 openCategoryBtn.addEventListener("click",postTogleModal)
@@ -100,3 +104,15 @@ $(".dark-brown").on("click", function(){
         text.css("display", "flex");
     }
 });
+
+
+/* 프로필 누를시 유저메뉴 보기 */
+const elements = document.getElementsByClassName("writer_pic");
+const userMenu = document.getElementsByClassName("userMenu")
+
+for (let i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('click', function(){
+    userMenu[i].classList.toggle("hidden")
+	
+});
+}
