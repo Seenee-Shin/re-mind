@@ -106,13 +106,4 @@ $(".dark-brown").on("click", function(){
 });
 
 
-/* 프로필 누를시 유저메뉴 보기 */
-const elements = document.getElementsByClassName("writer_pic");
-const userMenu = document.getElementsByClassName("userMenu")
 
-for (let i = 0; i < elements.length; i++) {
-    elements[i].addEventListener('click', function(){
-    userMenu[i].classList.toggle("hidden")
-	
-});
-}
