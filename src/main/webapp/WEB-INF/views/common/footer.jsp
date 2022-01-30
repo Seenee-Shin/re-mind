@@ -28,5 +28,6 @@
 
     <script src="${contextPath}/resources/js/selftest/selftest.js"></script>
 
+
 </body>
 </html>

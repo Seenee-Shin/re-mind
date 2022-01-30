@@ -626,3 +626,54 @@ COMMENT ON COLUMN "CHAT_FILE"."FILE_NAME" IS '파일명';
 
 COMMENT ON COLUMN "CHAT_FILE"."CHATTING_NO" IS '채팅 번호';
 
+
+
+
+-- 조용진 -- 조용진 -- 조용진 -- 조용진 -- 조용진 -- 조용진 -- 조용진 -- 조용진 -- 조용진 -- 조용진
+ALTER TABLE PROFESSION ADD FOREIGN KEY(STATUS_CD) REFERENCES STATUS(STATUS_CD);
+
+
+-- 제약조건 삭제
+--ALTER TABLE 테이블명 DROP CONSTRAINT 제약조건명;
+ALTER TABLE PROFESSION DROP CONSTRAINT 제약조건명;
+
+-- PK 제약조건 추가
+ALTER TABLE STATUS ADD PRIMARY KEY (STATUS_CD);
+
+CREATE SEQUENCE SEQ_PROFESSION_NO;
+
+-- 전문가 등록
+INSERT INTO PROFESSION VALUES(
+SEQ_PROFESSION_NO.NEXTVAL, 'user05', 'pass05!', '유저5', '010-1111-2222',
+DEFAULT, '남', '999999', '등록완료', 4);
+COMMIT;
+
+-- 전문가 병원
+INSERT INTO PROFESSION_HOSPITAL VALUES(
+6, '365 열린내과의원', '서울 노원구 한글비석로 77 한성여객빌딩 3층', '010-0000-0000', '02-000-0000');
+COMMIT;
+
+-- 전문가 정보
+INSERT INTO PROFESSION_INFORMATION VALUES(
+6, '서울대학교연건캠퍼스', '의예과', '심리상담');
+COMMIT;
+
+SELECT * FROM PROFESSION_HOSPITAL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
