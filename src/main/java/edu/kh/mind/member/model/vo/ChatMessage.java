@@ -1,14 +1,12 @@
 package edu.kh.mind.member.model.vo;
 
-
-
 public class ChatMessage {
 	private int chatMessageNo;
 	private String message;
 	private String createDate;
 	private int professionNo;
 	private int memberNo;
-	private int chattingNo;
+	private int chatNo;
 
 	public ChatMessage() {
 	}
@@ -53,12 +51,12 @@ public class ChatMessage {
 		this.memberNo = memberNo;
 	}
 
-	public int getChattingNo() {
-		return chattingNo;
+	public int getChatNo() {
+		return chatNo;
 	}
 
-	public void setChattingNo(int chattingNo) {
-		this.chattingNo = chattingNo;
+	public void setChatNo(int chatNo) {
+		this.chatNo = chatNo;
 	}
 
 	@Override
@@ -69,7 +67,7 @@ public class ChatMessage {
 				", createDate='" + createDate + '\'' +
 				", professionNo=" + professionNo +
 				", memberNo=" + memberNo +
-				", chattingNo=" + chattingNo +
+				", chatNo=" + chatNo +
 				'}';
 	}
 }

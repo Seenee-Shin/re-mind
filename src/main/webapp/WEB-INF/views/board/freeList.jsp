@@ -26,7 +26,7 @@
                     <div class="board_write_warp grey_bg " >
                         <div id="free_board_write">
                             <div class="writer_pic_wrap">
-                                <div class="writer_pic light_brown_bg" style="background-image: url();">
+                                <div class="my_pic light_brown_bg" style="background-image: url();">
                                     
                                 </div>
                             </div>
@@ -37,23 +37,20 @@
                         
                         <div class="write_option_area">
                             <div class="check_box_wrap">
-                                <label for="mComment" class="light_brown_bg">댓글허용
-                                    <input type="checkbox"  name="writeOption" value="" id="mComment" checked>
-                                </label>
+                                <label for="comment" class="light_brown_bg"> 댓글허용 </label>
+                                <input type="checkbox"  name="writeOption" value="comment" id="comment" onclick="optionValidate();">
                             </div>
 
                             <div class="check_box_wrap">
-                                <label for="mScrap" class="light_brown_bg">스크랩허용
-                                    <input type="checkbox"  name="writeOption" value="" id="mScarp" checked>
+                                <label for="scrap" class="light_brown_bg">스크랩허용</label>
+								<input type="checkbox"  name="writeOption" value="scrap" id="scrap" onclick="optionValidate();">
                                     
-                                </label>
                             </div>
                             
                             <div class="check_box_wrap">
-                                <label for="mLike" class="light_brown_bg"> 공감 허용
-                                    <input type="checkbox"  name="writeOption" value="" id="mLike" checked>
+                                <label for="like" class="light_brown_bg"> 공감 허용</label>
+                                <input type="checkbox"  name="writeOption" value="like" id="like" onclick="optionValidate();">
 
-                                </label>
                             </div>
                             
                         </div>
@@ -76,7 +73,7 @@
                                     <div id="m_free_board_write">
                                         <i class="fas fa-times" id="closeModal"></i>
                                         <div class="writer_wrap">
-                                            <div class="writer_pic light_brown_bg" style="background-image: url();">
+                                            <div class="my_pic light_brown_bg" style="background-image: url();">
                                             </div>
                                             <div class="m_writing">
                                                 <textarea name="writePost" id="m_post_text" rows="5" placeholder="무슨일이 있었나요?"></textarea>
@@ -88,23 +85,18 @@
     
                                         <div class="write_option_area">
                                             <div class="check_box_wrap">
-                                                <label for="comment" class="light_brown_bg">댓글허용
-                                                    <input type="checkbox" name="writeOption" value="" id="comment" checked>
-                                                </label>
+                                                <label for="mComment" class="light_brown_bg">댓글허용 </label>
+                                                <input type="checkbox" name="writeOption" value="comment" id="mComment"  onclick="optionValidate();">
                                             </div>
     
                                             <div class="check_box_wrap">
-                                                <label for="scrap" class="light_brown_bg">스크랩허용
-                                                    <input type="checkbox"  name="writeOption" value="" id="scarp" checked>
-                                                    
-                                                </label>
+                                                <label for="mScrap" class="light_brown_bg">스크랩허용</label>
+                                                <input type="checkbox"  name="writeOption" value="scrap" id="mScrap"  onclick="optionValidate();">
                                             </div>
                                             
                                             <div class="check_box_wrap">
-                                                <label for="like" class="light_brown_bg"> 공감 허용
-                                                    <input type="checkbox"  name="writeOption" value="" id="like" checked>
-    
-                                                </label>
+                                                <label for="mLike" class="light_brown_bg"> 공감 허용</label>
+                                                <input type="checkbox"  name="writeOption" value="like" id="mLike"  onclick="optionValidate();">
                                             </div>
                                     </div>
                                     
@@ -141,18 +133,73 @@
                         <div class="writer_pic_wrap">
                             <div class="writer_pic light_brown_bg" style="background-image: url();">
                             </div>
+                            <ul class="userMenu hidden">
+	                            <li> <a href=""> 차단</a> </li>
+	                            <li> <a href=""> 검색</a> </li>
+                            </ul>                            
                         </div>
 
                         <!-- 포스트 시작 -->
-                        <div class="posting_info">
-                            <div class="writer_id">
-                                <p>아이디</p> 
-                                <p> 5분전</p>
-                            </div>
-                            <div class="posting">
-                                <p>저는 오늘 마라탕을 시켰는데요 마라마라마라탕~~~ </p>
-                            </div>
+                        <a href="">
+	                        <div class="posting_info">
+	                            <div class="writer_id">
+	                                <p>아이디</p> 
+	                                
+	                                <p> 5분전</p>
+	                            </div>
+	                            <div class="posting">
+	                                <p>저는 오늘 마라탕을 시켰는데요 마라마라마라탕~~~ </p>
+	                            </div>
+	                        </div>
+                        </a>
+                    </div>
+                    <div class="board_icon_wrap">
+                        <!-- 댓글 아이콘 -->
+                        <div class="commnet_wrap">
+                            <i class="far fa-comment dark-brown"></i>
+                            <p>3</p>
                         </div>
+
+                    <!-- 공감수 표시 -->
+                        <div class="like_warp">
+                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
+                            <p>2</p>
+                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
+                            <p>2</p>
+                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
+                            <p>2</p>
+                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
+                            <p>2</p>
+                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
+                            <p>2</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="board_list_content">
+                    <!-- 프로필 시작 -->
+                    <div class="board_flex_wrap">
+                        <div class="writer_pic_wrap">
+                            <div class="writer_pic light_brown_bg" style="background-image: url();">
+                            </div>
+                            <ul class="userMenu hidden">
+	                            <li> <a href=""> 차단</a> </li>
+	                            <li> <a href=""> 검색</a> </li>
+                            </ul>                            
+                        </div>
+
+                        <!-- 포스트 시작 -->
+                        <a href="">
+	                        <div class="posting_info">
+	                            <div class="writer_id">
+	                                <p>아이디</p> 
+	                                
+	                                <p> 5분전</p>
+	                            </div>
+	                            <div class="posting">
+	                                <p>저는 오늘 마라탕을 시켰는데요 마라마라마라탕~~~ </p>
+	                            </div>
+	                        </div>
+                        </a>
                     </div>
                     <div class="board_icon_wrap">
                         <!-- 댓글 아이콘 -->
@@ -184,7 +231,6 @@
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
+<script type="text/javascript" src="${contextPath}/resources/js/board/board_common.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
 
-</body>
-</html>

@@ -30,6 +30,5 @@
     <script src="${contextPath}/resources/js/selftest/selftest.js"></script>
     <script src="${contextPath}/resources/js/google/googleAPI.js"></script>
 
-
 </body>
 </html>
