@@ -35,6 +35,7 @@
 		<div class="login_method">
 			<a href="javascript:kakaoLogin();">카카오 로그인</a>
 			<a href="javascript:unlinkApp();">카카오 탈퇴하기</a>
+			<a href="javascript:kakaoLogout();">카카오 로그아웃</a>
 			<a href="#self">네이버 로그인</a>
 			<a href="javascript:googleLogin();">구글 로그인</a>
 			<div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>
@@ -82,6 +83,26 @@
 		})
 	}
 
+	function kakao_login() {
+		Kakao.Auth.login({
+			success: function(authObj) {
+				$.ajax({
+					type: 'POST',
+					url: `/login/kakaoo`,
+					contentType: "application/json",
+					data: JSON.stringify({'token':authObj['access_token']}),
+					success: function (response) {
+						localStorage.setItem("token", response['token']);
+						localStorage.setItem("username", response['username']);
+						location.href = '/mind';
+					}
+				})
+			},
+			fail: function(err) {
+				alert(JSON.stringify(err))
+			},
+		})
+	}
 
 
 	//카카오로그인
@@ -94,7 +115,7 @@
 
 				console.log(Kakao.Auth.getAccessToken());
 				const urll = 'https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2' +
-				'&redirect_uri=http://localhost:9000/mind&response_type=code';
+				'&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code';
 
 				// console.log(response) // 로그인 성공하면 받아오는 데이터
 				window.Kakao.API.request({ // 사용자 정보 가져오기
@@ -102,22 +123,23 @@
 					success: (res) => {
 						console.log(res)
 						const kakaoAccount = res.kakao_account;
+						window.location.href=urll; //리다이렉트 되는 코드
 
-						$.ajax({
-							url: "login/kakao",
-							aysnc:false, // 동기식 변경
-							method:"POST",
-							data:{
-								"kakaoEmail": kakaoAccount.email,
-								"kakaoGender": kakaoAccount.gender,
-								"kakaonickname":kakaoAccount.profile.nickname},
-							success:function (result){
-								window.location.href=urll; //리다이렉트 되는 코드
-							},
-							error:function (req, sta, er){
-
-							}
-						});
+						// $.ajax({
+						// 	url: "login/kakao",
+						// 	aysnc:false, // 동기식 변경
+						// 	method:"POST",
+						// 	data:{
+						// 		"kakaoEmail": kakaoAccount.email,
+						// 		"kakaoGender": kakaoAccount.gender,
+						// 		"kakaonickname":kakaoAccount.profile.nickname},
+						// 	success:function (result){
+						// 		window.location.href=urll; //리다이렉트 되는 코드
+						// 	},
+						// 	error:function (req, sta, er){
+						//
+						// 	}
+						// });
 					}
 				});
 			},
@@ -135,7 +157,7 @@
 		Kakao.Auth.logout(function(response) {
 			Kakao.Auth.setAccessToken(undefined); // 로그아웃
 			alert(response +' logout');
-			window.location.href='/'
+			window.location.href='/mind'
 		});
 	};
 
