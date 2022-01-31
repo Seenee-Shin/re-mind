@@ -1,20 +1,5 @@
 package edu.kh.mind.member.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import edu.kh.mind.HomeController;
-import edu.kh.mind.member.model.service.GoogleService;
-import edu.kh.mind.member.model.service.KakaoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,12 +20,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import javax.servlet.http.HttpServletRequest;
-<<<<<<< HEAD
-import javax.servlet.http.HttpServletResponse;
-=======
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
->>>>>>> 0933ccaf15e1a9c8cbb0617ea0967fcaf63c40a6
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,14 +29,8 @@ import java.util.Map;
 @Controller
 public class Aadgadg {
 
-
     @Autowired
     private KakaoService kakaoService;
-
-    @Autowired
-    GoogleService googleService;
-
-
 
 
     @GetMapping("callback")
@@ -106,7 +81,7 @@ public class Aadgadg {
         //AccessToken 발급 요청
         ResponseEntity<String> resultEntity = restTemplate.postForEntity("https://www.googleapis.com/oauth2/v4/token", googleOAuthRequestParam, String.class);
         System.out.println("resultEntity : " + resultEntity);
-        // https://oauth2.googleapis.com/token
+        //https://oauth2.googleapis.com/token
         // https://accounts.google.com/o/oauth2/token
         // https://www.googleapis.com/oauth2/v4/token
 
@@ -136,8 +111,5 @@ public class Aadgadg {
         return "common/main";
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 0933ccaf15e1a9c8cbb0617ea0967fcaf63c40a6
 }
