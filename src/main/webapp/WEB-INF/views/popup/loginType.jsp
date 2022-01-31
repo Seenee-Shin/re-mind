@@ -9,10 +9,8 @@
 <%-- 구글 api 사용을 위한 라이브러리 --%>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+
 <script>
-
-
-
 	function onSignIn(googleUser) {
 		var profile = googleUser.getBasicProfile();
 		var id_token = googleUser.getAuthResponse().id_token;
@@ -65,8 +63,10 @@
 	</div>
 	<div class="login_box">
 		<div class="login_method">
-			<a href="javascript:kakaoLogin();">카카오 로그인</a>
+<%--			<a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code">카카오 로그인</a>
 			<a href="javascript:unlinkApp();">카카오 탈퇴하기</a>
+			<a href="javascript:kakaoLogout();">카카오 로그아웃</a>
 			<a href="#self">네이버 로그인</a>
 <%--			<a href="javascript:googleLogin();">구글 로그인</a>--%>
 			<div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>
@@ -115,7 +115,6 @@
 	}
 
 
-
 	//카카오로그인
 	function kakaoLogin() {
 		Kakao.Auth.login({
@@ -124,34 +123,58 @@
 				console.log(response)
 				Kakao.Auth.setAccessToken(response.access_token);
 
-				console.log(Kakao.Auth.getAccessToken());
+				// console.log(Kakao.Auth.getAccessToken());
 				const urll = 'https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2' +
-				'&redirect_uri=http://localhost:9000/mind&response_type=code';
+				'&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code';
 
-				// console.log(response) // 로그인 성공하면 받아오는 데이터
-				window.Kakao.API.request({ // 사용자 정보 가져오기
-					url: '/v2/user/me',
-					success: (res) => {
-						console.log(res)
-						const kakaoAccount = res.kakao_account;
+				$.ajax({
+					url:urll,
+					method:"GET",
+					success:function (result){
+						console.log(result);
 
-						$.ajax({
-							url: "login/kakao",
-							aysnc:false, // 동기식 변경
-							method:"POST",
-							data:{
-								"kakaoEmail": kakaoAccount.email,
-								"kakaoGender": kakaoAccount.gender,
-								"kakaonickname":kakaoAccount.profile.nickname},
-							success:function (result){
-								window.location.href=urll; //리다이렉트 되는 코드
-							},
-							error:function (req, sta, er){
-
-							}
-						});
+						const urlCode = "https://kauth.kakao.com/oauth/token?grant_type=authorization_code"+
+								"&client_id=b862240d0cf0e40922fb9312954ca3a2"+
+								"&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback"+
+								"&code=" + result;
+						window.location.href = urlCode;
+						// $.ajax({
+						// 	url:urlCode,
+						// 	method:"POST",
+						// 	dataType:"json",
+						// 	success:function (result){
+						// 		// console.log(result);
+						// 	}
+						// });
 					}
 				});
+				// window.location.href=urll; //리다이렉트 되는 코드
+
+				// console.log(response) // 로그인 성공하면 받아오는 데이터
+				// window.Kakao.API.request({ // 사용자 정보 가져오기
+				// 	url: '/v2/user/me',
+				// 	success: (res) => {
+				// 		console.log(res)
+				// 		const kakaoAccount = res.kakao_account;
+				// 		window.location.href=urll; //리다이렉트 되는 코드
+				//
+				// 		// $.ajax({
+				// 		// 	url: "login/kakao",
+				// 		// 	aysnc:false, // 동기식 변경
+				// 		// 	method:"POST",
+				// 		// 	data:{
+				// 		// 		"kakaoEmail": kakaoAccount.email,
+				// 		// 		"kakaoGender": kakaoAccount.gender,
+				// 		// 		"kakaonickname":kakaoAccount.profile.nickname},
+				// 		// 	success:function (result){
+				// 		// 		window.location.href=urll; //리다이렉트 되는 코드
+				// 		// 	},
+				// 		// 	error:function (req, sta, er){
+				// 		//
+				// 		// 	}
+				// 		// });
+				// 	}
+				// });
 			},
 			fail: function(error) {
 				console.log(error);
@@ -167,7 +190,7 @@
 		Kakao.Auth.logout(function(response) {
 			Kakao.Auth.setAccessToken(undefined); // 로그아웃
 			alert(response +' logout');
-			window.location.href='/'
+			window.location.href='/mind'
 		});
 	};
 

@@ -175,6 +175,7 @@ function AddrChangeCoords(){
                 // // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                 // map.setCenter(currentPos);
 
+
             } else if (status == "ZERO_RESULT") {
                 alert("검색결과가 없습니다.");
             }
@@ -190,6 +191,7 @@ function AddrChangeCoords(){
         distance[i] = dis2[i];
     }
 }
+
 
 function makeProList(){
     $("#placesList").empty();
@@ -329,7 +331,13 @@ if(window.innerWidth > 1200){
 
 
 
+var callback = function(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+        console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
+    }
+};
 
+geocoder.coord2Address(currentPos.getLng(), currentPos.getLat(), callback);
 
 
 // 좌표로 상세주소
@@ -345,9 +353,12 @@ function getHospAddress() {
         }
     });
 }
-$(function(){
+// $(function(){
+//     getHospAddress();
+// });
+setTimeout(function (){
     getHospAddress();
-});
+}, 500);
 
 
 
