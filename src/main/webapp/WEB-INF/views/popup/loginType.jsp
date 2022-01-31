@@ -22,31 +22,31 @@
 		console.log(id_token);
 
 		/*window.location.replace("http://localhost:9000/mind?" +
-				"client_id=251812285867-osc8dhqrlc0f5tu31kiike62ehrro734.apps.googleusercontent.com&" +
-				"redirect_uri=http://localhost:9000/mind&" +
-				"response_type=code&" +
-				"scope=email%20profile%20openid&" +
-				"access_type=offline");*/
+              "client_id=251812285867-osc8dhqrlc0f5tu31kiike62ehrro734.apps.googleusercontent.com&" +
+              "redirect_uri=http://localhost:9000/mind&" +
+              "response_type=code&" +
+              "scope=email%20profile%20openid&" +
+              "access_type=offline");*/
 	}
 
 	// function onSignIn(googleUser) {
-	// 	var profile = googleUser.getBasicProfile();
-	// 	var id_token = googleUser.getAuthResponse().id_token;
+	//    var profile = googleUser.getBasicProfile();
+	//    var id_token = googleUser.getAuthResponse().id_token;
 	// }//onSignIn
 
 	/*function onSignIn(){
-		var auth2 = gapi.auth2.getAuthInstance()
-		if(auth2.isSignedIn.get()){
-			var profile = auth2.currentUser.get().getBasicProfile();
-			googleLoginPro(profile)
+       var auth2 = gapi.auth2.getAuthInstance()
+       if(auth2.isSignedIn.get()){
+          var profile = auth2.currentUser.get().getBasicProfile();
+          googleLoginPro(profile)
 
 
-		}
-		console.log(auth2);
-		console.log(profile);
+       }
+       console.log(auth2);
+       console.log(profile);
 
 
-	}*/
+    }*/
 
 	function signOut() {
 		var auth2 = gapi.auth2.getAuthInstance();
@@ -64,19 +64,19 @@
 	</div>
 	<div class="login_box">
 		<div class="login_method">
-<%--			<a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
+			<%--         <a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code">카카오 로그인</a>
 			<a href="javascript:unlinkApp();">카카오 탈퇴하기</a>
-<%--			<a href="javascript:kakaoLogout();">카카오 로그아웃</a>--%>
+			<%--         <a href="javascript:kakaoLogout();">카카오 로그아웃</a>--%>
 			<a href="javascript:kakaoLogoutt();">카카오 로그아웃</a>
-<%--			<a href="#self">네이버 로그인</a>--%>
-	<button onclick="showLoginPopup();"><img width="200" height="50" src="images/btnG_완성형.png"></button>
-<%--	<a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
+			<%--         <a href="#self">네이버 로그인</a>--%>
+			<button onclick="showLoginPopup();"><img width="200" height="50" src="images/btnG_완성형.png"></button>
+			<%--   <a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
 
-<%--			<a href="javascript:googleLogin();">구글 로그인</a>--%>
-<%--			<div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>--%>
+			<%--         <a href="javascript:googleLogin();">구글 로그인</a>--%>
+			<%--         <div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>--%>
 			<button class="btn btn-primary" id="googleLoginBtn">구글 로그인</button>
-<%--			<a class="g-signin2"  onClick="onSignIn()">Google Login</a>--%>
+			<%--         <a class="g-signin2"  onClick="onSignIn()">Google Login</a>--%>
 
 			<a href="#" onclick="signOut();">구글 로그아웃</a>
 			<a href="#self">이메일 로그인</a>
@@ -118,11 +118,11 @@
 	const onClickGoogleLogin = function(e) {
 		//구글서버로 인증코드 발급 요청
 		window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?"+
-		"client_id=251812285867-iarbblabr07shf2kvjjmuaoa3tuv6n8r.apps.googleusercontent.com&"+
-		"redirect_uri=http://localhost:9000/mind/oauth_kakao/googleLogin&"+
-		"response_type=code&"+
-		"scope=email%20profile%20openid&"+
-		"access_type=offline");
+				"client_id=251812285867-iarbblabr07shf2kvjjmuaoa3tuv6n8r.apps.googleusercontent.com&"+
+				"redirect_uri=http://localhost:9000/mind/oauth_kakao/googleLogin&"+
+				"response_type=code&"+
+				"scope=email%20profile%20openid&"+
+				"access_type=offline");
 	}
 
 	function init() {
@@ -166,17 +166,17 @@
 
 				// console.log(Kakao.Auth.getAccessToken());
 				const urll = 'https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2' +
-				'&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code';
+						'&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code';
 				window.location.href=urll; //리다이렉트 되는 코드
 
 				// window.Kakao.API.request({ // 사용자 정보 가져오기
-				// 	url: '/v2/user/me',
-				// 	success: (res) => {
-				// 		console.log(res)
-				// 		const kakaoAccount = res.kakao_account;
-				// 		window.location.href=urll; //리다이렉트 되는 코드
+				//    url: '/v2/user/me',
+				//    success: (res) => {
+				//       console.log(res)
+				//       const kakaoAccount = res.kakao_account;
+				//       window.location.href=urll; //리다이렉트 되는 코드
 				//
-				// 	}
+				//    }
 				// });
 			},
 			fail: function(error) {
