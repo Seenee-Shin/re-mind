@@ -20,6 +20,8 @@ public class KakaoService {
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
         String refresh_Token = "";
+        String refresh_token_expires_in = "";
+        String expires_in = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
 
         try {
@@ -63,9 +65,13 @@ public class KakaoService {
 
             access_Token = element.getAsJsonObject().get("access_token").getAsString();
             refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+            refresh_token_expires_in = element.getAsJsonObject().get("refresh_token_expires_in").getAsString();
+            expires_in = element.getAsJsonObject().get("expires_in").getAsString();
 
             System.out.println("access_token : " + access_Token);
             System.out.println("refresh_token : " + refresh_Token);
+            System.out.println("refresh_token_expires_in : " + refresh_token_expires_in);
+            System.out.println("expires_in : " + expires_in);
 
             br.close();
             bw.close();
