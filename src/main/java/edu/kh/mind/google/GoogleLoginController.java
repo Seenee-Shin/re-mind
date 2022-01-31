@@ -33,7 +33,7 @@ import java.util.Map;
 @Controller
 public class GoogleLoginController {
 
-    
+
 
 
 	/*@RequestMapping(value = "/mind", method = RequestMethod.GET)
