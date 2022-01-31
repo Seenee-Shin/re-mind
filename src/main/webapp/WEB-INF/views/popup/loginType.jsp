@@ -8,6 +8,9 @@
 <meta name ="google-signin-client_id" content="251812285867-iarbblabr07shf2kvjjmuaoa3tuv6n8r.apps.googleusercontent.com">
 <%-- 구글 api 사용을 위한 라이브러리 --%>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<%-- naver --%>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+
 
 <script>
 
@@ -63,7 +66,14 @@ function onSignIn(googleUser) {
 <%--			<a href="javascript:kakaoLogout();">카카오 로그아웃</a>--%>
 			<a href="javascript:kakaoLogoutt();">카카오 로그아웃</a>
 <%--			<a href="#self">네이버 로그인</a>--%>
-			<div id="naverIdLogin"></div>
+<<<<<<< HEAD
+<%--			<div id="naverIdLogin"></div>--%>
+			<div id="naver_id_login" style="text-align:center"><a href="${url}"><img width="223" src="${pageContext.request.contextPath}/resources/img/naver_Bn_Green.PNG"/></a></div>
+=======
+	<button onclick="showLoginPopup();"><img width="200" height="50" src="images/btnG_완성형.png"></button>
+<%--	<a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
+>>>>>>> 0933ccaf15e1a9c8cbb0617ea0967fcaf63c40a6
+
 			<button class="btn btn-primary" id="googleLoginBtn">구글 로그인</button>
 <%--			<a class="g-signin2"  onClick="onSignIn()">Google Login</a>--%>
 
@@ -77,18 +87,22 @@ function onSignIn(googleUser) {
 	</div>
 </div>
 
-<script>
-	var naverLogin = new naver.LoginWithNaverId(
-			{
-				clientId: "bCW4VaBNrrKJO0dNnbwX",
-				callbackUrl: "http://localhost:9000/mind/oauth_kakao/naverLogin",
-				isPopup: false, /* 팝업을 통한 연동처리 여부 */
-				loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
-			}
-	);
+<script type="text/javascript">
+	function showLoginPopup(){
+		let uri = 'https://nid.naver.com/oauth2.0/authorize?' +
+				'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
+				'&client_id=bCW4VaBNrrKJO0dNnbwX' +     // 발급받은 client_id 를 입력
+				'&state=NAVER_LOGIN_TEST' +             // CORS 를 방지하기 위한 특정 토큰값(임의값 사용)
+				'&redirect_uri=http://localhost:9000/mind/oauth_kakao/naverLogin';   // 어플케이션에서 등록했던 CallBack URL를 입력
 
-	/* 설정정보를 초기화하고 연동을 준비 */
-	naverLogin.init();
+		// 사용자가 사용하기 편하게끔 팝업창으로 띄어준다.
+		// window.open(uri, "Naver Login Test PopupScreen", "width=450, height=600");
+		window.location.href = uri;
+	}
+
+</script>
+
+<script>
 
 
 	document.getElementById("googleLoginBtn").addEventListener("click", function (){

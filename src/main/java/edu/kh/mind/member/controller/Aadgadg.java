@@ -26,15 +26,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
+
 import javax.servlet.http.HttpServletRequest;
+<<<<<<< HEAD
 import javax.servlet.http.HttpServletResponse;
+=======
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+>>>>>>> 0933ccaf15e1a9c8cbb0617ea0967fcaf63c40a6
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +54,9 @@ public class Aadgadg {
 
     @Autowired
     GoogleService googleService;
+
+
+
 
     @GetMapping("callback")
     public String kakaooLogin(@RequestParam(value = "code", required = false) String code,
@@ -97,7 +106,7 @@ public class Aadgadg {
         //AccessToken 발급 요청
         ResponseEntity<String> resultEntity = restTemplate.postForEntity("https://www.googleapis.com/oauth2/v4/token", googleOAuthRequestParam, String.class);
         System.out.println("resultEntity : " + resultEntity);
-        //https://oauth2.googleapis.com/token
+        // https://oauth2.googleapis.com/token
         // https://accounts.google.com/o/oauth2/token
         // https://www.googleapis.com/oauth2/v4/token
 
@@ -127,4 +136,8 @@ public class Aadgadg {
         return "common/main";
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0933ccaf15e1a9c8cbb0617ea0967fcaf63c40a6
 }
