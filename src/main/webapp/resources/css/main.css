@@ -582,7 +582,7 @@
     }
   
     .mb_main_content2_content_board > button:nth-child(2) {
-      border-radius: 10px;
+      border-radius: 10px;;
       background: #a59999;
       width: 80px;
       height: 30px;
