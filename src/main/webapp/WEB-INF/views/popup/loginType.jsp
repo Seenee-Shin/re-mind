@@ -10,6 +10,7 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
+
 <script>
 	function onSignIn(googleUser) {
 		var profile = googleUser.getBasicProfile();
@@ -69,7 +70,7 @@
 <%--			<a href="javascript:kakaoLogout();">카카오 로그아웃</a>--%>
 			<a href="javascript:kakaoLogoutt();">카카오 로그아웃</a>
 <%--			<a href="#self">네이버 로그인</a>--%>
-	<div id="naverIdLogin"></div>
+	<button onclick="showLoginPopup();"><img width="200" height="50" src="images/btnG_완성형.png"></button>
 <%--	<a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
 
 <%--			<a href="javascript:googleLogin();">구글 로그인</a>--%>
@@ -87,18 +88,22 @@
 	</div>
 </div>
 
-<script>
-	var naverLogin = new naver.LoginWithNaverId(
-			{
-				clientId: "bCW4VaBNrrKJO0dNnbwX",
-				callbackUrl: "http://localhost:9000/mind/oauth_kakao/naverLogin",
-				isPopup: false, /* 팝업을 통한 연동처리 여부 */
-				loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
-			}
-	);
+<script type="text/javascript">
+	function showLoginPopup(){
+		let uri = 'https://nid.naver.com/oauth2.0/authorize?' +
+				'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
+				'&client_id=bCW4VaBNrrKJO0dNnbwX' +     // 발급받은 client_id 를 입력
+				'&state=NAVER_LOGIN_TEST' +             // CORS 를 방지하기 위한 특정 토큰값(임의값 사용)
+				'&redirect_uri=http://localhost:9000/mind/oauth_kakao/naverLogin';   // 어플케이션에서 등록했던 CallBack URL를 입력
 
-	/* 설정정보를 초기화하고 연동을 준비 */
-	naverLogin.init();
+		// 사용자가 사용하기 편하게끔 팝업창으로 띄어준다.
+		// window.open(uri, "Naver Login Test PopupScreen", "width=450, height=600");
+		window.location.href = uri;
+	}
+
+</script>
+
+<script>
 
 
 	document.getElementById("googleLoginBtn").addEventListener("click", function (){
