@@ -12,23 +12,34 @@
 <script>
 
 
+// function attachSignin(element) {
+// 	auth2.attachHandler(element, {},
+//
+// 			,function (error){
+// 				console.log(JSON.stringify(error, undefined, 2));
+// 			})
+// }
 
-	function onSignIn(googleUser) {
-		var profile = googleUser.getBasicProfile();
-		var id_token = googleUser.getAuthResponse().id_token;
-		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-		console.log('Name: ' + profile.getName());
-		console.log('Image URL: ' + profile.getImageUrl());
-		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-		console.log(id_token);
+function onSignIn(googleUser) {
+	var profile = googleUser.getBasicProfile();
+	var id_token = googleUser.getAuthResponse().id_token;
+	console.log('ID: ' + profile.getId());
+	// console.log('Name: ' + profile.getName());
+	// console.log('Image URL: ' + profile.getImageUrl());
+	// console.log('Email: ' + profile.getEmail());
+	// console.log(id_token);
 
-		/*window.location.replace("http://localhost:9000/mind?" +
-				"client_id=251812285867-osc8dhqrlc0f5tu31kiike62ehrro734.apps.googleusercontent.com&" +
-				"redirect_uri=http://localhost:9000/mind&" +
-				"response_type=code&" +
-				"scope=email%20profile%20openid&" +
-				"access_type=offline");*/
-	}
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'login/google/tokensignin');
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.onload = function (){
+		console.log('Sign in : ' + xhr.responseText);
+	};
+	xhr.send('idtoken= ' + id_token);
+	// console.log(xhr);
+
+}
+
 
 	// function onSignIn(googleUser) {
 	// 	var profile = googleUser.getBasicProfile();
