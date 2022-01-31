@@ -57,13 +57,17 @@ function onSignIn(googleUser) {
 	</div>
 	<div class="login_box">
 		<div class="login_method">
-<%--			<a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code">카카오 로그인</a>
+			<a href="javascript:kakaoLogin();">카카오 로그인</a>
+<%--			<a href="https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code">카카오 로그인</a>--%>
 			<a href="javascript:unlinkApp();">카카오 탈퇴하기</a>
 			<a href="javascript:kakaoLogout();">카카오 로그아웃</a>
 			<a href="#self">네이버 로그인</a>
 <%--			<a href="javascript:googleLogin();">구글 로그인</a>--%>
-			<div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>
+<%--			<div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>--%>
+<%--			<div id="googleLoginBtn" style="cursor: pointer">--%>
+<%--				<img id="googleLoginImg" src="./images/btn_google_signin_light_pressed_web.png">--%>
+<%--			</div>--%>
+			
 <%--			<a class="g-signin2"  onClick="onSignIn()">Google Login</a>--%>
 
 			<a href="#" onclick="signOut();">구글 로그아웃</a>
@@ -78,18 +82,36 @@ function onSignIn(googleUser) {
 
 <script>
 
-	function init() {
-		gapi.load('auth2', function() {
-			gapi.auth2.init();
-			options = new gapi.auth2.SigninOptionsBuilder();
-			options.setPrompt('select_account');
-			// 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
-			options.setScope('email profile openid');
-			// 인스턴스의 함수 호출 - element에 로그인 기능 추가
-			// GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
-			gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
-		})
+
+
+
+
+	/*
+	const onClickGoogleLogin = (e) => {
+		//구글 인증 서버로 인증코드 발급 요청
+		window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?"+
+		"client_id=251812285867-iarbblabr07shf2kvjjmuaoa3tuv6n8r.apps.googleusercontent.com"+
+		"&redirect_uri=http://localhost:9000/mind/oauth_kakao/googleLogin"+
+		"&response_type=code"+
+		"&scope=email%20profile%20openid"+
+		"&access_type=offline");
 	}
+
+	const googleLoginBtn = document.getElementById("googleLoginBtn");
+	googleLoginBtn.addEventListener("click", onClickGoogleLogin);
+*/
+	// function init() {
+	// 	gapi.load('auth2', function() {
+	// 		gapi.auth2.init();
+	// 		options = new gapi.auth2.SigninOptionsBuilder();
+	// 		options.setPrompt('select_account');
+	// 		// 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
+	// 		options.setScope('email profile openid');
+	// 		// 인스턴스의 함수 호출 - element에 로그인 기능 추가
+	// 		// GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
+	// 		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
+	// 	})
+	// }
 
 
 	Kakao.init('f9cc932f2cb179a77079e2c667dab98a');
@@ -120,18 +142,19 @@ function onSignIn(googleUser) {
 				// console.log(Kakao.Auth.getAccessToken());
 				const urll = 'https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2' +
 				'&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code';
+				window.location.href=urll; //리다이렉트 되는 코드
 
-				$.ajax({
-					url:urll,
-					method:"GET",
-					success:function (result){
-						console.log(result);
-
-						const urlCode = "https://kauth.kakao.com/oauth/token?grant_type=authorization_code"+
-								"&client_id=b862240d0cf0e40922fb9312954ca3a2"+
-								"&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback"+
-								"&code=" + result;
-						window.location.href = urlCode;
+				// $.ajax({
+				// 	url:urll,
+				// 	method:"GET",
+				// 	success:function (result){
+				// 		console.log(result);
+				//
+				// 		const urlCode = "https://kauth.kakao.com/oauth/token?grant_type=authorization_code"+
+				// 				"&client_id=b862240d0cf0e40922fb9312954ca3a2"+
+				// 				"&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback"+
+				// 				"&code=" + result;
+				// 		window.location.href = urlCode;
 						// $.ajax({
 						// 	url:urlCode,
 						// 	method:"POST",
@@ -140,8 +163,8 @@ function onSignIn(googleUser) {
 						// 		// console.log(result);
 						// 	}
 						// });
-					}
-				});
+				// 	}
+				// });
 				// window.location.href=urll; //리다이렉트 되는 코드
 
 				// console.log(response) // 로그인 성공하면 받아오는 데이터

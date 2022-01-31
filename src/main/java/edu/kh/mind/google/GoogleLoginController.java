@@ -10,7 +10,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import edu.kh.mind.google.model.vo.GoogleOAuthRequest;
 import edu.kh.mind.google.model.vo.GoogleOAuthResponse;
+import edu.kh.mind.member.model.service.GoogleService;
 import jdk.nashorn.internal.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +35,8 @@ import java.util.Map;
 @Controller
 public class GoogleLoginController {
 
-
+    @Autowired
+    GoogleService googleService;
 
 
 	/*@RequestMapping(value = "/mind", method = RequestMethod.GET)

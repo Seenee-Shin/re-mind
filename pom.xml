@@ -237,6 +237,22 @@
 			<version>2.2.1</version>
 			<scope>compile</scope>
 		</dependency>
+
+
+		<!-- httpcore -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.6</version>
+		</dependency>
+
+		<!-- httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+
 	</dependencies>
 	
 
