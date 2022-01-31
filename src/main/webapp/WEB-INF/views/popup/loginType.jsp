@@ -71,6 +71,8 @@
 			<a href="javascript:kakaoLogoutt();">카카오 로그아웃</a>
 <%--			<a href="#self">네이버 로그인</a>--%>
 	<button onclick="showLoginPopup();"><img width="200" height="50" src="images/btnG_완성형.png"></button>
+	<div id="naverIdLogin"></div>
+
 <%--	<a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
 
 <%--			<a href="javascript:googleLogin();">구글 로그인</a>--%>
@@ -88,7 +90,10 @@
 	</div>
 </div>
 
+
+
 <script type="text/javascript">
+
 	function showLoginPopup(){
 		let uri = 'https://nid.naver.com/oauth2.0/authorize?' +
 				'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
@@ -104,7 +109,39 @@
 </script>
 
 <script>
+	const naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "bCW4VaBNrrKJO0dNnbwX",
+				callbackUrl: "http://localhost:9000/mind/oauth_kakao/naverLogin",
+				loginButton: {color: "green", type: 2, height: 40}
+			}
+	); naverLogin.init(); // 로그인 설정
 
+	naverLogin.getLoginStatus(function (status) {
+		if (status) {
+			const nickName=naverLogin.user.getNickName();
+			const age=naverLogin.user.getAge();
+			const birthday=naverLogin.user.getBirthday();
+
+			//닉네임을 선택하지 않으면 선택창으로 돌아갑니다.
+			if(nickName===null||nickName===undefined ){
+				alert("별명이 필요합니다. 정보제공을 동의해주세요.");
+				naverLogin.reprompt();
+				return ;
+			}else{
+				setLoginStatus(); //모든 필수 정보 제공 동의하면 실행하는 함수
+			}
+		}
+	});
+	console.log(naverLogin);
+
+	const message_area=document.getElementById('message');
+	message_area.innerHTML=`
+      <h3> Login 성공 </h3>
+      <div>user Nickname : ${naverLogin.user.nickname}</div>
+      <div>user Age(범위) : ${naverLogin.user.age}</div>
+      <div>user Birthday : ${naverLogin.user.birthday}</div>
+      `;
 
 	document.getElementById("googleLoginBtn").addEventListener("click", function (){
 		//구글서버로 인증코드 발급 요청

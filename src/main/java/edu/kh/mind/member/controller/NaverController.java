@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.security.SecureRandom;
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,7 +31,6 @@ public class NaverController {
 
     private String CLIENT_ID = "bCW4VaBNrrKJO0dNnbwX"; //애플리케이션 클라이언트 아이디값";
     private String CLI_SECRET = "XWBByOkfMf"; //애플리케이션 클라이언트 시크릿값";
-
 
     /**
      * 로그인 화면이 있는 페이지 컨트롤
@@ -86,6 +86,16 @@ public class NaverController {
             session.setAttribute("currentUser", res);
             session.setAttribute("currentAT", parsedJson.get("access_token"));
             session.setAttribute("currentRT", parsedJson.get("refresh_token"));
+
+            String infoURL = "https://openapi.naver.com/v1/nid/me";
+            String headerStr = "Bearer " + parsedJson.get("access_token"); // Bearer 다음에 공백 추가
+            String ress = requestToServer(infoURL, headerStr);
+            System.out.println("ress : " + ress);
+
+
+
+
+
         } else {
             model.addAttribute("res", "Login failed!");
         }
@@ -160,7 +170,7 @@ public class NaverController {
     @RequestMapping("/naver/invalidate")
     public String invalidateSession(HttpSession session) {
         session.invalidate();
-        return "redirect:/naver";
+        return "redirect:/";
     }
     /**
      * 서버 통신 메소드

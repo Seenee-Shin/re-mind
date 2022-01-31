@@ -33,9 +33,6 @@ public class Aadgadg {
     private KakaoService kakaoService;
 
 
-
-
-
     @GetMapping("callback")
     public String kakaooLogin(@RequestParam(value = "code", required = false) String code,
                               RedirectAttributes ra){
