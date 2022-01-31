@@ -10,6 +10,8 @@
     <title>마음연구소 RE:mind</title>
     <%-- 카카오로그인 API JS 라이브러리 --%>
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <%-- 네이버로그인 API JS 라이브러리 --%>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
     
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
