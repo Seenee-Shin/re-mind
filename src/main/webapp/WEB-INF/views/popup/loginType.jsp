@@ -11,56 +11,10 @@
 
 
 
-<script>
-	function onSignIn(googleUser) {
-		var profile = googleUser.getBasicProfile();
-		var id_token = googleUser.getAuthResponse().id_token;
-		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-		console.log('Name: ' + profile.getName());
-		console.log('Image URL: ' + profile.getImageUrl());
-		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-		console.log(id_token);
-
-		/*window.location.replace("http://localhost:9000/mind?" +
-              "client_id=251812285867-osc8dhqrlc0f5tu31kiike62ehrro734.apps.googleusercontent.com&" +
-              "redirect_uri=http://localhost:9000/mind&" +
-              "response_type=code&" +
-              "scope=email%20profile%20openid&" +
-              "access_type=offline");*/
-	}
-
-	// function onSignIn(googleUser) {
-	//    var profile = googleUser.getBasicProfile();
-	//    var id_token = googleUser.getAuthResponse().id_token;
-	// }//onSignIn
-
-	/*function onSignIn(){
-       var auth2 = gapi.auth2.getAuthInstance()
-       if(auth2.isSignedIn.get()){
-          var profile = auth2.currentUser.get().getBasicProfile();
-          googleLoginPro(profile)
-
-
-       }
-       console.log(auth2);
-       console.log(profile);
-
-
-    }*/
-
-	function signOut() {
-		var auth2 = gapi.auth2.getAuthInstance();
-		auth2.signOut().then(function () {
-			console.log('User signed out.');
-		});
-	}
-
-</script>
-
-
 <div id="login_area">
 	<div class="top_title_wrap">
 		<h2 class="title">로그인</h2>
+
 	</div>
 	<div class="login_box">
 		<div class="login_method">
@@ -72,11 +26,13 @@
 			<%--         <a href="#self">네이버 로그인</a>--%>
 			<button onclick="showLoginPopup();"><img width="200" height="50" src="images/btnG_완성형.png"></button>
 			<%--   <a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
+<%--			<a href="#self">네이버 로그인</a>--%>
+
+<%--	<a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
 
 			<%--         <a href="javascript:googleLogin();">구글 로그인</a>--%>
 			<%--         <div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>--%>
 			<button class="btn btn-primary" id="googleLoginBtn">구글 로그인</button>
-			<%--         <a class="g-signin2"  onClick="onSignIn()">Google Login</a>--%>
 
 			<a href="#" onclick="signOut();">구글 로그아웃</a>
 			<a href="#self">이메일 로그인</a>
@@ -88,7 +44,8 @@
 	</div>
 </div>
 
-<script type="text/javascript">
+<script>
+	// 네이버 로그인
 	function showLoginPopup(){
 		let uri = 'https://nid.naver.com/oauth2.0/authorize?' +
 				'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
@@ -101,11 +58,8 @@
 		window.location.href = uri;
 	}
 
-</script>
 
-<script>
-
-
+	// 구글 로그인
 	document.getElementById("googleLoginBtn").addEventListener("click", function (){
 		//구글서버로 인증코드 발급 요청
 		window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?"+
@@ -115,34 +69,13 @@
 				"scope=email%20profile%20openid&"+
 				"access_type=offline");
 	});
-	const onClickGoogleLogin = function(e) {
-		//구글서버로 인증코드 발급 요청
-		window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?"+
-				"client_id=251812285867-iarbblabr07shf2kvjjmuaoa3tuv6n8r.apps.googleusercontent.com&"+
-				"redirect_uri=http://localhost:9000/mind/oauth_kakao/googleLogin&"+
-				"response_type=code&"+
-				"scope=email%20profile%20openid&"+
-				"access_type=offline");
-	}
 
-	function init() {
-		gapi.load('auth2', function() {
-			gapi.auth2.init();
-			options = new gapi.auth2.SigninOptionsBuilder();
-			options.setPrompt('select_account');
-			// 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
-			options.setScope('email profile openid');
-			// 인스턴스의 함수 호출 - element에 로그인 기능 추가
-			// GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
-			gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
-		})
-	}
-
-
+	// 카카오 로그인 API
 	Kakao.init('f9cc932f2cb179a77079e2c667dab98a');
 	Kakao.isInitialized();
 	// console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
+	// 카카오 회원 탈퇴
 	function unlinkApp() {
 		Kakao.API.request({
 			url: '/v1/user/unlink',
@@ -154,7 +87,6 @@
 			},
 		})
 	}
-
 
 	//카카오로그인
 	function kakaoLogin() {
@@ -185,6 +117,7 @@
 		});
 	}
 
+	// 카카오 로그아웃
 	function kakaoLogout() {
 		if (!Kakao.Auth.getAccessToken()) {
 			console.log('Not logged in.');
@@ -198,3 +131,4 @@
 	};
 
 </script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
