@@ -103,7 +103,7 @@ public class Aadgadg {
         // refreshToken 재발급 하려면 access권한 삭제해야함
         // https://developers.google.com/identity/gsi/web/guides/revoke
 
-        return "common/main";
+        return "redirect:/";
     }
 
 
