@@ -14,12 +14,14 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.ChatMessage" alias="ChatMessage"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.ChatJoin" alias="ChatJoin"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionHospital" alias="ProfessionHospital"/>
+		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
 	</typeAliases>
 
 	<!-- SQL이 작성된 파일 지정 -->
 	<mappers>
 		<mapper resource="/mappers/chat-mapper.xml"/>
 		<mapper resource="/mappers/profession-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
 	</mappers>
 
 </configuration>

@@ -1,6 +1,6 @@
 package edu.kh.mind.selftest;
 
-import edu.kh.mind.selftest.model.service.selftestService;
+import edu.kh.mind.selftest.model.service.SelftestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/selftest/*")
-public class selftestController {
+public class SelftestController {
 
-    private selftestService service;
+    private SelftestService service;
 
 
 

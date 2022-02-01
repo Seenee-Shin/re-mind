@@ -26,7 +26,7 @@
                     <div class="board_write_warp grey_bg " >
                         <div id="free_board_write">
                             <div class="writer_pic_wrap">
-                                <div class="writer_pic light_brown_bg" style="background-image: url();">
+                                <div class="my_pic light_brown_bg" style="background-image: url();">
                                     
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                                     <div id="m_free_board_write">
                                         <i class="fas fa-times" id="closeModal"></i>
                                         <div class="writer_wrap">
-                                            <div class="writer_pic light_brown_bg" style="background-image: url();">
+                                            <div class="my_pic light_brown_bg" style="background-image: url();">
                                             </div>
                                             <div class="m_writing">
                                                 <textarea name="writePost" id="m_post_text" rows="5" placeholder="무슨일이 있었나요?"></textarea>
@@ -85,21 +85,18 @@
     
                                         <div class="write_option_area">
                                             <div class="check_box_wrap">
-                                                <label for="mComment" class="light_brown_bg">댓글허용
-                                                </label>
-                                                    <input type="checkbox" name="writeOption" value="comment" id="mComment"  onclick="optionValidate();">
+                                                <label for="mComment" class="light_brown_bg">댓글허용 </label>
+                                                <input type="checkbox" name="writeOption" value="comment" id="mComment"  onclick="optionValidate();">
                                             </div>
     
                                             <div class="check_box_wrap">
-                                                <label for="mScrap" class="light_brown_bg">스크랩허용
-                                                </label>
-                                                    <input type="checkbox"  name="writeOption" value="scarp" id="mScrap"  onclick="optionValidate();">
+                                                <label for="mScrap" class="light_brown_bg">스크랩허용</label>
+                                                <input type="checkbox"  name="writeOption" value="scrap" id="mScrap"  onclick="optionValidate();">
                                             </div>
                                             
                                             <div class="check_box_wrap">
-                                                <label for="mLike" class="light_brown_bg"> 공감 허용
-                                                </label>
-                                                    <input type="checkbox"  name="writeOption" value="like" id="mLike"  onclick="optionValidate();">
+                                                <label for="mLike" class="light_brown_bg"> 공감 허용</label>
+                                                <input type="checkbox"  name="writeOption" value="like" id="mLike"  onclick="optionValidate();">
                                             </div>
                                     </div>
                                     

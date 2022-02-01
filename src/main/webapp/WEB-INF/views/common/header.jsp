@@ -8,9 +8,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마음연구소 RE:mind</title>
-
-    <%-- 카카오로그인 API JS 라이브러리 삭제 ㄴㄴ --%>
+    <%-- 카카오로그인 API JS 라이브러리 --%>
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <%-- 네이버로그인 API JS 라이브러리 --%>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
     
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
@@ -42,6 +43,7 @@
 
     <!-- 아이콘 -->
     <script src="https://kit.fontawesome.com/5e0a99db98.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <!--
@@ -72,13 +74,14 @@
     <!-- 헤더 -->
     <section class="header_wrap">
         <article class="header_logo_wrap">
-            <img src="" alt="">
+            <img src="${contextPath}/resources/images/remind_logo.png" alt="">
         </article>
 
 
         <!-- 헤더 메뉴 -->
         <article class="header_menu_wrap">
             <ul class="dep1">
+
                 <li>
                     <a href="#">상담예약</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">

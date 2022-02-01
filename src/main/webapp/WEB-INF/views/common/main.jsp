@@ -9,7 +9,7 @@
 <article class="main_banner">
     <div>
         <p class="main_banner_p1">마음 속 이야기를 들어주는</p>
-        <p class="main_banner_p2 animate__backInDown">RE MIND</p>
+        <p class="main_banner_p2 animate__backInDown">RE:MIND</p>
         <button class="main_banner_btn" type="button" onclick="location.href='#';">
             상담 예약
         </button>
@@ -24,28 +24,40 @@
     </div>
     <div>
         <div>
-            <div class="main_content1_cir"></div>
+            <div class="main_content1_cir">
+            	<img alt="" src="${contextPath}/resources/images/main/depression.png">
+            </div>
             <p>우울증</p>
         </div>
         <div>
-            <div class="main_content1_cir"></div>
-            <p>ADHD</p>
+            <div class="main_content1_cir">
+            	<img alt="" src="${contextPath}/resources/images/main/Anxiety.png">
+            </div>
+            <p>불안장애</p>
         </div>
         <div>
-            <div class="main_content1_cir"></div>
+            <div class="main_content1_cir">
+            	<img alt="" src="${contextPath}/resources/images/main/stress.png">
+            </div>
             <p>스트레스</p>
         </div>
         <div>
-            <div class="main_content1_cir"></div>
-            <p>공황장애</p>
+            <div class="main_content1_cir">
+            	<img alt="" src="${contextPath}/resources/images/main/panic.png">
+            </div>
+            <p>자존감</p>
         </div>
         <div>
-            <div class="main_content1_cir"></div>
-            <p>자살생각</p>
+            <div class="main_content1_cir">
+            	<img alt="" src="${contextPath}/resources/images/main/bulimia.png">
+            </div>
+            <p>폭식증</p>
         </div>
         <div>
-            <div class="main_content1_cir"></div>
-            <p>KH정보교육원</p>
+            <div class="main_content1_cir">
+            	<img alt="" src="${contextPath}/resources/images/main/Alcoholism.png">
+            </div>
+            <p>알콜중독</p>
         </div>
     </div>
 
@@ -264,8 +276,8 @@
                 </div>
             </div>
         </div>
-        <div class="swiper-button-next" style="top: 2800px;"></div>
-        <div class="swiper-button-prev" style="top: 2800px;"></div>
+        <div class="swiper-button-next" style="top:1750px; color: #E5D4C5; width: 30px;"></div>
+        <div class="swiper-button-prev" style="top: 1750px; color: #E5D4C5; width: 30px;"></div>
         <!-- <div class="swiper-pagination" style="top: 3080px;"></div> -->
         <!-- 슬라이드 페이지네이션 -->
     </div>
@@ -317,8 +329,7 @@
             </div>
         </div>
         <div>
-            <div class="main_content4_content_postit"></div>
-            <div class="main_content4_content_postit2">
+            <div class="main_content4_content_postit">
                 <div>마인드 포스트잇</div>
                 <div>잊고 있었던 가치나 자신에 대한 생각을 해볼 수 있도록
                     스스로를 돌아보는 질문에 답변을 해보세요.
@@ -372,7 +383,6 @@
             </div>
         </div>
         <div>
-            <div class="mb_main_content4_content_postit"></div>
             <div class="mb_main_content4_content_postit2">
                 <div>마인드 포스트잇</div>
                 <div>잊고 있었던 가치나 자신에 대한 생각을 해볼 수 있도록
