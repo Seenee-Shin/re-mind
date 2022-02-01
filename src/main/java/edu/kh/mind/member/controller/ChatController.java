@@ -43,8 +43,8 @@ public class ChatController {
 			model.addAttribute("css", "my");
 
 
-			System.out.println(chat);
-//			model.addAttribute("css", "my");
+			model.addAttribute("chat", chat);
+			model.addAttribute("list", list);
 
 			return "chatting/chat";
 		} else {

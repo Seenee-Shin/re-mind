@@ -2,9 +2,9 @@ package edu.kh.mind.member.model.vo;
 
 public class ChatJoin {
 
-    private int chatNo;
-    private String chatEnrollDate;
-    private int chatStatusCode;
+    private int chattingNo;
+    private String chattingEnrollDate;
+    private int chattingStatusCode;
     private int reservationNo;
 
     private int memberNo;
@@ -13,28 +13,28 @@ public class ChatJoin {
     public ChatJoin() {
     }
 
-    public int getChatNo() {
-        return chatNo;
+    public int getChattingNo() {
+        return chattingNo;
     }
 
-    public void setChatNo(int chatNo) {
-        this.chatNo = chatNo;
+    public void setChattingNo(int chattingNo) {
+        this.chattingNo = chattingNo;
     }
 
-    public String getChatEnrollDate() {
-        return chatEnrollDate;
+    public String getChattingEnrollDate() {
+        return chattingEnrollDate;
     }
 
-    public void setChatEnrollDate(String chatEnrollDate) {
-        this.chatEnrollDate = chatEnrollDate;
+    public void setChattingEnrollDate(String chattingEnrollDate) {
+        this.chattingEnrollDate = chattingEnrollDate;
     }
 
-    public int getChatStatusCode() {
-        return chatStatusCode;
+    public int getChattingStatusCode() {
+        return chattingStatusCode;
     }
 
-    public void setChatStatusCode(int chatStatusCode) {
-        this.chatStatusCode = chatStatusCode;
+    public void setChattingStatusCode(int chattingStatusCode) {
+        this.chattingStatusCode = chattingStatusCode;
     }
 
     public int getReservationNo() {
@@ -64,9 +64,9 @@ public class ChatJoin {
     @Override
     public String toString() {
         return "ChatJoin{" +
-                "chatNo=" + chatNo +
-                ", chatEnrollDate='" + chatEnrollDate + '\'' +
-                ", chatStatusCode=" + chatStatusCode +
+                "chattingNo=" + chattingNo +
+                ", chattingEnrollDate='" + chattingEnrollDate + '\'' +
+                ", chattingStatusCode=" + chattingStatusCode +
                 ", reservationNo=" + reservationNo +
                 ", memberNo=" + memberNo +
                 ", professionNo=" + professionNo +
