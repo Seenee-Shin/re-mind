@@ -36,6 +36,7 @@
 
 	<!-- 웹소켓과 매핑할 요청 주소 -->
 	<beans:bean id="chatHandler" class="edu.kh.mind.member.websocket.ChatWebsocketHandler" />
+
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/chat" />
 		<websocket:handshake-interceptors>

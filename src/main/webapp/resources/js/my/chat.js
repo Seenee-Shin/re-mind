@@ -10,12 +10,14 @@ function sendMessage() {
     if ( message.value.trim().length === 0) {
         alert("내용을 입력해 주세요.");
     } else {
-        console.log(message.value);
         const obj = {};
-        obj.memberNo = 1;
-        obj.professionNo = 1;
-        obj.chatNo = 1;
+        obj.memberNo = memberNo;
+        obj.professionNo = professionNo;
+        obj.chattingNo = chattingNo;
         obj.message = message.value;
+
+        const nowDate = new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/, '');
+        obj.createDate = nowDate.toString();
 
         chattingSock.send(JSON.stringify(obj));
 
@@ -23,6 +25,15 @@ function sendMessage() {
     }
 }
 
+Date.prototype.amPm = function (nowDate) {
+    const now = new Date(nowDate);
+    let amPm = now.getHours() < 12 ? "오전" : "오후";
+    let hours = now.getHours() <= 12 ? now.getHours() === 0 ? '12' : ('0' + now.getHours()).slice(-2) : ('0' + now.getHours()).slice(-2) - 12 ;
+    let minutes = ('0' + now.getMinutes()).slice(-2);
+
+    const dt =  amPm + " " + hours + ":" + minutes;
+    return dt;
+}
 
 chattingSock.onmessage = function (e) {
     const obj = JSON.parse(e.data);
@@ -33,7 +44,7 @@ chattingSock.onmessage = function (e) {
     const chatCol = $("<div class='chat_col'>");
     const chatMessage = $("<span class='chat'>");
     const chatDate = $("<span class='chatDate'>");
-    chatDate.html(obj.createDate);
+    chatDate.html(new Date().amPm(obj.createDate));
 
     if (obj.message !== undefined) {
         let chat = XSS(obj.message);
@@ -68,7 +79,8 @@ chattingSock.onmessage = function (e) {
     chatUl.append(li);
 
     // 채팅 입력 시 스크롤을 가장 아래로 내리기
-    chatUl.scrollTop($(".display-chatting")[0].scrollHeight);
+    chatUl.scrollTop(chatUl[0].scrollHeight);
+
 }
 
 

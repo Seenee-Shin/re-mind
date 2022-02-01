@@ -2,9 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="chatMapper">
     <resultMap id="chatMessage_rm" type="chatMessage">
+        <id property="chatNo" column="CHAT_NO"/>
+
+        <result property="message" column="MESSAGE"/>
+        <result property="createDate" column="CREATE_DT"/>
+        <result property="professionNo" column="PROFESSION_NO"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="chattingNo" column="CHATTING_NO"/>
     </resultMap>
 
-    <select id="exeistsChat"  resultType="_int">
+    <select id="existsChat"  resultType="_int">
         SELECT NVL(MAX(CHATTING_NO), 0)
         FROM CHATTING_TEST
         WHERE RESERVATION_NO = #{reservationNo}
@@ -15,14 +22,14 @@
 
     <select id="selectChatMessage" resultMap="chatMessage_rm">
         SELECT MESSAGE,
-               TO_CHAR(CREATE_DT, 'YYYY-MM-DD HH24:MI:SS') CREATE_DT,
+               TO_CHAR(CREATE_DT, 'AM', 'nls_date_language=korean') || ' ' || TO_CHAR(CREATE_DT, 'HH:MI') CREATE_DT,
                MEMBER_NO, PROFESSION_NO
         FROM CHATTING_MESSAGE_TEST
-        WHERE CHATTING_NO = #{chatNo}
+        WHERE CHATTING_NO = #{chattingNo}
         ORDER BY CHAT_NO
     </select>
 
     <insert id="insertMessage">
-        INSERT INTO CHATTING_MESSAGE_TEST VALUES(SEQ_CM_NO.NEXTVAL, #{message}, DEFAULT, #{professionNo}, #{memberNo}, #{chatNo})
+        INSERT INTO CHATTING_MESSAGE_TEST VALUES(SEQ_CM_NO.NEXTVAL, #{message}, TO_DATE(#{createDate}, 'YYYY-MM-DD HH24:MI:SS'), DEFAULT, #{memberNo}, #{chattingNo})
     </insert>
 </mapper>

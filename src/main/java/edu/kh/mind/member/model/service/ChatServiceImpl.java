@@ -20,11 +20,13 @@ public class ChatServiceImpl implements ChatService {
 
         int result = dao.existsChat(chat);
 
-        System.out.println(result);
-
         if (result > 0) {
-            chat.setChatNo(result);
-            return dao.selectChatMessage(chat);
+            chat.setChattingNo(result);
+            List<ChatMessage> list = dao.selectChatMessage(chat);
+
+            System.out.print("list : ");
+            System.out.println(list);
+            return list;
         } else {
             return null;
         }
@@ -44,7 +46,7 @@ public class ChatServiceImpl implements ChatService {
             result = dao.insertMessage(cm);
         }
 
-        return 0;
+        return result;
     }
 
 }
