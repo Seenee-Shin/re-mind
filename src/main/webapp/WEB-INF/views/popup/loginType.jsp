@@ -35,7 +35,7 @@
 			<button class="btn btn-primary" id="googleLoginBtn">구글 로그인</button>
 
 			<a href="#" onclick="signOut();">구글 로그아웃</a>
-			<a href="#self">이메일 로그인</a>
+			<a href="#" class="emailLogin">이메일 로그인</a>
 		</div>
 		<div class="sign_up_wrap">
 			<span>아직 계정이 없으신가요?</span>
@@ -129,6 +129,11 @@
 			window.location.href='/mind'
 		});
 	};
+
+	const emailLogin = document.querySelector(".emailLogin");
+	emailLogin.addEventListener("click", () => {
+		layerPopup("emailLogin");
+	});
 
 </script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>

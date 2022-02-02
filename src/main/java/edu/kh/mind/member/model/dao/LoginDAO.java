@@ -1,5 +1,6 @@
 package edu.kh.mind.member.model.dao;
 
+import edu.kh.mind.member.model.vo.Member;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,10 @@ public class LoginDAO {
 
     public int kakaoLogin(Map map) {
         return sqlSession.insert("memberMapper.kakaoLogin", map);
+    }
+
+    public Member emailLogin(String memberId) {
+        Member loginMember = sqlSession.selectOne("memberMapper.emailLogin", memberId);
+        return loginMember;
     }
 }
