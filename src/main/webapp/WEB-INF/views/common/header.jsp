@@ -118,7 +118,16 @@
                 <li ><!-- 로그인 했으면 로그아웃 버튼 보이기
                             로그인 안했으면 회원가입 -->
                     <!-- <a href=""> 회원가입 </a>  -->
-                    <a href="#" class="login_btn">로그인</a>
+
+                    <c:choose>
+                        <c:when test="${empty sessionScope.loginMember}">
+                            <a href="#" class="login_btn">로그인</a>
+                        </c:when>
+                        <c:otherwise>
+                            ${sessionScope.loginMember.memberName}
+                            <a href="#" class="logout_btn">로그아웃</a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
             </ul>
             <a href="#" class="headermenu_togle">
