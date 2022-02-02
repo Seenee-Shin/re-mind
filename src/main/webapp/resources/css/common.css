@@ -162,7 +162,7 @@ main{
   height: 100px;
   float: left;
 }
-.header_logo_wrap>img{
+.header_logo_wrap>a>img{
 	    margin: auto;
     width: 130px;
     margin-top: 40px;

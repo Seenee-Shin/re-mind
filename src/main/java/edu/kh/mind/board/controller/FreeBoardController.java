@@ -1,17 +1,23 @@
 package edu.kh.mind.board.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.kh.mind.board.model.service.BoardService;
+import edu.kh.mind.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/board/*")
 @SessionAttributes({"loginMember"})
-public class BoardController {
+public class FreeBoardController {
 
 	@Autowired
     private BoardService service;
@@ -27,30 +33,33 @@ public class BoardController {
     }
 
 	//--------------자유게시판--------------------
-    @RequestMapping("freeList")
+	
+    @RequestMapping("freeList" )
     public String freeBoardList(Model model) {
     	
     	model.addAttribute("css", "board/freeList");
     	model.addAttribute("header", "community");
+    	
+    	
+    	
     	 
         return "board/freeList";
     }
     
-    @RequestMapping("freeView")
-    public String freeBoardView(Model model) {
+    @RequestMapping(value = "freeinsert", method = RequestMethod.POST)
+    public String freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember) {
+    	
+    	return null;
+    }
+    
+    @RequestMapping("freeView/{boardNo}")
+    public String freeBoardView(Model model, @PathVariable("boardNo") int boardNo) {
     	model.addAttribute("css", "board/freeView");
     	model.addAttribute("header", "community");
     	
     	return "board/freeView";
     }
     
-    @RequestMapping("freeInsert")
-    public String freeBoardInsert(Model model) {
-    	model.addAttribute("css", "board/freeList");
-    	model.addAttribute("header", "community");
-    	
-    	return "board/freeList";
-    }
     
     @RequestMapping("freeUpdate")
     public String freeBoardUpdate(Model model) {
@@ -67,35 +76,6 @@ public class BoardController {
     	return "board/freeList";
     }
     
-    
-    //-----------------고민상담 게시판 ------------------
-    @RequestMapping("worryList")
-    public String worryBoardList(Model model) {
-    	
-    	model.addAttribute("css", "board/worryList");
-    	model.addAttribute("header", "community");
-    	 
-        return "board/worryList";
-    }
-    
-    @RequestMapping("worryView")
-    public String worryBoardView(Model model) {
-    	
-    	model.addAttribute("css", "board/worryView");
-    	model.addAttribute("header", "community");
-    	 
-        return "board/worryView";
-    }
-    
-    @RequestMapping("worryUpdate")
-    public String worryBoardUpdate(Model model) {
-    	model.addAttribute("css", "board/update");
-    	model.addAttribute("header", "community");
-    	
-    	return "board/worryUpdate";
-    }
-    
-
-
+  
 
 }
