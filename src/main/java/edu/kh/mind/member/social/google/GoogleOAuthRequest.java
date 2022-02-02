@@ -1,4 +1,4 @@
-package edu.kh.mind.member.model.vo;
+package edu.kh.mind.member.social.google;
 
 public class GoogleOAuthRequest {
     private String redirectUri;

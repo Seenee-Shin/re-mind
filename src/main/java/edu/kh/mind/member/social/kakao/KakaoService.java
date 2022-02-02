@@ -1,9 +1,10 @@
-package edu.kh.mind.member.model.service;
+package edu.kh.mind.member.social.kakao;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,6 +17,29 @@ import java.util.HashMap;
 @Service
 public class KakaoService {
 
+    private static String clientId = "b862240d0cf0e40922fb9312954ca3a2";
+    private static String redirect_uri = "http://localhost:9000/mind/oauth/callback";
+
+    // 여기서 주소 받음
+    public String getKakaoOAuthURL(){
+        String reqURL = "https://kauth.kakao.com/oauth/authorize?client_id=" + clientId +
+                "&redirect_uri=" + redirect_uri + "&response_type=code";
+
+        try {
+            URL url = null;
+            url = new URL(reqURL);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            System.out.println("conn.getURL() : " + conn.getURL().toString());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return reqURL;
+    }
 
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
@@ -39,9 +63,10 @@ public class KakaoService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=b862240d0cf0e40922fb9312954ca3a2");  //본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback");     // 본인이 설정해 놓은 경로
+            sb.append("&client_id=" + clientId);
+            sb.append("&redirect_uri=" + redirect_uri);
             sb.append("&code=" + authorize_code);
+            sb.append("&client_secret=" + "gdtGzCb853IUDKEcrizvc2z67kcyTGhY");
             bw.write(sb.toString());
             bw.flush();
 

@@ -1,12 +1,12 @@
-package edu.kh.mind.member.controller;
+package edu.kh.mind.member.social.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import edu.kh.mind.member.model.service.KakaoService;
-import edu.kh.mind.member.model.vo.GoogleOAuthRequest;
-import edu.kh.mind.member.model.vo.GoogleOAuthResponse;
+import edu.kh.mind.member.social.kakao.KakaoService;
+import edu.kh.mind.member.social.google.GoogleOAuthRequest;
+import edu.kh.mind.member.social.google.GoogleOAuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -16,17 +16,27 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequestMapping("/oauth_kakao/*")
+// 리다이렉트 주소 변경
+@RequestMapping("/oauth/*")
 @Controller
 public class Aadgadg {
 
     @Autowired
     private KakaoService kakaoService;
 
+
+    @GetMapping("authorizecode")
+    @ResponseBody
+    public String getKakaoOAuthURL(Model model){
+        String url = kakaoService.getKakaoOAuthURL();
+
+        model.addAttribute("url", url);
+
+        return url;
+    }
 
     @GetMapping("callback")
     public String kakaooLogin(@RequestParam(value = "code", required = false) String code,
@@ -41,13 +51,6 @@ public class Aadgadg {
         System.out.println("###nickname#### : " + userInfo.get("nickname"));
 //        System.out.println("###profile_image#### : " + userInfo.get("profile_image"));
         return "redirect:/";
-    }
-
-    @PostMapping("callback")
-    @ResponseBody
-    public String kakaooLogin(){
-
-        return null;
     }
 
 
