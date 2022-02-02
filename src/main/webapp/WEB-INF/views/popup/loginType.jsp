@@ -21,32 +21,9 @@
 		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 		console.log(id_token);
 
-		/*window.location.replace("http://localhost:9000/mind?" +
-              "client_id=251812285867-osc8dhqrlc0f5tu31kiike62ehrro734.apps.googleusercontent.com&" +
-              "redirect_uri=http://localhost:9000/mind&" +
-              "response_type=code&" +
-              "scope=email%20profile%20openid&" +
-              "access_type=offline");*/
+
 	}
 
-	// function onSignIn(googleUser) {
-	//    var profile = googleUser.getBasicProfile();
-	//    var id_token = googleUser.getAuthResponse().id_token;
-	// }//onSignIn
-
-	/*function onSignIn(){
-       var auth2 = gapi.auth2.getAuthInstance()
-       if(auth2.isSignedIn.get()){
-          var profile = auth2.currentUser.get().getBasicProfile();
-          googleLoginPro(profile)
-
-
-       }
-       console.log(auth2);
-       console.log(profile);
-
-
-    }*/
 
 	function signOut() {
 		var auth2 = gapi.auth2.getAuthInstance();
@@ -133,7 +110,7 @@
 			// 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
 			options.setScope('email profile openid');
 			// 인스턴스의 함수 호출 - element에 로그인 기능 추가
-			// GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
+			//  위에 설정한 options와 아래 성공,실패시 실행하는 함수들
 			gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
 		})
 	}
