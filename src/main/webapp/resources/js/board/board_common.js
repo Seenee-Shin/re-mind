@@ -56,10 +56,10 @@ let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mSc
 const elements = document.getElementsByClassName("writer_pic");
 const userMenu = document.getElementsByClassName("userMenu")
 
-for (let i = 0; i < elements.length; i++) {
-	
-    elements[i].addEventListener('click',  () =>{
-    userMenu[i].classList.toggle("hidden");
-	
-});
+	for (let i = 0; i < elements.length; i++) {
+		
+	    elements[i].addEventListener('click',  () =>{
+	    userMenu[i].classList.toggle("hidden");
+		
+	});
 }

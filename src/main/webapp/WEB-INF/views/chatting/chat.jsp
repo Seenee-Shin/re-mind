@@ -14,78 +14,27 @@
 		</div>
 		<!-- 채팅 내용 -->
 		<ul>
-			<li class="friend_chat">
-				<img class="profile_img" src="${contextPath}/resources/images/sample4.gif">
-				<div class="chat_col friend_chat_col">
-					<span class="profile_name">상담사 누구누구씨</span>
-					<span class="chat">안녕하세요! 회원님</span>
-				</div>
-				<span class="chatDate">오전 7:30</span>
-			</li>
-			<li class="my_chat">
-				<div class="chat_col me_chat_col">
-					<span class="chat">네 안녕하세요 누구상담사님</span>
-				</div>
-				<span class="chatDate">오전 7:32</span>
-			</li>
-			<li class="my_chat">
-				<div class="chat_col me_chat_col">
-					<span class="chat">상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!</span>
-				</div>
-				<span class="chatDate">오전 7:33</span>
-			</li>
-			<li class="friend_chat">
-				<img class="profile_img" src="${contextPath}/resources/images/sample4.gif">
-				<div class="chat_col friend_chat_col">
-					<span class="profile_name">상담사 누구누구씨</span>
-					<span class="chat">안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님</span>
-				</div>
-				<span class="chatDate">오전 7:30</span>
-			</li>
-			<li class="friend_chat">
-				<img class="profile_img" src="${contextPath}/resources/images/sample4.gif">
-				<div class="chat_col friend_chat_col">
-					<span class="profile_name">상담사 누구누구씨</span>
-					<span class="chat">안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님</span>
-				</div>
-				<span class="chatDate">오전 7:30</span>
-			</li>
-			<li class="friend_chat">
-				<img class="profile_img" src="${contextPath}/resources/images/sample4.gif">
-				<div class="chat_col friend_chat_col">
-					<span class="profile_name">상담사 누구누구씨</span>
-					<span class="chat">안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님</span>
-				</div>
-				<span class="chatDate">오전 7:30</span>
-			</li>
-			<li class="friend_chat">
-				<img class="profile_img" src="${contextPath}/resources/images/sample4.gif">
-				<div class="chat_col friend_chat_col">
-					<span class="profile_name">상담사 누구누구씨</span>
-					<span class="chat">안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님안녕하세요! 회원님</span>
-				</div>
-				<span class="chatDate">오전 7:30</span>
-			</li>
-			<li class="my_chat">
-				<div class="chat_col me_chat_col">
-					<span class="chat">상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!</span>
-				</div>
-				<span class="chatDate">오전 7:33</span>
-			</li>
-			<li class="friend_chat">
-				<img class="profile_img" src="${contextPath}/resources/images/sample4.gif">
-				<div class="chat_col friend_chat_col">
-					<span class="profile_name">상담사 누구누구씨</span>
-					<span class="chat">안녕하세요! 회원님</span>
-				</div>
-				<span class="chatDate">오전 7:30</span>
-			</li>
-			<li class="my_chat">
-				<div class="chat_col me_chat_col">
-					<span class="chat">상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!상담이 필요합니다.!</span>
-				</div>
-				<span class="chatDate">오전 7:33</span>
-			</li>
+			<c:forEach items="${list}" var="msg">
+				<c:if test="${msg.memberNo == 1 }">
+					<li class="my_chat">
+						<div class="chat_col me_chat_col">
+							<span class="chat">${msg.message}</span>
+						</div>
+						<span class="chatDate">${msg.createDate}</span>
+					</li>
+				</c:if>
+
+				<c:if test="${msg.professionNo == chat.professionNo }">
+					<li class="friend_chat">
+						<img class="profile_img" src="${contextPath}/resources/images/sample4.gif">
+						<div class="chat_col friend_chat_col">
+							<span class="profile_name">상담사 누구누구씨</span>
+							<span class="chat">${msg.message}</span>
+						</div>
+						<span class="chatDate">${msg.createDate}</span>
+					</li>
+				</c:if>
+			</c:forEach>
 		</ul>
 
 		<div class="input_area">
@@ -105,6 +54,8 @@
 <!-- https://github.com/sockjs/sockjs-client -->
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script>
+	$(".chatting_area ul").scrollTop($(".chatting_area ul")[0].scrollHeight);
+
 	// 로그인이 되어 있을 경우에만
 	// /chat 이라는 요청 주소로 통신할 수 있는  WebSocket 객체 생성
 	let chattingSock = new SockJS("<c:url value='/chat' />");
@@ -116,7 +67,13 @@
 	<%--const chatRoomNo = "${chatRoomNo}";--%>
 	<%--const contextPath = "${contextPath}";--%>
 
+
+	const chattingNo = "${chat.chattingNo}";
+
 	const memberNo = 1;
+	const professionNo = 1;
+
+
 </script>
 
 <script src="${contextPath}/resources/js/my/chat.js"></script>

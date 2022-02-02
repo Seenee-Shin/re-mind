@@ -1,22 +1,22 @@
 package edu.kh.mind.member.model.vo;
 
 public class ChatMessage {
-	private int chatMessageNo;
+	private int chatNo;
 	private String message;
 	private String createDate;
 	private int professionNo;
 	private int memberNo;
-	private int chatNo;
+	private int chattingNo;
 
 	public ChatMessage() {
 	}
 
-	public int getChatMessageNo() {
-		return chatMessageNo;
+	public int getChatNo() {
+		return chatNo;
 	}
 
-	public void setChatMessageNo(int chatMessageNo) {
-		this.chatMessageNo = chatMessageNo;
+	public void setChatNo(int chatNo) {
+		this.chatNo = chatNo;
 	}
 
 	public String getMessage() {
@@ -51,23 +51,23 @@ public class ChatMessage {
 		this.memberNo = memberNo;
 	}
 
-	public int getChatNo() {
-		return chatNo;
+	public int getChattingNo() {
+		return chattingNo;
 	}
 
-	public void setChatNo(int chatNo) {
-		this.chatNo = chatNo;
+	public void setChattingNo(int chattingNo) {
+		this.chattingNo = chattingNo;
 	}
 
 	@Override
 	public String toString() {
 		return "ChatMessage{" +
-				"chatMessageNo=" + chatMessageNo +
+				"chatNo=" + chatNo +
 				", message='" + message + '\'' +
 				", createDate='" + createDate + '\'' +
 				", professionNo=" + professionNo +
 				", memberNo=" + memberNo +
-				", chatNo=" + chatNo +
+				", chattingNo=" + chattingNo +
 				'}';
 	}
 }

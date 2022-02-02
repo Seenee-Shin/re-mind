@@ -39,5 +39,6 @@ function layerPopup (layerPopup) {
 // login button
 const loginBtn = document.querySelector(".login_btn");
 loginBtn.addEventListener("click", () => {
+
    layerPopup("loginType");
 });

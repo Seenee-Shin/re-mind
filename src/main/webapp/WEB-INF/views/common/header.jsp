@@ -74,7 +74,9 @@
     <!-- 헤더 -->
     <section class="header_wrap">
         <article class="header_logo_wrap">
-            <img src="${contextPath}/resources/images/remind_logo.png" alt="">
+        	<a href="${contextPath}">
+            	<img src="${contextPath}/resources/images/remind_logo.png" alt="">
+            </a>
         </article>
 
 
@@ -94,20 +96,14 @@
                 <li>
                     <a href="#">커뮤니티</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
-                        <li><a href="#">자유게시판</a></li>
-                        <li><a href="#">고민상담 게시판</a></li>
-                        <li><a href="#">마인드 포스팃</a></li>
-                        <li><a href="#">털어놓기</a></li>
+                        <li><a href="${contextPath}/board/freeList">자유게시판</a></li>
+                        <li><a href="/worryList">고민상담 게시판</a></li>
+                        <li><a href="/m">마인드 포스팃</a></li>
+                        <li><a href="/secretList">털어놓기</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#">공지사항</a> <p class="menu_toggle">+</p>
-                    <ul class="dep2">
-                        <li><a href="#">자유게시판</a></li>
-                        <li><a href="#">고민상담 게시판</a></li>
-                        <li><a href="#">마인드 포스팃</a></li>
-                        <li><a href="#">털어놓기</a></li>
-                    </ul>
                 </li>
                 <li><!-- 로그인 안했으면 로그인 버튼 -->
                     <!-- <a href="">로그인</a> -->
@@ -122,7 +118,16 @@
                 <li ><!-- 로그인 했으면 로그아웃 버튼 보이기
                             로그인 안했으면 회원가입 -->
                     <!-- <a href=""> 회원가입 </a>  -->
-                    <a href="#" class="login_btn">로그인</a>
+
+                    <c:choose>
+                        <c:when test="${empty sessionScope.loginMember}">
+                            <a href="#" class="login_btn">로그인</a>
+                        </c:when>
+                        <c:otherwise>
+                            ${sessionScope.loginMember.memberName}
+                            <a href="#" class="logout_btn">로그아웃</a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
             </ul>
             <a href="#" class="headermenu_togle">
@@ -146,8 +151,8 @@
 		                <h3>커뮤니티</h3>
 		                <hr>
 		                <ul class="side_menu_dep1">
-		                    <li class="w_side_menu"><a href="#">자유게시판</a></li>
-		                    <li class="m_side_menu"><a href="#">자유</a></li>
+		                    <li class="w_side_menu"><a href="${contextPath}/board/freeList">자유게시판</a></li>
+		                    <li class="m_side_menu"><a href="${contextPath}/board/freeList">자유</a></li>
 		                    <li class="w_side_menu"><a href="#">고민상담 게시판</a> </li>
 		                    <li class="m_side_menu"><a href="#">고민상담</a></li>
 		                    <li class="w_side_menu"><a href="#">마인드포스팃</a></li>

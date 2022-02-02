@@ -17,7 +17,7 @@ public class ChatDAO {
 
     public int existsChat(ChatJoin chat) {
 
-        return sqlSession.selectOne("chatMapper.exeistsChat", chat);
+        return sqlSession.selectOne("chatMapper.existsChat", chat);
     }
 
     public List<ChatMessage> selectChatMessage(ChatJoin chat) {
@@ -27,4 +27,5 @@ public class ChatDAO {
     public int insertMessage(ChatMessage cm) {
         return sqlSession.insert("chatMapper.insertMessage", cm);
     }
+
 }

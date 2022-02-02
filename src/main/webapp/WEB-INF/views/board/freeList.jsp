@@ -1,26 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 
 <!-- header include -->
-<jsp:include page="../common/header.jsp"></jsp:include>
+<jsp:include page="../common/header.jsp"/>
 
         <section class="main_content">    
             <!-- 메인 -->
             <h3 class="comunity_title">자유롭게 글을 남겨주세요</h3>
             
-            <form action="/list" method="post" onsubmit="return ostingValidate()">
-            
-                <div class="search_area">
-                <select name="search_category" id="">
-                    <option value="">아이디</option>
-                    <option value="">내용</option>
-                </select>
-                <input type="text" name="freeboard_search">
-                <button class="submit_btn light_brown_bg"> 검색 </button>
-                </div>
-
+              <div class="search_area">
+              <select name="search_category" id="">
+                  <option value="">아이디</option>
+                  <option value="">내용</option>
+              </select>
+              <input type="text" name="freeboard_search">
+              <button class="submit_btn light_brown_bg"> 검색 </button>
+              </div>
+              
+			<form action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate()">
                 <article id="free_borad_wrap">
                     <!-- 글작성 -->
                     <div class="board_write_warp grey_bg " >
@@ -32,34 +31,38 @@
                             </div>
                             <div class="writing">
                                 <textarea class="grey_bg" name="" id="post_textarea" rows="5" placeholder="무슨일이 있었나요?"></textarea>
+                                
+								<div class="boardImg">
+									<img>
+									<span class="deleteImg">x</span>
+								</div>
                             </div>
                         </div>
                         
                         <div class="write_option_area">
                             <div class="check_box_wrap">
-                                <label for="comment" class="light_brown_bg"> 댓글허용 </label>
-                                <input type="checkbox"  name="writeOption" value="comment" id="comment" onclick="optionValidate();">
+                                <label for="comment" class="light_brown_bg"> 댓글 허용 </label>
+                                <input type="checkbox" name="writeOption" value="comment" id="comment" onclick="optionValidate();">
                             </div>
 
                             <div class="check_box_wrap">
-                                <label for="scrap" class="light_brown_bg">스크랩허용</label>
-								<input type="checkbox"  name="writeOption" value="scrap" id="scrap" onclick="optionValidate();">
+                                <label for="scrap" class="light_brown_bg">스크랩 허용</label>
+								<input type="checkbox" name="writeOption" value="scrap" id="scrap" onclick="optionValidate();">
                                     
                             </div>
                             
                             <div class="check_box_wrap">
-                                <label for="like" class="light_brown_bg"> 공감 허용</label>
-                                <input type="checkbox"  name="writeOption" value="like" id="like" onclick="optionValidate();">
-
+                                <label for="like" class="light_brown_bg">공감 허용</label>
+                                <input type="checkbox" name="writeOption" value="like" id="like" onclick="optionValidate();">
                             </div>
-                            
                         </div>
                         
                         <hr>
                         <div class="btn_area">
-                            <a>
+                            <label for="file">
                                 <i class="fas fa-image dark-brown"></i>
-                            </a>
+                            </label>
+								<input type="file" name="images" id='file' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
                             <button class="submit_btn light_brown_bg">작성</button>
                         </div>
                     </div>
@@ -69,7 +72,7 @@
                         <div class="modal">
                             <article id="m_free_borad_wrap">
                                 <!-- 글작성 -->
-                                <div class="m_board_write_warp " >
+                                <div class="m_board_write_warp ">
                                     <div id="m_free_board_write">
                                         <i class="fas fa-times" id="closeModal"></i>
                                         <div class="writer_wrap">
@@ -85,17 +88,17 @@
     
                                         <div class="write_option_area">
                                             <div class="check_box_wrap">
-                                                <label for="mComment" class="light_brown_bg">댓글허용 </label>
+                                                <label for="mComment" class="light_brown_bg">댓글 허용</label>
                                                 <input type="checkbox" name="writeOption" value="comment" id="mComment"  onclick="optionValidate();">
                                             </div>
     
                                             <div class="check_box_wrap">
-                                                <label for="mScrap" class="light_brown_bg">스크랩허용</label>
+                                                <label for="mScrap" class="light_brown_bg">스크랩 허용</label>
                                                 <input type="checkbox"  name="writeOption" value="scrap" id="mScrap"  onclick="optionValidate();">
                                             </div>
                                             
                                             <div class="check_box_wrap">
-                                                <label for="mLike" class="light_brown_bg"> 공감 허용</label>
+                                                <label for="mLike" class="light_brown_bg">공감 허용</label>
                                                 <input type="checkbox"  name="writeOption" value="like" id="mLike"  onclick="optionValidate();">
                                             </div>
                                     </div>
@@ -103,18 +106,18 @@
                                     <hr>
     
                                     <div class="m_submit_btn_wrap">
-                                        <a>
-                                            <i class="fas fa-image dark-brown"></i>
-                                        </a>
+			                            <label for="mfile">
+			                                <i class="fas fa-image dark-brown"></i>
+			                            </label>
+											<input type="file" name="images" id='mfile' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
     
                                         <div class="m_btn_area">
                                             <button class="submit_btn light_brown_bg">작성</button>
                                             
-                                            <button class="submit_btn dark_brown_bg"  button type="button" onclick="">취소</button>
+                                            <button class="submit_btn dark_brown_bg" button type="button" onclick="">취소</button>
                                         </div>
                                     </div>
                                 </div>
-    
                         </div>
                     </div>
                 </article>
@@ -140,7 +143,7 @@
                         </div>
 
                         <!-- 포스트 시작 -->
-                        <a href="">
+                        <a href="/freeView">
 	                        <div class="posting_info">
 	                            <div class="writer_id">
 	                                <p>아이디</p> 
@@ -230,7 +233,7 @@
 
 
 <!-- header include -->
-<jsp:include page="../common/footer.jsp"></jsp:include>
+<jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript" src="${contextPath}/resources/js/board/board_common.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
 

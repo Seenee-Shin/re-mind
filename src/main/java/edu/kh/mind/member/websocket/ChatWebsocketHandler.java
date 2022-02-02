@@ -8,9 +8,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ChatWebsocketHandler extends TextWebSocketHandler {
 
@@ -32,15 +31,20 @@ public class ChatWebsocketHandler extends TextWebSocketHandler {
         ObjectMapper objectMapper = new ObjectMapper();
         ChatMessage cm = objectMapper.readValue(message.getPayload(), ChatMessage.class);
 
+//        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+//        cm.setCreateDate(timeStamp);
+
         System.out.println("변경된 cm : " + cm);
 
         int result = service.insertMessage(cm);
 
         if (result > 0) {
             for (WebSocketSession wss : sessions) {
-                int chatNo = (Integer)wss.getAttributes().get("chatNo");
 
-                if (chatNo == cm.getChatNo()) {
+                // int chattingNo = (Integer)wss.getAttributes().get("chattingNo");
+                int chattingNo = 3;
+
+                if (chattingNo == cm.getChattingNo()) {
                     wss.sendMessage(new TextMessage(message.getPayload()));
                 }
             }

@@ -7,20 +7,20 @@
 	<div class="top_title_wrap">
 		<h2 class="title">이메일 로그인</h2>
 	</div>
-	<form action="">
+	<form method="POST" action="${contextPath}/emailLogin/emailLogin">
 		<div class="email_login_box">
 			<div class="input_wrap">
 				<div class="input_div">
 					<div>이메일</div>
-					<input type="text" class="login_input">
+					<input type="text" class="login_input" name="memberId" value="stage107@naver.com">
 				</div>
 				<div class="input_div">
 					<div>비밀번호</div>
-					<input type="text" class="login_input">
+					<input type="password" class="login_input" name="memberPw" value="123123">
 				</div>
 			</div>
 			<div class="submit_area">
-				<button type="button" class="login_btn">이메일로 로그인</button>
+				<button type="submit" class="login_btn">이메일로 로그인</button>
 			</div>
 
 			<div class="sign_up_wrap">
