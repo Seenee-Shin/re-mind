@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
 <!-- 구글 로그인 API  -->
 <%--<meta name="google-signin-scope" content="profile email openid ">--%>
@@ -14,21 +13,16 @@
 <div id="login_area">
 	<div class="top_title_wrap">
 		<h2 class="title">로그인</h2>
-
 	</div>
+
 	<div class="login_box">
 		<div class="login_method">
-			<%--         <a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code">카카오 로그인</a>
-			<a href="javascript:unlinkApp();">카카오 탈퇴하기</a>
-			<%--         <a href="javascript:kakaoLogout();">카카오 로그아웃</a>--%>
-			<a href="javascript:kakaoLogoutt();">카카오 로그아웃</a>
-			<%--         <a href="#self">네이버 로그인</a>--%>
-			<button onclick="showLoginPopup();"><img width="200" height="50" src="images/btnG_완성형.png"></button>
-			<%--   <a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
-<%--			<a href="#self">네이버 로그인</a>--%>
 
-<%--	<a id="custom-login-btn" href="javascript:void(0);" onclick="window.open('${googleUrl}','googleLogin','width=430,height=500,location=no,status=no,scrollbars=yes');""> <img src="/images/btn_google_signin_dark_normal_web.png" width="300"/> </a>--%>
+			<%--         <a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
+			<a href="javascript:kakaoLLL();">카카오 로그인</a>
+			<a href="javascript:unlinkApp();">카카오 탈퇴하기</a>
+			<a href="javascript:kakaoLogoutt();">카카오 로그아웃</a>
+			<a href="javascript:naverLogin();">네이버 로그인</a>
 
 			<%--         <a href="javascript:googleLogin();">구글 로그인</a>--%>
 			<%--         <div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>--%>
@@ -46,17 +40,18 @@
 
 <script>
 	// 네이버 로그인
-	function showLoginPopup(){
+	function showLoginPopup() {
 		let uri = 'https://nid.naver.com/oauth2.0/authorize?' +
 				'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
 				'&client_id=bCW4VaBNrrKJO0dNnbwX' +     // 발급받은 client_id 를 입력
-				'&state=NAVER_LOGIN_TEST' +             // CORS 를 방지하기 위한 특정 토큰값(임의값 사용)
-				'&redirect_uri=http://localhost:9000/mind/oauth_kakao/naverLogin';   // 어플케이션에서 등록했던 CallBack URL를 입력
-
+				'&state=e68c269c-5ba9-4c31-85da-54c16c658125' +             // CORS 를 방지하기 위한 특정 토큰값(임의값 사용)
+				'&redirect_uri=http://localhost:9000/mind/naver/callback';   // 어플케이션에서 등록했던 CallBack URL를 입력
+//NAVER_LOGIN_TEST
 		// 사용자가 사용하기 편하게끔 팝업창으로 띄어준다.
 		// window.open(uri, "Naver Login Test PopupScreen", "width=450, height=600");
 		window.location.href = uri;
 	}
+
 
 
 	// 구글 로그인
@@ -70,7 +65,27 @@
 				"access_type=offline");
 	});
 
-	// 카카오 로그인 API
+	function naverLogin(){
+		$.ajax({
+			url:"naver/naverlogin",
+		}).done(function (res){
+			window.location.replace(res);
+		});
+	}
+
+	function kakaoLLL(){
+		$.ajax({
+			url:"oauth/authorizecode",
+			// success:function (result){
+			// 	window.location.href = result;
+			// }
+		}).done(function (res){
+			window.location.replace(res);
+			// location.href = res;
+		});
+	}
+
+	// 카카오 로그인 js key
 	Kakao.init('f9cc932f2cb179a77079e2c667dab98a');
 	Kakao.isInitialized();
 	// console.log(Kakao.isInitialized()); // sdk초기화여부판단
@@ -85,7 +100,7 @@
 			fail: function(err) {
 				alert('fail: ' + JSON.stringify(err))
 			},
-		})
+		});
 	}
 
 	//카카오로그인

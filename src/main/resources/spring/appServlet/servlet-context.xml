@@ -34,6 +34,8 @@
 	<!-- @Scheduled 어노테이션 -->
 	<task:annotation-driven/>
 
+	<beans:bean id="naverLoginBO" class="edu.kh.mind.member.social.naver.NaverLoginBO"/>
+
 	<!-- 웹소켓과 매핑할 요청 주소 -->
 	<beans:bean id="chatHandler" class="edu.kh.mind.member.websocket.ChatWebsocketHandler" />
 	<websocket:handlers>

@@ -1,36 +1,8 @@
 package edu.kh.mind.google;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import edu.kh.mind.google.model.vo.GoogleOAuthRequest;
-import edu.kh.mind.google.model.vo.GoogleOAuthResponse;
-import edu.kh.mind.member.model.service.GoogleService;
-import jdk.nashorn.internal.parser.JSONParser;
+import edu.kh.mind.member.social.google.GoogleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import com.google.gson.Gson;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Collections;
-import java.util.Map;
 
 @Controller
 public class GoogleLoginController {
