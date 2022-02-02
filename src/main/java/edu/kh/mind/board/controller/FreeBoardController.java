@@ -43,7 +43,7 @@ public class FreeBoardController {
     }
     
     @RequestMapping(value = "freeinsert", method = RequestMethod.POST)
-    public String freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember) {
+    public String freeBoardInsert() {
     	
     	return null;
     }
