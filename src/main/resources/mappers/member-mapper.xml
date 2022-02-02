@@ -22,4 +22,11 @@
          #{kakaonickname}, NULL, #{kakaoGender}, DEFAULT, 'KAKAO', DEFAULT)
     </insert>
 
+    <select id="emailLogin" resultMap="member_rm">
+        SELECT * FROM MEMBER
+        WHERE MEMBER_ID = #{memberId}
+        AND STATUS_CD = 0
+        AND MEMBER_TYPE = 'EMAIL'
+    </select>
+
 </mapper>
