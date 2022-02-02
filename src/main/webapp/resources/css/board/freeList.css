@@ -135,7 +135,7 @@ input:focus, textarea:focus, select:focus{
     font-weight: 500;
     cursor: pointer;
 }
-#free_borad_wrap>.board_write_warp>.btn_area>a>i{
+#free_borad_wrap>.board_write_warp>.btn_area>label>i{
     font-size: 25px;
     cursor: pointer;
 }
@@ -438,7 +438,7 @@ display: inline-block;
         margin: 10px;
     }
 
-    .m_submit_btn_wrap >a> i{
+    .m_submit_btn_wrap >label> i{
         font-size: 25px;
         cursor: pointer;
     }
