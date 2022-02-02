@@ -77,7 +77,7 @@
 		$.ajax({
 			url:"oauth/authorizecode",
 			// success:function (result){
-			// 	window.location.href = result;
+			//    window.location.href = result;
 			// }
 		}).done(function (res){
 			window.location.replace(res);
