@@ -1,4 +1,4 @@
-package edu.kh.mind.google.model.vo;
+package edu.kh.mind.member.social.google;
 
 public class GoogleOAuthResponse {
     private String accessToken;
@@ -11,60 +11,37 @@ public class GoogleOAuthResponse {
     public String getAccessToken() {
         return accessToken;
     }
-
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
-
     public String getExpiresIn() {
         return expiresIn;
     }
-
     public void setExpiresIn(String expiresIn) {
         this.expiresIn = expiresIn;
     }
-
     public String getRefreshToken() {
         return refreshToken;
     }
-
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
-
     public String getScope() {
         return scope;
     }
-
     public void setScope(String scope) {
         this.scope = scope;
     }
-
     public String getTokenType() {
         return tokenType;
     }
-
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
     }
-
     public String getIdToken() {
         return idToken;
     }
-
     public void setIdToken(String idToken) {
         this.idToken = idToken;
-    }
-
-    @Override
-    public String toString() {
-        return "GoogleOAuthResponse{" +
-                "accessToken='" + accessToken + '\'' +
-                ", expiresIn='" + expiresIn + '\'' +
-                ", refreshToken='" + refreshToken + '\'' +
-                ", scope='" + scope + '\'' +
-                ", tokenType='" + tokenType + '\'' +
-                ", idToken='" + idToken + '\'' +
-                '}';
     }
 }

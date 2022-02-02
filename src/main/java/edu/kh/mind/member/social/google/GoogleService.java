@@ -1,4 +1,4 @@
-package edu.kh.mind.member.model.service;
+package edu.kh.mind.member.social.google;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
