@@ -9,12 +9,12 @@
 <main>
     <h1>상담사 등록 신청 </h1>
 
-    <form action="proRegister" method="post">
+    <form action="proRegister" method="post" onsubmit="">
         <div class="proWrap">
             <div class="label">
             아이디 
             </div>
-            <input type="email" name="professionId" id="professionId" required> <br>
+            <input type="email" name="professionId" id="professionId" required> <button onclick="">인증하기</button> <br> 
 
             <div class="label">
             비밀번호 
@@ -44,7 +44,7 @@
             <br>
             <br>
             <br>
-        <button>로그인</button>
+        <button >로그인</button>
         </div>
     </form>
 
@@ -53,6 +53,7 @@
 
 <!-- header include -->
 <jsp:include page="../procommon/footer.jsp"></jsp:include>
+
 
 
 

@@ -21,14 +21,17 @@ public class AdminProController {
 	@RequestMapping(value = "proRegister", method = RequestMethod.GET )
 	public String proRegister() {
 		
-		return "ProRegister";
+		return "adminPro/proRegister";
 	}
 	
 	@RequestMapping(value = "proRegister", method = RequestMethod.POST )
 	public String proRegister(Profession profession) {
+		
 		int result = service.proRegister(profession);
 		
-		return "proRegisterDetail";
+		
+		
+		return null;
 	}
 	
 	
