@@ -11,7 +11,7 @@ import edu.kh.mind.board.model.service.BoardService;
 import edu.kh.mind.member.model.vo.Member;
 
 @Controller
-@RequestMapping("/board/*")
+@RequestMapping("/free/*")
 @SessionAttributes({"loginMember"})
 public class FreeBoardController {
 
@@ -30,7 +30,7 @@ public class FreeBoardController {
 
 	//--------------자유게시판--------------------
 	
-    @RequestMapping("freeList")
+    @RequestMapping("list")
     public String freeBoardList(Model model) {
     	
     	model.addAttribute("css", "board/freeList");

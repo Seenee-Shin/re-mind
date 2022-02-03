@@ -32,13 +32,15 @@
                             </div>
                         </div>
                         
-						<div class="boardImg">
-							<img>
-							 <i class="fas fa-times" id="deleteImg"></i>
-						</div>
-						<div class="boardImg">
-							<img>
-							<span class="deleteImg">x</span>
+                        <div class="imgWrap">
+							<div class="boardImg">
+								<img>
+								 <i class="fas fa-times deleteImg" ></i>
+							</div>
+							<div class="boardImg">
+								<img>
+								<i class="fas fa-times deleteImg"></i>
+							</div>
 						</div>
                         
                         <div class="write_option_area">
@@ -64,7 +66,7 @@
                             <label for="file">
                                 <i class="fas fa-image dark-brown"></i>
                             </label>
-								<input type="file" name="images" id='file' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
+								<input type="file" name="images" id='addFileBtn' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
                             <button class="submit_btn light_brown_bg">작성</button>
                         </div>
                     </div>
