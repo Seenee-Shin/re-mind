@@ -303,6 +303,26 @@ a{
   }
 }
 
+/* 이미지 파일 영역 */
+.boardImg{
+	display:inline-block;
+	width: 150px;
+	height: 150px;
+	text-align:right;
+	padding: 5px;
+}
+.deleteImg{
+	cursor: pointer;
+	margin:5px;
+	font-size: 20px;
+}
+
+.imgWrap{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* -----------모바일----------- */
 @media screen and (max-width: 768px) {
   main{

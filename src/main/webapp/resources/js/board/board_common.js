@@ -65,4 +65,11 @@ const userMenu = document.getElementsByClassName("userMenu")
 }
 
 
-/**/
+/*사진 프리뷰 */
+
+function loadImg(){
+	
+	const addBtn = document.querySelector("#addFileBtn")
+	const  
+	
+}
