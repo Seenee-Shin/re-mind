@@ -50,10 +50,10 @@
 					<ul>
 						<c:forEach items="${emotionCategoryList}" var="emotionCategory">
 							<li>
-								<label for="option${emotionCategory.emotionCategoryCode}"><input type="checkbox" name="stress" id="option${emotionCategory.emotionCategoryCode}" value="${emotionCategory.emotionCategoryCode}">${emotionCategory.emotionCategoryName}</label>
+								<input type="checkbox" name="stress" id="option${emotionCategory.emotionCategoryCode}" value="${emotionCategory.emotionCategoryCode}">
+								<label for="option${emotionCategory.emotionCategoryCode}">${emotionCategory.emotionCategoryName}</label>
 							</li>
 						</c:forEach>
-
 					</ul>
 				</div>
 
@@ -69,7 +69,7 @@
 				<textarea placeholder="오늘 있었던 일을 맘 껏 풀어놓으세요."></textarea>
 				<div class="agree_area">
 					<label for="agreement">
-						<input type="checkbox" name="agreement" id="agreement"> 상담사에게 공개
+						<input type="checkbox" name="agreement" id="agreement1"> 상담사에게 공개
 					</label>
 				</div>
 			</div>

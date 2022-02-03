@@ -58,10 +58,13 @@ hr{
 }
 
 
-input[type='radio'],input[type='radio']:checked {appearance: none; width: 0.9rem; height: 0.9rem; border-radius: 100%; margin-right: 0.1rem;}
+input[type='radio'],input[type='radio']:checked {appearance: none; width: 22px; height: 22px; border-radius: 100%; margin-right: 0.1rem;}
 input[type='radio'] {background:url('../images/icon/radio_none.png') no-repeat center center;}
 input[type='radio']:checked {background:url('../images/icon/radio_active.png') no-repeat center center;}
 
+input[type='checkbox'],input[type='radio']:checked {appearance: none; width: 22px; height: 22px; border-radius: 100%; margin-right: 0.1rem;}
+input[type='checkbox'] {background:url('../images/icon/radio_none.png') no-repeat center center;}
+input[type='checkbox']:checked {background:url('../images/icon/radio_active.png') no-repeat center center;}
 
 @media (hover: hover) {}
 
@@ -298,6 +301,26 @@ a{
   .side_menu > ul > li > ul > li{
       font-size: 13px;
   }
+}
+
+/* 이미지 파일 영역 */
+.boardImg{
+	display:inline-block;
+	width: 150px;
+	height: 150px;
+	text-align:right;
+	padding: 5px;
+}
+.deleteImg{
+	cursor: pointer;
+	margin:5px;
+	font-size: 20px;
+}
+
+.imgWrap{
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* -----------모바일----------- */

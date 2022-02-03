@@ -33,7 +33,7 @@
 /* 지난 상담 내역(e) */
 
 
-/* 감정 기록(s) */
+/* 감정 기록 form(s) */
 .emotion_diary{margin-left: 20px;}
 .emotion_diary .sub_title{margin:20px auto; width: 100%; text-align: center; font-size: 20px;}
 .emotion_diary > .progress_area{margin-left:30px;}
@@ -48,7 +48,7 @@
     
 .progress_statistic > .progress_bar{height:48px; line-height:46px; font-size:15px; display: flex;
     align-items: center;
-        justify-content: space-evenly;
+    justify-content: space-evenly;
 }
 .progress_statistic > .progress_bar > .name{min-width: 90px;  margin-right:10px; display:inline-block;}
 .progress_statistic > .progress_bar > progress{min-width:83%; height:17px; vertical-align:middle;}
@@ -62,7 +62,7 @@ progress.type04::-webkit-progress-value{background:#00f7d6; border-radius: 25px;
 progress::-moz-progress-bar{background:#E5D4C5;}
 
 .emotion_diary > .option_area{margin-left:30px; margin-top:70px;}
-.emotion_diary > .option_area > .option_statistic > ul > li{float:left; width:20%; min-width:90px; height:36px; line-height:34px; text-align:left;}
+.emotion_diary > .option_area > .option_statistic > ul > li{float:left; width:20%; min-width:90px; height:36px; line-height:34px; text-align:center; display: flex; align-items: center; justify-content: center;}
 .emotion_diary > .option_area > .option_statistic > ul::after{content:""; display:block; clear:both;}
 .option_statistic >  ul  {display: flex; flex-wrap: wrap; align-items: center; font-size:14px; letter-spacing:-.5px;}
 .emotion_diary > .option_area > .agree_area{height: 36px; line-height: 34px; text-align: right; font-size: 14px;}
@@ -73,9 +73,9 @@ progress::-moz-progress-bar{background:#E5D4C5;}
 
 .emotion_diary > .submit_area{margin-left:30px; margin-top:40px; text-align: center;}
 .emotion_diary > .submit_area > button{width: 30%; height:36px; margin:0 10px; border: 0px; border-radius: 10px; }
-    .emotion_diary > .submit_area>button:nth-child(1) {background-color: #E5D4C5; color: white;}
-    .emotion_diary > .submit_area>button:nth-child(2) {background-color: white; border:1px solid #A59999; color: #A59999;}
-/* 감정 기록(e) */
+.emotion_diary > .submit_area>button:nth-child(1) {background-color: #E5D4C5; color: white;}
+.emotion_diary > .submit_area>button:nth-child(2) {background-color: white; border:1px solid #A59999; color: #A59999;}
+/* 감정 기록 form(e) */
 
 
 /* 감정 기록(s) */

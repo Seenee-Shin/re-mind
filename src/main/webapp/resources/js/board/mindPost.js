@@ -33,6 +33,7 @@ for(let i = 0; i < box.length; i++){
     });
 }
 
+
 document.addEventListener("mousemove", function(e) {
     if(isDragging){
         const diffX = e.clientX - originX;
@@ -48,6 +49,33 @@ document.addEventListener("mousemove", function(e) {
 });
 
 
+const coordinate = null;
+
+
+
 document.addEventListener("mouseup", function(e) {
     isDragging = false;
+      const left = box[backupIndex].offsetLeft;
+      const top = box[backupIndex].offsetTop;
+	console.log(left);
+	console.log(top);
+   
+     
 });
+
+
+const submitBtn = document.querySelector(".study_submit");
+submitBtn.addEventListener("click", () => {
+   layerPopup("studyWrite");
+});
+
+
+container.addEventListener("dblclick", () => {
+	layerPopup("studyView");
+});
+
+
+
+
+
+

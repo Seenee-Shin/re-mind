@@ -30,7 +30,7 @@ public class FreeBoardController {
 
 	//--------------자유게시판--------------------
 	
-    @RequestMapping("freeList" )
+    @RequestMapping("list")
     public String freeBoardList(Model model) {
     	
     	model.addAttribute("css", "board/freeList");
@@ -43,7 +43,7 @@ public class FreeBoardController {
     }
     
     @RequestMapping(value = "freeinsert", method = RequestMethod.POST)
-    public String freeBoardInsert() {
+    public String freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember) {
     	
     	return null;
     }

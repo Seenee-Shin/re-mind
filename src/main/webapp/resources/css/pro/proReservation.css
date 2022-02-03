@@ -207,3 +207,6 @@ html{
     }
 }
 
+table{width: 100%}
+thead tr {width: 100%;}
+thead td {width: 14.2%; height: 40px; font-size: 28px;}
