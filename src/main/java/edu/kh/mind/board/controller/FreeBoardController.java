@@ -39,7 +39,7 @@ public class FreeBoardController {
     	
     	
     	 
-        return "board/freeList";
+        return "free/list";
     }
     
     @RequestMapping(value = "freeinsert", method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class FreeBoardController {
     	model.addAttribute("css", "board/freeView");
     	model.addAttribute("header", "community");
     	
-    	return "board/freeView";
+    	return null;
     }
     
     
@@ -62,14 +62,14 @@ public class FreeBoardController {
     	model.addAttribute("css", "board/update");
     	model.addAttribute("header", "community");
     	
-    	return "board/freeUpdate";
+    	return "free/update";
     }
     
     @RequestMapping("freeDelete")
     public String freeBoarDelete(Model model) {
     	model.addAttribute("header", "community");
     	model.addAttribute("css", "board/freeList");
-    	return "board/freeList";
+    	return "free/list";
     }
     
   

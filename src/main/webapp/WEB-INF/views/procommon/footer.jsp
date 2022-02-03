@@ -17,6 +17,7 @@
         // 전역 변수
         const contextPath = "${contextPath}";
     </script>
+	<script src="${contextPath}/resources/js/adminPro/adminPro.js"></script>
 
 </body>
 </html>
