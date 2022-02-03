@@ -13,7 +13,10 @@
 	<typeAliases>
 		<typeAlias type="edu.kh.mind.member.model.vo.ChatMessage" alias="ChatMessage"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.ChatJoin" alias="ChatJoin"/>
+		<typeAlias type="edu.kh.mind.member.model.vo.Profession" alias="Profession"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionHospital" alias="ProfessionHospital"/>
+		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionInformation" alias="ProfessionInfo"/>
+		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionPrice" alias="ProfessionPrice"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.EmotionCategory" alias="EmotionCategory"/>
 	</typeAliases>

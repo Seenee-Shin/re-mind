@@ -5,6 +5,10 @@ public class ProfessionInformation {
     private String professionUniversity;
     private String professionDepartment;
     private String professionMajor;
+    private String professionIntro;
+    private String professionStory;
+    private String professionCarrer;
+    
 
     public ProfessionInformation(){}
 
@@ -39,4 +43,28 @@ public class ProfessionInformation {
     public String getProfessionMajor() {
         return professionMajor;
     }
+
+	public String getProfessionIntro() {
+		return professionIntro;
+	}
+
+	public void setProfessionIntro(String professionIntro) {
+		this.professionIntro = professionIntro;
+	}
+
+	public String getProfessionStory() {
+		return professionStory;
+	}
+
+	public void setProfessionStory(String professionStory) {
+		this.professionStory = professionStory;
+	}
+
+	public String getProfessionCarrer() {
+		return professionCarrer;
+	}
+
+	public void setProfessionCarrer(String professionCarrer) {
+		this.professionCarrer = professionCarrer;
+	}
 }
