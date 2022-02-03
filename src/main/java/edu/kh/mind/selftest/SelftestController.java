@@ -20,23 +20,27 @@ public class SelftestController {
     	model.addAttribute("css", "selftestForm");
     	model.addAttribute("header", "main");
     	
-        return "selftest/selftestForm";
+        return "/selftestForm";
     }
 
 
     @RequestMapping("mbSelftest")
     public String mbSelftest(Model model){
     	
-    	model.addAttribute("css", "selftestResult");
+    	model.addAttribute("css", "mb_selftest");
     	model.addAttribute("header", "main");
     	
-        return "selftest/mbSelftest";
+        return "/mbSelftest";
     }
 
     @RequestMapping(value = "selftestResult", method = RequestMethod.POST)
-    public String selftestResult(){
+    public String selftestResult(Model model){
 
-        return "selftestResult";
+        model.addAttribute("css", "selftestResult");
+        model.addAttribute("header", "main");
+
+
+        return "/selftestResult";
     }
 
 
