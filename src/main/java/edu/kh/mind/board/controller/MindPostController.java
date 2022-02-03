@@ -18,7 +18,7 @@ public class MindPostController {
     private MindPostService service;
 
     @RequestMapping("list")
-    public String freeBoardList(Model model) {
+    public String MindPostList(Model model) {
     	
     	model.addAttribute("css", "board/mindPost");
     	model.addAttribute("header", "community");

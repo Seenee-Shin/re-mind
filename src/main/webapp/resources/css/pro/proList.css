@@ -114,6 +114,9 @@ input:focus {outline:none;}
 .pro_radio > li{
     float: left;
     margin-right: 30px;
+        display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pro_radio label{
@@ -381,7 +384,7 @@ input:focus {outline:none;}
     
     .pro{
         max-width: 1200px;
-        height:520px;
+        height:570px;
         padding:30px 40px;
     }
 

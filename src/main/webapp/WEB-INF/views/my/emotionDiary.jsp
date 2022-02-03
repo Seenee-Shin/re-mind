@@ -49,50 +49,66 @@
 				<div class="option_statistic">
 					<ul>
 						<li>
-							<label for="option01"><input type="checkbox" name="stress" id="option01">옵션01</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option02"><input type="checkbox" name="stress" id="option02">옵션02</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option03"><input type="checkbox" name="stress" id="option03">옵션03</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option04"><input type="checkbox" name="stress" id="option04">옵션04</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option05"><input type="checkbox" name="stress" id="option05">옵션05</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option06"><input type="checkbox" name="stress" id="option06">옵션06</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option07"><input type="checkbox" name="stress" id="option07">옵션07</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option08"><input type="checkbox" name="stress" id="option08">옵션08</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option09"><input type="checkbox" name="stress" id="option09">옵션09</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option10"><input type="checkbox" name="stress" id="option10">옵션10</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option11"><input type="checkbox" name="stress" id="option11">옵션11</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option12"><input type="checkbox" name="stress" id="option12">옵션12</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option13"><input type="checkbox" name="stress" id="option13">옵션13</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option14"><input type="checkbox" name="stress" id="option14">옵션14</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
 						<li>
-							<label for="option15"><input type="checkbox" name="stress" id="option15">옵션15</label>
+							<input type="checkbox" name="stress" id="option01">
+							<label for="option01">옵션01</label>
 						</li>
+						
 					</ul>
 				</div>
 

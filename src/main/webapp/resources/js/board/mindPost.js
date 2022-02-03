@@ -57,7 +57,8 @@ document.addEventListener("mouseup", function(e) {
     isDragging = false;
       const left = box[backupIndex].offsetLeft;
       const top = box[backupIndex].offsetTop;
-
+	console.log(left);
+	console.log(top);
    
      
 });
