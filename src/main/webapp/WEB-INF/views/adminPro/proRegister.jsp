@@ -14,7 +14,7 @@
             <div class="label">
             아이디 
             </div>
-            <input type="email" name="professionId" id="professionId" required> <button onclick="">인증하기</button> <br> 
+            <input type="email" name="professionId" id="professionId" required> <a href="emailConfirm">인증하기</a> <br> 
 
             <div class="label">
             비밀번호 

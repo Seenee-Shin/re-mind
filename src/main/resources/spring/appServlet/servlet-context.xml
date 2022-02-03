@@ -61,5 +61,8 @@
 
 	<!-- AOP + proxy -->
 	<aop:aspectj-autoproxy/>
+	
+	
+	<annotation-driven />
 
 </beans:beans>

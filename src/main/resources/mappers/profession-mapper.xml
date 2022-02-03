@@ -11,6 +11,8 @@
         <result property="professionEnrollDate" column="PROFESSION_ENROLL_DT"/>
         <result property="professionGender" column="PROFESSION_GENDER"/>
         <result property="professionBirth" column="PROFESSION_BIRTH"/>
+        <result property="professionAuthKey" column="PROFESSION_AUTH_KEY"/>
+        <result property="authStatus" column="AUTH_STATUS"/>
         <result property="remarks" column="REMARKS"/>
         <result property="statusCode" column="STATUS_CD"/>
     </resultMap>
@@ -48,18 +50,32 @@
     
     <!-- 상담사 등록 - 기본 -->
     <insert id="proRegister">
-    			INSERT INTO PROFESSION VALUES(
-										SEQ_PROFESSION_NO.NEXTVAL,
-										#{professionId},
-										#{professionPw},
-										#{professionName},
-										#{professionPhone},
-										DEFAULT,
-										#{professionGender},
-										DEFAULT,
-										DEFAULT,
-										#{professionBirth}
-										)
+    			INSERT INTO PROFESSION
+    			(PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
+    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH)
+    			
+    			 VALUES(
+						SEQ_PROFESSION_NO.NEXTVAL,
+						#{professionId},
+						#{professionPw},
+						#{professionName},
+						#{professionPhone},
+						DEFAULT,
+						#{professionGender},
+						DEFAULT,
+						#{professionBirth},
+						)
     </insert>
+    
+      <!-- 생성된 메일 인증키 업데이트 -->
+  <update id="createAuthkey">
+    UPDATE PROFESSION SET PROFESSION_AUTH_KEY = #{professionAuthKey} where PROFESSION_ID = #{professionId}
+  </update>
+  
+  
+  <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
+  <update id="chkAuth">
+      UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{authStatus}
+  </update>
 
 </mapper>
