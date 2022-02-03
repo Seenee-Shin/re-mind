@@ -10,7 +10,9 @@ public class SelftestDAO {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
-//    public String selectQ(int questionNo) {
-//        return sqlSession.selectOne("", );
-//    }
+
+
+    public String selectQ(int questionNo) {
+        return sqlSession.selectOne("selftestMapper", questionNo);
+    }
 }
