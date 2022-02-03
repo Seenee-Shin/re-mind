@@ -8,7 +8,7 @@
 
 <article class="self_banner">
   <div>누구나 마음 속에 수많은 고민들이 있습니다.</div>
-  <div>도움이 필요할 땐 언제든지 KH정보교육원 과 함께하세요!</div>
+  <div>도움이 필요할 땐 언제든지 마음연구소와 함께하세요!</div>
 </article>
 <article class="self_content">
   <div class="self_content_title">
