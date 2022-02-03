@@ -94,6 +94,12 @@
 			<version>9.0.56</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-google</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
 
 
 		<!-- 파일 업로드 라이브러리 -->
