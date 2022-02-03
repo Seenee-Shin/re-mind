@@ -24,7 +24,7 @@
                         <tr>
                             <th>테라피 선택</th>
                             <td>
-                                <select class="select_box">
+                                <select class="select_box" id="therapy_select">
                                     <option value="0">선택</option>
                                     <option value="25000">텍스트테라피</option>
                                     <option value="50000">페이스테라피</option>
@@ -35,7 +35,7 @@
                         <tr>
                             <th>횟수</th>
                             <td>
-                                <select class="select_box">
+                                <select class="select_box" id="therapy_count">
                                     <option value="0">선택</option>
                                     <option value="1">1회</option>
                                     <option value="5">3회</option>
@@ -86,12 +86,12 @@
         <div id="reservation_pay">
             <div class="pro_price">
                 <p class="float-left pro_price_title">테라피 선택</p>
-                <p id="therapy_chk" class="float-right">보이스테라피</p>
+                <p id="therapy_chk" class="float-right">선택</p>
             </div>
 
             <div class="pro_price clear-both">
                 <p class="float-left pro_price_title">횟수 합계</p>
-                <p id="therapy_count_chk" class="float-right">5회</p>
+                <p id="therapy_count_chk" class="float-right">선택</p>
             </div>
 
             <div class="pro_price clear-both">
@@ -138,6 +138,7 @@
     var today = new Date();
     let year = today.getFullYear();
     let month = today.getMonth();
+    let backupMonthFirstDay;
 
     const calendar = document.getElementById("calendar");
     function makeCalendar(el, yearNo, monthNo) {
@@ -165,7 +166,7 @@
         // let doyWeek = WEEKDAY[new Date(today).getDay()];
         // let dayNo = new Date(today).getDay();
         let monthFirstDay = new Date(year, month, 1).getDay();
-
+        backupMonthFirstDay = monthFirstDay;
         let row = el.insertRow();
         let cell;
 
@@ -193,6 +194,8 @@
                 monthFirstDay = monthFirstDay - 6;
             }
         }
+
+        setHgight();
     }
 
     function beforeCalendar() {
@@ -235,8 +238,28 @@
     }
 
     makeCalendar(calendar, year, month);
+    
+    $(document).on("click", "#calendar td", function (){
+        const index = $("#calendar td").index($(this));
+        
+        if(index < 7 + backupMonthFirstDay) return;
+        
+        $("#calendar td").removeClass("YMcss");
+        
+      	$(this).addClass("YMcss");
+        console.log($(this));
+    });
 
 
+    function setHgight(){
+       if($("#calendar tr").length > 6){
+            $("#tuition_date").css("height","630px");
+        }else{
+            $("#tuition_date").css("height","560px");
+        } 
+    }
+
+    
 
 </script>
 

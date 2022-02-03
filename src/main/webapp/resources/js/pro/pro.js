@@ -11,8 +11,6 @@ $(".cate_btn").on("click",function(){
     }
 });
 
-
-
 // 상담사 상세페이지 네비게이션 ( 상담사 한마디, 후기)
 
 $(".detail_btn").on("click",function(){
@@ -22,19 +20,24 @@ $(".detail_btn").on("click",function(){
 
 });
 
-
 // 예상 수강료
 let therapySelect;
 let therapyCount;
 
 $("#therapy_select").change(function(){
     therapySelect = $(this).val();
+    therapySelectText = $("#therapy_select option:selected").text();
     calc();
+
+    $("#therapy_chk").text(therapySelectText);
 });
 
 $("#therapy_count").change(function(){ 
     therapyCount = $(this).val();
+    therapyCountText = $("#therapy_count option:selected").text();
     calc();
+
+    $("#therapy_count_chk").text(therapyCountText);
 });
 
 // 상담가격 , 천단위 콤마
@@ -49,6 +52,9 @@ function calc(){
         }
     }
 }
+
+
+
 
 $("#mobile_category_btn").on("click",function(){
     $("#mobile_pro_category").css("display","block");
@@ -78,3 +84,55 @@ $(".mobile_cate_btn").on("click",function(){
 });
 
 
+
+
+
+
+// 결제
+function requestPay(){
+    // 1.주문정보 테이블에 인서트 에이젝스 
+
+    $.ajax({
+        url: contextPath + "/pro/select",
+		type: "GET",
+		dataType: "JSON",
+
+    });
+
+    //2 . ajax 성공 시 아이포트 수행
+    IMP.init("imp11319218"); // 예: imp00000000
+    IMP.request_pay({
+        pg : 'inicis', // version 1.1.0부터 지원.
+        pay_method : 'card',
+        merchant_uid : 'merchant_' + new Date().getTime(),
+        name : '마음연구소 re:mind',
+        amount : 100, //판매 가격
+        buyer_email : 'iamport@siot.do',
+        buyer_name : '구매자이름',
+        buyer_tel : '010-1234-5678'
+        
+    }, function(rsp) {
+        if ( rsp.success ) {
+
+            // 3. 주문번호를 이용하여 db에 select 됐던 총 금액 조회
+            $.ajax({}); 
+
+            console.log(rsp);
+
+            // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
+
+            var msg = '결제가 완료되었습니다.';
+            msg += '고유ID : ' + rsp.imp_uid;
+            msg += '상점 거래ID : ' + rsp.merchant_uid;
+            msg += '결제 금액 : ' + rsp.paid_amount;
+            msg += '카드 승인번호 : ' + rsp.apply_num;
+
+            // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
+        } else {
+            var msg = '결제에 실패하였습니다.';
+            msg += '에러내용 : ' + rsp.error_msg;
+        }
+        alert(msg);
+    });
+
+}
