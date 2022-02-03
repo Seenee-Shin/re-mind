@@ -1,6 +1,7 @@
 package edu.kh.mind.member.model.service;
 
 import edu.kh.mind.member.model.vo.EmotionCategory;
+import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 
 import java.util.List;
@@ -15,4 +16,12 @@ public interface MyService {
 	 * @return emotionCategoryList
 	 */
 	List<EmotionCategory> emotionCategory();
+
+
+	/**
+	 * 감정 기록 등록
+	 * @param emotionDiary
+	 * @return result
+	 */
+	int insertEmotionDiary(EmotionDiary emotionDiary);
 }

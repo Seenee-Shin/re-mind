@@ -12,4 +12,10 @@
 		ORDER BY EMOTION_CATEGORY_CD ASC
 	</select>
 
+	<insert id="insertEmotionDiary">
+		INSERT INTO EMOTION_DIARY VALUES(
+			SEQ_EMOTION_DIARY_NO.NEXTVAL, #{emotionArray}, #{stressArray}, #{emotionContent}, #{stressAgree}, #{diaryAgree}, DEFAULT, DEFAULT, #{memberNo}
+		)
+	</insert>
+
 </mapper>

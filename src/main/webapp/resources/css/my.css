@@ -83,8 +83,7 @@ progress::-moz-progress-bar{background:#E5D4C5;}
 .highlight a{background-color : #E5D4C5 !important;background-image :none !important; color: #000 !important; font-weight:bold !important; border-color: #E5D4C5;}
 .emotion_record{margin:40px;}
 .emotion_record > .regist_area{margin-left:30px; text-align: center;}
-.emotion_record > .regist_area > .sub_title{margin:20px auto; width: 100%; text-align: center;     font-size: 18px;
-    font-weight: 500;}
+.emotion_record > .regist_area > .sub_title{margin:20px auto; width: 100%; text-align: center; font-size: 18px; font-weight: 500;}
 .emotion_record > .regist_area > a > .emotion_regist{margin: 0px auto 40px; width: 50%; height: 50px; line-height: 48px; border-radius: 10px; border: 1px solid #ddd; background: #E5D4C5; color: #fff;}
 .emotion_record > .calendar_area{margin-left:30px;}
 .emotion_record > .progress_area{margin-left:30px; margin-top:80px;}
