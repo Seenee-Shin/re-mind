@@ -15,18 +15,18 @@
     <div>나의 마음건강을 체크해보세요.</div>
     <div>심리 자가진단 테스트</div>
   </div>
-  <form method="POST" class="self_content_form">
+  <form method="POST" class="self_content_form" action="selftestForm">
     <div class="self_content_option">
       <div class="self_content_option1">
-        <div>우울증</div>
-        <div>불안장애</div>
-        <div>폭식증</div>
-        <div>알코올의존</div>
-        <div>스트레스</div>
+        <div class="selfTest_op">우울증</div>
+        <div class="selfTest_op">불안장애</div>
+        <div class="selfTest_op">폭식증</div>
+        <div class="selfTest_op">알코올의존</div>
+        <div class="selfTest_op">스트레스</div>
       </div>
       <div class="self_content_option2">
-        <div>자존감</div>
-        <div>인터넷중독</div>
+        <div class="selfTest_op">자존감</div>
+        <div class="selfTest_op">인터넷중독</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>

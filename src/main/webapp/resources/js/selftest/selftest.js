@@ -1,9 +1,34 @@
-// 웹/모바일 확인
-if (/Mobile|Android/i.test(navigator.userAgent)) { 
-    console.log(":mobile");
-}else{
-    console.log(":web");
-}
+// // 웹/모바일 확인
+// if (/Mobile|Android/i.test(navigator.userAgent)) {
+//     console.log(":mobile");
+// }else{
+//     console.log(":web");
+// }
+
+const contextPath = "${contextPath}";
+const questionNo = "${selftest.questionNo}";
+
+$(".selfTest_op").on("click", function (){
+
+    $.ajax({
+        url : "/selftestForm",
+        data : {"questionNo":questionNo},
+        dataType : "json",
+        success : function (question){
+        },
+        error(){
+
+        } //error
+
+    });
+
+
+});
+
+
+
+
+
 
 
 // 결과창 모달 호출
