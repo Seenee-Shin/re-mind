@@ -207,6 +207,6 @@ html{
     }
 }
 
-table{width: 100%}
-thead tr {width: 100%;}
-thead td {width: 14.2%; height: 40px; font-size: 28px;}
+table{width: 100%; text-align: center;}
+.calendar tr {width: 100%; font-size: 28px;}
+.calendar td {width: 14.2%; font-size: 28px; padding-bottom: 20px;}
