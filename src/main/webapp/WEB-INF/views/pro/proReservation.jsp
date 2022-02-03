@@ -50,10 +50,14 @@
 
             <div id="tuition_date" class="box_style">
                 <p class="tuition_font">첫번째 상담 날짜 선택 <span class="tuition_sub">*두번째 상담부터는 마이페이지에서 지정해 주세요.</span></p>
-                <div style="text-align: center; font-width: bold;">
-                    <div style="float: left; font-width: bold;" onclick="beforeCalendar();"><</div>
+                <div style="text-align: center; font-width: bold; margin: 50px 0;">
+                    <div style="float: left; font-width: bold; cursor: pointer;" onclick="beforeCalendar();">
+                    <img src="${contextPath}/resources/images/pro/left.png">
+                    </div>
                     <div style="display: inline-block; font-size: 20px;" class="YM">2022년 1월</div>
-                    <div style="float: right; font-width: bold;" onclick="nextCalendar();">></div>
+                    <div style="float: right; font-width: bold; cursor: pointer;" onclick="nextCalendar();">
+                    <img src="${contextPath}/resources/images/pro/right.png">
+                    </div>
                 </div>
                 <div class="calendar">
                     <table id="calendar">
