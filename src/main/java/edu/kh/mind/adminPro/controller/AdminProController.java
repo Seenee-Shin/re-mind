@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.mind.adminPro.model.service.AdminProService;
+import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Profession;
 
 @Controller
@@ -31,7 +32,7 @@ public class AdminProController {
 	
 	//등록 기능구현
 	@RequestMapping(value = "proRegister", method = RequestMethod.POST )
-	public String proRegister(Profession profession, Model model) throws Exception{
+	public String proRegister(Profession profession, Model model, RedirectAttributes ra) throws Exception{
 		
 		int result = service.idChk(profession);
 		
@@ -39,7 +40,7 @@ public class AdminProController {
 		if(result == 1) {
 			service.proRegister(profession);
 			
-	       model.addAttribute("result", "ok");
+	       Util.swalSetMessage("이메일을 인증해주세요", "작성된 이메일주소로 발송된 메일을 확인하여 등록을 완료해주세요", "correct", ra);;
 	       model.addAttribute("refreshUrl", "2;url=../auth/login");
 		}
 		
@@ -48,14 +49,14 @@ public class AdminProController {
 	
     //이메일 인증 코드 검증
     @RequestMapping(value = "emailConfirm", method = RequestMethod.GET)
-    public String emailConfirm(Profession profession,Model model,RedirectAttributes ra) { 
+    public String emailConfirm(Profession profession, Model model, RedirectAttributes ra) { 
         
         Profession loginpro = new Profession();
         
         loginpro = service.chkAuth(profession);
         
         if(loginpro == null) {
-            ra.addFlashAttribute("msg" , "다시 인증해 주세요");
+            Util.swalSetMessage("다시 인증해주세요","","error", ra);;
             return "redirect:/";
         }else {
         	model.addAttribute("loginPro", loginpro);

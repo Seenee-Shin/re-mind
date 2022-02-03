@@ -48,6 +48,12 @@
         FROM PROFESSION_HOSPITAL
     </select>
     
+    <!-- 이메일 중복확인 -->
+    <select id="idCheck">
+    	SELECT COUNT(*) FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
+    </select>
+    
+    
     <!-- 상담사 등록 - 기본 -->
     <insert id="proRegister">
     			INSERT INTO PROFESSION
