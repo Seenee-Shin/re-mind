@@ -1,6 +1,6 @@
 package edu.kh.mind.member.model.service;
 
-import edu.kh.mind.common.Util;
+import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.ChatDAO;
 import edu.kh.mind.member.model.vo.ChatJoin;
 import edu.kh.mind.member.model.vo.ChatMessage;

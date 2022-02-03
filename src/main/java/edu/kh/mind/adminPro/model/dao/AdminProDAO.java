@@ -18,7 +18,7 @@ public class AdminProDAO {
 	 * @return
 	 */
 	public int idCheck(Profession profession) {
-		return 0;
+		return sqlSession.selectOne("professionMapper/idCheck", profession);
 	}
 
 	
