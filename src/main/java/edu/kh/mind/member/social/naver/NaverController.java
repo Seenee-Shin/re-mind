@@ -19,11 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/naver/*")
 public class NaverController {
 
-    private String CLIENT_ID = "bCW4VaBNrrKJO0dNnbwX"; //애플리케이션 클라이언트 아이디값";
-    private String CLI_SECRET = "XWBByOkfMf"; //애플리케이션 클라이언트 시크릿값";
-
     /* NaverLoginBO */
+    @Autowired
     private NaverLoginBO naverLoginBO;
+
     private String apiResult = null;
 
     @Autowired

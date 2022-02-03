@@ -49,6 +49,30 @@
 	         
 	         <div id="tuition_date" class="box_style">
 	             <p class="tuition_font">첫번째 상담 날짜 선택 <span class="tuition_sub">*두번째 상담부터는 마이페이지에서 지정해 주세요.</span></p>
+				 <div style="text-align: center; font-width: bold;">
+					 <div style="float: left; font-width: bold; "><</div>
+					 <div style="display: inline-block; font-size: 20px;">2022년 1월</div>
+					 <div style="float: right; font-width: bold;">></div>
+				 </div>
+				 <table>
+					 <thead>
+					 	<tr>
+							<td>일</td>
+							<td>월</td>
+							<td>화</td>
+							<td>수</td>
+							<td>목</td>
+							<td>금</td>
+							<td>토</td>
+						</tr>
+					 </thead>
+					 <tbody>
+					 	<tr>
+							<td>1</td>
+							<td>2</td>
+						</tr>
+					 </tbody>
+				 </table>
 	         </div>
 	         
 	         <div id="tuition_time_wrap" class="box_style">
@@ -97,7 +121,7 @@
 	     </div>
 	
 	     <div class="final_pay clear-both">
-	         <button>
+	         <button onclick="requestPay();">
 	             결제하기
 	         </button>
 	     </div>
@@ -107,7 +131,7 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <!-- js -->
-<script src="./pro//pro.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/pro/pro.js"></script>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
