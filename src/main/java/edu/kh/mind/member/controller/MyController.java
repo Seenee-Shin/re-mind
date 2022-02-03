@@ -2,6 +2,7 @@ package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
 import edu.kh.mind.member.model.service.MyService;
+import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,8 +36,19 @@ public class MyController {
         return "my/appointmentPast";
     }
 
+    /**
+     * 감정 기록 form
+     * @param model
+     * @return
+     */
     @RequestMapping("emotionDiary")
     public String emotionDiary(Model model) {
+        List<EmotionCategory> emotionCategoryList = service.emotionCategory();
+        System.out.println(emotionCategoryList);
+
+        model.addAttribute("emotionCategoryList", emotionCategoryList);
+
+
     	model.addAttribute("css", "my");
 
         return "my/emotionDiary";

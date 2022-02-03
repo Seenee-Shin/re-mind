@@ -50,7 +50,7 @@
     align-items: center;
         justify-content: space-evenly;
 }
-.progress_statistic > .progress_bar > .name{min-width: 80px;  margin-right:10px; display:inline-block;}
+.progress_statistic > .progress_bar > .name{min-width: 90px;  margin-right:10px; display:inline-block;}
 .progress_statistic > .progress_bar > progress{min-width:83%; height:17px; vertical-align:middle;}
 
 progress{color: #E5D4C5; font-size: .6em; line-height: 1.5em; text-indent: .5em; width: 15em; height: 1.8em; border: 1px solid #ededed; border-radius:25px; background: #fff;}
@@ -62,9 +62,9 @@ progress.type04::-webkit-progress-value{background:#00f7d6; border-radius: 25px;
 progress::-moz-progress-bar{background:#E5D4C5;}
 
 .emotion_diary > .option_area{margin-left:30px; margin-top:70px;}
-.emotion_diary > .option_area > .option_statistic > ul > li{float:left; width:20%; min-width:90px; height:36px; line-height:34px; text-align:center;}
+.emotion_diary > .option_area > .option_statistic > ul > li{float:left; width:20%; min-width:90px; height:36px; line-height:34px; text-align:left;}
 .emotion_diary > .option_area > .option_statistic > ul::after{content:""; display:block; clear:both;}
-.option_statistic >  ul  {display: flex; flex-wrap: wrap; justify-content: center; align-items: center;}
+.option_statistic >  ul  {display: flex; flex-wrap: wrap; align-items: center; font-size:14px; letter-spacing:-.5px;}
 .emotion_diary > .option_area > .agree_area{height: 36px; line-height: 34px; text-align: right; font-size: 14px;}
 
 .emotion_diary > .diary_area{margin-left:30px; margin-top:70px;}
@@ -109,10 +109,11 @@ progress::-moz-progress-bar{background:#E5D4C5;}
     .appointmentPast_list > ul > li:first-child > div{font-size:15px;}
     /* 지난 상담 내역(e) */
 
-    /* 감정 기록(s)*/
+    /* 감정 기록 form(s)*/
     .emotion_diary .sub_title{font-size: 18px; letter-spacing:-1px;}
     .progress_statistic > .progress_bar{font-size:15px;}
-    /* 감정 기록(e)*/
+    .emotion_diary > .option_area > .option_statistic > ul > li{width:25%;}
+    /* 감정 기록 form(e)*/
 }
 
 /* 모바일 */
@@ -173,10 +174,12 @@ progress::-moz-progress-bar{background:#E5D4C5;}
     .emotion_diary > .submit_area{margin:40px auto 20px;}
 
     /* 감정 기록 등록(e) */
-
-
-   
 }
+
+@media screen and (max-width: 480px) {
+    .emotion_diary > .option_area > .option_statistic > ul > li{width:33.3%;}
+}
+
 
 
 

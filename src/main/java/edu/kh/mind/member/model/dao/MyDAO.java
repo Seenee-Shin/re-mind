@@ -1,5 +1,6 @@
 package edu.kh.mind.member.model.dao;
 
+import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +17,8 @@ public class MyDAO {
     public List<ProfessionHospital> loadProMap() {
         return sqlSession.selectList("professionMapper.loadProMap");
     }
+
+	public List<EmotionCategory> emotionCategory() {
+		return sqlSession.selectList("emotionMapper.emotionCategory");
+	}
 }

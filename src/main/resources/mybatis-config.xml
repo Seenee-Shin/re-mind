@@ -15,6 +15,7 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.ChatJoin" alias="ChatJoin"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionHospital" alias="ProfessionHospital"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="edu.kh.mind.member.model.vo.EmotionCategory" alias="EmotionCategory"/>
 	</typeAliases>
 
 	<!-- SQL이 작성된 파일 지정 -->
@@ -22,6 +23,7 @@
 		<mapper resource="/mappers/chat-mapper.xml"/>
 		<mapper resource="/mappers/profession-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/emotion-mapper.xml"/>
 	</mappers>
 
 </configuration>

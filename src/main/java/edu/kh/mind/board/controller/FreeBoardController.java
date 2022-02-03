@@ -11,7 +11,7 @@ import edu.kh.mind.board.model.service.BoardService;
 import edu.kh.mind.member.model.vo.Member;
 
 @Controller
-@RequestMapping("/board/*")
+@RequestMapping("/free/*")
 @SessionAttributes({"loginMember"})
 public class FreeBoardController {
 

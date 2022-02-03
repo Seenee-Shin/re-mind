@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="emotionMapper">
+	<resultMap id="emotionCategoryRm" type="EmotionCategory">
+		<id property="emotionCategoryCode" column="EMOTION_CATEGORY_CD"/>
+		<result property="emotionCategoryName" column="EMOTION_CATEGORY_NM"/>
+	</resultMap>
+
+	<!-- 스트레스 증상 -->
+	<select id="emotionCategory" resultMap="emotionCategoryRm">
+		SELECT * FROM EMOTION_DIARY_CATEGORY
+		ORDER BY EMOTION_CATEGORY_CD ASC
+	</select>
+
+</mapper>

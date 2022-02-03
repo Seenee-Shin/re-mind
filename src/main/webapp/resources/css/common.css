@@ -111,7 +111,7 @@ input[type='radio']:checked {background:url('../images/icon/radio_active.png') n
 
 
 main{
-  width: 75%;
+  width: 90%;
   max-width:1200px;
   margin:auto;
 }
@@ -121,7 +121,7 @@ main{
 }
 /* ---------------------------------------- */
 .side_menu{
-  width: 25%;
+  width: 195px;
   padding: 20px;
   min-height: 300px;
   background-color:  #F8F8F8;
@@ -130,7 +130,7 @@ main{
 }
 
 .main_content{
-  width: 75%;
+  width: calc(100% - 195px);
   min-height: 500px;
   float: left;
 }
