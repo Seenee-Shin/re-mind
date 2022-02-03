@@ -25,19 +25,21 @@
                     <div class="board_write_warp grey_bg " >
                         <div id="free_board_write">
                             <div class="writer_pic_wrap">
-                                <div class="my_pic light_brown_bg" style="background-image: url();">
-                                    
-                                </div>
+                                <div class="my_pic light_brown_bg" style="background-image: url();"> </div>
                             </div>
                             <div class="writing">
                                 <textarea class="grey_bg" name="" id="post_textarea" rows="5" placeholder="무슨일이 있었나요?"></textarea>
-                                
-								<div class="boardImg">
-									<img>
-									<span class="deleteImg">x</span>
-								</div>
                             </div>
                         </div>
+                        
+						<div class="boardImg">
+							<img>
+							 <i class="fas fa-times" id="deleteImg"></i>
+						</div>
+						<div class="boardImg">
+							<img>
+							<span class="deleteImg">x</span>
+						</div>
                         
                         <div class="write_option_area">
                             <div class="check_box_wrap">

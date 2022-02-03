@@ -300,6 +300,14 @@ a{
   }
 }
 
+/* 이미지 파일 영역 */
+.boardImg{
+	display:inline-block;
+	width: 150px;
+	height: 150px;
+	margin-left: 15px;
+}
+
 /* -----------모바일----------- */
 @media screen and (max-width: 768px) {
   main{
