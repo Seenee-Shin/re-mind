@@ -19,16 +19,9 @@
 		<div class="login_method">
 
 			<%--         <a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
-			<a href="javascript:kakaoLLL();">카카오 로그인</a>
-			<a href="javascript:unlinkApp();">카카오 탈퇴하기</a>
-			<a href="javascript:kakaoLogoutt();">카카오 로그아웃</a>
+			<a href="javascript:kakaoLogin();">카카오 로그인</a>
 			<a href="javascript:naverLogin();">네이버 로그인</a>
-
-			<%--         <a href="javascript:googleLogin();">구글 로그인</a>--%>
-			<%--         <div class="g-signin2 googleLoginBtn" data-onsuccess="onSignIn">구글 로그인</div>--%>
-			<button class="btn btn-primary" id="googleLoginBtn">구글 로그인</button>
-
-			<a href="#" onclick="signOut();">구글 로그아웃</a>
+			<a href="javascript:googleLogin();">구글 로그인</a>
 			<a href="#" class="emailLogin">이메일 로그인</a>
 		</div>
 		<div class="sign_up_wrap">
@@ -39,20 +32,27 @@
 </div>
 
 <script>
-	// 네이버 로그인
-	function showLoginPopup() {
-		let uri = 'https://nid.naver.com/oauth2.0/authorize?' +
-				'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
-				'&client_id=bCW4VaBNrrKJO0dNnbwX' +     // 발급받은 client_id 를 입력
-				'&state=e68c269c-5ba9-4c31-85da-54c16c658125' +             // CORS 를 방지하기 위한 특정 토큰값(임의값 사용)
-				'&redirect_uri=http://localhost:9000/mind/naver/callback';   // 어플케이션에서 등록했던 CallBack URL를 입력
-//NAVER_LOGIN_TEST
-		// 사용자가 사용하기 편하게끔 팝업창으로 띄어준다.
-		// window.open(uri, "Naver Login Test PopupScreen", "width=450, height=600");
-		window.location.href = uri;
+	function naverLogin(){
+		$.ajax({
+			url:"social/naverlogin",
+		}).done(function (res){
+			window.location.replace(res);
+		});
 	}
-
-
+	function kakaoLogin(){
+		$.ajax({
+			url:"social/kakaoLogin",
+		}).done(function (res){
+			window.location.replace(res);
+		});
+	}
+	function  googleLogin(){
+		$.ajax({
+			url:"social/googleLogin",
+		}).done(function (res){
+			window.location.replace(res);
+		});
+	}
 
 	// 구글 로그인
 	document.getElementById("googleLoginBtn").addEventListener("click", function (){
@@ -64,86 +64,6 @@
 				"scope=email%20profile%20openid&"+
 				"access_type=offline");
 	});
-
-	function naverLogin(){
-		$.ajax({
-			url:"naver/naverlogin",
-		}).done(function (res){
-			window.location.replace(res);
-		});
-	}
-
-	function kakaoLLL(){
-		$.ajax({
-			url:"oauth/authorizecode",
-			// success:function (result){
-			//    window.location.href = result;
-			// }
-		}).done(function (res){
-			window.location.replace(res);
-			// location.href = res;
-		});
-	}
-
-	// 카카오 로그인 js key
-	Kakao.init('f9cc932f2cb179a77079e2c667dab98a');
-	Kakao.isInitialized();
-	// console.log(Kakao.isInitialized()); // sdk초기화여부판단
-
-	// 카카오 회원 탈퇴
-	function unlinkApp() {
-		Kakao.API.request({
-			url: '/v1/user/unlink',
-			success: function(res) {
-				alert('success: ' + JSON.stringify(res))
-			},
-			fail: function(err) {
-				alert('fail: ' + JSON.stringify(err))
-			},
-		});
-	}
-
-	//카카오로그인
-	function kakaoLogin() {
-		Kakao.Auth.login({
-			// scope: 'profile_nickname, profile_image, account_email, gender, age_range, birthday', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
-			success: function(response) {
-				console.log(response)
-				Kakao.Auth.setAccessToken(response.access_token);
-
-				// console.log(Kakao.Auth.getAccessToken());
-				const urll = 'https://kauth.kakao.com/oauth/authorize?client_id=b862240d0cf0e40922fb9312954ca3a2' +
-						'&redirect_uri=http://localhost:9000/mind/oauth_kakao/callback&response_type=code';
-				window.location.href=urll; //리다이렉트 되는 코드
-
-				// window.Kakao.API.request({ // 사용자 정보 가져오기
-				//    url: '/v2/user/me',
-				//    success: (res) => {
-				//       console.log(res)
-				//       const kakaoAccount = res.kakao_account;
-				//       window.location.href=urll; //리다이렉트 되는 코드
-				//
-				//    }
-				// });
-			},
-			fail: function(error) {
-				console.log(error);
-			}
-		});
-	}
-
-	// 카카오 로그아웃
-	function kakaoLogout() {
-		if (!Kakao.Auth.getAccessToken()) {
-			console.log('Not logged in.');
-			return;
-		}
-		Kakao.Auth.logout(function(response) {
-			Kakao.Auth.setAccessToken(undefined); // 로그아웃
-			alert(response +' logout');
-			window.location.href='/mind'
-		});
-	};
 
 	const emailLogin = document.querySelector(".emailLogin");
 	emailLogin.addEventListener("click", () => {
