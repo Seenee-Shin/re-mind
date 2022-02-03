@@ -11,6 +11,8 @@ public class Profession {
     private Date professionEnrollDate;
     private String professionGender;
     private String professionBirth;
+    private String professionAuthKey;
+    private int authStatus;
     private int remarks;
     private int statusCode;
 
@@ -97,5 +99,21 @@ public class Profession {
 
 	public void setProfessionBirth(String professionBirth) {
 		this.professionBirth = professionBirth;
+	}
+
+	public String getProfessionAuthKey() {
+		return professionAuthKey;
+	}
+
+	public void setProfessionAuthKey(String professionAuthKey) {
+		this.professionAuthKey = professionAuthKey;
+	}
+
+	public int getAuthStatus() {
+		return authStatus;
+	}
+
+	public void setAuthStatus(int authstatus) {
+		this.authStatus = authstatus;
 	}
 }
