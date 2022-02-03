@@ -1,6 +1,6 @@
 .self_banner{
     color: rgb(255 255 255);
-    width: 75%;
+    /*width: 75%;*/
     height: 300px;
     margin: 0 auto;
     background: rgb(165 153 153);
@@ -22,7 +22,7 @@
 }
 
 .self_content{
-    width: 75%;
+    /*width: 75%;*/
     margin: 0 auto;
 }
 

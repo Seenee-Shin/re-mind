@@ -328,6 +328,47 @@
                 </div>
             </div>
         </div>
+         <div class="main_content4_content_left">
+            <div>새소식</div>
+            <div>
+                <div class="main_content4_content_left_item">
+                    <div>
+                        <span>23</span>
+                        <span>2022.01</span>
+                    </div>
+                    <div>
+                        <p>
+                            지역사회서비스 제공 기관 / 바우처 서비스
+                        </p>
+                    </div>
+                </div>
+
+                <div class="main_content4_content_left_item">
+                    <div>
+                        <span>23</span>
+                        <span>2022.01</span>
+                    </div>
+                    <div>
+                        <p>
+                            지역사회서비스 제공 기관 / 바우처 서비스
+                        </p>
+                    </div>
+                </div>
+
+                <div class="main_content4_content_left_item">
+                    <div>
+                        <span>23</span>
+                        <span>2022.01</span>
+                    </div>
+                    <div>
+                        <p>
+                            지역사회서비스 제공 기관 / 바우처 서비스
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div>
             <div class="main_content4_content_postit">
                 <div>마인드 포스트잇</div>
