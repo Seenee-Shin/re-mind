@@ -10,7 +10,7 @@ public class Profession {
     private String professionPhone;
     private Date professionEnrollDate;
     private String professionGender;
-    private String professionPrice;
+    private String professionBirth;
     private int remarks;
     private int statusCode;
 
@@ -44,9 +44,6 @@ public class Profession {
         return professionGender;
     }
 
-    public String getProfessionPrice() {
-        return professionPrice;
-    }
 
     public int getRemarks() {
         return remarks;
@@ -84,9 +81,7 @@ public class Profession {
         this.professionGender = professionGender;
     }
 
-    public void setProfessionPrice(String professionPrice) {
-        this.professionPrice = professionPrice;
-    }
+
 
     public void setRemarks(int remarks) {
         this.remarks = remarks;
@@ -95,4 +90,12 @@ public class Profession {
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }
+
+	public String getProfessionBirth() {
+		return professionBirth;
+	}
+
+	public void setProfessionBirth(String professionBirth) {
+		this.professionBirth = professionBirth;
+	}
 }

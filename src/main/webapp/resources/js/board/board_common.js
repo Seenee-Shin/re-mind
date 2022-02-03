@@ -70,6 +70,5 @@ const userMenu = document.getElementsByClassName("userMenu")
 function loadImg(){
 	
 	const addBtn = document.querySelector("#addFileBtn")
-	const  
 	
 }
