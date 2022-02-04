@@ -105,7 +105,7 @@
   
   <!-- 산담사 병원정보 insert -->
   <insert id="insertProHospital" parameterType="ProfessionHospital">
-  	INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddr}, #{hospitalPhone}, #{businessNo})
+  	INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddress}, #{hospitalPhone}, #{businessNo})
   </insert>
   
   <insert id="insertProInfo" parameterType="ProfessionInfo">
