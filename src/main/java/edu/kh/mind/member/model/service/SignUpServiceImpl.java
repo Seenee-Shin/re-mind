@@ -11,4 +11,14 @@ public class SignUpServiceImpl implements SignUpService{
 	@Autowired
 	private SignUpDAO dao;
 
+	@Override
+	public int idDupCheck(String inputId) {
+		return dao.idDupCheck(inputId);
+	}
+
+	@Override
+	public int nickNmDupCheck(String inputNickNm) {
+		return dao.nickNmDupCheck(inputNickNm);
+	}
+
 }
