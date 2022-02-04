@@ -48,9 +48,10 @@ public class AdminProServiceImpl implements AdminProService{
         
         //메일 전송
         MailHandler sendMail = new MailHandler(mailSender);
-        sendMail.setSubject("re:mind 상담사 회원가입을 완료해주세요]");
+        sendMail.setSubject("re:mind 상담사 회원가입을 완료해주세요");
         sendMail.setText(
-                new StringBuffer().append("<h1>re:mind 상담사 메일 인증</h1>").append("<a href='http://localhost:8080/mind/adminPro/emailConfirm?professionId=").
+                new StringBuffer().append("<h1>re:mind 상담사 메일 인증</h1>").
+                append("<a href='http://localhost:8080/mind/adminPro/emailConfirm?professionId=").
                 append(profession.getProfessionId()).
                 append("&memberAuthKey=").append(key).
                 append("' target='_blank'>이메일 인증 확인</a>").toString());
@@ -62,7 +63,7 @@ public class AdminProServiceImpl implements AdminProService{
     }
 
 	@Override
-	public Profession chkAuth(Profession profession) {
+	public int chkAuth(Profession profession) {
 		return dao.chkAuth(profession);
 	}
 
