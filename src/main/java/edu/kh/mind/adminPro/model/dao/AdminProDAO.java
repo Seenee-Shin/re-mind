@@ -14,11 +14,11 @@ public class AdminProDAO {
 	SqlSessionTemplate sqlSession;
 	
 	/** 이메일 중복 확인
-	 * @param profession
+	 * @param inputId
 	 * @return
 	 */
-	public int idCheck(Profession profession) {
-		return sqlSession.selectOne("professionMapper/idCheck", profession);
+	public int idCheck(String inputId) {
+		return sqlSession.selectOne("professionMapper.idCheck", inputId);
 	}
 
 	
@@ -27,22 +27,13 @@ public class AdminProDAO {
 	 * @return
 	 */
 	public int proRegister(Profession profession) {
-		return sqlSession.insert("professionMapper/proRegister", profession);
+		return sqlSession.insert("professionMapper.proRegister", profession);
 	}
-	
-	//이메일 인증 생성 
-	public void createAuthKey(String professionId, String key) {
-        Profession pro = new Profession();
-        pro.setProfessionAuthKey(key);
-        pro.setProfessionId(professionId);
-        sqlSession.update("professionMapper/createAuthKey", pro);		
-	}
-	
 	
 	//이메일 인증 확인
-	public Profession chkAuth(Profession profession) {
+	public int chkAuth(Profession profession) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("professionMapper/chkAuth", profession);
+		return sqlSession.update("professionMapper.chkAuth", profession);
 	}
 
 

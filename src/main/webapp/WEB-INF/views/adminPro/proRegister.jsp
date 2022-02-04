@@ -9,22 +9,26 @@
 <main>
     <h1>상담사 등록 신청 </h1>
 
-    <form action="proRegister" method="post" onsubmit="">
+    <form action="proRegister" method="post" onsubmit="return vaildate();">
         <div class="proWrap">
             <div class="label">
             아이디 
             </div>
-            <input type="email" name="professionId" id="professionId" required> <a href="emailConfirm">인증하기</a> <br> 
+            <input type="email" name="professionId" id="professionId" required> 
+            <div id="checkEmail"></div> <br>
 
             <div class="label">
             비밀번호 
             </div>
-            <input type="text" name="professionPw" id="proPw" required> <br>
+            <input type="password" name="professionPw" id="proPw" required>
+            <div id="checkPw"></div> <br>
+            
 
             <div class="label">
             비밀번호 확인 
             </div>
-            <input type="text" name="proPwCheck" id="proPwCheck" required> <br>
+            <input type="password" name="proPwCheck" id="proPwCheck" required>
+            <div id="checkPw2"></div> <br>
             
             <div class="label"> 이름</div>
             <input type="text" name="professionName" id="proName" required> <br>
@@ -33,8 +37,8 @@
             <input type="text" name="professionBirth" id="proBirth" required> <br>
             
             <div class="label">성별</div>
-            <input type="radio" name="professionGender" id="proBirthF" value="f"><label for="proBirthF">여성</label>
-            <input type="radio" name="professionGender" id="proBirthM" value="m"> <label for="proBirthM">남성</label><br>
+            <input type="radio" name="professionGender" id="proBirthF" value="여"><label for="proBirthF">여성</label>
+            <input type="radio" name="professionGender" id="proBirthM" value="남"> <label for="proBirthM">남성</label><br>
 
             <div class="label">핸드폰 번호</div>
             <input type="text" name="professionPhone" id="proPhone" required> <br>

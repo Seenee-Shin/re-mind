@@ -56,5 +56,4 @@ public class ProController {
 		
 		return "pro/proReservation";
 	}
-
 }
