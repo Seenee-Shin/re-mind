@@ -55,6 +55,7 @@
 	}
 
 	// 구글 로그인
+	if (document.getElementById("googleLoginBtn") != null)
 	document.getElementById("googleLoginBtn").addEventListener("click", function (){
 		//구글서버로 인증코드 발급 요청
 		window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?"+
@@ -65,10 +66,12 @@
 				"access_type=offline");
 	});
 
-	const emailLogin = document.querySelector(".emailLogin");
-	emailLogin.addEventListener("click", () => {
-		layerPopup("emailLogin");
-	});
+	if (document.querySelector(".emailLogin") != null) {
+		document.querySelector(".emailLogin").addEventListener("click", () => {
+			layerPopup("emailLogin");
+		});
+	}
+
 
 </script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
