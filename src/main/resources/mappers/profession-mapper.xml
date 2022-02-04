@@ -94,5 +94,12 @@
   <update id="chkAuth" parameterType="Profession" >
       UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{professionId}
   </update>
+  
+  
+  <select id="selectPro" resultMap="profession_rm">
+  	SELECT PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
+    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS
+    FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
+  </select>
 
 </mapper>

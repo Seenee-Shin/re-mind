@@ -54,9 +54,10 @@ public class AdminProController {
 	
 	//등록 & 이메일 인증
 	@RequestMapping(value = "proRegister", method = RequestMethod.POST )
-	public String proRegister(Profession profession, Model model, RedirectAttributes ra) throws Exception{
+	public String proRegister(Profession profession) throws Exception{
 		
 		service.proRegister(profession);
+		
 			
        return "redirect:adminPro/proLogin";
 		
@@ -66,7 +67,6 @@ public class AdminProController {
     @RequestMapping(value = "emailConfirm", method = RequestMethod.GET)
     public String emailConfirm(Profession profession, Model model, RedirectAttributes ra) { 
         
-        Profession loginpro = new Profession();
         
         int result = service.chkAuth(profession);
         
@@ -74,21 +74,27 @@ public class AdminProController {
             Util.swalSetMessage("다시 인증해주세요","","error", ra);;
             return "redirect:/";
         }else {
-        	model.addAttribute("loginPro", loginpro);
+        	
+        	Profession loginPro = service.selectProfession(profession);
+        	model.addAttribute("loginPro", loginPro);
+        	
         	return "adminPro/emailConfirm";
         }
     }
-    @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.GET )
-    public String insertproDetail(){
+    
+    //상담사 페이지 연결
+    @RequestMapping(value = "proRegisterDetail", method = RequestMethod.GET )
+    public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro ){
     	
-    	return "adminPro/proRegisterDetail";
+    	int proNo = loginPro.getProfessionNo();
+    	return "redirect:adminPro/proRegisterDetail/"+proNo;
     }
     
     
     //상담사 정보등록 
-    @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.POST )
+    @RequestMapping(value = "proRegisterDetail/{professionNo}", method = RequestMethod.POST )
     public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro,
-    							@PathVariable("boardNo") int proNo, ProfessionHospital ProHospital,
+    							@PathVariable("professionNo") int proNo, ProfessionHospital ProHospital,
     							Model md, RedirectAttributes ra, HttpSession session) {
     	
     	return "redirect:/adminPro";
