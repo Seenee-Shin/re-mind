@@ -19,14 +19,16 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionPrice" alias="ProfessionPrice"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.EmotionCategory" alias="EmotionCategory"/>
+		<typeAlias type="edu.kh.mind.pro.model.vo.ReservationPayMent" alias="ReservationPayMent"/>
 	</typeAliases>
 
 	<!-- SQL이 작성된 파일 지정 -->
 	<mappers>
 		<mapper resource="/mappers/chat-mapper.xml"/>
 		<mapper resource="/mappers/profession-mapper.xml"/>
-		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>		
 		<mapper resource="/mappers/emotion-mapper.xml"/>
+		<mapper resource="/mappers/reservation-mapper.xml"/>
 	</mappers>
 
 </configuration>

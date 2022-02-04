@@ -225,7 +225,8 @@ table{
     font-weight: bold;
 }
 .YMcss{
-    color:#00a8e3;
+    color:#a59999;
+    border-bottom: 4px solid #a59999;
 }
 
 .calendar tr {

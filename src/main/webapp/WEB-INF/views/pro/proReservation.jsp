@@ -24,7 +24,7 @@
                         <tr>
                             <th>테라피 선택</th>
                             <td>
-                                <select class="select_box" id="therapy_select">
+                                <select class="select_box" id="therapy_select" >
                                     <option value="0">선택</option>
                                     <option value="25000">텍스트테라피</option>
                                     <option value="50000">페이스테라피</option>
