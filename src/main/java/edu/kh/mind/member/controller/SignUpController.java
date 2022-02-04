@@ -86,17 +86,13 @@ public class SignUpController {
 	}
     
     
-	  // 닉네임 중복 검사
-	@RequestMapping(value="nickNmDupCheck", method=RequestMethod.GET)
+	 // 닉네임 중복 검사
+	@RequestMapping("check")
 	@ResponseBody
 	public int nickNmDupCheck( String inputNickNm) {
 			
-		int result = service.nickNmDupCheck(inputNickNm);
-			
-		return result;
+		return service.nickNmDupCheck(inputNickNm);
 	}
-	    	
-    
     
     
 }
