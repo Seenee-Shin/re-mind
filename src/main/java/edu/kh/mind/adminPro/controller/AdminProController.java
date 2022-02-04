@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,32 +21,42 @@ import edu.kh.mind.member.model.vo.Profession;
 @SessionAttributes({"loginPro"})
 public class AdminProController {
 	
-	//등록화면 연결
 	@Autowired
 	private AdminProService service;
 
+	//등록화면 연결
+	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
+	public String proLogin() {
+		
+		return "adminPro/proLogin";
+	}
+	
+	//등록화면 연결
 	@RequestMapping(value = "proRegister", method = RequestMethod.GET )
 	public String proRegister() {
 		
 		return "adminPro/proRegister";
 	}
 	
+	@RequestMapping(value = "emailDupCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public int emailDupCheck(String inputEmail) {
+		
+		//아이디 중복검사 Service 호출
+		int result = service.idChk(inputEmail);
+		
+		return result;
+	}
 	
-	//등록 기능구현
+	
+	//등록 & 이메일 인증
 	@RequestMapping(value = "proRegister", method = RequestMethod.POST )
 	public String proRegister(Profession profession, Model model, RedirectAttributes ra) throws Exception{
 		
-		int result = service.idChk(profession);
-		
-		// 이메일 중복여부 확인 (사용가능하면 0)
-		if(result == 1) {
-			service.proRegister(profession);
+		service.proRegister(profession);
 			
-	       Util.swalSetMessage("이메일을 인증해주세요", "작성된 이메일주소로 발송된 메일을 확인하여 등록을 완료해주세요", "correct", ra);;
-	       model.addAttribute("refreshUrl", "2;url=../auth/login");
-		}
+       return "redirect:adminPro/proLogin";
 		
-		 return "adminPro/proRegisterDetail";
 	}
 	
     //이메일 인증 코드 검증
@@ -60,10 +72,11 @@ public class AdminProController {
             return "redirect:/";
         }else {
         	model.addAttribute("loginPro", loginpro);
-        	return "/adminPro/";
+        	return "adminPro/proRegisterDetail";
         }
     }
-	
+    
+
 	
     //예외처리
 	@ExceptionHandler(Exception.class)
