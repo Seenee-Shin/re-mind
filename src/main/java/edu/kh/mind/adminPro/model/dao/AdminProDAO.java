@@ -37,6 +37,12 @@ public class AdminProDAO {
 	}
 
 
+	public Profession selectProfession(Profession profession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("professionMapper.selectPro", profession);
+	}
+
+
 
 
 }

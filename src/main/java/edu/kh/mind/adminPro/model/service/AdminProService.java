@@ -21,6 +21,8 @@ public interface AdminProService {
 
 	int chkAuth(Profession profession);
 
+	Profession selectProfession(Profession profession);
+
 
 
 

@@ -67,6 +67,12 @@ public class AdminProServiceImpl implements AdminProService{
 		return dao.chkAuth(profession);
 	}
 
+	@Override
+	public Profession selectProfession(Profession profession) {
+		// TODO Auto-generated method stub
+		return dao.selectProfession(profession);
+	}
+
 
 
 
