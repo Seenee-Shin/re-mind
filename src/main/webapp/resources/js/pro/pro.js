@@ -54,11 +54,13 @@ $("#therapy_count").change(function(){
     $("#therapy_count_chk").text(therapyCountText);
 });    
 
+let price;
+
 // 상담가격 , 천단위 콤마
 function calc(){
     if(therapySelect != undefined && therapySelect != 0){
         if(therapyCount != undefined && therapyCount != 0){
-            var price = Number(therapySelect) * Number(therapyCount);
+            price = Number(therapySelect) * Number(therapyCount);
             var price2 = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             $("#price").html(price2 + "<span>원</span>");
         }else{
@@ -110,49 +112,78 @@ $("#category_cancel_btn").on("click",function(){
 
 // 결제
 function requestPay(){
-    // 1.주문정보 테이블에 인서트 에이젝스 
+   
+    if($("#therapy_chk").text() == "선택"){
+        alert("테라피를 선택해주세요");
+        return;
+    }else if($("#therapy_count_chk").text() == "선택"){
+        alert("횟수를 선택해주세요");
+        return;
+    }else if($("#date_chk").text() == "선택"){
+        alert("상담 날짜를 선택해주세요");
+        return;
+    }else if($("#time_chk").text() == "선택"){
+        alert("상담 시간을 선택해주세요");
+        return;
+    }else{
 
-    $.ajax({
-        url: contextPath + "/pro/select",
-		type: "GET",
-		dataType: "JSON",
+        // const price = $("#price").text().split("원");
+        // const finallyPrice = price[0];
 
-    });
-
-    //2 . ajax 성공 시 아이포트 수행
-    IMP.init("imp11319218"); // 예: imp00000000
-    IMP.request_pay({
-        pg : 'inicis', // version 1.1.0부터 지원.
-        pay_method : 'card',
-        merchant_uid : 'merchant_' + new Date().getTime(),
-        name : '마음연구소 re:mind',
-        amount : 100, //판매 가격
-        buyer_email : 'iamport@siot.do',
-        buyer_name : '구매자이름',
-        buyer_tel : '010-1234-5678'
+        const count = $("#therapy_count_chk").text().split("회");
+        const therapyCount = Number.parseInt(count[0]);
         
-    }, function(rsp) {
-        if ( rsp.success ) {
+         // 1.주문정보 테이블에 인서트 에이젝스
+         $.ajax({
+            url : contextPath + "/pro/priceInsert",
+            type : "POST",
+            data : {"price":price, "therapyCount": therapyCount},
+            success : function(payNo){
+                console.log(payNo);
+            },
+        });
 
-            // 3. 주문번호를 이용하여 db에 select 됐던 총 금액 조회
-            $.ajax({}); 
+        //2 . ajax 성공 시 아이포트 수행
+        IMP.init("imp11319218"); // 예: imp00000000
+        IMP.request_pay({
+            pg : 'inicis', // version 1.1.0부터 지원.
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+            name : '마음연구소 re:mind',
+            amount : 100, //판매 가격
+            buyer_email : 'iamport@siot.do',
+            buyer_name : '구매자이름',
+            buyer_tel : '010-1234-5678'
+            
+        }, function(rsp) {
+            if ( rsp.success ) {
 
-            console.log(rsp);
+                // 3. 주문번호를 이용하여 db에 select 됐던 총 금액 조회
+                $.ajax({}); 
 
-            // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
+                console.log(rsp);
 
-            var msg = '결제가 완료되었습니다.';
-            msg += '고유ID : ' + rsp.imp_uid;
-            msg += '상점 거래ID : ' + rsp.merchant_uid;
-            msg += '결제 금액 : ' + rsp.paid_amount;
-            msg += '카드 승인번호 : ' + rsp.apply_num;
+                // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
 
-            // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
-        } else {
-            var msg = '결제에 실패하였습니다.';
-            msg += '에러내용 : ' + rsp.error_msg;
-        }
-        alert(msg);
-    });
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
 
+                // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+            }
+            alert(msg);
+        });
+
+    } //else
+        
+       
+
+    
 }
+
+

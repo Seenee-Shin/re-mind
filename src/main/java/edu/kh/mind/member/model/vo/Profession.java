@@ -13,10 +13,21 @@ public class Profession {
     private String professionBirth;
     private String professionAuthKey;
     private int authStatus;
-    private int remarks;
+    private String remarks;
     private int statusCode;
+    private String worryName;
 
     public Profession(){}
+
+    public void setWorryName(String worryName) {
+        this.worryName = worryName;
+    }
+
+    public String getWorryName() {
+        return worryName;
+    }
+
+
 
     public int getProfessionNo() {
         return professionNo;
@@ -47,7 +58,7 @@ public class Profession {
     }
 
 
-    public int getRemarks() {
+    public String getRemarks() {
         return remarks;
     }
 
@@ -85,7 +96,7 @@ public class Profession {
 
 
 
-    public void setRemarks(int remarks) {
+    public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
 

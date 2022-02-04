@@ -23,11 +23,11 @@
 						<button class="shortBtn mailCheckBtn" type="button" >인증번호 전송</button>
 					</div>
 					<div class="input_div">
-						<div><label for="pw">비밀번호</label>  <div class="check" id="checkPw1"></div></div>
-						<input type="password" name="memberPw" id="pwd1" class="login_input" required>
+						<div><label for="pw">비밀번호</label>  <div class="check" id="checkPwd1"></div></div>
+						<input type="password" name="memberPw" id="pwd1" placeholder = "6~20글자"class="login_input" required>
 					</div>
 					<div class="input_div">
-						<div><label for="pw2">비밀번호 확인</label>  <div class="check" id="checkPw2"></div></div>
+						<div><label for="pw2">비밀번호 확인</label>  <div class="check" id="checkPwd2"></div></div>
 						<input type="password" id="pwd2" class="login_input" required>
 					</div>
 					<div class="input_div">
@@ -36,7 +36,7 @@
 					</div>
 					<div class="input_div">
 						<div><label for="nickname">닉네임</label> <div class="check" id="checkNickNm"></div></div>
-						<input type="text" name="memberNickNm" id="nickname" class="login_input" required>
+						<input type="text" name="memberNickNm" id="nickname" placeholder = "2~20글자" class="login_input" required>
 					</div>
 				</div>
 					<div class="input_area right_area">
@@ -54,7 +54,7 @@
 						<input type="text" name="address" id="address2" class="login_input" required>
 					</div>
 					<div class="input_div">
-						<div><label for="phone2">핸드폰 번호</label></div>
+						<div><label for="phone2">핸드폰 번호</label><div class="check" id="checkPhone"></div></div>
 							<select class="custom-select" id="phone1" name="phone" required>
 								<option>010</option>
 								<option>011</option>
@@ -175,14 +175,12 @@ function validate(){
             success : function(result){
 
                 if(result  ==  0){ 
-                    checkId.innerText = "사용 가능한 아이디 입니다.";
-                    checkId.style.color = "green";
+                	$(checkId).text("사용 가능한 아이디입니다.").css("color", "green");
                     signUpCheckObj.id = true;
               
                 }else{ 
                     
-                    checkId.innerText = "이미 사용중인 아이디 입니다.";
-                    checkId.style.color = "red";
+                	$(checkId).text("이미 사용중인 아이디입니다.").css("color", "red");
                     signUpCheckObj.id = false;
                 }
             },
@@ -266,38 +264,37 @@ $("#name").on("input", function(){
 
 
 // 닉네임 
- document.getElementById("nickname").addEventListener("input", function(e){
+document.getElementById("nickname").addEventListener("input", function(e){
 	
 	const inputNickNm = this.value;
 
-    const regExp = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
+    const regExp = /^[가-힣]{2,5}$/;
+    
+    const checkNm = document.getElementById("checkNickNm");
         
-    const checkNickNm = document.getElementById("checkNickNm");
-
  	if(inputNickNm.length == 0){ 
 
-        $(checkNickNm).text("");
+        $(checkNm).text("");
 
         signUpCheckObj.nickname = false; 
 
     } else if( regExp.test(inputNickNm) ){ 
 	
 	  $.ajax({ 
-            url : "signUp/nickNmDupCheck",                       
-
+            url : "signUp/check",
+            
             data : {"inputNickNm" : inputNickNm},               
-
+            type : "GET",
             success : function(result){
 
                 if(result  ==  0){ 
-                    checkNickNm.innerText = "사용 가능한 닉네임 입니다.";
-                  	checkNickNm.style.color = "green";
+                	console.log("성공");
+                	$(checkNm).text("사용 가능한 닉네임입니다.").css("color", "green");
                     signUpCheckObj.nickname = true;
               
                 }else{
-	
-                    checkNickNm.innerText = "이미 사용중인 닉네임 입니다.";
-                    checkNickNm.style.color = "red";
+
+                	$(checkNm).text("이미 사용중인 닉네임입니다.").css("color", "red");
                     signUpCheckObj.nickname = false;
                 }
             },
@@ -310,8 +307,7 @@ $("#name").on("input", function(){
         });
 	
 	} else{
-		$(checkNickNm).text("유효하지 않은 닉네임 입니다.").css("color", "red");
-
+		$(checkNm).text("유효하지 않은 닉네임 입니다.").css("color", "red");
         signUpCheckObj.nickname = false;
 	}
 	
@@ -327,17 +323,15 @@ document.getElementById("pwd1").addEventListener("input", (e) => {
     const checkPwd1 = document.getElementById("checkPwd1"); 
 
     if(inputPw.length == 0){ 
-        checkPwd1.innerText = "";
+    	$(checkPwd1).text("");
         signUpCheckObj.pwd1 = false;
     
     }else if(regExp.test(inputPw)){ 
-        checkPwd1.innerText = "유효한 비밀번호 입니다.";
-        checkPwd1.style.color = "green";
+    	$(checkPwd1).text("유효한 비밀번호입니다.").css("color", "green");
         signUpCheckObj.pwd1 = true;
 
     }else{
-        checkPwd1.innerText = "유효하지 않은 비밀번호 입니다.";
-        checkPwd1.style.color = "red";
+    	$(checkPwd1).text("유효하지 않은 비밀번호입니다.").css("color", "red");
         signUpCheckObj.pwd1 = false;
     }
 
@@ -369,41 +363,32 @@ $("#pwd2, #pwd1").on("input", function(){
 // 핸드폰번호
 $(".phone").on("input", function(){
 
-    // 현재 입력 중인 번호 자리에 작성된 값의 길이가 4를 초과할 경우
-    // -> 전화번호를 4글자 초과해서 작성함
     if(  $(this).val().length > 4  ){
 
-        // 글자수 제한 처리
-        // -> 초과된 부분을 잘라서 없앰
         const num = $(this).val().slice(0,4); // 4자리만 남음
 
-        // 잘라서 4자리만 남은 값을 
-        // 현재 입력중인 input 태그의 value로 대입
         $(this).val(num);
     }
 
-    // 각각 입력된 번호 얻어오기
     const inputPhone2 = document.getElementById("phone2").value;
     const inputPhone3 = document.getElementById("phone3").value;
 
-    // 정규 표현식
     const regExp2 = /^\d{3,4}$/;
     const regExp3 = /^\d{4}$/;
 
-    // 출력용 span태그
     const checkPhone = document.getElementById("checkPhone");
 
     if( inputPhone2.length == 0  && inputPhone3.length == 0){ // 둘다 빈칸일 경우
         checkPhone.innerText = "";
         signUpCheckObj.phone3 = false;
 
-    }else if(regExp2.test(inputPhone2) && regExp3.test(inputPhone3) ){ // 둘다 유효
+    }else if(regExp2.test(inputPhone2) && regExp3.test(inputPhone3) ){
 
         checkPhone.innerText = "유효한 전화번호 입니다.";
         checkPhone.style.color = "green";
         signUpCheckObj.phone3 = true;
 
-    }else{ // 둘 중 하나라도 유효 X
+    }else{
 
         checkPhone.innerText = "유효하지 않은 전화번호 입니다.";
         checkPhone.style.color = "red";
