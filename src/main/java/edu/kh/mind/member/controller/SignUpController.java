@@ -87,7 +87,7 @@ public class SignUpController {
     
     
 	  // 닉네임 중복 검사
-	@RequestMapping(value="idDupCheck", method=RequestMethod.GET)
+	@RequestMapping(value="nickNmDupCheck", method=RequestMethod.GET)
 	@ResponseBody
 	public int nickNmDupCheck( String inputNickNm) {
 			
