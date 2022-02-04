@@ -36,9 +36,6 @@ public class FreeBoardController {
     	model.addAttribute("css", "board/freeList");
     	model.addAttribute("header", "community");
     	
-    	
-    	
-    	 
         return "free/list";
     }
     
