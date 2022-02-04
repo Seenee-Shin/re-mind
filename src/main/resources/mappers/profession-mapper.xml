@@ -101,5 +101,16 @@
     			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS
     FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
   </select>
+  
+  
+  <!-- 산담사 병원정보 insert -->
+  <insert id="insertProHospital" parameterType="ProfessionHospital">
+  	INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddr}, #{hospitalPhone}, #{businessNo})
+  </insert>
+  
+  <insert id="insertProInfo" parameterType="ProfessionInfo">
+  	INSERT INTO PROFESSION_INFORMATION (PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR)
+  	VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},professionMajor)
+  </insert>
 
 </mapper>

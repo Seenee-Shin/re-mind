@@ -20,7 +20,11 @@
             <div class="label">
             병원주소 
             </div>
-            <input type="text" name="hospitalAddr" id="hospitalAddr" required> <button type="button" onclick="">주소 찾기</button>
+            <input type="text" name="hospitalAddr" id="hospitalAddr" readonly="readonly"> <button type="button" id="address_kakao">주소 찾기</button> <br>
+            <div class="label">
+            상세주소
+            </div>
+            <input type="text" name="address_detail" id="address_detail"> 
             <br>
 
             <div class="label">
@@ -55,6 +59,20 @@
 <!-- header include -->
 <jsp:include page="../procommon/footer.jsp"></jsp:include>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+	window.onload = function(){
+	    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+	        //카카오 지도 발생
+	        new daum.Postcode({
+	            oncomplete: function(data) { //선택시 입력값 세팅
+	                document.getElementById("hospitalAddr").value = data.address; // 주소 넣기
+	                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+	            }
+	        }).open();
+	    });
+	}
+</script>
 
 
 
