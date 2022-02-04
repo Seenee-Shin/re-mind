@@ -120,7 +120,7 @@ public class SocialController {
     @RequestMapping(value = "naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, @RequestParam(value = "code", required = false) String code,
                            @RequestParam String state,
-                           HttpSession session) throws IOException {
+                           HttpSession session) throws Exception {
         System.out.println("============== callback ==============");
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
@@ -130,6 +130,16 @@ public class SocialController {
 //        naverLoginBO.getNaverAccessToken(session, code, state);
 
         apiResult = naverLoginBO.getUserProfile(oauthToken);
+
+        JSONParser jsonParser = new JSONParser();
+        Object obj = jsonParser.parse(apiResult);
+        JSONObject jsonObj = (JSONObject) obj;
+        System.out.println("jsonObj : " + jsonObj);
+
+        JSONObject response_obj = (JSONObject) jsonObj.get("response");
+        System.out.println("email : " + response_obj.get("email"));
+
+
         System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
         model.addAttribute("result", apiResult);
         System.out.println("result"+apiResult);
@@ -242,7 +252,7 @@ public class SocialController {
         // refreshToken 재발급 하려면 access권한 삭제해야함
         // https://developers.google.com/identity/gsi/web/guides/revoke
 
-        return "redirect:/";
+        return "socialSuccess";
     }
 
 

@@ -15,6 +15,7 @@
         <result property="authStatus" column="AUTH_STATUS"/>
         <result property="remarks" column="REMARKS"/>
         <result property="statusCode" column="STATUS_CD"/>
+        <result property="worryName" column="WORRY_NM"/>
     </resultMap>
     
     <resultMap id="professionInfo_rm" type="ProfessionInfo">
@@ -42,6 +43,18 @@
     	<result property="counselPrice" column="COUNSEL_PRICE"/>
     </resultMap>
 
+<!--    그그그머냐ㅐ 그거 검색 -->
+    <select id="selectProfession" resultMap="profession_rm">
+        SELECT * FROM PROFESSION
+        WHERE
+              <foreach collection="list" item="category" open="(" close=")" separator=" OR ">
+                  WORRY_NM LIKE '%' || #{category} || '%'
+              </foreach>
+    </select>
+    <select id="selectAllProfession" resultMap="profession_rm">
+        SELECT * FROM PROFESSION
+    </select>
+
 	<!-- 지도 병원  -->
     <select id="loadProMap" resultMap="professionHospital_rm">
         SELECT *
@@ -49,16 +62,16 @@
     </select>
     
     <!-- 이메일 중복확인 -->
-    <select id="idCheck">
-    	SELECT COUNT(*) FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
+    <select id="idCheck" parameterType="string" resultType="_int">
+    	SELECT COUNT(*) FROM PROFESSION WHERE PROFESSION_ID = #{professionId} AND  STATUS_CD != 1
     </select>
     
     
     <!-- 상담사 등록 - 기본 -->
-    <insert id="proRegister">
+    <insert id="proRegister" parameterType="Profession">
     			INSERT INTO PROFESSION
     			(PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
-    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH)
+    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS)
     			
     			 VALUES(
 						SEQ_PROFESSION_NO.NEXTVAL,
@@ -70,18 +83,16 @@
 						#{professionGender},
 						DEFAULT,
 						#{professionBirth},
+						#{professionAuthKey},
+						DEFAULT
 						)
     </insert>
     
-      <!-- 생성된 메일 인증키 업데이트 -->
-  <update id="createAuthkey">
-    UPDATE PROFESSION SET PROFESSION_AUTH_KEY = #{professionAuthKey} where PROFESSION_ID = #{professionId}
-  </update>
-  
+
   
   <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
-  <update id="chkAuth">
-      UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{authStatus}
+  <update id="chkAuth" parameterType="Profession" >
+      UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{professionId}
   </update>
 
 </mapper>

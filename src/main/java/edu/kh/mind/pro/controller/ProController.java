@@ -1,25 +1,21 @@
 package edu.kh.mind.pro.controller;
 
+import com.google.gson.Gson;
+import edu.kh.mind.member.model.vo.Profession;
+import edu.kh.mind.pro.model.service.ProService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
-import edu.kh.mind.pro.model.server.ProService;
-import edu.kh.mind.pro.model.vo.ReservationPayMent;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/pro/*")
 @SessionAttributes({"loginMember"})
 public class ProController {
-	
+
 	@Autowired
 	private ProService service;
 	
@@ -31,6 +27,17 @@ public class ProController {
     	
 		return "pro/proList";
 	}
+	@GetMapping("proCategory")
+	@ResponseBody
+	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<String> worryCtCd){
+
+		List<Profession> pList;
+
+		if(worryCtCd != null)	pList = service.selectProfession(worryCtCd);
+		else					pList = service.selectAllProfession();
+
+		return new Gson().toJson(pList);
+	}
 	
 	@RequestMapping("proView")
 	public String proView(Model model) {
@@ -41,8 +48,6 @@ public class ProController {
 		return "pro/proView";
 	}
 	
-	
-	// 상담사 예약 페이지
 	@RequestMapping("proReservation")
 	public String proReservation(Model model) {
 		
@@ -51,26 +56,4 @@ public class ProController {
 		
 		return "pro/proReservation";
 	}
-	
-	
-	// 상담사 결제 - 1.RESERVATION_PAYMENT 번호 INSERT, 2. PAYMENT DB에 총 금액, 번호 INSERT 후 결제 번호 반환
-	
-	@ResponseBody
-	@RequestMapping(value="priceInsert", method = RequestMethod.POST)
-	public int priceInsert(@RequestParam("price") int price, @RequestParam("therapyCount") int totalCnt) {
-		
-		// 추후에 전문가, loginMemberNo 같이 insert 해야함.
-		ReservationPayMent rv = new ReservationPayMent();
-		
-		
-		
-		rv.setTotalCnt(totalCnt);
-		
-		int payNo = service.priceInsert(price, rv);
-		
-		return 0;
-	}
-	
-
-	
 }
