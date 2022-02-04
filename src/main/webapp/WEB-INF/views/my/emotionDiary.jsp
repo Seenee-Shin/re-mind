@@ -7,9 +7,9 @@
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <article class="main_content">
-	<form action="${contextPath}/my/emotionDiary" method="POST" onsubmit="return optionList();">
-		<input type="text" name="emotionArray" class="emotion_array">
-		<input type="text" name="stressArray" class="stress_array">
+	<form action="${contextPath}/my/emotionDiary" method="POST" onsubmit="return validate();">
+		<input type="hidden" name="emotionArray" class="emotion_array">
+		<input type="hidden" name="stressArray" class="stress_array">
 		<div class="emotion_diary">
 			<div class="title">감정 기록</div>
 			<div class="progress_area">
@@ -18,27 +18,27 @@
 				<div class="progress_statistic">
 					<div class="progress_bar">
 						<div class="name">
-							행복 <span>25%</span>
+							행복 <span>0%</span>
 						</div>
-						<progress class="type01 happy" max="100" value="25"></progress>
+						<progress class="type01 happy" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							불안 <span>75%</span>
+							불안 <span>0%</span>
 						</div>
-						<progress class="type02 misery" max="100" value="75"></progress>
+						<progress class="type02 misery" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							우울 <span>100%</span>
+							우울 <span>0%</span>
 						</div>
-						<progress class="type03 depression" max="100" value="100"></progress>
+						<progress class="type03 depression" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							스트레스 <span>25%</span>
+							스트레스 <span>0%</span>
 						</div>
-						<progress class="type04 stress" max="100" value="25"></progress>
+						<progress class="type04 stress" max="100" value="0"></progress>
 					</div>
 
 				</div>
@@ -67,7 +67,7 @@
 
 			<div class="diary_area">
 				<div class="sub_title"><strong>오늘의 감정 일기</strong></div>
-				<textarea name="emotionContent" placeholder="오늘 있었던 일을 맘 껏 풀어놓으세요."></textarea>
+				<textarea name="emotionContent" class="emotionContent" placeholder="오늘 있었던 일을 맘 껏 풀어놓으세요."></textarea>
 				<div class="agree_area">
 					<label for="diaryAgree">
 						<input type="checkbox" name="diaryAgree" id="diaryAgree"> 상담사에게 공개
@@ -104,7 +104,10 @@
 		$(this).prev().children().html(changeValue + "%")
 	});
 
-	function optionList() {
+	function validate() {
+		let result = false;
+
+		console.log("${loginMember.memberNo}");
 
 		const emotion = {
 			happy :  $(".progress_bar .happy").val(),
@@ -121,8 +124,24 @@
 		$(".emotion_array").val(JSON.stringify(emotion));
 		$(".stress_array").val(stress);
 
+		const emotionContent = $(".emotionContent");
+		const loginMember = "${loginMember.memberNo}";
+		if (loginMember == "") {
+			alert("로그인이 필요 합니다.");
+			layerPopup("loginType");
+		} else if (emotionContent.val().trim() == "") {
+			alert("내용을 작성해 주세요");
+			emotionContent.val("");
+		} else {
+			result = true;
+		}
 
-		return true;
+		return result;
+
+		// return result;
+
+
+
 
 	}
 

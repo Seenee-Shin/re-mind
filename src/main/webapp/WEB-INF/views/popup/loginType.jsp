@@ -55,16 +55,17 @@
 	}
 
 	// 구글 로그인
-	if (document.getElementById("googleLoginBtn") != null)
-	document.getElementById("googleLoginBtn").addEventListener("click", function (){
-		//구글서버로 인증코드 발급 요청
-		window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?"+
+	if (document.getElementById("googleLoginBtn") != null) {
+		document.getElementById("googleLoginBtn").addEventListener("click", function (){
+			//구글서버로 인증코드 발급 요청
+			window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?"+
 				"client_id=251812285867-iarbblabr07shf2kvjjmuaoa3tuv6n8r.apps.googleusercontent.com&"+
 				"redirect_uri=http://localhost:9000/mind/oauth_kakao/googleLogin&"+
 				"response_type=code&"+
 				"scope=email%20profile%20openid&"+
 				"access_type=offline");
-	});
+		});
+	}
 
 	if (document.querySelector(".emailLogin") != null) {
 		document.querySelector(".emailLogin").addEventListener("click", () => {

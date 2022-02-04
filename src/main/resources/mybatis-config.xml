@@ -19,6 +19,7 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionPrice" alias="ProfessionPrice"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.EmotionCategory" alias="EmotionCategory"/>
+		<typeAlias type="edu.kh.mind.member.model.vo.EmotionDiary" alias="EmotionDiary"/>
 	</typeAliases>
 
 	<!-- SQL이 작성된 파일 지정 -->

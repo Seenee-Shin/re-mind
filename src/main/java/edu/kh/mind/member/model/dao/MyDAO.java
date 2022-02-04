@@ -26,4 +26,13 @@ public class MyDAO {
 	public int insertEmotionDiary(EmotionDiary emotionDiary) {
 		return sqlSession.insert("emotionMapper.insertEmotionDiary", emotionDiary);
 	}
+
+	public EmotionDiary selectEmotionRecord(String selectDate) {
+		System.out.println(selectDate);
+		EmotionDiary result = sqlSession.selectOne("emotionMapper.selectEmotionRecord", selectDate);
+		System.out.println("--------------------------------");
+		System.out.println(result);
+		System.out.println("--------------------------------");
+		return result;
+	}
 }
