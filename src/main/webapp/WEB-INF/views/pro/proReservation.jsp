@@ -51,11 +51,11 @@
             <div id="tuition_date" class="box_style">
                 <p class="tuition_font">첫번째 상담 날짜 선택 <span class="tuition_sub">*두번째 상담부터는 마이페이지에서 지정해 주세요.</span></p>
                 <div style="text-align: center; font-width: bold; margin: 50px 0;">
-                    <div style="float: left; font-width: bold; cursor: pointer;" onclick="beforeCalendar();">
+                    <div id="calendar_left" onclick="beforeCalendar();">
                     <img src="${contextPath}/resources/images/pro/left.png">
                     </div>
-                    <div style="display: inline-block; font-size: 20px;" class="YM">2022년 1월</div>
-                    <div style="float: right; font-width: bold; cursor: pointer;" onclick="nextCalendar();">
+                    <div style="display: inline-block; font-size: 20px;" class="YM" id="ym">2022년 1월</div>
+                    <div id="calendar_right" onclick="nextCalendar();">
                     <img src="${contextPath}/resources/images/pro/right.png">
                     </div>
                 </div>
@@ -96,12 +96,12 @@
 
             <div class="pro_price clear-both">
                 <p class="float-left pro_price_title">첫번째 수강 날짜</p>
-                <p id="date_chk" class="float-right">1월 27일</p>
+                <p id="date_chk" class="float-right">선택</p>
             </div>
 
             <div class="pro_price clear-both">
                 <p class="float-left pro_price_title">시간</p>
-                <p id="time_chk" class="float-right">10:00</p>
+                <p id="time_chk" class="float-right">선택</p>
             </div>
         </div>
 
@@ -231,7 +231,6 @@
             yearNo = Number.parseInt(yearNo) + 1;
             monthNo = Number.parseInt(monthNo) - 11;
         }
-        console.log(monthNo)
         monthNo = Number.parseInt(monthNo) + 1;
 
         makeCalendar(calendar, yearNo, monthNo);
@@ -247,7 +246,6 @@
         $("#calendar td").removeClass("YMcss");
         
       	$(this).addClass("YMcss");
-        console.log($(this));
     });
 
 
@@ -259,7 +257,6 @@
         } 
     }
 
-    
 
 </script>
 

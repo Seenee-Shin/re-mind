@@ -233,7 +233,6 @@ table{
 }
 
 .calendar td {
-
     cursor: pointer;
     width: 14.2%;
     height:65px;
@@ -241,4 +240,17 @@ table{
     font-size: 17px;
     font-weight: 600;
 
+}
+
+
+#calendar_left{
+    float: left;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#calendar_right{
+    float:right;
+    font-weight: bold;
+    cursor: pointer;
 }
