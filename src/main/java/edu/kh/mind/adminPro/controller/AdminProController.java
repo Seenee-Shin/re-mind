@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -94,13 +95,14 @@ public class AdminProController {
     
     //상담사 정보등록 
     @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.POST )
-    public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro,
-    							 ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile image,
+    public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro, 
+    							 ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile certification,
     							Model md, RedirectAttributes ra, HttpSession session) {
     	
     	//loginPro의 ProfessionNo set
     	proHospital.setProfessionNo(loginPro.getProfessionNo());
     	proInfo.setProfessionNo(loginPro.getProfessionNo());
+    	
     	
     	//학력증명서 
     	//웹 접근경로(web path), 서버 저장경로(serverPath)
@@ -111,21 +113,23 @@ public class AdminProController {
     	//병원정보 등록
     	int hResult = service.insertProHospital(proHospital);
     	
+    	System.out.println(certification);
+    	
 		String path = null; 
 		
     	if(hResult < 0) {
 			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-			path = "proRegisterDetail";
+			path = "/proRegisterDetail";
     	}else {
     		//학력정보 입력
-    		int iResult = service.insertProInfo(proInfo,image, webPath, serverPath);
+    		int iResult = service.insertProInfo(proInfo,certification, webPath, serverPath);
     		
     		if(iResult > 0) { // insert 성공 
     			Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
-    			path = "proLogin";
+    			path = "/proLogin";
     		}else {
     			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-    			path = "proRegisterDetail";
+    			path = "/proRegisterDetail";
     			
     		}
     	}

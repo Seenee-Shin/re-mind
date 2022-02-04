@@ -40,7 +40,7 @@ public interface AdminProService {
 	 * @param image 
 	 * @return
 	 */
-	int insertProInfo(ProfessionInformation proInfo, MultipartFile image, String webPath, String serverPath);
+	int insertProInfo(ProfessionInformation proInfo, MultipartFile certification, String webPath, String serverPath);
 
 
 

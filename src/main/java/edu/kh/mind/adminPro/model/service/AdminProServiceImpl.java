@@ -89,14 +89,14 @@ public class AdminProServiceImpl implements AdminProService{
 
 
 	@Override
-	public int insertProInfo(ProfessionInformation proInfo, MultipartFile image, String webPath, String serverPath) {
+	public int insertProInfo(ProfessionInformation proInfo, MultipartFile certification, String webPath, String serverPath) {
 		
 		Image img= new Image();
 		
 		img.setImagePath(webPath);
 		img.setProfessionNo(proInfo.getProfessionNo());
-		img.setImagePathName(Util.fileRename(image.getOriginalFilename()));
-		img.setImageOriginal(image.getOriginalFilename());
+		img.setImagePathName(Util.fileRename(certification.getOriginalFilename()));
+		img.setImageOriginal(certification.getOriginalFilename());
 		img.setImageLevel(0);
 		
 		int iResult = dao.insertProInfo(proInfo);
@@ -107,7 +107,7 @@ public class AdminProServiceImpl implements AdminProService{
 			
 			if (result==1) {
 				try {
-					image.transferTo(new File(serverPath+"/"+img.getImagePathName()));
+					certification.transferTo(new File(serverPath+"/"+img.getImagePathName()));
 					
 				}catch (Exception e) {
 					e.printStackTrace();
