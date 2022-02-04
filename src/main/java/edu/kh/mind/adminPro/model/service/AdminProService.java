@@ -19,7 +19,7 @@ public interface AdminProService {
 	void proRegister(Profession profession) throws Exception;
 
 
-	Profession chkAuth(Profession profession);
+	int chkAuth(Profession profession);
 
 
 

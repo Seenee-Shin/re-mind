@@ -30,12 +30,10 @@ public class AdminProDAO {
 		return sqlSession.insert("professionMapper.proRegister", profession);
 	}
 	
-	
-	
 	//이메일 인증 확인
-	public Profession chkAuth(Profession profession) {
+	public int chkAuth(Profession profession) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("professionMapper.chkAuth", profession);
+		return sqlSession.update("professionMapper.chkAuth", profession);
 	}
 
 

@@ -35,6 +35,7 @@
 	function naverLogin(){
 		$.ajax({
 			url:"social/naverlogin",
+			data:{"naver": "naver"},
 		}).done(function (res){
 			window.location.replace(res);
 		});
@@ -42,6 +43,7 @@
 	function kakaoLogin(){
 		$.ajax({
 			url:"social/kakaoLogin",
+			data:{"kakao": "kakao"},
 		}).done(function (res){
 			window.location.replace(res);
 		});
@@ -49,11 +51,16 @@
 	function  googleLogin(){
 		$.ajax({
 			url:"social/googleLogin",
+			data:{"google": "google"},
 		}).done(function (res){
 			window.location.replace(res);
 		});
 	}
 
+	const emailLogin = document.querySelector(".emailLogin");
+	emailLogin.addEventListener("click", () => {
+		layerPopup("emailLogin");
+	});
 	// 구글 로그인
 	if (document.getElementById("googleLoginBtn") != null) {
 		document.getElementById("googleLoginBtn").addEventListener("click", function (){
@@ -72,7 +79,6 @@
 			layerPopup("emailLogin");
 		});
 	}
-
 
 </script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>

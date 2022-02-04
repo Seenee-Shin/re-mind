@@ -1,5 +1,7 @@
 package edu.kh.mind.adminPro.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.kh.mind.adminPro.model.service.AdminProService;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Profession;
+import edu.kh.mind.member.model.vo.ProfessionHospital;
 
 @Controller
 @RequestMapping("adminPro/*")
@@ -65,15 +68,30 @@ public class AdminProController {
         
         Profession loginpro = new Profession();
         
-        loginpro = service.chkAuth(profession);
+        int result = service.chkAuth(profession);
         
-        if(loginpro == null) {
+        if(result == 0) {
             Util.swalSetMessage("다시 인증해주세요","","error", ra);;
             return "redirect:/";
         }else {
         	model.addAttribute("loginPro", loginpro);
-        	return "adminPro/proRegisterDetail";
+        	return "adminPro/emailConfirm";
         }
+    }
+    @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.GET )
+    public String insertproDetail(){
+    	
+    	return "adminPro/proRegisterDetail";
+    }
+    
+    
+    //상담사 정보등록 
+    @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.POST )
+    public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro,
+    							@PathVariable("boardNo") int proNo, ProfessionHospital ProHospital,
+    							Model md, RedirectAttributes ra, HttpSession session) {
+    	
+    	return "redirect:/adminPro";
     }
     
 
