@@ -1,5 +1,7 @@
 package edu.kh.mind.board.model.vo;
 
+import java.io.File;
+
 public class Image {
 
 	private int imageNo;
@@ -78,6 +80,7 @@ public class Image {
 	public void setProfessionNo(int professionNo) {
 		this.professionNo = professionNo;
 	}
-	
+
+
 	
 }

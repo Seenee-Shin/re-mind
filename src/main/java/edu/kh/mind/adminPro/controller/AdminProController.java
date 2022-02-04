@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.mind.adminPro.model.service.AdminProService;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.ProfessionInformation;
 
 @Controller
 @RequestMapping("adminPro/*")
@@ -59,7 +61,7 @@ public class AdminProController {
 		service.proRegister(profession);
 		
 			
-       return "redirect:adminPro/proLogin";
+       return "redirect:proLogin";
 		
 	}
 	
@@ -83,21 +85,52 @@ public class AdminProController {
     }
     
     //상담사 페이지 연결
-    @RequestMapping(value = "proRegisterDetail", method = RequestMethod.GET )
-    public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro ){
+    @RequestMapping("proRegisterDetail/{proNo}")
+    public String insertproDetail(){
     	
-    	int proNo = loginPro.getProfessionNo();
-    	return "redirect:adminPro/proRegisterDetail/"+proNo;
+    	return "adminPro/proRegisterDetail";
     }
     
     
     //상담사 정보등록 
-    @RequestMapping(value = "proRegisterDetail/{professionNo}", method = RequestMethod.POST )
+    @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.POST )
     public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro,
-    							@PathVariable("professionNo") int proNo, ProfessionHospital ProHospital,
+    							 ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile image,
     							Model md, RedirectAttributes ra, HttpSession session) {
     	
-    	return "redirect:/adminPro";
+    	//loginPro의 ProfessionNo set
+    	proHospital.setProfessionNo(loginPro.getProfessionNo());
+    	proInfo.setProfessionNo(loginPro.getProfessionNo());
+    	
+    	//학력증명서 
+    	//웹 접근경로(web path), 서버 저장경로(serverPath)
+		String webPath = "/resources/images/pro/certification";
+		
+		String serverPath= session.getServletContext().getRealPath(webPath);
+    	
+    	//병원정보 등록
+    	int hResult = service.insertProHospital(proHospital);
+    	
+		String path = null; 
+		
+    	if(hResult < 0) {
+			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
+			path = "proRegisterDetail";
+    	}else {
+    		//학력정보 입력
+    		int iResult = service.insertProInfo(proInfo,image, webPath, serverPath);
+    		
+    		if(iResult > 0) { // insert 성공 
+    			Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
+    			path = "proLogin";
+    		}else {
+    			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
+    			path = "proRegisterDetail";
+    			
+    		}
+    	}
+    	
+    	return "redirect:"+path;
     }
     
 
