@@ -15,6 +15,7 @@
         <result property="authStatus" column="AUTH_STATUS"/>
         <result property="remarks" column="REMARKS"/>
         <result property="statusCode" column="STATUS_CD"/>
+        <result property="worryName" column="WORRY_NM"/>
     </resultMap>
     
     <resultMap id="professionInfo_rm" type="ProfessionInfo">
@@ -41,6 +42,18 @@
     	<result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
     	<result property="counselPrice" column="COUNSEL_PRICE"/>
     </resultMap>
+
+<!--    그그그머냐ㅐ 그거 검색 -->
+    <select id="selectProfession" resultMap="profession_rm">
+        SELECT * FROM PROFESSION
+        WHERE
+              <foreach collection="list" item="category" open="(" close=")" separator=" OR ">
+                  WORRY_NM LIKE '%' || #{category} || '%'
+              </foreach>
+    </select>
+    <select id="selectAllProfession" resultMap="profession_rm">
+        SELECT * FROM PROFESSION
+    </select>
 
 	<!-- 지도 병원  -->
     <select id="loadProMap" resultMap="professionHospital_rm">

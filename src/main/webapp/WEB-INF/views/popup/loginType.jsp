@@ -35,6 +35,7 @@
 	function naverLogin(){
 		$.ajax({
 			url:"social/naverlogin",
+			data:{"naver": "naver"},
 		}).done(function (res){
 			window.location.replace(res);
 		});
@@ -42,6 +43,7 @@
 	function kakaoLogin(){
 		$.ajax({
 			url:"social/kakaoLogin",
+			data:{"kakao": "kakao"},
 		}).done(function (res){
 			window.location.replace(res);
 		});
@@ -49,21 +51,11 @@
 	function  googleLogin(){
 		$.ajax({
 			url:"social/googleLogin",
+			data:{"google": "google"},
 		}).done(function (res){
 			window.location.replace(res);
 		});
 	}
-
-	// 구글 로그인
-	document.getElementById("googleLoginBtn").addEventListener("click", function (){
-		//구글서버로 인증코드 발급 요청
-		window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?"+
-				"client_id=251812285867-iarbblabr07shf2kvjjmuaoa3tuv6n8r.apps.googleusercontent.com&"+
-				"redirect_uri=http://localhost:9000/mind/oauth_kakao/googleLogin&"+
-				"response_type=code&"+
-				"scope=email%20profile%20openid&"+
-				"access_type=offline");
-	});
 
 	const emailLogin = document.querySelector(".emailLogin");
 	emailLogin.addEventListener("click", () => {
