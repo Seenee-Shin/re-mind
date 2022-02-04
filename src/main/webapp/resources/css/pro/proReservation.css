@@ -2,13 +2,15 @@
     width: 100%;
 }
 
-.main_content22{
+.main_content22 *{
     max-width:1200px;
     margin: 0 auto;
+    font-family: 'Poppins';
 }
 
 html{
     scroll-behavior: smooth;
+
 }
 
 *{box-sizing: border-box;}
@@ -108,7 +110,7 @@ html{
 /* 날짜 지정 */
 #tuition_date{
     width:100%;
-    height:550px;
+    height:560px;
 }
 
 
@@ -206,7 +208,7 @@ html{
         width: 100%;
     }
     #tuition_date{
-        height:520px;
+        height:570px;
     }
 }
 
@@ -221,7 +223,9 @@ table{
 .YM{
     font-size: 15px;
     font-weight: bold;
-    font-family: 'Poppins';
+}
+.YMcss{
+    color:#00a8e3;
 }
 
 .calendar tr {
@@ -229,10 +233,24 @@ table{
 }
 
 .calendar td {
-    font-family: 'Poppins';
     cursor: pointer;
     width: 14.2%;
+    height:65px;
+    line-height:63px;
     font-size: 17px;
     font-weight: 600;
-    padding-bottom: 50px;
+
+}
+
+
+#calendar_left{
+    float: left;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#calendar_right{
+    float:right;
+    font-weight: bold;
+    cursor: pointer;
 }
