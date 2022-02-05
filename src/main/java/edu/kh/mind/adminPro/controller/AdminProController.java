@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import edu.kh.mind.member.model.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import edu.kh.mind.adminPro.model.service.AdminProService;
 import edu.kh.mind.common.util.Util;
+
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import edu.kh.mind.member.model.vo.ProfessionInformation;
@@ -27,7 +28,7 @@ import edu.kh.mind.pro.model.vo.WorryCategory;
 
 @Controller
 @RequestMapping("adminPro/*")
-@SessionAttributes({"loginPro"})
+@SessionAttributes({"loginPro", "chattingNo"})
 public class AdminProController {
 	
 	@Autowired
@@ -251,6 +252,40 @@ public class AdminProController {
 		model.addAttribute("e", e);
 		
 		return "/common/error";
+	}
+
+
+	@RequestMapping("chat/room/{reservationNo}")
+	public String chatJoin(@PathVariable("reservationNo") int reservationNo, ChatJoin chat, RedirectAttributes ra, Model model, HttpSession session) {
+
+		String path = "redirect:/adminPro/proReservation";
+		if (session.getAttribute("loginPro") != null) {
+
+			int professionNo = ((Profession) session.getAttribute("loginPro")).getProfessionNo();
+			System.out.println(professionNo);
+			System.out.println(chat);
+
+			chat.setProfessionNo(professionNo);
+			List<ChatMessage> list = service.joinChat(chat);
+			System.out.println(list);
+
+			if (list != null) {
+				model.addAttribute("chattingNo", chat.getChattingNo());
+
+//				model.addAttribute("css", "my");
+				model.addAttribute("chat", chat);
+				model.addAttribute("list", list);
+
+				path = "adminPro/proChat";
+			} else {
+				Util.swalSetMessage("해당 채팅방이 존재하지 않습니다.", null, "info", ra);
+			}
+		} else {
+			Util.swalSetMessage("로그인이 필요 합니다.", null, "error", ra);
+		}
+
+		return path;
+
 	}
 	
 }

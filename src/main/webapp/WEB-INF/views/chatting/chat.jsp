@@ -15,7 +15,7 @@
 		<!-- 채팅 내용 -->
 		<ul>
 			<c:forEach items="${list}" var="msg">
-				<c:if test="${msg.memberNo == 1 }">
+				<c:if test="${msg.memberNo == loginMember.memberNo}">
 					<li class="my_chat">
 						<div class="chat_col me_chat_col">
 							<span class="chat">${msg.message}</span>
@@ -24,11 +24,11 @@
 					</li>
 				</c:if>
 
-				<c:if test="${msg.professionNo == chat.professionNo }">
+				<c:if test="${msg.memberNo != loginMember.memberNo}">
 					<li class="friend_chat">
 						<img class="profile_img" src="${contextPath}/resources/images/sample4.gif">
 						<div class="chat_col friend_chat_col">
-							<span class="profile_name">상담사 누구누구씨</span>
+							<span class="profile_name">상담사 ${msg.professionName}</span>
 							<span class="chat">${msg.message}</span>
 						</div>
 						<span class="chatDate">${msg.createDate}</span>
@@ -60,19 +60,12 @@
 	// /chat 이라는 요청 주소로 통신할 수 있는  WebSocket 객체 생성
 	let chattingSock = new SockJS("<c:url value='/chat' />");
 
-	// 세션에 있는 값들을 JS에서 사용할 수 있도록 전역 변수로 선언
-	<%--const memberNo = "${loginMember.memberNo}";--%>
-	<%--const memberId = "${loginMember.memberId}";--%>
-	<%--const memberName = "${loginMember.memberName}";--%>
-	<%--const chatRoomNo = "${chatRoomNo}";--%>
-	<%--const contextPath = "${contextPath}";--%>
-
-
 	const chattingNo = "${chat.chattingNo}";
-
-	const memberNo = 1;
-	const professionNo = 1;
-
+	const memberNo = "${loginMember.memberNo}";
+	const memberName = "${loginMember.memberName}";
+	console.log(chattingNo);
+	console.log(memberNo);
+	console.log(memberName);
 
 </script>
 

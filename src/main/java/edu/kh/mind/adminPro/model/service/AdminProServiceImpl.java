@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import edu.kh.mind.member.model.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,7 @@ import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.common.util.MailHandler;
 import edu.kh.mind.common.util.TempKey;
 import edu.kh.mind.common.util.Util;
+
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import edu.kh.mind.member.model.vo.ProfessionInformation;
@@ -169,6 +171,25 @@ public class AdminProServiceImpl implements AdminProService{
 
 
 		return loginPro;
+	}
+
+	// 채팅방 입장
+	@Override
+	public List<ChatMessage> joinChat(ChatJoin chat) {
+		int result = dao.existsChat(chat);
+		System.out.println("existsChat : " + result);
+
+		if (result > 0) {
+			chat.setChattingNo(result);
+			List<ChatMessage> list = dao.selectChatMessage(chat);
+
+			System.out.print("list : ");
+			System.out.println(list);
+			return list;
+		} else {
+			return null;
+		}
+
 	}
 
 

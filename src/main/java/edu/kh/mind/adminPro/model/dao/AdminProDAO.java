@@ -1,5 +1,6 @@
 package edu.kh.mind.adminPro.model.dao;
 
+import edu.kh.mind.member.model.vo.*;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.kh.mind.board.model.vo.Image;
+
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import edu.kh.mind.member.model.vo.ProfessionInformation;
@@ -95,7 +97,6 @@ public class AdminProDAO {
 		return sqlSession.update("professionMapper.updatePrice", price);
 	}
 
-
 	/**
 	 * 로그인
 	 * @param profession
@@ -105,4 +106,21 @@ public class AdminProDAO {
 		return sqlSession.selectOne("professionMapper.proLogin", profession);
 	}
 
+	/**
+	 * 채팅방 입장
+	 * @param chat
+	 * @return result
+	 */
+	public int existsChat(ChatJoin chat) {
+		return sqlSession.selectOne("professionMapper.existsChat", chat);
+	}
+
+	/**
+	 * 채팅방 메시지
+	 * @param chat
+	 * @return list
+	 */
+	public List<ChatMessage> selectChatMessage(ChatJoin chat) {
+		return sqlSession.selectList("professionMapper.selectChatMessage", chat);
+	}
 }

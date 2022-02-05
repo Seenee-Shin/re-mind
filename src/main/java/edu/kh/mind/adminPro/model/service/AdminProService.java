@@ -1,8 +1,9 @@
 package edu.kh.mind.adminPro.model.service;
 
-import java.util.List;
-
+import edu.kh.mind.member.model.vo.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -19,10 +20,10 @@ public interface AdminProService {
 	 */
 	int idChk(String inputId);
 	
-	/** 상담사 등록
-	 * @param loginPro
-	 * @return int reuslt
-	 * @throws Exception 
+	/**
+	 * 상담사 등록
+	 * @param profession
+	 * @throws Exception
 	 */
 	void proRegister(Profession profession) throws Exception;
 
@@ -41,7 +42,6 @@ public interface AdminProService {
 	 * @param proInfo
 	 * @param serverPath 
 	 * @param webPath 
-	 * @param image 
 	 * @return
 	 */
 	int insertProInfo(ProfessionInformation proInfo, MultipartFile certification, String webPath, String serverPath);
@@ -80,4 +80,11 @@ public interface AdminProService {
 	 * @return loginPro
 	 */
     Profession proLogin(Profession profession);
+
+	/**
+	 * 채팅방 입장
+	 * @param chat
+	 * @return
+	 */
+	List<ChatMessage> joinChat(ChatJoin chat);
 }
