@@ -74,6 +74,10 @@ public interface AdminProService {
 
 
 
-
-
+	/**
+	 * 로그인
+	 * @param profession
+	 * @return loginPro
+	 */
+    Profession proLogin(Profession profession);
 }

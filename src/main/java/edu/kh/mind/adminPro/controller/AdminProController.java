@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,20 +33,70 @@ public class AdminProController {
 	@Autowired
 	private AdminProService service;
 
-	//등록화면 연결
-	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
-	public String proLogin() {
-		
-		return "adminPro/proLogin";
+
+	@RequestMapping(value = "/")
+	public String proMain(HttpSession session) {
+
+		String path = "adminPro/proLogin";
+		if (session.getAttribute("loginPro") != null) {
+			path = "redirect:/adminPro/proReservation";
+		}
+
+		return path;
 	}
+
+	// 로그인 페이지
+	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
+	public String proLoginForm(HttpSession session) {
+
+		String path = "adminPro/proLogin";
+		if (session.getAttribute("loginPro") != null) {
+			path = "redirect:/adminPro/proReservation";
+		}
+		
+		return path;
+	}
+
+	// 로그인
+	@RequestMapping(value="proLogin", method = RequestMethod.POST)
+	public String proLogin(Profession profession, Model model, RedirectAttributes ra) {
+		System.out.println(profession.toString());
+		Profession loginPro = service.proLogin(profession);
+		System.out.println(loginPro);
+
+		String path = "redirect:/adminPro/proLogin";
+
+		if (loginPro != null) {
+			if (loginPro.getStatusCode() == 4) {
+				model.addAttribute("loginPro", loginPro);
+				path = "redirect:/adminPro/proReservation";
+			} else {
+				Util.swalSetMessage("관리자 승인 후 로그인 가능합니다.", null, "info", ra);
+			}
+		} else {
+			Util.swalSetMessage("아이디 또는 비밀번호를 확인해 주세요.", null, "error", ra);
+		}
+
+		return path;
+
+	}
+
+	// 상담사 예약 목록
+	@RequestMapping("proReservation")
+	public String proReservation() {
+
+		return "adminPro/proReservation";
+	}
+
 	
-	//등록화면 연결
+	// 상담사 등록 신청
 	@RequestMapping(value = "proRegister", method = RequestMethod.GET )
 	public String proRegister() {
 		
 		return "adminPro/proRegister";
 	}
-	
+
+	// 아이디 중복 검사
 	@RequestMapping(value = "emailDupCheck", method=RequestMethod.GET)
 	@ResponseBody
 	public int emailDupCheck(String inputEmail) {

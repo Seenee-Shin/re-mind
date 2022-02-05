@@ -7,18 +7,9 @@
 <jsp:include page="../procommon/header.jsp"></jsp:include>
 
 <main>
-	<h1>상담사 로그인</h1>
+	<h1>상담사 예약 목록</h1>
+    ${loginPro}
 
-    <form action="proLogin" method="post">
-
-        <label for="professionId"></label>아이디
-        <input type="text" name="professionId" id="professionId">
-
-        <label for="professionPw"></label>비밀번호
-        <input type="password" name="professionPw" id="professionPw">
-
-        <button>로그인</button>
-    </form>
 
 </main>
 

@@ -12,20 +12,11 @@ public class Member {
     private String memberPhone;
     private String memberGender;
     private Date memberEnrollDate;
-    private String memberType;
     private int statusCode;
     public Member(){}
 
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
-    }
-
-    public String getMemberType() {
-        return memberType;
-    }
-
-    public void setMemberType(String memberType) {
-        this.memberType = memberType;
     }
 
     public void setMemberId(String memberId) {

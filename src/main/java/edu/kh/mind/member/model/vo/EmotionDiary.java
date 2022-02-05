@@ -85,4 +85,19 @@ public class EmotionDiary {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+
+	@Override
+	public String toString() {
+		return "EmotionDiary{" +
+				"emotionNo=" + emotionNo +
+				", emotionArray='" + emotionArray + '\'' +
+				", stressArray='" + stressArray + '\'' +
+				", emotionContent='" + emotionContent + '\'' +
+				", stressAgree=" + stressAgree +
+				", diaryAgree=" + diaryAgree +
+				", emotionDate='" + emotionDate + '\'' +
+				", emotionUpdateDate='" + emotionUpdateDate + '\'' +
+				", memberNo=" + memberNo +
+				'}';
+	}
 }
