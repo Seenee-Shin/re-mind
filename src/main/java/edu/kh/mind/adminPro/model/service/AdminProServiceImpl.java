@@ -19,6 +19,12 @@ import edu.kh.mind.common.util.MailHandler;
 import edu.kh.mind.common.util.TempKey;
 import edu.kh.mind.common.util.Util;
 
+import edu.kh.mind.member.model.vo.Profession;
+import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.ProfessionInformation;
+import edu.kh.mind.member.model.vo.ProfessionPrice;
+import edu.kh.mind.pro.model.vo.WorryCategory;
+
 @Service
 public class AdminProServiceImpl implements AdminProService{
 	
@@ -121,6 +127,37 @@ public class AdminProServiceImpl implements AdminProService{
 		return result;
 	}
 
+	@Override
+	public List<WorryCategory> selectWorryCategory() {
+		return dao.selectWorryCategory();
+	}
+
+	@Override
+	public int updateProProfile(ProfessionInformation proInfo) {
+		
+		proInfo.setProfessionIntro(Util.XSS(proInfo.getProfessionIntro()));
+		proInfo.setProfessionIntro(Util.changeNewLine(proInfo.getProfessionIntro()));
+		
+		proInfo.setProfessionStory(Util.XSS(proInfo.getProfessionStory()));
+		proInfo.setProfessionStory(Util.changeNewLine(proInfo.getProfessionStory()));
+		
+		proInfo.setProfessionCarrer(Util.XSS(proInfo.getProfessionCarrer()));
+		proInfo.setProfessionCarrer(Util.changeNewLine(proInfo.getProfessionCarrer()));
+		
+		return dao.insertProProfile(proInfo);
+	}
+
+	@Override
+	public List<ProfessionPrice> selectPrice(int professionNo) {
+		return dao.selectPrice(professionNo);
+	}
+
+	@Override
+	public int updatePrice(ProfessionPrice price) {
+		// TODO Auto-generated method stub
+		return dao.updatePrice(price);
+	}
+
 	// 로그인
 	@Override
 	public Profession proLogin(Profession profession) {
@@ -131,6 +168,7 @@ public class AdminProServiceImpl implements AdminProService{
 		} else {
 			loginPro = null;
 		}
+
 
 		return loginPro;
 	}

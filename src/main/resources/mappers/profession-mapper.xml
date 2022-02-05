@@ -26,6 +26,7 @@
         <result property="professionIntro" column="PRO_INTRO"/>
         <result property="professionStory" column="PRO_STORY"/>
         <result property="professionCarrer" column="PRO_CARRER"/>
+        <result property="professionTag" column="PRO_TAG"/>
     </resultMap>
     
     <resultMap id="professionHospital_rm" type="ProfessionHospital">
@@ -35,8 +36,7 @@
         <result property="hospitalPhone" column="HOSPITAL_PHONE"/>
         <result property="businessNo" column="BUSINESS_NO"/>
     </resultMap>
-    
-    
+
     <resultMap  id="professionPrice_rm" type="ProfessionPrice">
     	<result property="professionNo" column="PROFESSION_NO"/>
     	<result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
@@ -99,6 +99,44 @@
         )
     </insert>
 
+  
+  <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
+  <update id="chkAuth" parameterType="Profession" >
+      UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{professionId}
+  </update>
+  
+  
+  <select id="selectPro" resultMap="profession_rm">
+  	SELECT PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
+    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS
+    FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
+  </select>
+  
+  
+  <!-- 상담사 병원정보 insert -->
+  <insert id="insertProHospital" parameterType="ProfessionHospital">
+  	INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddress}, #{hospitalPhone}, #{businessNo})
+  </insert>
+  
+  <!-- 상담사 상세정보 insert -->
+  <insert id="insertProInfo" parameterType="ProfessionInfo">
+  	INSERT INTO PROFESSION_INFORMATION (PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR)
+  	VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
+  </insert>
+  
+  <!-- 프로필 view용 가격조회 -->
+  <select id="selectPrice" resultMap="professionPrice_rm">
+  	SELECT COUNSEL_CATEGORY_NO, COUNSEL_PRICE 
+	FROM PROFESSION_PRICE 
+	WHERE PROFESSION_NO = #{professionNo}
+  </select>
+  
+  <update id="updateProProfile" parameterType="ProfessionInfo">
+  	UPDATE PROFESSION_INFORMATION SET PRO_INTRO =#{professionIntro} , PRO_STORY=#{professionStory}, 
+  										PRO_CARRER=#{professionCarrer}, PRO_TAG=#{professionTag}
+  	WHERE PROFESSION_NO = #{professionNo}
+  </update>
+  
     <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
     <update id="chkAuth" parameterType="Profession" >
         UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{professionId}
@@ -129,6 +167,13 @@
         AND STATUS_CD in(3,4)
     </select>
 
+    <update id="updatePrice">
+        UPDATE PROFESSION_PRICE SET COUNSEL_CATEGORY_NO=#{counselCategoryCode}, COUNSEL_PRICE =#{counselPrice}
+        WHERE PROFESSION_NO = #{professionNo}
+    </update>
+
+
+
     <!-- 채팅방 입장 -->
     <select id="existsChat"  resultType="_int">
         SELECT NVL(MAX(CHATTING_NO), 0)
@@ -148,6 +193,5 @@
         WHERE CHATTING_NO = #{chattingNo}
         ORDER BY CHAT_NO
     </select>
-
 
 </mapper>

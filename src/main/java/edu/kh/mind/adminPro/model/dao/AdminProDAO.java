@@ -1,13 +1,19 @@
 package edu.kh.mind.adminPro.model.dao;
 
 import edu.kh.mind.member.model.vo.*;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.kh.mind.board.model.vo.Image;
 
-import java.util.List;
+import edu.kh.mind.member.model.vo.Profession;
+import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.ProfessionInformation;
+import edu.kh.mind.member.model.vo.ProfessionPrice;
+import edu.kh.mind.pro.model.vo.WorryCategory;
 
 
 @Repository
@@ -64,6 +70,32 @@ public class AdminProDAO {
 		return sqlSession.insert("professionMapper.insertProInfo",proInfo);
 	}
 
+
+
+	public List<WorryCategory> selectWorryCategory() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("worryMapper.selectWorryCategory");
+	}
+	
+	
+
+
+	public int insertProProfile(ProfessionInformation proInfo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("professionMapper.updateProProfile", proInfo);
+	}
+
+
+	public List<ProfessionPrice> selectPrice(int professionNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("professionMapper.selectPrice",professionNo);
+	}
+
+
+	public int updatePrice(ProfessionPrice price) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("professionMapper.updatePrice", price);
+	}
 
 	/**
 	 * 로그인
