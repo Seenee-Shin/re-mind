@@ -95,7 +95,7 @@ public class AdminProServiceImpl implements AdminProService{
 		
 		img.setImagePath(webPath);
 		img.setProfessionNo(proInfo.getProfessionNo());
-		img.setImagePathName(Util.fileRename(certification.getOriginalFilename()));
+		img.setImageName(Util.fileRename(certification.getOriginalFilename()));
 		img.setImageOriginal(certification.getOriginalFilename());
 		img.setImageLevel(0);
 		
@@ -107,7 +107,7 @@ public class AdminProServiceImpl implements AdminProService{
 			
 			if (result==1) {
 				try {
-					certification.transferTo(new File(serverPath+"/"+img.getImagePathName()));
+					certification.transferTo(new File(serverPath+"/"+img.getImageName()));
 					
 				}catch (Exception e) {
 					e.printStackTrace();
