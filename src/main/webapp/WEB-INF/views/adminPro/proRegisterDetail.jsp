@@ -9,7 +9,7 @@
 <main>
     <h1>상담사 등록 신청 </h1>
     <br>
-    <form action="proRegisterDetail" method="post">
+    <form action="proRegisterDetail" method="post" enctype="multipart/form-data" role="form"> 
 
         <div class="proWrap">
             <div class="label">
@@ -37,16 +37,16 @@
             <br>
             
             <div class="label">학력사항</div> <br>
-            <div class="label child">학교명</div><input type="text" name="schoolName" id="schoolName" required> <br>
-            <div class="label child ">학과명</div> <input type="text" name="schoolPart" id="schoolPart" required> <br>
-            <div class="label child">전공</div>  <input type="text" name="schoolMajor" id="schoolMajor" required> <br>
+            <div class="label child">학교명</div><input type="text" name="professionUniversity" id="schoolName" required> <br>
+            <div class="label child ">학과명</div> <input type="text" name="professionDepartment" id="schoolPart" required> <br>
+            <div class="label child">전공</div>  <input type="text" name="professionMajor" id="schoolMajor" required> <br>
             <input type="file" name="certification" id="certification" accept="image/*, .pdf" required> <label for="certification">증명서 첨부</label>
             <br>
             <br>
             <br>
-            <input type="checkbox" name="accept" id="accept" required>(필수)  입력한 정보는 모두 사실이며, 추후 사실이 아님이 확인되는 경우, 즉각 
+            <input type="checkbox" name="accept" id="accept1" required>(필수)  입력한 정보는 모두 사실이며, 추후 사실이 아님이 확인되는 경우, 즉각 
             상담 활동이 중지됨을 확인하였습니다. <br><br>
-            <input type="checkbox" name="accept" id="accept" required>(필수)  상담윤리에 대한 교육을 이수하였으며, 상담학회의 윤리규정을 중용 할 것임을 서약합니다. <br>
+            <input type="checkbox" name="accept" id="accept2" required>(필수)  상담윤리에 대한 교육을 이수하였으며, 상담학회의 윤리규정을 중용 할 것임을 서약합니다. <br>
             <br>
             <br>
             <button style="display: inline-block; text-align: center;">등록하기</button>

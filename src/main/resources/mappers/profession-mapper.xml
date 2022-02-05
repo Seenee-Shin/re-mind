@@ -110,7 +110,7 @@
   
   <insert id="insertProInfo" parameterType="ProfessionInfo">
   	INSERT INTO PROFESSION_INFORMATION (PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR)
-  	VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},professionMajor)
+  	VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
   </insert>
 
 </mapper>
