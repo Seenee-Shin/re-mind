@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -18,6 +19,7 @@ public class EmailLoginController {
     @Autowired
     private LoginService service;
 
+    // 이메일 로그인
     @RequestMapping(value="emailLogin", method = RequestMethod.POST)
     public String emailLogin(Member member, RedirectAttributes ra, Model model) {
 
@@ -28,6 +30,14 @@ public class EmailLoginController {
         } else {
             ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해 주세요.");
         }
+
+        return "redirect:/";
+    }
+
+    // 로그아웃
+    @RequestMapping("logout")
+    public String logout(SessionStatus status) {
+        status.setComplete();
 
         return "redirect:/";
     }
