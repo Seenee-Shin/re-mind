@@ -35,6 +35,27 @@
 		SELECT EMOTION_NO, EMOTION_ARRAY, STRESS_ARRAY, EMOTION_CONTENT, STRESS_AGREE, DIARY_AGREE, TO_CHAR(EMOTION_DT, 'YYYY-MM-DD') EMOTION_DT, TO_CHAR(EMOTION_UD, 'YYYY-MM-DD') EMOTION_UD, MEMBER_NO
 		FROM EMOTION_DIARY
 		WHERE TO_CHAR(EMOTION_DT, 'YYYY-MM-DD') = #{selectDate}
+		AND MEMBER_NO = #{memberNo}
 	</select>
+
+	<select id="selectEmotionDiaryDate" resultType="string">
+		SELECT TO_CHAR(EMOTION_DT, 'YYYY-MM-DD') EMOTION_DT
+		FROM EMOTION_DIARY
+		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY EMOTION_DT DESC
+	</select>
+
+	<update id="updateEmotionDiary">
+		UPDATE EMOTION_DIARY SET
+			EMOTION_ARRAY = #{emotionArray},
+			STRESS_ARRAY = #{stressArray},
+			EMOTION_CONTENT = #{emotionContent},
+			STRESS_AGREE = #{stressAgree},
+			DIARY_AGREE = #{diaryAgree},
+			EMOTION_UD = SYSDATE
+		WHERE EMOTION_NO = #{emotionNo}
+		AND TO_CHAR(EMOTION_DT, 'YYYY-MM-DD') = #{emotionDate}
+		AND MEMBER_NO = #{memberNo}
+	</update>
 
 </mapper>

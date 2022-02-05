@@ -168,7 +168,7 @@
 			        <article class="dark-brown side_menu">
 			            <h3>마이페이지</h3>
 			            <ul>
-			                <li><a href="#">증상기록</a></li>
+			                <li><a href="${contextPath}/my/emotionRecord">증상기록</a></li>
 			                <hr>
 			                <li><a href="#">마이상담</a>
 			                    <ul>

@@ -1,6 +1,7 @@
 package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
+import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
@@ -10,10 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/my/*")
@@ -37,20 +44,92 @@ public class MyController {
         return "my/appointmentPast";
     }
 
-    // 감정기록 form
-    @RequestMapping(value="emotionDiary", method= RequestMethod.GET)
-    public String emotionDiary(Model model) {
+    // 감정 기록 페이지
+    @RequestMapping("emotionRecord")
+    public String emotionRecord(Model model, HttpSession session) {
         List<EmotionCategory> emotionCategoryList = service.emotionCategory();
 
-        model.addAttribute("emotionCategoryList", emotionCategoryList);
-    	model.addAttribute("css", "my");
+        // 감정 기록 등록일 list
+        String emotionDiaryDate = "[]";
 
-        return "my/emotionDiary";
+        String gsonData = "";
+        if (session.getAttribute("loginMember")  != null) {
+            int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+
+            // 감정 기록 등록일
+            List<String> emotionDiaryDateList = service.selectEmotionDiaryDate(memberNo);
+            emotionDiaryDate = new Gson().toJson(emotionDiaryDateList);
+
+            // 오늘 등록된 감정 기록
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("memberNo", memberNo +"");
+            map.put("selectDate", todayFormat());
+            EmotionDiary emotionRecordData = service.selectEmotionRecord(map);
+            gsonData = new Gson().toJson(emotionRecordData);
+        }
+
+        model.addAttribute("emotionRecordData", gsonData);
+        model.addAttribute("emotionDiaryDate", emotionDiaryDate);
+        model.addAttribute("emotionCategoryList", emotionCategoryList);
+        model.addAttribute("css", "my");
+
+        return "my/emotionRecord";
+    }
+
+    // 감정 기록 select
+    @RequestMapping(value="emotionRecordData", method=RequestMethod.POST)
+    @ResponseBody
+    public EmotionDiary emotionRecordData(String selectDate, HttpSession session, RedirectAttributes ra) {
+        EmotionDiary emotionRecordData = null;
+        if(session.getAttribute("loginMember") != null) {
+            int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("memberNo", memberNo +"");
+            map.put("selectDate", selectDate);
+
+            emotionRecordData = service.selectEmotionRecord(map);
+        } else {
+            Util.swalSetMessage("로그인이 필요합니다.", null, "info", ra);
+        }
+
+        return emotionRecordData;
+    }
+
+
+    // 감정기록 form
+    @RequestMapping(value="emotionDiary", method= RequestMethod.GET)
+    public String emotionDiary(Model model, HttpSession session, RedirectAttributes ra) {
+
+        if (session.getAttribute("loginMember") != null) {
+            List<EmotionCategory> emotionCategoryList = service.emotionCategory();
+
+            int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+
+            // 오늘 등록된 감정 기록
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("memberNo", memberNo +"");
+            map.put("selectDate", todayFormat());
+            EmotionDiary emotionRecordData = service.selectEmotionRecord(map);
+            String gsonData = new Gson().toJson(emotionRecordData);
+            System.out.println(gsonData);
+
+            model.addAttribute("emotionRecordData", gsonData);
+            model.addAttribute("emotionCategoryList", emotionCategoryList);
+            model.addAttribute("css", "my");
+
+            return "my/emotionDiary";
+        } else {
+            Util.swalSetMessage("로그인이 필요합니다.", null, "info", ra);
+            return "redirect:emotionRecord";
+        }
+
+
     }
 
     // 감정기록 등록
     @RequestMapping(value="emotionDiary", method=RequestMethod.POST)
-    public String emotionDiaryInsert(EmotionDiary emotionDiary, @ModelAttribute("loginMember") Member loginMember, HttpServletRequest req, HttpSession session) {
+    public String emotionDiaryInsert(EmotionDiary emotionDiary, @ModelAttribute("loginMember") Member loginMember, HttpServletRequest req, HttpSession session, RedirectAttributes ra) {
 
         if (req.getParameter("stressAgree") != null) {
             emotionDiary.setStressAgree(1);
@@ -64,46 +143,39 @@ public class MyController {
             emotionDiary.setDiaryAgree(0);
         }
 
-        if(session.getAttribute("loginMember") != null) {
+        emotionDiary.setEmotionDate(todayFormat());
+
+        if (session.getAttribute("loginMember") != null) {
             emotionDiary.setMemberNo(loginMember.getMemberNo());
             int result = service.insertEmotionDiary(emotionDiary);
 
+            return "redirect:/my/emotionRecord";
+
         } else {
-            System.out.println("로그인 필요");
+            Util.swalSetMessage("로그인이 필요합니다.", null, "info", ra);
+            return null;
         }
 
-        return "redirect:/my/emotionRecord";
     }
 
-    // 감정 기록 보기
-    @RequestMapping("emotionRecord")
-    public String emotionRecord(Model model) {
-
-        List<EmotionCategory> emotionCategoryList = service.emotionCategory();
-//        if (loginMember != null) {
-//            System.out.println(loginMember.getMemberNo());
-//        List<EmotionDiary> emotionDiaryDate = service.selectEmotionDiaryDate();
-
-//        }
-
-        model.addAttribute("emotionCategoryList", emotionCategoryList);
-        
-    	model.addAttribute("css", "my");
-
-        return "my/emotionRecord";
+    private String todayFormat() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date(System.currentTimeMillis());
+        return dateFormat.format(today);
     }
 
-    // 감정 기록 select
-    @RequestMapping(value="emotionRecordData", method=RequestMethod.POST)
-    @ResponseBody
-    public EmotionDiary emotionRecordData(String selectDate) {
-        System.out.println(selectDate);
 
-        EmotionDiary emotionRecordData = service.selectEmotionRecord(selectDate);
 
-        System.out.println(emotionRecordData);
-        return emotionRecordData;
-    }
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("counselor")
     public String counselor(Model model){
@@ -171,4 +243,17 @@ public class MyController {
 
         return new Gson().toJson(proList);
     }
+
+    // @ExceptionHandler(처리할 예외.class)
+    @ExceptionHandler(Exception.class)
+    public String exceptionHandler(Exception e, Model model) {
+
+        // Model : 데이터 전달용 객체 (Map형식, request범위)
+        model.addAttribute("errorMessage", "회원 관련 서비스 이용중 문제가 발생했습니다.");
+        model.addAttribute("e", e);
+
+        return "common/error";
+    }
+
 }
+
