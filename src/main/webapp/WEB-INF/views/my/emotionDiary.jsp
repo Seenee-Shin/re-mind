@@ -7,7 +7,9 @@
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <article class="main_content">
-	<form action="">
+	<form action="${contextPath}/my/emotionDiary" method="POST" onsubmit="return validate();">
+		<input type="hidden" name="emotionArray" class="emotion_array">
+		<input type="hidden" name="stressArray" class="stress_array">
 		<div class="emotion_diary">
 			<div class="title">감정 기록</div>
 			<div class="progress_area">
@@ -16,30 +18,29 @@
 				<div class="progress_statistic">
 					<div class="progress_bar">
 						<div class="name">
-							행복 <span>25%</span>
+							행복 <span>0%</span>
 						</div>
-						<progress class="type01" max="100" value="25">
-							<span>25%</span>
-						</progress>
+						<progress class="type01 happy" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							불안 <span>70%</span>
+							불안 <span>0%</span>
 						</div>
-						<progress class="type02" max="100" value="70"></progress>
+						<progress class="type02 misery" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							우울 <span>100%</span>
+							우울 <span>0%</span>
 						</div>
-						<progress class="type03" max="100" value="100"></progress>
+						<progress class="type03 depression" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							?? <span>25%</span>
+							스트레스 <span>0%</span>
 						</div>
-						<progress class="type04" max="100" value="25"></progress>
+						<progress class="type04 stress" max="100" value="0"></progress>
 					</div>
+
 				</div>
 			</div>
 
@@ -48,83 +49,28 @@
 
 				<div class="option_statistic">
 					<ul>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						<li>
-							<input type="checkbox" name="stress" id="option01">
-							<label for="option01">옵션01</label>
-						</li>
-						
+						<c:forEach items="${emotionCategoryList}" var="emotionCategory">
+							<li>
+								<input type="checkbox" name="stress" id="option${emotionCategory.emotionCategoryCode}" value="${emotionCategory.emotionCategoryCode}">
+								<label for="option${emotionCategory.emotionCategoryCode}">${emotionCategory.emotionCategoryName}</label>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 
 				<div class="agree_area">
-					<label for="agreement">
-						<input type="checkbox" name="agreement" id="agreement"> 상담사에게 공개
+					<label for="stressAgree">
+						<input type="checkbox" name="stressAgree" id="stressAgree"> 상담사에게 공개
 					</label>
 				</div>
 			</div>
 
 			<div class="diary_area">
 				<div class="sub_title"><strong>오늘의 감정 일기</strong></div>
-				<textarea placeholder="오늘 있었던 일을 맘 껏 풀어놓으세요."></textarea>
+				<textarea name="emotionContent" class="emotionContent" placeholder="오늘 있었던 일을 맘 껏 풀어놓으세요."></textarea>
 				<div class="agree_area">
-					<label for="agreement">
-						<input type="checkbox" name="agreement" id="agreement"> 상담사에게 공개
+					<label for="diaryAgree">
+						<input type="checkbox" name="diaryAgree" id="diaryAgree"> 상담사에게 공개
 					</label>
 				</div>
 			</div>
@@ -140,5 +86,63 @@
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
-</body>
-</html>
+<script>
+	$("progress").on("click", function () {
+		const value = $(this).val();
+		let changeValue = 0;
+		if (value >= 0 && value < 100) {
+			changeValue = value + 25;
+			if (changeValue > 100) {
+				changeValue = 100;
+			}
+
+		} else if (value >= 100) {
+			changeValue = 0;
+		}
+
+		$(this).val(changeValue);
+		$(this).prev().children().html(changeValue + "%")
+	});
+
+	function validate() {
+		let result = false;
+
+		console.log("${loginMember.memberNo}");
+
+		const emotion = {
+			happy :  $(".progress_bar .happy").val(),
+			misery : $(".progress_bar .misery").val(),
+			depression : $(".progress_bar .depression").val(),
+			stress : $(".progress_bar .stress").val()
+		};
+
+		const stress = [];
+		$("input:checked[name='stress']").each(function () {
+			stress.push($(this).val());
+		});
+
+		$(".emotion_array").val(JSON.stringify(emotion));
+		$(".stress_array").val(stress);
+
+		const emotionContent = $(".emotionContent");
+		const loginMember = "${loginMember.memberNo}";
+		if (loginMember == "") {
+			alert("로그인이 필요 합니다.");
+			layerPopup("loginType");
+		} else if (emotionContent.val().trim() == "") {
+			alert("내용을 작성해 주세요");
+			emotionContent.val("");
+		} else {
+			result = true;
+		}
+
+		return result;
+
+		// return result;
+
+
+
+
+	}
+
+</script>

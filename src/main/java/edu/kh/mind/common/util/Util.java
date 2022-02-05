@@ -1,4 +1,4 @@
-package edu.kh.mind.common;
+package edu.kh.mind.common.util;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 

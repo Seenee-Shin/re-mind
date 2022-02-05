@@ -4,15 +4,15 @@ import com.github.scribejava.core.builder.api.DefaultApi20;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KakaoOAuthApi20 extends DefaultApi20 {
-    protected KakaoOAuthApi20() {
+public class KakaoLoginApi extends DefaultApi20 {
+    protected KakaoLoginApi() {
     }
 
     private static class InstanceHolder {
-        private static final KakaoOAuthApi20 INSTANCE = new KakaoOAuthApi20();
+        private static final KakaoLoginApi INSTANCE = new KakaoLoginApi();
     }
 
-    public static KakaoOAuthApi20 instance() {
+    public static KakaoLoginApi instance() {
         return InstanceHolder.INSTANCE;
     }
 

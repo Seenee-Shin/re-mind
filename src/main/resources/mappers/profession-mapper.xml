@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
 <mapper namespace="professionMapper">
 
+    <resultMap id="profession_rm" type="Profession">
+        <id property="professionNo" column="PROFESSION_NO"/>
+        <result property="professionId" column="PROFESSION_ID"/>
+        <result property="professionPw" column="PROFESSION_PW"/>
+        <result property="professionName" column="PROFESSION_NM"/>
+        <result property="professionPhone" column="PROFESSION_PHONE"/>
+        <result property="professionEnrollDate" column="PROFESSION_ENROLL_DT"/>
+        <result property="professionGender" column="PROFESSION_GENDER"/>
+        <result property="professionBirth" column="PROFESSION_BIRTH"/>
+        <result property="professionAuthKey" column="PROFESSION_AUTH_KEY"/>
+        <result property="authStatus" column="AUTH_STATUS"/>
+        <result property="remarks" column="REMARKS"/>
+        <result property="statusCode" column="STATUS_CD"/>
+        <result property="worryName" column="WORRY_NM"/>
+    </resultMap>
+    
+    <resultMap id="professionInfo_rm" type="ProfessionInfo">
+        <id property="professionNo" column="PROFESSION_NO"/>
+        <result property="professionUniversity" column="PROFESSION_UNIVERSITY"/>
+        <result property="professionDepartment" column="PROFESSION_DEPARTMENT"/>
+        <result property="professionMajor" column="PROFESSION_MAJOR"/>
+        <result property="professionIntro" column="PRO_INTRO"/>
+        <result property="professionStory" column="PRO_STORY"/>
+        <result property="professionCarrer" column="PRO_CARRER"/>
+    </resultMap>
+    
     <resultMap id="professionHospital_rm" type="ProfessionHospital">
         <id property="professionNo" column="PROFESSION_NO"/>
         <result property="hospitalName" column="HOSPITAL_NM"/>
@@ -9,10 +35,82 @@
         <result property="hospitalPhone" column="HOSPITAL_PHONE"/>
         <result property="businessNo" column="BUSINESS_NO"/>
     </resultMap>
+    
+    
+    <resultMap  id="professionPrice_rm" type="ProfessionPrice">
+    	<result property="professionNo" column="PROFESSION_NO"/>
+    	<result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
+    	<result property="counselPrice" column="COUNSEL_PRICE"/>
+    </resultMap>
 
+<!--    그그그머냐ㅐ 그거 검색 -->
+    <select id="selectProfession" resultMap="profession_rm">
+        SELECT * FROM PROFESSION
+        WHERE
+              <foreach collection="list" item="category" open="(" close=")" separator=" OR ">
+                  WORRY_NM LIKE '%' || #{category} || '%'
+              </foreach>
+    </select>
+    <select id="selectAllProfession" resultMap="profession_rm">
+        SELECT * FROM PROFESSION
+    </select>
+
+	<!-- 지도 병원  -->
     <select id="loadProMap" resultMap="professionHospital_rm">
         SELECT *
         FROM PROFESSION_HOSPITAL
     </select>
+    
+    <!-- 이메일 중복확인 -->
+    <select id="idCheck" parameterType="string" resultType="_int">
+    	SELECT COUNT(*) FROM PROFESSION WHERE PROFESSION_ID = #{professionId} AND  STATUS_CD != 1
+    </select>
+    
+    
+    <!-- 상담사 등록 - 기본 -->
+    <insert id="proRegister" parameterType="Profession">
+    			INSERT INTO PROFESSION
+    			(PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
+    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS)
+    			
+    			 VALUES(
+						SEQ_PROFESSION_NO.NEXTVAL,
+						#{professionId},
+						#{professionPw},
+						#{professionName},
+						#{professionPhone},
+						DEFAULT,
+						#{professionGender},
+						DEFAULT,
+						#{professionBirth},
+						#{professionAuthKey},
+						DEFAULT
+						)
+    </insert>
+    
+
+  
+  <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
+  <update id="chkAuth" parameterType="Profession" >
+      UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{professionId}
+  </update>
+  
+  
+  <select id="selectPro" resultMap="profession_rm">
+  	SELECT PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
+    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS
+    FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
+  </select>
+  
+  
+  <!-- 산담사 병원정보 insert -->
+  <insert id="insertProHospital" parameterType="ProfessionHospital">
+  	INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddress}, #{hospitalPhone}, #{businessNo})
+  </insert>
+  
+  <insert id="insertProInfo" parameterType="ProfessionInfo">
+  	INSERT INTO PROFESSION_INFORMATION (PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR)
+  	VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
+  </insert>
 
 </mapper>

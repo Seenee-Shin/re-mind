@@ -96,7 +96,7 @@
                 <li>
                     <a href="#">커뮤니티</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
-                        <li><a href="${contextPath}/board/freeList">자유게시판</a></li>
+                        <li><a href="${contextPath}/free/list">자유게시판</a></li>
                         <li><a href="/worryList">고민상담 게시판</a></li>
                         <li><a href="/m">마인드 포스팃</a></li>
                         <li><a href="/secretList">털어놓기</a></li>
@@ -109,7 +109,7 @@
                     <!-- <a href="">로그인</a> -->
                     <a href="#">마이페이지</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
-                        <li><a href="#">감정기록</a></li>
+                        <li><a href="${contextPath}/my/emotionRecord">감정기록</a></li>
                         <li><a href="#">마이 상담</a></li>
                         <li><a href="#">마이 활동</a></li>
                         <li><a href="#">마이 정보</a></li>
@@ -151,8 +151,8 @@
 		                <h3>커뮤니티</h3>
 		                <hr>
 		                <ul class="side_menu_dep1">
-		                    <li class="w_side_menu"><a href="${contextPath}/board/freeList">자유게시판</a></li>
-		                    <li class="m_side_menu"><a href="${contextPath}/board/freeList">자유</a></li>
+		                    <li class="w_side_menu"><a href="${contextPath}/free/list">자유게시판</a></li>
+		                    <li class="m_side_menu"><a href="${contextPath}/free/list">자유</a></li>
 		                    <li class="w_side_menu"><a href="#">고민상담 게시판</a> </li>
 		                    <li class="m_side_menu"><a href="#">고민상담</a></li>
 		                    <li class="w_side_menu"><a href="#">마인드포스팃</a></li>

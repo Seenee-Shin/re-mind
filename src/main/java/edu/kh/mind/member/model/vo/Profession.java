@@ -10,11 +10,24 @@ public class Profession {
     private String professionPhone;
     private Date professionEnrollDate;
     private String professionGender;
-    private String professionPrice;
-    private int remarks;
+    private String professionBirth;
+    private String professionAuthKey;
+    private int authStatus;
+    private String remarks;
     private int statusCode;
+    private String worryName;
 
     public Profession(){}
+
+    public void setWorryName(String worryName) {
+        this.worryName = worryName;
+    }
+
+    public String getWorryName() {
+        return worryName;
+    }
+
+
 
     public int getProfessionNo() {
         return professionNo;
@@ -44,11 +57,8 @@ public class Profession {
         return professionGender;
     }
 
-    public String getProfessionPrice() {
-        return professionPrice;
-    }
 
-    public int getRemarks() {
+    public String getRemarks() {
         return remarks;
     }
 
@@ -84,15 +94,37 @@ public class Profession {
         this.professionGender = professionGender;
     }
 
-    public void setProfessionPrice(String professionPrice) {
-        this.professionPrice = professionPrice;
-    }
 
-    public void setRemarks(int remarks) {
+
+    public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }
+
+	public String getProfessionBirth() {
+		return professionBirth;
+	}
+
+	public void setProfessionBirth(String professionBirth) {
+		this.professionBirth = professionBirth;
+	}
+
+	public String getProfessionAuthKey() {
+		return professionAuthKey;
+	}
+
+	public void setProfessionAuthKey(String professionAuthKey) {
+		this.professionAuthKey = professionAuthKey;
+	}
+
+	public int getAuthStatus() {
+		return authStatus;
+	}
+
+	public void setAuthStatus(int authstatus) {
+		this.authStatus = authstatus;
+	}
 }

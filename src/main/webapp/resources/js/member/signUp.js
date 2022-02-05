@@ -1,4 +1,4 @@
-
+/*
 // 각 입력 값이 유효성 검사를 진행했는지 기록할 객체
 const signUpCheckObj = {
     "id" : false,
@@ -281,5 +281,21 @@ $(".phone").on("input", function(){
 
 
 
+ 
+// 인증번호 이메일 전송
+$(".mailCheckBtn").click(function(){
+    
+    var email = $(".idEmail").val();        // 입력한 이메일
+    
+       $.ajax({
+        
+        type:"GET",
+        url:"mailCheck",
+        data : email
+                
+    });
+    
+});
 
 
+*/
