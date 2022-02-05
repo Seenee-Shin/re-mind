@@ -1,5 +1,7 @@
 package edu.kh.mind.adminPro.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +22,8 @@ import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import edu.kh.mind.member.model.vo.ProfessionInformation;
+import edu.kh.mind.member.model.vo.ProfessionPrice;
+import edu.kh.mind.pro.model.vo.WorryCategory;
 
 @Controller
 @RequestMapping("adminPro/*")
@@ -133,8 +138,8 @@ public class AdminProController {
         }
     }
     
-    //상담사 페이지 연결
-    @RequestMapping("proRegisterDetail/{proNo}")
+    //상담사 정보등록 페이지 연결
+    @RequestMapping("proRegisterDetail/{professionNo}")
     public String insertproDetail(){
     	
     	return "adminPro/proRegisterDetail";
@@ -142,7 +147,7 @@ public class AdminProController {
     
     
     //상담사 정보등록 
-    @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.POST )
+    @RequestMapping(value = "proRegisterDetail/{professionNo}", method = RequestMethod.POST )
     public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro, 
     							 ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile certification,
     							Model md, RedirectAttributes ra, HttpSession session) {
@@ -185,21 +190,57 @@ public class AdminProController {
     	return "redirect:"+path;
     }
     
-    //상담사 프로필 작성 연결
-    @RequestMapping(value = "AdminProProfile/{proNo}")
-    public String AdminProProfile() {
-    	 return "adminPro/AdminProProfile";
-    }
-    
-    //상담사 프로필 작성 연결
-    @RequestMapping(value = "AdminProProfile/{proNo}", method = RequestMethod.POST)
-    public String AdminProProfile(@ModelAttribute("loginPro") Profession loginPro,ProfessionInformation proInfo ) {
+    //상담사 프로필 조회 연결
+    @RequestMapping(value = "AdminProProfile/{professionNo}")
+    public String AdminProProfileView(@ModelAttribute("loginPro") Profession loginPro,
+    		@PathVariable int professionNo, Model model) {
+    	List<ProfessionPrice> price = service.selectPrice(professionNo);
+    	
+    	
+    	model.addAttribute("price", price);
+    	model.addAttribute("css", "proPage/proProfile");
     	
     	return "adminPro/AdminProProfile";
     }
     
+    //상담사 프로필 수정 연결
+    @RequestMapping(value = "update/{professionNo}")
+    public String AdminProProfile(@PathVariable int professionNo, Model model) {
+		List<WorryCategory> category = service.selectWorryCategory();
+		List<ProfessionPrice> price = service.selectPrice(professionNo);
+		model.addAttribute("category", category);
+		model.addAttribute("price", price);
+		model.addAttribute("css", "proPage/proProfile");
+		
+    	 return "adminPro/AdminProProfileUpdate";
+    }
+    
+    //상담사 프로필 수정 
+    @RequestMapping(value = "update/{professionNo}", method = RequestMethod.POST)
+    public String AdminProProfile(@ModelAttribute("loginPro") Profession loginPro,ProfessionInformation proInfo, ProfessionPrice price,
+    							@PathVariable int professionNo, int worryCategoryCode, RedirectAttributes ra ) {
+    	
+    	proInfo.setProfessionNo(loginPro.getProfessionNo());
+    	proInfo.setProfessionTag(worryCategoryCode);
+    	
+    	int result = service.updateProProfile(proInfo); 
+    	
+    	int pResult = service.updatePrice(price);
+    	
+    	String path = null;
+    	
+    	if(result < 0) {
+    		Util.swalSetMessage("프로필 수정 완료", null, "success", ra);
+    		path = "/AdminProProfile/"+professionNo;
+    		
+    	}else {
+			Util.swalSetMessage("프로필 수정 실패", null, "error", ra);
+			path = "/update/"+professionNo;
+    	}
+    	
+    	return "redirect:"+path;
+    }
 
-	
     //예외처리
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e, Model model) {
