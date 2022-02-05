@@ -137,8 +137,18 @@ public class AdminProController {
     	return "redirect:"+path;
     }
     
-    //상담사 프로필 작성 
+    //상담사 프로필 작성 연결
+    @RequestMapping(value = "AdminProProfile/{proNo}")
+    public String AdminProProfile() {
+    	 return "adminPro/AdminProProfile";
+    }
     
+    //상담사 프로필 작성 연결
+    @RequestMapping(value = "AdminProProfile/{proNo}", method = RequestMethod.POST)
+    public String AdminProProfile(@ModelAttribute("loginPro") Profession loginPro,ProfessionInformation proInfo ) {
+    	
+    	return "adminPro/AdminProProfile";
+    }
     
 
 	

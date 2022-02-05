@@ -1,0 +1,64 @@
+form{
+    display: block;
+}
+h2{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 25px;
+}
+
+.imgBox{
+    width: 250px;
+    height: 250px;
+    background-color: #a59999;
+    margin: auto;
+}
+main{
+    width: 1000px;
+    margin: auto;
+}
+
+.proflieWrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.proInfoWrap{
+    width: 45%;
+}
+
+.proInfo, .proflieWrap, .priceWrap{
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+.checkBoxWrap{
+    min-height: 120px;
+    border: 1px solid;
+}
+
+textarea,.checkBoxWrap {
+    width: 100%;
+}
+
+h3{
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+h3,p,h4{
+    text-align: left;
+    
+}
+
+.proPrice{
+    text-align: left;
+}
+
+.proDescrpiton, .priceWrap{
+    margin-top: 80px;
+}
