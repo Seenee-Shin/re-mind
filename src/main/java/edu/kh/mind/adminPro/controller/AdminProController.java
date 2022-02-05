@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.mind.adminPro.model.service.AdminProService;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.ProfessionInformation;
 
 @Controller
 @RequestMapping("adminPro/*")
@@ -54,11 +57,12 @@ public class AdminProController {
 	
 	//등록 & 이메일 인증
 	@RequestMapping(value = "proRegister", method = RequestMethod.POST )
-	public String proRegister(Profession profession, Model model, RedirectAttributes ra) throws Exception{
+	public String proRegister(Profession profession) throws Exception{
 		
 		service.proRegister(profession);
+		
 			
-       return "redirect:adminPro/proLogin";
+       return "redirect:proLogin";
 		
 	}
 	
@@ -66,7 +70,6 @@ public class AdminProController {
     @RequestMapping(value = "emailConfirm", method = RequestMethod.GET)
     public String emailConfirm(Profession profession, Model model, RedirectAttributes ra) { 
         
-        Profession loginpro = new Profession();
         
         int result = service.chkAuth(profession);
         
@@ -74,11 +77,16 @@ public class AdminProController {
             Util.swalSetMessage("다시 인증해주세요","","error", ra);;
             return "redirect:/";
         }else {
-        	model.addAttribute("loginPro", loginpro);
+        	
+        	Profession loginPro = service.selectProfession(profession);
+        	model.addAttribute("loginPro", loginPro);
+        	
         	return "adminPro/emailConfirm";
         }
     }
-    @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.GET )
+    
+    //상담사 페이지 연결
+    @RequestMapping("proRegisterDetail/{proNo}")
     public String insertproDetail(){
     	
     	return "adminPro/proRegisterDetail";
@@ -87,11 +95,46 @@ public class AdminProController {
     
     //상담사 정보등록 
     @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.POST )
-    public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro,
-    							@PathVariable("boardNo") int proNo, ProfessionHospital ProHospital,
+    public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro, 
+    							 ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile certification,
     							Model md, RedirectAttributes ra, HttpSession session) {
     	
-    	return "redirect:/adminPro";
+    	//loginPro의 ProfessionNo set
+    	proHospital.setProfessionNo(loginPro.getProfessionNo());
+    	proInfo.setProfessionNo(loginPro.getProfessionNo());
+    	
+    	
+    	//학력증명서 
+    	//웹 접근경로(web path), 서버 저장경로(serverPath)
+		String webPath = "/resources/images/pro/certification";
+		
+		String serverPath= session.getServletContext().getRealPath(webPath);
+    	
+    	//병원정보 등록
+    	int hResult = service.insertProHospital(proHospital);
+    	
+    	System.out.println(certification);
+    	
+		String path = null; 
+		
+    	if(hResult < 0) {
+			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
+			path = "/proRegisterDetail";
+    	}else {
+    		//학력정보 입력
+    		int iResult = service.insertProInfo(proInfo,certification, webPath, serverPath);
+    		
+    		if(iResult > 0) { // insert 성공 
+    			Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
+    			path = "/proLogin";
+    		}else {
+    			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
+    			path = "/proRegisterDetail";
+    			
+    		}
+    	}
+    	
+    	return "redirect:"+path;
     }
     
 

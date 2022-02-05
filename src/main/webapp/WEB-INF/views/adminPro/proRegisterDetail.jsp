@@ -20,16 +20,19 @@
             <div class="label">
             병원주소 
             </div>
-            <input type="text" name="hospitalAddr" id="hospitalAddr" required> <button type="button" onclick="">주소 찾기</button>
+            <input type="text" name="hospitalAddress" id="hospitalAddress" readonly="readonly"> <button type="button" id="address_kakao">주소 찾기</button> <br>
+               <div class="label">
+            </div>
+            <input type="text" name="address_detail" id="address_detail"> 
             <br>
-
+			<br>
             <div class="label">
             병원 전화번호
             </div>
             <input type="text" name="hospitalPhone" id="hospitalPhone" required> <br>
             
             <div class="label">병원 개업번호</div>
-            <input type="text" name="hospitalNo" id="hospitalNo" required> <br>
+            <input type="text" name="businessNo" id="businessNo" required> <br>
             
             <br>
             
@@ -37,7 +40,7 @@
             <div class="label child">학교명</div><input type="text" name="schoolName" id="schoolName" required> <br>
             <div class="label child ">학과명</div> <input type="text" name="schoolPart" id="schoolPart" required> <br>
             <div class="label child">전공</div>  <input type="text" name="schoolMajor" id="schoolMajor" required> <br>
-            <input type="file" name="certification" id="certification" accept="image/*, .pdf"> <label for="certification">증명서 첨부</label>
+            <input type="file" name="certification" id="certification" accept="image/*, .pdf" required> <label for="certification">증명서 첨부</label>
             <br>
             <br>
             <br>
@@ -55,6 +58,20 @@
 <!-- header include -->
 <jsp:include page="../procommon/footer.jsp"></jsp:include>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+	window.onload = function(){
+	    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+	        //카카오 지도 발생
+	        new daum.Postcode({
+	            oncomplete: function(data) { //선택시 입력값 세팅
+	                document.getElementById("hospitalAddress").value = data.address; // 주소 넣기
+	                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+	            }
+	        }).open();
+	    });
+	}
+</script>
 
 
 
