@@ -122,10 +122,22 @@ public class AdminProServiceImpl implements AdminProService{
 		return result;
 	}
 
+	// 로그인
+	@Override
+	public Profession proLogin(Profession profession) {
+		Profession loginPro =  dao.proLogin(profession);
+
+		if(loginPro != null && encoder.matches(profession.getProfessionPw(), loginPro.getProfessionPw())) {
+			loginPro.setProfessionPw(null);
+		} else {
+			loginPro = null;
+		}
+
+		return loginPro;
+	}
 
 
-
-    //이메일 인증 키 검증 
+	//이메일 인증 키 검증
 
 
 }

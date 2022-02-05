@@ -47,9 +47,9 @@
     <select id="selectProfession" resultMap="profession_rm">
         SELECT * FROM PROFESSION
         WHERE
-              <foreach collection="list" item="category" open="(" close=")" separator=" OR ">
-                  WORRY_NM LIKE '%' || #{category} || '%'
-              </foreach>
+            <foreach collection="list" item="category" open="(" close=")" separator=" OR ">
+                WORRY_NM LIKE '%' || #{category} || '%'
+            </foreach>
     </select>
     <select id="selectAllProfession" resultMap="profession_rm">
         SELECT * FROM PROFESSION
@@ -69,48 +69,52 @@
     
     <!-- 상담사 등록 - 기본 -->
     <insert id="proRegister" parameterType="Profession">
-    			INSERT INTO PROFESSION
-    			(PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
-    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS)
-    			
-    			 VALUES(
-						SEQ_PROFESSION_NO.NEXTVAL,
-						#{professionId},
-						#{professionPw},
-						#{professionName},
-						#{professionPhone},
-						DEFAULT,
-						#{professionGender},
-						DEFAULT,
-						#{professionBirth},
-						#{professionAuthKey},
-						DEFAULT
-						)
-    </insert>
-    
+        INSERT INTO PROFESSION
+            (PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
+            PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS)
 
-  
-  <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
-  <update id="chkAuth" parameterType="Profession" >
-      UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{professionId}
-  </update>
-  
-  
-  <select id="selectPro" resultMap="profession_rm">
-  	SELECT PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
-    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS
-    FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
-  </select>
-  
-  
-  <!-- 산담사 병원정보 insert -->
-  <insert id="insertProHospital" parameterType="ProfessionHospital">
-  	INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddress}, #{hospitalPhone}, #{businessNo})
-  </insert>
-  
-  <insert id="insertProInfo" parameterType="ProfessionInfo">
-  	INSERT INTO PROFESSION_INFORMATION (PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR)
-  	VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
-  </insert>
+        VALUES(
+            SEQ_PROFESSION_NO.NEXTVAL,
+            #{professionId},
+            #{professionPw},
+            #{professionName},
+            #{professionPhone},
+            DEFAULT,
+            #{professionGender},
+            DEFAULT,
+            #{professionBirth},
+            #{professionAuthKey},
+            DEFAULT
+        )
+    </insert>
+
+    <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
+    <update id="chkAuth" parameterType="Profession" >
+        UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{professionId}
+    </update>
+
+
+    <select id="selectPro" resultMap="profession_rm">
+        SELECT PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
+            PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS
+        FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
+    </select>
+
+
+    <!-- 산담사 병원정보 insert -->
+    <insert id="insertProHospital" parameterType="ProfessionHospital">
+        INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddress}, #{hospitalPhone}, #{businessNo})
+    </insert>
+
+    <insert id="insertProInfo" parameterType="ProfessionInfo">
+        INSERT INTO PROFESSION_INFORMATION (PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR)
+        VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
+    </insert>
+
+    <select id="proLogin" resultMap="profession_rm">
+        SELECT * FROM PROFESSION
+        WHERE PROFESSION_ID = #{professionId}
+        AND STATUS_CD in(3,4)
+    </select>
 
 </mapper>
