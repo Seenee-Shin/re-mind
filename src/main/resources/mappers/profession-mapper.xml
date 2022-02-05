@@ -26,6 +26,7 @@
         <result property="professionIntro" column="PRO_INTRO"/>
         <result property="professionStory" column="PRO_STORY"/>
         <result property="professionCarrer" column="PRO_CARRER"/>
+        <result property="professionTag" column="PRO_TAG"/>
     </resultMap>
     
     <resultMap id="professionHospital_rm" type="ProfessionHospital">
@@ -42,6 +43,8 @@
     	<result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
     	<result property="counselPrice" column="COUNSEL_PRICE"/>
     </resultMap>
+    
+
 
 <!--    그그그머냐ㅐ 그거 검색 -->
     <select id="selectProfession" resultMap="profession_rm">
@@ -103,14 +106,34 @@
   </select>
   
   
-  <!-- 산담사 병원정보 insert -->
+  <!-- 상담사 병원정보 insert -->
   <insert id="insertProHospital" parameterType="ProfessionHospital">
   	INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddress}, #{hospitalPhone}, #{businessNo})
   </insert>
   
+  <!-- 상담사 상세정보 insert -->
   <insert id="insertProInfo" parameterType="ProfessionInfo">
   	INSERT INTO PROFESSION_INFORMATION (PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR)
   	VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
   </insert>
+  
+  
+  <!-- 프로필 view용 가격조회 -->
+  <select id="selectPrice" resultMap="professionPrice_rm">
+  	SELECT COUNSEL_CATEGORY_NO, COUNSEL_PRICE 
+	FROM PROFESSION_PRICE 
+	WHERE PROFESSION_NO = #{professionNo}
+  </select>
+  
+  <update id="updateProProfile" parameterType="ProfessionInfo">
+  	UPDATE PROFESSION_INFORMATION SET PRO_INTRO =#{professionIntro} , PRO_STORY=#{professionStory}, 
+  										PRO_CARRER=#{professionCarrer}, PRO_TAG=#{professionTag}
+  	WHERE PROFESSION_NO = #{professionNo}
+  </update>
 
+	<update id="updatePrice">
+		UPDATE PROFESSION_PRICE SET COUNSEL_CATEGORY_NO=#{counselCategoryCode}, COUNSEL_PRICE =#{counselPrice}
+	  	WHERE PROFESSION_NO = #{professionNo}
+	</update>
+	
 </mapper>

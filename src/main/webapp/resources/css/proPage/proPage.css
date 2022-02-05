@@ -108,4 +108,7 @@ button{
     background-color: white;
     border-radius: 15px;
     border: 2px solid #A59999;
+        display: block;
+    margin: auto;
+    
 }
