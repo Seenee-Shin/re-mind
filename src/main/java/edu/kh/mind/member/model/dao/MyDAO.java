@@ -28,11 +28,10 @@ public class MyDAO {
 	}
 
 	public EmotionDiary selectEmotionRecord(String selectDate) {
-		System.out.println(selectDate);
-		EmotionDiary result = sqlSession.selectOne("emotionMapper.selectEmotionRecord", selectDate);
-		System.out.println("--------------------------------");
-		System.out.println(result);
-		System.out.println("--------------------------------");
-		return result;
+		return sqlSession.selectOne("emotionMapper.selectEmotionRecord", selectDate);
 	}
+
+    public List<EmotionDiary> selectEmotionDiaryDate() {
+		return sqlSession.selectList("emotionMapper.selectEmotionDiaryDate");
+    }
 }

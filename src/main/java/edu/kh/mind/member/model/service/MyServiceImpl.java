@@ -36,5 +36,10 @@ public class MyServiceImpl implements MyService {
         return dao.selectEmotionRecord(selectDate);
     }
 
+    @Override
+    public List<EmotionDiary> selectEmotionDiaryDate() {
+        return dao.selectEmotionDiaryDate();
+    }
+
 
 }

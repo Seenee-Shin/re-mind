@@ -78,7 +78,13 @@ public class MyController {
     // 감정 기록 보기
     @RequestMapping("emotionRecord")
     public String emotionRecord(Model model) {
+
         List<EmotionCategory> emotionCategoryList = service.emotionCategory();
+//        if (loginMember != null) {
+//            System.out.println(loginMember.getMemberNo());
+//        List<EmotionDiary> emotionDiaryDate = service.selectEmotionDiaryDate();
+
+//        }
 
         model.addAttribute("emotionCategoryList", emotionCategoryList);
         

@@ -21,53 +21,9 @@
 				<div class="datepicker"></div>
 			</div>
 
-			<%--<div class="progress_area">
-				<div class="sub_title"><strong>2022-01-02의 감정일기</strong></div>
+			<div class="emotion_data">
 
-				<div class="progress_statistic">
-					<div class="progress_bar">
-						<div class="name">
-							행복 <span>25%</span>
-						</div>
-						<progress class="type01" max="100" value="25">
-							<span>25%</span>
-						</progress>
-					</div>
-					<div class="progress_bar">
-						<div class="name">
-							불안 <span>75%</span>
-						</div>
-						<progress class="type02" max="100" value="80"></progress>
-					</div>
-					<div class="progress_bar">
-						<div class="name">
-							우울 <span>100%</span>
-						</div>
-						<progress class="type03" max="100" value="100"></progress>
-					</div>
-					<div class="progress_bar">
-						<div class="name">
-							?? <span>25%</span>
-						</div>
-						<progress class="type04" max="100" value="25"></progress>
-					</div>
-				</div>
-			</div>--%>
-
-			<%--<div class="option_area">
-				<div class="sub_title"><strong>스트레스 증상이 있었나요?</strong></div>
-
-				<div class="option_statistic">
-					<ul>
-
-					</ul>
-				</div>
-			</div>--%>
-
-<%--			<div class="diary_area">
-				<div class="sub_title"><strong>오늘의 감정 일기</strong></div>
-				<textarea name="emotionContent" class="emotionContent" readonly ></textarea>
-			</div>--%>
+			</div>
 		</div>
 	</form>
 
@@ -93,7 +49,7 @@
 
 	$(function(){
 		const dateList = [
-			'2022-02-01',
+			'2022-02-04',
 			'2022-02-03',
 			'2022-01-11',
 			'2022-01-22',
@@ -122,47 +78,86 @@
 			data : {"selectDate" : selectDate},
 			type : "POST",
 			success : function (emotionDiary) {
+				const emotionData = $('.emotion_data');
+
 				// 감정 progress
+				const progressAreaDiv = $("<div class='progress_area'>");
+				const progressSubTitleDiv = $("<div class='sub_title'>");
+				const subTitle = $("<strong>");
+				subTitle.text(selectDate + "의 감정일기");
+				const progressStatisticDiv = $("<div class='progress_statistic'>");
 
+				progressSubTitleDiv.html(subTitle);
+				progressAreaDiv.html(progressSubTitleDiv);
+				progressAreaDiv.append(progressStatisticDiv);
 
+				const emotionArray = JSON.parse(emotionDiary.emotionArray);
+				let progressBarDiv, nameDiv, nameSpan, progressBar, name, type;
+				$.each(emotionArray, function (key, value, index) {
+					switch (key) {
+						case 'happy' : name = "행복 "; type="type01"; break;
+						case 'misery' : name = "불안 "; type="type02"; break;
+						case 'depression' : name = "우울 "; type="type03"; break;
+						case 'stress' : name = "스트레스 "; type="type04"; break;
+						default : name = "";
+					}
 
+					progressBarDiv = $("<div class='progress_bar'>");
+					nameDiv = $("<div class='name'>");
 
+					nameSpan = $(" <span>");
+					nameSpan.text(value);
 
+					progressBar = $("<progress max='100'>");
+					progressBar.addClass(type).addClass(key);
+					progressBar.val(value);
+
+					nameDiv.html(nameSpan);
+					nameDiv.prepend(name);
+					progressBarDiv.append(nameDiv).append(progressBar);
+
+					progressStatisticDiv.append(progressBarDiv);
+				});
+
+				emotionData.html(progressAreaDiv);
 
 				// stress checked
-				let stressList = "";
-				let chk;
-				<c:forEach items="${emotionCategoryList}" var="emotionCategory">
-				chk = "";
-				if ($.inArray("${emotionCategory.emotionCategoryCode}",  (emotionDiary.stressArray).split(",")) >= 0) {
-					chk = "checked";
-				}
+				const optionAreaDiv = $("<div class='option_area'>");
+				const optionSubTitleDiv = $("<div class='sub_title'><strong>스트레스 증상이 있었나요?</strong></div>");
+				const optionStatisticDiv = $("<div class='option_statistic'>");
+				const optionUl = $("<ul>");
 
-				stressList += `
-					<li>
-						<input type="checkbox" name="stress" id="option${emotionCategory.emotionCategoryCode}" value="${emotionCategory.emotionCategoryCode}" disabled `+ chk + `>
-						<label for="option${emotionCategory.emotionCategoryCode}">${emotionCategory.emotionCategoryName}</label>
-					</li>
-				`;
+				optionStatisticDiv.html(optionUl);
+				optionAreaDiv.html(optionSubTitleDiv);
+				optionAreaDiv.append(optionStatisticDiv);
+
+				let stressList, chk;
+				<c:forEach items="${emotionCategoryList}" var="emotionCategory">
+					chk = "";
+					if ($.inArray("${emotionCategory.emotionCategoryCode}",  (emotionDiary.stressArray).split(",")) >= 0) {
+						chk = "checked";
+					}
+
+					stressList = `
+						<li>
+							<input type="checkbox" name="stress" id="option${emotionCategory.emotionCategoryCode}" value="${emotionCategory.emotionCategoryCode}" disabled `+ chk + `>
+							<label for="option${emotionCategory.emotionCategoryCode}">${emotionCategory.emotionCategoryName}</label>
+						</li>
+					`;
+					optionUl.append(stressList);
 				</c:forEach>
 
-				let optionArea = `
-					<div class="option_area">
-						<div class="sub_title"><strong>스트레스 증상이 있었나요?</strong></div>
-						<div class="option_statistic">
-							<ul>
-								` + stressList + `
-							</ul>
-						</div>
-					</div>
-				`;
-
-
-				$('.emotion_record').append(optionArea);
+				emotionData.append(optionAreaDiv);
 
 				// content
-				$('.emotionContent').val(emotionDiary.emotionContent);
+				const diaryAreaDiv = $("<div class='diary_area'>");
+				const diarySubTitleDiv = $("<div class='sub_title'><strong>감정 일기</strong></div>");
+				const diaryContent = $("<textarea name='emotionContent' class='emotionContent' readonly ></textarea>");
+				diaryContent.val(emotionDiary.emotionContent);
+				diaryAreaDiv.html(diarySubTitleDiv);
+				diaryAreaDiv.append(diaryContent);
 
+				emotionData.append(diaryAreaDiv);
 
 			},
 			error : function(request, status, error){
