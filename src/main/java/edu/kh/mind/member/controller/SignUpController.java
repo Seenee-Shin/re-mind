@@ -13,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import edu.kh.mind.member.model.service.SignUpService;
+import edu.kh.mind.member.model.vo.Member;
 
 
 @Controller
@@ -28,6 +31,26 @@ public class SignUpController {
     
     @Autowired
     private JavaMailSender mailSender;
+    
+    // 회원 가입 
+ 	@RequestMapping(value="signUp", method = RequestMethod.POST)
+ 	public String signUp(Member member) {  
+ 		
+ 		int result = service.signUp(member);
+ 		
+ 		if(result>0) { 
+ 			System.out.println("가입성공");
+ 		}else { 
+ 			System.out.println("가입실패");
+ 		}
+ 		
+ 		return "redirect:/";
+ 	}
+ 	
+    
+    
+    
+    
     
     
     /* 이메일 인증 */
@@ -68,7 +91,7 @@ public class SignUpController {
           }catch(Exception e) {
               e.printStackTrace();
           }*/
-          
+           
           String num = Integer.toString(checkNum);
           
           return num;
