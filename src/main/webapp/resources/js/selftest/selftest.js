@@ -1,4 +1,3 @@
-// // 웹/모바일 확인
 
 let QUES = [];
 let ctCode;
@@ -7,14 +6,18 @@ let nowQNo = 1;
 let allAnswerLen;
 let allQuestionLen;
 
+
 let flag = false;
-/*카테고리 코드 ctCode
+/*
+카테고리 코드 ctCode
 현재 문항 번호 nowQNo
 
 총 답변 갯수 allAnswerLen
-총 문항 갯수 allQuestionLen*/
+총 문항 갯수 allQuestionLen
+*/
 
 $(".selfTest_prev_btn, .selfTest_next_btn").css("display", "block");
+
 
 function addACount(){
     for(let i = 0; i < allAnswerLen; i++){
@@ -59,9 +62,9 @@ function prev(){
 $(".selfTest_op").on("click", function (){
 
     ctCode = $(this).attr("id");
-    // console.log(answerNo);
     const index = $(this).index($(this));
     const nm = $(this).text();
+    console.log(nm);
 
     $.ajax({
         url : "selftestQuestion",
@@ -74,6 +77,8 @@ $(".selfTest_op").on("click", function (){
                 allAnswerLen = 4; // 이것만 직접 바꿔주면 됨 / 전체 답변 수
                 allQuestionLen = result.length - allAnswerLen;
 
+                // 카테고리 표시
+                $(".selfTest_title > h1").text(nm + " 자가진단 테스트");
 
                 // 현재 문제 번호 표시
                 $(".selfTest_content > span:first-child").text(nowQNo);
@@ -88,6 +93,23 @@ $(".selfTest_op").on("click", function (){
                 addACount();
 
             }else if(ctCode == 2){
+                allAnswerLen = 4; // 이것만 직접 바꿔주면 됨 / 전체 답변 수
+                allQuestionLen = result.length - allAnswerLen;
+
+                // 카테고리 표시
+                $(".selfTest_title > h1").text(nm + " 자가진단 테스트");
+
+                // 현재 문제 번호 표시
+                $(".selfTest_content > span:first-child").text(nowQNo);
+
+                // 총 문항 갯수 표시
+                $(".selfTest_content > span:nth-child(3)").text("총 " + allQuestionLen + "문항");
+
+                // 1번문항을 ajax요청 후 보여줌
+                $(".selfTest_content > div:first-of-type").html(QUES[nowQNo + allAnswerLen - 1].answerContent);
+
+
+                addACount();
 
             }else if(ctCode == 3){
 
@@ -113,13 +135,9 @@ $(".selfTest_op").on("click", function (){
 
 $(".selfTest_result").on("click", function (){
     flag = true;
-    $(".selfTest_result").css("backgroundColor", "white");
-    $(this).css("backgroundColor", "blue");
+    $(".selfTest_result").css("backgroundColor", "#fff").css("color", "#A59999");
+    $(this).css("backgroundColor", "#A59999").css("color", "#fff");
 });
-
-
-
-
 
 
 // 결과창 모달 호출
