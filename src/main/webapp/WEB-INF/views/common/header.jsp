@@ -125,7 +125,7 @@
                         </c:when>
                         <c:otherwise>
                             ${sessionScope.loginMember.memberName}
-                            <a href="#" class="logout_btn">로그아웃</a>
+                            <a href="${contextPath}/emailLogin/logout" class="logout_btn">로그아웃</a>
                         </c:otherwise>
                     </c:choose>
                 </li>
