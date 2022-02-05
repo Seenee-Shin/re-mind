@@ -24,4 +24,17 @@ public interface MyService {
 	 * @return result
 	 */
 	int insertEmotionDiary(EmotionDiary emotionDiary);
+
+	/**
+	 * 감정 기록 select
+	 * @param selectDate
+	 * @return result
+	 */
+	EmotionDiary selectEmotionRecord(String selectDate);
+
+	/**
+	 * 감정 기록 등록일 list
+	 * @return list
+	 */
+    List<EmotionDiary> selectEmotionDiaryDate();
 }

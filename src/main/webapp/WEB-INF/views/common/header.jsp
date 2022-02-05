@@ -109,7 +109,7 @@
                     <!-- <a href="">로그인</a> -->
                     <a href="#">마이페이지</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
-                        <li><a href="${contextPath}/my/emotionDiary">감정기록</a></li>
+                        <li><a href="${contextPath}/my/emotionRecord">감정기록</a></li>
                         <li><a href="#">마이 상담</a></li>
                         <li><a href="#">마이 활동</a></li>
                         <li><a href="#">마이 정보</a></li>

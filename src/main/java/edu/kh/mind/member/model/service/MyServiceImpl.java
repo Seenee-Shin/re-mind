@@ -28,7 +28,17 @@ public class MyServiceImpl implements MyService {
     @Override
     public int insertEmotionDiary(EmotionDiary emotionDiary) {
         return dao.insertEmotionDiary(emotionDiary);
+    }
 
+    // 감정 기록 select
+    @Override
+    public EmotionDiary selectEmotionRecord(String selectDate) {
+        return dao.selectEmotionRecord(selectDate);
+    }
+
+    @Override
+    public List<EmotionDiary> selectEmotionDiaryDate() {
+        return dao.selectEmotionDiaryDate();
     }
 
 

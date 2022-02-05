@@ -66,22 +66,43 @@ public class MyController {
 
         if(session.getAttribute("loginMember") != null) {
             emotionDiary.setMemberNo(loginMember.getMemberNo());
-
-            System.out.println(emotionDiary);
-
             int result = service.insertEmotionDiary(emotionDiary);
+
         } else {
             System.out.println("로그인 필요");
         }
 
-        return null;
+        return "redirect:/my/emotionRecord";
     }
 
+    // 감정 기록 보기
     @RequestMapping("emotionRecord")
     public String emotionRecord(Model model) {
+
+        List<EmotionCategory> emotionCategoryList = service.emotionCategory();
+//        if (loginMember != null) {
+//            System.out.println(loginMember.getMemberNo());
+//        List<EmotionDiary> emotionDiaryDate = service.selectEmotionDiaryDate();
+
+//        }
+
+        model.addAttribute("emotionCategoryList", emotionCategoryList);
+        
     	model.addAttribute("css", "my");
 
         return "my/emotionRecord";
+    }
+
+    // 감정 기록 select
+    @RequestMapping(value="emotionRecordData", method=RequestMethod.POST)
+    @ResponseBody
+    public EmotionDiary emotionRecordData(String selectDate) {
+        System.out.println(selectDate);
+
+        EmotionDiary emotionRecordData = service.selectEmotionRecord(selectDate);
+
+        System.out.println(emotionRecordData);
+        return emotionRecordData;
     }
 
     @GetMapping("counselor")
