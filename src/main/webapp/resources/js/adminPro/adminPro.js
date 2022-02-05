@@ -13,7 +13,7 @@ function validate(){
 			let msg
 			
 			switch(key){
-            	case "email" : message = "이메일이 유효하지 않습니다."; break;
+            	case "id" : message = "이메일이 유효하지 않습니다."; break;
            		case "pwd1" : message = "비밀번호가 유효하지 않습니다."; break;
             	case "pwd2" : message = "비밀번호가 일치하지 않습니다."; break;
             	case "phone" : message = "전화번호가 유효하지 않습니다."; break;
@@ -23,6 +23,20 @@ function validate(){
             return false;			
 			
 		}
+			
+	//주소 병합
+	//input type="hidden" 태그 생성 및 추가
+ 	const address = document.getElementById("hospitalAddress")
+ 	const address1= document.querySelector("input[id=address_detail]")	
+ 	
+ 	const input = document.createElement("input")
+ 	
+ 	input.setAttribute("type","hidden")
+ 	input.setAttribute("name","hospitalAddress")
+    input.value = address.value + address1.value 
+    
+	document.proRegisterDetail.append(input)
+	
 	}
 }
 
@@ -124,11 +138,10 @@ $("#proPw, #proPwCheck").on("input", function(){
 		
 		
 	}
+
+	
 	
 })
-
-
-
 
 
 
