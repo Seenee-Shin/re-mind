@@ -15,18 +15,18 @@
     <div>나의 마음건강을 체크해보세요.</div>
     <div>심리 자가진단 테스트</div>
   </div>
-  <form method="POST" class="self_content_form" action="selftestForm">
+  <form method="POST" class="self_content_form">
     <div class="self_content_option">
       <div class="self_content_option1">
-        <div class="selfTest_op">우울증</div>
-        <div class="selfTest_op">불안장애</div>
-        <div class="selfTest_op">폭식증</div>
-        <div class="selfTest_op">알코올의존</div>
-        <div class="selfTest_op">스트레스</div>
+        <div id="1" class="selfTest_op">우울증</div>
+        <div id="2"  class="selfTest_op">불안장애</div>
+        <div id="3"  class="selfTest_op">폭식증</div>
+        <div id="4"  class="selfTest_op">알코올의존</div>
+        <div id="5"  class="selfTest_op">스트레스</div>
       </div>
       <div class="self_content_option2">
-        <div class="selfTest_op">자존감</div>
-        <div class="selfTest_op">인터넷중독</div>
+        <div id="6"  class="selfTest_op">자존감</div>
+        <div id="7"  class="selfTest_op">인터넷중독</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
@@ -43,29 +43,32 @@
         </div>
       </div>
       <div class="selfTest_content">
-        <span>01</span>
+        <span>0</span>
         <span></span>
-        <span>총 10문항</span>
+        <span>총 0문항</span>
         <div>나는 내가 적어도 다른 사람만큼은 가치있는 사람이라고 느낀다.</div>
         <div id="selfTest_content_option">
-          <div id="1" class="selfTest_result">대체로 그렇지 않다</div>
-          <div id="2" class="selfTest_result">보통이다</div>
-          <div id="3" class="selfTest_result">대체로 그렇다</div>
-          <div id="4" class="selfTest_result">항상 그렇다</div>
+          <div id="btn1" class="selfTest_result">대체로 그렇지 않다</div>
+          <div id="btn2" class="selfTest_result">보통이다</div>
+          <div id="btn3" class="selfTest_result">대체로 그렇다</div>
+          <div id="btn4" class="selfTest_result">항상 그렇다</div>
         </div>
       </div>
     </div>
     <!-- 버튼 -->
     <div class="selfTest_btn">
-      <button class="selfTest_prev_btn">이전</button>
-      <button id="selfTest_next_btn" class="selfTest_next_btn">다음</button>
+      <button class="selfTest_prev_btn" onclick="prev()" type="button">이전</button>
+      <button id="selfTest_next_btn" class="selfTest_next_btn" onclick="next()" type="button">다음</button>
     </div>
     <button type="button" class="mb_selfTest_btn">테스트 진행</button>
   </form>
+    <button type="button" id="selfTest_result_btn">테스트 결과</button>
 </article>
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script>
+
+
 
 </script>

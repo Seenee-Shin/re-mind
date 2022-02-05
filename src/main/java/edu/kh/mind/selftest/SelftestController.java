@@ -23,7 +23,7 @@ public class SelftestController {
     	model.addAttribute("css", "selftestForm");
     	model.addAttribute("header", "main");
     	
-        return "/selftestForm";
+        return "selftest/selftestForm";
     }
 
 

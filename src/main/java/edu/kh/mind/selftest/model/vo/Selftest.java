@@ -1,6 +1,8 @@
 package edu.kh.mind.selftest.model.vo;
 
-public class Selftest {
+import org.apache.ibatis.session.RowBounds;
+
+public class Selftest{
 
     private int answerNo;
     private int answerType;

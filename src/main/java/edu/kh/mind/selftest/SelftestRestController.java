@@ -5,25 +5,33 @@ import edu.kh.mind.selftest.model.service.SelftestService;
 import edu.kh.mind.selftest.model.vo.Selftest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 @RestController
 @RequestMapping("/selftest/*")
+//@SessionAttributes({ "loginMember" })
 public class SelftestRestController {
 
 
     @Autowired
     private SelftestService service;
 
-    @RequestMapping(value = "selftestForm", method = RequestMethod.POST)
-    public String selftestForm(Model model, int questionNo){
+    @RequestMapping(value = "selftestQuestion", method = RequestMethod.POST)
+    public String selftestForm(Model model, int categoryNo, Selftest selftest){
 
         model.addAttribute("css", "selftestForm");
         model.addAttribute("header", "main");
 
-        String selectQ = service.selectQ(questionNo);
+//        System.out.println(questionNo);
+
+        selftest.setCategoryNo(categoryNo);
+
+        List<Selftest> selectQ = service.selectQ(selftest);
+        System.out.println("List : " + selectQ);
+
 
 
         return new Gson().toJson(selectQ);
@@ -35,7 +43,7 @@ public class SelftestRestController {
         model.addAttribute("css", "mb_selftest");
         model.addAttribute("header", "main");
 
-        return "/mbSelftest";
+        return "mbSelftest";
     }
 
     @RequestMapping(value = "selftestResult", method = RequestMethod.POST)
@@ -45,7 +53,7 @@ public class SelftestRestController {
         model.addAttribute("header", "main");
 
 
-        return "/selftestResult";
+        return "selftestResult";
     }
 
 

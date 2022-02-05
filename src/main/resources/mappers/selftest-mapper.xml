@@ -5,8 +5,9 @@
     <!-- 질문 / 응답 리절트 맵 -->
     <resultMap id="selftest_rm" type="Selftest">
 
-        <id property="questionNo" column="QUESTION_NO"/>
+        <id property="categoryNo" column="CATEGORY_NO"/>
 
+        <result property="questionNo" column="QUESTION_NO"/>
         <result property="questionContent" column="QUESTION_CONTENT"/>
         <result property="resultNo" column="RESULT_NO"/>
         <result property="resultContent" column="RESULT_CONTENT"/>
@@ -24,10 +25,32 @@
 
 
     </resultMap>-->
+    <!--<select id="selectQ" resultMap="selftest_rm">
+        SELECT * FROM SELF_CHECK_QUESTION
+        where CATEGORY_NO = #{categoryNo}
+    </select>-->
 
+    <!--<select id="selectQ" resultMap="selftest_rm">
+        SELECT * FROM SELF_CHECK_QUESTION S
+        JOIN SELF_CHECK_CATEGORY A ON(A.CATEGORY_NO = S.CATEGORY_NO)
+        JOIN SELF_CHECK_ANSWER B ON(B.QUESTION_NO = S.QUESTION_NO)
+        JOIN SELF_CHECK_RESULT C ON(C.CATEGORY_NO = A.CATEGORY_NO)
+        WHERE S.CATEGORY_NO = #{categoryNo}
+    </select>-->
     <select id="selectQ" resultMap="selftest_rm">
-        SELECT
+        SELECT ANSWER_CONTENT
+        FROM SELF_CHECK_ANSWER
+        WHERE CATEGORY_NO = #{categoryNo}
+        UNION ALL
+        SELECT QUESTION_CONTENT
+        FROM SELF_CHECK_QUESTION
+        WHERE CATEGORY_NO = #{categoryNo}
     </select>
+
+
+
+
+
 
 
 
