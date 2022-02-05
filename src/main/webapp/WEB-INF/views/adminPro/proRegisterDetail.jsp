@@ -9,7 +9,7 @@
 <main>
     <h1>상담사 등록 신청 </h1>
     <br>
-    <form action="proRegisterDetail" method="post" enctype="multipart/form-data" role="form"> 
+    <form action="proRegisterDetail" method="post" enctype="multipart/form-data" role="form" name="proRegisterDetail"> 
 
         <div class="proWrap">
             <div class="label">
@@ -20,10 +20,10 @@
             <div class="label">
             병원주소 
             </div>
-            <input type="text" name="hospitalAddress" id="hospitalAddress" readonly="readonly"> <button type="button" id="address_kakao">주소 찾기</button> <br>
+            <input type="text" name="address" id="hospitalAddress" readonly="readonly"> <button type="button" id="address_kakao">주소 찾기</button> <br>
                <div class="label">
             </div>
-            <input type="text" name="address_detail" id="address_detail"> 
+            <input type="text" name="address" id="address_detail"> 
             <br>
 			<br>
             <div class="label">
@@ -65,12 +65,16 @@
 	        //카카오 지도 발생
 	        new daum.Postcode({
 	            oncomplete: function(data) { //선택시 입력값 세팅
-	                document.getElementById("hospitalAddress").value = data.address; // 주소 넣기
-	                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+	                document.getElementById("hospitalAddress").value = data.zonecode+ " " +data.address; // 주소 넣기
+	                document.querySelector("input[id=address_detail]").focus(); //상세입력 포커싱
 	            }
 	        }).open();
 	    });
 	}
+	
+
+
+
 </script>
 
 
