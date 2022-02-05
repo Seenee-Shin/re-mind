@@ -6,7 +6,7 @@ public class Image {
 
 	private int imageNo;
 	private String imagePath;
-	private String imagePathName;
+	private String imageName;
 	private String imageOriginal;
 	private int imageLevel;
 	private int memberNo;
@@ -33,12 +33,12 @@ public class Image {
 		this.imagePath = imagePath;
 	}
 
-	public String getImagePathName() {
-		return imagePathName;
+	public String getImageName() {
+		return imageName;
 	}
 
-	public void setImagePathName(String imagePathName) {
-		this.imagePathName = imagePathName;
+	public void setImageName(String imagePathName) {
+		this.imageName = imagePathName;
 	}
 
 	public String getImageOriginal() {

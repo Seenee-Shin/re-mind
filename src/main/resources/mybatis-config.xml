@@ -20,6 +20,7 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.EmotionCategory" alias="EmotionCategory"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.ReservationPayMent" alias="ReservationPayMent"/>
+		<typeAlias type="edu.kh.mind.board.model.vo.image" alias="Image"/>
 	</typeAliases>
 
 	<!-- SQL이 작성된 파일 지정 -->
@@ -29,6 +30,7 @@
 		<mapper resource="/mappers/member-mapper.xml"/>		
 		<mapper resource="/mappers/emotion-mapper.xml"/>
 		<mapper resource="/mappers/reservation-mapper.xml"/>
+		<mapper resource="/mappers/image-mapper.xml"/>
 	</mappers>
 
 </configuration>
