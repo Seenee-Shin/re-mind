@@ -135,7 +135,7 @@ function execution_daum_address(){
 // 각 입력 값이 유효성 검사를 진행했는지 기록할 객체
 const signUpCheckObj = {
     "id" : false,
-    "email" : false,
+    "idKey" : false,
     "name" : false,
     "nickname" : false,
     "pwd1" : false,
@@ -155,7 +155,7 @@ function validate(){
 
             switch(key){
             case "id" : message = "아이디가 유효하지 않습니다."; break;
-            case "email" : message = "인증번호가 유효하지 않습니다."; break;
+            case "idKey" : message = "인증번호가 유효하지 않습니다."; break;
             case "name" : message = "이름이 유효하지 않습니다."; break;
             case "nickname" : message = "닉네임이 유효하지 않습니다."; break;
             case "pwd1" : message = "비밀번호가 유효하지 않습니다."; break;
@@ -266,17 +266,17 @@ function validate(){
  	
  	if(inputCode.length == 0 ){
  		checkResult.html("");
- 		signUpCheckObj.email = false;
+ 		signUpCheckObj.idKey = false;
  	
  	}else if(inputCode == code){                           
          checkResult.html("인증번호가 일치합니다.");
          checkResult.css("color","green");
- 		signUpCheckObj.email = true;
-     } else {                                           
+ 		 signUpCheckObj.idKey = true;
+    }else{                                           
          checkResult.html("인증번호가 불일치합니다.");
          checkResult.css("color","red");
- 		signUpCheckObj.email = false;
-     }   
+ 		 signUpCheckObj.idKey = false;
+    }   
      
  });
 
@@ -330,7 +330,6 @@ document.getElementById("nickname").addEventListener("input", function(e){
             success : function(result){
 
                 if(result  ==  0){ 
-                	console.log("성공");
                 	$(checkNm).text("사용 가능한 닉네임입니다.").css("color", "green");
                     signUpCheckObj.nickname = true;
               
