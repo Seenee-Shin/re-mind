@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="imageMapper">
+	<resultMap type="Image" id="image_rm">
+		<id property="imageNo" column="IMAGE_NO"/>
+		<result property="imagePath" column="IMAGE_PATH"/>
+		<result property="imageName" column="IMAGE_NM"/>
+		<result property="imageOriginal" column="IMAGE_ORIGINAL"/>
+		<result property="imageLevel" column="IMAGE_LEVEL"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="boardNo" column="PROFESSION_NO"/>
+		<result property="professionNo" column="BOARD_NO"/>
+	</resultMap>
+	
+	
+	<!-- 상담사 학력증명서 입력 -->
+	<insert id="insertCertification" parameterType="Image">
+		INSERT INTO IMAGE (IMAGE_NO,IMAGE_PATH,IMAGE_NM,IMAGE_ORIGINAL,IMAGE_LEVEL,PROFESSION_NO)
+		VALUES(SEQ_IMAGE_NO.NEXTVAL,#{imagePath},#{imageName},#{imageOriginal},#{imageLevel},#{professionNo})
+	</insert>
+</mapper>
