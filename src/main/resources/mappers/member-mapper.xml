@@ -42,5 +42,12 @@
 	 WHERE MEMBER_FN = #{inputNickNm}
 	 AND STATUS_CD != 1
 	 </select>
+	 
+	 <!--  회원 가입 -->			
+	 <insert id="signUp" parameterType="Member">
+	 INSERT INTO MEMBER VALUES(
+	 	SEQ_MEMBER_NO.NEXTVAL, #{memberId}, #{memberPw}, #{memberName},
+	 	#{memberAddress}, #{memberFName}, #{memberPhone}, #{memberGender}, DEFAULT, DEFAULT)
+	 </insert>
 
 </mapper>
