@@ -5,6 +5,7 @@ import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface MyService {
@@ -27,14 +28,15 @@ public interface MyService {
 
 	/**
 	 * 감정 기록 select
-	 * @param selectDate
+	 * @param map
 	 * @return result
 	 */
-	EmotionDiary selectEmotionRecord(String selectDate);
+	EmotionDiary selectEmotionRecord(Map<String, String> map);
 
 	/**
 	 * 감정 기록 등록일 list
+	 * @param memberNo
 	 * @return list
 	 */
-    List<EmotionDiary> selectEmotionDiaryDate();
+	List<String> selectEmotionDiaryDate(int memberNo);
 }
