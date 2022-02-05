@@ -65,6 +65,12 @@ public class AdminProDAO {
 	}
 
 
-
-
+	/**
+	 * 로그인
+	 * @param profession
+	 * @return loginPro
+	 */
+	public Profession proLogin(Profession profession) {
+		return sqlSession.selectOne("professionMapper.proLogin", profession);
+	}
 }

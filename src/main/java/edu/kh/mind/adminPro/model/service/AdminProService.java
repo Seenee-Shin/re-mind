@@ -43,6 +43,10 @@ public interface AdminProService {
 	int insertProInfo(ProfessionInformation proInfo, MultipartFile certification, String webPath, String serverPath);
 
 
-
-
+	/**
+	 * 로그인
+	 * @param profession
+	 * @return loginPro
+	 */
+    Profession proLogin(Profession profession);
 }
