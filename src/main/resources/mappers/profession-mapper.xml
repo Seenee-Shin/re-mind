@@ -43,6 +43,17 @@
     	<result property="counselPrice" column="COUNSEL_PRICE"/>
     </resultMap>
 
+    <resultMap id="chatMessage_rm" type="ChatMessage">
+        <id property="chatNo" column="CHAT_NO"/>
+
+        <result property="message" column="MESSAGE"/>
+        <result property="createDate" column="CREATE_DT"/>
+        <result property="professionNo" column="PROFESSION_NO"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="chattingNo" column="CHATTING_NO"/>
+        <result property="memberName" column="MEMBER_NM"/>
+    </resultMap>
+
 <!--    그그그머냐ㅐ 그거 검색 -->
     <select id="selectProfession" resultMap="profession_rm">
         SELECT * FROM PROFESSION
@@ -101,7 +112,7 @@
     </select>
 
 
-    <!-- 산담사 병원정보 insert -->
+    <!-- 상담사 병원정보 insert -->
     <insert id="insertProHospital" parameterType="ProfessionHospital">
         INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddress}, #{hospitalPhone}, #{businessNo})
     </insert>
@@ -111,10 +122,32 @@
         VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
     </insert>
 
+    <!-- 로그인 -->
     <select id="proLogin" resultMap="profession_rm">
         SELECT * FROM PROFESSION
         WHERE PROFESSION_ID = #{professionId}
         AND STATUS_CD in(3,4)
     </select>
+
+    <!-- 채팅방 입장 -->
+    <select id="existsChat"  resultType="_int">
+        SELECT NVL(MAX(CHATTING_NO), 0)
+        FROM CHATTING_TEST
+        WHERE RESERVATION_NO = #{reservationNo}
+        AND PROFESSION_NO = #{professionNo}
+        AND CHATTING_STATUS_CD = 1
+    </select>
+
+    <!-- 채팅 메시지 -->
+    <select id="selectChatMessage" resultMap="chatMessage_rm">
+        SELECT MESSAGE,
+            TO_CHAR(CREATE_DT, 'AM', 'nls_date_language=korean') || ' ' || TO_CHAR(CREATE_DT, 'HH:MI') CREATE_DT,
+            MEMBER_NO, PROFESSION_NO, MEMBER_NM
+        FROM CHATTING_MESSAGE_TEST
+        LEFT JOIN MEMBER USING(MEMBER_NO)
+        WHERE CHATTING_NO = #{chattingNo}
+        ORDER BY CHAT_NO
+    </select>
+
 
 </mapper>

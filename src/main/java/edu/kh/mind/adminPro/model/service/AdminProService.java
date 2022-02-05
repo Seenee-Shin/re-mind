@@ -1,10 +1,9 @@
 package edu.kh.mind.adminPro.model.service;
 
+import edu.kh.mind.member.model.vo.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.kh.mind.member.model.vo.Profession;
-import edu.kh.mind.member.model.vo.ProfessionHospital;
-import edu.kh.mind.member.model.vo.ProfessionInformation;
+import java.util.List;
 
 public interface AdminProService {
 
@@ -49,4 +48,11 @@ public interface AdminProService {
 	 * @return loginPro
 	 */
     Profession proLogin(Profession profession);
+
+	/**
+	 * 채팅방 입장
+	 * @param chat
+	 * @return
+	 */
+	List<ChatMessage> joinChat(ChatJoin chat);
 }
