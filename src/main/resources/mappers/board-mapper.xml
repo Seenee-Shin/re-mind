@@ -79,7 +79,7 @@
 	<!-- 자유게시판 조회-->
 	<select id="selectBoardList" resultMap="board_rm">
 		SELECT * FROM BOARD WHERE BOARD_CATEGORY_CD = 101 AND BOARD_STATUS_CD = 201
-	</select>	
+	</select>
 	
 	    	
 	<!-- 공감조회 -->

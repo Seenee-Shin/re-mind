@@ -15,18 +15,6 @@
 
     <!-- sweetealert : 경고창 api -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
-
-
-    <script>
-        // 전역 변수
-        const contextPath = "${contextPath}";
-    </script>
-	<script src="${contextPath}/resources/js/adminPro/adminPro.js"></script>
-
-    <!-- sweetealert : 경고창 api -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <%-- request scope에 "title"이라는 키 값이 존재하는 경우 --%>
     <c:if test="${!empty requestScope.title}">
         <script>
@@ -37,6 +25,14 @@
             });
         </script>
     </c:if>
+ 
+
+    <script>
+        // 전역 변수
+        const contextPath = "${contextPath}";
+    </script>
+	<script src="${contextPath}/resources/js/adminPro/adminPro.js"></script>
+
 
 </body>
 </html>
