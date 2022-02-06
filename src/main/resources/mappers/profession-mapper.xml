@@ -99,43 +99,18 @@
         )
     </insert>
 
+    <!-- 프로필 view용 가격조회 -->
+    <select id="selectPrice" resultMap="professionPrice_rm">
+        SELECT COUNSEL_CATEGORY_NO, COUNSEL_PRICE
+        FROM PROFESSION_PRICE
+        WHERE PROFESSION_NO = #{professionNo}
+    </select>
   
-  <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
-  <update id="chkAuth" parameterType="Profession" >
-      UPDATE PROFESSION SET AUTH_STATUS = 1 WHERE PROFESSION_ID = #{professionId}
-  </update>
-  
-  
-  <select id="selectPro" resultMap="profession_rm">
-  	SELECT PROFESSION_NO,PROFESSION_ID,PROFESSION_PW,PROFESSION_NM,PROFESSION_PHONE,
-    			PROFESSION_ENROLL_DT,PROFESSION_GENDER,STATUS_CD,PROFESSION_BIRTH,PROFESSION_AUTH_KEY,AUTH_STATUS
-    FROM PROFESSION WHERE PROFESSION_ID = #{professionId}
-  </select>
-  
-  
-  <!-- 상담사 병원정보 insert -->
-  <insert id="insertProHospital" parameterType="ProfessionHospital">
-  	INSERT INTO PROFESSION_HOSPITAL VALUES(#{professionNo},#{hospitalName}, #{hospitalAddress}, #{hospitalPhone}, #{businessNo})
-  </insert>
-  
-  <!-- 상담사 상세정보 insert -->
-  <insert id="insertProInfo" parameterType="ProfessionInfo">
-  	INSERT INTO PROFESSION_INFORMATION (PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR)
-  	VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
-  </insert>
-  
-  <!-- 프로필 view용 가격조회 -->
-  <select id="selectPrice" resultMap="professionPrice_rm">
-  	SELECT COUNSEL_CATEGORY_NO, COUNSEL_PRICE 
-	FROM PROFESSION_PRICE 
-	WHERE PROFESSION_NO = #{professionNo}
-  </select>
-  
-  <update id="updateProProfile" parameterType="ProfessionInfo">
-  	UPDATE PROFESSION_INFORMATION SET PRO_INTRO =#{professionIntro} , PRO_STORY=#{professionStory}, 
-  										PRO_CARRER=#{professionCarrer}, PRO_TAG=#{professionTag}
-  	WHERE PROFESSION_NO = #{professionNo}
-  </update>
+    <update id="updateProProfile" parameterType="ProfessionInfo">
+        UPDATE PROFESSION_INFORMATION SET PRO_INTRO =#{professionIntro} , PRO_STORY=#{professionStory},
+            PRO_CARRER=#{professionCarrer}, PRO_TAG=#{professionTag}
+        WHERE PROFESSION_NO = #{professionNo}
+    </update>
   
     <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
     <update id="chkAuth" parameterType="Profession" >
