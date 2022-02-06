@@ -149,14 +149,14 @@ function requestPay(){
                     merchant_uid : 'merchant_' + new Date().getTime(),
                     name : '마음연구소 re:mind',
                     amount : price, //판매 가격
-                    buyer_email : 'iamport@siot.do',
-                    buyer_name : '구매자이름',
+                    buyer_email : '1234@naver.com',
+                    buyer_name : '홍두깨',
                     buyer_tel : '010-1234-5678'
                     
                 }, function(rsp) {
 
                     if ( rsp.success ) { // 결제에 성공했을경우
-
+                            
                         // 3. 주문번호를 이용하여 db에 select 됐던 총 금액 조회
                         $.ajax({
                             url : contextPath + "/pro/priceSelect",
@@ -165,21 +165,34 @@ function requestPay(){
 
                             success : function(price){
 
-                                console.log(price);
-
                                 // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
                                 if(price == rsp.paid_amount){
+                                    alert("결제가 완료되었습니다.");
+                                    
+                                    const reservationEnrollDate = $("#date_chk").text();
+                                    const reservationEnrollTime = $("#time_chk").text();
+                                    const counselCategoryNm = $("#therapy_chk").text();
 
-                                    var msg = '결제가 완료되었습니다.';
-                                    msg += '고유ID : ' + rsp.imp_uid;
-                                    msg += '상점 거래ID : ' + rsp.merchant_uid;
-                                    msg += '결제 금액 : ' + rsp.paid_amount;
-                                    msg += '카드 승인번호 : ' + rsp.apply_num;
+                                    var formData = new FormData();
+                                    formData.append('payNo',payNo);
+                                    formData.append('reservationEnrollDate',reservationEnrollDate); // 날짜
+                                    formData.append('reservationEnrollTime',reservationEnrollTime); // 시간
+                                    formData.append('counselCategoryNm',counselCategoryNm); // 테라피 종류
 
                                     // update와 insert 동시 진행
+                                    $.ajax({
+                                        url : contextPath + "/pro/reservationUpdate",
+                                        type : "POST",
+                                        data : formData,
+                                        processData: false,
+		                                contentType: false,
+                                        success:function(result){
+                                            console.log(result);
+                                        },
+                                    });
 
                                 }else{
-                                // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
+                                    // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
                                     alert("결제가 실패 하였습니다.");
                                 }
                                 
