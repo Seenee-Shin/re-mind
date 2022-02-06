@@ -36,7 +36,7 @@
 <script>
 	function naverLogin(){
 		$.ajax({
-			url:"social/naverlogin",
+			url:contextPath+"/social/naverlogin",
 			data:{"naver": "naver"},
 		}).done(function (res){
 			window.location.replace(res);
@@ -44,7 +44,7 @@
 	}
 	function kakaoLogin(){
 		$.ajax({
-			url:"social/kakaoLogin",
+			url:contextPath+"/social/kakaoLogin",
 			data:{"kakao": "kakao"},
 		}).done(function (res){
 			window.location.replace(res);
@@ -52,7 +52,7 @@
 	}
 	function  googleLogin(){
 		$.ajax({
-			url:"social/googleLogin",
+			url:contextPath+"/social/googleLogin",
 			data:{"google": "google"},
 		}).done(function (res){
 			window.location.replace(res);
