@@ -40,6 +40,7 @@
 		<mapper resource="/mappers/reservation-mapper.xml"/>
 		<mapper resource="/mappers/image-mapper.xml"/>
 		<mapper resource="/mappers/worry-mapper.xml"/>
+		<mapper resource="/mappers/board2-mapper.xml"/>
 
 	</mappers>
 
