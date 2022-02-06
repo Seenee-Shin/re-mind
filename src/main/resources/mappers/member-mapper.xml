@@ -12,15 +12,15 @@
         <result property="memberPhone" column="MEMBER_PHONE"/>
         <result property="memberGender" column="MEMBER_GENDER"/>
         <result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
-        <result property="memberType" column="MEMBER_TYPE"/>
         <result property="statusCode" column="STATUS_CD"/>
     </resultMap>
 
-    <insert id="kakaoLogin">
-        INSERT INTO MEMBER VALUES(
-         SEQ_MEMBER_NO.NEXTVAL, #{kakaoEmail}, NULL, NULL, NULL,
-         #{kakaonickname}, NULL, #{kakaoGender}, DEFAULT, 'KAKAO', DEFAULT)
-    </insert>
+    <resultMap id="social_rm" type="Naver">
+        <id property="memberSocialNo" column="MEMBER_SOCIAL_NO"/>
+        <result property="memberSocialToken" column="MEMBER_SOCIAL_TOKEN"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="socialType" column="SOCIAL_TYPE"/>
+    </resultMap>
 
     <select id="emailLogin" resultMap="member_rm">
         SELECT * FROM MEMBER
@@ -42,5 +42,23 @@
 	 WHERE MEMBER_FN = #{inputNickNm}
 	 AND STATUS_CD != 1
 	 </select>
+
+    <select id="socialCheck" resultMap="member_rm">
+        SELECT * FROM MEMBER WHERE MEMBER_PHONE = #{memberPhone}
+    </select>
+
+    <insert id="socialSignUp" useGeneratedKeys="true">
+        <selectKey order="BEFORE" resultType="_int" keyProperty="memberNo">
+            SELECT SEQ_MEMBER_NO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MEMBER VALUES(
+        #{memberNo}, #{memberId}, NULL, #{memberName}, NULL, #{memberFName}, #{memberPhone}, #{memberGender}, DEFAULT, DEFAULT)
+    </insert>
+
+    <insert id="insertToken">
+        INSERT INTO MEMBER_SOCIAL VALUES(
+        SEQ_MEMBER_SOCIAL_NO.NEXTVAL, #{memberSocialToken}, #{memberNo}, #{socialType})
+    </insert>
+
 
 </mapper>

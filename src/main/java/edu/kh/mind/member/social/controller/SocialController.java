@@ -5,10 +5,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import edu.kh.mind.member.model.service.LoginService;
+import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.member.social.google.GoogleOAuthRequest;
 import edu.kh.mind.member.social.google.GoogleOAuthResponse;
 import edu.kh.mind.member.social.kakao.KakaoLoginBO;
 import edu.kh.mind.member.social.naver.NaverLoginBO;
+import edu.kh.mind.member.social.naver.vo.Naver;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.GrantType;
@@ -31,6 +34,7 @@ import org.springframework.social.oauth2.OAuth2Parameters;
 // 리다이렉트 주소 변경
 @Controller
 @RequestMapping("/social/*")
+@SessionAttributes({"loginMember"})
 public class SocialController {
 
     /* NaverLoginBO */
@@ -56,6 +60,9 @@ public class SocialController {
     private GoogleConnectionFactory googleConnectionFactory;
     @Autowired
     private OAuth2Parameters googleOAuth2Parameters;
+
+    @Autowired
+    private LoginService service;
 
     // 로그인 첫 화면 요청 메소드
     @GetMapping("googleLogin")
@@ -137,12 +144,56 @@ public class SocialController {
         System.out.println("jsonObj : " + jsonObj);
 
         JSONObject response_obj = (JSONObject) jsonObj.get("response");
-        System.out.println("email : " + response_obj.get("email"));
+//        System.out.println("email : " + response_obj.get("email"));
 
 
-        System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
+
+        Naver naver = new Naver();
+        naver.setMemberSocialToken(oauthToken.getRefreshToken());
+        naver.setSocialType("naver");
+
+        Member member = new Member();
+        member = service.socialCheck((String)response_obj.get("mobile"));
+
+        System.out.println("에러1");
+//        System.out.println(member.getMemberNo());
+//        System.out.println(member.getMemberPw());
+//        System.out.println(member.getMemberId());
+//        System.out.println(member.getStatusCode());
+//        System.out.println(member.getMemberName());
+//        System.out.println(member.getMemberFName());
+//        System.out.println(member.getMemberPhone());
+//        System.out.println(member.getMemberAddress());
+//        System.out.println(member.getMemberEnrollDate());
+//        System.out.println(member.getMemberGender());
+        if(member != null){ // 없는 회원이면 회원가입을 진행합니다.
+            System.out.println("tetete : " + member.getMemberNo());
+        }else{ // 이미 가입이 되어있는 회원이면 로그인을 진행합니다.
+            Member loginMember = new Member();
+            loginMember.setMemberPhone((String)response_obj.get("mobile"));
+            loginMember.setMemberId((String)response_obj.get("email"));
+            loginMember.setMemberName((String)response_obj.get("name"));
+            loginMember.setMemberFName((String)response_obj.get("nickname"));
+            loginMember.setMemberGender((String)response_obj.get("gender"));
+
+            System.out.println("에러2");
+            // 일반회원에 삽입
+            int memberNo = service.socialSignUp(loginMember);
+            naver.setMemberNo(loginMember.getMemberNo());
+            System.out.println(naver.getMemberNo() + " / " + naver.getMemberSocialNo() + " / " + naver.getMemberSocialToken());
+
+            // 소셜테이블에 나머지 정보 삽입
+            int result = service.insertToken(naver);
+
+
+            System.out.println("비어있습니다");
+        }
+
+//        List<Naver> nList = service.naverLogin(naver);
+
+
         model.addAttribute("result", apiResult);
-        System.out.println("result"+apiResult);
+//        model.addAttribute("result", apiResult);
 
         return "socialSuccess";
     }
