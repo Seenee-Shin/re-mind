@@ -128,48 +128,40 @@ public class SocialController {
     public String callback(Model model, @RequestParam(value = "code", required = false) String code,
                            @RequestParam String state,
                            HttpSession session) throws Exception {
+
+        String path = "";
+
         System.out.println("============== callback ==============");
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
-        System.out.println("[AccessToken : " + oauthToken.getAccessToken() + "]");
-        System.out.println("[RefreshToken : " + oauthToken.getRefreshToken() + "]");
-
-//        naverLoginBO.getNaverAccessToken(session, code, state);
+//        System.out.println("[AccessToken : " + oauthToken.getAccessToken() + "]");
+//        System.out.println("[RefreshToken : " + oauthToken.getRefreshToken() + "]");
 
         apiResult = naverLoginBO.getUserProfile(oauthToken);
 
         JSONParser jsonParser = new JSONParser();
         Object obj = jsonParser.parse(apiResult);
         JSONObject jsonObj = (JSONObject) obj;
-        System.out.println("jsonObj : " + jsonObj);
+//        System.out.println("jsonObj : " + jsonObj);
 
         JSONObject response_obj = (JSONObject) jsonObj.get("response");
-//        System.out.println("email : " + response_obj.get("email"));
-
-
 
         Naver naver = new Naver();
         naver.setMemberSocialToken(oauthToken.getRefreshToken());
         naver.setSocialType("naver");
 
         Member member = new Member();
+
         member = service.socialCheck((String)response_obj.get("mobile"));
 
+        Member loginMember = new Member();
+
+
         System.out.println("에러1");
-//        System.out.println(member.getMemberNo());
-//        System.out.println(member.getMemberPw());
-//        System.out.println(member.getMemberId());
-//        System.out.println(member.getStatusCode());
-//        System.out.println(member.getMemberName());
-//        System.out.println(member.getMemberFName());
-//        System.out.println(member.getMemberPhone());
-//        System.out.println(member.getMemberAddress());
-//        System.out.println(member.getMemberEnrollDate());
-//        System.out.println(member.getMemberGender());
         if(member != null){ // 없는 회원이면 회원가입을 진행합니다.
-            System.out.println("tetete : " + member.getMemberNo());
+            loginMember = member;
+            path = "socialSuccess";
         }else{ // 이미 가입이 되어있는 회원이면 로그인을 진행합니다.
-            Member loginMember = new Member();
             loginMember.setMemberPhone((String)response_obj.get("mobile"));
             loginMember.setMemberId((String)response_obj.get("email"));
             loginMember.setMemberName((String)response_obj.get("name"));
@@ -178,24 +170,21 @@ public class SocialController {
 
             System.out.println("에러2");
             // 일반회원에 삽입
-            int memberNo = service.socialSignUp(loginMember);
-            naver.setMemberNo(loginMember.getMemberNo());
-            System.out.println(naver.getMemberNo() + " / " + naver.getMemberSocialNo() + " / " + naver.getMemberSocialToken());
+            int result = service.socialSignUp(loginMember);
+            if(result > 0)  naver.setMemberNo(loginMember.getMemberNo());
 
             // 소셜테이블에 나머지 정보 삽입
-            int result = service.insertToken(naver);
-
+            result = service.insertToken(naver);
 
             System.out.println("비어있습니다");
+            if(result > 0)  path = "socialSuccess";
+            else            path = "redirect:/";
         }
 
-//        List<Naver> nList = service.naverLogin(naver);
-
-
-        model.addAttribute("result", apiResult);
+        model.addAttribute("loginMember", loginMember);
 //        model.addAttribute("result", apiResult);
 
-        return "socialSuccess";
+        return path;
     }
 
 

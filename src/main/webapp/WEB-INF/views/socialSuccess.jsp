@@ -9,11 +9,8 @@
 <body>
 
 <script>
-    $(function () {
-        <%--setTimeout(function(){location.href= "${pageContext.request.contextPath}/"},0);--%>
-
-        location.href= "${pageContext.request.contextPath}/";
-    });
+    <%--setTimeout(function(){location.href= "${pageContext.request.contextPath}/"},0);--%>
+    location.href= "${pageContext.request.contextPath}/";
 
 </script>
 
