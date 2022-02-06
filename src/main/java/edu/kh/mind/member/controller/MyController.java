@@ -1,6 +1,7 @@
 package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
 import edu.kh.mind.member.model.vo.EmotionCategory;
@@ -208,9 +209,36 @@ public class MyController {
     }
 
     @GetMapping("myBoardList")
-    public String myBoardList(Model model){
+    public String myBoardList(Model model,
+                              HttpServletRequest req,
+                              @ModelAttribute("loginMember") Member loginMember,
+                              HttpSession session,RedirectAttributes ra, Board board){
         model.addAttribute("css", "my/myBoardList");
-        return "my/myBoardList";
+
+        String path = null;
+
+        int memberNo = 0;
+
+        if (session.getAttribute("loginMember") != null) {
+            memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
+
+            System.out.println(memberNo);
+
+            board.setMemberNo(memberNo);
+
+            Board myBoardList = (Board) service.myBoardList(board);
+
+            System.out.println(myBoardList);
+
+
+            model.addAttribute("myBoardList", myBoardList);
+            path = "/my/myBoardList";
+        } else {
+            Util.swalSetMessage("로그인이 필요합니다.", "h", "info", ra);
+            path = "/";
+        }
+        return path;
+
     }
 
     @GetMapping("postscript")
@@ -256,4 +284,3 @@ public class MyController {
     }
 
 }
-
