@@ -18,15 +18,44 @@
                  
               </div>
               <div class="study_content">
-                  <div class="image_wrap"> <!--area-->
-                     <div class="item"> <!--area__box-->
-                            <p>김치찌개해</p>
-                     </div>
-                     <div class="item"> <!--area__box-->
-                            <p>김치찌개</p>
-                     </div>
+                  <div class="image_wrap">
                   
-                     
+                  	<c:choose>
+                  		<c:when test="${empty postList}">
+                  		</c:when>
+                  		<c:otherwise>
+                  			<c:forEach items="${postList}" var="post">
+	                  			<c:choose>
+	                  			<c:when test="${post.itemImgNo == 1}">
+		                  			<div class="item beaker1" >
+		                  				<p>${post.postContent}</p>
+		                  			</div>
+	                  			</c:when>
+	                  			<c:when test="${post.itemImgNo == 2}">
+		                  			<div class="item beaker2">
+		                  				<p>${post.postContent}</p>
+		                  			</div>
+	                  			</c:when>
+	                  			<c:when test="${post.itemImgNo == 3}">
+		                  			<div class="item beaker3">
+		                  				<p>${post.postContent}</p>
+		                  			</div>
+	                  			</c:when>
+	                  			<c:when test="${post.itemImgNo == 4}">
+		                  			<div class="item beaker4">
+		                  				<p>${post.postContent}</p>
+		                  			</div>
+	                  			</c:when>
+	                  			
+	                  			
+	                  			</c:choose>
+                  		
+                  		
+                  			</c:forEach>
+                  		</c:otherwise>
+                  	</c:choose>
+                  	
+                  
                   </div>
              </div>
               

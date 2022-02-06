@@ -13,6 +13,9 @@ public class MindPost {
 	private int statusCode;
 	private int itemImgNo;
 	
+	private String memberFname;
+	private String itemRoute;
+	
 	public MindPost() {
 	}
 	
@@ -70,6 +73,26 @@ public class MindPost {
 	}
 	public void setItemImgNo(int itemImgNo) {
 		this.itemImgNo = itemImgNo;
+	}
+
+
+	public String getMemberFname() {
+		return memberFname;
+	}
+
+
+	public void setMemberFname(String memberFname) {
+		this.memberFname = memberFname;
+	}
+
+
+	public String getItemRoute() {
+		return itemRoute;
+	}
+
+
+	public void setItemRoute(String itemRoute) {
+		this.itemRoute = itemRoute;
 	}
 		
 	

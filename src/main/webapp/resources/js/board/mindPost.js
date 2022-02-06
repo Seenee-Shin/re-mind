@@ -65,16 +65,15 @@ document.addEventListener("mouseup", function(e) {
 
 
 const submitBtn = document.querySelector(".study_submit");
+
 submitBtn.addEventListener("click", () => {
    layerPopup("studyWrite");
 });
 
 
-container.addEventListener("dblclick", () => {
-	layerPopup("studyView");
+box.addEventListener("dblclick", () => {
+	   layerPopup("studyView");
 });
-
-
 
 
 
