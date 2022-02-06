@@ -19,6 +19,7 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionPrice" alias="ProfessionPrice"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="edu.kh.mind.board.model.vo.MindPost" alias="MindPost"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Empathy" alias="Empathy"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.EmpathyStatus" alias="EmpathyStatus"/>
 

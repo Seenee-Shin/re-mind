@@ -18,4 +18,16 @@
 	</resultMap>
 
 
+	<insert id="insertPost" useGeneratedKeys="true" parameterType="MindPost">
+	
+		<selectKey order="BEFORE" resultType="_int" keyProperty="postNo">
+			SELECT SEQ_MIND_POST_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO MIND_POST VALUES( 
+		#{postNo}, #{postContent}, DEFAULT, NULL, DEFAULT, DEFAULT, #{memberNo},
+		DEFAULT, #{itemImgNo})
+	</insert>
+	
+	
+
 </mapper>
