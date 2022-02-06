@@ -13,7 +13,6 @@ public interface ChatService {
      * @param chat
      * @return list
      */
-
     List<ChatMessage> joinChat(ChatJoin chat);
 
     /**
@@ -22,4 +21,5 @@ public interface ChatService {
      * @return result
      */
     int insertMessage(ChatMessage cm);
+
 }

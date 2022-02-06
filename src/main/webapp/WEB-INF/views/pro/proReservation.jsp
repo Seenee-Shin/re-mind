@@ -26,9 +26,9 @@
                             <td>
                                 <select class="select_box" id="therapy_select" >
                                     <option value="0">선택</option>
-                                    <option value="25000">텍스트테라피</option>
-                                    <option value="50000">페이스테라피</option>
-                                    <option value="35000">보이스테라피</option>
+                                    <option value="100">텍스트테라피</option>
+                                    <option value="100">페이스테라피</option>
+                                    <option value="100">보이스테라피</option>
                                 </select>
                             </td>
                         </tr>
@@ -38,9 +38,9 @@
                                 <select class="select_box" id="therapy_count">
                                     <option value="0">선택</option>
                                     <option value="1">1회</option>
-                                    <option value="5">3회</option>
-                                    <option value="10">5회</option>
-                                    <option value="20">20회</option>
+                                    <option value="1">3회</option>
+                                    <option value="1">5회</option>
+                                    <option value="1">20회</option>
                                 </select>
                             </td>
                         </tr>

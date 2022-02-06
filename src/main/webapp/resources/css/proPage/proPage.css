@@ -95,7 +95,8 @@ h1 {
 
 
 input[type=text] ,
-input[type=email]{
+input[type=email],
+input[type=password]{
     border: 0px;
     border-bottom: 1px solid gray;
 }
@@ -108,4 +109,7 @@ button{
     background-color: white;
     border-radius: 15px;
     border: 2px solid #A59999;
+        display: block;
+    margin: auto;
+    
 }

@@ -59,9 +59,9 @@
 				</div>
 
 				<div class="agree_area">
-					<label for="stressAgree">
-						<input type="checkbox" name="stressAgree" id="stressAgree"> 상담사에게 공개
-					</label>
+					<input type="checkbox" name="stressAgree" id="stressAgree">
+					<label for="stressAgree">상담사에게 공개</label>
+
 				</div>
 			</div>
 
@@ -69,14 +69,13 @@
 				<div class="sub_title"><strong>오늘의 감정 일기</strong></div>
 				<textarea name="emotionContent" class="emotionContent" placeholder="오늘 있었던 일을 맘 껏 풀어놓으세요."></textarea>
 				<div class="agree_area">
-					<label for="diaryAgree">
-						<input type="checkbox" name="diaryAgree" id="diaryAgree"> 상담사에게 공개
-					</label>
+					<input type="checkbox" name="diaryAgree" id="diaryAgree">
+					<label for="diaryAgree">상담사에게 공개</label>
 				</div>
 			</div>
 			<div class="submit_area">
 				<button>등록하기</button>
-				<button type="button">안쓸래요</button>
+				<button type="button" onclick="location.href='${contextPath}/my/emotionRecord';">안쓸래요</button>
 			</div>
 		</div>
 	</form>
@@ -87,6 +86,36 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script>
+	$(function () {
+		const emotionRecordData = JSON.stringify(${emotionRecordData});
+
+		if (emotionRecordData != undefined) {
+			const emotionDiary = JSON.parse(emotionRecordData);
+
+			// progress bar
+			let index = 0;
+			const emotionArray = JSON.parse(emotionDiary.emotionArray);
+			$.each(emotionArray, function (key, value) {
+				$(".progress_bar").eq(index).children().children().text(value + "%");
+				$(".progress_bar").eq(index).children().val(value);
+				index++;
+			});
+
+			// stress
+			const optionInput = $(".option_statistic li input");
+			$.each(optionInput, function (key, value) {
+				if ($.inArray($(this).val(),  (emotionDiary.stressArray).split(",")) >= 0) {
+					$(this).prop("checked", true);
+				}
+			});
+
+			// content
+			$(".emotionContent").val(XSS(emotionDiary.emotionContent));
+		}
+	});
+
+
+
 	$("progress").on("click", function () {
 		const value = $(this).val();
 		let changeValue = 0;
@@ -106,8 +135,6 @@
 
 	function validate() {
 		let result = false;
-
-		console.log("${loginMember.memberNo}");
 
 		const emotion = {
 			happy :  $(".progress_bar .happy").val(),
@@ -137,11 +164,6 @@
 		}
 
 		return result;
-
-		// return result;
-
-
-
 
 	}
 

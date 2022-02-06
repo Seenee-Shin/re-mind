@@ -43,3 +43,17 @@ if (document.querySelector(".login_btn") != null) {
     });
 }
 
+
+// XSS 처리, 개행 문자 변경
+function XSS(message) {
+    let str = message;
+
+    str = str.replace(/&amp;/g, "&");
+    str = str.replace(/&lt;/g, "<");
+    str = str.replace(/&gt;/g, ">");
+    str = str.replace(/&quot;/g, "\"");
+
+    str = str.replace(/<br>/g, "\n");
+
+    return str;
+}

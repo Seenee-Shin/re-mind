@@ -16,7 +16,6 @@ public class ChatDAO {
     private SqlSessionTemplate sqlSession;
 
     public int existsChat(ChatJoin chat) {
-
         return sqlSession.selectOne("chatMapper.existsChat", chat);
     }
 

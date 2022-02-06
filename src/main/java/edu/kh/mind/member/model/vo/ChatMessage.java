@@ -8,6 +8,9 @@ public class ChatMessage {
 	private int memberNo;
 	private int chattingNo;
 
+	private String professionName;
+	private String memberName;
+
 	public ChatMessage() {
 	}
 
@@ -59,6 +62,22 @@ public class ChatMessage {
 		this.chattingNo = chattingNo;
 	}
 
+	public String getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	@Override
 	public String toString() {
 		return "ChatMessage{" +
@@ -68,6 +87,8 @@ public class ChatMessage {
 				", professionNo=" + professionNo +
 				", memberNo=" + memberNo +
 				", chattingNo=" + chattingNo +
+				", professionName='" + professionName + '\'' +
+				", memberName='" + memberName + '\'' +
 				'}';
 	}
 }
