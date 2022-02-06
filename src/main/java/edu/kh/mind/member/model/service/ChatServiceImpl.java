@@ -19,6 +19,7 @@ public class ChatServiceImpl implements ChatService {
     public List<ChatMessage> joinChat (ChatJoin chat) {
 
         int result = dao.existsChat(chat);
+        System.out.println("existsChat : " + result);
 
         if (result > 0) {
             chat.setChattingNo(result);

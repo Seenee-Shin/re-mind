@@ -9,7 +9,7 @@
 	<div class="top_title_wrap">
 		<h2 class="title">회원가입</h2>
 	</div>
-	<form method="POST" action="signUp"  name="signUpForm" onsubmit="return validate();">
+	<form method="POST" action="signUp/signUp"  name="signUpForm" onsubmit="return validate();">
 		<div class="signup_box">
 			<div class="input_wrap">
 				<div class="input_area left_area">
@@ -19,7 +19,7 @@
 					</div>
 					<div class="input_div">
 						<div><label for="idKey">아이디 확인</label> <div class="check" id="checkEmail"></div></div>
-						<input type="text" name="memberIdKey" id="idKey" placeholder="인증번호" class="login_input short" required>
+						<input type="text" id="idKey" placeholder="인증번호" class="login_input short" required>
 						<button class="shortBtn mailCheckBtn" type="button" >인증번호 전송</button>
 					</div>
 					<div class="input_div">
@@ -32,26 +32,26 @@
 					</div>
 					<div class="input_div">
 						<div><label for="name">이름</label><div class="check" id="checkName"></div></div>
-						<input type="text"  name="memberNm" id="name" class="login_input" required>
+						<input type="text"  name="memberName" id="name" class="login_input" required>
 					</div>
 					<div class="input_div">
 						<div><label for="nickname">닉네임</label> <div class="check" id="checkNickNm"></div></div>
-						<input type="text" name="memberNickNm" id="nickname" placeholder = "2~20글자" class="login_input" required>
+						<input type="text" name="memberFName" id="nickname" placeholder = "2~20글자" class="login_input" required>
 					</div>
 				</div>
 					<div class="input_area right_area">
 					<div class="input_div">
 						<div>주소 우편번호</div>
-						<input type="text" name="address"  class="login_input short" required>
-						<button class="shortBtn" type="button" >검색</button>
+						<input type="text" name="address" id="address_input_1" class="login_input short" required>
+						<button class="shortBtn" type="button" onclick="execution_daum_address()">검색</button>
 					</div>
 					<div class="input_div">
 						<div><label for="address1">도로명 주소</label></div>
-						<input type="text" name="address" id="address1" class="login_input" required>
+						<input type="text" name="address" id="address_input_2" class="login_input" required>
 					</div>
 					<div class="input_div">
 						<div><label for="address2">상세 주소</label></div>
-						<input type="text" name="address" id="address2" class="login_input" required>
+						<input type="text" name="address" id="address_input_3" class="login_input" >
 					</div>
 					<div class="input_div">
 						<div><label for="phone2">핸드폰 번호</label><div class="check" id="checkPhone"></div></div>
@@ -70,10 +70,10 @@
 						<div>성별</div>
 						<div class="radio_area">
 							<label for="male">
-								<input type="radio" id="male" name="gender" checked> 남성
+								<input type="radio" id="male" name="memberGender" value="남" checked> 남성
 							</label>
 							<label for="female">
-								<input type="radio" id="female" name="gender"> 여성
+								<input type="radio" id="female" name="memberGender" value="여"> 여성
 							</label>
 						</div>
 					</div>
@@ -88,12 +88,54 @@
 </div>
 
 <%-- <script src="${contextPath}/resources/js/member/signUp.js"></script> --%>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
+
+// 주소
+function execution_daum_address(){
+	new daum.Postcode({
+	    oncomplete: function(data) {
+
+	        var addr = ''; // 주소 변수
+	        var extraAddr = ''; // 참고항목 변수
+    	 
+   	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+   	                    addr = data.roadAddress;
+   	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+   	                    addr = data.jibunAddress;
+   	                }
+    	 
+   	                if(data.userSelectedType === 'R'){
+   	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+   	                        extraAddr += data.bname;
+   	                    }
+   	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+   	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+   	                    }
+   	                    if(extraAddr !== ''){
+   	                        extraAddr = ' (' + extraAddr + ')';
+   	                    }
+   	                    
+   	                	addr += extraAddr;
+   	                } else {
+   	                	addr += ' ';
+   	                }
+   	 
+   	                $("#address_input_1").val(data.zonecode);
+   	                $("#address_input_2").val(addr);
+       
+   	                $("#address_input_3").focus();
+
+	        }
+	    }).open(); 
+}
 
 // 각 입력 값이 유효성 검사를 진행했는지 기록할 객체
 const signUpCheckObj = {
     "id" : false,
-    "email" : false,
+    "idKey" : false,
     "name" : false,
     "nickname" : false,
     "pwd1" : false,
@@ -113,7 +155,7 @@ function validate(){
 
             switch(key){
             case "id" : message = "아이디가 유효하지 않습니다."; break;
-            case "email" : message = "이메일이 유효하지 않습니다."; break;
+            case "idKey" : message = "인증번호가 유효하지 않습니다."; break;
             case "name" : message = "이름이 유효하지 않습니다."; break;
             case "nickname" : message = "닉네임이 유효하지 않습니다."; break;
             case "pwd1" : message = "비밀번호가 유효하지 않습니다."; break;
@@ -224,17 +266,17 @@ function validate(){
  	
  	if(inputCode.length == 0 ){
  		checkResult.html("");
- 		signUpCheckObj.email = false;
+ 		signUpCheckObj.idKey = false;
  	
  	}else if(inputCode == code){                           
          checkResult.html("인증번호가 일치합니다.");
          checkResult.css("color","green");
- 		signUpCheckObj.email = true;
-     } else {                                           
+ 		 signUpCheckObj.idKey = true;
+    }else{                                           
          checkResult.html("인증번호가 불일치합니다.");
          checkResult.css("color","red");
- 		signUpCheckObj.email = false;
-     }   
+ 		 signUpCheckObj.idKey = false;
+    }   
      
  });
 
@@ -288,7 +330,6 @@ document.getElementById("nickname").addEventListener("input", function(e){
             success : function(result){
 
                 if(result  ==  0){ 
-                	console.log("성공");
                 	$(checkNm).text("사용 가능한 닉네임입니다.").css("color", "green");
                     signUpCheckObj.nickname = true;
               
@@ -398,7 +439,6 @@ $(".phone").on("input", function(){
 
 
 });
-
 
 
 

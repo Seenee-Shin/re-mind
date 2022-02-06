@@ -140,11 +140,12 @@
 }
 
 .selfTest_btn{
-    float:right;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .selfTest_prev_btn{
-    visibility: hidden; 
+    display: none;
 }
 
 .selfTest_prev_btn,
@@ -159,13 +160,29 @@
     margin-left: 40px;   
 }
 
+#selfTest_result_btn{
+    display: none;
+    border: 1px solid rgb(165 153 153);
+    width: 23.5em;
+    height: 75px;
+    background: rgb(0 0 0 / 0%);
+    color: rgb(165 153 153);
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 5vh;
+    cursor: pointer;
+}
+
+
 .mb_selfTest_btn{
     display: none;
 }
 
     @media (hover: hover) {
         .selfTest_prev_btn:hover,
-        .selfTest_next_btn:hover{
+        .selfTest_next_btn:hover,
+        #selfTest_result_btn:hover{
         background: #A59999;
         color: #FFF;
         transition: 0.7s;
@@ -284,25 +301,3 @@
         }
 
     }
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

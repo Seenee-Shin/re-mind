@@ -12,9 +12,9 @@ function sendMessage() {
     } else {
         const obj = {};
         obj.memberNo = memberNo;
-        obj.professionNo = professionNo;
         obj.chattingNo = chattingNo;
         obj.message = message.value;
+        obj.memberName = memberName;
 
         const nowDate = new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/, '');
         obj.createDate = nowDate.toString();
@@ -51,7 +51,7 @@ chattingSock.onmessage = function (e) {
         chat = chat.replaceAll("\n", "<br>");
         chatMessage.html(chat);
     } else {
-        chatMessage.html( "<b>" + obj.memberName + "님이 나가셨습니다.</b>");
+        chatMessage.html( "<b>" + obj.professionName + "님이 나가셨습니다.</b>");
     }
 
     if (obj.memberNo === memberNo) {
@@ -65,6 +65,11 @@ chattingSock.onmessage = function (e) {
         // img
         const profileImg = $("<img class='profile_img'>");
         profileImg.attr("src", "http://localhost:8080/mind/resources/images/sample4.gif");
+
+        // profile name
+        const profileName = $("<span class='profile_name'>");
+        profileName.text("상담사 " + obj.professionName);
+        chatCol.html(profileName);
 
         li.addClass("friend_chat");
         chatCol.addClass("friend_chat_col");

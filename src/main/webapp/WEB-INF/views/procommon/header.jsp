@@ -8,7 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마음연구소 RE:mind - 상담사 페이지</title>
-    
+
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/proPage/proPage.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/${css}.css">
 

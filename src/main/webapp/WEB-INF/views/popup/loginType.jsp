@@ -59,10 +59,6 @@
 		});
 	}
 
-	const emailLogin = document.querySelector(".emailLogin");
-	emailLogin.addEventListener("click", () => {
-		layerPopup("emailLogin");
-	});
 	// 구글 로그인
 	if (document.getElementById("googleLoginBtn") != null) {
 		document.getElementById("googleLoginBtn").addEventListener("click", function (){
@@ -76,6 +72,7 @@
 		});
 	}
 
+	// 이메일 로그인
 	if (document.querySelector(".emailLogin") != null) {
 		document.querySelector(".emailLogin").addEventListener("click", () => {
 			layerPopup("emailLogin");
