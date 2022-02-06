@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/selftest/*")
-//@SessionAttributes({ "loginMember" })
 public class SelftestRestController {
 
 
@@ -31,7 +30,7 @@ public class SelftestRestController {
 
 
         List<Selftest> selectQ = service.selectQ(selftest);
-        System.out.println("List : " + selectQ);
+//        System.out.println("List : " + selectQ);
 
 
 
@@ -47,12 +46,13 @@ public class SelftestRestController {
         return "mbSelftest";
     }
 
-    @RequestMapping(value = "selftestResult", method = RequestMethod.POST)
+    @RequestMapping(value = "selftestResult", method = RequestMethod.GET)
     public String selftestResult(Model model) {
 
         model.addAttribute("css", "selftestResult");
         model.addAttribute("header", "main");
 
+        System.out.println(selftestResult(model));
 
         return "selftestResult";
     }

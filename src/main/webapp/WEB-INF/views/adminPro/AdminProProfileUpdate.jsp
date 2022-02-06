@@ -8,7 +8,7 @@
 
 <main>
    <h2>상담사 프로필</h2>
-   <form action="update/${loginPro.professionNo}" method="post" enctype="multipart/form-data" role="form">
+   <form action="update/${loginPro.professionNo}" method="post" enctype="multipart/form-data" role="form" onsubmit="getCheckBoxVal()">
 
        <section class="proflieWrap">
            <article class="proInfoWrap">
@@ -57,10 +57,11 @@
                
                		<c:forEach items="${category}"  var="c">
                			<div class="checkBox" >
-                   			<input type="checkbox" name="worryCategory" value="${c.worryCategoryCode}" id="${c.worryName}">
+                   			<input type="checkbox" name="worryCategoryOne" value="${c.worryCategoryCode}" id="${c.worryName}">
                   			<label for="${c.worryName}">${c.worryName}</label>
                    		</div>
                    </c:forEach>
+             		<input type="hidden" name="professionTag" id="worryCategory" value=""/>
                </div>
            </article>
 
@@ -148,6 +149,16 @@
 		}
 	}
 	
+	//submit시 고민카테고리 코드 문자열 만들기
+    function getCheckBoxVal(){
+        var worryCategoy = "" // 문자열 선언
+ 
+        $('input:checkbox[name=worryCategoryOne]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
+        	worryCategoy += this.value + " ";
+        });
+        $('#worryCategory').val(worryCategoy);
+        
+    }
 
 </script>
 

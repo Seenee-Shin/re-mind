@@ -64,6 +64,28 @@ public class ProServiceImpl implements ProService{
 		
 		return result;
 	}
+	
+	
+	// 취소버튼 눌렀을 경우
+	@Transactional
+	@Override
+	public int paymentDelete(int payNo) {
+		
+		// payNo로 상담 예약 결제 번호 가지고 오기
+		int reservationNo = dao.reservationNoSelect(payNo);
+		
+		// 상담예약 결제 삭제
+		int result = dao.reservationPaymentDelete(reservationNo);
+		
+		int result2 = 0;
+		
+		if(result > 0) {
+			// 결제 테이블 삭제
+			result2 = dao.paymentDelete(payNo);
+		}
+
+		return result2;
+	}
     
     
 }

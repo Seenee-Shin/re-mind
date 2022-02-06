@@ -214,5 +214,5 @@ $("#selfTest_result_btn").on("click",function (){
 
     layerPopup("selftestResult");
 
-    return false;
+
 });

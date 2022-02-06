@@ -1652,10 +1652,37 @@ commit;
 select count(*) from self_check_question
 where category_no = 3;
 -- 4번 문항 응답 44444444444444444444444444444----------------------------
-
+-- 5 / 5 / 5 / 3
 
 -- 5번 문항 응답 5555555555555555555555555555----------------------------
+INSERT INTO SELF_CHECK_ANSWER VALUES (32, 0, '전혀 없음', null, 5);
 
+INSERT INTO SELF_CHECK_ANSWER VALUES (33, 1, '거의 없음', null, 5);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (34, 2, '때때로 있음', null, 5);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (35, 3, '자주 있음', null, 5);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (36, 4, '매우 자주', null, 5);
+
+-- 6번 문항 응답 666666666666666666666666666666666----------------------------
+INSERT INTO SELF_CHECK_ANSWER VALUES (37, 1, '대체로 그렇지 않다', null, 6);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (38, 2, '보통이다', null, 6);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (39, 3, '대체로 그렇다', null, 6);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (40, 4, '항상 그렇다', null, 6);
+
+-- 7번 문항 응답 77777777777777777777777777777----------------------------
+INSERT INTO SELF_CHECK_ANSWER VALUES (41, 1, '전혀 그렇지 않다', null, 7);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (42, 2, '그렇지 않다', null, 7);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (43, 3, '그렇다', null, 7);
+
+INSERT INTO SELF_CHECK_ANSWER VALUES (44, 4, '매우 그렇다', null, 7);
+commit;
 
 SELECT A.QUESTION_NO, A.CATEGORY_NO, A.QUESTION_CONTENT, B.ANSWER_TYPE, B.ANSWER_CONTENT
 FROM SELF_CHECK_QUESTION A
@@ -1669,7 +1696,43 @@ SELECT QUESTION_CONTENT
 FROM SELF_CHECK_QUESTION
 WHERE CATEGORY_NO = 1;
 
+----------------------------- 내 게시글 조회
 
 
+SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, MEMBER_NM  FROM BOARD
+JOIN MEMBER USING(MEMBER_NO)
+WHERE MEMBER_NO = 71
+AND BOARD_STATUS_CD = 201
+AND STATUS_CD = 0;
+
+-- 보드 테이블 샘플 데이터
+BEGIN
+    FOR N IN 1..50 LOOP
+        INSERT INTO BOARD
+        VALUES(SEQ_BOARD_NO.NEXTVAL,
+                    '나의 ' || SEQ_BOARD_NO.CURRVAL || '번째 게시글',
+                    '나의 ' || SEQ_BOARD_NO.CURRVAL || '번째 게시글 입니다.',
+                    DEFAULT,
+                    DEFAULT, 
+                    0, /*조회 수*/
+                    DEFAULT,
+                    DEFAULT,
+                    FLOOR(DBMS_RANDOM.VALUE(101,104)),
+                    72,/*회원번호*/
+                    DEFAULT,
+                    DEFAULT,
+                    DEFAULT,
+                    DEFAULT,
+                    DEFAULT
+                    );
+    END LOOP;
+
+END;
+/
+
+ALTER TABLE BOARD MODIFY BOARD_READ_COUNT  NOT NULL;
+
+
+alter table BOARD RENAME COLUMN EM_CHCEK_CD TO EM_CHECK_CD;
 
 

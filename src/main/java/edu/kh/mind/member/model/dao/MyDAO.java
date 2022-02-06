@@ -1,5 +1,6 @@
 package edu.kh.mind.member.model.dao;
 
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -59,4 +60,9 @@ public class MyDAO {
 	public int updateEmotionDiary(EmotionDiary emotionDiary) {
 		return sqlSession.update("emotionMapper.updateEmotionDiary", emotionDiary);
 	}
+
+    public List<Board> myBoardList(Board board) {
+
+		return sqlSession.selectList("boardMapper.myBoardList", board);
+    }
 }

@@ -84,3 +84,17 @@ $(window).scroll(function(e){
 
     underLineDraw(line, $(".div-btn").eq(backupIndex));
 });
+
+/* 페이지 요청시  AJAX */
+
+
+// $.ajax({
+//     url : "selectMyBoardList",
+//     type : "GET",
+//     data : {"memberNo" : memberNo},
+//     success : function (result){
+//         console.log(result);
+//         console.log(memberNo);
+//     }
+//
+// });

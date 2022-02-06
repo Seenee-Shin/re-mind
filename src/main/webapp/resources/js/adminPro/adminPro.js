@@ -10,8 +10,7 @@ function validate(){
 	for(key in registCheckObj){
 		
 		if(!registCheckObj[key]){
-			let msg
-			
+
 			switch(key){
             	case "id" : message = "이메일이 유효하지 않습니다."; break;
            		case "pwd1" : message = "비밀번호가 유효하지 않습니다."; break;
@@ -39,7 +38,6 @@ function validate(){
 			document.proRegisterDetail.append(input);
 		}
 
-	
 	}
 }
 

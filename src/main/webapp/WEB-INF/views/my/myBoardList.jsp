@@ -10,10 +10,10 @@
     <div class="board-page">게시글 내역</div>
     <div class="div-btn-info">
         <div class="db-line"></div>
-        <div class="div-btn">내가 쓴 게시글</div>
-        <div class="div-btn">내가 쓴 댓글</div>
-        <div class="div-btn">스크랩 한 글</div>
-        <div class="div-btn">공감 한 글</div>
+        <div class="div-btn" id="select_myBoardList">내가 쓴 게시글</div>
+        <div class="div-btn" id="select_myReplyList">내가 쓴 댓글</div>
+        <div class="div-btn" id="select_myScrapList">스크랩 한 글</div>
+        <div class="div-btn" id="select_myEmpathyList">공감 한 글</div>
     </div>
     <!-- <hr> -->
 
@@ -27,11 +27,32 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="board-view">
-            <td>1445</td>
-            <td>너무 힘드네요...</td>
-            <td>2022.01.01</td>
-            <td>46</td>
+            <c:choose>
+
+                <c:when test="${empty myBoardList}">
+                    <%-- 조회된 게시글 목록이 없을 때 --%>
+                    <tr>
+                        <td colspan="4">게시글이 존재하지 않습니다.</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${myBoardList}" var="myBoardList">
+                        <%-- 조회된 게시글 목록이 있을 때 --%>
+                        <tr class="board-view">
+                            <td>${myBoardList.boardNo}</td>
+                            <td>${myBoardList.boardTitle}</td>
+                            <td>${myBoardList.createDate}</td>
+                            <td>${myBoardList.readCount}</td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+
+            </c:choose>
+            <tr class="board-view">
+                <td>1445</td>
+                <td>너무 힘드네요...</td>
+                <td>2022.01.01</td>
+                <td>46</td>
         </tr>
         <tr class="board-view">
             <td>26467</td>

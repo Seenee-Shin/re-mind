@@ -34,6 +34,7 @@
 		<typeAlias type="edu.kh.mind.member.social.naver.vo.Naver" alias="Naver"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.WorryCategory" alias="WorryCategory"/>
 
+
 	</typeAliases>
 
 	<!-- SQL이 작성된 파일 지정 -->
