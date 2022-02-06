@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.SignUpService;
 import edu.kh.mind.member.model.vo.Member;
 
@@ -34,15 +34,27 @@ public class SignUpController {
     
     // 회원 가입 
  	@RequestMapping(value="signUp", method = RequestMethod.POST)
- 	public String signUp(Member member) {  
+ 	public String signUp(Member member, RedirectAttributes ra) {  
  		
  		int result = service.signUp(member);
  		
- 		if(result>0) { 
- 			System.out.println("가입성공");
- 		}else { 
- 			System.out.println("가입실패");
- 		}
+ 			String title;
+ 			String text;
+ 			String icon;
+ 			
+ 			if(result>0) { 
+ 				title="회원 가입 성공";
+ 				text= member.getMemberFName() + "님의 회원 가입을 환영합니다.";
+ 				icon = "success";
+ 			}else { 
+ 				title="회원 가입 실패";
+ 				text= "관리자에게 문의해주세요.";
+ 				icon = "error";
+ 			}
+ 			
+ 			ra.addFlashAttribute("title", title);
+ 			ra.addFlashAttribute("text", text);
+ 			ra.addFlashAttribute("icon", icon);
  		
  		return "redirect:/";
  	}
@@ -65,7 +77,7 @@ public class SignUpController {
           /* 인증번호(난수) 생성 */
           Random random = new Random();
           int checkNum = random.nextInt(888888) + 111111;      
-          logger.info("인증번호 " + checkNum);
+          //logger.info("인증번호 " + checkNum);
           
           /* 이메일 보내기 */
           String setFrom = "마음연구소 리마인드 <remindlab46@gmail.com>";
@@ -78,7 +90,7 @@ public class SignUpController {
                   "<br>" + 
                   "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
           
-          /*try {
+          try {
               
               MimeMessage message = mailSender.createMimeMessage();
               MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
@@ -90,7 +102,7 @@ public class SignUpController {
               
           }catch(Exception e) {
               e.printStackTrace();
-          }*/
+          }
            
           String num = Integer.toString(checkNum);
           
