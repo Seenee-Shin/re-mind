@@ -9,7 +9,7 @@
 <main>
     <h1>상담사 등록 신청 </h1>
     <br>
-    <form action="proRegisterDetail" method="post" enctype="multipart/form-data" role="form" name="proRegisterDetail"> 
+    <form action="proRegisterDetail" method="post" enctype="multipart/form-data" role="form" name="proRegisterDetail" onsubmit="addressVal()"> 
 
         <div class="proWrap">
             <div class="label">
@@ -72,6 +72,20 @@
 	    });
 	}
 	
+	function addressVal() {
+		//주소 병합
+		//input type="hidden" 태그 생성 및 추가
+	 	const address = document.getElementById("hospitalAddress")
+	 	const address1= document.querySelector("input[id=address_detail]")	
+	 	
+	 	const input = document.createElement("input")
+	 	
+	 	input.setAttribute("type","hidden")
+	 	input.setAttribute("name","hospitalAddress")
+	    input.value = address.value + address1.value 
+	    
+		document.proRegisterDetail.append(input)f
+	}
 
 
 

@@ -148,7 +148,7 @@ public class AdminProController {
     
     
     //상담사 정보등록 
-    @RequestMapping(value = "proRegisterDetail/{professionNo}", method = RequestMethod.POST )
+    @RequestMapping(value = "proRegisterDetail", method = RequestMethod.POST )
     public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro, 
     							 ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile certification,
     							Model md, RedirectAttributes ra, HttpSession session) {
@@ -173,7 +173,7 @@ public class AdminProController {
 		
     	if(hResult < 0) {
 			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-			path = "/proRegisterDetail";
+			path = "/"+loginPro.getProfessionNo();
     	}else {
     		//학력정보 입력
     		int iResult = service.insertProInfo(proInfo,certification, webPath, serverPath);
@@ -183,7 +183,7 @@ public class AdminProController {
     			path = "/proLogin";
     		}else {
     			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-    			path = "/proRegisterDetail";
+    			path = "/"+loginPro.getProfessionNo();
     			
     		}
     	}
@@ -196,8 +196,7 @@ public class AdminProController {
     public String AdminProProfileView(@ModelAttribute("loginPro") Profession loginPro,
     		@PathVariable int professionNo, Model model) {
     	List<ProfessionPrice> price = service.selectPrice(professionNo);
-    	
-    	
+    			
     	model.addAttribute("price", price);
     	model.addAttribute("css", "proPage/proProfile");
     	
@@ -209,6 +208,7 @@ public class AdminProController {
     public String AdminProProfile(@PathVariable int professionNo, Model model) {
 		List<WorryCategory> category = service.selectWorryCategory();
 		List<ProfessionPrice> price = service.selectPrice(professionNo);
+		
 		model.addAttribute("category", category);
 		model.addAttribute("price", price);
 		model.addAttribute("css", "proPage/proProfile");
@@ -242,17 +242,6 @@ public class AdminProController {
     	return "redirect:"+path;
     }
 
-    //예외처리
-	@ExceptionHandler(Exception.class)
-	public String exceptionHandler(Exception e, Model model) {
-		
-		//Model : 데이터 전달용 객체(Map형식, request범위)
-		
-		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
-		model.addAttribute("e", e);
-		
-		return "/common/error";
-	}
 
 
 	@RequestMapping("chat/room/{reservationNo}")
@@ -288,4 +277,16 @@ public class AdminProController {
 
 	}
 	
+    //예외처리
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e, Model model) {
+		
+		//Model : 데이터 전달용 객체(Map형식, request범위)
+		
+		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
+		model.addAttribute("e", e);
+		
+		return "/common/error";
+	}
+
 }
