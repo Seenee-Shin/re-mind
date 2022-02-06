@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board2Mapper">
+
+	<resultMap type="edu.kh.mind.board.vo.MindPost" id="mindPost_rm">
+		<id property="postNo" column="POST_NO"/>
+		
+		<result property="postContent" column="POST_CONTENT"/>
+		<result property="createDate" column="POST_CREATE_DT"/>
+		<result property="modifyDate" column="POST_MODIFY_DT"/>
+		<result property="coordLeft" column="COORD_LEFT"/>
+		<result property="coordTop" column="COORD_TOP"/>
+		
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="statusCode" column="BOARD_STATUS_CD"/>
+		<result property="itemImgNo" column="ITEM_IMG_NO"/>
+	
+	</resultMap>
+
+
+</mapper>
