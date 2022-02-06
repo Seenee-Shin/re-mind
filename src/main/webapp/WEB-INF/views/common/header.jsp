@@ -89,7 +89,7 @@
                     <ul class="dep2">
                         <li><a href="#">상담사 찾기</a></li>
                         <li><a href="#">상담센터 찾기</a></li>
-                        <li><a href="#">자가진단</a></li>
+                        <li><a href="selftest/selftestForm">자가진단</a></li>
                     </ul>
 
                 </li>

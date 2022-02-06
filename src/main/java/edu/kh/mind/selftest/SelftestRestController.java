@@ -29,6 +29,7 @@ public class SelftestRestController {
 
         selftest.setCategoryNo(categoryNo);
 
+
         List<Selftest> selectQ = service.selectQ(selftest);
         System.out.println("List : " + selectQ);
 
