@@ -24,6 +24,7 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.EmotionCategory" alias="EmotionCategory"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.EmotionDiary" alias="EmotionDiary"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.ReservationPayMent" alias="ReservationPayMent"/>
+		<typeAlias type="edu.kh.mind.pro.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Image" alias="Image"/>
 
 	</typeAliases>

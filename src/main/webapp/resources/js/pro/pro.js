@@ -138,51 +138,69 @@ function requestPay(){
             url : contextPath + "/pro/priceInsert",
             type : "POST",
             data : {"price":price, "therapyCount": therapyCount},
+
             success : function(payNo){
-                console.log(payNo);
+
+                //2 . ajax 성공 시 아이포트 수행
+                IMP.init("imp11319218"); // 예: imp00000000
+                IMP.request_pay({
+                    pg : 'inicis', // version 1.1.0부터 지원.
+                    pay_method : 'card',
+                    merchant_uid : 'merchant_' + new Date().getTime(),
+                    name : '마음연구소 re:mind',
+                    amount : price, //판매 가격
+                    buyer_email : 'iamport@siot.do',
+                    buyer_name : '구매자이름',
+                    buyer_tel : '010-1234-5678'
+                    
+                }, function(rsp) {
+
+                    if ( rsp.success ) { // 결제에 성공했을경우
+
+                        // 3. 주문번호를 이용하여 db에 select 됐던 총 금액 조회
+                        $.ajax({
+                            url : contextPath + "/pro/priceSelect",
+                            type : "POST",
+                            data : {"payNo":payNo},
+
+                            success : function(price){
+
+                                console.log(price);
+
+                                // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
+                                if(price == rsp.paid_amount){
+
+                                    var msg = '결제가 완료되었습니다.';
+                                    msg += '고유ID : ' + rsp.imp_uid;
+                                    msg += '상점 거래ID : ' + rsp.merchant_uid;
+                                    msg += '결제 금액 : ' + rsp.paid_amount;
+                                    msg += '카드 승인번호 : ' + rsp.apply_num;
+
+                                    // update와 insert 동시 진행
+
+                                }else{
+                                // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
+                                    alert("결제가 실패 하였습니다.");
+                                }
+                                
+                            }, // 총 금액을 가지고 온 ajax
+
+                        });
+                       
+                    } else { // 결제에 실패했을경우
+                        var msg = '결제에 실패하였습니다.';
+                        msg += '에러내용 : ' + rsp.error_msg;
+
+                        
+                        $.ajax({
+
+                        });
+                    }
+                }); 
             },
         });
 
-        //2 . ajax 성공 시 아이포트 수행
-        IMP.init("imp11319218"); // 예: imp00000000
-        IMP.request_pay({
-            pg : 'inicis', // version 1.1.0부터 지원.
-            pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '마음연구소 re:mind',
-            amount : 100, //판매 가격
-            buyer_email : 'iamport@siot.do',
-            buyer_name : '구매자이름',
-            buyer_tel : '010-1234-5678'
-            
-        }, function(rsp) {
-            if ( rsp.success ) {
-
-                // 3. 주문번호를 이용하여 db에 select 됐던 총 금액 조회
-                $.ajax({}); 
-
-                console.log(rsp);
-
-                // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
-
-                var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '상점 거래ID : ' + rsp.merchant_uid;
-                msg += '결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
-
-                // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
-            } else {
-                var msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
-            }
-            alert(msg);
-        });
-
-    } //else
-        
-       
-
+    } //else end
     
 }
 
