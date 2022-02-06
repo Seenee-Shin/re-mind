@@ -34,7 +34,7 @@ function next(){
 
     // 문제 불러오기
     addQCount();
-    
+
     // 답변 불러오기
     addACount();
 
@@ -113,8 +113,8 @@ $(".selfTest_op").on("click", function (){
 
 $(".selfTest_result").on("click", function (){
     flag = true;
-    $(".selfTest_result").css("backgroundColor", "white");
-    $(this).css("backgroundColor", "blue");
+    $(".selfTest_result").css("backgroundColor", "white").css("color", "#A59999");
+    $(this).css("backgroundColor", "#A59999").css("color", "#fff");
 });
 
 
@@ -123,7 +123,7 @@ $(".selfTest_result").on("click", function (){
 
 
 // 결과창 모달 호출
-$(".selfTest-next-btn").on("click",function (){
+$("#selfTest_result_btn").on("click",function (){
 
     layerPopup("selftestResult");
 
