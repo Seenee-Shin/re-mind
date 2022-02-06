@@ -12,6 +12,16 @@
 		<result property="statusCode" column="STATUS_CD"/>
 	</resultMap>
 	
+	<!-- 결제 vo -->
+	<resultMap type="Payment" id="Payment_rm">
+		<id property="payNo" column="PAY_NO"/>
+		<result property="payAmount" column="PAY_AMOUNT"/>
+		<result property="payDate" column="PAY_DT"/>
+		<result property="payUpdateDate" column="PAY_UPDATE_DT"/>
+		<result property="paymentStatus" column="PAYMENT_STATUS"/>
+		<result property="reservationNo" column="RESERVATION_NO"/>
+	</resultMap>
+	
 	<!-- 상담예약결제 insert -->
 	<insert id="reservationPaymentInsert" useGeneratedKeys="true">
 	
@@ -23,4 +33,21 @@
 		VALUES(#{reservationPayNo},3,24,#{totalCnt},DEFAULT,DEFAULT)
 		
 	</insert>
+	
+	<!-- 결제 tb에 총금액 상담 예약결제번호 insert -->
+	<insert id="paymentInsert" useGeneratedKeys="true">
+	
+		<selectKey order="BEFORE" resultType="_int" keyProperty="payNo">
+			SELECT SEQ_PAY_NO.NEXTVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO PAYMENT
+		VALUES(#{payNo},#{payAmount},NULL,NULL,NULL,#{reservationNo})
+	
+	</insert>
+	
+	<!-- 총 금액 select -->
+	<select id="priceSelect" resultType="_int">
+		SELECT PAY_AMOUNT FROM PAYMENT WHERE PAY_NO = #{payNo}
+	</select>
 </mapper>

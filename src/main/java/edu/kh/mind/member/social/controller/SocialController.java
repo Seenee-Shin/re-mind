@@ -5,10 +5,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import edu.kh.mind.member.model.service.LoginService;
+import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.member.social.google.GoogleOAuthRequest;
 import edu.kh.mind.member.social.google.GoogleOAuthResponse;
 import edu.kh.mind.member.social.kakao.KakaoLoginBO;
 import edu.kh.mind.member.social.naver.NaverLoginBO;
+import edu.kh.mind.member.social.naver.vo.Naver;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.GrantType;
@@ -31,6 +34,7 @@ import org.springframework.social.oauth2.OAuth2Parameters;
 // 리다이렉트 주소 변경
 @Controller
 @RequestMapping("/social/*")
+@SessionAttributes({"loginMember"})
 public class SocialController {
 
     /* NaverLoginBO */
@@ -56,6 +60,9 @@ public class SocialController {
     private GoogleConnectionFactory googleConnectionFactory;
     @Autowired
     private OAuth2Parameters googleOAuth2Parameters;
+
+    @Autowired
+    private LoginService service;
 
     // 로그인 첫 화면 요청 메소드
     @GetMapping("googleLogin")
@@ -121,30 +128,63 @@ public class SocialController {
     public String callback(Model model, @RequestParam(value = "code", required = false) String code,
                            @RequestParam String state,
                            HttpSession session) throws Exception {
+
+        String path = "";
+
         System.out.println("============== callback ==============");
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
-        System.out.println("[AccessToken : " + oauthToken.getAccessToken() + "]");
-        System.out.println("[RefreshToken : " + oauthToken.getRefreshToken() + "]");
-
-//        naverLoginBO.getNaverAccessToken(session, code, state);
+//        System.out.println("[AccessToken : " + oauthToken.getAccessToken() + "]");
+//        System.out.println("[RefreshToken : " + oauthToken.getRefreshToken() + "]");
 
         apiResult = naverLoginBO.getUserProfile(oauthToken);
 
         JSONParser jsonParser = new JSONParser();
         Object obj = jsonParser.parse(apiResult);
         JSONObject jsonObj = (JSONObject) obj;
-        System.out.println("jsonObj : " + jsonObj);
+//        System.out.println("jsonObj : " + jsonObj);
 
         JSONObject response_obj = (JSONObject) jsonObj.get("response");
-        System.out.println("email : " + response_obj.get("email"));
+
+        Naver naver = new Naver();
+        naver.setMemberSocialToken(oauthToken.getRefreshToken());
+        naver.setSocialType("naver");
+
+        Member member = new Member();
+
+        member = service.socialCheck((String)response_obj.get("mobile"));
+
+        Member loginMember = new Member();
 
 
-        System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
-        model.addAttribute("result", apiResult);
-        System.out.println("result"+apiResult);
+        System.out.println("에러1");
+        if(member != null){ // 없는 회원이면 회원가입을 진행합니다.
+            loginMember = member;
+            path = "socialSuccess";
+        }else{ // 이미 가입이 되어있는 회원이면 로그인을 진행합니다.
+            loginMember.setMemberPhone((String)response_obj.get("mobile"));
+            loginMember.setMemberId((String)response_obj.get("email"));
+            loginMember.setMemberName((String)response_obj.get("name"));
+            loginMember.setMemberFName((String)response_obj.get("nickname"));
+            loginMember.setMemberGender((String)response_obj.get("gender"));
 
-        return "socialSuccess";
+            System.out.println("에러2");
+            // 일반회원에 삽입
+            int result = service.socialSignUp(loginMember);
+            if(result > 0)  naver.setMemberNo(loginMember.getMemberNo());
+
+            // 소셜테이블에 나머지 정보 삽입
+            result = service.insertToken(naver);
+
+            System.out.println("비어있습니다");
+            if(result > 0)  path = "socialSuccess";
+            else            path = "redirect:/";
+        }
+
+        model.addAttribute("loginMember", loginMember);
+//        model.addAttribute("result", apiResult);
+
+        return path;
     }
 
 
