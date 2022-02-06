@@ -144,6 +144,7 @@
 
             <!-- 게시판 리스트 -->
             <jsp:include page="list.jsp"/> 
+            
         </section>
     </div>
 </main>
@@ -152,4 +153,7 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"/>
 <script src="${contextPath}/resources/js/board/board_common.js"></script>
+
+
+
 <script src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
