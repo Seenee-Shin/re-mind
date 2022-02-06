@@ -181,7 +181,7 @@
 			                <hr>
 			                <li><a href="#">마이활동</a>
 			                    <ul>
-			                        <li><a href="#">게시글 내역</a></li>
+			                        <li><a href="myBoardList">게시글 내역</a></li>
 			                        <li><a href="#">쪽지</a></li>
 			                        <li><a href="#">문의사항</a></li>
 			                        <li><a href="#">차단한 회원</a></li>

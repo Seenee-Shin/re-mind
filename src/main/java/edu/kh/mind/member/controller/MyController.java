@@ -212,30 +212,32 @@ public class MyController {
     public String myBoardList(Model model,
                               HttpServletRequest req,
                               @ModelAttribute("loginMember") Member loginMember,
-                              HttpSession session,RedirectAttributes ra, Board board) throws Exception{
+                              HttpSession session,RedirectAttributes ra, Board board){
         model.addAttribute("css", "my/myBoardList");
 
+        String path = null;
 
-        String path = "";
+        int memberNo = 0;
 
-        if (loginMember != null) {
+        if (session.getAttribute("loginMember") != null) {
+            memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
 
-            System.out.println(loginMember.getMemberNo());
-
-            int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+            System.out.println(memberNo);
 
             board.setMemberNo(memberNo);
-            List<Board> myBoardList = service.myBoardList(board);
+
+            Board myBoardList = (Board) service.myBoardList(board);
+
+            System.out.println(myBoardList);
+
 
             model.addAttribute("myBoardList", myBoardList);
             path = "/my/myBoardList";
-            return "redirect:" + path;
-
         } else {
-            Util.swalSetMessage("로그인이 필요합니다.", "", "info", ra);
+            Util.swalSetMessage("로그인이 필요합니다.", "h", "info", ra);
             path = "/";
-            return "redirect:" + path;
         }
+        return path;
 
     }
 

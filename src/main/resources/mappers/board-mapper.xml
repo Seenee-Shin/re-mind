@@ -21,7 +21,8 @@
     </resultMap>
 
     <select id="myBoardList" resultMap="board_rm">
-        SELECT * FROM BOARD
+        SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, MEMBER_NM
+        FROM BOARD
         JOIN MEMBER USING(MEMBER_NO)
         WHERE MEMBER_NO = #{memberNo}
           AND BOARD_STATUS_CD = 201
