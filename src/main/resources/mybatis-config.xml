@@ -19,6 +19,7 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionPrice" alias="ProfessionPrice"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="edu.kh.mind.board.model.vo.MindPost" alias="MindPost"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Empathy" alias="Empathy"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.EmpathyStatus" alias="EmpathyStatus"/>
 
@@ -28,6 +29,7 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.EmotionDiary" alias="EmotionDiary"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.ReservationPayMent" alias="ReservationPayMent"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.Payment" alias="Payment"/>
+		<typeAlias type="edu.kh.mind.pro.model.vo.Reservation" alias="Reservation"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Image" alias="Image"/>
 		<typeAlias type="edu.kh.mind.member.social.naver.vo.Naver" alias="Naver"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.WorryCategory" alias="WorryCategory"/>
