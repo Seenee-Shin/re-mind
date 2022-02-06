@@ -1700,14 +1700,16 @@ WHERE CATEGORY_NO = 1;
 
 
 SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, MEMBER_NM  FROM BOARD
-JOIN MEMBER USING(MEMBER_NO)
-WHERE MEMBER_NO = 71
+JOIN MEMBER USING (MEMBER_NO)
+WHERE MEMBER_NO = 72
 AND BOARD_STATUS_CD = 201
 AND STATUS_CD = 0;
 
+select * from board;
+
 -- 보드 테이블 샘플 데이터
 BEGIN
-    FOR N IN 1..50 LOOP
+    FOR N IN 1..100 LOOP
         INSERT INTO BOARD
         VALUES(SEQ_BOARD_NO.NEXTVAL,
                     '나의 ' || SEQ_BOARD_NO.CURRVAL || '번째 게시글',
@@ -1729,6 +1731,8 @@ BEGIN
 
 END;
 /
+--------------------------------------------------
+----------------------------------------------------
 
 ALTER TABLE BOARD MODIFY BOARD_READ_COUNT  NOT NULL;
 

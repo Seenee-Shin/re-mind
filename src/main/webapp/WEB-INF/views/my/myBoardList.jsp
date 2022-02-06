@@ -29,14 +29,14 @@
         <tbody>
             <c:choose>
 
-                <c:when test="${empty myBoardList}">
+                <c:when test="${empty sessionScope.myBoardList}">
                     <%-- 조회된 게시글 목록이 없을 때 --%>
                     <tr>
                         <td colspan="4">게시글이 존재하지 않습니다.</td>
                     </tr>
                 </c:when>
                 <c:otherwise>
-                    <c:forEach items="${myBoardList}" var="myBoardList">
+                    <c:forEach items="${sessionScope.myBoardList}" var="myBoardList">
                         <%-- 조회된 게시글 목록이 있을 때 --%>
                         <tr class="board-view">
                             <td>${myBoardList.boardNo}</td>
@@ -48,7 +48,7 @@
                 </c:otherwise>
 
             </c:choose>
-            <tr class="board-view">
+            <%--<tr class="board-view">
                 <td>1445</td>
                 <td>너무 힘드네요...</td>
                 <td>2022.01.01</td>
@@ -66,7 +66,7 @@
             <td>너무 힘드네요...너무 힘드네요... 너무 힘드네요...</td>
             <td>2021.05.17</td>
             <td>12</td>
-        </tr>
+        </tr>--%>
         </tbody>
     </table>
 

@@ -222,19 +222,14 @@ public class MyController {
         if (session.getAttribute("loginMember") != null) {
             memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
 
-            System.out.println(memberNo);
 
-            board.setMemberNo(memberNo);
-
-            Board myBoardList = (Board) service.myBoardList(board);
-
+            List<Board> myBoardList = service.myBoardList(memberNo);
             System.out.println(myBoardList);
 
-
             model.addAttribute("myBoardList", myBoardList);
-            path = "/my/myBoardList";
+            path = "my/myBoardList";
         } else {
-            Util.swalSetMessage("로그인이 필요합니다.", "h", "info", ra);
+            Util.swalSetMessage("로그인이 필요합니다.", null, "info", ra);
             path = "/";
         }
         return path;
