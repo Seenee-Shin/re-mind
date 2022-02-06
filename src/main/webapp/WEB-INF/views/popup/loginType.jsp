@@ -8,6 +8,8 @@
 <%-- 구글 api 사용을 위한 라이브러리 --%>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+
 
 
 <div id="login_area">
@@ -19,9 +21,9 @@
 		<div class="login_method">
 
 			<%--         <a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
-			<a href="javascript:kakaoLogin();">카카오 로그인</a>
+<%--			<a href="javascript:kakaoLogin();">카카오 로그인</a>--%>
 			<a href="javascript:naverLogin();">네이버 로그인</a>
-			<a href="javascript:googleLogin();">구글 로그인</a>
+<%--			<a href="javascript:googleLogin();">구글 로그인</a>--%>
 			<a href="#" class="emailLogin">이메일 로그인</a>
 		</div>
 		<div class="sign_up_wrap">
@@ -34,7 +36,7 @@
 <script>
 	function naverLogin(){
 		$.ajax({
-			url:"social/naverlogin",
+			url:contextPath+"/social/naverlogin",
 			data:{"naver": "naver"},
 		}).done(function (res){
 			window.location.replace(res);
@@ -42,7 +44,7 @@
 	}
 	function kakaoLogin(){
 		$.ajax({
-			url:"social/kakaoLogin",
+			url:contextPath+"/social/kakaoLogin",
 			data:{"kakao": "kakao"},
 		}).done(function (res){
 			window.location.replace(res);
@@ -50,7 +52,7 @@
 	}
 	function  googleLogin(){
 		$.ajax({
-			url:"social/googleLogin",
+			url:contextPath+"/social/googleLogin",
 			data:{"google": "google"},
 		}).done(function (res){
 			window.location.replace(res);

@@ -15,6 +15,7 @@ public class Member {
     private int statusCode;
     public Member(){}
 
+
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
     }

@@ -31,7 +31,7 @@ public class ProController {
     	
 		return "pro/proList";
 	}
-	
+
 	@GetMapping("proCategory")
 	@ResponseBody
 	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<String> worryCtCd){
@@ -40,6 +40,10 @@ public class ProController {
 
 		if(worryCtCd != null)	pList = service.selectProfession(worryCtCd);
 		else					pList = service.selectAllProfession();
+
+		for(Profession p : pList){
+			System.out.println("제발 : " + p.getProfessionName());
+		}
 
 		return new Gson().toJson(pList);
 	}

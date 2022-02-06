@@ -16,6 +16,13 @@
         <result property="remarks" column="REMARKS"/>
         <result property="statusCode" column="STATUS_CD"/>
         <result property="worryName" column="WORRY_NM"/>
+
+        <result property="professionMajor" column="PROFESSION_MAJOR"/>
+        <result property="professionIntro" column="PRO_INTRO"/>
+        <result property="professionStory" column="PRO_STORY"/>
+        <result property="professionTag" column="PRO_TAG"/>
+        <result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
+        <result property="counselPrice" column="COUNSEL_PRICE"/>
     </resultMap>
     
     <resultMap id="professionInfo_rm" type="ProfessionInfo">
@@ -54,13 +61,33 @@
         <result property="memberName" column="MEMBER_NM"/>
     </resultMap>
 
+		<resultMap type="Image" id="image_rm">
+		<id property="imageNo" column="IMAGE_NO"/>
+		<result property="imagePath" column="IMAGE_PATH"/>
+		<result property="imageName" column="IMAGE_NM"/>
+		<result property="imageOriginal" column="IMAGE_ORIGINAL"/>
+		<result property="imageLevel" column="IMAGE_LEVEL"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="boardNo" column="PROFESSION_NO"/>
+		<result property="professionNo" column="BOARD_NO"/>
+	</resultMap>
+	
 <!--    그그그머냐ㅐ 그거 검색 -->
     <select id="selectProfession" resultMap="profession_rm">
-        SELECT * FROM PROFESSION
-        WHERE
+        SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
+        PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG,
+        LISTAGG(COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
+        LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
+        FROM PROFESSION_PRICE
+        JOIN PROFESSION USING(PROFESSION_NO)
+        JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
+        WHERE PROFESSION_NO IN (SELECT PROFESSION_NO FROM PROFESSION_INFORMATION
+            WHERE
             <foreach collection="list" item="category" open="(" close=")" separator=" OR ">
-                WORRY_NM LIKE '%' || #{category} || '%'
-            </foreach>
+                PRO_TAG LIKE '%' || #{category} || '%'
+            </foreach>)
+        GROUP BY PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR, PRO_INTRO,
+        PRO_STORY, PRO_CARRER, PRO_TAG
     </select>
     <select id="selectAllProfession" resultMap="profession_rm">
         SELECT * FROM PROFESSION
@@ -98,6 +125,13 @@
             DEFAULT
         )
     </insert>
+    
+    	
+	<!-- 상담사 학력증명서 입력 -->
+	<insert id="insertCertification" parameterType="Image">
+		INSERT INTO IMAGE (IMAGE_NO,IMAGE_PATH,IMAGE_NM,IMAGE_ORIGINAL,IMAGE_LEVEL,PROFESSION_NO)
+		VALUES(SEQ_IMAGE_NO.NEXTVAL,#{imagePath},#{imageName},#{imageOriginal},#{imageLevel},#{professionNo})
+	</insert>
 
     <!-- 프로필 view용 가격조회 -->
     <select id="selectPrice" resultMap="professionPrice_rm">
