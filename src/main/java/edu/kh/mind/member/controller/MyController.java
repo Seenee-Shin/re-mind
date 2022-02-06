@@ -1,6 +1,7 @@
 package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
 import edu.kh.mind.member.model.vo.EmotionCategory;
@@ -208,9 +209,21 @@ public class MyController {
     }
 
     @GetMapping("myBoardList")
-    public String myBoardList(Model model){
+    public String myBoardList(Model model,
+                              HttpServletRequest req,
+                              @ModelAttribute("loginMember") Member loginMember,
+                              RedirectAttributes ra,
+                              int memberNo, Board board) throws Exception{
         model.addAttribute("css", "my/myBoardList");
-        return "my/myBoardList";
+
+
+        System.out.println(loginMember.getMemberNo());
+
+        board.setMemberNo(loginMember.getMemberNo());
+        List<Board> myBoardList = service.myBoardList(memberNo);
+
+
+        return new Gson().toJson(myBoardList);
     }
 
     @GetMapping("postscript")
@@ -256,4 +269,3 @@ public class MyController {
     }
 
 }
-

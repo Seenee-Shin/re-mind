@@ -1,5 +1,6 @@
 package edu.kh.mind.member.model.service;
 
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -39,4 +40,7 @@ public interface MyService {
 	 * @return list
 	 */
 	List<String> selectEmotionDiaryDate(int memberNo);
+
+	// 내가 쓴글 조회
+    List<Board> myBoardList(int memberNo);
 }

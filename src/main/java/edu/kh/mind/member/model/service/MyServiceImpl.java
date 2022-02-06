@@ -1,5 +1,6 @@
 package edu.kh.mind.member.model.service;
 
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.MyDAO;
 import edu.kh.mind.member.model.vo.EmotionCategory;
@@ -63,4 +64,9 @@ public class MyServiceImpl implements MyService {
     }
 
 
+    // 내 게시글 조회
+    @Override
+    public List<Board> myBoardList(int memberNo) {
+        return dao.myBoardList(memberNo);
+    }
 }

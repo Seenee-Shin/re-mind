@@ -31,7 +31,7 @@ public class SelftestRestController {
 
 
         List<Selftest> selectQ = service.selectQ(selftest);
-        System.out.println("List : " + selectQ);
+//        System.out.println("List : " + selectQ);
 
 
 
