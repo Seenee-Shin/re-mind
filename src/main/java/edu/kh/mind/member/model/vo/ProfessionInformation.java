@@ -8,6 +8,7 @@ public class ProfessionInformation {
     private String professionIntro;
     private String professionStory;
     private String professionCarrer;
+    private int professionTag;
     
 
     public ProfessionInformation(){}
@@ -66,5 +67,13 @@ public class ProfessionInformation {
 
 	public void setProfessionCarrer(String professionCarrer) {
 		this.professionCarrer = professionCarrer;
+	}
+
+	public int getProfessionTag() {
+		return professionTag;
+	}
+
+	public void setProfessionTag(int professionTag) {
+		this.professionTag = professionTag;
 	}
 }

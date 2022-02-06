@@ -1,7 +1,10 @@
 package edu.kh.mind.adminPro.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import edu.kh.mind.member.model.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,40 +13,91 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import edu.kh.mind.adminPro.model.service.AdminProService;
 import edu.kh.mind.common.util.Util;
+
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import edu.kh.mind.member.model.vo.ProfessionInformation;
+import edu.kh.mind.member.model.vo.ProfessionPrice;
+import edu.kh.mind.pro.model.vo.WorryCategory;
 
 @Controller
 @RequestMapping("adminPro/*")
-@SessionAttributes({"loginPro"})
+@SessionAttributes({"loginPro", "chattingNo"})
 public class AdminProController {
 	
 	@Autowired
 	private AdminProService service;
 
-	//등록화면 연결
-	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
-	public String proLogin() {
-		
-		return "adminPro/proLogin";
+
+	@RequestMapping(value = "/")
+	public String proMain(HttpSession session) {
+
+		String path = "adminPro/proLogin";
+		if (session.getAttribute("loginPro") != null) {
+			path = "redirect:/adminPro/proReservation";
+		}
+
+		return path;
 	}
+
+	// 로그인 페이지
+	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
+	public String proLoginForm(HttpSession session) {
+
+		String path = "adminPro/proLogin";
+		if (session.getAttribute("loginPro") != null) {
+			path = "redirect:/adminPro/proReservation";
+		}
+		
+		return path;
+	}
+
+	// 로그인
+	@RequestMapping(value="proLogin", method = RequestMethod.POST)
+	public String proLogin(Profession profession, Model model, RedirectAttributes ra) {
+		System.out.println(profession.toString());
+		Profession loginPro = service.proLogin(profession);
+		System.out.println(loginPro);
+
+		String path = "redirect:/adminPro/proLogin";
+
+		if (loginPro != null) {
+			if (loginPro.getStatusCode() == 4) {
+				model.addAttribute("loginPro", loginPro);
+				path = "redirect:/adminPro/proReservation";
+			} else {
+				Util.swalSetMessage("관리자 승인 후 로그인 가능합니다.", null, "info", ra);
+			}
+		} else {
+			Util.swalSetMessage("아이디 또는 비밀번호를 확인해 주세요.", null, "error", ra);
+		}
+
+		return path;
+
+	}
+
+	// 상담사 예약 목록
+	@RequestMapping("proReservation")
+	public String proReservation() {
+
+		return "adminPro/proReservation";
+	}
+
 	
-	//등록화면 연결
+	// 상담사 등록 신청
 	@RequestMapping(value = "proRegister", method = RequestMethod.GET )
 	public String proRegister() {
 		
 		return "adminPro/proRegister";
 	}
-	
+
+	// 아이디 중복 검사
 	@RequestMapping(value = "emailDupCheck", method=RequestMethod.GET)
 	@ResponseBody
 	public int emailDupCheck(String inputEmail) {
@@ -85,8 +139,8 @@ public class AdminProController {
         }
     }
     
-    //상담사 페이지 연결
-    @RequestMapping("proRegisterDetail/{proNo}")
+    //상담사 정보등록 페이지 연결
+    @RequestMapping("proRegisterDetail/{professionNo}")
     public String insertproDetail(){
     	
     	return "adminPro/proRegisterDetail";
@@ -94,7 +148,7 @@ public class AdminProController {
     
     
     //상담사 정보등록 
-    @RequestMapping(value = "proRegisterDetail/{proNo}", method = RequestMethod.POST )
+    @RequestMapping(value = "proRegisterDetail/{professionNo}", method = RequestMethod.POST )
     public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro, 
     							 ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile certification,
     							Model md, RedirectAttributes ra, HttpSession session) {
@@ -137,21 +191,57 @@ public class AdminProController {
     	return "redirect:"+path;
     }
     
-    //상담사 프로필 작성 연결
-    @RequestMapping(value = "AdminProProfile/{proNo}")
-    public String AdminProProfile() {
-    	 return "adminPro/AdminProProfile";
-    }
-    
-    //상담사 프로필 작성 연결
-    @RequestMapping(value = "AdminProProfile/{proNo}", method = RequestMethod.POST)
-    public String AdminProProfile(@ModelAttribute("loginPro") Profession loginPro,ProfessionInformation proInfo ) {
+    //상담사 프로필 조회 연결
+    @RequestMapping(value = "AdminProProfile/{professionNo}")
+    public String AdminProProfileView(@ModelAttribute("loginPro") Profession loginPro,
+    		@PathVariable int professionNo, Model model) {
+    	List<ProfessionPrice> price = service.selectPrice(professionNo);
+    	
+    	
+    	model.addAttribute("price", price);
+    	model.addAttribute("css", "proPage/proProfile");
     	
     	return "adminPro/AdminProProfile";
     }
     
+    //상담사 프로필 수정 연결
+    @RequestMapping(value = "update/{professionNo}")
+    public String AdminProProfile(@PathVariable int professionNo, Model model) {
+		List<WorryCategory> category = service.selectWorryCategory();
+		List<ProfessionPrice> price = service.selectPrice(professionNo);
+		model.addAttribute("category", category);
+		model.addAttribute("price", price);
+		model.addAttribute("css", "proPage/proProfile");
+		
+    	 return "adminPro/AdminProProfileUpdate";
+    }
+    
+    //상담사 프로필 수정 
+    @RequestMapping(value = "update/{professionNo}", method = RequestMethod.POST)
+    public String AdminProProfile(@ModelAttribute("loginPro") Profession loginPro,ProfessionInformation proInfo, ProfessionPrice price,
+    							@PathVariable int professionNo, int worryCategoryCode, RedirectAttributes ra ) {
+    	
+    	proInfo.setProfessionNo(loginPro.getProfessionNo());
+    	proInfo.setProfessionTag(worryCategoryCode);
+    	
+    	int result = service.updateProProfile(proInfo); 
+    	
+    	int pResult = service.updatePrice(price);
+    	
+    	String path = null;
+    	
+    	if(result < 0) {
+    		Util.swalSetMessage("프로필 수정 완료", null, "success", ra);
+    		path = "/AdminProProfile/"+professionNo;
+    		
+    	}else {
+			Util.swalSetMessage("프로필 수정 실패", null, "error", ra);
+			path = "/update/"+professionNo;
+    	}
+    	
+    	return "redirect:"+path;
+    }
 
-	
     //예외처리
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e, Model model) {
@@ -162,6 +252,40 @@ public class AdminProController {
 		model.addAttribute("e", e);
 		
 		return "/common/error";
+	}
+
+
+	@RequestMapping("chat/room/{reservationNo}")
+	public String chatJoin(@PathVariable("reservationNo") int reservationNo, ChatJoin chat, RedirectAttributes ra, Model model, HttpSession session) {
+
+		String path = "redirect:/adminPro/proReservation";
+		if (session.getAttribute("loginPro") != null) {
+
+			int professionNo = ((Profession) session.getAttribute("loginPro")).getProfessionNo();
+			System.out.println(professionNo);
+			System.out.println(chat);
+
+			chat.setProfessionNo(professionNo);
+			List<ChatMessage> list = service.joinChat(chat);
+			System.out.println(list);
+
+			if (list != null) {
+				model.addAttribute("chattingNo", chat.getChattingNo());
+
+//				model.addAttribute("css", "my");
+				model.addAttribute("chat", chat);
+				model.addAttribute("list", list);
+
+				path = "adminPro/proChat";
+			} else {
+				Util.swalSetMessage("해당 채팅방이 존재하지 않습니다.", null, "info", ra);
+			}
+		} else {
+			Util.swalSetMessage("로그인이 필요 합니다.", null, "error", ra);
+		}
+
+		return path;
+
 	}
 	
 }

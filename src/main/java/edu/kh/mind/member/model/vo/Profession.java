@@ -127,4 +127,23 @@ public class Profession {
 	public void setAuthStatus(int authstatus) {
 		this.authStatus = authstatus;
 	}
+
+    @Override
+    public String toString() {
+        return "Profession{" +
+                "professionNo=" + professionNo +
+                ", professionId='" + professionId + '\'' +
+                ", professionPw='" + professionPw + '\'' +
+                ", professionName='" + professionName + '\'' +
+                ", professionPhone='" + professionPhone + '\'' +
+                ", professionEnrollDate=" + professionEnrollDate +
+                ", professionGender='" + professionGender + '\'' +
+                ", professionBirth='" + professionBirth + '\'' +
+                ", professionAuthKey='" + professionAuthKey + '\'' +
+                ", authStatus=" + authStatus +
+                ", remarks='" + remarks + '\'' +
+                ", statusCode=" + statusCode +
+                ", worryName='" + worryName + '\'' +
+                '}';
+    }
 }

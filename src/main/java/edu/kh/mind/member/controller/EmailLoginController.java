@@ -1,5 +1,6 @@
 package edu.kh.mind.member.controller;
 
+import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.LoginService;
 import edu.kh.mind.member.model.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class EmailLoginController {
         if (loginMember != null) {
             model.addAttribute("loginMember", loginMember);
         } else {
-            ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해 주세요.");
+            Util.swalSetMessage("아이디 또는 비밀번호를 확인해 주세요.", null, "error", ra);
         }
 
         return "redirect:/";
