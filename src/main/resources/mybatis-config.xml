@@ -18,6 +18,7 @@
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionInformation" alias="ProfessionInfo"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.ProfessionPrice" alias="ProfessionPrice"/>
 		<typeAlias type="edu.kh.mind.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="edu.kh.mind.board.model.vo.Board" alias="Board"/>
 
 		<typeAlias type="edu.kh.mind.selftest.model.vo.Selftest" alias="Selftest"/>
 
@@ -28,6 +29,7 @@
 		<typeAlias type="edu.kh.mind.board.model.vo.Image" alias="Image"/>
 		<typeAlias type="edu.kh.mind.member.social.naver.vo.Naver" alias="Naver"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.WorryCategory" alias="WorryCategory"/>
+
 
 	</typeAliases>
 
@@ -43,6 +45,7 @@
 		<mapper resource="/mappers/image-mapper.xml"/>
 		<mapper resource="/mappers/worry-mapper.xml"/>
 		<mapper resource="/mappers/board2-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
 
 	</mappers>
 

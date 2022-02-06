@@ -42,5 +42,5 @@ public interface MyService {
 	List<String> selectEmotionDiaryDate(int memberNo);
 
 	// 내가 쓴글 조회
-    List<Board> myBoardList(int memberNo);
+    List<Board> myBoardList(Board board);
 }

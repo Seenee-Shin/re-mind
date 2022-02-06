@@ -212,18 +212,31 @@ public class MyController {
     public String myBoardList(Model model,
                               HttpServletRequest req,
                               @ModelAttribute("loginMember") Member loginMember,
-                              RedirectAttributes ra,
-                              int memberNo, Board board) throws Exception{
+                              HttpSession session,RedirectAttributes ra, Board board) throws Exception{
         model.addAttribute("css", "my/myBoardList");
 
 
-        System.out.println(loginMember.getMemberNo());
+        String path = "";
 
-        board.setMemberNo(loginMember.getMemberNo());
-        List<Board> myBoardList = service.myBoardList(memberNo);
+        if (loginMember != null) {
 
+            System.out.println(loginMember.getMemberNo());
 
-        return new Gson().toJson(myBoardList);
+            int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+
+            board.setMemberNo(memberNo);
+            List<Board> myBoardList = service.myBoardList(board);
+
+            model.addAttribute("myBoardList", myBoardList);
+            path = "/my/myBoardList";
+            return "redirect:" + path;
+
+        } else {
+            Util.swalSetMessage("로그인이 필요합니다.", "", "info", ra);
+            path = "/";
+            return "redirect:" + path;
+        }
+
     }
 
     @GetMapping("postscript")

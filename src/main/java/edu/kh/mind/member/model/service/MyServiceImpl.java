@@ -66,7 +66,7 @@ public class MyServiceImpl implements MyService {
 
     // 내 게시글 조회
     @Override
-    public List<Board> myBoardList(int memberNo) {
-        return dao.myBoardList(memberNo);
+    public List<Board> myBoardList(Board board) {
+        return dao.myBoardList(board);
     }
 }
