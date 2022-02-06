@@ -95,6 +95,8 @@ public class ProController {
 		return price;
 	}
 	
+	
+	// 금액이 맞으면 update
 	@ResponseBody
 	@RequestMapping(value="reservationUpdate", method=RequestMethod.POST)
 	public int reservationUpdate(Payment payment, Reservation reservation) {
@@ -109,5 +111,14 @@ public class ProController {
 		return result;
 	}
 	
+	// 결제 취소 버튼을 눌렀을 경우
+	@ResponseBody
+	@RequestMapping(value="paymentDelete", method=RequestMethod.POST)
+	public int paymentDelete(int payNo) {
+	
+		int result = service.paymentDelete(payNo);
+		
+		return result;
+	}
 	
 }
