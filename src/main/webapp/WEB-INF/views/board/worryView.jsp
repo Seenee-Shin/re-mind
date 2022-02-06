@@ -55,7 +55,7 @@
 	
 	
 	                <div class="like_warp">
-	                    <div id="like_smile" onclick="">
+	                    <input type="radio" name="empathy" value="1001" id="like_smile" onclick="">
 	                        <img src="${contextPath}/resources/images/icon/smile.png" alt="">
 	                        <p>좋아요</p>
 	                        <p class="like_count">34</p>
