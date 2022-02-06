@@ -135,6 +135,16 @@
 		}
 	}
 	
+	$(function () {
+		const emotionRecordData = JSON.stringify(${emotionRecordData});
+
+		if (emotionRecordData != undefined) {
+			const emotionDiary = JSON.parse(emotionRecordData);
+			
+			let index = 0;		}
+		
+	}
+	
 
 </script>
 

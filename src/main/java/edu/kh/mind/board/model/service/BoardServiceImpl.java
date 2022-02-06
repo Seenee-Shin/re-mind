@@ -1,14 +1,120 @@
 package edu.kh.mind.board.model.service;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.mind.adminPro.model.exception.InsertCertificationFailException;
 import edu.kh.mind.board.model.dao.BoardDAO;
+import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.common.util.Util;
 
 @Service
 public class BoardServiceImpl implements BoardService{
 
 	@Autowired
 	private BoardDAO dao;
-	
+
+
+	@Override
+	public List<Board> selectBoardList() {
+		// TODO Auto-generated method stub
+		return dao.selectBoardList();
+	}
+
+
+	@Override
+	public int insertFreeBoard(Board board, List<MultipartFile> images, String webPath, String serverPath) {
+		board.setBoardContent(Util.XSS(board.getBoardContent()));
+		board.setBoardContent(Util.changeNewLine(board.getBoardContent()));
+		
+		int boardNo= dao.insertFreeBoard(board);
+		
+		if(boardNo>0) {
+			//실제 업로드도니 이미지를 분별하여 list<Boardimages> imgList에 담기
+			List<Image> imgList = new ArrayList<Image>();
+			
+			for(int i = 0 ; i<images.size(); i++) {
+				//i == images index == level
+				
+				//각 인덱스 요소에 파일이 업로드 되었는지 검사
+				if(!images.get(i).getOriginalFilename().equals("")) {
+					//업로드가 된 경우 MultipartFile에서 DB저장에 필요한 데이터를 추출 -> add BoardImage -> add imgList
+					
+					Image img = new Image();
+					img.setImagePath(webPath); //web access
+					img.setImageOriginal(images.get(i).getOriginalFilename()); //OriginalFileName
+					//image rename
+					img.setImageName(Util.fileRename(images.get(i).getOriginalFilename()));
+					img.setImageLevel(i);
+					img.setBoardNo(boardNo); //return from dao 
+					
+					imgList.add(img); //add to List
+				}// end if
+			}//end for
+			
+			//upload images if there are infomation about imgList
+			if(!imgList.isEmpty()) {
+				int result = dao.insertImgList(imgList);
+				
+				//삽입 성공한 행의 개수와 imgList 개수가 같을 경우 파일을 서버에 저장 
+				//1순위로 확인할 것 : servers -> fin server -> Overview -> serve module 확인 
+				
+				
+				// images : MultipartFile List : 실제 파일 + 정보 
+				// imgList : BoardImage List, DB에 저장할 파일 정보
+				if(result == imgList.size()) {
+					for(int i = 0; i <imgList.size(); i++) {
+						
+						//업로드된 파일이 있는 images의 인덱스 요소를 얻어와 지정된 경로와 이름으로 파일로 변환하여 저장
+						try {
+							images.get(imgList.get(i).getImageLevel())
+							.transferTo(new File(serverPath+"/"+ imgList.get(i).getImageName()));
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							
+							throw new InsertCertificationFailException("파일 변환중 문제 발생");
+							
+							//파일 변환이 실패할 경우 사용자 정의 예외 발생
+						}
+					}
+				}else {
+					//업로드된 이미지 수와 삽입된 행의 수가 다를경우 
+					//사용자 정의 예외 발생
+				  throw new InsertCertificationFailException();
+				  
+				}
+			}
+		}
+		return boardNo;
+	}
+
+
+	@Override
+	public Board selectBoard(int boardNo, int memberNo) {
+		
+		Board board = dao.selectBoard(boardNo);
+		
+	      // 게시글 상세조회 성공 && 게시글 작성자(board.getMemberNo()) != 회원번호 
+	      if(board != null && board.getMemberNo() != memberNo ) {
+	         
+	         // 조회수 증가
+	         int result = dao.increaseReadCount(boardNo); // 몇번 글의 조회수를 증가하는지 알아야하기에 boardNo가 넘어간다
+	      
+	         // 조회 수 증가 성공 시
+	         // 미리 조회된 board의 readCount를 +1 (DB 동기화)
+	         if(result > 0) {
+	            board.setReadCount( board.getReadCount() + 1);
+	         }
+	      }
+	      return board;
+	   }
+		
 }
+

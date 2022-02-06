@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.pro.model.service.ProService;
 import edu.kh.mind.pro.model.vo.Payment;
+import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class ProController {
     	
 		return "pro/proList";
 	}
-	
+
 	@GetMapping("proCategory")
 	@ResponseBody
 	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<String> worryCtCd){
@@ -39,6 +40,10 @@ public class ProController {
 
 		if(worryCtCd != null)	pList = service.selectProfession(worryCtCd);
 		else					pList = service.selectAllProfession();
+
+		for(Profession p : pList){
+			System.out.println("제발 : " + p.getProfessionName());
+		}
 
 		return new Gson().toJson(pList);
 	}
@@ -88,6 +93,20 @@ public class ProController {
 		int price = service.priceSelect(payNo);
 		
 		return price;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="reservationUpdate", method=RequestMethod.POST)
+	public int reservationUpdate(Payment payment, Reservation reservation) {
+		
+		System.out.println(payment.getPayNo());
+		System.out.println(reservation.getReservationEnrollDate());
+		System.out.println(reservation.getReservationEnrollTime());
+		System.out.println(reservation.getCounselCategoryNm());
+		
+		int result = service.reservationUpdate(payment,reservation);
+		
+		return result;
 	}
 	
 	

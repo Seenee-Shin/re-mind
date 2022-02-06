@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.kh.mind.pro.model.vo.Payment;
+import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
 
 @Repository 
@@ -43,6 +44,18 @@ public class ProDAO {
     public List<Profession> selectAllProfession() {
         return sqlSession.selectList("professionMapper.selectAllProfession");
     }
+    
+    
+    // payment update
+	public int paymentUpdate(Payment payment) {
+		
+		return sqlSession.update("reservationMapper.paymentUpdate",payment);
+	}
+	
+	// reservation insert
+	public int reservationInsert(Reservation reservation) {
+		return sqlSession.insert("reservationMapper.reservationInsert",reservation);
+	}
     
 	
 	

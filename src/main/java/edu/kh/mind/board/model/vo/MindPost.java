@@ -13,4 +13,65 @@ public class MindPost {
 	private int statusCode;
 	private int itemImgNo;
 	
+	public MindPost() {
+	}
+	
+	
+	public int getPostNo() {
+		return postNo;
+	}
+	public void setPostNo(int postNo) {
+		this.postNo = postNo;
+	}
+	public String getPostContent() {
+		return postContent;
+	}
+	public void setPostContent(String postContent) {
+		this.postContent = postContent;
+	}
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+	public String getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+	public int getCoordLeft() {
+		return coordLeft;
+	}
+	public void setCoordLeft(int coordLeft) {
+		this.coordLeft = coordLeft;
+	}
+	public int getCoordTop() {
+		return coordTop;
+	}
+	public void setCoordTop(int coordTop) {
+		this.coordTop = coordTop;
+	}
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+	public int getStatusCode() {
+		return statusCode;
+	}
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+	public int getItemImgNo() {
+		return itemImgNo;
+	}
+	public void setItemImgNo(int itemImgNo) {
+		this.itemImgNo = itemImgNo;
+	}
+		
+	
+	
 }

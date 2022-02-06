@@ -135,6 +135,9 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <script>
+    const redColor = "#be153d";
+    const blueColor = "#193ea0";
+
     var today = new Date();
     let year = today.getFullYear();
     let month = today.getMonth();
@@ -166,13 +169,17 @@
         // let doyWeek = WEEKDAY[new Date(today).getDay()];
         // let dayNo = new Date(today).getDay();
         let monthFirstDay = new Date(year, month, 1).getDay();
+        console.log(monthFirstDay)
         backupMonthFirstDay = monthFirstDay;
         let row = el.insertRow();
         let cell;
 
+        // 일 ~ 토 요일을 표시해주고 색을 칠해줍니다.
         for(let i = 0; i < 7; i++){
             cell = row.insertCell();
             cell.innerHTML = WEEKDAY[i]
+            if(i == 0)      cell.style.color = redColor;
+            else if(i == 6) cell.style.color = blueColor;
         }
         row = el.insertRow();
 
@@ -185,12 +192,16 @@
                 cell = row.insertCell();
                 cell.setAttribute("id", i);
                 cell.innerHTML = i;
+                if(monthFirstDay == 6)              cell.style.color = blueColor;
+                if(monthFirstDay == 0 && i == 1)    cell.style.color = redColor;
                 monthFirstDay += 1;
             }else{
                 row = el.insertRow();
                 cell = row.insertCell();
                 cell.setAttribute("id", i);
+
                 cell.innerHTML = i;
+                cell.style.color = redColor;
                 monthFirstDay = monthFirstDay - 6;
             }
         }

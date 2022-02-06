@@ -356,6 +356,10 @@
 		}
 		clickable.sort(function (a, b){return a-b;});
 
+		function makeComma(str) {
+			str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
 
 		$.ajax({
 			url:"proCategory",
@@ -366,6 +370,22 @@
 				ul.empty();
 				$.each(result, function (i, item){
 					console.log(item)
+
+					let category = item.counselCategoryCode.split(",");
+					let price = item.counselPrice.split(",");
+
+					if(category[0] != 1 && category[0] == 2){
+						category.splice(0, 0, "undefined");
+						price.splice(0, 0, "undefined");
+					}
+					else if(category[0] != 1 && category[0] == 3){
+						category.splice(0, 0, "undefined", "undefined");
+						price.splice(0, 0, "undefined", "undefined");
+					}
+					if(category[1] != 2 && category[1] == 3){
+						category.splice(1, 0, "undefined");
+						price.splice(1, 0, "undefined");
+					}
 
 					const li = $('<li class="pro">');
 					const aHref = $('<a href="#">');
@@ -392,7 +412,7 @@
 					pro_score_wrap.append(pro_score_wrap_span, pro_score);
 					pro_intro_wrap_div.append(pro_name, pro_score_wrap);
 					const pro_intro = $('<div class="pro_intro">');
-					const pro_intro_p1 = $('<p>누구보다 아름다운 삶을 응원하겠습니다.</p>');
+					const pro_intro_p1 = $('<p>' + item.professionIntro + '</p>');
 					const pro_intro_p2 = $('<p>#가족 #대인관계 #자존감상실 #연인</p>');
 					pro_intro.append(pro_intro_p1, pro_intro_p2);
 					pro_intro_wrap.append(pro_intro_wrap_div, pro_intro);
@@ -403,17 +423,32 @@
 					const pro_price_wrap = $('<div class="pro_price_wrap">');
 					const text_price = $('<div class="text_price">');
 					const text_price_img = $('<img src="/mind/resources/images/pro/text_therapy.png" class="float-left">');
-					const text_price_p = $('<p class="float-right">25,000<span>원</span></p>');
+					let text_price_p;
+					if(category[0] == 1){
+						text_price_p = $('<p class="float-right">'+makeComma(price[0])+'<span>원</span></p>');
+					}else{
+						text_price_p = $('<p class="float-right">-</p>');
+					}
 					text_price.append(text_price_img, text_price_p);
 
 					const voice_price = $('<div class="voice_price clear-both">');
 					const voice_price_img = $('<img src="/mind/resources/images/pro/voice_therapy.png" class="float-left">');
-					const voice_price_p = $('<p class="float-right">-</p>');
+					let voice_price_p;
+					if(category[1] == 2){
+						voice_price_p = $('<p class="float-right">'+makeComma(price[1])+'<span>원</span></p>');
+					}else{
+						voice_price_p = $('<p class="float-right">-</p>');
+					}
 					voice_price.append(voice_price_img, voice_price_p);
 
 					const face_price = $('<div class="face_price clear-both">');
 					const face_price_img = $('<img src="/mind/resources/images/pro/face_therapy.png" class="float-left">');
-					const face_price_p = $('<p class="float-right">50,000<span>원</span></p>');
+					let face_price_p;
+					if(category[2] == 3){
+						face_price_p = $('<p class="float-right">'+makeComma(price[2])+'<span>원</span></p>');
+					}else{
+						face_price_p = $('<p class="float-right">-</p>');
+					}
 					face_price.append(face_price_img, face_price_p);
 					pro_price_wrap.append(text_price, voice_price, face_price);
 

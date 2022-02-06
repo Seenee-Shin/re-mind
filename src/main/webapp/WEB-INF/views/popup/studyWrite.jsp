@@ -10,7 +10,7 @@
  		<h2>오늘 점심은 무엇을 드시나요? <br>점심 메뉴 추천하기</h2>
  	</div>
  	
-	<form action="/list" method="post" onsubmit="return Validate()">
+	<form action="insert" method="POST">
  	<div class="bg_select">
  		<div class="beaker">
  			<img src="${contextPath}/resources/images/board/mindPost/beaker1.png">
@@ -26,23 +26,20 @@
  		</div>
  	</div>
  	<div class="beaker_radio">
- 			<input type="radio" name="beaker" value="1">
-			<input type="radio" name="beaker" value="2">
-			<input type="radio" name="beaker" value="3">
-			<input type="radio" name="beaker" value="4">
+ 			<input type="radio" name="itemImgNo" value="1" checked="checked">
+			<input type="radio" name="itemImgNo" value="2">
+			<input type="radio" name="itemImgNo" value="3">
+			<input type="radio" name="itemImgNo" value="4">
  	</div>
  	
  	<div class="study_write">
-	     <textarea class="study_textarea" name="" rows="5" ></textarea>
-	<button class="study_submit_btn">작성</button>
+	     <textarea class="study_textarea" name="postContent" id="postContent" rows="5" required></textarea>
+	<button type="submit" class="study_submit_btn">작성</button>
 	</div>
 	
  	
  	</form>
  	
- 
- 
- 
  
  
  </div>

@@ -24,18 +24,7 @@ function validate(){
 			
 		}
 			
-	//주소 병합
-	//input type="hidden" 태그 생성 및 추가
- 	const address = document.getElementById("hospitalAddress")
- 	const address1= document.querySelector("input[id=address_detail]")	
- 	
- 	const input = document.createElement("input")
- 	
- 	input.setAttribute("type","hidden")
- 	input.setAttribute("name","hospitalAddress")
-    input.value = address.value + address1.value 
-    
-	document.proRegisterDetail.append(input)
+
 	
 	}
 }

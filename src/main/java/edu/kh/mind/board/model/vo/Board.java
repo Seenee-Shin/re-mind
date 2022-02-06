@@ -18,12 +18,17 @@ public class Board {
 	
 	private int readCount;
 	private int memberNo;
+	private int memberFn;
 	private int professionNo;
+	private int professionName;
 	private int statusCode;
 	private int boardCategoryCode;
+	private int boardCategoryName;
 	private int worryCategoryCode;
+	private int worryCategoryName;
 	
 	private List<Image> imgList;
+	private List<Empathy> emList;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
@@ -147,6 +152,54 @@ public class Board {
 
 	public void setWorryCategoryCode(int worryCategoryCode) {
 		this.worryCategoryCode = worryCategoryCode;
+	}
+
+	public int getMemberFn() {
+		return memberFn;
+	}
+
+	public void setMemberFn(int memberFn) {
+		this.memberFn = memberFn;
+	}
+
+	public int getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(int professionName) {
+		this.professionName = professionName;
+	}
+
+	public int getBoardCategoryName() {
+		return boardCategoryName;
+	}
+
+	public void setBoardCategoryName(int boardCategoryName) {
+		this.boardCategoryName = boardCategoryName;
+	}
+
+	public int getWorryCategoryName() {
+		return worryCategoryName;
+	}
+
+	public void setWorryCategoryName(int worryCategoryName) {
+		this.worryCategoryName = worryCategoryName;
+	}
+
+	public List<Image> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(List<Image> imgList) {
+		this.imgList = imgList;
+	}
+
+	public List<Empathy> getEmList() {
+		return emList;
+	}
+
+	public void setEmList(List<Empathy> emList) {
+		this.emList = emList;
 	}
 	
 	
