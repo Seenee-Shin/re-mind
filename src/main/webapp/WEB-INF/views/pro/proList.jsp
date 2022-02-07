@@ -403,7 +403,7 @@
 					if(item.imagePath == undefined)//기본프로필이 없으면
 						pro_profile_img2 = $('<img src="'+contextPath+'/resources/images/basicProfile.png" class="profile">');
 					else // 있으면 경로로 이미지이름 추가로 가져와야됨
-						pro_profile_img2 = $('<img src="'+contextPath+'/resources/images/basicProfile.png" class="profile">');
+						pro_profile_img2 = $('<img src="'+contextPath+item.imagePath+'/'+item.imageName+'" class="profile">');
 
 					pro_profile.append(pro_profile_img1, pro_profile_img2);
 
