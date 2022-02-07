@@ -79,4 +79,22 @@
 		]]>
 	</insert>
 	
+	
+	<!-- 결제 취소가 되었을 경우  -->
+	
+	<!-- prservation_no select -->
+	<select id="reservationNoSelect" resultType="_int">
+		SELECT RESERVATION_NO FROM PAYMENT WHERE PAY_NO = #{payNo}
+	</select>
+	
+	<!-- reservationPayment 삭제 -->
+	<delete id="reservationPaymentDelete">
+		DELETE FROM RESERVATION_PAYMENT WHERE RESERVATION_PAY_NO = #{reservationNo}
+	</delete>
+	
+	<!-- payment 삭제 -->
+	<delete id="paymentDelete">
+		DELETE FROM PAYMENT WHERE PAY_NO = #{payNo}
+	</delete>
+	
 </mapper>

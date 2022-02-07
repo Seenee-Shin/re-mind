@@ -6,7 +6,7 @@ public class Reservation {
 	
 	private int reservationNo;
 	private Date reservationEnrollDate;
-	private String reservationEnrollTime;
+	private int reservationEnrollTime;
 	private int reservationStatusCode; // 1:예약신청, 2:예약결정, 3:예약취소, 4:상담완료
 	private String reservationCancel;
 	private int counselCategoryNo;
@@ -35,11 +35,11 @@ public class Reservation {
 		this.reservationEnrollDate = reservationEnrollDate;
 	}
 
-	public String getReservationEnrollTime() {
+	public int getReservationEnrollTime() {
 		return reservationEnrollTime;
 	}
 
-	public void setReservationEnrollTime(String reservationEnrollTime) {
+	public void setReservationEnrollTime(int reservationEnrollTime) {
 		this.reservationEnrollTime = reservationEnrollTime;
 	}
 

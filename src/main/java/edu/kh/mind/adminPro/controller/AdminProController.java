@@ -140,7 +140,7 @@ public class AdminProController {
     }
     
     //상담사 정보등록 페이지 연결
-    @RequestMapping("proRegisterDetail/{professionNo}")
+    @RequestMapping(value="proRegisterDetail/{professionNo}", method = RequestMethod.GET)
     public String insertproDetail(){
     	
     	return "adminPro/proRegisterDetail";

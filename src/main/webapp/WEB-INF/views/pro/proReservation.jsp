@@ -263,8 +263,10 @@
     function setHgight(){
        if($("#calendar tr").length > 6){
             $("#tuition_date").css("height","630px");
+            $("#reservation_confirm_wrap").css("height","1197px");
         }else{
             $("#tuition_date").css("height","560px");
+            $("#reservation_confirm_wrap").css("height","1120px");
         } 
     }
 
