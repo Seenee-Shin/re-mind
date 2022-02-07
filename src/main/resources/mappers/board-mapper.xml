@@ -26,7 +26,7 @@
 		
 		<result property="replyCount" column="REPLY_COUNT"/>
 		<result property="memberImage" column="MEMBER_IMAGE"/>
-		<result property="profrssionImage" column="PROFESSION_IMAGE"/>
+		<result property="professionImage" column="PROFESSION_IMAGE"/>
 		
 		<result property="likeCount" column="L_COUNT"/>
 		<result property="cheerCount" column="C_COUNT"/>
@@ -127,7 +127,7 @@
 	<select id="myBoardList" resultMap="board_rm" >
 		SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE,
 			   TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
-			   BOARD_CATEGORY_NM, BOARD_READ_COUNT
+			   BOARD_CATEGORY_NM, BOARD_READ_COUNT, MEMBER_FN
 		FROM BOARD
 				 JOIN MEMBER USING (MEMBER_NO)
 				 JOIN BOARD_CATEGORY USING (BOARD_CATEGORY_CD)
