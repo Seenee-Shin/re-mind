@@ -25,7 +25,7 @@
 	                            <div class="writer_id">
 	                                <p>${board.memberFn}</p> 
 	                                
-	                                <p> 5분전</p>
+	                                <p>${board.createDate}</p>
 	                            </div>
 	                            <div class="posting">
 	                                <p>${board.boardContent}</p>
@@ -39,7 +39,7 @@
 							<c:when test="${board.replyCheckCode == 1}">
 		                        <div class="commnet_wrap">
 		                            <i class="far fa-comment dark-brown"></i>
-		                            <p>3</p>
+		                            <p>${board.replyCount}</p>
 		                        </div>
 	                        </c:when>
 	                        <c:otherwise>
@@ -53,15 +53,15 @@
 							<c:when test="${board.empathyCheckCode == 1}">
 		                        <div class="like_warp">
 		                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
-		                            <p></p>
+		                            <p>${board.likeCount}</p>
 		                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
-		                            <p>2</p>
+		                            <p>${board.cheerCount}</p>
 		                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
-		                            <p>2</p>
+		                            <p>${board.surpriseCount}</p>
 		                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
-		                            <p>2</p>
+		                            <p>${board.angryCount}</p>
 		                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
-		                            <p>2</p>
+		                            <p>${board.sadCount}</p>
 		                        </div>
 							</c:when>
 							

@@ -9,7 +9,7 @@
 <main>
     <h1>상담사 등록 신청 </h1>
     <br>
-    <form action="proRegisterDetail" method="post" enctype="multipart/form-data" role="form" name="proRegisterDetail" onsubmit="addressVal()"> 
+    <form action="../proRegisterDetail" method="post" enctype="multipart/form-data" role="form" name="proRegisterDetail" onsubmit="addressVal()"> 
 
         <div class="proWrap">
             <div class="label">
@@ -84,7 +84,7 @@
 	 	input.setAttribute("name","hospitalAddress")
 	    input.value = address.value + address1.value 
 	    
-		document.proRegisterDetail.append(input)f
+		document.proRegisterDetail.append(input)
 	}
 
 

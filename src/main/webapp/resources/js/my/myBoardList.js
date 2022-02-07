@@ -79,11 +79,12 @@ $(document).on("click", ".opImg > img", function(){
     }
 });
 
-$(window).scroll(function(e){
-    // console.log($(this).scrollTop());
 
-    underLineDraw(line, $(".div-btn").eq(backupIndex));
-});
+// $(window).scroll(function(e){
+//     // console.log($(this).scrollTop());
+//
+//     underLineDraw(line, $(".div-btn").eq(backupIndex));
+// });
 
 /* 페이지 요청시  AJAX */
 

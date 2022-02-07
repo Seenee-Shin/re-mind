@@ -37,32 +37,57 @@ $(".detail_btn").on("click",function(){
 // 예상 수강료
 let therapySelect;
 let therapyCount;
+let finallyPrice; // 최종 가격
+
+// ********** 상담사 별 가격 가지고 올 예정
+let textTherapy = 100;
+let faceTherapy = 100;
+let voiceTherapy = 100;
+// **********
 
 $("#therapy_select").change(function(){
     therapySelect = $(this).val();
-    therapySelectText = $("#therapy_select option:selected").text();
-    calc();
+  
+    if(therapySelect == 1){
+        finallyPrice = textTherapy*therapyCount;
+    }else if(therapySelect == 2){
+        finallyPrice = faceTherapy*therapyCount;
+    }else if(therapySelect == 3){
+        finallyPrice = voiceTherapy*therapyCount;
+    }
 
+    
+
+    calc();
+    
+    therapySelectText = $("#therapy_select option:selected").text();
     $("#therapy_chk").text(therapySelectText);
 });    
 
 $("#therapy_count").change(function(){ 
     therapyCount = $(this).val();
-    therapyCountText = $("#therapy_count option:selected").text();
-    calc();
 
+    if(therapySelect == 1){
+        finallyPrice = textTherapy*therapyCount;
+    }else if(therapySelect == 2){
+        finallyPrice = faceTherapy*therapyCount;
+    }else if(therapySelect == 3){
+        finallyPrice = voiceTherapy*therapyCount;
+    }
+
+
+    calc();
+    
+    therapyCountText = $("#therapy_count option:selected").text();
     $("#therapy_count_chk").text(therapyCountText);
 });    
 
-let price;
-
 // 상담가격 , 천단위 콤마
 function calc(){
-    if(therapySelect != undefined && therapySelect != 0){
+    if(finallyPrice != undefined && finallyPrice != 0 && finallyPrice != NaN){
         if(therapyCount != undefined && therapyCount != 0){
-            price = Number(therapySelect) * Number(therapyCount);
-            var price2 = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $("#price").html(price2 + "<span>원</span>");
+            var price = Number(finallyPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $("#price").html(price + "<span>원</span>");
         }else{
 
         }    
@@ -93,11 +118,12 @@ $(document).on("click", "#calendar td", function (){
     asff= $("#ym").text().split("년 ");
     splitYear = asff[0];
     splitMonth = asff[1].split("월");
-
     splitDate = $(this).attr("id");
+    
 
-    $("#date_chk").text(splitYear +"-"+splitMonth[0]+"-"+ splitDate);
-
+    if(splitDate != undefined && $(this).css("color") != "rgb(197, 202, 205)"){
+        $("#date_chk").text(splitYear +"-"+splitMonth[0]+"-"+ splitDate);
+    }
 });
 
 // 상담사 목록페이지 카테고리 선택(모바일)
@@ -139,7 +165,8 @@ function requestPay(){
          $.ajax({
             url : contextPath + "/pro/priceInsert",
             type : "POST",
-            data : {"price":price, "therapyCount": therapyCount},
+            // 전문가 번호, 텍스트 테라피 종류 , 횟수
+            data : {"therapySelect":therapySelect, "therapyCount": therapyCount},
 
             success : function(payNo){
 
@@ -150,7 +177,7 @@ function requestPay(){
                     pay_method : 'card',
                     merchant_uid : 'merchant_' + new Date().getTime(),
                     name : '마음연구소 re:mind',
-                    amount : price, //판매 가격
+                    amount : Number(finallyPrice), //판매 가격
                     buyer_email : '1234@naver.com',
                     buyer_name : '홍두깨',
                     buyer_tel : '010-1234-5678'
