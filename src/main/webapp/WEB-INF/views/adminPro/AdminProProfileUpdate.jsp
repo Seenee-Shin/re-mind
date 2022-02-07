@@ -61,7 +61,7 @@
                   			<label for="${c.worryName}">${c.worryName}</label>
                    		</div>
                    </c:forEach>
-             		<input type="hidden" name="worryCategory" id="worryCategory" value=""/>
+             		<input type="hidden" name="professionTag" id="worryCategory" value=""/>
                </div>
            </article>
 

@@ -84,7 +84,7 @@
 	 	input.setAttribute("name","hospitalAddress")
 	    input.value = address.value + address1.value 
 	    
-		document.proRegisterDetail.append(input)f
+		document.proRegisterDetail.append(input)
 	}
 
 

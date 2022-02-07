@@ -61,8 +61,8 @@ public class MyDAO {
 		return sqlSession.update("emotionMapper.updateEmotionDiary", emotionDiary);
 	}
 
-    public List<Board> myBoardList(Board board) {
+    public List<Board> myBoardList(int memberNo) {
 
-		return sqlSession.selectList("boardMapper.myBoardList", board);
-    }
+		return sqlSession.selectList("boardMapper.myBoardList", memberNo);
+	}
 }

@@ -9,7 +9,6 @@ import edu.kh.mind.member.model.vo.ProfessionHospital;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +65,7 @@ public class MyServiceImpl implements MyService {
 
     // 내 게시글 조회
     @Override
-    public List<Board> myBoardList(Board board) {
-        return dao.myBoardList(board);
+    public List<Board> myBoardList(int memberNo) {
+        return dao.myBoardList(memberNo);
     }
 }

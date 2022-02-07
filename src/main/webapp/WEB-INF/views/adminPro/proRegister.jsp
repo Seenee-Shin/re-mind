@@ -9,7 +9,7 @@
 <main>
     <h1>상담사 등록 신청 </h1>
 
-    <form action="proRegister" method="post" onsubmit="return vaildate();">
+    <form action="proRegister" method="post" onsubmit="return validate();">
         <div class="proWrap">
             <div class="label">
             아이디 
@@ -57,8 +57,3 @@
 
 <!-- header include -->
 <jsp:include page="../procommon/footer.jsp"></jsp:include>
-
-
-
-
-

@@ -36,19 +36,19 @@
                     </tr>
                 </c:when>
                 <c:otherwise>
-                    <c:forEach items="${myBoardList}" var="myBoardList">
+                    <c:forEach items="${myBoardList}" var="myBoard">
                         <%-- 조회된 게시글 목록이 있을 때 --%>
                         <tr class="board-view">
-                            <td>${myBoardList.boardNo}</td>
-                            <td>${myBoardList.boardTitle}</td>
-                            <td>${myBoardList.createDate}</td>
-                            <td>${myBoardList.readCount}</td>
+                            <td>${myBoard.boardNo}</td>
+                            <td>${myBoard.boardTitle}</td>
+                            <td>${myBoard.createDate}</td>
+                            <td>${myBoard.readCount}</td>
                         </tr>
                     </c:forEach>
                 </c:otherwise>
 
             </c:choose>
-            <tr class="board-view">
+            <%--<tr class="board-view">
                 <td>1445</td>
                 <td>너무 힘드네요...</td>
                 <td>2022.01.01</td>
@@ -66,7 +66,7 @@
             <td>너무 힘드네요...너무 힘드네요... 너무 힘드네요...</td>
             <td>2021.05.17</td>
             <td>12</td>
-        </tr>
+        </tr>--%>
         </tbody>
     </table>
 
