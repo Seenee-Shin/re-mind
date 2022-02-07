@@ -5,6 +5,7 @@ import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -65,7 +66,12 @@ public class MyDAO {
 	// 내 게시글 보기
     public List<Board> myBoardList(Pagination pagination) {
 
-		return sqlSession.selectList("boardMapper.myBoardList", pagination);
+		int offset = (pagination.getCurrentPage() -1) * pagination.getLimit();
+		int limit = pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		return sqlSession.selectList("boardMapper.myBoardList", pagination, rowBounds);
 	}
 
 	// 페이징 처리 필요한 전체 게시글 계산

@@ -126,8 +126,54 @@
         <hr>--%>
     </div>
 
+
+
 </article>
+<div class="my-5">
+    <ul class="pagination">
+
+        <c:if test="${pagination.startPage != 1 }">
+            <li><a class="page-link" href="myBoardList?cp=1${c}${s}">&lt;&lt;</a></li>
+            <li><a class="page-link"
+                   href="myBoardList?cp=${pagination.prevPage}${s}">&lt;</a></li>
+        </c:if>
+
+        <%-- 페이지네이션 번호 목록 --%>
+        <c:forEach begin="${pagination.startPage}"
+                   end="${pagination.endPage}" step="1" var="i">
+            <c:choose>
+                <c:when test="${i == pagination.currentPage}">
+                    <li><a class="page-link"
+                           style="color: black; font-weight: bold;">${i}</a></li>
+                </c:when>
+
+                <c:otherwise>
+                    <li><a class="page-link" href="myBoardList?cp=${i}${c}${s}">${i}</a></li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+
+        <c:if test="${pagination.endPage != pagination.maxPage }">
+            <li><a class="page-link"
+                   href="myBoardList?cp=${pagination.nextPage}${c}${s}">&gt;</a></li>
+            <li><a class="page-link"
+                   href="myBoardList?cp=${pagination.maxPage }${s}">&gt;&gt;</a></li>
+        </c:if>
+    </ul>
+</div>
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script src="${contextPath}/resources/js/my/myBoardList.js"></script>
+<script>
+    let qs = "";
+
+    // 쿼리스트링에 cp가 없으면 1, 있으면 작성된 값
+    if(getParam("cp") == null){
+        qs += "?cp=1";
+    }else{
+        qs += "?cp=" + getParam("cp");
+    }
+
+    location.href = "myBoardList" + qs;
+</script>
