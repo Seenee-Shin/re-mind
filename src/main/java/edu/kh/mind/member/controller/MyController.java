@@ -2,6 +2,7 @@ package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
 import edu.kh.mind.member.model.vo.EmotionCategory;
@@ -210,31 +211,32 @@ public class MyController {
 
     @GetMapping("myBoardList")
     public String myBoardList(Model model,
-                              HttpServletRequest req,
                               @ModelAttribute("loginMember") Member loginMember,
-                              HttpSession session,RedirectAttributes ra, Board board){
+                              HttpSession session,RedirectAttributes ra, Board board,
+                              @RequestParam(value="cp", required = false, defaultValue="1")int cp){
         model.addAttribute("css", "my/myBoardList");
 
         String path = null;
-
         int memberNo = 0;
+        Pagination pagination = null;
+
 
         if (session.getAttribute("loginMember") != null) {
             memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
+            pagination = service.getPagination(cp, memberNo);
+            System.out.println(pagination); //
+            pagination.setMemberNo(memberNo);
 
-            System.out.println(memberNo);
-
-            board.setMemberNo(memberNo);
-
-            Board myBoardList = (Board) service.myBoardList(board);
-
-            System.out.println(myBoardList);
+            List<Board> myBoardList = service.myBoardList(pagination);
+            System.out.println(myBoardList.get(board.getBoardNo()).toString());
 
 
+
+            model.addAttribute("pagination", pagination);
             model.addAttribute("myBoardList", myBoardList);
-            path = "/my/myBoardList";
+            path = "my/myBoardList";
         } else {
-            Util.swalSetMessage("로그인이 필요합니다.", "h", "info", ra);
+            Util.swalSetMessage("로그인이 필요합니다.", null, "info", ra);
             path = "/";
         }
         return path;

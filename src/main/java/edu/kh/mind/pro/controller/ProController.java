@@ -1,7 +1,9 @@
 package edu.kh.mind.pro.controller;
 
 import com.google.gson.Gson;
+
 import edu.kh.mind.member.model.vo.Profession;
+import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.pro.model.service.ProService;
 import edu.kh.mind.pro.model.vo.Payment;
 import edu.kh.mind.pro.model.vo.Reservation;
@@ -41,19 +43,21 @@ public class ProController {
 		if(worryCtCd != null)	pList = service.selectProfession(worryCtCd);
 		else					pList = service.selectAllProfession();
 
-		for(Profession p : pList){
-			System.out.println("제발 : " + p.getProfessionName());
-		}
-
 		return new Gson().toJson(pList);
 	}
 	
-	@RequestMapping("proView")
-	public String proView(Model model) {
+	@RequestMapping("proView/{professionNo}")
+	public String proView(Model model, @PathVariable("professionNo") int professionNo) {
 		
 		model.addAttribute("css", "pro/proView");
     	model.addAttribute("header", "main");
-		
+
+		Profession pro = service.selectPro(professionNo);
+
+		System.out.println(pro.getProfessionName());
+
+		model.addAttribute("profession", pro);
+
 		return "pro/proView";
 	}
 	
@@ -68,20 +72,22 @@ public class ProController {
 	
 	@ResponseBody
 	@RequestMapping(value="priceInsert", method=RequestMethod.POST)
-	public int priceInsert(@RequestParam("price") int price, 
+	public int priceInsert(@RequestParam("therapySelect") int counselCategoryCode, 
 			@RequestParam("therapyCount") int totalCnt) {
 		
 		
 		// 상담 횟수 rp 객체에 담기
-		ReservationPayMent rp = new ReservationPayMent();
-		rp.setTotalCnt(totalCnt);
+		ReservationPayMent rv = new ReservationPayMent();
+		rv.setTotalCnt(totalCnt);
+
 		
-		// 총 금액 pm 객체에 담기
-		Payment pm = new Payment();
-		pm.setPayAmount(price);
+		// 상담사 번호(추후 삽입 예정), 테라피 번호
+		ProfessionPrice pfp = new ProfessionPrice();
+		pfp.setCounselCategoryCode(counselCategoryCode);
+		
 		
 		// 결과 결제 tb에서 결제 번호 가지고 오기
-		int payNo = service.priceInsert(pm,rp);
+		int payNo = service.priceInsert(pfp,rv);
 		
 		return payNo;
 	}

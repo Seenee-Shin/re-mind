@@ -1,6 +1,7 @@
 package edu.kh.mind.member.model.service;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.MyDAO;
 import edu.kh.mind.member.model.vo.EmotionCategory;
@@ -9,7 +10,6 @@ import edu.kh.mind.member.model.vo.ProfessionHospital;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +66,18 @@ public class MyServiceImpl implements MyService {
 
     // 내 게시글 조회
     @Override
-    public List<Board> myBoardList(Board board) {
-        return dao.myBoardList(board);
+    public List<Board> myBoardList(Pagination pagination) {
+        return dao.myBoardList(pagination);
+    }
+
+    // 페이징 처리
+    @Override
+    public Pagination getPagination(int cp, int memberNo) {
+
+        // 전체 게시글 수
+        int listCount = dao.getBoardListCount(memberNo);
+        System.out.println(listCount);
+
+        return new Pagination(listCount, cp);
     }
 }

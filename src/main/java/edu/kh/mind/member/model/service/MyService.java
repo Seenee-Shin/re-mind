@@ -1,6 +1,7 @@
 package edu.kh.mind.member.model.service;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -41,6 +42,10 @@ public interface MyService {
 	 */
 	List<String> selectEmotionDiaryDate(int memberNo);
 
+
 	// 내가 쓴글 조회
-    List<Board> myBoardList(Board board);
+	List<Board> myBoardList(Pagination pagination);
+
+	// 페이징
+	Pagination getPagination(int cp, int memberNo);
 }
