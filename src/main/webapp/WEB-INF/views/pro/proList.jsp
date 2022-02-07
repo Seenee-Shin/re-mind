@@ -379,7 +379,7 @@
 					let category = item.counselCategoryCode.split(",");
 					let price = item.counselPrice.split(",");
 
-					console.log(item.imagePath == undefined)
+					console.log(item)
 
 					if(category[0] != 1 && category[0] == 2){
 						category.splice(0, 0, "undefined");
@@ -395,11 +395,16 @@
 					}
 
 					const li = $('<li class="pro">');
-					const aHref = $('<a href="#">');
+					const aHref = $('<a href= '+contextPath+'/pro/proView/'+item.professionNo+'>');
 
 					const pro_profile = $('<div class="pro_profile">');
 					const pro_profile_img1 = $('<img src="/mind/resources/images/pro/best.png" class="pro_best">');
-					const pro_profile_img2 = $('<img src="/mind/resources/images/basicProfile.png" class="profile">');
+					let pro_profile_img2;
+					if(item.imagePath == undefined)//기본프로필이 없으면
+						pro_profile_img2 = $('<img src="'+contextPath+'/resources/images/basicProfile.png" class="profile">');
+					else // 있으면 경로로 이미지이름 추가로 가져와야됨
+						pro_profile_img2 = $('<img src="'+contextPath+'/resources/images/basicProfile.png" class="profile">');
+
 					pro_profile.append(pro_profile_img1, pro_profile_img2);
 
 					const pro_intro_wrap = $('<div class="pro_intro_wrap">');
