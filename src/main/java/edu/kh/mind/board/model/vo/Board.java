@@ -4,6 +4,7 @@ import java.util.List;
 
 
 public class Board {
+
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
@@ -32,7 +33,7 @@ public class Board {
 	
 	//프로필 이미지 path 
 	private String memberImage;
-	private String profrssionImage;
+	private String professionImage;
 	
 	//공감 수 변수 
 	private int likeCount;
@@ -40,7 +41,6 @@ public class Board {
 	private int sadCount;
 	private int angryCount;
 	private int surpriseCount;
-	
 	
 	private List<Image> imgList;
 	private List<Empathy> emList;
@@ -217,12 +217,12 @@ public class Board {
 		this.memberImage = memberImage;
 	}
 
-	public String getProfrssionImage() {
-		return profrssionImage;
+	public String getProfessionImage() {
+		return professionImage;
 	}
 
-	public void setProfrssionImage(String profrssionImage) {
-		this.profrssionImage = profrssionImage;
+	public void setProfessionImage(String professionImage) {
+		this.professionImage = professionImage;
 	}
 
 	public int getLikeCount() {
@@ -280,6 +280,4 @@ public class Board {
 	public void setEmList(List<Empathy> emList) {
 		this.emList = emList;
 	}
-
-	
 }
