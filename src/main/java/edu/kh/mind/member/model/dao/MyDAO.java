@@ -1,6 +1,7 @@
 package edu.kh.mind.member.model.dao;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -61,8 +62,14 @@ public class MyDAO {
 		return sqlSession.update("emotionMapper.updateEmotionDiary", emotionDiary);
 	}
 
-    public List<Board> myBoardList(int memberNo) {
+	// 내 게시글 보기
+    public List<Board> myBoardList(Pagination pagination) {
 
-		return sqlSession.selectList("boardMapper.myBoardList", memberNo);
+		return sqlSession.selectList("boardMapper.myBoardList", pagination);
+	}
+
+	// 페이징 처리 필요한 전체 게시글 계산
+	public int getBoardListCount(int memberNo) {
+		return sqlSession.selectOne("boardMapper.getBoardListCount", memberNo);
 	}
 }

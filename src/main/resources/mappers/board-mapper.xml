@@ -58,10 +58,10 @@
     	<result property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
     </resultMap>
 
-    <resultMap type="EmpathyStatus" id="empathyStatus_rm">
+    <!--<resultMap type="EmpathyStatus" id="empathyStatus_rm">
     	<id property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
     	<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
-    </resultMap>
+    </resultMap>-->
 
 		<!-- 게시판 이미지 조회-->
 	<select id="selectBoardImageList" resultMap="image_rm">
@@ -125,16 +125,26 @@
 
 	<!-- 작성 날짜 역순 / 최신 순 -->
 	<select id="myBoardList" resultMap="board_rm" >
-		SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE,
+		SELECT BOARD.MEMBER_NO, BOARD.BOARD_NO, BOARD_TITLE,
 			   TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
-			   BOARD_CATEGORY_NM, BOARD_READ_COUNT, MEMBER_FN
+			   BOARD_CATEGORY_NM, BOARD_READ_COUNT, MEMBER_FN, IMAGE_PATH, POST_NO
 		FROM BOARD
-				 JOIN MEMBER USING (MEMBER_NO)
+				 JOIN MEMBER ON(MEMBER.MEMBER_NO = BOARD.MEMBER_NO)
 				 JOIN BOARD_CATEGORY USING (BOARD_CATEGORY_CD)
-		WHERE MEMBER_NO = #{memberNo}
-		  AND BOARD_STATUS_CD = 201
+				 LEFT JOIN IMAGE IMG ON(IMG.BOARD_NO = BOARD.BOARD_NO)
+				 JOIN BOARD_STATUS ON (BOARD.BOARD_STATUS_CD = BOARD_STATUS.BOARD_STATUS_CD)
+				 JOIN MIND_POST ON( BOARD_STATUS.BOARD_STATUS_CD = MIND_POST.BOARD_STATUS_CD)
+		WHERE BOARD.MEMBER_NO = #{memberNo}
+		  AND BOARD.BOARD_STATUS_CD = 201
 		  AND STATUS_CD = 0
 		ORDER BY BOARD_CREATE_DT DESC
+	</select>
+
+	<!-- 전체 게시글 수 count -->
+	<select id="getBoardListCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD
+		WHERE BOARD_STATUS_CD != 203
+		AND MEMBER_NO = #{memberNo}
 	</select>
 
 </mapper>
