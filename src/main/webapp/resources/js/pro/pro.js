@@ -88,11 +88,11 @@ $(document).on("click", "#calendar td", function (){
     asff= $("#ym").text().split("년 ");
     splitYear = asff[0];
     splitMonth = asff[1].split("월");
-
     splitDate = $(this).attr("id");
-
+    
+    if(splitDate != undefined){
     $("#date_chk").text(splitYear +"-"+splitMonth[0]+"-"+ splitDate);
-
+    }
 });
 
 // 상담사 목록페이지 카테고리 선택(모바일)
