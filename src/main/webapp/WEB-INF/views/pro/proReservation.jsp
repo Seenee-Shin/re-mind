@@ -143,6 +143,36 @@
     let month = today.getMonth();
     let backupMonthFirstDay;
 
+    function setBlock(){
+        let seeYear = $(".YM").text().split("년 ")[0];
+        let seeMonth = $(".YM").text().split("년 ")[1].split("월")[0];
+        let date = today.getDate();
+
+        let monthFirstDay = new Date(year, month, 1).getDay();
+
+        // 현재날짜보다 보고 있는 달력의 년도가 낮을 시 블록처리합니다.
+        if(seeYear < today.getFullYear()){
+            for(let i = 0; i < $("#calendar td").length; i++){
+                if(i < 7) continue;
+                $("#calendar td").eq(i + monthFirstDay).css("color", "#c5cacd");
+            }
+        }else{// 현재년도와 보고있는 년도가 같거나 더 높을 시
+            // 현재날짜보다 보고있는 달력의 월이 낮을 시 블록처리합니다.
+            if(seeMonth <= today.getMonth() + 1){
+                if(seeMonth == today.getMonth() + 1){
+                    for(let i = 0; i < $("#calendar td").length; i++) {
+                        if ($("#calendar td").eq(i).attr("id") <= date)
+                            $("#calendar td").eq(i).css("color", "#c5cacd");
+                    }
+                }else{ // 현재 월보다 보고있는 월이 낮을 시
+                    for(let i = monthFirstDay; i < $("#calendar td").length; i++){
+                        $("#calendar td").eq(i + monthFirstDay).css("color", "#c5cacd");
+                    }
+                }
+            }
+        }
+    }
+
     const calendar = document.getElementById("calendar");
     function makeCalendar(el, yearNo, monthNo) {
 
@@ -163,6 +193,7 @@
         let endDay = new Date(year, month + 1, 0);
         let nextDate = endDay.getDate();
         let nextDay = endDay.getDay();
+
 
         // 오늘은 무슨요일
         const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
@@ -192,8 +223,9 @@
                 cell = row.insertCell();
                 cell.setAttribute("id", i);
                 cell.innerHTML = i;
-                if(monthFirstDay == 6)              cell.style.color = blueColor;
+
                 if(monthFirstDay == 0 && i == 1)    cell.style.color = redColor;
+                else if(monthFirstDay == 6)         cell.style.color = blueColor;
                 monthFirstDay += 1;
             }else{
                 row = el.insertRow();
@@ -205,8 +237,8 @@
                 monthFirstDay = monthFirstDay - 6;
             }
         }
-
         setHgight();
+        setBlock();
     }
 
     function beforeCalendar() {
@@ -240,7 +272,7 @@
         // 현재 12월이면
         if(splitId[1] == 11){
             yearNo = Number.parseInt(yearNo) + 1;
-            monthNo = Number.parseInt(monthNo) - 11;
+            monthNo = Number.parseInt(monthNo) - 12;
         }
         monthNo = Number.parseInt(monthNo) + 1;
 
