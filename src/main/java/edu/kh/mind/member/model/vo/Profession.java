@@ -22,11 +22,20 @@ public class Profession {
     private String counselCategoryCode;
     private String counselPrice;
     private String imagePath;
+    private String imageName;
 
     public Profession(){}
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageName() {
+        return imageName;
     }
 
     public String getImagePath() {

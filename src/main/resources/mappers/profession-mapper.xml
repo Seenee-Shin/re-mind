@@ -24,6 +24,7 @@
         <result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
         <result property="counselPrice" column="COUNSEL_PRICE"/>
         <result property="imagePath" column="IMAGE_PATH"/>
+        <result property="imageName" column="IMAGE_NM"/>
     </resultMap>
     
     <resultMap id="professionInfo_rm" type="ProfessionInfo">
@@ -76,7 +77,7 @@
 <!--    그그그머냐ㅐ 그거 검색 -->
     <select id="selectProfession" resultMap="profession_rm">
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
-               PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH,
+               PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
                LISTAGG(COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
                LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
         FROM PROFESSION_PRICE
@@ -89,11 +90,11 @@
                 PRO_TAG LIKE '%' || #{category} || '%'
             </foreach>) AND BOARD_NO IS NULL
         GROUP BY PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR, PRO_INTRO,
-            PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH
+            PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM
     </select>
     <select id="selectAllProfession" resultMap="profession_rm">
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
-               PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH,
+               PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
                LISTAGG(COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
                LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
         FROM PROFESSION_PRICE
@@ -102,7 +103,7 @@
             LEFT JOIN IMAGE USING(PROFESSION_NO)
         WHERE BOARD_NO IS NULL
         GROUP BY PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR, PRO_INTRO,
-            PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH
+            PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM
     </select>
 
 	<!-- 지도 병원  -->
