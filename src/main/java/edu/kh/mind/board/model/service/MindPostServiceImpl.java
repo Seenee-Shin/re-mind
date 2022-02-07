@@ -12,6 +12,10 @@ import edu.kh.mind.board.model.vo.MindPost;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.common.util.Util;
 
+/**
+ * @author 82105
+ *
+ */
 @Service
 public class MindPostServiceImpl implements MindPostService{
 
@@ -45,13 +49,32 @@ public class MindPostServiceImpl implements MindPostService{
 		
 	}
 
-	// 지정된 범위의 게시글 모록 조회
+	// 지정된 범위의 게시글 목록 조회
 	@Override
 	public List<MindPost> selectPostList(Pagination pagination) {
 		return dao.selectPostList(pagination);
 	}
 
 
+	// 포스트 삭제
+	@Override
+	public int deletePost(int postNo) {
+		return dao.deletePost(postNo);
+	}
+
+
+	// 포스트 좌표 저장
+	@Override
+	@Transactional
+	public int updatePost(MindPost post) {
+		return dao.updatePost(post);
+	}
+
+
+	
+	
+	
+	
 	/*@Override
 	public MindPost selectPost(int postNo, int memberNo) {
 		MindPost post = dao.selectPost(postNo);

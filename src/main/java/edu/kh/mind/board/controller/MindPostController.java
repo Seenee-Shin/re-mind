@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -51,10 +52,10 @@ public class MindPostController {
     // 글 작성 
     @RequestMapping(value="insert", method=RequestMethod.POST)
     public String postInsert(MindPost post, 
-    		//@ModelAttribute("loginMember") Member loginMember,
+    		@ModelAttribute("loginMember") Member loginMember,
     		RedirectAttributes ra) {
     	
-    	post.setMemberNo(60);
+    	post.setMemberNo( loginMember.getMemberNo());
     	
     	int postNo = service.insertPost(post);
     	
@@ -74,6 +75,26 @@ public class MindPostController {
 		
     	return "redirect:/post/list";
     }
+    
+    
+    // 글 삭제
+    @RequestMapping("delete")
+    @ResponseBody
+    public int deletePost(int postNo, RedirectAttributes ra) {
+    	
+    	return service.deletePost(postNo);
+    }
+    
+    
+    //좌표 저장
+    @RequestMapping("saveCoord")
+    @ResponseBody
+    public int updatePost(MindPost post) {
+    	System.out.println(post.getCoordLeft());
+    	return service.updatePost(post);
+    }
+    
+    
     
     
    /* //상세조회

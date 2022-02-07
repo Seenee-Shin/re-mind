@@ -13,14 +13,14 @@ public interface MindPostService {
 	
 	/** 포스트 등록 
 	 * @param post
-	 * @return
+	 * @return postNo
 	 */
 	int insertPost(MindPost post);
 
 	
 	/** 전체 포스트 수 count + 페이징 처리에 필요한 값 계산 
 	 * @param cp
-	 * @return
+	 * @return pagination
 	 */
 	Pagination getPagination(int cp);
 
@@ -30,6 +30,20 @@ public interface MindPostService {
 	 * @return postList
 	 */
 	List<MindPost> selectPostList(Pagination pagination);
+
+
+	/** 포스트 삭제
+	 * @param postNo
+	 * @return result
+	 */
+	int deletePost(int postNo);
+
+
+	/** 포스트 좌표 저장
+	 * @param post
+	 * @return result
+	 */
+	int updatePost(MindPost post);
 
 
 	/** 포스트 상세 조회

@@ -55,6 +55,26 @@ public class MindPostDAO {
 	}
 
 
+	/** 포스트 삭제
+	 * @param postNo
+	 * @return result
+	 */
+	public int deletePost(int postNo) {
+		return sqlSession.update("board2Mapper.deletePost", postNo);
+	}
+
+
+	/** 포스트 좌표 저장
+	 * @param left
+	 * @param top
+	 * @param postNo
+	 * @return result
+	 */
+	public int updatePost(MindPost post) {
+		return sqlSession.update("board2Mapper.updatePost", post );
+	}
+
+
 	/*public MindPost selectPost(int postNo) {
 		return sqlSession.selectOne("board2Mapper.selectPost", postNo);
 	}*/

@@ -55,6 +55,25 @@
 	</select>
 	
 	
+	<!-- 포스트 삭제 -->
+	<update id="deletePost">
+		UPDATE MIND_POST SET
+		BOARD_STATUS_CD = 203
+		WHERE POST_NO = #{postNo}
+	</update>
+	
+	
+	<!-- 포스트 좌표 저장 -->
+	<update id="updatePost">
+		UPDATE MIND_POST SET
+		COORD_LEFT = #{coordLeft},
+		COORD_TOP = #{coordTop}
+		WHERE POST_NO = #{postNo}
+	</update>
+	
+	
+	
+	
 	<!-- 포스트 상세 조회 -->
 	<!-- <select id="selectPost" resultMap="mindPost_rm">
 	SELECT POST_NO, POST_CONTENT,
