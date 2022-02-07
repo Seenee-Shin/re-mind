@@ -56,6 +56,24 @@ public class ProDAO {
 	public int reservationInsert(Reservation reservation) {
 		return sqlSession.insert("reservationMapper.reservationInsert",reservation);
 	}
+	
+	
+	// reservationNo select
+	public int reservationNoSelect(int payNo) {
+		return sqlSession.selectOne("reservationMapper.reservationNoSelect",payNo);
+	}
+	
+	
+	// 상담예약결제 삭제
+	public int reservationPaymentDelete(int reservationNo) {
+		return sqlSession.delete("reservationMapper.reservationPaymentDelete",reservationNo);
+	}
+	
+	
+	// 결제 테이블 삭제
+	public int paymentDelete(int payNo) {
+		return sqlSession.delete("reservationMapper.paymentDelete",payNo);
+	}
     
 	
 	
