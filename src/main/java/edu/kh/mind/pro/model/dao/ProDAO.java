@@ -48,6 +48,10 @@ public class ProDAO {
     public List<Profession> selectAllProfession() {
         return sqlSession.selectList("professionMapper.selectAllProfession");
     }
+
+	public Profession selectPro(int professionNo) {
+		return sqlSession.selectOne("professionMapper.selectProOne", professionNo);
+	}
     
     
     // payment update
@@ -78,8 +82,7 @@ public class ProDAO {
 	public int paymentDelete(int payNo) {
 		return sqlSession.delete("reservationMapper.paymentDelete",payNo);
 	}
-    
-	
-	
+
+
 
 }

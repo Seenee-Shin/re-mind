@@ -96,6 +96,9 @@ public class ProServiceImpl implements ProService{
 
 		return result2;
 	}
-    
-    
+
+	@Override
+	public Profession selectPro(int professionNo) {
+		return dao.selectPro(professionNo);
+	}
 }

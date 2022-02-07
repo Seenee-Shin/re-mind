@@ -28,4 +28,5 @@ public interface ProService {
 	int paymentDelete(int payNo);
 
 
+    Profession selectPro(int professionNo);
 }
