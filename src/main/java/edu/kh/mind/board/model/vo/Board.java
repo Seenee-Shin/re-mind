@@ -4,6 +4,7 @@ import java.util.List;
 
 
 public class Board {
+
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
@@ -18,14 +19,14 @@ public class Board {
 	
 	private int readCount;
 	private int memberNo;
-	private int memberFn;
+	private String memberFn;
 	private int professionNo;
-	private int professionName;
+	private String professionName;
 	private int statusCode;
 	private int boardCategoryCode;
-	private int boardCategoryName;
+	private String boardCategoryName;
 	private int worryCategoryCode;
-	private int worryCategoryName;
+	private String worryCategoryName;
 	
 	private List<Image> imgList;
 	private List<Empathy> emList;
@@ -122,12 +123,28 @@ public class Board {
 		this.memberNo = memberNo;
 	}
 
+	public String getMemberFn() {
+		return memberFn;
+	}
+
+	public void setMemberFn(String memberFn) {
+		this.memberFn = memberFn;
+	}
+
 	public int getProfessionNo() {
 		return professionNo;
 	}
 
 	public void setProfessionNo(int professionNo) {
 		this.professionNo = professionNo;
+	}
+
+	public String getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
 	}
 
 	public int getStatusCode() {
@@ -146,6 +163,14 @@ public class Board {
 		this.boardCategoryCode = boardCategoryCode;
 	}
 
+	public String getBoardCategoryName() {
+		return boardCategoryName;
+	}
+
+	public void setBoardCategoryName(String boardCategoryName) {
+		this.boardCategoryName = boardCategoryName;
+	}
+
 	public int getWorryCategoryCode() {
 		return worryCategoryCode;
 	}
@@ -154,35 +179,11 @@ public class Board {
 		this.worryCategoryCode = worryCategoryCode;
 	}
 
-	public int getMemberFn() {
-		return memberFn;
-	}
-
-	public void setMemberFn(int memberFn) {
-		this.memberFn = memberFn;
-	}
-
-	public int getProfessionName() {
-		return professionName;
-	}
-
-	public void setProfessionName(int professionName) {
-		this.professionName = professionName;
-	}
-
-	public int getBoardCategoryName() {
-		return boardCategoryName;
-	}
-
-	public void setBoardCategoryName(int boardCategoryName) {
-		this.boardCategoryName = boardCategoryName;
-	}
-
-	public int getWorryCategoryName() {
+	public String getWorryCategoryName() {
 		return worryCategoryName;
 	}
 
-	public void setWorryCategoryName(int worryCategoryName) {
+	public void setWorryCategoryName(String worryCategoryName) {
 		this.worryCategoryName = worryCategoryName;
 	}
 
@@ -201,6 +202,4 @@ public class Board {
 	public void setEmList(List<Empathy> emList) {
 		this.emList = emList;
 	}
-	
-	
 }
