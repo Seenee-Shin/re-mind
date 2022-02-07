@@ -177,7 +177,7 @@ function AddrChangeCoords(){
 
 
             } else if (status == "ZERO_RESULT") {
-                alert("검색결과가 없습니다.");
+                // alert("검색결과가 없습니다.");
             }
 
             polyline[i] = new kakao.maps.Polyline({
@@ -331,13 +331,13 @@ if(window.innerWidth > 1200){
 
 
 
-var callback = function(result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-        console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
-    }
-};
-
-geocoder.coord2Address(currentPos.getLng(), currentPos.getLat(), callback);
+// 이건뭐지? 이런거 만든적없는데...
+// var callback = function(result, status) {
+//     if (status === kakao.maps.services.Status.OK) {
+//         console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
+//     }
+// };
+// geocoder.coord2Address(currentPos.getLng(), currentPos.getLat(), callback);
 
 
 // 좌표로 상세주소
