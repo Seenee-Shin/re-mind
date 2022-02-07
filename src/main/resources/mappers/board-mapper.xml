@@ -23,6 +23,16 @@
 		<result property="boardCategoryName" column="BOARD_CATEGORY_NM"/>
 		<result property="worryCategoryCode" column="WORRY_CATEGORY_CD"/>
 		<result property="worryCategoryName" column="WORRY_CATEGORY_NM"/>
+		
+		<result property="replyCount" column="REPLY_COUNT"/>
+		<result property="memberImage" column="MEMBER_IMAGE"/>
+		<result property="profrssionImage" column="PROFESSION_IMAGE"/>
+		
+		<result property="likeCount" column="L_COUNT"/>
+		<result property="cheerCount" column="C_COUNT"/>
+		<result property="sadCount" column="SA_COUNT"/>
+		<result property="angryCount" column="A_COUNT"/>
+		<result property="surpriseCount" column="SU_COUNT"/>
 
 		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>

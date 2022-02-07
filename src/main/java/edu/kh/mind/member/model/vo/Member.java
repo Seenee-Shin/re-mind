@@ -12,6 +12,9 @@ public class Member {
     private String memberPhone;
     private String memberGender;
     private Date memberEnrollDate;
+    
+    //프로필 사진 imagePath
+    private String memberImage;
     private int statusCode;
     public Member(){}
 
@@ -95,4 +98,14 @@ public class Member {
     public int getStatusCode() {
         return statusCode;
     }
+
+
+	public String getMemberImage() {
+		return memberImage;
+	}
+
+
+	public void setMemberImage(String memberImage) {
+		this.memberImage = memberImage;
+	}
 }
