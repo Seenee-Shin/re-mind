@@ -29,20 +29,20 @@
         <tbody>
             <c:choose>
 
-                <c:when test="${empty sessionScope.myBoardList}">
+                <c:when test="${empty myBoardList}">
                     <%-- 조회된 게시글 목록이 없을 때 --%>
                     <tr>
                         <td colspan="4">게시글이 존재하지 않습니다.</td>
                     </tr>
                 </c:when>
                 <c:otherwise>
-                    <c:forEach items="${sessionScope.myBoardList}" var="myBoardList">
+                    <c:forEach items="${myBoardList}" var="myBoard">
                         <%-- 조회된 게시글 목록이 있을 때 --%>
                         <tr class="board-view">
-                            <td>${myBoardList.boardNo}</td>
-                            <td>${myBoardList.boardTitle}</td>
-                            <td>${myBoardList.createDate}</td>
-                            <td>${myBoardList.readCount}</td>
+                            <td>${myBoard.boardNo}</td>
+                            <td>${myBoard.boardTitle}</td>
+                            <td>${myBoard.createDate}</td>
+                            <td>${myBoard.readCount}</td>
                         </tr>
                     </c:forEach>
                 </c:otherwise>

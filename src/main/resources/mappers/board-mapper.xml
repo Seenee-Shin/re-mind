@@ -114,7 +114,6 @@
 	</update>
 
 	<select id="myBoardList" resultMap="board_rm" >
-
 			SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE,
 				TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
 				BOARD_READ_COUNT
@@ -124,9 +123,6 @@
 			  AND BOARD_STATUS_CD = 201
 			  AND STATUS_CD = 0
 			ORDER BY BOARD_CREATE_DT DESC
-
 	</select>
 
-   
-	
 </mapper>

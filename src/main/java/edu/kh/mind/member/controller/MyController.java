@@ -210,21 +210,22 @@ public class MyController {
 
     @GetMapping("myBoardList")
     public String myBoardList(Model model,
-                              HttpServletRequest req,
                               @ModelAttribute("loginMember") Member loginMember,
                               HttpSession session,RedirectAttributes ra, Board board){
         model.addAttribute("css", "my/myBoardList");
 
         String path = null;
-
         int memberNo = 0;
 
         if (session.getAttribute("loginMember") != null) {
             memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
 
-
             List<Board> myBoardList = service.myBoardList(memberNo);
-            System.out.println(myBoardList);
+
+
+            System.out.println(myBoardList.get(board.getBoardNo()).toString());
+
+//            System.out.println(myBoardList);
 
             model.addAttribute("myBoardList", myBoardList);
             path = "my/myBoardList";
