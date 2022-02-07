@@ -143,6 +143,7 @@
     let month = today.getMonth();
     let backupMonthFirstDay;
 
+    // 달력에 블록표시해주는 함수입니다.
     function setBlock(){
         let seeYear = $(".YM").text().split("년 ")[0];
         let seeMonth = $(".YM").text().split("년 ")[1].split("월")[0];
@@ -173,6 +174,7 @@
         }
     }
 
+    // 달력을 만들어주는 함수입니다.
     const calendar = document.getElementById("calendar");
     function makeCalendar(el, yearNo, monthNo) {
 
@@ -274,11 +276,9 @@
         const index = $("#calendar td").index($(this));
 
         if($(this).css("color") == "rgb(197, 202, 205)") return;
-
         if(index < 7 + backupMonthFirstDay) return;
         
         $("#calendar td").removeClass("YMcss");
-        
       	$(this).addClass("YMcss");
     });
 

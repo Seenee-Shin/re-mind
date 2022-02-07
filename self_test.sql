@@ -1722,9 +1722,10 @@ SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE,
 
 SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE,
 				TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
-				BOARD_READ_COUNT
+				,BOARD_CATEGORY_NM, BOARD_READ_COUNT, BOARD_CATEGORY_CD
 			FROM BOARD
 			JOIN MEMBER USING (MEMBER_NO)
+            JOIN BOARD_CATEGORY USING (BOARD_CATEGORY_CD)
 			WHERE MEMBER_NO = 72
 			  AND BOARD_STATUS_CD = 201
 			  AND STATUS_CD = 0
@@ -1757,6 +1758,28 @@ BEGIN
 END;
 /
 
+
+CREATE SEQUENCE SEQ_REPLY_NO;
+-- 보드(댓글) 테이블 샘플 데이터
+BEGIN
+    FOR N IN 1..50 LOOP
+        INSERT INTO REPLY
+        VALUES(SEQ_REPLY_NO.NEXTVAL,
+                    '나의 ' || SEQ_REPLY_NO.CURRVAL || '번째 댓글',
+                    DEFAULT,
+                    DEFAULT, 
+                    DEFAULT, /* DEFAULT 301 상태*/
+                    DEFAULT, /* DEFAULT 401 상태*/
+                    SEQ_REPLY_NO.CURRVAL,
+                    72,/*회원 번호*/
+                    2,/*전문가 번호*/
+                    SEQ_REPLY_NO.CURRVAL
+                    );
+    END LOOP;
+
+END;
+/
+
 --------------------------------------------------
 ----------------------------------------------------
 
@@ -1765,4 +1788,11 @@ ALTER TABLE BOARD MODIFY BOARD_READ_COUNT  NOT NULL;
 
 alter table BOARD RENAME COLUMN EM_CHCEK_CD TO EM_CHECK_CD;
 
+alter table REPLY ADD CONSTRAINT emp_ch_sex_check CHECK(REPLY_STATUS_CD IN(301, 302));
+
+alter table REPLY modify REPLY_STATUS_CD default 301;
+
+alter table REPLY ADD CONSTRAINT REPLY_NESTED_CD_CHECK CHECK(REPLY_NESTED_CD IN(401, 402));
+
+alter table REPLY modify REPLY_NESTED_CD default 401;
 
