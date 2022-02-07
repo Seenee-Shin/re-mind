@@ -20,6 +20,7 @@ public class Board {
 	private int readCount;
 	private int memberNo;
 	private String memberFn;
+	private String memberId;
 	private int professionNo;
 	private String professionName;
 	private int statusCode;
@@ -146,6 +147,14 @@ public class Board {
 
 	public void setMemberFn(String memberFn) {
 		this.memberFn = memberFn;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public int getProfessionNo() {

@@ -2,6 +2,7 @@ package edu.kh.mind.board.model.service;
 
 import edu.kh.mind.board.model.dao.WorryDAO;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.WorryCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,12 @@ public class WorryServiceImpl implements WorryService {
 	// 고민상담 게시글
 	@Override
 	public List<Board> selectWorryList() {
-		List<Board> list = dao.selectWorryList();
-		System.out.println(list.get(0).toString());
-		return list;
+		return dao.selectWorryList();
+	}
+
+	// 고민상담 카테고리
+	@Override
+	public List<WorryCategory> selectWorryCategory() {
+		return dao.selectWorryCategory();
 	}
 }

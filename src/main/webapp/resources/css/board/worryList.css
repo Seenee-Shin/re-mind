@@ -354,7 +354,7 @@ select{
 .writer_id>*{
 display: inline-block;
 }
-.like_warp>* , .commnet_wrap>*{
+.like_warp>* , .comment_wrap>*{
     display: inline-block;
     font-size: 15px;
     font-weight: 400;

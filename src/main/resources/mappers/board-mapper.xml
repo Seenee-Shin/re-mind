@@ -16,6 +16,7 @@
 		<result property="readCount" column="BOARD_READ_COUNT"/>
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="memberFn" column="MEMBER_FN"/>
+		<result property="memberId" column="MEMBER_ID"/>
 		<result property="professionNo" column="PROFESSION_NO"/>
 		<result property="professionName" column="PROFESSION_NM"/>
 		<result property="statusCode" column="BOARD_STATUS_CD"/>
@@ -125,11 +126,11 @@
 	<select id="selectWorryList" resultMap="board_rm">
 		SELECT MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM,
 			BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT,
-			/*w.WORRY_CATEGORY_CD, w.WORRY_NM WORRY_CATEGORY_NM,*/
+			w.WORRY_CATEGORY_CD, w.WORRY_NM WORRY_CATEGORY_NM,
 			e.EMPATHY_ARRAY, e.CNT_ARRAY
 		FROM BOARD
 		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
-		/*LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD*/
+		LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
 		LEFT JOIN(
 			SELECT
 				a.BOARD_NO,

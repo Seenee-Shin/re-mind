@@ -2,6 +2,7 @@ package edu.kh.mind.board.controller;
 
 import edu.kh.mind.board.model.service.WorryService;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.WorryCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,11 @@ public class WorryBoardController {
     @RequestMapping(value="worryList", method=RequestMethod.GET)
     public String worryBoard(Model model) {
 
+        // 카테고리
+        List<WorryCategory> categoryList = service.selectWorryCategory();
+
+        model.addAttribute("categoryList", categoryList);
+
         model.addAttribute("css", "board/worryList");
 
         return "board/worryList";
@@ -35,17 +41,10 @@ public class WorryBoardController {
         System.out.println("start");
         HashMap<String, Object> map = new HashMap<>();
 
+        // 게시글 목록
         List<Board> worryList = service.selectWorryList();
-        System.out.println(worryList.get(0).toString());
 
         map.put("worryList", worryList);
-
-
-
-
-
-
-
 
         return map;
     }

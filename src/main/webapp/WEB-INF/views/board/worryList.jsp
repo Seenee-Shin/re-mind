@@ -36,16 +36,12 @@
 	                <!-- 카테고리 숨김 -->
 	                <div class="worry_category_wrap hidden">
 	                    <div class="worry_category">
-	
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark_brown_border">일반고민</label>
-                                <input type="radio" id="normal" name="worryCategory" value="normal">
-	                        </div>
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark_brown_border">일반고민</label>
-	                            <input type="radio" id="normal" name="worryCategory" value="normal">
-	                        </div>
-	                        
+		                    <c:forEach items="${categoryList}" var="category" varStatus="status">
+			                    <div class="check_box_wrap">
+				                    <label for="normal${status.index}" class="dark_brown_border">${category.worryName}</label>
+				                    <input type="radio" id="normal${status.index}" name="worryCategory" value="normal">
+			                    </div>
+		                    </c:forEach>
 	                    </div>
 	                </div>
 	
@@ -115,116 +111,11 @@
 	
 	                <!-- 게시판 리스트 -->
 	                <div class="free_board_list_wrap">
-	
-	                        <!-- 게시판 하나 시작  -->
-	                        <div class="board_list_content">
-	                            
-	                            <!-- 프로필 시작 -->
-	                            <div class="board_flex_wrap">
-	                                <div class="writer_pic_wrap">
-	                                    <div class="writer_pic light_brown_bg" style="background-image: url();">
-	                                    </div>
-                                       	<ul class="userMenu hidden">
-                                       		<li> <a href=""> 차단</a> </li>
-                                       		<li> <a href=""> 검색</a> </li>
-                                       	</ul>
-	                                </div>
-	
-	                                <!-- 포스트 시작 -->
-	                                <a href="">
-		                                <div class="posting_info">
-		                                    <div class="writer_id">
-		                                        <p class="userInfo">아이디</p> 
-		  
-		                                        <p> 5분전</p>
-		                                    </div>
-		                                    <div class="posting">
-		                                        <p>저는 오늘 마라탕을 시켰는데요 마라마라마라탕~~~ </p>
-		                                    </div>
-		                                </div>
-	                                </a>
-	                            </div>
-	                            <div class="board_icon_wrap">
-	                                <!-- 댓글 아이콘 -->
-	                                <div class="commnet_wrap">
-	                                    <i class="far fa-comment dark-brown"></i>
-	                                    <p>3</p>
-	                                </div>
-		                           
-	                            <!-- 공감수 표시 -->
-	                                <div class="like_warp">
-	                                    <img src="${contextPath}/resources/images/icon/smile.png" alt="">
-	                                    <p>2</p>
-	                                    <img src="${contextPath}/resources/images/icon/hug.png" alt="">
-	                                    <p>2</p>
-	                                    <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
-	                                    <p>2</p>
-	                                    <img src="${contextPath}/resources/images/icon/angry.png" alt="">
-	                                    <p>2</p>
-	                                    <img src="${contextPath}/resources/images/icon/crying.png" alt="">
-	                                    <p>2</p>
-	                                </div>
-	                            </div>
-
-	                        </div>
-	                        <div class="board_list_content">
-	                            
-	                            <!-- 프로필 시작 -->
-	                            <div class="board_flex_wrap">
-	                                <div class="writer_pic_wrap">
-	                                    <div class="writer_pic light_brown_bg" style="background-image: url();">
-	                                    </div>
-                                       	<ul class="userMenu hidden">
-                                       		<li> <a href=""> 차단</a> </li>
-                                       		<li> <a href=""> 검색</a> </li>
-                                       	</ul>
-	                                </div>
-	
-	                                <!-- 포스트 시작 -->
-	                                <a href="">
-		                                <div class="posting_info">
-		                                    <div class="writer_id">
-		                                        <p class="userInfo">아이디</p> 
-		  
-		                                        <p> 5분전</p>
-		                                    </div>
-		                                    <div class="posting">
-		                                        <p>저는 오늘 마라탕을 시켰는데요 마라마라마라탕~~~ </p>
-		                                    </div>
-		                                </div>
-	                                </a>
-	                            </div>
-	                            <div class="board_icon_wrap">
-	                                <!-- 댓글 아이콘 -->
-	                                <div class="commnet_wrap">
-	                                    <i class="far fa-comment dark-brown"></i>
-	                                    <p>3</p>
-	                                </div>
-		                           
-	                            <!-- 공감수 표시 -->
-	                                <div class="like_warp">
-	                                    <img src="${contextPath}/resources/images/icon/smile.png" alt="">
-	                                    <p>2</p>
-	                                    <img src="${contextPath}/resources/images/icon/hug.png" alt="">
-	                                    <p>2</p>
-	                                    <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
-	                                    <p>2</p>
-	                                    <img src="${contextPath}/resources/images/icon/angry.png" alt="">
-	                                    <p>2</p>
-	                                    <img src="${contextPath}/resources/images/icon/crying.png" alt="">
-	                                    <p>2</p>
-	                                </div>
-	                            </div>
-
-	                        </div>
-	
 	                </div>
 	
 	            </article>
 	        
 	        </section>
-	    </div>
-	</main>
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
@@ -233,19 +124,85 @@
 
 <script>
 $(function () {
-	console.log("${contextPath}/worry/worryList");
 	$.ajax({
 		url : "${contextPath}/worry/worryList",
 		type : "POST",
 		data : {},
 		success : function (result) {
-			console.log(result);
 
+			let i = 0;
+			let html = "";
+			let empathyArr;
+			let empathyCntArr;
 
+			let iconCnt = {};
 
+			$.each(result.worryList, function (i, item) {
+				// empathy 초기화
+				empathyArr = [];
+				empathyCntArr = [];
+				iconCnt = {
+					"1001" : 0,
+					"1002" : 0,
+					"1003" : 0,
+					"1004" : 0,
+					"1005" : 0
+				};
 
+				if (item.worryEmpathyArray != null) {
+					empathyArr = (item.worryEmpathyArray).split(",");
+					empathyCntArr = (item.worryCntArray).split(",");
+				}
 
+				for(i=0; i<empathyArr.length; i++) {
+					iconCnt[empathyArr[i]] = empathyCntArr[i];
+				}
 
+				html += `
+					<div class="board_list_content">
+						<div class="board_flex_wrap">
+							<div class="writer_pic_wrap">
+								<div class="writer_pic light_brown_bg" style="background-image: url();"></div>
+								<ul class="userMenu hidden">
+									<li> <a href=""> 차단</a> </li>
+									<li> <a href=""> 검색</a> </li>
+								</ul>
+							</div>
+							<a href="">
+								<div class="posting_info">
+									<div class="writer_id">
+										<p class="userInfo">` + item.memberId + `</p>
+										<p> ` + item.createDate + `</p>
+									</div>
+									<div class="posting">
+										<p>` + item.boardTitle + `</p>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="board_icon_wrap">
+							<div class="comment_wrap">
+                                <i class="far fa-comment dark-brown"></i>
+                                <p>` + 5 + `</p>
+                            </div>
+							<div class="like_warp">
+                                <img src="${contextPath}/resources/images/icon/smile.png" alt="" data-icon="1001">
+                                <p>`+ iconCnt[1001] +`</p>
+                                <img src="${contextPath}/resources/images/icon/hug.png" alt="" data-icon="1002">
+                                <p>`+ iconCnt[1002] +`</p>
+                                <img src="${contextPath}/resources/images/icon/amazed.png" alt="" data-icon="1003">
+                                <p>`+ iconCnt[1003] +`</p>
+                                <img src="${contextPath}/resources/images/icon/angry.png" alt="" data-icon="1004">
+                                <p>`+ iconCnt[1004] +`</p>
+                                <img src="${contextPath}/resources/images/icon/crying.png" alt="" data-icon="1005">
+                                <p>`+ iconCnt[1005] +`</p>
+                            </div>
+                        </div>
+					</div>
+				`;
+			});
+
+			$(".free_board_list_wrap").append(html);
 		},
 		error : function(request, status, error){
 			console.log("ajax 통신 중 오류 발생");
