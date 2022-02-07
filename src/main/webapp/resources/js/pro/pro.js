@@ -130,6 +130,8 @@ function requestPay(){
         // const price = $("#price").text().split("원");
         // const finallyPrice = price[0];
 
+        
+
         const count = $("#therapy_count_chk").text().split("회");
         const therapyCount = Number.parseInt(count[0]);
         
@@ -149,14 +151,14 @@ function requestPay(){
                     merchant_uid : 'merchant_' + new Date().getTime(),
                     name : '마음연구소 re:mind',
                     amount : price, //판매 가격
-                    buyer_email : 'iamport@siot.do',
-                    buyer_name : '구매자이름',
+                    buyer_email : '1234@naver.com',
+                    buyer_name : '홍두깨',
                     buyer_tel : '010-1234-5678'
                     
                 }, function(rsp) {
 
                     if ( rsp.success ) { // 결제에 성공했을경우
-
+                            
                         // 3. 주문번호를 이용하여 db에 select 됐던 총 금액 조회
                         $.ajax({
                             url : contextPath + "/pro/priceSelect",
@@ -165,25 +167,53 @@ function requestPay(){
 
                             success : function(price){
 
-                                console.log(price);
-
                                 // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
                                 if(price == rsp.paid_amount){
+                                    alert("결제가 완료되었습니다.");
+                                    
+                                    const reservationEnrollDate = $("#date_chk").text();
+                                    const reservationEnrollTime = $("#time_chk").text().split(":")[0];
+                                    const counselCategoryNm = $("#therapy_chk").text();
 
-                                    var msg = '결제가 완료되었습니다.';
-                                    msg += '고유ID : ' + rsp.imp_uid;
-                                    msg += '상점 거래ID : ' + rsp.merchant_uid;
-                                    msg += '결제 금액 : ' + rsp.paid_amount;
-                                    msg += '카드 승인번호 : ' + rsp.apply_num;
+                                    var formData = new FormData();
+                                    formData.append('payNo',payNo);
+                                    formData.append('reservationEnrollDate',reservationEnrollDate); // 날짜
+                                    formData.append('reservationEnrollTime',reservationEnrollTime); // 시간
+                                    formData.append('counselCategoryNm',counselCategoryNm); // 테라피 종류
 
                                     // update와 insert 동시 진행
+                                    $.ajax({
+                                        url : contextPath + "/pro/reservationUpdate",
+                                        type : "POST",
+                                        data : formData,
+                                        processData: false,
+		                                contentType: false,
+                                        success:function(result){
+                                            console.log(result);
+                                            // 여기서 결제 완료창으로 넘어갈지 , 아님 마이페이지로 들어갈지 고민
+                                        },
+
+                                    });
 
                                 }else{
-                                // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
-                                    alert("결제가 실패 하였습니다.");
+                                    
+                                    // 임의로 삭제버튼을 누르거나 금액이 안맞을떄 PAYMENT, RESERVATION_PAYMENT 삭제 처리
+                                    $.ajax({
+                                        url : contextPath + "/pro/paymentDelete",
+                                        type : "POST",
+                                        data : {"payNo":payNo},
+
+                                        success:function(result){
+
+                                            if(result>0){
+                                                // 5.  DB 조회된 총금액과 rsp.paid_amount 가 같지 않으면 삭제 ajax
+                                                alert("결제 실패 하였습니다.");
+                                            }
+                                        },
+                                    });
                                 }
                                 
-                            }, // 총 금액을 가지고 온 ajax
+                            }, 
 
                         });
                        
@@ -191,9 +221,15 @@ function requestPay(){
                         var msg = '결제에 실패하였습니다.';
                         msg += '에러내용 : ' + rsp.error_msg;
 
-                        
+                        // 임의로 삭제버튼을 누르거나 금액이 안맞을떄 PAYMENT, RESERVATION_PAYMENT 삭제 처리
                         $.ajax({
+                            url : contextPath + "/pro/paymentDelete",
+                            type : "POST",
+                            data : {"payNo":payNo},
 
+                            success:function(result){
+                                console.log(result);
+                            },
                         });
                     }
                 }); 

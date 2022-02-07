@@ -2,6 +2,7 @@ package edu.kh.mind.pro.model.service;
 
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.pro.model.vo.Payment;
+import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
 
 import java.util.List;
@@ -16,5 +17,14 @@ public interface ProService {
     int priceInsert(Payment pm, ReservationPayMent rv);
     
     // 총가격 select
-	int priceSelect(int payNo);
+	int priceSelect(int payNo); 
+	
+	// reservation insert, paymant update
+	int reservationUpdate(Payment payment, Reservation reservation);
+	
+	
+	// 취소 버튼 눌렀을 경우
+	int paymentDelete(int payNo);
+	
+	
 }

@@ -54,7 +54,7 @@ public class FreeBoardController {
         return new Gson().toJson(freeBoardList);
     }
     
-	//게시판 글작성
+	//게시판 글작성 페이지 연결
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String freeBoardinsert(Model model) {
     	model.addAttribute("css", "board/freeList");
@@ -63,7 +63,7 @@ public class FreeBoardController {
     	return "free/insert";
 	}
 	
-	
+	// 글작성 기능 
 	@ResponseBody
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, Board board, 
@@ -87,6 +87,8 @@ public class FreeBoardController {
     	return result;
     }
     
+	
+	
     //게시판 상세조회
     @RequestMapping("view/{boardNo}")
     public String freeBoardView(Model model, @PathVariable("boardNo") int boardNo,
@@ -140,6 +142,17 @@ public class FreeBoardController {
     	return "free/list";
     }
     
+    //예외처리
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e, Model model) {
+		
+		//Model : 데이터 전달용 객체(Map형식, request범위)
+		
+		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
+		model.addAttribute("e", e);
+		
+		return "/common/error";
+	}
   
 
 }

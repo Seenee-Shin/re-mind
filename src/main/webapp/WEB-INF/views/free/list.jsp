@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 
 <!-- header include -->
-            <div class="free_board_list_wrap">
+            <div class="free_board_list_wrap" id="BoardListArea">
 
                 <!-- 게시판 하나 시작  -->
                 <div class="board_list_content">
@@ -19,46 +19,64 @@
                             </ul>                            
                         </div>
 
-                        <!-- 포스트 시작 -->
-                        <a href="/freeView">
+
+                        <a href="/view/${board.boardNo}">
 	                        <div class="posting_info">
 	                            <div class="writer_id">
-	                                <p>아이디</p> 
+	                                <p>${board.memberFn}</p> 
 	                                
 	                                <p> 5분전</p>
 	                            </div>
 	                            <div class="posting">
-	                                <p>저는 오늘 마라탕을 시켰는데요 마라마라마라탕~~~ </p>
+	                                <p>${board.boardContent}</p>
 	                            </div>
 	                        </div>
                         </a>
                     </div>
                     <div class="board_icon_wrap">
                         <!-- 댓글 아이콘 -->
-                        <div class="commnet_wrap">
-                            <i class="far fa-comment dark-brown"></i>
-                            <p>3</p>
-                        </div>
+						<c:choose>
+							<c:when test="${board.replyCheckCode == 1}">
+		                        <div class="commnet_wrap">
+		                            <i class="far fa-comment dark-brown"></i>
+		                            <p>3</p>
+		                        </div>
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<div class="commnet_wrap">
+	                        	</div>
+	                        </c:otherwise>
+                        </c:choose>
 
                  		<!-- 공감수 표시 -->
-                        <div class="like_warp">
-                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
-                            <p>2</p>
-                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
-                            <p>2</p>
-                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
-                            <p>2</p>
-                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
-                            <p>2</p>
-                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
-                            <p>2</p>
-                        </div>
+						<c:choose >
+							<c:when test="${board.empathyCheckCode == 1}">
+		                        <div class="like_warp">
+		                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
+		                            <p></p>
+		                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
+		                            <p>2</p>
+		                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
+		                            <p>2</p>
+		                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
+		                            <p>2</p>
+		                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
+		                            <p>2</p>
+		                        </div>
+							</c:when>
+							
+							<c:otherwise>
+		                        <div class="like_warp">
+		                        </div>
+							</c:otherwise>
+						</c:choose>
                     </div>
-                </div>
+                </div>  
             </div>    
 <script>
 	//전역변수 생성 
 	const loginMemberNo = "${loginMember.memberNo}"
 	const boardNo = "${board.boardNo}";
 </script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="${contextPath}/resources/js/board/freeList.js"></script>

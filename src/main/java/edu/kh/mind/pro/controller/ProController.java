@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.pro.model.service.ProService;
 import edu.kh.mind.pro.model.vo.Payment;
+import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,5 +95,30 @@ public class ProController {
 		return price;
 	}
 	
+	
+	// 금액이 맞으면 update
+	@ResponseBody
+	@RequestMapping(value="reservationUpdate", method=RequestMethod.POST)
+	public int reservationUpdate(Payment payment, Reservation reservation) {
+		
+		System.out.println(payment.getPayNo());
+		System.out.println(reservation.getReservationEnrollDate());
+		System.out.println(reservation.getReservationEnrollTime());
+		System.out.println(reservation.getCounselCategoryNm());
+		
+		int result = service.reservationUpdate(payment,reservation);
+		
+		return result;
+	}
+	
+	// 결제 취소 버튼을 눌렀을 경우
+	@ResponseBody
+	@RequestMapping(value="paymentDelete", method=RequestMethod.POST)
+	public int paymentDelete(int payNo) {
+	
+		int result = service.paymentDelete(payNo);
+		
+		return result;
+	}
 	
 }
