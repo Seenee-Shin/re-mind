@@ -61,7 +61,7 @@ public class AdminProDAO {
 	
 	public int insertCertification(Image img) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("imageMapper.insertCertification", img);
+		return sqlSession.insert("professionMapper.insertCertification", img);
 	}
 
 

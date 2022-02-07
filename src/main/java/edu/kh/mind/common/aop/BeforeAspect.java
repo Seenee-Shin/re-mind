@@ -18,7 +18,6 @@ public class BeforeAspect {
 
     private Logger logger = LoggerFactory.getLogger(BeforeAspect.class);
 
-    //	@Before("execution(* edu.kh.fin..*Controller.*(..))")
     @Before("PointcutCollection.controllerPointcut()")
     private void ControllerLog(JoinPoint jp) {
 
