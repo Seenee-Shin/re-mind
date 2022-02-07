@@ -19,6 +19,7 @@
               </div>
               <div class="study_content">
                   <div class="image_wrap">
+                  	<div class="naturally">원래대로</div>
                   
                   	<c:choose>
                   		<c:when test="${empty postList}">
@@ -28,22 +29,38 @@
 	                  			<c:choose>
 	                  			<c:when test="${post.itemImgNo == 1}">
 		                  			<div class="item beaker1" >
-		                  				<p>${post.postContent}</p>
+		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
+		                  				<i class="far fa-trash-alt fa-sm"></i>
+		                  				</c:if>
+		                  				<p class="postContent">${post.postContent}</p>
+		                  				<p class="hidden nickname">${post.memberFname}</p>
 		                  			</div>
 	                  			</c:when>
 	                  			<c:when test="${post.itemImgNo == 2}">
 		                  			<div class="item beaker2">
+		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
+		                  				<i class="far fa-trash-alt fa-sm"></i>
+		                  				</c:if>
 		                  				<p>${post.postContent}</p>
+		                  				<p class="hidden nickname">${post.memberFname}</p>
 		                  			</div>
 	                  			</c:when>
 	                  			<c:when test="${post.itemImgNo == 3}">
 		                  			<div class="item beaker3">
+		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
+		                  				<i class="far fa-trash-alt fa-sm"></i>
+		                  				</c:if>
 		                  				<p>${post.postContent}</p>
+		                  				<p class="hidden nickname">${post.memberFname}</p>
 		                  			</div>
 	                  			</c:when>
 	                  			<c:when test="${post.itemImgNo == 4}">
 		                  			<div class="item beaker4">
-		                  				<p>${post.postContent}</p>
+		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
+		                  				<i class="far fa-trash-alt fa-sm"></i>
+		                  				</c:if>
+		                  				<p>일이삼사오육칠팔구십일이삼사오</p>
+		                  				<p class="hidden nickname">${post.memberFname}</p>
 		                  			</div>
 	                  			</c:when>
 	                  			

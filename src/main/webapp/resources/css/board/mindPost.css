@@ -56,19 +56,35 @@
     position: relative;
 }
 
-/*.study_content  img{
-    width: 100%;
+.naturally{
+	width: 12%;
+    height: 4%;
+    position: absolute;
+    right: 0;
+    top: -5%;
+    background: pink;
+    border-radius: 15px 15px 0px 0px;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 8px;
 }
-*/
 
 .item{
-    width: 10%;
-    height: 10%;
+    width: 15%;
+    height: 15%;
     position: absolute;
     line-height: 18px;
     text-align: center;
     font-size: 15px;
+     overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+.item > i{
+	position: absolute;
+	right: 10%;
+}
+
 
 .beaker1{
 	 background: url(../../images/board/mindPost/beaker1.png) 100% 100% / 100% 100% no-repeat;
@@ -83,10 +99,11 @@
 	 background: url(../../images/board/mindPost/beaker4.png) 100% 100% / 100% 100% no-repeat;
 }
 
-.item p {
-    padding-top: 25%;
+.item > p {
+    padding-top: 15%;
     color: #454545;
-    padding-left : 5px;
+    padding-left : 13%;
+    padding-right : 5%;
     
 }
 
@@ -216,8 +233,22 @@
 
 /* 확인 모달창 */
 
+.hidden{
+	display : none;
+}
 
-.id_date {
+.nickname{
+	position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    font-size: 16px;
+    font-weight: bold;
+	
+}
+
+
+/*.id_date {
 	
 	width: 80%;
 	margin : 0 auto;
@@ -265,7 +296,27 @@
 
 .study_bottom{
 	margin : 30px 0 30px 0;
+}*/
+
+
+@media screen and (max-width: 910px){
+	   .item{
+        width : 15%;
+        height: 15%;
+        font-size: 13px;
+    }
+    
+    .naturally{
+    font-size: 12px;
+    width: 15%;
+    height: 5%;
+    padding-top : 2px;
+    }
+	
 }
+
+
+
 
 
 

@@ -71,10 +71,24 @@ submitBtn.addEventListener("click", () => {
 });
 
 
-box.addEventListener("dblclick", () => {
-	   layerPopup("studyView");
+
+$(".item").on("dblclick",function(e){
+	
+	$(this).css({"width": "25%","height": "25%"});
+	$(this).children(".nickname").removeClass("hidden");
+	
+	
+	
 });
 
 
+$(".naturally").on("click",function(e){
+	$(".item").css({"width" : "15%", "height" : "15%"});
+	$(".item").children(".nickname").addClass("hidden");
+});
+
+
+
+	
 
 
