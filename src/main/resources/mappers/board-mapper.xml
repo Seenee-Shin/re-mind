@@ -2,16 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
 
-
-    <select id="myBoardList" resultMap="board_rm">
-        SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, MEMBER_NM
-        FROM BOARD
-        JOIN MEMBER USING(MEMBER_NO)
-        WHERE MEMBER_NO = #{memberNo}
-          AND BOARD_STATUS_CD = 201
-          AND STATUS_CD = 0
-    </select>
-
 	<resultMap type="Board" id="board_rm">
 		<id property="boardNo" column="BOARD_NO"/>
 
@@ -33,6 +23,16 @@
 		<result property="boardCategoryName" column="BOARD_CATEGORY_NM"/>
 		<result property="worryCategoryCode" column="WORRY_CATEGORY_CD"/>
 		<result property="worryCategoryName" column="WORRY_CATEGORY_NM"/>
+		
+		<result property="replyCount" column="REPLY_COUNT"/>
+		<result property="memberImage" column="MEMBER_IMAGE"/>
+		<result property="profrssionImage" column="PROFESSION_IMAGE"/>
+		
+		<result property="likeCount" column="L_COUNT"/>
+		<result property="cheerCount" column="C_COUNT"/>
+		<result property="sadCount" column="SA_COUNT"/>
+		<result property="angryCount" column="A_COUNT"/>
+		<result property="surpriseCount" column="SU_COUNT"/>
 
 		<result property="worryEmpathyArray" column="EMPATHY_ARRAY"/>
 		<result property="worryCntArray" column="CNT_ARRAY"/>
@@ -59,11 +59,6 @@
     	<result property="memberNo" column="MEMBER_NO"/>
     	<result property="boardNo" column="BOARD_NO"/>
     	<result property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
-    </resultMap>
-
-    <resultMap type="EmpathyStatus" id="empathyStatus_rm">
-    	<id property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
-    	<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
     </resultMap>
 
 		<!-- 게시판 이미지 조회-->
@@ -126,8 +121,6 @@
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 
-
-
 	<!-- 고민상담 게시글 -->
 	<select id="selectWorryList" resultMap="board_rm">
 		SELECT MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM,
@@ -152,5 +145,18 @@
 		WHERE BOARD_CATEGORY_CD = 102
 	</select>
    
-	
+	<!-- 작성 날짜 역순 / 최신 순 -->
+	<select id="myBoardList" resultMap="board_rm" >
+		SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE,
+			   TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
+			   BOARD_CATEGORY_NM, BOARD_READ_COUNT
+		FROM BOARD
+				 JOIN MEMBER USING (MEMBER_NO)
+				 JOIN BOARD_CATEGORY USING (BOARD_CATEGORY_CD)
+		WHERE MEMBER_NO = #{memberNo}
+		  AND BOARD_STATUS_CD = 201
+		  AND STATUS_CD = 0
+		ORDER BY BOARD_CREATE_DT DESC
+	</select>
+
 </mapper>

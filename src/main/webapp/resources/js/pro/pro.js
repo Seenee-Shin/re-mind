@@ -37,32 +37,57 @@ $(".detail_btn").on("click",function(){
 // 예상 수강료
 let therapySelect;
 let therapyCount;
+let finallyPrice; // 최종 가격
+
+// ********** 상담사 별 가격 가지고 올 예정
+let textTherapy = 100;
+let faceTherapy = 100;
+let voiceTherapy = 100;
+// **********
 
 $("#therapy_select").change(function(){
     therapySelect = $(this).val();
-    therapySelectText = $("#therapy_select option:selected").text();
-    calc();
+  
+    if(therapySelect == 1){
+        finallyPrice = textTherapy*therapyCount;
+    }else if(therapySelect == 2){
+        finallyPrice = faceTherapy*therapyCount;
+    }else if(therapySelect == 3){
+        finallyPrice = voiceTherapy*therapyCount;
+    }
 
+    
+
+    calc();
+    
+    therapySelectText = $("#therapy_select option:selected").text();
     $("#therapy_chk").text(therapySelectText);
 });    
 
 $("#therapy_count").change(function(){ 
     therapyCount = $(this).val();
-    therapyCountText = $("#therapy_count option:selected").text();
-    calc();
 
+    if(therapySelect == 1){
+        finallyPrice = textTherapy*therapyCount;
+    }else if(therapySelect == 2){
+        finallyPrice = faceTherapy*therapyCount;
+    }else if(therapySelect == 3){
+        finallyPrice = voiceTherapy*therapyCount;
+    }
+
+
+    calc();
+    
+    therapyCountText = $("#therapy_count option:selected").text();
     $("#therapy_count_chk").text(therapyCountText);
 });    
 
-let price;
-
 // 상담가격 , 천단위 콤마
 function calc(){
-    if(therapySelect != undefined && therapySelect != 0){
+    if(finallyPrice != undefined && finallyPrice != 0 && finallyPrice != NaN){
         if(therapyCount != undefined && therapyCount != 0){
-            price = Number(therapySelect) * Number(therapyCount);
-            var price2 = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $("#price").html(price2 + "<span>원</span>");
+            var price = Number(finallyPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $("#price").html(price + "<span>원</span>");
         }else{
 
         }    
@@ -84,15 +109,21 @@ let splitDate;
 
 
 $(document).on("click", "#calendar td", function (){
-    
+    const index = $("#calendar td").index($(this));
+
+    if(index < 7 || $(this).css("color") == "rgb(25, 62, 160)"
+        || $(this).css("color") == "rgb(190, 21, 61)")   return;
+    if($(this).css("color") == "rgb(197, 202, 205)")    return;
+
     asff= $("#ym").text().split("년 ");
     splitYear = asff[0];
     splitMonth = asff[1].split("월");
-
     splitDate = $(this).attr("id");
+    
 
-    $("#date_chk").text(splitYear +"-"+splitMonth[0]+"-"+ splitDate);
-
+    if(splitDate != undefined && $(this).css("color") != "rgb(197, 202, 205)"){
+        $("#date_chk").text(splitYear +"-"+splitMonth[0]+"-"+ splitDate);
+    }
 });
 
 // 상담사 목록페이지 카테고리 선택(모바일)
@@ -127,11 +158,6 @@ function requestPay(){
         return;
     }else{
 
-        // const price = $("#price").text().split("원");
-        // const finallyPrice = price[0];
-
-        
-
         const count = $("#therapy_count_chk").text().split("회");
         const therapyCount = Number.parseInt(count[0]);
         
@@ -139,7 +165,8 @@ function requestPay(){
          $.ajax({
             url : contextPath + "/pro/priceInsert",
             type : "POST",
-            data : {"price":price, "therapyCount": therapyCount},
+            // 전문가 번호, 텍스트 테라피 종류 , 횟수
+            data : {"therapySelect":therapySelect, "therapyCount": therapyCount},
 
             success : function(payNo){
 
@@ -150,7 +177,7 @@ function requestPay(){
                     pay_method : 'card',
                     merchant_uid : 'merchant_' + new Date().getTime(),
                     name : '마음연구소 re:mind',
-                    amount : price, //판매 가격
+                    amount : Number(finallyPrice), //판매 가격
                     buyer_email : '1234@naver.com',
                     buyer_name : '홍두깨',
                     buyer_tel : '010-1234-5678'
@@ -241,3 +268,167 @@ function requestPay(){
 }
 
 
+
+
+
+
+// 달력
+const redColor = "#be153d";
+const blueColor = "#193ea0";
+
+var today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth();
+let backupMonthFirstDay;
+
+// 달력에 블록표시해주는 함수입니다.
+function setBlock(){
+    let seeYear = $(".YM").text().split("년 ")[0];
+    let seeMonth = $(".YM").text().split("년 ")[1].split("월")[0];
+    let date = today.getDate();
+
+    let monthFirstDay = new Date(year, month, 1).getDay();
+
+    // 현재날짜보다 보고 있는 달력의 년도가 낮을 시 블록처리합니다.
+    if(seeYear < today.getFullYear()){
+        for(let i = 0; i < $("#calendar td").length; i++){
+            if(i < 7) continue;
+            $("#calendar td").eq(i + monthFirstDay).css("color", "#c5cacd");
+        }
+    }else{// 현재년도와 보고있는 년도가 같거나 더 높을 시
+        // 현재날짜보다 보고있는 달력의 월이 낮을 시 블록처리합니다.
+        if(seeMonth <= today.getMonth() + 1){
+            if(seeMonth == today.getMonth() + 1){
+                for(let i = 0; i < $("#calendar td").length; i++) {
+                    if ($("#calendar td").eq(i).attr("id") <= date)
+                        $("#calendar td").eq(i).css("color", "#c5cacd");
+                }
+            }else{ // 현재 월보다 보고있는 월이 낮을 시
+                for(let i = monthFirstDay; i < $("#calendar td").length; i++){
+                    $("#calendar td").eq(i + monthFirstDay).css("color", "#c5cacd");
+                }
+            }
+        }
+    }
+}
+
+// 달력을 만들어주는 함수입니다.
+const calendar = document.getElementById("calendar");
+function makeCalendar(el, yearNo, monthNo) {
+
+    year = Number.parseInt(yearNo);
+    month = Number.parseInt(monthNo);
+
+    let YM = year + "년 " + (month + 1) + "월";
+    $(".YM").text(YM);
+
+    $(".calendar").attr("id", year + "-" + month);
+
+    let endDay = new Date(year, month + 1, 0);
+    let nextDate = endDay.getDate();
+
+    // 오늘은 무슨요일
+    const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
+    let monthFirstDay = new Date(year, month, 1).getDay();
+    backupMonthFirstDay = monthFirstDay;
+    let row = el.insertRow();
+    let cell;
+
+    // 일 ~ 토 요일을 표시해주고 색을 칠해줍니다.
+    for(let i = 0; i < 7; i++){
+        cell = row.insertCell();
+        cell.innerHTML = WEEKDAY[i]
+        if(i == 0)      cell.style.color = redColor;
+        else if(i == 6) cell.style.color = blueColor;
+    }
+    row = el.insertRow();
+
+    for(let i = 0; i < monthFirstDay; i++){
+        cell = row.insertCell();
+    }
+
+    for(let i = 1; i <= nextDate; i++){
+        if(monthFirstDay != 7){
+            cell = row.insertCell();
+            cell.setAttribute("id", i);
+            cell.innerHTML = i;
+
+            if(monthFirstDay == 0 && i == 1)    cell.style.color = redColor;
+            else if(monthFirstDay == 6)         cell.style.color = blueColor;
+            monthFirstDay += 1;
+        }else{
+            row = el.insertRow();
+            cell = row.insertCell();
+            cell.setAttribute("id", i);
+
+            cell.innerHTML = i;
+            cell.style.color = redColor;
+            monthFirstDay = monthFirstDay - 6;
+        }
+    }
+    setHgight();
+    setBlock();
+}
+
+function beforeCalendar() {
+    $("#calendar").empty();
+
+    let id = $(".calendar").attr("id");
+    let splitId = id.split("-");
+
+    let yearNo = splitId[0];
+    let monthNo = splitId[1];
+
+    // 현재 1월이면
+    if(splitId[1] == 0){
+        yearNo = Number.parseInt(yearNo) - 1;
+        monthNo = Number.parseInt(monthNo) + 12;
+    }
+    monthNo = Number.parseInt(monthNo) - 1;
+
+    makeCalendar(calendar, yearNo, monthNo);
+}
+
+function nextCalendar() {
+    $("#calendar").empty();
+
+    let id = $(".calendar").attr("id");
+    let splitId = id.split("-");
+
+    let yearNo = splitId[0];
+    let monthNo = splitId[1];
+
+    // 현재 12월이면
+    if(splitId[1] == 11){
+        yearNo = Number.parseInt(yearNo) + 1;
+        monthNo = Number.parseInt(monthNo) - 12;
+    }
+    monthNo = Number.parseInt(monthNo) + 1;
+
+    makeCalendar(calendar, yearNo, monthNo);
+}
+
+makeCalendar(calendar, year, month);
+
+$(document).on("click", "#calendar td", function (){
+    const index = $("#calendar td").index($(this));
+
+    if($(this).css("color") == "rgb(197, 202, 205)") return;
+    if($(this).css("color") == "rgb(25, 62, 160)"
+        || $(this).css("color") == "rgb(190, 21, 61)")   return;
+    if(index < 7 + backupMonthFirstDay) return;
+
+    $("#calendar td").removeClass("YMcss");
+    $(this).addClass("YMcss");
+});
+
+
+function setHgight(){
+    if($("#calendar tr").length > 6){
+        $("#tuition_date").css("height","630px");
+        $("#reservation_confirm_wrap").css("height","1197px");
+    }else{
+        $("#tuition_date").css("height","560px");
+        $("#reservation_confirm_wrap").css("height","1120px");
+    }
+}

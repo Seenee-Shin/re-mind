@@ -26,9 +26,9 @@
                             <td>
                                 <select class="select_box" id="therapy_select" >
                                     <option value="0">선택</option>
-                                    <option value="100">텍스트테라피</option>
-                                    <option value="100">페이스테라피</option>
-                                    <option value="100">보이스테라피</option>
+                                    <option value="1">텍스트테라피</option>
+                                    <option value="2">페이스테라피</option>
+                                    <option value="3">보이스테라피</option>
                                 </select>
                             </td>
                         </tr>
@@ -38,9 +38,9 @@
                                 <select class="select_box" id="therapy_count">
                                     <option value="0">선택</option>
                                     <option value="1">1회</option>
-                                    <option value="1">3회</option>
-                                    <option value="1">5회</option>
-                                    <option value="1">20회</option>
+                                    <option value="3">3회</option>
+                                    <option value="5">5회</option>
+                                    <option value="20">20회</option>
                                 </select>
                             </td>
                         </tr>
@@ -134,145 +134,3 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-<script>
-    const redColor = "#be153d";
-    const blueColor = "#193ea0";
-
-    var today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth();
-    let backupMonthFirstDay;
-
-    const calendar = document.getElementById("calendar");
-    function makeCalendar(el, yearNo, monthNo) {
-
-        year = Number.parseInt(yearNo);
-        month = Number.parseInt(monthNo);
-
-        let YM = year + "년 " + (month + 1) + "월";
-        $(".YM").text(YM);
-
-        $(".calendar").attr("id", year + "-" + month);
-
-        // 이전 달의 마지막 날, 요일
-        // let startDay = new Date(year, month, 0);
-        // let prevDate = startDay.getDate();
-        // let prevDay = startDay.getDay();
-
-        // 이번 달의 마지막 날, 요일
-        let endDay = new Date(year, month + 1, 0);
-        let nextDate = endDay.getDate();
-        let nextDay = endDay.getDay();
-
-        // 오늘은 무슨요일
-        const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
-        // let doyWeek = WEEKDAY[new Date(today).getDay()];
-        // let dayNo = new Date(today).getDay();
-        let monthFirstDay = new Date(year, month, 1).getDay();
-        console.log(monthFirstDay)
-        backupMonthFirstDay = monthFirstDay;
-        let row = el.insertRow();
-        let cell;
-
-        // 일 ~ 토 요일을 표시해주고 색을 칠해줍니다.
-        for(let i = 0; i < 7; i++){
-            cell = row.insertCell();
-            cell.innerHTML = WEEKDAY[i]
-            if(i == 0)      cell.style.color = redColor;
-            else if(i == 6) cell.style.color = blueColor;
-        }
-        row = el.insertRow();
-
-        for(let i = 0; i < monthFirstDay; i++){
-            cell = row.insertCell();
-        }
-
-        for(let i = 1; i <= nextDate; i++){
-            if(monthFirstDay != 7){
-                cell = row.insertCell();
-                cell.setAttribute("id", i);
-                cell.innerHTML = i;
-                if(monthFirstDay == 6)              cell.style.color = blueColor;
-                if(monthFirstDay == 0 && i == 1)    cell.style.color = redColor;
-                monthFirstDay += 1;
-            }else{
-                row = el.insertRow();
-                cell = row.insertCell();
-                cell.setAttribute("id", i);
-
-                cell.innerHTML = i;
-                cell.style.color = redColor;
-                monthFirstDay = monthFirstDay - 6;
-            }
-        }
-
-        setHgight();
-    }
-
-    function beforeCalendar() {
-        $("#calendar").empty();
-
-        let id = $(".calendar").attr("id");
-        let splitId = id.split("-");
-
-        let yearNo = splitId[0];
-        let monthNo = splitId[1];
-
-        // 현재 1월이면
-        if(splitId[1] == 0){
-            yearNo = Number.parseInt(yearNo) - 1;
-            monthNo = Number.parseInt(monthNo) + 12;
-        }
-        monthNo = Number.parseInt(monthNo) - 1;
-
-        makeCalendar(calendar, yearNo, monthNo);
-    }
-
-    function nextCalendar() {
-        $("#calendar").empty();
-
-        let id = $(".calendar").attr("id");
-        let splitId = id.split("-");
-
-        let yearNo = splitId[0];
-        let monthNo = splitId[1];
-
-        // 현재 12월이면
-        if(splitId[1] == 11){
-            yearNo = Number.parseInt(yearNo) + 1;
-            monthNo = Number.parseInt(monthNo) - 11;
-        }
-        monthNo = Number.parseInt(monthNo) + 1;
-
-        makeCalendar(calendar, yearNo, monthNo);
-    }
-
-    makeCalendar(calendar, year, month);
-    
-    $(document).on("click", "#calendar td", function (){
-        const index = $("#calendar td").index($(this));
-        
-        if(index < 7 + backupMonthFirstDay) return;
-        
-        $("#calendar td").removeClass("YMcss");
-        
-      	$(this).addClass("YMcss");
-    });
-
-
-    function setHgight(){
-       if($("#calendar tr").length > 6){
-            $("#tuition_date").css("height","630px");
-            $("#reservation_confirm_wrap").css("height","1197px");
-        }else{
-            $("#tuition_date").css("height","560px");
-            $("#reservation_confirm_wrap").css("height","1120px");
-        } 
-    }
-
-
-</script>
-
-
-</body>
-</html>

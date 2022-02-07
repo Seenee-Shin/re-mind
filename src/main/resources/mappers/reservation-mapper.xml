@@ -33,6 +33,12 @@
 		<result property="reservationPayNo" column="RESERVATION_PAY_NO"/>
 	</resultMap>
 	
+	<resultMap type="ProfessionPrice" id="ProfessionPrice_rm">
+		<id property="professionNo" column="PROFESSION_NO"/>
+		<result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
+		<result property="counselPrice" column="COUNSEL_PRICE"/>
+	</resultMap>
+	
 	<!-- 상담예약결제 insert -->
 	<insert id="reservationPaymentInsert" useGeneratedKeys="true">
 	
@@ -41,9 +47,16 @@
 		</selectKey>
 
 		INSERT INTO RESERVATION_PAYMENT 
-		VALUES(#{reservationPayNo},3,24,#{totalCnt},DEFAULT,DEFAULT)
+		VALUES(#{reservationPayNo},61,1,#{totalCnt},DEFAULT,DEFAULT)
 		
 	</insert>
+	
+	<!-- 상담사 별 금액 조회 -->
+	<select id="professionPriceSelect" resultType="_int">
+		SELECT COUNSEL_PRICE
+		FROM PROFESSION_PRICE
+		WHERE COUNSEL_CATEGORY_NO = #{counselCategoryCode} AND PROFESSION_NO = 1
+	</select>
 	
 	<!-- 결제 tb에 총금액 상담 예약결제번호 insert -->
 	<insert id="paymentInsert" useGeneratedKeys="true">
