@@ -34,38 +34,38 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="imgWrap">
-									<div class="boardImg">
-										<img>
-										 <i class="fas fa-times deleteImg" ></i>
-									</div>
-
+		                        <div id="imgWrap">
 								</div>
 		                        
 		                        <div class="write_option_area">
 		                            <div class="check_box_wrap">
-		                                <label for="comment" class="light_brown_bg"> 댓글 허용 </label>
-		                                <input type="checkbox" name="replyCheckCode" value="1" id="comment" onclick="optionValidate();">
+                                       <select id="replyCheckCode" name="replyCheckCode">
+										    <option value="1">댓글 허용</option>
+										    <option value="2">댓글 비허용</option>
+									    </select>  		                            
 		                            </div>
 		
 		                            <div class="check_box_wrap">
-		                                <label for="scrap" class="light_brown_bg">스크랩 허용</label>
-										<input type="checkbox" name="scrapCheckCode" value="1" id="scrap" onclick="optionValidate();">
-		                                    
+                                       <select id="scrapCheckCode" name="scrapCheckCode">
+										    <option value="1">스크랩 허용</option>
+										    <option value="2">스크랩 비허용</option>
+									    </select>  		                            
 		                            </div>
 		                            
 		                            <div class="check_box_wrap">
-		                                <label for="like" class="light_brown_bg">공감 허용</label>
-		                                <input type="checkbox" name="empathyCheckCode" value="1" id="like" onclick="optionValidate();">
+                                       <select id="empathyCheckCode" name="empathyCheckCode">
+										    <option value="1">공감 허용</option>
+										    <option value="2">공감 비허용</option>
+									    </select>  		                            
 		                            </div>
 		                        </div>
 		                        
 		                        <hr>
 		                        <div class="btn_area">
-		                            <label for="file">
-		                                <i class="fas fa-image dark-brown"></i>
+		                            <label for="addFileBtn">
+		                                <i class="fas fa-image dark-brown" ></i>
 		                            </label>
-										<input type="file" name="images" id='addFileBtn' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
+										<input type="file" name="images" id='addFileBtn' accept="audio/*, video/*, image/*" multiple style="display: none"> 
 		                            <button class="submit_btn light_brown_bg">작성</button>
 		                        </div>
 		                    </div>
@@ -89,19 +89,25 @@
 			                               <div class="m_write_option_area">
 			
 			                                    <div class="write_option_area">
-			                                        <div class="check_box_wrap">
-			                                            <label for="mComment" class="light_brown_bg">댓글 허용</label>
-			                                            <input type="checkbox" name="replyCheckCode" value="1" id="mComment"  onclick="optionValidate();">
-			                                        </div>
+			                                       <div class="check_box_wrap">
+			                                       <select id="mReplyCheckCode" name="replyCheckCode">
+													    <option value="1">댓글 허용</option>
+													    <option value="2">댓글 비허용</option>
+												    </select>  
+												    </div>
 			
 			                                        <div class="check_box_wrap">
-			                                            <label for="mScrap" class="light_brown_bg">스크랩 허용</label>
-			                                            <input type="checkbox"  name="scrapCheckCode" value="1" id="mScrap"  onclick="optionValidate();">
+				                                       <select id="mScrapCheckCode" name="scrapCheckCode">
+														    <option value="1">스크랩 허용</option>
+														    <option value="2">스크랩 비허용</option>
+													    </select>  
 			                                        </div>
 			                                        
 			                                        <div class="check_box_wrap">
-			                                            <label for="mLike" class="light_brown_bg">공감 허용</label>
-			                                            <input type="checkbox"  name="empathyCheckCode" value="1" id="mLike"  onclick="optionValidate();">
+				                                       <select id="mEmpathyCheckCode" name="empathyCheckCode">
+														    <option value="1">공감 허용</option>
+														    <option value="2">공감 비허용</option>
+													    </select>  
 			                                        </div>
 			                              		</div>
 			                                
