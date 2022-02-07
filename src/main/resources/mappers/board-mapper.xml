@@ -2,16 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
 
-
-    <select id="myBoardList" resultMap="board_rm">
-        SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, MEMBER_NM
-        FROM BOARD
-        JOIN MEMBER USING(MEMBER_NO)
-        WHERE MEMBER_NO = #{memberNo}
-          AND BOARD_STATUS_CD = 201
-          AND STATUS_CD = 0
-    </select>
-
 	<resultMap type="Board" id="board_rm">
 		<id property="boardNo" column="BOARD_NO"/>
 
@@ -123,6 +113,16 @@
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 
-   
-	
+	<select id="myBoardList" resultMap="board_rm" >
+			SELECT MEMBER_NO, BOARD_NO, BOARD_TITLE,
+				TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
+				BOARD_READ_COUNT
+			FROM BOARD
+			JOIN MEMBER USING (MEMBER_NO)
+			WHERE MEMBER_NO = #{memberNo}
+			  AND BOARD_STATUS_CD = 201
+			  AND STATUS_CD = 0
+			ORDER BY BOARD_CREATE_DT DESC
+	</select>
+
 </mapper>

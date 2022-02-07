@@ -57,8 +57,3 @@
 
 <!-- header include -->
 <jsp:include page="../procommon/footer.jsp"></jsp:include>
-
-
-
-
-
