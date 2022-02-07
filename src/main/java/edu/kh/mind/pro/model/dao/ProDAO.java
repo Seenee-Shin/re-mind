@@ -2,6 +2,7 @@ package edu.kh.mind.pro.model.dao;
 
 
 import edu.kh.mind.member.model.vo.Profession;
+import edu.kh.mind.member.model.vo.ProfessionPrice;
 
 import java.util.List;
 
@@ -19,10 +20,16 @@ public class ProDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	// 결제 예약 결제
+	// 결제 예약 결제 insert
 	public int reservationPaymentInsert(ReservationPayMent rv) {
 		return sqlSession.insert("reservationMapper.reservationPaymentInsert",rv);
 	}
+	
+	// 상담사 별 가격 select
+	public int professionPriceSelect(ProfessionPrice pfp) {
+		return sqlSession.selectOne("reservationMapper.professionPriceSelect",pfp);
+	}
+	
 	
 	// 결제 총 금액 insert
 	public int paymentInsert(Payment pm) {
@@ -33,9 +40,6 @@ public class ProDAO {
 	public int priceSelect(int payNo) {
 		return sqlSession.selectOne("reservationMapper.priceSelect",payNo);
 	}
-
-	
-	
 	
     public List<Profession> selectProfession(List<String> worryCtCd) {
         return sqlSession.selectList("professionMapper.selectProfession", worryCtCd);

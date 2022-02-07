@@ -21,6 +21,7 @@
 		<typeAlias type="edu.kh.mind.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.MindPost" alias="MindPost"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Empathy" alias="Empathy"/>
+
 <!--		<typeAlias type="edu.kh.mind.board.model.vo.EmpathyStatus" alias="EmpathyStatus"/>-->
 
 		<typeAlias type="edu.kh.mind.selftest.model.vo.Selftest" alias="Selftest"/>
@@ -41,7 +42,6 @@
 	<mappers>
 		<mapper resource="/mappers/chat-mapper.xml"/>
 		<mapper resource="/mappers/profession-mapper.xml"/>
-
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/selftest-mapper.xml"/>	
 		<mapper resource="/mappers/emotion-mapper.xml"/>
