@@ -17,7 +17,13 @@ const mScrapLable = document.querySelector("label[for='mScrap']")
 const mLikeLable = document.querySelector("label[for='mLike']")
 const mAnonLable = document.querySelector("label[for='mAnon']")
 
+const replyCheckCode = $("#comment, #mComment")
+const scrapCheckCode = $("#mScrap, #scrap")
+const empathyCheckCode = $("#mLike, #like")
+const anonCheckCode = $("#mAnon, #anon")
 
+
+const checkbox = $("input[type='checkbox']")
 
 function optionValidate(){
 	
@@ -29,24 +35,51 @@ let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mSc
 
 		if(!option) return;
 		
+		
 		if(option.checked){
+			
 			optionLable[i].classList.remove("light_brown_bg")
 			optionLable[i].classList.add("dark_brown_bg")
 			
-			if(i == 0 || i == 4)   optionLable[i].innerText = "댓글 비허용";
-	        else if(i == 1 || i == 5)   optionLable[i].innerText = "스크랩 비허용";
-			else if(i == 2 || i == 6)   optionLable[i].innerText = "공감 비허용";
-			else if(i == 3 || i == 7)   optionLable[i].innerText = "익명 OFF";
+			if(i == 0 || i == 4)  {
+				optionLable[i].innerText = "댓글 비허용";
+				replyCheckCode.val(0)
+			} 
+	        else if(i == 1 || i == 5) {
+				scrapCheckCode.val(0)
+	        	optionLable[i].innerText = "스크랩 비허용";
+			}  
+			else if(i == 2 || i == 6) {
+			  optionLable[i].innerText = "공감 비허용";
+			  empathyCheckCode.val(0)			
+			}
+			else if(i == 3 || i == 7)  
+			 optionLable[i].innerText = "익명 OFF";
+			  anonCheckCode.val(0)			
 
 		}else{
 			option.unchecked
 			optionLable[i].classList.remove("dark_brown_bg")
 			optionLable[i].classList.add("light_brown_bg")
 			
-	        if(i == 0 || i == 4)   optionLable[i].innerText = "댓글 허용";
-			else if(i == 1 || i == 5)   optionLable[i].innerText = "스크랩 허용";
-			else if(i == 2 || i == 6)   optionLable[i].innerText = "공감 허용";
-			else if(i == 3 || i == 7)   optionLable[i].innerText = "익명 ON";
+	        if(i == 0 || i == 4) {
+	        	optionLable[i].innerText = "댓글 허용";
+				replyCheckCode.val(1)
+			}  
+			else if(i == 1 || i == 5) {
+				optionLable[i].innerText = "스크랩 허용";
+				scrapCheckCode.val(1)
+			}
+			else if(i == 2 || i == 6) {
+				optionLable[i].innerText = "공감 허용";
+				empathyCheckCode.val(1)
+							
+			}  
+			else if(i == 3 || i == 7) {
+				optionLable[i].innerText = "익명 ON";
+				anonCheckCode.val(1)
+				
+			}
 		}
 	});
 	

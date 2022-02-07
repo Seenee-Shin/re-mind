@@ -330,14 +330,11 @@
 	var clickable = [];
 
 	$(".cate_btn").on("click", function (){
-		const index = $(".cate_btn").index($(this));
-
 		let val = $(this).val();
 
 		if(val.length == 1)	val = 100 + val;
 		else				val = 10 + val;
 
-		// console.log($(this).attr("id"))
 		if( $(this).attr("id") == undefined ){
 			if(clickable.length > 4)	return;
 			$(this).attr("id", val).css("backgroundColor", "rgb(166 166 168)").css("color", "white");
@@ -351,16 +348,26 @@
 				clickable[count] = $(".cate_btn").eq(i).attr("id");
 				count = count + 1;
 			}else{
-				clickable.splice( count, 1);
+				clickable.splice(count, 1);
 			}
 		}
 		clickable.sort(function (a, b){return a-b;});
 
-		function makeComma(str) {
-			str = String(str);
-			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-		}
+		makePro();
+	});
 
+	function makeComma(str) {
+		str = String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+
+
+	const replyCheckCode = $("#comment, #mComment")
+	const checkbox = $("input[type='checkbox']")
+	replyCheckCode.val(1)
+
+
+	function makePro(){
 		$.ajax({
 			url:"proCategory",
 			data:{"worryCtCd": clickable},
@@ -369,10 +376,10 @@
 				const ul = $("#pro_list");
 				ul.empty();
 				$.each(result, function (i, item){
-					console.log(item)
-
 					let category = item.counselCategoryCode.split(",");
 					let price = item.counselPrice.split(",");
+
+					console.log(item)
 
 					if(category[0] != 1 && category[0] == 2){
 						category.splice(0, 0, "undefined");
@@ -388,11 +395,16 @@
 					}
 
 					const li = $('<li class="pro">');
-					const aHref = $('<a href="#">');
+					const aHref = $('<a href= '+contextPath+'/pro/proView/'+item.professionNo+'>');
 
 					const pro_profile = $('<div class="pro_profile">');
 					const pro_profile_img1 = $('<img src="/mind/resources/images/pro/best.png" class="pro_best">');
-					const pro_profile_img2 = $('<img src="/mind/resources/images/pro/pro_img/pro_img1.png" class="profile">');
+					let pro_profile_img2;
+					if(item.imagePath == undefined)//기본프로필이 없으면
+						pro_profile_img2 = $('<img src="'+contextPath+'/resources/images/basicProfile.png" class="profile">');
+					else // 있으면 경로로 이미지이름 추가로 가져와야됨
+						pro_profile_img2 = $('<img src="'+contextPath+item.imagePath+'/'+item.imageName+'" class="profile">');
+
 					pro_profile.append(pro_profile_img1, pro_profile_img2);
 
 					const pro_intro_wrap = $('<div class="pro_intro_wrap">');
@@ -459,7 +471,8 @@
 				});
 			}
 		});
-	});
+	}
+	makePro();
 </script>
 </body>
 </html>
