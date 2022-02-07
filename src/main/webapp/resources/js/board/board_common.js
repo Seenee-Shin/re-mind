@@ -37,31 +37,28 @@ let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mSc
 		
 		
 		if(option.checked){
-			checkbox.val('')
 			
 			optionLable[i].classList.remove("light_brown_bg")
 			optionLable[i].classList.add("dark_brown_bg")
 			
 			if(i == 0 || i == 4)  {
 				optionLable[i].innerText = "댓글 비허용";
-				replyCheckCode.val(1)
+				replyCheckCode.val(0)
 			} 
 	        else if(i == 1 || i == 5) {
-				scrapCheckCode.val(1)
+				scrapCheckCode.val(0)
 	        	optionLable[i].innerText = "스크랩 비허용";
 			}  
 			else if(i == 2 || i == 6) {
 			  optionLable[i].innerText = "공감 비허용";
-			  empathyCheckCode.val(1)			
+			  empathyCheckCode.val(0)			
 			}
 			else if(i == 3 || i == 7)  
 			 optionLable[i].innerText = "익명 OFF";
-			  anonCheckCode.val(1)			
+			  anonCheckCode.val(0)			
 
 		}else{
-			checkbox.val('')
 			option.unchecked
-			checkbox.val().remove
 			optionLable[i].classList.remove("dark_brown_bg")
 			optionLable[i].classList.add("light_brown_bg")
 			
