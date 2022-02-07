@@ -143,6 +143,38 @@
     let month = today.getMonth();
     let backupMonthFirstDay;
 
+    // 달력에 블록표시해주는 함수입니다.
+    function setBlock(){
+        let seeYear = $(".YM").text().split("년 ")[0];
+        let seeMonth = $(".YM").text().split("년 ")[1].split("월")[0];
+        let date = today.getDate();
+
+        let monthFirstDay = new Date(year, month, 1).getDay();
+
+        // 현재날짜보다 보고 있는 달력의 년도가 낮을 시 블록처리합니다.
+        if(seeYear < today.getFullYear()){
+            for(let i = 0; i < $("#calendar td").length; i++){
+                if(i < 7) continue;
+                $("#calendar td").eq(i + monthFirstDay).css("color", "#c5cacd");
+            }
+        }else{// 현재년도와 보고있는 년도가 같거나 더 높을 시
+            // 현재날짜보다 보고있는 달력의 월이 낮을 시 블록처리합니다.
+            if(seeMonth <= today.getMonth() + 1){
+                if(seeMonth == today.getMonth() + 1){
+                    for(let i = 0; i < $("#calendar td").length; i++) {
+                        if ($("#calendar td").eq(i).attr("id") <= date)
+                            $("#calendar td").eq(i).css("color", "#c5cacd");
+                    }
+                }else{ // 현재 월보다 보고있는 월이 낮을 시
+                    for(let i = monthFirstDay; i < $("#calendar td").length; i++){
+                        $("#calendar td").eq(i + monthFirstDay).css("color", "#c5cacd");
+                    }
+                }
+            }
+        }
+    }
+
+    // 달력을 만들어주는 함수입니다.
     const calendar = document.getElementById("calendar");
     function makeCalendar(el, yearNo, monthNo) {
 
@@ -154,22 +186,12 @@
 
         $(".calendar").attr("id", year + "-" + month);
 
-        // 이전 달의 마지막 날, 요일
-        // let startDay = new Date(year, month, 0);
-        // let prevDate = startDay.getDate();
-        // let prevDay = startDay.getDay();
-
-        // 이번 달의 마지막 날, 요일
         let endDay = new Date(year, month + 1, 0);
         let nextDate = endDay.getDate();
-        let nextDay = endDay.getDay();
 
         // 오늘은 무슨요일
         const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
-        // let doyWeek = WEEKDAY[new Date(today).getDay()];
-        // let dayNo = new Date(today).getDay();
         let monthFirstDay = new Date(year, month, 1).getDay();
-        console.log(monthFirstDay)
         backupMonthFirstDay = monthFirstDay;
         let row = el.insertRow();
         let cell;
@@ -192,8 +214,9 @@
                 cell = row.insertCell();
                 cell.setAttribute("id", i);
                 cell.innerHTML = i;
-                if(monthFirstDay == 6)              cell.style.color = blueColor;
+
                 if(monthFirstDay == 0 && i == 1)    cell.style.color = redColor;
+                else if(monthFirstDay == 6)         cell.style.color = blueColor;
                 monthFirstDay += 1;
             }else{
                 row = el.insertRow();
@@ -205,8 +228,8 @@
                 monthFirstDay = monthFirstDay - 6;
             }
         }
-
         setHgight();
+        setBlock();
     }
 
     function beforeCalendar() {
@@ -240,7 +263,7 @@
         // 현재 12월이면
         if(splitId[1] == 11){
             yearNo = Number.parseInt(yearNo) + 1;
-            monthNo = Number.parseInt(monthNo) - 11;
+            monthNo = Number.parseInt(monthNo) - 12;
         }
         monthNo = Number.parseInt(monthNo) + 1;
 
@@ -248,14 +271,14 @@
     }
 
     makeCalendar(calendar, year, month);
-    
+
     $(document).on("click", "#calendar td", function (){
         const index = $("#calendar td").index($(this));
-        
+
+        if($(this).css("color") == "rgb(197, 202, 205)") return;
         if(index < 7 + backupMonthFirstDay) return;
         
         $("#calendar td").removeClass("YMcss");
-        
       	$(this).addClass("YMcss");
     });
 

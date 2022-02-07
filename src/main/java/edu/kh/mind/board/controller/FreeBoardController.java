@@ -67,7 +67,7 @@ public class FreeBoardController {
 	@ResponseBody
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, Board board, 
-    		List<MultipartFile> images,HttpSession session,RedirectAttributes ra) {
+    		List<MultipartFile> images, HttpSession session,RedirectAttributes ra) {
     	
 		board.setMemberNo(loginMember.getMemberNo());
 		//웹 접근경로(web path), 서버 저장경로(serverPath)
@@ -108,10 +108,7 @@ public class FreeBoardController {
 		String path =null;
 		//조회 결과에 따른 처리
 		if(board != null) { 
-			//댓글 목록 조회 Service호출 
-			//List<Reply> rList = replyService.selectList(boardNo);
-			
-			//model.addAttribute("rList", rList);
+
 			
 			//게시글이 존재할 때 
 			model.addAttribute("board",board);

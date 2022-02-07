@@ -8,15 +8,15 @@ public class Board {
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
-
+		
 	private String createDate;
 	private String modifyDate;
-	
+	  
 	private int replyCheckCode;
 	private int scrapCheckCode;
 	private int anonCheckCode;
 	private int empathyCheckCode;
-	
+	 
 	private int readCount;
 	private int memberNo;
 	private String memberFn;
@@ -27,6 +27,20 @@ public class Board {
 	private String boardCategoryName;
 	private int worryCategoryCode;
 	private String worryCategoryName;
+
+	//댓글 수 변수 
+	private int replyCount;
+	
+	//프로필 이미지 path 
+	private String memberImage;
+	private String professionImage;
+	
+	//공감 수 변수 
+	private int likeCount;
+	private int cheerCount;
+	private int sadCount;
+	private int angryCount;
+	private int surpriseCount;
 	
 	private List<Image> imgList;
 	private List<Empathy> emList;
@@ -185,6 +199,70 @@ public class Board {
 
 	public void setWorryCategoryName(String worryCategoryName) {
 		this.worryCategoryName = worryCategoryName;
+	}
+
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
+	public String getMemberImage() {
+		return memberImage;
+	}
+
+	public void setMemberImage(String memberImage) {
+		this.memberImage = memberImage;
+	}
+
+	public String getProfessionImage() {
+		return professionImage;
+	}
+
+	public void setProfessionImage(String professionImage) {
+		this.professionImage = professionImage;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public int getCheerCount() {
+		return cheerCount;
+	}
+
+	public void setCheerCount(int cheerCount) {
+		this.cheerCount = cheerCount;
+	}
+
+	public int getSadCount() {
+		return sadCount;
+	}
+
+	public void setSadCount(int sadCount) {
+		this.sadCount = sadCount;
+	}
+
+	public int getAngryCount() {
+		return angryCount;
+	}
+
+	public void setAngryCount(int angryCount) {
+		this.angryCount = angryCount;
+	}
+
+	public int getSurpriseCount() {
+		return surpriseCount;
+	}
+
+	public void setSurpriseCount(int surpriseCount) {
+		this.surpriseCount = surpriseCount;
 	}
 
 	public List<Image> getImgList() {

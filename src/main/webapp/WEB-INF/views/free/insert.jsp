@@ -27,10 +27,10 @@
 	                   	 	<div class="board_write_warp grey_bg " >
 		                        <div id="free_board_write">
 		                            <div class="writer_pic_wrap">
-		                                <div class="my_pic light_brown_bg" style="background-image: url();"> </div>
+		                                <div class="my_pic light_brown_bg" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});"> </div>
 		                            </div>
 		                            <div class="writing">
-		                                <textarea class="grey_bg" name="" id="post_textarea" rows="5" placeholder="무슨일이 있었나요?"></textarea>
+		                                <textarea class="grey_bg" name="boardContent" id="post_textarea" rows="5" placeholder="무슨일이 있었나요?"></textarea>
 		                            </div>
 		                        </div>
 		                        
@@ -39,27 +39,24 @@
 										<img>
 										 <i class="fas fa-times deleteImg" ></i>
 									</div>
-									<div class="boardImg">
-										<img>
-										<i class="fas fa-times deleteImg"></i>
-									</div>
+
 								</div>
 		                        
 		                        <div class="write_option_area">
 		                            <div class="check_box_wrap">
 		                                <label for="comment" class="light_brown_bg"> 댓글 허용 </label>
-		                                <input type="checkbox" name="writeOption" value="comment" id="comment" onclick="optionValidate();">
+		                                <input type="checkbox" name="replyCheckCode" value="comment" id="comment" onclick="optionValidate();">
 		                            </div>
 		
 		                            <div class="check_box_wrap">
 		                                <label for="scrap" class="light_brown_bg">스크랩 허용</label>
-										<input type="checkbox" name="writeOption" value="scrap" id="scrap" onclick="optionValidate();">
+										<input type="checkbox" name="scrapCheckCode" value="scrap" id="scrap" onclick="optionValidate();">
 		                                    
 		                            </div>
 		                            
 		                            <div class="check_box_wrap">
 		                                <label for="like" class="light_brown_bg">공감 허용</label>
-		                                <input type="checkbox" name="writeOption" value="like" id="like" onclick="optionValidate();">
+		                                <input type="checkbox" name="empathyCheckCode" value="like" id="like" onclick="optionValidate();">
 		                            </div>
 		                        </div>
 		                        
@@ -84,7 +81,7 @@
 			                                        <div class="my_pic light_brown_bg" style="background-image: url();">
 			                                        </div>
 			                                        <div class="m_writing">
-			                                            <textarea name="writePost" id="m_post_text" rows="5" placeholder="무슨일이 있었나요?"></textarea>
+			                                            <textarea name="boardContent" id="m_post_text" rows="5" placeholder="무슨일이 있었나요?"></textarea>
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -94,17 +91,17 @@
 			                                    <div class="write_option_area">
 			                                        <div class="check_box_wrap">
 			                                            <label for="mComment" class="light_brown_bg">댓글 허용</label>
-			                                            <input type="checkbox" name="writeOption" value="comment" id="mComment"  onclick="optionValidate();">
+			                                            <input type="checkbox" name="replyCheckCode" value="comment" id="mComment"  onclick="optionValidate();">
 			                                        </div>
 			
 			                                        <div class="check_box_wrap">
 			                                            <label for="mScrap" class="light_brown_bg">스크랩 허용</label>
-			                                            <input type="checkbox"  name="writeOption" value="scrap" id="mScrap"  onclick="optionValidate();">
+			                                            <input type="checkbox"  name="scrapCheckCode" value="scrap" id="mScrap"  onclick="optionValidate();">
 			                                        </div>
 			                                        
 			                                        <div class="check_box_wrap">
 			                                            <label for="mLike" class="light_brown_bg">공감 허용</label>
-			                                            <input type="checkbox"  name="writeOption" value="like" id="mLike"  onclick="optionValidate();">
+			                                            <input type="checkbox"  name="empathyCheckCode" value="like" id="mLike"  onclick="optionValidate();">
 			                                        </div>
 			                              		</div>
 			                                
@@ -130,8 +127,8 @@
                	     	<c:otherwise>
                	     		<div class="board_write_warp grey_bg " >
                	     			<div id="free_board_write">
-		                            <div class="writing">
-		                            	<div>글은 작성하시려면 로그인 해주세요</div>
+		                            <div class="writing" style="min-height: 100px;">
+		                            	<div style="text-align: center; color: grey; font-size: 20px;">글은 작성하시려면 로그인 해주세요</div>
 		                            </div>
 	                            </div>
                            	</div>
