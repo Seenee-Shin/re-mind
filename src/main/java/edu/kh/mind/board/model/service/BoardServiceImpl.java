@@ -23,7 +23,9 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public List<Board> selectBoardList() {
-		// TODO Auto-generated method stub
+		
+		
+		
 		return dao.selectBoardList();
 	}
 
