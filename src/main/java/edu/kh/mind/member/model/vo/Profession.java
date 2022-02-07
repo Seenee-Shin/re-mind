@@ -21,8 +21,17 @@ public class Profession {
     private String professionTag;
     private String counselCategoryCode;
     private String counselPrice;
+    private String imagePath;
 
     public Profession(){}
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
 
     public void setProfessionNo(int professionNo) {
         this.professionNo = professionNo;
