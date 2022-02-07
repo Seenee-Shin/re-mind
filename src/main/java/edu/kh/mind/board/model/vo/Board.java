@@ -20,6 +20,7 @@ public class Board {
 	private int readCount;
 	private int memberNo;
 	private String memberFn;
+	private String memberId;
 	private int professionNo;
 	private String professionName;
 	private int statusCode;
@@ -44,7 +45,10 @@ public class Board {
 	
 	private List<Image> imgList;
 	private List<Empathy> emList;
-	
+
+	private String worryEmpathyArray;
+	private String worryCntArray;
+
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
@@ -143,6 +147,14 @@ public class Board {
 
 	public void setMemberFn(String memberFn) {
 		this.memberFn = memberFn;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public int getProfessionNo() {
@@ -279,5 +291,50 @@ public class Board {
 
 	public void setEmList(List<Empathy> emList) {
 		this.emList = emList;
+	}
+
+	public String getWorryEmpathyArray() {
+		return worryEmpathyArray;
+	}
+
+	public void setWorryEmpathyArray(String worryEmpathyArray) {
+		this.worryEmpathyArray = worryEmpathyArray;
+	}
+
+	public String getWorryCntArray() {
+		return worryCntArray;
+	}
+
+	public void setWorryCntArray(String worryCntArray) {
+		this.worryCntArray = worryCntArray;
+	}
+
+	@Override
+	public String toString() {
+		return "Board{" +
+				"boardNo=" + boardNo +
+				", boardTitle='" + boardTitle + '\'' +
+				", boardContent='" + boardContent + '\'' +
+				", createDate='" + createDate + '\'' +
+				", modifyDate='" + modifyDate + '\'' +
+				", replyCheckCode=" + replyCheckCode +
+				", scrapCheckCode=" + scrapCheckCode +
+				", anonCheckCode=" + anonCheckCode +
+				", empathyCheckCode=" + empathyCheckCode +
+				", readCount=" + readCount +
+				", memberNo=" + memberNo +
+				", memberFn=" + memberFn +
+				", professionNo=" + professionNo +
+				", professionName=" + professionName +
+				", statusCode=" + statusCode +
+				", boardCategoryCode=" + boardCategoryCode +
+				", boardCategoryName=" + boardCategoryName +
+				", worryCategoryCode=" + worryCategoryCode +
+				", worryCategoryName=" + worryCategoryName +
+				", imgList=" + imgList +
+				", emList=" + emList +
+				", worryEmpathyArray='" + worryEmpathyArray + '\'' +
+				", worryCntArray='" + worryCntArray + '\'' +
+				'}';
 	}
 }

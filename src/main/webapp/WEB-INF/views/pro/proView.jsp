@@ -11,12 +11,19 @@
 	    <div class="pro_profile_wrap">
 	        <div class="pro_profile">
 	                <img src="${contextPath}/resources/images/pro/best.png" class="pro_best">
-	                <img src="${contextPath}/resources/images/pro/pro_img/pro_img1.png" class="profile">
+				<c:choose>
+					<c:when test="${empty profession.imagePath}">
+	                	<img src="${contextPath}/resources/images/basicProfile.png" class="profile">
+					</c:when>
+					<c:otherwise>
+						<img src="${contextPath}${profession.imagePath}/${profession.imageName}" class="profile">
+					</c:otherwise>
+				</c:choose>
 	        </div>
 	        <div class="pro_intro_wrap">
 	            <div class="pro_star_score">
 	                <div class="pro_name float-left">
-	                    <h1>김효린</h1>
+	                    <h1>${profession.professionName}</h1>
 	                </div>
 	                <div class="pro_score_wrap float-left">
 	                    <span>추천 전문가</span>
@@ -35,22 +42,54 @@
 	                <p>#가족 #대인관계 #자존감상실 #연인</p>
 	            </div>
 	        </div>
-	
+
+			<c:set var="splitPrice" value="${fn:split(profession.counselPrice,',')}"/>
+			<c:set var="splitCategory" value="${fn:split(profession.counselCategoryCode,',')}"/>
 	        <div class="pro_price_wrap float-left">
 	            <div class="text_price">
 	                <div>
 	                    <img src="${contextPath}/resources/images/pro/text_therapy_mini.png" class="float-left">
-	                    <p class="float-left">25,000<span>원</span></p> 
+						<c:choose>
+							<c:when test="${splitCategory[0] == 1}">
+								<p class="float-left">${splitPrice[0]}<span>원</span></p>
+							</c:when>
+							<c:otherwise>
+								<p class="float-left">-</p>
+							</c:otherwise>
+						</c:choose>
 	                </div>
-	                
+
 	            </div>
 	            <div class="face_price clear-both">
 	                <img src="${contextPath}/resources/images/pro/face_therapy_mini.png" class="float-left">
-	                <p class="float-left">50,000<span>원</span></p>
+					<c:choose>
+						<c:when test="${splitCategory[0] == 2}">
+							<p class="float-left">${splitPrice[0]}<span>원</span></p>
+						</c:when>
+						<c:when test="${splitCategory[1] == 2}">
+							<p class="float-left">${splitPrice[1]}<span>원</span></p>
+						</c:when>
+						<c:otherwise>
+							<p class="float-left">-</p>
+						</c:otherwise>
+					</c:choose>
 	            </div>
 	            <div class="voice_price clear-both">
 	                <img src="${contextPath}/resources/images/pro/voice_therapy_mini.png" class="float-left">
-	                <p class="float-left">35,000<span>원</span></p>
+					<c:choose>
+						<c:when test="${splitCategory[0] == 3}">
+							<p class="float-left">${splitPrice[0]}<span>원</span></p>
+						</c:when>
+						<c:when test="${splitCategory[1] == 3}">
+							<p class="float-left">${splitPrice[1]}<span>원</span></p>
+						</c:when>
+						<c:when test="${splitCategory[2] == 3}">
+							<p class="float-left">${splitPrice[2]}<span>원</span></p>
+						</c:when>
+						<c:otherwise>
+							<p class="float-left">-</p>
+						</c:otherwise>
+					</c:choose>
 	            </div>
 	        </div>
 	    </div>
@@ -224,3 +263,8 @@
 <jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>
+
+<script>
+	const profession = "${profession.counselCategoryCode}";
+	console.log(profession)
+</script>

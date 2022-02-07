@@ -43,19 +43,21 @@ public class ProController {
 		if(worryCtCd != null)	pList = service.selectProfession(worryCtCd);
 		else					pList = service.selectAllProfession();
 
-		for(Profession p : pList){
-			System.out.println("제발 : " + p.getProfessionName());
-		}
-
 		return new Gson().toJson(pList);
 	}
 	
-	@RequestMapping("proView")
-	public String proView(Model model) {
+	@RequestMapping("proView/{professionNo}")
+	public String proView(Model model, @PathVariable("professionNo") int professionNo) {
 		
 		model.addAttribute("css", "pro/proView");
     	model.addAttribute("header", "main");
-		
+
+		Profession pro = service.selectPro(professionNo);
+
+		System.out.println(pro.getProfessionName());
+
+		model.addAttribute("profession", pro);
+
 		return "pro/proView";
 	}
 	
