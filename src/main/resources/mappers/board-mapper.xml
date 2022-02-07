@@ -58,11 +58,6 @@
     	<result property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
     </resultMap>
 
-    <resultMap type="EmpathyStatus" id="empathyStatus_rm">
-    	<id property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
-    	<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
-    </resultMap>
-
 		<!-- 게시판 이미지 조회-->
 	<select id="selectBoardImageList" resultMap="image_rm">
 		SELECT * FROM IMAGE

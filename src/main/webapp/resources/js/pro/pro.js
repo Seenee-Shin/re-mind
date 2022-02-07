@@ -414,6 +414,8 @@ $(document).on("click", "#calendar td", function (){
     const index = $("#calendar td").index($(this));
 
     if($(this).css("color") == "rgb(197, 202, 205)") return;
+    if($(this).css("color") == "rgb(25, 62, 160)"
+        || $(this).css("color") == "rgb(190, 21, 61)")   return;
     if(index < 7 + backupMonthFirstDay) return;
 
     $("#calendar td").removeClass("YMcss");
