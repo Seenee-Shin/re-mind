@@ -4,6 +4,10 @@ public class Empathy {
 	private int memberNo;
 	private int boardNo;
 	private int empathyStatusCode;
+	private String empathyStatusName;
+	
+
+	
 	
 	public Empathy() {
 		// TODO Auto-generated constructor stub
