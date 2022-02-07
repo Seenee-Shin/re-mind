@@ -45,18 +45,18 @@
 		                        <div class="write_option_area">
 		                            <div class="check_box_wrap">
 		                                <label for="comment" class="light_brown_bg"> 댓글 허용 </label>
-		                                <input type="checkbox" name="replyCheckCode" value="comment" id="comment" onclick="optionValidate();">
+		                                <input type="checkbox" name="replyCheckCode" value="" id="comment" onclick="optionValidate();">
 		                            </div>
 		
 		                            <div class="check_box_wrap">
 		                                <label for="scrap" class="light_brown_bg">스크랩 허용</label>
-										<input type="checkbox" name="scrapCheckCode" value="scrap" id="scrap" onclick="optionValidate();">
+										<input type="checkbox" name="scrapCheckCode" value="" id="scrap" onclick="optionValidate();">
 		                                    
 		                            </div>
 		                            
 		                            <div class="check_box_wrap">
 		                                <label for="like" class="light_brown_bg">공감 허용</label>
-		                                <input type="checkbox" name="empathyCheckCode" value="like" id="like" onclick="optionValidate();">
+		                                <input type="checkbox" name="empathyCheckCode" value="" id="like" onclick="optionValidate();">
 		                            </div>
 		                        </div>
 		                        
@@ -91,17 +91,17 @@
 			                                    <div class="write_option_area">
 			                                        <div class="check_box_wrap">
 			                                            <label for="mComment" class="light_brown_bg">댓글 허용</label>
-			                                            <input type="checkbox" name="replyCheckCode" value="comment" id="mComment"  onclick="optionValidate();">
+			                                            <input type="checkbox" name="replyCheckCode" value="" id="mComment"  onclick="optionValidate();">
 			                                        </div>
 			
 			                                        <div class="check_box_wrap">
 			                                            <label for="mScrap" class="light_brown_bg">스크랩 허용</label>
-			                                            <input type="checkbox"  name="scrapCheckCode" value="scrap" id="mScrap"  onclick="optionValidate();">
+			                                            <input type="checkbox"  name="scrapCheckCode" value="" id="mScrap"  onclick="optionValidate();">
 			                                        </div>
 			                                        
 			                                        <div class="check_box_wrap">
 			                                            <label for="mLike" class="light_brown_bg">공감 허용</label>
-			                                            <input type="checkbox"  name="empathyCheckCode" value="like" id="mLike"  onclick="optionValidate();">
+			                                            <input type="checkbox"  name="empathyCheckCode" value="" id="mLike"  onclick="optionValidate();">
 			                                        </div>
 			                              		</div>
 			                                

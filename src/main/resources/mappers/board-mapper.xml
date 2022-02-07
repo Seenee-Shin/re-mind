@@ -27,15 +27,11 @@
 		<result property="replyCount" column="REPLY_COUNT"/>
 		<result property="memberImage" column="MEMBER_IMAGE"/>
 		<result property="profrssionImage" column="PROFESSION_IMAGE"/>
-		
-		<result property="likeCount" column="L_COUNT"/>
-		<result property="cheerCount" column="C_COUNT"/>
-		<result property="sadCount" column="SA_COUNT"/>
-		<result property="angryCount" column="A_COUNT"/>
-		<result property="surpriseCount" column="SU_COUNT"/>
 
 		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
+		<collection property="profileImgList" column="BOARD_NO"
+					javaType="java.util.ArrayList" ofType="Image" select="selectFropileImageList"/>
 		<collection property="emList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>
 	</resultMap>
@@ -51,26 +47,21 @@
 		<result property="professionNo" column="BOARD_NO"/>
 	</resultMap>
 
-
     <resultMap type="Empathy" id="empathy_rm">
     	<result property="memberNo" column="MEMBER_NO"/>
     	<result property="boardNo" column="BOARD_NO"/>
     	<result property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
-    </resultMap>
-
-    <resultMap type="EmpathyStatus" id="empathyStatus_rm">
-    	<id property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
     	<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
     </resultMap>
 
-		<!-- 게시판 이미지 조회-->
+		<!-- 특정 게시판 이미지 조회-->
 	<select id="selectBoardImageList" resultMap="image_rm">
 		SELECT * FROM IMAGE
 		WHERE BOARD_NO = #{boardNo}
 		ORDER BY IMAGE_LEVEL
 	</select>
 
-
+	
 	<!-- 게시판 이미지 삽입 -->
    <insert id="insertImgList" parameterType="list">
    		INSERT INTO IMAGE
@@ -85,17 +76,37 @@
 		   </foreach>
    </insert>
 
+	<!-- 자유게시판 글쓴사람 프로필 사진  -->
+	<select id="">
+		SELECT IMAGE_PATH 
+		FROM IMAGE 
+		WHERE MEMBER_NO = (SELECT BOARD_NO
+							FROM BOARD
+							WHERE BOARD_STATUS_CD = 201 
+							AND BOARD_CATEGORY_CD = 101 )
+	</select>
+	
 
 	<!-- 자유게시판 조회-->
 	<select id="selectBoardList" resultMap="board_rm">
-		SELECT * FROM BOARD WHERE BOARD_CATEGORY_CD = 101 AND BOARD_STATUS_CD = 201
+	<![CDATA[
+		SELECT BOARD_NO,BOARD_CONTENT,
+				TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
+				TO_CHAR(BOARD_MODIFY_DT, 'YYYY-  SCRAP_CHECK_CD,MEMBER_NO,EM_CHECK_CD,ANON_CHECK_CD 
+		FROM BOARD
+		WHERE BOARD_STATUS_CD = 201 
+		AND BOARD_CATEGORY_CD = 101
+		ORDER BY BOARD_NO DESC
+		
+		]]>
 	</select>
 	
 	    	
 	<!-- 공감조회 -->
 	<select id="selectEmpathyList" resultMap="empathy_rm">
-		SELECT EMPATHY_STATUS_CD, COUNT(MEMBER_NO) FROM EMPATHY
-		WHERE BOARD_NO = #{boardNo} GROUP BY EMPATHY_STATUS_CD
+		SELECT EMPATHY_STATUS_NM, COUNT(MEMBER_NO)
+		FROM EMPATHY JOIN EMPATHY_STATUS USING(EMPATHY_STATUS_CD)
+		WHERE BOARD_NO = #{boardNo} GROUP BY EMPATHY_STATUS_NM
 	</select>
     
 	
@@ -114,7 +125,21 @@
 	
 	<!-- 게시글 상세조회 -->
 	<select id="selectBoard" resultMap="board_rm">
-
+		SELECT b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT, 
+    			e.EMPATHY_ARRAY, e.CNT_ARRAY
+		FROM BOARD b
+		LEFT JOIN (
+		    SELECT 
+		        a.BOARD_NO,
+		        LISTAGG(  a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
+		        LISTAGG(  a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
+		    FROM (
+		        SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
+		        FROM EMPATHY
+		        GROUP BY BOARD_NO, EMPATHY_STATUS_CD
+		    ) a
+    	GROUP BY BOARD_NO
+		) e on e.BOARD_NO = b.BOARD_NO;
 	</select>
 	
 	<update id="increaseReadCount">
