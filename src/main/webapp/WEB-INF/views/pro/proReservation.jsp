@@ -184,23 +184,12 @@
 
         $(".calendar").attr("id", year + "-" + month);
 
-        // 이전 달의 마지막 날, 요일
-        // let startDay = new Date(year, month, 0);
-        // let prevDate = startDay.getDate();
-        // let prevDay = startDay.getDay();
-
-        // 이번 달의 마지막 날, 요일
         let endDay = new Date(year, month + 1, 0);
         let nextDate = endDay.getDate();
-        let nextDay = endDay.getDay();
-
 
         // 오늘은 무슨요일
         const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
-        // let doyWeek = WEEKDAY[new Date(today).getDay()];
-        // let dayNo = new Date(today).getDay();
         let monthFirstDay = new Date(year, month, 1).getDay();
-        console.log(monthFirstDay)
         backupMonthFirstDay = monthFirstDay;
         let row = el.insertRow();
         let cell;
@@ -280,10 +269,12 @@
     }
 
     makeCalendar(calendar, year, month);
-    
+
     $(document).on("click", "#calendar td", function (){
         const index = $("#calendar td").index($(this));
-        
+
+        if($(this).css("color") == "rgb(197, 202, 205)") return;
+
         if(index < 7 + backupMonthFirstDay) return;
         
         $("#calendar td").removeClass("YMcss");
