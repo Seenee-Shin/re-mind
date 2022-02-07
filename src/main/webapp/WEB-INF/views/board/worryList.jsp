@@ -231,3 +231,34 @@
 <script type="text/javascript" src="${contextPath}/resources/js/board/board_common.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_worry_board.js"></script>
 
+<script>
+$(function () {
+	console.log("${contextPath}/worry/worryList");
+	$.ajax({
+		url : "${contextPath}/worry/worryList",
+		type : "POST",
+		data : {},
+		success : function (result) {
+			console.log(result);
+
+
+
+
+
+
+		},
+		error : function(request, status, error){
+			console.log("ajax 통신 중 오류 발생");
+			console.log(request.responseText);
+		}
+
+
+	})
+})
+
+
+
+
+
+</script>
+
