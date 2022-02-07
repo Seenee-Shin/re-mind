@@ -141,7 +141,7 @@
 		INSERT INTO BOARD 
 		VALUES(BOARD_NO, NULL, #{boardContent}, DEFAULT, NULL, 0, 
 				#{replyCheckCode},#{scrapCheckCode},101,#{memberNo},
-				DEFAULT,DEFAULT,#{empathyCheckCode},#{anonCheckCode},NULL)
+				DEFAULT,DEFAULT,#{empathyCheckCode},1,NULL)
 	</insert>
 	
 	<!-- 게시글 상세조회 -->

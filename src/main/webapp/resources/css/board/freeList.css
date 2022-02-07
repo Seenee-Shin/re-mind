@@ -13,6 +13,34 @@
 input:focus, textarea:focus, select:focus{
     outline: none;}
 
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  
+  font-family: "Noto Sansf KR", sans-serif;
+  padding: 4px;
+  width:110px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 600;
+  color:#A59999;
+  border: 1px solid #A59999;
+  border-radius: 15px;
+}
+
+select:hover {
+	background-color:#E5D4C5;
+	color: white;
+	border-color:#E5D4C5 ;
+	
+}
+
+
+select:disabled {
+  opacity: 0.5;
+}
+
 
 /* 검색 */
 .search_area{
@@ -90,7 +118,7 @@ input:focus, textarea:focus, select:focus{
     display: none;
 }
 
-.check_box_wrap>label{
+.check_box_wrap> .checkBtn{
     display: inline-block;
     border-radius: 15px;
     min-width: 90px;
@@ -235,7 +263,19 @@ display: inline-block;
     margin: 10px;
     width: 90%;
     margin-top: 0px;
+
 }
+.deleteImg{
+	position: fixed;
+    width: 126px;
+    top: 375px;
+	
+}
+.boardImg>img{
+	width: 100%;
+	height: 100%;
+}
+	
 
 /* 공감 & 댓글 아이콘 */
 .board_icon_wrap{
@@ -357,6 +397,10 @@ display: inline-block;
 
     footer{
         display: none;
+    }
+    
+    .imgWrap{
+    	display: none;
     }
 
 

@@ -19,6 +19,7 @@ function setMobile(){
    writing.value = ""
    writing.onclick = openModal
    closeBtn.onclick = closeModal
+   
 }
 
 if(innerWidth <= 768){
@@ -41,7 +42,6 @@ window.onresize = function(){
 
 /* 모바일 대댓글 토글 */
 const child = document.querySelectorAll(".comment_view child")
-
 
 
 
