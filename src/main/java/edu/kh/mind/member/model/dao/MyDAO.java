@@ -80,8 +80,9 @@ public class MyDAO {
 		return sqlSession.selectOne("boardMapper.getBoardListCount", memberNo);
 	}
 
-	//
+	// 내 댓글 보기
     public List<Reply> selectMyReplyList(int memberNo) {
+//		System.out.println(memberNo); 담김
 		return sqlSession.selectList("replyMapper.selectMyReplyList", memberNo);
     }
 }

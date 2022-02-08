@@ -96,9 +96,31 @@ function selectMyReplyList(){
         type : "GET",
         data : {"memberNo" : memberNo},
         dataType : "json",
-        success : function (result){
-            console.log(result);
-            console.log(memberNo);
+        success : function (selectMyReplyList){
+            console.log(selectMyReplyList);
+            // console.log(memberNo); 72
+                $(".board-info").empty();
+
+            $.each(selectMyReplyList, function (i,item){
+                // const tr = $("<tr class='board-view'>");
+                // const td = $('<td>');
+
+                console.log(item)
+
+                $(".my-5").empty();
+
+                const tr = $('<tr class=\"board-view\" style=\"background-color: rgb(252, 247, 243);\">');
+                let td = '<td>'+item.boardNo+'</td>' +
+                '<td>'+item.boardTitle+'</td>' +
+                '<td>'+item.replyCreateDate+'</td>' +
+                '<td>'+item.readCount+'</td>';
+                tr.append(td);
+                $("tbody").append(tr);
+
+
+
+            }) // each
+
         },
         error : function (error, status){
             console.log("error : " + error + "\n" + "status : " + status );

@@ -29,7 +29,7 @@
         <tbody>
             <c:choose>
 
-                <c:when test="${empty myBoardList}">
+                <c:when test="${empty myBoardList && empty selectMyReplyList}">
                     <%-- 조회된 게시글 목록이 없을 때 --%>
                     <tr>
                         <td colspan="4">게시글이 존재하지 않습니다.</td>
@@ -51,6 +51,33 @@
                 </c:otherwise>
 
             </c:choose>
+
+            <%--<c:choose>
+
+                <c:when test="${empty myBoardList && empty selectMyReplyList}">
+                    &lt;%&ndash; 조회된 게시글 목록이 없을 때 &ndash;%&gt;
+                    <tr>
+                        <td colspan="4">게시글이 존재하지 않습니다.</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                        <c:forEach items="${selectMyReplyList}" var="myReply">
+                            &lt;%&ndash; 조회된 게시글 목록이 있을 때 &ndash;%&gt;
+                            <tr class="board-view">
+                                <td>${myReply.boardNo}</td>
+                                <td>${myReply.boardTitle}
+                                        &lt;%&ndash; <a href="${contextPath}/mind/board/view/${myBoard.boardNo}">&ndash;%&gt;
+                                        &lt;%&ndash; 상제조회 페이지 완성시 &ndash;%&gt;
+                                </td>
+                                <td>${myReply.replyCreateDate}</td>
+                                <td>${myReply.readCount}</td>
+                            </tr>
+
+                        </c:forEach>
+                </c:otherwise>
+
+            </c:choose>--%>
+
             <%--<tr class="board-view">
                 <td>1445</td>
                 <td>너무 힘드네요...</td>
@@ -172,10 +199,14 @@
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
+<script>
+
+    <!-- 세션에 올라가있는 loinMember -->
+    const memberNo = ${loginMember.memberNo};
+</script>
 <script src="${contextPath}/resources/js/my/myBoardList.js"></script>
 <script>
 
-    const memberNo = ${myBoard.memberNo};
 
 
 
