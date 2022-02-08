@@ -77,6 +77,9 @@ submitBtn.addEventListener("click", () => {
 
 
 
+
+
+
 // 상세 조회
 $(".item").on("dblclick",function(e){
 	
