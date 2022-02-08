@@ -77,7 +77,7 @@ public class MyServiceImpl implements MyService {
 
         // 전체 게시글 수
         int listCount = dao.getBoardListCount(memberNo);
-        System.out.println(listCount);
+//        System.out.println(listCount);
 
         return new Pagination(listCount, cp);
     }

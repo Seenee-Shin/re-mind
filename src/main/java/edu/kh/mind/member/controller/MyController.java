@@ -227,11 +227,11 @@ public class MyController {
         if (session.getAttribute("loginMember") != null) {
             memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
             pagination = service.getPagination(cp, memberNo);
-            System.out.println(pagination); //
+//            System.out.println(pagination);
             pagination.setMemberNo(memberNo);
 
             List<Board> myBoardList = service.myBoardList(pagination);
-            System.out.println(myBoardList.get(board.getBoardNo()).toString());
+//            System.out.println(myBoardList.get(board.getBoardNo()).toString());
 
 
 

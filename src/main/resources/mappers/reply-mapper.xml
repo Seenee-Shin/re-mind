@@ -17,6 +17,7 @@
 		<result property="parentReplyNo" column="REPLY_NESTED_CD"/>
 
 		<result property="boardTitle" column="BOARD_TITLE"/>
+		<result property="readCount" column="BOARD_READ_COUNT"/>
 		<result property="boardCategoryName" column="BOARD_CATEGORY_NM"/>
 		<result property="memberFn" column="MEMBER_FN"/>
 
@@ -25,16 +26,18 @@
 	<select id="selectMyReplyList" resultMap="reply_rm">
 		SELECT REPLY.REPLY_NO, BOARD_TITLE,
 			   TO_CHAR(REPLY_CREATE_DT, 'YYYY-MM-DD') "REPLY_CREATE_DT" ,
-			   BOARD_CATEGORY_NM, MEMBER_FN
+			   BOARD_CATEGORY_NM, MEMBER.MEMBER_FN, REPLY.MEMBER_NO, BOARD.BOARD_NO, BOARD_READ_COUNT,
+			   POST_NO, REPLY_NESTED_CD
 		FROM REPLY
 				 JOIN BOARD ON (BOARD.BOARD_NO = REPLY.BOARD_NO)
 				 JOIN BOARD_CATEGORY USING(BOARD_CATEGORY_CD)
 				 JOIN MEMBER ON (MEMBER.MEMBER_NO = REPLY.MEMBER_NO)
-		WHERE MEMBER_NO = #{memberNo}
+				 LEFT JOIN MIND_POST ON( MEMBER.MEMBER_NO = MIND_POST.MEMBER_NO)
+		WHERE REPLY.MEMBER_NO = #{memberNo}
 		  AND BOARD.BOARD_STATUS_CD = 201
 		  AND STATUS_CD = 0
 		  AND REPLY_STATUS_CD = 301
-		ORDER BY REPLY_CREATE_DT DESC
+		ORDER BY REPLY_NO DESC
 	</select>
 
 

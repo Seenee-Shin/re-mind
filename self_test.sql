@@ -1766,9 +1766,9 @@ END;
 /
 
 --(댓글)작성 날짜 역순 ( 최신 순)
-SELECT REPLY.REPLY_NO, BOARD_TITLE, REPLY_CREATE_DT, 
+SELECT REPLY.REPLY_NO, BOARD_TITLE,  
         TO_CHAR(REPLY_CREATE_DT, 'YYYY-MM-DD') "REPLY_CREATE_DT" ,
-        BOARD_CATEGORY_NM, MEMBER_FN
+        BOARD_CATEGORY_NM, MEMBER_FN, MEMBER_NO
         FROM REPLY
             JOIN BOARD ON (BOARD.BOARD_NO = REPLY.BOARD_NO)
             JOIN BOARD_CATEGORY USING(BOARD_CATEGORY_CD)
@@ -1794,13 +1794,12 @@ BEGIN
                     72,
                     72,/*회원 번호*/
                     2,/*전문가 번호*/
-                    SEQ_REPLY_NO.CURRVAL
+                    default
                 );
     END LOOP;
 
 END;
 /
-COMMIT;
 
 --------------------------------------------------
 ----------------------------------------------------

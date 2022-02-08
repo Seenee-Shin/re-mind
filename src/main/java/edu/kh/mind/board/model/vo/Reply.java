@@ -12,9 +12,18 @@ public class Reply {
     private int professionNo;
     private int parentReplyNo;
 
+    private int readCount;
     private String boardTitle;
     private String boardCategoryName;
     private String memberFn;
+
+    public int getReadCount() {
+        return readCount;
+    }
+
+    public void setReadCount(int readCount) {
+        this.readCount = readCount;
+    }
 
     public int getReplyNo() {
         return replyNo;
