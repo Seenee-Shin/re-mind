@@ -197,7 +197,19 @@
 		<if test="worryCategoryCode != null">
 			AND BOARD.WORRY_CATEGORY_CD = #{worryCategoryCode}
 		</if>
-	</select>
+		<if test="searchCategory != null">
+			<bind name="val" value="'%' + searchText + '%'"/>
+
+			<choose>
+				<when test="searchCategory == 'id'">
+					AND MEMBER_ID LIKE #{val}
+				</when>
+				<otherwise>
+					AND BOARD_CONTENT LIKE #{val}
+				</otherwise>
+			</choose>
+		</if>
+</select>
    
 	<!-- 작성 날짜 역순 / 최신 순 -->
 	<select id="myBoardList" resultMap="board_rm" >
