@@ -37,8 +37,8 @@
 	                <div class="worry_category_wrap hidden">
 	                    <div class="worry_category">
 		                    <div class="check_box_wrap">
-			                    <label for="category_all" class="dark_brown_border">전체</label>
-			                    <input type="radio" id="category_all" name="worryCategory" value="0">
+			                    <label for="category_all" class="dark_brown_border active">전체</label>
+			                    <input type="radio" id="category_all" name="worryCategory" value="0" checked>
 		                    </div>
 		                    <c:forEach items="${categoryList}" var="category" varStatus="status">
 			                    <div class="check_box_wrap">
@@ -137,16 +137,21 @@
 	inputRadio.on("click", function () {
 		// 검색 초기화
 		$("[name='freeboard_search']").val('');
-		// $("#search_category option[value='0']").attr('selected','selected');
-
+		$("[name='search_category']").val('id');
 		$(".dark_brown_border").removeClass("active");
-		$(this).prev().addClass("active");
+
+		const _this = $(this);
+		_this.prev().addClass("active");
 
 		const data = {
-			"worryCategoryCode" : $(this).val()
+			"worryCategoryCode" : _this.val()
 		}
 
-		getWorryList(data);
+		if (_this.val() != '0') {
+			getWorryList(data);
+		} else {
+			getWorryList();
+		}
 	});
 
 	// 검색
@@ -154,6 +159,8 @@
 	searchSelect.on("click", function () {
 		// 카테고리 초기화
 		$(".dark_brown_border").removeClass("active");
+		$(".dark_brown_border").eq(0).addClass("active");
+		$("input[name='worryCategory']").eq(0).prop("checked", true);
 
 		const data = {
 			"searchCategory" : $("#search_category option:selected").val(),
@@ -177,11 +184,9 @@
 			data : data,
 			success : function (result) {
 
-				let i = 0;
 				let html = "";
 				let empathyArr;
 				let empathyCntArr;
-
 				let iconCnt = {};
 
 				$.each(result.worryList, function (i, item) {
@@ -250,11 +255,13 @@
 				`;
 				});
 
-				if (!$.isEmptyObject(data)) { // 카테고리 선택
-					$(".free_board_list_wrap").html(html);
-				} else {
-					$(".free_board_list_wrap").append(html);
-				}
+				$(".free_board_list_wrap").html(html);
+
+				// if (!$.isEmptyObject(data)) { // 카테고리 선택
+				//
+				// } else {
+				// 	$(".free_board_list_wrap").append(html);
+				// }
 
 
 			},
