@@ -166,6 +166,7 @@
         WHERE PROFESSION_NO = #{professionNo}
     </select>
   
+  <!--프로필 수정  -->
     <update id="updateProProfile" parameterType="ProfessionInfo">
         UPDATE PROFESSION_INFORMATION SET PRO_INTRO =#{professionIntro} , PRO_STORY=#{professionStory},
             PRO_CARRER=#{professionCarrer}, PRO_TAG=#{professionTag}
@@ -195,6 +196,9 @@
         VALUES(#{professionNo},#{professionUniversity},#{professionDepartment},#{professionMajor})
     </insert>
 
+	<insert id="insertPrice">
+		ISERT INTO PROFESSION_PRICE VALUES(#{professionNo},#{counsulPrice},0) 
+	</insert>
     <!-- 로그인 -->
     <select id="proLogin" resultMap="profession_rm">
         SELECT * FROM PROFESSION
@@ -203,8 +207,8 @@
     </select>
 
     <update id="updatePrice">
-        UPDATE PROFESSION_PRICE SET COUNSEL_CATEGORY_NO=#{counselCategoryCode}, COUNSEL_PRICE =#{counselPrice}
-        WHERE PROFESSION_NO = #{professionNo}
+        UPDATE PROFESSION_PRICE SET COUNSEL_PRICE =#{counselPrice}
+        WHERE PROFESSION_NO = #{professionNo} AND COUNSEL_CATEGORY_NO=#{categoryCode}
     </update>
 
 

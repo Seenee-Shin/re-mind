@@ -69,10 +69,12 @@ public class FreeBoardController {
 	// 글작성 기능 
 	@ResponseBody
     @RequestMapping(value = "insert", method = RequestMethod.POST)
-    public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, Board board, 
-    		List<MultipartFile> images, HttpSession session,RedirectAttributes ra) {
+    public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, 
+    		@RequestPart(value = "key") Map<String, Object> board,
+    		@RequestPart(value = "images",required = false) List<MultipartFile> images,  HttpSession session
+    		) throws Exception {
     	
-		board.setMemberNo(loginMember.getMemberNo());
+		board.put("member", loginMember.getMemberNo());
 		//웹 접근경로(web path), 서버 저장경로(serverPath)
 		String webPath = "/resources/images/board/";
 		
@@ -80,15 +82,9 @@ public class FreeBoardController {
 
 		
 		//게시글 작성 후 상세 조회(DB에 입력된 게시글)할 boardNo 
-		int result = service.insertFreeBoard(board, images, webPath, serverPath);
+		//int result = service.insertFreeBoard(board, images, webPath, serverPath);
 		
-		if(result > 0) { // insert 성공 
-			Util.swalSetMessage("게시글 등록 성공", null, "success", ra);
-		}else {
-			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-		}
-		
-    	return result;
+    	return 0;
     }
 	
 	

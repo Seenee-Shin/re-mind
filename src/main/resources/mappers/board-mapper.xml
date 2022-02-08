@@ -43,10 +43,13 @@
 
 		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
-		<collection property="profileImgList" column="BOARD_NO"
-					javaType="java.util.ArrayList" ofType="Image" select="selectFropileImageList"/>
+					
+<!-- 		<collection property="profileImgList" column="BOARD_NO"
+					javaType="java.util.ArrayList" ofType="Image" select="selectProfileImageList"/>
+					
 		<collection property="emList" column="BOARD_NO"
-					javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>
+		
+					javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/> -->
 	</resultMap>
 
 	<resultMap type="Image" id="image_rm">
@@ -77,9 +80,11 @@
 
 		<!-- 게시판 이미지 조회-->
 	<select id="selectBoardImageList" resultMap="image_rm">
-		SELECT * FROM IMAGE
-		WHERE BOARD_NO = #{boardNo}
-		ORDER BY IMAGE_LEVEL
+		<if test="#{boardNo} != null ">
+			SELECT * FROM IMAGE
+			WHERE BOARD_NO = #{boardNo}
+			ORDER BY IMAGE_LEVEL
+		</if>
 	</select>
 
 	
