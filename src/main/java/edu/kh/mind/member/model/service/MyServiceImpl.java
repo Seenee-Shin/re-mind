@@ -8,8 +8,11 @@ import edu.kh.mind.member.model.dao.MyDAO;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.Review;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -87,4 +90,15 @@ public class MyServiceImpl implements MyService {
     public List<Reply> selectMyReplyList(int memberNo) {
         return dao.selectMyReplyList(memberNo);
     }
+
+    // 후기 등록
+    @Transactional
+	@Override
+	public int reviewInsert(Review review) {
+		
+		review.setReviewContent(Util.XSS(review.getReviewContent()));
+		review.setReviewContent(Util.changeNewLine(review.getReviewContent()));
+		
+		return dao.reviewInsert(review);
+	}
 }

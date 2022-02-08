@@ -6,6 +6,8 @@ import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.Review;
+
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,4 +87,10 @@ public class MyDAO {
 //		System.out.println(memberNo); 담김
 		return sqlSession.selectList("replyMapper.selectMyReplyList", memberNo);
     }
+    
+    // 후기 등록
+	public int reviewInsert(Review review) {
+
+		return sqlSession.insert("reviewMapper.reviewInsert", review);
+	}
 }

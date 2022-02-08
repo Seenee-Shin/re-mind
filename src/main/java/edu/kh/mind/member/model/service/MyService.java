@@ -6,6 +6,7 @@ import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.Review;
 
 import java.util.List;
 import java.util.Map;
@@ -52,4 +53,7 @@ public interface MyService {
 
 	// 내가 쓴 댓글 조회
     List<Reply> selectMyReplyList(int memberNo);
+    
+    // 후기 등록
+	int reviewInsert(Review review);
 }

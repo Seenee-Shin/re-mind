@@ -9,6 +9,8 @@ import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.Review;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -165,15 +167,20 @@ public class MyController {
         Date today = new Date(System.currentTimeMillis());
         return dateFormat.format(today);
     }
-
-
-
-
-
-
-
-
-
+    
+    // 리뷰 등록
+    @ResponseBody
+    @RequestMapping(value="reviewInsert", method=RequestMethod.POST)
+    private int reviewInsert(@ModelAttribute("loginMember") Member loginMember,Review review) {
+    	
+    	// 전문가 번호 추가해야함
+    	review.setMemberNo(loginMember.getMemberNo());
+    	
+    	int result = service.reviewInsert(review);
+    	System.out.println(result);
+    	
+    	return result;
+    }
 
 
 
