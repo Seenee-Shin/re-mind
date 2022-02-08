@@ -5,9 +5,37 @@
 	<resultMap type="Reply" id="reply_rm">
 		<id property="replyNo" column="REPLY_NO"/>
 
+		<result property="replyContent" column="REPLY_CONTENT"/>
+		<result property="replyCreateDate" column="REPLY_CREATE_DT"/>
+		<result property="replyModifyDate" column="REPLY_MODIFY_DT"/>
+		<result property="replyStatusCode" column="REPLY_STATUS_CD"/>
+		<result property="replyNestedCode" column="REPLY_NESTED_CD"/>
+
+		<result property="boardNo" column="REPLY_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="professionNo" column="PROFESSION_NO"/>
+		<result property="parentReplyNo" column="REPLY_NESTED_CD"/>
+
 		<result property="boardTitle" column="BOARD_TITLE"/>
+		<result property="boardCategoryName" column="BOARD_CATEGORY_NM"/>
+		<result property="memberFn" column="MEMBER_FN"/>
 
 	</resultMap>
+
+	<select id="selectMyReplyList" resultMap="reply_rm">
+		SELECT REPLY.REPLY_NO, BOARD_TITLE,
+			   TO_CHAR(REPLY_CREATE_DT, 'YYYY-MM-DD') "REPLY_CREATE_DT" ,
+			   BOARD_CATEGORY_NM, MEMBER_FN
+		FROM REPLY
+				 JOIN BOARD ON (BOARD.BOARD_NO = REPLY.BOARD_NO)
+				 JOIN BOARD_CATEGORY USING(BOARD_CATEGORY_CD)
+				 JOIN MEMBER ON (MEMBER.MEMBER_NO = REPLY.MEMBER_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		  AND BOARD.BOARD_STATUS_CD = 201
+		  AND STATUS_CD = 0
+		  AND REPLY_STATUS_CD = 301
+		ORDER BY REPLY_CREATE_DT DESC
+	</select>
 
 
 </mapper>
