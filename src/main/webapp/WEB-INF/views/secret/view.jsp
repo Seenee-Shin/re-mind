@@ -17,14 +17,14 @@
                 </div>
                 <article class="board_view_wrap">
                     <div class="posting_time">
-                        <p> 15분전</p>
+                        <p>${board.createDate}</p>
                     </div>
                     <div class="profile_wrap">
                         <div class="writer_pic light_brown_bg" style="background-image: url();">
                         </div>
 
                         <div class="writer_id">
-                            <p>아이디</p>
+                            <p>${board.memberFn}</p>
                         </div>
                     </div>
                     
@@ -35,12 +35,12 @@
                     </div>
 
                     <div class=" posting">
-                        <p>dlknfa'wiendl/gnper</p>
+                        <p>${board.boardContent}</p>
                         <div class="post_img"></div>
                     </div>                   
 
 
-
+					<c:if test="${board.empathyCheckCode == 1}">
                     <div class="like_warp">
                         <div id="like_smile" onclick="">
                         	<input type="radio" name="empathy" value="">
@@ -74,14 +74,16 @@
                             <p  class="like_count">34</p>
                         </div>
                     </div>
-
+					</c:if>
+					
                     <div class="report_scrap_wrap">
                         <!-- 스크랩 허용 했을 경우만 -->
+					<c:if test="${board.scrapCheckCode == 1}">
                         <a href="">
                             <i class="fas fa-archive"></i>  
                             <p>스크랩</p>
                         </a>
-    
+    				</c:if>
                         <a href="">
                             <i class="fas fa-exclamation-triangle"></i>
                             <p>신고</p>
@@ -90,7 +92,8 @@
 
 
                 </article>
-
+                
+				<c:if test="${board.replyCheckCode == 1}">
                 <article class="comment_view_wrap">
                     <div class="comment_top dark-brown">
                         <div>
@@ -124,18 +127,22 @@
                     </form>
 
                     <div class="comment_list">
-                        <div class="comment_view">
+                        
+                        <c:forEach items="${rList}" var="reply">
+                        
+                       
+                        <div class="comment_view  <c:if test="${reply.parentReplyNo != 0 }"> child </c:if>">
                             <div class="user_info">
                                 <div class="user_pic light_brown_bg" style="background-image: url();">
                                 </div>
 
                                 <div>
-                                    <p>아이디</p>
+                                    <p>${reply.memberFn}</p>
                                 </div>
                             </div>
 
                             <div class="comment">
-                                <p>dhdhdhdhspr ljdn vg;wori</p>
+                                <p>${reply.replyContent}</p>
                             </div>
 
                             <div class="comment_btn">
@@ -145,34 +152,17 @@
                                 <button class="dark-brown"> 삭제 </button> -->
                             </div>
                         </div>
-                        <!-- 대댓글일 경우 클래스 child 붙이기  -->
-                        <div class="comment_view child">
-                            <div class="user_info">
-                                <div class="user_pic light_brown_bg" style="background-image: url();">
-                                </div>
-
-                                <div>
-                                    <p>아이디</p>
-                                </div>
-                            </div>
-
-                            <div class="comment">
-                                <p>dhdhdhdhspr ljdn vg;wori</p>
-                            </div>
-
-                            <div class="comment_btn">
-                                <button type="button" class="dark-brown edit_btn re-comment" onclick=""> 답글 </button>
-                                <!--  자신이 쓴 댓글에 보이기 -->
-                                <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
-                                <button type="button" class="dark-brown edit_btn" onclick=""> 삭제 </button>
-                            </div>
-                        </div>
+                        
+                        
+                       </c:forEach> 
+                        
 
                     </div>
 
 
 
                 </article>
+                </c:if>
             
             </section>
         </div>

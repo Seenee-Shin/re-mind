@@ -5,14 +5,13 @@ import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
-import edu.kh.mind.member.model.vo.EmotionCategory;
-import edu.kh.mind.member.model.vo.EmotionDiary;
-import edu.kh.mind.member.model.vo.Member;
-import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.*;
+import edu.kh.mind.member.social.naver.vo.Naver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/my/*")
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember", "naver"})
 public class MyController {
 
     @Autowired
@@ -205,11 +204,28 @@ public class MyController {
     }
 
     @GetMapping("muteMember")
-    public String muteMember(Model model){
+    public String muteMember(Model model, @ModelAttribute("loginMember") Member loginMember){
         model.addAttribute("css", "my/muteMember");
 //        model.addAttribute("header", "main");
+        List<Mute> mList = service.selectMuteMember(loginMember.getMemberNo());
+
+        model.addAttribute("mList", mList);
 
         return "my/muteMember";
+    }
+
+    @GetMapping("clearMember")
+    @ResponseBody
+    public int clearMember(@ModelAttribute("loginMember") Member loginMember,
+                              @RequestParam(value = "muteNo", required = false) int muteNo){
+
+        Mute mute = new Mute();
+        mute.setMemberNo(loginMember.getMemberNo());
+        mute.setMuteNo(muteNo);
+
+        int result = service.clearMember(mute);
+
+        return result;
     }
 
     @GetMapping("myBoardList")
@@ -253,9 +269,32 @@ public class MyController {
     }
 
     @GetMapping("secession")
-    public String secession(Model model){
+    public String secession(Model model, HttpSession session){
         model.addAttribute("css", "my/secession");
+
+        Naver naver = ((Naver)session.getAttribute("naver"));
+        model.addAttribute("naver", naver);
+
         return "my/secession";
+    }
+
+    @PostMapping("secessionMember")
+    public String secessionMember(Model model, @ModelAttribute("loginMember") Member loginMember,
+                                  HttpSession session, RedirectAttributes ra, SessionStatus status,
+                                  @RequestParam(value = "memberPw", required = false) String memberPw){
+
+        Naver naver = ((Naver)session.getAttribute("naver"));
+
+        int result = service.secessionMember(naver, loginMember);
+
+        if(result > 0) {
+            Util.swalSetMessage("회원 탈퇴 성공", null, "success", ra);
+            status.setComplete();
+        }else {
+            Util.swalSetMessage("회원 탈퇴 실패", null, "info", ra);
+        }
+
+        return "redirect:/";
     }
 
     @GetMapping("updateMyInfo")

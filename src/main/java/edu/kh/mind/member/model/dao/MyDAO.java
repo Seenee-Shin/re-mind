@@ -3,9 +3,8 @@ package edu.kh.mind.member.model.dao;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
-import edu.kh.mind.member.model.vo.EmotionCategory;
-import edu.kh.mind.member.model.vo.EmotionDiary;
-import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.*;
+import edu.kh.mind.member.social.naver.vo.Naver;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,4 +84,24 @@ public class MyDAO {
 //		System.out.println(memberNo); 담김
 		return sqlSession.selectList("replyMapper.selectMyReplyList", memberNo);
     }
+
+	public List<Mute> selectMuteMember(int memberNo) {
+		return sqlSession.selectList("memberMapper.selectMuteMember", memberNo);
+	}
+
+	public int clearMember(Mute mute) {
+		return sqlSession.delete("memberMapper.clearMember", mute);
+	}
+
+	public int deleteToken(Naver naver) {
+		return sqlSession.delete("memberMapper.deleteToken", naver);
+	}
+
+	public int deleteSocial(Member loginMember) {
+		return sqlSession.update("memberMapper.deleteSocial", loginMember);
+	}
+
+	public int secessionMember(Member loginMember) {
+		return sqlSession.update("memberMapper.secessionMember", loginMember);
+	}
 }

@@ -1,6 +1,7 @@
 package edu.kh.mind.pro.model.service;
 
 import edu.kh.mind.member.model.vo.Profession;
+
 import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.pro.model.dao.ProDAO;
 import edu.kh.mind.pro.model.vo.Payment;
@@ -32,19 +33,25 @@ public class ProServiceImpl implements ProService{
     @Transactional
     @Override
     public int priceInsert(ProfessionPrice pfp, ReservationPayMent rv) {
-
+    	
+    	//****************************
         // 상담예약결제 insert
     	dao.reservationPaymentInsert(rv);
+    	//****************************
+    	
+    	//****************************
+    	// 전문가 번호 삽임
+    	pfp.setProfessionNo(rv.getProfessionNo());
     	
     	// 전문가 번호, 테라피 번호로 select 가격
     	int price = dao.professionPriceSelect(pfp);
+    	//****************************
     	
     	// 총금액 횟수 * 금액
     	int payAmount = rv.getTotalCnt() * price;
-    	
-		//상담 예약 결제 번호 결제 vo에 넣기
-    	Payment pm = new Payment();
-    	
+
+    	//상담 예약 결제 번호 결제 vo에 넣기
+    	Payment pm = new Payment();    	
     	pm.setPayAmount(payAmount);
         pm.setReservationNo(rv.getReservationPayNo());
         

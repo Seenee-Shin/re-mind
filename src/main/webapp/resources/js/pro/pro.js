@@ -166,7 +166,8 @@ function requestPay(){
             url : contextPath + "/pro/priceInsert",
             type : "POST",
             // 전문가 번호, 텍스트 테라피 종류 , 횟수
-            data : {"therapySelect":therapySelect, "therapyCount": therapyCount},
+            data : {"therapySelect":therapySelect, "therapyCount": therapyCount,
+            "professionNo":professionNo,"loginMemberNo":loginMemberNo},
 
             success : function(payNo){
 
@@ -178,9 +179,9 @@ function requestPay(){
                     merchant_uid : 'merchant_' + new Date().getTime(),
                     name : '마음연구소 re:mind',
                     amount : Number(finallyPrice), //판매 가격
-                    buyer_email : '1234@naver.com',
-                    buyer_name : '홍두깨',
-                    buyer_tel : '010-1234-5678'
+                    buyer_email : loginMemberId,
+                    buyer_name : loginMemberNm,
+                    buyer_tel : loginMemberPhone
                     
                 }, function(rsp) {
 
@@ -196,7 +197,7 @@ function requestPay(){
 
                                 // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
                                 if(price == rsp.paid_amount){
-                                    alert("결제가 완료되었습니다.");
+                                    alert("상담 예약이 완료되었습니다. 마음연구소가 당신을 응원합니다!");
                                     
                                     const reservationEnrollDate = $("#date_chk").text();
                                     const reservationEnrollTime = $("#time_chk").text().split(":")[0];
@@ -216,8 +217,7 @@ function requestPay(){
                                         processData: false,
 		                                contentType: false,
                                         success:function(result){
-                                            console.log(result);
-                                            // 여기서 결제 완료창으로 넘어갈지 , 아님 마이페이지로 들어갈지 고민
+                                           location.href = contextPath+"/my/appointment";
                                         },
 
                                     });
@@ -444,20 +444,21 @@ $(document).on("click", "#calendar td", function (){
     select.append(makeSelect);
 
     for(let i = 0; i < m.length; i++){
-        if( Number.parseInt($(this).attr("id")) == Number.parseInt(d[i]) ){
+	
+          if( Number.parseInt($(this).attr("id")) == Number.parseInt(d[i]) && month + 1 == Number.parseInt(m[i])){
 
             if(Number.parseInt(backupTime[i]) == 8)
-                select.children().eq(1).remove();
+                select.children().eq(1).attr("disabled", true);
             if(Number.parseInt(backupTime[i]) == 10)
-                select.children().eq(2).remove();
+                select.children().eq(2).attr("disabled", true);
             if(Number.parseInt(backupTime[i]) == 12)
-                select.children().eq(3).remove();
+                select.children().eq(3).attr("disabled", true);
             if(Number.parseInt(backupTime[i]) == 14)
-                select.children().eq(4).remove();
+                select.children().eq(4).attr("disabled", true);
             if(Number.parseInt(backupTime[i]) == 16)
-                select.children().eq(5).remove();
+                select.children().eq(5).attr("disabled", true);
             if(Number.parseInt(backupTime[i]) == 18)
-                select.children().eq(6).remove();
+                select.children().eq(6).attr("disabled", true);
         }
     }
 
