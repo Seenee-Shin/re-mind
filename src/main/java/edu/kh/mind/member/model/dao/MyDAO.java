@@ -3,8 +3,15 @@ package edu.kh.mind.member.model.dao;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
+
+import edu.kh.mind.member.model.vo.EmotionCategory;
+import edu.kh.mind.member.model.vo.EmotionDiary;
+import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.Review;
+
 import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
+
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +92,13 @@ public class MyDAO {
 		return sqlSession.selectList("replyMapper.selectMyReplyList", memberNo);
     }
 
+    
+    // 후기 등록
+	public int reviewInsert(Review review) {
+
+	return sqlSession.insert("reviewMapper.reviewInsert", review);
+	}	
+
 	public List<Mute> selectMuteMember(int memberNo) {
 		return sqlSession.selectList("memberMapper.selectMuteMember", memberNo);
 	}
@@ -103,5 +117,6 @@ public class MyDAO {
 
 	public int secessionMember(Member loginMember) {
 		return sqlSession.update("memberMapper.secessionMember", loginMember);
+
 	}
 }

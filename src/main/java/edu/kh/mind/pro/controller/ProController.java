@@ -169,4 +169,14 @@ public class ProController {
 		return result;
 	}
 	
+	// 후기
+	@ResponseBody
+	@RequestMapping(value="reviewInsert", method=RequestMethod.POST)
+	public int reviewInsert(@RequestParam("payNo") int payNo) {
+	
+		int result = service.paymentDelete(payNo);
+		
+		return result;
+	}
+	
 }
