@@ -138,6 +138,14 @@ public class BoardServiceImpl implements BoardService{
 	      }
 	      return board;
 	   }
+
+
+	@Override
+	public int updateBoard(Board board, List<MultipartFile> images, String webPath, String serverPath,
+			String deleteImages) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 		
 }
 

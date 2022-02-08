@@ -40,9 +40,9 @@
 
 		<result property="worryEmpathyArray" column="EMPATHY_ARRAY"/>
 		<result property="worryCntArray" column="CNT_ARRAY"/>
-		<!--
+		
 		<collection property="imgList" column="BOARD_NO"
-					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>-->
+					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
 
 		<!--<collection property="profileImgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectProfileImageList"/>
@@ -149,21 +149,15 @@
 	
 	<!-- 게시글 상세조회 -->
 	<select id="selectBoard" resultMap="board_rm">
-		SELECT b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT, 
-    			e.EMPATHY_ARRAY, e.CNT_ARRAY
-		FROM BOARD b
-		LEFT JOIN (
-		    SELECT 
-		        a.BOARD_NO,
-		        LISTAGG(  a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
-		        LISTAGG(  a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
-		    FROM (
-		        SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
-		        FROM EMPATHY
-		        GROUP BY BOARD_NO, EMPATHY_STATUS_CD
-		    ) a
-    	GROUP BY BOARD_NO
-		) e on e.BOARD_NO = b.BOARD_NO;
+	SELECT BOARD_NO, BOARD_CONTENT,
+		    MEMBER_NO, MEMBER_FN,
+		    TO_CHAR(BOARD_CREATE_DT, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"' ) BOARD_CREATE_DT,
+		    TO_CHAR(BOARD_MODIFY_DT, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"' ) BOARD_MODIFY_DT,
+		    BOARD_READ_COUNT, REPLY_CHECK_CD, SCRAP_CHECK_CD, EM_CHECK_CD, ANON_CHECK_CD
+		FROM BOARD 
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_STATUS_CD = 201
 	</select>
 	
 	<update id="increaseReadCount">
