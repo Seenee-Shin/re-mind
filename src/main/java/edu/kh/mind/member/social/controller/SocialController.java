@@ -158,8 +158,9 @@ public class SocialController {
 
         if(member != null){ // 없는 회원이면 회원가입을 진행합니다.
             loginMember = member;
+            naver.setMemberNo(member.getMemberNo());
             int result = service.insertToken(naver);
-            
+
             if(result > 0)  path = "socialSuccess";
             else            path = "redirect:/";
         }else{ // 이미 가입이 되어있는 회원이면 로그인을 진행합니다.
@@ -177,13 +178,11 @@ public class SocialController {
             // 소셜테이블에 나머지 정보 삽입
             result = service.insertToken(naver);
 
-            System.out.println("비어있습니다");
             if(result > 0)  path = "socialSuccess";
             else            path = "redirect:/";
         }
 
         model.addAttribute("loginMember", loginMember);
-//        model.addAttribute("result", apiResult);
 
         return path;
     }
