@@ -26,6 +26,13 @@
         <result property="counselPrice" column="COUNSEL_PRICE"/>
         <result property="imagePath" column="IMAGE_PATH"/>
         <result property="imageName" column="IMAGE_NM"/>
+
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="memberEmail" column="MEMBER_ID"/>
+        <result property="memberName" column="MEMBER_NM"/>
+        <result property="memberPhone" column="MEMBER_PHONE"/>
+        <result property="reservationEnrollDate" column="RESERVATION_ENROLL_DT"/>
+        <result property="reservationEnrollTime" column="RESERVATION_ENROLL_TIME"/>
     </resultMap>
     
     <resultMap id="professionInfo_rm" type="ProfessionInfo">
@@ -120,18 +127,19 @@
         GROUP BY PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR, PRO_INTRO,
             PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM
     </select>
-    <select id="selectMemberProfession">
-        SELECT PROFESSION_NO, PROFESSION_PW, PROFESSION_NM, MEMBER_NO, MEMBER_ID,
-               MEMBER_NM, MEMBER_PHONE, RESERVATION_ENROLL_DT,
+    <select id="selectMemberProfession" resultMap="profession_rm">
+        SELECT PROFESSION_NO, PROFESSION_NM, M.MEMBER_NO, M.MEMBER_ID,
+               M.MEMBER_NM, M.MEMBER_PHONE, RESERVATION_ENROLL_DT, IMAGE_PATH, IMAGE_NM,
                REGEXP_REPLACE(LISTAGG(RESERVATION_ENROLL_TIME, ',') WITHIN GROUP(ORDER BY RESERVATION_NO), '([^,]+)(,\1)*(,|$)', '\1\3') RESERVATION_ENROLL_TIME
         FROM RESERVATION_PAYMENT
                  JOIN RESERVATION USING(RESERVATION_PAY_NO)
                  JOIN PROFESSION_PRICE USING(PROFESSION_NO)
                  JOIN PROFESSION USING(PROFESSION_NO)
-                 JOIN MEMBER USING(MEMBER_NO)
+                 LEFT JOIN IMAGE USING(PROFESSION_NO)
+                 JOIN MEMBER M ON(M.MEMBER_NO = RESERVATION_PAYMENT.MEMBER_NO)
         WHERE RESERVATION_ENROLL_DT > SYSDATE AND PROFESSION_NO = #{professionNo}
-        GROUP BY PROFESSION_NO, PROFESSION_PW, PROFESSION_NM, MEMBER_NO, MEMBER_ID,
-                 MEMBER_NM, MEMBER_PHONE, RESERVATION_ENROLL_DT
+        GROUP BY PROFESSION_NO, PROFESSION_NM, M.MEMBER_NO, M.MEMBER_ID,
+                 M.MEMBER_NM, M.MEMBER_PHONE, RESERVATION_ENROLL_DT, IMAGE_PATH, IMAGE_NM
     </select>
 
 	<!-- 지도 병원  -->

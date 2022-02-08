@@ -67,13 +67,20 @@ public class ProController {
 		model.addAttribute("css", "pro/proReservation");
     	model.addAttribute("header", "main");
 
-		List<Profession> pList = service.selectMemberProfession(professionNo);
+//		List<Profession> pList = service.selectMemberProfession(professionNo);
+//
+//		for(Profession p : pList){
+//			System.out.println(p.getProfessionName() + p.getMemberName() + p.getMemberEmail());
+//		}
+		model.addAttribute("professionNo", professionNo);
 
-		for(Profession p : pList){
-			System.out.println(p.getProfessionName());
-		}
-		
 		return "pro/proReservation";
+	}
+	@GetMapping("proMemberSelect")
+	@ResponseBody
+	public String proMemberSelect(@RequestParam(value = "professionNo", required = false) int professionNo){
+		List<Profession> pList = service.selectMemberProfession(professionNo);
+		return new Gson().toJson(pList);
 	}
 	
 	@ResponseBody
