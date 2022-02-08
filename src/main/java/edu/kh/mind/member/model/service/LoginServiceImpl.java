@@ -52,4 +52,9 @@ public class LoginServiceImpl implements LoginService{
     public int insertToken(Naver naver) {
         return dao.insertToken(naver);
     }
+
+    @Override
+    public int selectToken(Naver naver) {
+        return dao.selectToken(naver);
+    }
 }
