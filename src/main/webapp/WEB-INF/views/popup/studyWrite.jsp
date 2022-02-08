@@ -26,14 +26,17 @@
  		</div>
  	</div>
  	<div class="beaker_radio">
- 			<input type="radio" name="itemImgNo" value="1" checked="checked">
+ 			<input type="radio" class="radioFirst" name="itemImgNo" value="1" checked="checked">
 			<input type="radio" name="itemImgNo" value="2">
 			<input type="radio" name="itemImgNo" value="3">
 			<input type="radio" name="itemImgNo" value="4">
  	</div>
  	
  	<div class="study_write">
-	     <textarea class="study_textarea" name="postContent" id="postContent" rows="5" required></textarea>
+	     <textarea class="study_textarea" name="postContent" id="postContent" rows="3" required></textarea>
+	      <div id="content_counter">
+          <p><span id = "content_count">0</span>/15</p>
+          </div>
 	<button type="submit" class="study_submit_btn">작성</button>
 	</div>
 	
@@ -43,4 +46,27 @@
  
  
  </div>
+ 
+ <script>
+ $(".study_textarea").on("input" , function(){
+
+	    let count = $(this).val().length;
+
+	    if(count >= 15){
+	        $("#content_count").css("color", "red");
+	        
+	        $(this).val( $(this).val().substr(0,15) );
+	        
+	        count = 15;
+
+	    }else if( count < 15){
+	        $("#content_count").css("color", "black");
+
+	    }
+	    $("#content_count").text(count);
+
+	});
+ 
+ 
+ </script>
 

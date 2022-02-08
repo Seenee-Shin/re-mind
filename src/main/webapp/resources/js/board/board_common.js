@@ -1,89 +1,3 @@
-/*옵션 허용 비허용 */
-const comment = document.querySelector("#comment")
-const scrap = document.querySelector("#scrap")
-const like = document.querySelector("#like")
-const anon = document.querySelector("#anon")
-const mComment = document.querySelector("#mComment")
-const mScrap = document.querySelector("#mScrap")
-const mLike = document.querySelector("#mLike")
-const mAnon = document.querySelector("#mAnon")
-
-const commentLable = document.querySelector("label[for='comment']")
-const scrapLable = document.querySelector("label[for='scrap']")
-const likeLable = document.querySelector("label[for='like']")
-const anonLable = document.querySelector("label[for='anon']")
-const mCommentLable = document.querySelector("label[for='mComment']")
-const mScrapLable = document.querySelector("label[for='mScrap']")
-const mLikeLable = document.querySelector("label[for='mLike']")
-const mAnonLable = document.querySelector("label[for='mAnon']")
-
-const replyCheckCode = $("#comment, #mComment")
-const scrapCheckCode = $("#mScrap, #scrap")
-const empathyCheckCode = $("#mLike, #like")
-const anonCheckCode = $("#mAnon, #anon")
-
-
-const checkbox = $("input[type='checkbox']")
-
-function optionValidate(){
-	
-let postOption =[comment, scrap, like,anon,mComment, mScrap,mLike,mAnon]
-let optionLable= [commentLable,scrapLable,likeLable,anonLable,mCommentLable, mScrapLable,mLikeLable,mAnonLable]
-	console.log(optionLable)
-	
-	 postOption.forEach((option, i) => {
-
-		if(!option) return;
-		
-		
-		if(option.checked){
-			
-			optionLable[i].classList.remove("light_brown_bg")
-			optionLable[i].classList.add("dark_brown_bg")
-			
-			if(i == 0 || i == 4)  {
-				optionLable[i].innerText = "댓글 비허용";
-				replyCheckCode.val(0)
-			} 
-	        else if(i == 1 || i == 5) {
-				scrapCheckCode.val(0)
-	        	optionLable[i].innerText = "스크랩 비허용";
-			}  
-			else if(i == 2 || i == 6) {
-			  optionLable[i].innerText = "공감 비허용";
-			  empathyCheckCode.val(0)			
-			}
-			else if(i == 3 || i == 7)  
-			 optionLable[i].innerText = "익명 OFF";
-			  anonCheckCode.val(0)			
-
-		}else{
-			option.unchecked
-			optionLable[i].classList.remove("dark_brown_bg")
-			optionLable[i].classList.add("light_brown_bg")
-			
-	        if(i == 0 || i == 4) {
-	        	optionLable[i].innerText = "댓글 허용";
-				replyCheckCode.val(1)
-			}  
-			else if(i == 1 || i == 5) {
-				optionLable[i].innerText = "스크랩 허용";
-				scrapCheckCode.val(1)
-			}
-			else if(i == 2 || i == 6) {
-				optionLable[i].innerText = "공감 허용";
-				empathyCheckCode.val(1)
-							
-			}  
-			else if(i == 3 || i == 7) {
-				optionLable[i].innerText = "익명 ON";
-				anonCheckCode.val(1)
-				
-			}
-		}
-	});
-	
-}
 
 /* 프로필 누를시 유저메뉴 보기 */
 const elements = document.getElementsByClassName("writer_pic");
@@ -98,15 +12,103 @@ const userMenu = document.getElementsByClassName("userMenu")
 }
 
 
-/*사진 프리뷰 */
 
-function loadImg(){
+//파일 업로드 스크립트
+$(document).ready(function()
+		// input file 파일 첨부시 fileCheck 함수 실행
+		{
+			$("#addFileBtn").on("change", fileCheck);
+		});
+		
+
+// 파일 현재 필드 숫자 totalCount랑 비교값
+var fileCount = 0;
+// 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
+var totalCount = 5;
+// 파일 고유넘버
+var fileNum = 0;
+// 첨부파일 배열
+var content_files = new Array();
+
+function fileCheck(e) {
+    var files = e.target.files;
+    
+    // 파일 배열 담기
+    var filesArr = Array.prototype.slice.call(files);
+    
+    // 파일 개수 확인 및 제한
+    if (fileCount + filesArr.length > totalCount) {
+      alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
+      return;
+    } else {
+    	 fileCount = fileCount + filesArr.length;
+    }
+    
+    // 각각의 파일 배열담기 및 기타
+    filesArr.forEach(function (f) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
 	
-	const addBtn = document.querySelector("#addFileBtn")
+        content_files.push(f);
+        
+        $('#imgWrap').append(
+       		'<div id="img'+fileNum+'"class="boardImg"> <img src="'+ e.target.result+'">'
+       		+'<div class="deleteImg" onclick="fileDelete(\'file' + fileNum + '\')"><i class="fas fa-times"></i></div>'
+       		+'</div>'
+		);
+        fileNum ++;
+      };
+      reader.readAsDataURL(f);
+    });
+    console.log(content_files);
+    //초기화 한다.
+    $("#input_file").val("");
+  }
+
+// 파일 부분 삭제 함수
+function fileDelete(fileNum){
+    var no = fileNum.replace(/[^0-9]/g, "");
+    content_files[no].is_delete = true;
+    
+	$('#img' + no).remove();
 	
+	fileCount --;
+    console.log(content_files);
 }
 
 
+
+function postingValidate(){
+	//사진 배열에 담기
+	var form = $("form")[0];        
+ 	var formData = new FormData(form);
+		for (var i = 0; i < content_files.length; i++) {
+			// 삭제 안한것만 담아 준다. 
+			if(!content_files[i].is_delete){
+				 formData.append("article_file", content_files[i]);
+			}
+}
+
+	$.ajax({
+   	      type: "POST",
+   	   	  enctype: "multipart/form-data",
+   	      url: "/insert",
+       	  data : formData,
+       	  processData: false,
+   	      contentType: false,
+   	      success: function (data) {
+   	    	if(JSON.parse(data)['result'] == "OK"){
+   	    		alert("파일업로드 성공");
+			} else
+				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+   	      },
+   	      error: function (xhr, status, error) {
+   	    	alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
+   	     return false;
+   	      }
+   	    });
+   	    return false;
+	}
 
 /*시간 몇분전 표시 */
 function displayedAt(createdAt) {

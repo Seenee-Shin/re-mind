@@ -53,29 +53,79 @@ const coordinate = null;
 
 
 
-document.addEventListener("mouseup", function(e) {
+$(".item").on("mouseup",function(e){
     isDragging = false;
-      const left = box[backupIndex].offsetLeft;
-      const top = box[backupIndex].offsetTop;
-	console.log(left);
-	console.log(top);
-   
-     
+      const coordLeft = $(this).position().left;
+      const coordTop = $(this).position().top;
+	  const postNo = $(this).children(".postNo").val();
+	
+	$.ajax({
+		url : "saveCoord",
+		data : {"coordLeft" : coordLeft, "coordTop" : coordTop, "postNo" : postNo}
+		
+	});
+       
 });
 
 
+// 작성하기 팝업
 const submitBtn = document.querySelector(".study_submit");
+
 submitBtn.addEventListener("click", () => {
    layerPopup("studyWrite");
 });
 
 
-container.addEventListener("dblclick", () => {
-	layerPopup("studyView");
+
+// 상세 조회
+$(".item").on("dblclick",function(e){
+	
+	$(this).css({"width": "25%","height": "25%"});
+	$(this).children(".nickname").removeClass("hidden");
+	$(this).children(".far").removeClass("hidden");
+	
+	
+});
+
+// 아이템 크기 줄이기
+$(".naturally").on("click",function(e){
+	$(".item").css({"width" : "15%", "height" : "15%"});
+	$(".item").children(".nickname").addClass("hidden");
+	$(".item").children(".far").addClass("hidden");
 });
 
 
 
 
+// 아이템 삭제 
+$(".far").click(function(){
+	
+	var answer = confirm('연구를 삭제하시겠습니까?');
+	const postNo = $(this).siblings(".postNo").val();
+	
+	if(answer){
+		
+		$.ajax({
+			
+			url : "delete",
+			data : {"postNo" : postNo},
+			success : function(result){
+				if(result>0){
+					location.reload();
+				}else{
+					
+				}
+			}
+		});
+		
+	}
+	
+});
+
+
+
+
+
+	
 
 

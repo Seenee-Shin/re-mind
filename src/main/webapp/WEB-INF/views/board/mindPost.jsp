@@ -18,30 +18,91 @@
                  
               </div>
               <div class="study_content">
-                  <div class="image_wrap"> <!--area-->
-                     <div class="item"> <!--area__box-->
-                            <p>김치찌개해</p>
-                     </div>
-                     <div class="item"> <!--area__box-->
-                            <p>김치찌개</p>
-                     </div>
+                  <div class="image_wrap">
+                  	<div class="naturally">원래대로</div>
                   
-                     
+                  	<c:choose>
+                  		<c:when test="${empty postList}">
+                  		</c:when>
+                  		<c:otherwise>
+                  			<c:forEach items="${postList}" var="post">
+	                  			<c:choose>
+	                  			<c:when test="${post.itemImgNo == 1}">
+		                  			<div class="item beaker1" style="left: ${post.coordLeft}px; top: ${post.coordTop}px;" >
+		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
+		                  				<i class="hidden far fa-trash-alt fa-sm"></i>
+		                  				</c:if>
+		                  				<p>${post.postContent}</p>
+		                  				<p class="hidden nickname">${post.memberFname}</p>
+		                  				<input class="postNo" value="${post.postNo}">
+		                  			</div>
+	                  			</c:when>
+	                  			<c:when test="${post.itemImgNo == 2}">
+		                  			<div class="item beaker2" style="left: ${post.coordLeft}px; top: ${post.coordTop}px;">
+		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
+		                  				<i class="hidden far fa-trash-alt fa-sm"></i>
+		                  				</c:if>
+		                  				<p>${post.postContent}</p>
+		                  				<p class="hidden nickname">${post.memberFname}</p>
+		                  				<input class="postNo" value="${post.postNo}">
+		                  			</div>
+	                  			</c:when>
+	                  			<c:when test="${post.itemImgNo == 3}">
+		                  			<div class="item beaker3" style="left: ${post.coordLeft}px; top: ${post.coordTop}px;">
+		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
+		                  				<i class="hidden far fa-trash-alt fa-sm"></i>
+		                  				</c:if>
+		                  				<p>${post.postContent}</p>
+		                  				<p class="hidden nickname">${post.memberFname}</p>
+		                  				<input class="postNo" value="${post.postNo}">
+		                  			</div>
+	                  			</c:when>
+	                  			<c:when test="${post.itemImgNo == 4}">
+		                  			<div class="item beaker4" style="left: ${post.coordLeft}px; top: ${post.coordTop}px;">
+		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
+		                  				<i class="hidden far fa-trash-alt fa-sm"></i>
+		                  				</c:if>
+		                  				<p>${post.postContent}</p>
+		                  				<p class="hidden nickname">${post.memberFname}</p>
+		                  				<input class="postNo" value="${post.postNo}">
+		                  			</div>
+	                  			</c:when>
+	                  			
+	                  			
+	                  			</c:choose>
+                  		
+                  		
+                  			</c:forEach>
+                  		</c:otherwise>
+                  	</c:choose>
+                  	
+                  
                   </div>
              </div>
               
 
              <ul class="pagination">
-                <li class="select_pg"> <a>1</a></li>
-                <li> <a>2</a></li>
-                <li> <a>3</a></li>
-                <li> <a>4</a></li>
-                <li> <a>5</a></li>
-                <li> <a>6</a></li>
-                <li> <a>7</a></li>
-                <li> <a>8</a></li>
-                <li> <a>9</a></li>
-                <li> <a>10</a></li>
+             	<c:if test="${pagination.startPage != 1 }">
+					<li><a class="page-link" href="list?cp=1}${c}${s}">&lt;&lt;</a></li>
+					<li><a class="page-link" href="list?cp=${pagination.prevPage}${c}${s}"">&lt;</a></li>
+				</c:if>
+				<%-- 페이지네이션 번호 목록 --%>
+				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1"  var="i">
+					<c:choose>
+						<c:when test="${i == pagination.currentPage}">
+							<li class="select_pg"><a>${i}</a></li>   
+						</c:when>
+						
+						<c:otherwise>
+							<li><a href="list?cp=${i}${c}${s}"">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				
+				<c:if test="${pagination.endPage != pagination.maxPage }">
+					<li><a class="page-link" href="list?cp=${pagination.nextPage}${c}${s}"">&gt;</a></li>
+					<li><a class="page-link" href="list?cp=${pagination.maxPage}${c}${s}"">&gt;&gt;</a></li>
+				</c:if>
                </ul>
 
             </article>  

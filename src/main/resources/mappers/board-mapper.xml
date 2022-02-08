@@ -16,6 +16,7 @@
 		<result property="readCount" column="BOARD_READ_COUNT"/>
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="memberFn" column="MEMBER_FN"/>
+		<result property="memberId" column="MEMBER_ID"/>
 		<result property="professionNo" column="PROFESSION_NO"/>
 		<result property="professionName" column="PROFESSION_NM"/>
 		<result property="statusCode" column="BOARD_STATUS_CD"/>
@@ -34,8 +35,10 @@
 		<result property="sadCount" column="SA_COUNT"/>
 		<result property="angryCount" column="A_COUNT"/>
 		<result property="surpriseCount" column="SU_COUNT"/>
-
 		<result property="profrssionImage" column="PROFESSION_IMAGE"/>
+
+		<result property="worryEmpathyArray" column="EMPATHY_ARRAY"/>
+		<result property="worryCntArray" column="CNT_ARRAY"/>
 
 
 		<collection property="imgList" column="BOARD_NO"
@@ -81,7 +84,7 @@
 
 	
 	<!-- 게시판 이미지 삽입 -->
-   <insert id="insertImgList" parameterType="list">
+	<insert id="insertImgList" parameterType="list">
    		INSERT INTO IMAGE
    		SELECT SEQ_IMAGE_NO.NEXTVAL, A.* FROM
 		   <foreach collection="list" item="img" open="(" close=") A" separator=" UNION ALL ">
@@ -138,7 +141,7 @@
 		INSERT INTO BOARD 
 		VALUES(BOARD_NO, NULL, #{boardContent}, DEFAULT, NULL, 0, 
 				#{replyCheckCode},#{scrapCheckCode},101,#{memberNo},
-				DEFAULT,DEFAULT,#{empathyCheckCode},#{anonCheckCode},NULL)
+				DEFAULT,DEFAULT,#{empathyCheckCode},1,NULL)
 	</insert>
 	
 	<!-- 게시글 상세조회 -->
@@ -166,6 +169,30 @@
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 
+	<!-- 고민상담 게시글 -->
+	<select id="selectWorryList" resultMap="board_rm">
+		SELECT MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM,
+			BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT,
+			w.WORRY_CATEGORY_CD, w.WORRY_NM WORRY_CATEGORY_NM,
+			e.EMPATHY_ARRAY, e.CNT_ARRAY
+		FROM BOARD
+		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
+		LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
+		LEFT JOIN(
+			SELECT
+				a.BOARD_NO,
+				LISTAGG(  a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
+				LISTAGG(  a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
+			FROM (
+				SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
+				FROM EMPATHY
+				GROUP BY BOARD_NO, EMPATHY_STATUS_CD
+			) a
+			GROUP BY BOARD_NO
+		) e on e.BOARD_NO = BOARD.BOARD_NO
+		WHERE BOARD_CATEGORY_CD = 102
+	</select>
+   
 	<!-- 작성 날짜 역순 / 최신 순 -->
 	<select id="myBoardList" resultMap="board_rm" >
 		SELECT BOARD.MEMBER_NO, BOARD.BOARD_NO, BOARD_TITLE,

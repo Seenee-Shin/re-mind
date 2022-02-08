@@ -1,6 +1,8 @@
 package edu.kh.mind.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -74,6 +77,7 @@ public class FreeBoardController {
 		String webPath = "/resources/images/board/";
 		
 		String serverPath= session.getServletContext().getRealPath(webPath);
+
 		
 		//게시글 작성 후 상세 조회(DB에 입력된 게시글)할 boardNo 
 		int result = service.insertFreeBoard(board, images, webPath, serverPath);
@@ -86,7 +90,6 @@ public class FreeBoardController {
 		
     	return result;
     }
-    
 	
 	
     //게시판 상세조회
