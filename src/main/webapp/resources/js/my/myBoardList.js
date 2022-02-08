@@ -88,14 +88,25 @@ $(document).on("click", ".opImg > img", function(){
 
 /* 페이지 요청시  AJAX */
 
+function selectMyReplyList(){
 
-// $.ajax({
-//     url : "selectMyBoardList",
-//     type : "GET",
-//     data : {"memberNo" : memberNo},
-//     success : function (result){
-//         console.log(result);
-//         console.log(memberNo);
-//     }
-//
-// });
+
+    $.ajax({
+        url : "myReplyList",
+        type : "GET",
+        data : {"memberNo" : memberNo},
+        dataType : "json",
+        success : function (result){
+            console.log(result);
+            console.log(memberNo);
+        },
+        error : function (error, status){
+            console.log("error : " + error + "\n" + "status : " + status );
+        }
+
+
+    });
+
+
+
+};
