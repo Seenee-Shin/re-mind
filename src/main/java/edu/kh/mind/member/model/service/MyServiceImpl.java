@@ -7,6 +7,7 @@ import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.MyDAO;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
+import edu.kh.mind.member.model.vo.Mute;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,16 @@ public class MyServiceImpl implements MyService {
 
     @Autowired
     private MyDAO dao;
+
+    @Override
+    public int clearMember(Mute mute) {
+        return dao.clearMember(mute);
+    }
+
+    @Override
+    public List<Mute> selectMuteMember(int memberNo) {
+        return dao.selectMuteMember(memberNo);
+    }
 
     @Override
     public List<ProfessionHospital> loadProMap() {

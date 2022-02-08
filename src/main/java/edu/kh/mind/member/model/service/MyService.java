@@ -5,6 +5,7 @@ import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
+import edu.kh.mind.member.model.vo.Mute;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 
 import java.util.List;
@@ -52,4 +53,8 @@ public interface MyService {
 
 	// 내가 쓴 댓글 조회
     List<Reply> selectMyReplyList(int memberNo);
+
+	List<Mute> selectMuteMember(int memberNo);
+
+	int clearMember(Mute mute);
 }

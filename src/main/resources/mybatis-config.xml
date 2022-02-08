@@ -22,6 +22,7 @@
 		<typeAlias type="edu.kh.mind.board.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.MindPost" alias="MindPost"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Empathy" alias="Empathy"/>
+		<typeAlias type="edu.kh.mind.member.model.vo.Mute" alias="Mute"/>
 
 <!--		<typeAlias type="edu.kh.mind.board.model.vo.EmpathyStatus" alias="EmpathyStatus"/>-->
 
