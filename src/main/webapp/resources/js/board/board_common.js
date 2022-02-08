@@ -125,6 +125,9 @@ function postingValidate(){
    	      success: function (result) {
    	    	if(result > 0){
    	    		alert("글작성 완료");
+   	    		
+   	    		
+   	    		
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
    	      },
@@ -134,6 +137,22 @@ function postingValidate(){
    	    });
    	    return false;
 	}
+	
+// 수정버튼 클릭 시 동작
+function updateForm(){
+	document.requestForm.action = "../update";
+	document.requestForm.method = "POST";
+	document.requestForm.submit();
+}
+
+//닫기 버튼시 동작
+function deleteBoard(){
+	if(confirm("정말 삭제하시겠습니까?")){
+	document.requestForm.action = "../delete";
+	document.requestForm.method = "POST";
+	document.requestForm.submit();
+	}
+}
 
 /*시간 몇분전 표시 */
 function displayedAt(createdAt) {

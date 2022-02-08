@@ -18,8 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 
 import edu.kh.mind.board.model.service.BoardService;
+import edu.kh.mind.board.model.service.ReplyService;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Member;
 
@@ -30,6 +32,9 @@ public class FreeBoardController {
 
 	@Autowired
     private BoardService service;
+	
+	@Autowired
+	private ReplyService rService;
 	//-------- 모바일 댓글창 --------------
 	
 	@RequestMapping("mobileComment")
@@ -94,19 +99,35 @@ public class FreeBoardController {
 	
     //게시판 상세조회
     @RequestMapping("view/{boardNo}")
-    public String freeBoardView(Model model, @PathVariable("boardNo") int boardNo,
-    							RedirectAttributes ra, HttpSession session) {
+    public String SecretView(Model model, 
+    							@PathVariable("boardNo") int boardNo,
+    							RedirectAttributes ra, 
+    							@ModelAttribute("loginMember") Member loginMember,
+    							HttpSession session) {
     	model.addAttribute("css", "board/freeView");
     	model.addAttribute("header", "community");
     	
-    	int memberNo= 0;
-    	//session에 login member가 있을 경우 
+    	int memberNo = 0;
     	
-//		if(session.getAttribute("loginMember") != null) {
-//			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-//		}
+		if(session.getAttribute("loginMember") != null) {
+			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		}
+    	
+		Board board = service.selectBoard(boardNo, memberNo);
 		
-		return "free/view";
+    	if(board != null) {
+    		
+    		
+    		// 댓글 
+    		List<Reply> rList = rService.selectList(boardNo);
+    		model.addAttribute("rList", rList);
+    		
+    		model.addAttribute("board", board);
+    		return "free/view";
+    		
+    	}else {
+    		return "redirect:";
+    	}
     	
     }
     
@@ -118,6 +139,36 @@ public class FreeBoardController {
     	
     	return "free/update";
     }
+	// 수정
+    
+    @RequestMapping(value="update", method=RequestMethod.POST)
+    public String secretUpdate(Model model, Board board,
+						@RequestParam("deleteImages") String deleteImages,
+						@RequestParam("images") List<MultipartFile> images,
+						RedirectAttributes ra, HttpSession session ) {
+
+    	
+    			String webPath = "/resources/images/board/"; 
+    			String serverPath = session.getServletContext().getRealPath(webPath);
+    			
+    			// 2) 게시글 수정 Service 호출 
+    			int result = service.updateBoard(board, images, webPath, serverPath, deleteImages);
+    			
+    			
+    			String path = null;
+    			if(result > 0) { 
+    				 	Util.swalSetMessage("게시글 수정 성공", null, "success", ra);
+    				 	path = "view/" + board.getBoardNo();
+    				 	
+    				 				
+    			}else { 
+    					Util.swalSetMessage("게시글 수정 실패", null, "error", ra);
+    					path = "updateForm";
+    			}
+    			
+    			return "redirect:"+path;
+    		}
+    		
     
     @RequestMapping("delete")
     public String freeBoarDelete(Model model) {
