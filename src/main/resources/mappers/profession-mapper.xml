@@ -20,6 +20,7 @@
         <result property="professionMajor" column="PROFESSION_MAJOR"/>
         <result property="professionIntro" column="PRO_INTRO"/>
         <result property="professionStory" column="PRO_STORY"/>
+        <result property="proCarrer" column="PRO_CARRER"/>
         <result property="professionTag" column="PRO_TAG"/>
         <result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
         <result property="counselPrice" column="COUNSEL_PRICE"/>
@@ -105,6 +106,7 @@
         GROUP BY PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR, PRO_INTRO,
             PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM
     </select>
+    
     <select id="selectProOne" resultMap="profession_rm">
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
                PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,

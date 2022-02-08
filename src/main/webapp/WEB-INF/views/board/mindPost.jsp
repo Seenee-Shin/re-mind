@@ -28,7 +28,7 @@
                   			<c:forEach items="${postList}" var="post">
 	                  			<c:choose>
 	                  			<c:when test="${post.itemImgNo == 1}">
-		                  			<div class="item beaker1" style="left: ${post.coordLeft}px; top: ${post.coordTop}px;" >
+		                  			<div class="item beaker1" style="left: ${post.coordLeft}px; top: ${post.coordTop}px; z-index:${post.postNo};" >
 		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
 		                  				<i class="hidden far fa-trash-alt fa-sm"></i>
 		                  				</c:if>
@@ -38,7 +38,7 @@
 		                  			</div>
 	                  			</c:when>
 	                  			<c:when test="${post.itemImgNo == 2}">
-		                  			<div class="item beaker2" style="left: ${post.coordLeft}px; top: ${post.coordTop}px;">
+		                  			<div class="item beaker2" style="left: ${post.coordLeft}px; top: ${post.coordTop}px; z-index:${post.postNo};">
 		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
 		                  				<i class="hidden far fa-trash-alt fa-sm"></i>
 		                  				</c:if>
@@ -48,7 +48,7 @@
 		                  			</div>
 	                  			</c:when>
 	                  			<c:when test="${post.itemImgNo == 3}">
-		                  			<div class="item beaker3" style="left: ${post.coordLeft}px; top: ${post.coordTop}px;">
+		                  			<div class="item beaker3" style="left: ${post.coordLeft}px; top: ${post.coordTop}px; z-index:${post.postNo};">
 		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
 		                  				<i class="hidden far fa-trash-alt fa-sm"></i>
 		                  				</c:if>
@@ -58,7 +58,7 @@
 		                  			</div>
 	                  			</c:when>
 	                  			<c:when test="${post.itemImgNo == 4}">
-		                  			<div class="item beaker4" style="left: ${post.coordLeft}px; top: ${post.coordTop}px;">
+		                  			<div class="item beaker4" style="left: ${post.coordLeft}px; top: ${post.coordTop}px; z-index:${post.postNo};">
 		                  				<c:if test="${loginMember.memberNo == post.memberNo }">
 		                  				<i class="hidden far fa-trash-alt fa-sm"></i>
 		                  				</c:if>
