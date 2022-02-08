@@ -11,7 +11,7 @@ public interface WorryService {
 	 * 고민상담 게시글
 	 * @return list
 	 */
-	List<Board> selectWorryList();
+	List<Board> selectWorryList(String worryCategoryCode);
 
 	/**
 	 * 고민상담 카테고리
