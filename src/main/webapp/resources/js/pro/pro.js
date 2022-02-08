@@ -121,7 +121,7 @@ $(document).on("click", "#calendar td", function (){
     splitDate = $(this).attr("id");
     
 
-    if(splitDate != undefined && $(this).css("color") != "rgb(197, 202, 205)"){
+    if(splitDate != undefined){
         $("#date_chk").text(splitYear +"-"+splitMonth[0]+"-"+ splitDate);
     }
 });

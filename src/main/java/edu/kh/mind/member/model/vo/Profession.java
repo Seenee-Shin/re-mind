@@ -18,6 +18,7 @@ public class Profession {
     private String professionMajor;
     private String professionIntro;
     private String professionStory;
+    private String proCarrer;
     private String professionTag;
     private String counselCategoryCode;
     private String counselPrice;
@@ -185,4 +186,27 @@ public class Profession {
     public String getCounselPrice() {
         return counselPrice;
     }
+
+	public String getProCarrer() {
+		return proCarrer;
+	}
+
+	public void setProCarrer(String proCarrer) {
+		this.proCarrer = proCarrer;
+	}
+
+	@Override
+	public String toString() {
+		return "Profession [professionNo=" + professionNo + ", professionId=" + professionId + ", professionPw="
+				+ professionPw + ", professionName=" + professionName + ", professionPhone=" + professionPhone
+				+ ", professionEnrollDate=" + professionEnrollDate + ", professionGender=" + professionGender
+				+ ", remarks=" + remarks + ", statusCode=" + statusCode + ", professionBirth=" + professionBirth
+				+ ", professionAuthKey=" + professionAuthKey + ", authStatus=" + authStatus + ", professionMajor="
+				+ professionMajor + ", professionIntro=" + professionIntro + ", professionStory=" + professionStory
+				+ ", proCarrer=" + proCarrer + ", professionTag=" + professionTag + ", counselCategoryCode="
+				+ counselCategoryCode + ", counselPrice=" + counselPrice + ", imagePath=" + imagePath + ", imageName="
+				+ imageName + "]";
+	}
+    
+    
 }
