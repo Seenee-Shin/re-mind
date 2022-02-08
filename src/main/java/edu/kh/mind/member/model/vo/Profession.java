@@ -25,7 +25,64 @@ public class Profession {
     private String imagePath;
     private String imageName;
 
+    // 멤버
+   private int memberNo;
+   private String memberEmail;
+   private String memberName;
+   private String memberPhone;
+
+   private String reservationEnrollDate;
+   private String reservationEnrollTime;
+
     public Profession(){}
+
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
+    }
+
+    public void setMemberEmail(String memberEmail) {
+        this.memberEmail = memberEmail;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
+    public void setMemberPhone(String memberPhone) {
+        this.memberPhone = memberPhone;
+    }
+
+    public void setReservationEnrollDate(String reservationEnrollDate) {
+        this.reservationEnrollDate = reservationEnrollDate;
+    }
+
+    public void setReservationEnrollTime(String reservationEnrollTime) {
+        this.reservationEnrollTime = reservationEnrollTime;
+    }
+
+    public int getMemberNo() {
+        return memberNo;
+    }
+
+    public String getMemberEmail() {
+        return memberEmail;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public String getMemberPhone() {
+        return memberPhone;
+    }
+
+    public String getReservationEnrollDate() {
+        return reservationEnrollDate;
+    }
+
+    public String getReservationEnrollTime() {
+        return reservationEnrollTime;
+    }
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
