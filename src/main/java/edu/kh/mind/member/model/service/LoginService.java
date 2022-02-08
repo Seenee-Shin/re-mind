@@ -16,4 +16,6 @@ public interface LoginService {
     int socialSignUp(Member member);
 
     int insertToken(Naver naver);
+
+    int selectToken(Naver naver);
 }

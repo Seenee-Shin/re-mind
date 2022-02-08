@@ -200,12 +200,15 @@ public class MyController {
     @GetMapping("map")
     public String map(Model model){
         model.addAttribute("css", "my/map");
+
         return "my/map";
     }
 
     @GetMapping("muteMember")
     public String muteMember(Model model){
         model.addAttribute("css", "my/muteMember");
+//        model.addAttribute("header", "main");
+
         return "my/muteMember";
     }
 
@@ -224,11 +227,11 @@ public class MyController {
         if (session.getAttribute("loginMember") != null) {
             memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
             pagination = service.getPagination(cp, memberNo);
-            System.out.println(pagination); //
+//            System.out.println(pagination);
             pagination.setMemberNo(memberNo);
 
             List<Board> myBoardList = service.myBoardList(pagination);
-            System.out.println(myBoardList.get(board.getBoardNo()).toString());
+//            System.out.println(myBoardList.get(board.getBoardNo()).toString());
 
 
 

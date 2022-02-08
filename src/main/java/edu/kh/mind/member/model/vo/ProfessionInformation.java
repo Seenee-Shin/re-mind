@@ -8,7 +8,7 @@ public class ProfessionInformation {
     private String professionIntro;
     private String professionStory;
     private String professionCarrer;
-    private int professionTag;
+    private String professionTag;
     
 
     public ProfessionInformation(){}
@@ -69,11 +69,22 @@ public class ProfessionInformation {
 		this.professionCarrer = professionCarrer;
 	}
 
-	public int getProfessionTag() {
+	public String getProfessionTag() {
 		return professionTag;
 	}
 
-	public void setProfessionTag(int professionTag) {
+	public void setProfessionTag(String professionTag) {
 		this.professionTag = professionTag;
 	}
+
+	@Override
+	public String toString() {
+		return "ProfessionInformation [professionNo=" + professionNo + ", professionUniversity=" + professionUniversity
+				+ ", professionDepartment=" + professionDepartment + ", professionMajor=" + professionMajor
+				+ ", professionIntro=" + professionIntro + ", professionStory=" + professionStory
+				+ ", professionCarrer=" + professionCarrer + ", professionTag=" + professionTag + "]";
+	}
+	
+	
 }
+

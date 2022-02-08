@@ -2,6 +2,7 @@ package edu.kh.mind.member.model.dao;
 
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
+import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -78,4 +79,10 @@ public class MyDAO {
 	public int getBoardListCount(int memberNo) {
 		return sqlSession.selectOne("boardMapper.getBoardListCount", memberNo);
 	}
+
+	// 내 댓글 보기
+    public List<Reply> selectMyReplyList(int memberNo) {
+//		System.out.println(memberNo); 담김
+		return sqlSession.selectList("replyMapper.selectMyReplyList", memberNo);
+    }
 }

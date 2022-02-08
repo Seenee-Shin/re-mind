@@ -33,4 +33,8 @@ public class LoginDAO {
     public int insertToken(Naver naver) {
         return sqlSession.insert("memberMapper.insertToken", naver);
     }
+
+    public int selectToken(Naver naver) {
+        return sqlSession.selectOne("memberMapper.selectToken", naver);
+    }
 }

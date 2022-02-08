@@ -2,6 +2,7 @@ package edu.kh.mind.member.model.service;
 
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
+import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.MyDAO;
 import edu.kh.mind.member.model.vo.EmotionCategory;
@@ -76,8 +77,14 @@ public class MyServiceImpl implements MyService {
 
         // 전체 게시글 수
         int listCount = dao.getBoardListCount(memberNo);
-        System.out.println(listCount);
+//        System.out.println(listCount);
 
         return new Pagination(listCount, cp);
+    }
+
+    // 내 댓글 조회
+    @Override
+    public List<Reply> selectMyReplyList(int memberNo) {
+        return dao.selectMyReplyList(memberNo);
     }
 }

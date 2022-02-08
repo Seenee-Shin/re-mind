@@ -2,6 +2,7 @@ package edu.kh.mind.adminPro.model.dao;
 
 import edu.kh.mind.member.model.vo.*;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,7 @@ public class AdminProDAO {
 	}
 
 
-	public int updatePrice(ProfessionPrice price) {
+	public int updatePrice(Map<String, Integer> price) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("professionMapper.updatePrice", price);
 	}
@@ -122,5 +123,11 @@ public class AdminProDAO {
 	 */
 	public List<ChatMessage> selectChatMessage(ChatJoin chat) {
 		return sqlSession.selectList("professionMapper.selectChatMessage", chat);
+	}
+
+
+	public int insertPrice(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("professionMapper.insertPrice", map);
 	}
 }

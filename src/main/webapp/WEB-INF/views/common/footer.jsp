@@ -24,7 +24,7 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
-        // 전역 변수
+        <!-- 전역 변수 -->
         const contextPath = "${contextPath}";
     </script>
     <script src="${contextPath}/resources/js/common/common.js"></script>
