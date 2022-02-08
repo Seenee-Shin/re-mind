@@ -121,7 +121,7 @@ $(document).on("click", "#calendar td", function (){
     splitDate = $(this).attr("id");
     
 
-    if(splitDate != undefined && $(this).css("color") != "rgb(197, 202, 205)"){
+    if(splitDate != undefined){
         $("#date_chk").text(splitYear +"-"+splitMonth[0]+"-"+ splitDate);
     }
 });
@@ -417,6 +417,49 @@ $(document).on("click", "#calendar td", function (){
     if($(this).css("color") == "rgb(25, 62, 160)"
         || $(this).css("color") == "rgb(190, 21, 61)")   return;
     if(index < 7 + backupMonthFirstDay) return;
+
+    // backupDate 1차
+    // backupTime 2차
+
+    let m = [];
+    let d = [];
+    for(let i = 0; i < backupDate.length; i++){
+        m[i] = backupDate[i].split("-")[1];
+        d[i] = backupDate[i].split("-")[2];
+    }
+
+    const select = $("#time_select");
+
+    let makeSelect;
+    makeSelect =
+        '<option>선택</option>' +
+        '<option>08:00</option>' +
+        '<option>10:00</option>' +
+        '<option>12:00</option>' +
+        '<option>14:00</option>' +
+        '<option>16:00</option>' +
+        '<option>18:00</option>';
+
+    select.empty();
+    select.append(makeSelect);
+
+    for(let i = 0; i < m.length; i++){
+        if( Number.parseInt($(this).attr("id")) == Number.parseInt(d[i]) ){
+
+            if(Number.parseInt(backupTime[i]) == 8)
+                select.children().eq(1).remove();
+            if(Number.parseInt(backupTime[i]) == 10)
+                select.children().eq(2).remove();
+            if(Number.parseInt(backupTime[i]) == 12)
+                select.children().eq(3).remove();
+            if(Number.parseInt(backupTime[i]) == 14)
+                select.children().eq(4).remove();
+            if(Number.parseInt(backupTime[i]) == 16)
+                select.children().eq(5).remove();
+            if(Number.parseInt(backupTime[i]) == 18)
+                select.children().eq(6).remove();
+        }
+    }
 
     $("#calendar td").removeClass("YMcss");
     $(this).addClass("YMcss");

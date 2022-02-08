@@ -11,7 +11,7 @@
     <div class="div-btn-info">
         <div class="db-line"></div>
         <div class="div-btn" id="select_myBoardList">내가 쓴 게시글</div>
-        <div class="div-btn" id="select_myReplyList">내가 쓴 댓글</div>
+        <div class="div-btn" id="select_myReplyList" onclick="selectMyReplyList()">내가 쓴 댓글</div>
         <div class="div-btn" id="select_myScrapList">스크랩 한 글</div>
         <div class="div-btn" id="select_myEmpathyList">공감 한 글</div>
     </div>
@@ -40,7 +40,10 @@
                         <%-- 조회된 게시글 목록이 있을 때 --%>
                         <tr class="board-view">
                             <td>${myBoard.boardNo}</td>
-                            <td>${myBoard.boardTitle}</td>
+                            <td>${myBoard.boardTitle}
+                                    <%-- <a href="${contextPath}/mind/board/view/${myBoard.boardNo}">--%>
+                                    <%-- 상제조회 페이지 완성시 --%>
+                            </td>
                             <td>${myBoard.createDate}</td>
                             <td>${myBoard.readCount}</td>
                         </tr>
@@ -88,7 +91,10 @@
 <%--                                <img src="../../../resources/images/profile1.png"/>--%>
                             </div>
                             <div class="board-content">
-                                  <div>${myBoard.boardTitle}</div>
+                                  <div>${myBoard.boardTitle}
+<%--                                    <a href="${contextPath}/mind/board/view/${myBoard.boardNo}">--%>
+                                      <%-- 상제조회 페이지 완성시 --%>
+                                  </div>
                                   <div>${myBoard.memberFn} ${myBoard.createDate} 조회수  ${myBoard.readCount}</div>
                                   <div>${myBoard.boardCategoryName}</div>
                             </div>
@@ -129,6 +135,8 @@
 
 
 </article>
+
+<%-- 강사님 코드 참고 --%>
 <div class="my-5">
     <ul class="pagination">
 
@@ -166,6 +174,11 @@
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script src="${contextPath}/resources/js/my/myBoardList.js"></script>
 <script>
+
+    const memberNo = ${myBoard.memberNo};
+
+
+
     let qs = "";
 
     // 쿼리스트링에 cp가 없으면 1, 있으면 작성된 값
