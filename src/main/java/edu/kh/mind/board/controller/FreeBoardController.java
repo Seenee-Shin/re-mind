@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,21 +71,24 @@ public class FreeBoardController {
 	@ResponseBody
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, 
-    		@RequestPart(value = "key") Map<String, Object> board,
-    		@RequestPart(value = "images",required = false) List<MultipartFile> images,  HttpSession session
-    		) throws Exception {
+    		@RequestPart(value = "images",required = false) List<MultipartFile> images,  HttpSession session,
+    		Board board, String contentFiles) throws Exception {
+		
     	
-		board.put("member", loginMember.getMemberNo());
+		board.setMemberNo(loginMember.getMemberNo());
 		//웹 접근경로(web path), 서버 저장경로(serverPath)
 		String webPath = "/resources/images/board/";
 		
 		String serverPath= session.getServletContext().getRealPath(webPath);
-
+		//System.out.println(board);
+		System.out.println(webPath);
+		System.out.println(serverPath);
+		System.out.println(images);
 		
 		//게시글 작성 후 상세 조회(DB에 입력된 게시글)할 boardNo 
-		//int result = service.insertFreeBoard(board, images, webPath, serverPath);
+		int result = service.insertFreeBoard(board, images, webPath, serverPath);
 		
-    	return 0;
+    	return result;
     }
 	
 	
