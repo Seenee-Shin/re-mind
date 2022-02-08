@@ -21,6 +21,19 @@
     transition: 0.3s;
 }
 
+.pagination {
+    display: inline-flex;
+    padding-left: 0;
+    list-style: none;
+    /* padding-right: 0; */
+    margin: 40px auto;
+    float: right;
+}
+
+.pagination li {
+    margin: 0 2px;
+}
+
 
 /* .div-btn:nth-child(1){border-bottom: 2px solid black;} */
 table{width: 100%; table-layout: fixed; margin-top: 10px;}
@@ -32,6 +45,21 @@ thead > tr > th:nth-child(4), td:nth-child(4){width: 25%;}
 .board-view > td:not(td:nth-child(2)){text-align: center; padding: 15px;}
 
 @media screen and (max-width: 768px) and (min-width: 0px) {
+
+
+    .pagination {
+        display: inline-flex;
+        padding-left: 0;
+        list-style: none;
+        /* padding-right: 0; */
+        margin: 40px auto;
+        /* float: right; */
+        width: 100%;
+    }
+
+    .pagination li {
+        margin: 0;
+    }
 
     .main_content{padding: 0;}
     .footer_wrap{display: none;}
