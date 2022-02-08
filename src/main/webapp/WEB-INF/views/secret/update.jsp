@@ -25,41 +25,53 @@
                     </div>
                     
 
-
-                    <div class=" posting">
-                        <textarea>dlknfa'wiendl/gnper</textarea>
-                        <div class="post_img"></div>
-                    </div> 
-                    
-                    
-                    <div class="btn_area">
-                        <a>
-                            <i class="fas fa-image dark-brown"></i>
-                        </a>
+				<form action="update" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate()">
+                      	 	<div class="board_write_warp grey_bg " >
+		                        <div id="free_board_write">
+		                            <div class="writer_pic_wrap">
+		                                <div class="my_pic light_brown_bg" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});"> </div>
+		                            </div>
+		                            <div class="writing">
+		                                <textarea class="grey_bg" name="boardContent" id="post_textarea" rows="5" placeholder="무슨일이 있었나요?"></textarea>
+		                            </div>
+		                        </div>
+		                        
+		                        <div id="imgWrap">
+								</div>
+		                        
+		                        <div class="write_option_area">
+		                            <div class="check_box_wrap">
+                                       <select id="replyCheckCode" name="replyCheckCode">
+										    <option value="1">댓글 허용</option>
+										    <option value="2">댓글 비허용</option>
+									    </select>  		                            
+		                            </div>
+		
+		                            <div class="check_box_wrap">
+                                       <select id="scrapCheckCode" name="scrapCheckCode">
+										    <option value="1">스크랩 허용</option>
+										    <option value="2">스크랩 비허용</option>
+									    </select>  		                            
+		                            </div>
+		                            
+		                            <div class="check_box_wrap">
+                                       <select id="empathyCheckCode" name="empathyCheckCode">
+										    <option value="1">공감 허용</option>
+										    <option value="2">공감 비허용</option>
+									    </select>  		                            
+		                            </div>
+		                        </div>
+		                        
+		                        <hr>
+		                        <div class="btn_area">
+		                            <label for="addFileBtn">
+		                                <i class="fas fa-image dark-brown" ></i>
+		                            </label>
+										<input type="file" name="images" id='addFileBtn' accept="audio/*, video/*, image/*" multiple style="display: none"> 
+		                            <button class="submit_btn light_brown_bg">작성</button>
+		                        </div>
+		                    </div>
                         
-                        <div class="write_option_area">
-                            <div class="check_box_wrap">
-                                <label for="comment" class="option_btn light_brown_bg">댓글허용
-                                    <input type="checkbox" name="writeOption" value="" id="comment"  onclick="optionValidate();">
-                                </label>
-                            </div>
-
-                            <div class="check_box_wrap">
-                                <label for="scrap" class="option_btn light_brown_bg">스크랩허용
-                                    <input type="checkbox"  name="writeOption" value="" id="scarp"  onclick="optionValidate();">
-                                    
-                                </label>
-                            </div>
-                            
-                            <div class="check_box_wrap">
-                                <label for="like" class="option_btn light_brown_bg"> 공감 허용
-                                    <input type="checkbox"  name="writeOption" value="" id="like"  onclick="optionValidate();">
-                                </label>
-                        </div>
-                        
-                    </div>
-                </article>
-
                 <div class="edit_btn_wrap">
                     <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
                     <button type="button" class="dark-brown edit_btn" onclick=""> 취소  </button>
