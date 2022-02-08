@@ -156,11 +156,12 @@ public class SocialController {
 
         Member loginMember = new Member();
 
-
-        System.out.println("에러1");
         if(member != null){ // 없는 회원이면 회원가입을 진행합니다.
             loginMember = member;
-            path = "socialSuccess";
+            int result = service.insertToken(naver);
+            
+            if(result > 0)  path = "socialSuccess";
+            else            path = "redirect:/";
         }else{ // 이미 가입이 되어있는 회원이면 로그인을 진행합니다.
             loginMember.setMemberPhone((String)response_obj.get("mobile"));
             loginMember.setMemberId((String)response_obj.get("email"));
