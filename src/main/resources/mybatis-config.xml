@@ -51,6 +51,7 @@
 		<mapper resource="/mappers/board-mapper.xml"/>
 		<mapper resource="/mappers/board2-mapper.xml"/>
 		<mapper resource="/mappers/reply-mapper.xml"/>
+		<mapper resource="/mappers/secret-mapper.xml"/>
 	</mappers>
 
 </configuration>
