@@ -98,27 +98,11 @@ public class FreeBoardController {
     	int memberNo= 0;
     	//session에 login member가 있을 경우 
     	
-		if(session.getAttribute("loginMember") != null) {
-			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-		}
+//		if(session.getAttribute("loginMember") != null) {
+//			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+//		}
 		
-		Board board = service.selectBoard(boardNo,memberNo);
-		
-		String path =null;
-		//조회 결과에 따른 처리
-		if(board != null) { 
-
-			
-			//게시글이 존재할 때 
-			model.addAttribute("board",board);
-			path = "board/boardView";
-			
-		}else {
-			Util.swalSetMessage("해당 글이 존재하지 않습니다.", null , "info", ra);
-			path = "redirect:../list";
-		}
-		
-		return path;
+		return "free/view";
     	
     }
     
