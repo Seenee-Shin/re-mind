@@ -20,9 +20,20 @@ public class SecretDAO {
 	}
 
 	public List<WorryCategory> selectWorryCategory() {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("secretMapper.selectWorryCategory");
 	
+	}
+
+	public int updateBoard(Board board) {
+		return sqlSession.update("secretMapper.updateBoard", board);
+	}
+
+	public Board selectBoard(int boardNo) {
+		return sqlSession.selectOne("secretMapper.selectBoard", boardNo);
+	}
+
+	public int increaseReadCount(int boardNo) {
+		return sqlSession.update("secretMapper.increaseReadCount", boardNo);
 	}
 
 }

@@ -47,7 +47,7 @@
 		</selectKey>
 
 		INSERT INTO RESERVATION_PAYMENT 
-		VALUES(#{reservationPayNo},61,1,#{totalCnt},DEFAULT,DEFAULT)
+		VALUES(#{reservationPayNo},#{memberNo},#{professionNo},#{totalCnt},DEFAULT,DEFAULT)
 		
 	</insert>
 	
@@ -55,7 +55,7 @@
 	<select id="professionPriceSelect" resultType="_int">
 		SELECT COUNSEL_PRICE
 		FROM PROFESSION_PRICE
-		WHERE COUNSEL_CATEGORY_NO = #{counselCategoryCode} AND PROFESSION_NO = 1
+		WHERE COUNSEL_CATEGORY_NO = #{counselCategoryCode} AND PROFESSION_NO = #{professionNo}
 	</select>
 	
 	<!-- 결제 tb에 총금액 상담 예약결제번호 insert -->

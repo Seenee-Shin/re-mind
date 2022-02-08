@@ -11,7 +11,7 @@
     <div class="div-btn-info">
         <div class="db-line"></div>
         <div class="div-btn" id="select_myBoardList">내가 쓴 게시글</div>
-        <div class="div-btn" id="select_myReplyList" onclick="selectMyReplyList()">내가 쓴 댓글</div>
+        <div class="div-btn" id="select_myReplyList" <%--onclick="selectMyReplyList()"--%>>내가 쓴 댓글</div>
         <div class="div-btn" id="select_myScrapList">스크랩 한 글</div>
         <div class="div-btn" id="select_myEmpathyList">공감 한 글</div>
     </div>
@@ -29,7 +29,7 @@
         <tbody>
             <c:choose>
 
-                <c:when test="${empty myBoardList}">
+                <c:when test="${empty myBoardList && empty selectMyReplyList}">
                     <%-- 조회된 게시글 목록이 없을 때 --%>
                     <tr>
                         <td colspan="4">게시글이 존재하지 않습니다.</td>
@@ -51,19 +51,8 @@
                 </c:otherwise>
 
             </c:choose>
-            <%--<tr class="board-view">
-                <td>1445</td>
-                <td>너무 힘드네요...</td>
-                <td>2022.01.01</td>
-                <td>46</td>
-        </tr>
-        <tr class="board-view">
-            <td>26467</td>
-            <td>너무 힘드네요...너무 힘드네요... 너무 힘드네요...</td>
-            <td>2021.11.21</td>
-            <td>4,264,676</td>
-            <!-- 100단위로 잘라? 말라? -->
-        </tr>
+
+            <%--
         <tr class="board-view">
             <td>33</td>
             <td>너무 힘드네요...너무 힘드네요... 너무 힘드네요...</td>
@@ -134,7 +123,13 @@
 
 
 
+    <ul id="pagingul"></ul>
+
 </article>
+
+<%--<select id="dataPerPage">--%>
+<%--    <option value="10">10개씩보기</option>--%>
+<%--</select>--%>
 
 <%-- 강사님 코드 참고 --%>
 <div class="my-5">
@@ -172,12 +167,13 @@
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
-<script src="${contextPath}/resources/js/my/myBoardList.js"></script>
 <script>
 
-    const memberNo = ${myBoard.memberNo};
-
-
+    <!-- 세션에 올라가있는 loinMember -->
+    const memberNo = ${loginMember.memberNo};
+</script>
+<script src="${contextPath}/resources/js/my/myBoardList.js"></script>
+<script>
 
     let qs = "";
 
@@ -187,6 +183,7 @@
     }else{
         qs += "?cp=" + getParam("cp");
     }
+
 
     location.href = "myBoardList" + qs;
 </script>

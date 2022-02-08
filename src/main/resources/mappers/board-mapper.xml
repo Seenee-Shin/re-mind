@@ -39,9 +39,8 @@
 
 		<result property="worryEmpathyArray" column="EMPATHY_ARRAY"/>
 		<result property="worryCntArray" column="CNT_ARRAY"/>
-
-
-		<collection property="imgList" column="BOARD_NO"
+		
+		<!--<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
 					
 		<collection property="profileImgList" column="BOARD_NO"
@@ -49,7 +48,7 @@
 					
 		<collection property="emList" column="BOARD_NO"
 		
-						javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>
+						javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>-->
 	</resultMap>
 
 
@@ -116,7 +115,7 @@
 	<![CDATA[
 		SELECT BOARD_NO,BOARD_CONTENT,
 				TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
-				TO_CHAR(BOARD_MODIFY_DT, 'YYYY-  SCRAP_CHECK_CD,MEMBER_NO,EM_CHECK_CD,ANON_CHECK_CD 
+				TO_CHAR(BOARD_MODIFY_DT, 'YYYY-MM-DD')  "BOARD_MODIFY_DT", SCRAP_CHECK_CD,MEMBER_NO,EM_CHECK_CD,ANON_CHECK_CD
 		FROM BOARD
 		WHERE BOARD_STATUS_CD = 201 
 		AND BOARD_CATEGORY_CD = 101
