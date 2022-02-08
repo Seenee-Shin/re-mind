@@ -159,7 +159,9 @@ public class SocialController {
         if(member != null){ // 없는 회원이면 회원가입을 진행합니다.
             loginMember = member;
             naver.setMemberNo(member.getMemberNo());
-            int result = service.insertToken(naver);
+            int result = service.selectToken(naver);
+
+            if(result == 0)  result = service.insertToken(naver);
 
             if(result > 0)  path = "socialSuccess";
             else            path = "redirect:/";
