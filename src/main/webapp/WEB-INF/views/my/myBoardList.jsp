@@ -129,6 +129,8 @@
 
 
 </article>
+
+<%-- 강사님 코드 참고 --%>
 <div class="my-5">
     <ul class="pagination">
 
