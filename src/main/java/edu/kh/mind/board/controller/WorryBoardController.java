@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/worry/*")
@@ -22,8 +23,7 @@ public class WorryBoardController {
 
     // 고민상담 게시판
     @RequestMapping(value="worryList", method=RequestMethod.GET)
-    public String worryBoard(Model model) {
-
+    public String worryBoard(Model model, WorryCategory worryCategory) {
         // 카테고리
         List<WorryCategory> categoryList = service.selectWorryCategory();
 
@@ -37,12 +37,14 @@ public class WorryBoardController {
     // 고민상담 게시글
     @ResponseBody
     @RequestMapping(value="worryList", method=RequestMethod.POST)
-    public HashMap<String, Object> worryList() {
+    public HashMap<String, Object> worryList(String worryCategoryCode) {
         System.out.println("start");
         HashMap<String, Object> map = new HashMap<>();
 
         // 게시글 목록
-        List<Board> worryList = service.selectWorryList();
+        List<Board> worryList = service.selectWorryList(worryCategoryCode);
+
+        System.out.println(worryList);
 
         map.put("worryList", worryList);
 

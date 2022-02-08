@@ -5,6 +5,7 @@
 	<resultMap type="Board" id="board_rm">
 		<id property="boardNo" column="BOARD_NO"/>
 
+
 		<result property="boardTitle" column="BOARD_TITLE"/>
 		<result property="boardContent" column="BOARD_CONTENT"/>
 		<result property="createDate" column="BOARD_CREATE_DT"/>
@@ -41,9 +42,9 @@
 		<result property="worryCntArray" column="CNT_ARRAY"/>
 
 
-		<!--<collection property="imgList" column="BOARD_NO"
+		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
-		<collection property="profileImgList" column="BOARD_NO"
+		<!--<collection property="profileImgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectFropileImageList"/>
 		<collection property="emList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>-->
@@ -77,9 +78,11 @@
 
 		<!-- 게시판 이미지 조회-->
 	<select id="selectBoardImageList" resultMap="image_rm">
-		SELECT * FROM IMAGE
-		WHERE BOARD_NO = #{boardNo}
-		ORDER BY IMAGE_LEVEL
+		<if test="#{boardNo} != null ">
+			SELECT * FROM IMAGE
+			WHERE BOARD_NO = #{boardNo}
+			ORDER BY IMAGE_LEVEL
+		</if>
 	</select>
 
 	
@@ -126,9 +129,11 @@
 	    	
 	<!-- 공감조회 -->
 	<select id="selectEmpathyList" resultMap="empathy_rm">
-		SELECT EMPATHY_STATUS_NM, COUNT(MEMBER_NO)
-		FROM EMPATHY JOIN EMPATHY_STATUS USING(EMPATHY_STATUS_CD)
-		WHERE BOARD_NO = #{boardNo} GROUP BY EMPATHY_STATUS_NM
+		<if test="boardNo != null">
+			SELECT EMPATHY_STATUS_NM, COUNT(MEMBER_NO)
+			FROM EMPATHY JOIN EMPATHY_STATUS USING(EMPATHY_STATUS_CD)
+			WHERE BOARD_NO = #{boardNo} GROUP BY EMPATHY_STATUS_NM
+		</if>
 	</select>
     
 	
@@ -173,8 +178,8 @@
 	<!-- 고민상담 게시글 -->
 	<select id="selectWorryList" resultMap="board_rm">
 		SELECT MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM,
-			BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT,
-			w.WORRY_CATEGORY_CD, w.WORRY_NM WORRY_CATEGORY_NM,
+			BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
+			w.WORRY_NM WORRY_CATEGORY_NM,
 			e.EMPATHY_ARRAY, e.CNT_ARRAY
 		FROM BOARD
 		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
@@ -191,7 +196,10 @@
 			) a
 			GROUP BY BOARD_NO
 		) e on e.BOARD_NO = BOARD.BOARD_NO
-		WHERE BOARD_CATEGORY_CD = 102
+		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
+		<if test="worryCategoryCode != null">
+			AND BOARD.WORRY_CATEGORY_CD = #{worryCategoryCode}
+		</if>
 	</select>
    
 	<!-- 작성 날짜 역순 / 최신 순 -->
