@@ -5,10 +5,7 @@ import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
-import edu.kh.mind.member.model.vo.EmotionCategory;
-import edu.kh.mind.member.model.vo.EmotionDiary;
-import edu.kh.mind.member.model.vo.Member;
-import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -205,11 +202,28 @@ public class MyController {
     }
 
     @GetMapping("muteMember")
-    public String muteMember(Model model){
+    public String muteMember(Model model, @ModelAttribute("loginMember") Member loginMember){
         model.addAttribute("css", "my/muteMember");
 //        model.addAttribute("header", "main");
+        List<Mute> mList = service.selectMuteMember(loginMember.getMemberNo());
+
+        model.addAttribute("mList", mList);
 
         return "my/muteMember";
+    }
+
+    @GetMapping("clearMember")
+    @ResponseBody
+    public int clearMember(@ModelAttribute("loginMember") Member loginMember,
+                              @RequestParam(value = "muteNo", required = false) int muteNo){
+
+        Mute mute = new Mute();
+        mute.setMemberNo(loginMember.getMemberNo());
+        mute.setMuteNo(muteNo);
+
+        int result = service.clearMember(mute);
+
+        return result;
     }
 
     @GetMapping("myBoardList")

@@ -5,6 +5,7 @@ import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
+import edu.kh.mind.member.model.vo.Mute;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -85,4 +86,12 @@ public class MyDAO {
 //		System.out.println(memberNo); 담김
 		return sqlSession.selectList("replyMapper.selectMyReplyList", memberNo);
     }
+
+	public List<Mute> selectMuteMember(int memberNo) {
+		return sqlSession.selectList("memberMapper.selectMuteMember", memberNo);
+	}
+
+	public int clearMember(Mute mute) {
+		return sqlSession.delete("memberMapper.clearMember", mute);
+	}
 }
