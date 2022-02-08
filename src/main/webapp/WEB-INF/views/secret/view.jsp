@@ -173,6 +173,7 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/board/secretBoard.js"></script>
 
 </body>
 </html>

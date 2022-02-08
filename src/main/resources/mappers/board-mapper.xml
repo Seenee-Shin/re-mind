@@ -41,10 +41,10 @@
 		<result property="worryCntArray" column="CNT_ARRAY"/>
 
 
-		<!--<collection property="imgList" column="BOARD_NO"
+		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
 					
-		<collection property="profileImgList" column="BOARD_NO"
+		<!--<collection property="profileImgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectProfileImageList"/>
 					
 		<collection property="emList" column="BOARD_NO"
@@ -71,11 +71,6 @@
 
     </resultMap>
 
-    <!--<resultMap type="EmpathyStatus" id="empathyStatus_rm">
-    	<id property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
-
-    	<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
-    </resultMap>-->
 
 		<!-- 특정 게시판 이미지 조회-->
 
