@@ -90,17 +90,14 @@
 
 	
 	<!-- 게시판 이미지 삽입 -->
-	<insert id="insertImgList" parameterType="list">
-   		INSERT INTO IMAGE
-   		SELECT SEQ_IMAGE_NO.NEXTVAL, A.* FROM
-		   <foreach collection="list" item="img" open="(" close=") A" separator=" UNION ALL ">
-				SELECT #{img.imagePath} IMAGE_PATH,
-					 #{img.imageName} IMAGE_NM,
-					 #{img.imageOriginal} IMAGE_ORIGINAL,
-					 #{img.imageLevel} IMAGE_LEVEL,
-					 #{img.boardNo} BOARD_NO
-				FROM DUAL
-		   </foreach>
+	<insert id="insertImgList" >
+		
+   		INSERT INTO IMAGE VALUES (SEQ_IMAGE_NO.NEXTVAL, #{imagePath},
+					 #{imageName},
+					 #{imageOriginal},
+					 #{imageLevel},
+					 DEFAULT,DEFAULT,
+					 #{boardNo})
    </insert>
 
 	<!-- 자유게시판 글쓴사람 프로필 사진  -->
@@ -145,9 +142,9 @@
 	    </selectKey>
 	    
 		INSERT INTO BOARD 
-		VALUES(BOARD_NO, NULL, #{boardContent}, DEFAULT, NULL, 0, 
-				#{replyCheckCode},#{scrapCheckCode},101,#{memberNo},
-				DEFAULT,DEFAULT,#{empathyCheckCode},1,NULL)
+		VALUES(#{boardNo},DEFAULT, #{boardContent}, DEFAULT, DEFAULT, DEFAULT, 
+				#{replyCheckCode},#{scrapCheckCode},#{boardCategoryCode},#{memberNo},
+				DEFAULT,DEFAULT,#{empathyCheckCode},DEFAULT,DEFAULT)
 	</insert>
 	
 	<!-- 게시글 상세조회 -->

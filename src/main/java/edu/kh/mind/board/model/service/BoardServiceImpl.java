@@ -3,6 +3,7 @@ package edu.kh.mind.board.model.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,18 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int insertFreeBoard(Board board, List<MultipartFile> images, String webPath, String serverPath) {
-		board.setBoardContent(Util.XSS(board.getBoardContent()));
-		board.setBoardContent(Util.changeNewLine(board.getBoardContent()));
+		
+		
+		board.setBoardContent(Util.XSS((String)board.getBoardContent()));
+		board.setBoardContent(Util.changeNewLine((String)board.getBoardContent()));
+		
+		board.setBoardCategoryCode(101);
+		
+		System.out.println(images);
 		
 		int boardNo= dao.insertFreeBoard(board);
+		
+		System.out.println(boardNo);
 		
 		if(boardNo>0) {
 			//실제 업로드도니 이미지를 분별하여 list<Boardimages> imgList에 담기
@@ -56,14 +65,26 @@ public class BoardServiceImpl implements BoardService{
 					img.setImageLevel(i);
 					img.setBoardNo(boardNo); //return from dao 
 					
+					
+					System.out.println(img.toString());
 					imgList.add(img); //add to List
 				}// end if
 			}//end for
+			System.out.println("------------------------");
+			System.out.println(imgList);
 			
+			
+			int result = 0;
 			//upload images if there are infomation about imgList
 			if(!imgList.isEmpty()) {
-				int result = dao.insertImgList(imgList);
 				
+				for(int i = 0; i <imgList.size(); i++) {
+					System.out.println("------------------------");
+					System.out.println(imgList.get(i));
+					result += dao.insertImgList(imgList.get(i));
+				}
+				
+				System.out.println(result);
 				//삽입 성공한 행의 개수와 imgList 개수가 같을 경우 파일을 서버에 저장 
 				//1순위로 확인할 것 : servers -> fin server -> Overview -> serve module 확인 
 				
