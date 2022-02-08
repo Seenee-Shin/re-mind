@@ -233,7 +233,7 @@ public class AdminProController {
 		
     	//학력증명서 
     	//웹 접근경로(web path), 서버 저장경로(serverPath)
-		String webPath = "/resources/images/pro/profile";
+		String webPath = "/resources/images/pro/pro_img";
 		
 		String serverPath= session.getServletContext().getRealPath(webPath);
 		
