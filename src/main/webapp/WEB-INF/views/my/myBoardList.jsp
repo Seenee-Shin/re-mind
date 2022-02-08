@@ -11,7 +11,7 @@
     <div class="div-btn-info">
         <div class="db-line"></div>
         <div class="div-btn" id="select_myBoardList">내가 쓴 게시글</div>
-        <div class="div-btn" id="select_myReplyList" onclick="selectMyReplyList()">내가 쓴 댓글</div>
+        <div class="div-btn" id="select_myReplyList" <%--onclick="selectMyReplyList()"--%>>내가 쓴 댓글</div>
         <div class="div-btn" id="select_myScrapList">스크랩 한 글</div>
         <div class="div-btn" id="select_myEmpathyList">공감 한 글</div>
     </div>
@@ -52,45 +52,7 @@
 
             </c:choose>
 
-            <%--<c:choose>
-
-                <c:when test="${empty myBoardList && empty selectMyReplyList}">
-                    &lt;%&ndash; 조회된 게시글 목록이 없을 때 &ndash;%&gt;
-                    <tr>
-                        <td colspan="4">게시글이 존재하지 않습니다.</td>
-                    </tr>
-                </c:when>
-                <c:otherwise>
-                        <c:forEach items="${selectMyReplyList}" var="myReply">
-                            &lt;%&ndash; 조회된 게시글 목록이 있을 때 &ndash;%&gt;
-                            <tr class="board-view">
-                                <td>${myReply.boardNo}</td>
-                                <td>${myReply.boardTitle}
-                                        &lt;%&ndash; <a href="${contextPath}/mind/board/view/${myBoard.boardNo}">&ndash;%&gt;
-                                        &lt;%&ndash; 상제조회 페이지 완성시 &ndash;%&gt;
-                                </td>
-                                <td>${myReply.replyCreateDate}</td>
-                                <td>${myReply.readCount}</td>
-                            </tr>
-
-                        </c:forEach>
-                </c:otherwise>
-
-            </c:choose>--%>
-
-            <%--<tr class="board-view">
-                <td>1445</td>
-                <td>너무 힘드네요...</td>
-                <td>2022.01.01</td>
-                <td>46</td>
-        </tr>
-        <tr class="board-view">
-            <td>26467</td>
-            <td>너무 힘드네요...너무 힘드네요... 너무 힘드네요...</td>
-            <td>2021.11.21</td>
-            <td>4,264,676</td>
-            <!-- 100단위로 잘라? 말라? -->
-        </tr>
+            <%--
         <tr class="board-view">
             <td>33</td>
             <td>너무 힘드네요...너무 힘드네요... 너무 힘드네요...</td>
@@ -161,7 +123,13 @@
 
 
 
+    <ul id="pagingul"></ul>
+
 </article>
+
+<%--<select id="dataPerPage">--%>
+<%--    <option value="10">10개씩보기</option>--%>
+<%--</select>--%>
 
 <%-- 강사님 코드 참고 --%>
 <div class="my-5">
@@ -207,9 +175,6 @@
 <script src="${contextPath}/resources/js/my/myBoardList.js"></script>
 <script>
 
-
-
-
     let qs = "";
 
     // 쿼리스트링에 cp가 없으면 1, 있으면 작성된 값
@@ -218,6 +183,7 @@
     }else{
         qs += "?cp=" + getParam("cp");
     }
+
 
     location.href = "myBoardList" + qs;
 </script>

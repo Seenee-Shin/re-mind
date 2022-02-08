@@ -25,11 +25,11 @@
 	                    
 	                        <div class="search_wrap">
 	                            <select name="search_category" id="search_category">
-	                                <option value="">아이디</option>
-	                                <option value="">내용</option>
+	                                <option value="id">아이디</option>
+	                                <option value="content">내용</option>
 	                            </select>
 	                            <input type="text" name="freeboard_search">
-	                            <button class="submit_btn light_brown_bg"> 검색 </button>
+	                            <button type="button" class="submit_btn light_brown_bg" id="freeboard_search"> 검색 </button>
 	                        </div>
 	                    </div>
 	                </div>
@@ -38,8 +38,8 @@
 	                    <div class="worry_category">
 		                    <c:forEach items="${categoryList}" var="category" varStatus="status">
 			                    <div class="check_box_wrap">
-				                    <label for="normal${status.index}" class="dark_brown_border">${category.worryName}</label>
-				                    <input type="radio" id="normal${status.index}" name="worryCategory" value="normal">
+				                    <label for="category_${status.index}" class="dark_brown_border">${category.worryName}</label>
+				                    <input type="radio" id="category_${status.index}" name="worryCategory" value="${category.worryCategoryCode}">
 			                    </div>
 		                    </c:forEach>
 	                    </div>
@@ -57,14 +57,14 @@
 	                            <div class="worry_category_wrap hidden">
 									<div class="worry_category">
 				                        <div class="check_box_wrap">
-			                            <label for="normal" class="dark-brown dark_brown_border">일반고민</label>
-		                                <input type="radio" id="normal" name="worryCategory" value="normal">
-			                        </div>
+				                            <label for="normal" class="dark-brown dark_brown_border">일반고민</label>
+			                                <input type="radio" id="normal" name="worryCategory" value="normal">
+				                        </div>
 			                        
-			                        <div class="check_box_wrap">
-			                            <label for="normal" class="dark-brown dark_brown_border">일반고민</label>
-			                            <input type="radio" id="normal" name="worryCategory" value="normal">
-			                        </div>
+				                        <div class="check_box_wrap">
+				                            <label for="normal" class="dark-brown dark_brown_border">일반고민</label>
+				                            <input type="radio" id="normal" name="worryCategory" value="normal">
+				                        </div>
 
 	                                </div>
 	                            </div>
@@ -123,42 +123,66 @@
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_worry_board.js"></script>
 
 <script>
-$(function () {
-	$.ajax({
-		url : "${contextPath}/worry/worryList",
-		type : "POST",
-		data : {},
-		success : function (result) {
+	$(function () {
+		// list 가져오기
+		getWorryList();
+	})
 
-			let i = 0;
-			let html = "";
-			let empathyArr;
-			let empathyCntArr;
+	// 카테고리 선택
+	const inputRadio = $("input[name='worryCategory']");
+	inputRadio.on("click", function () {
+		$(".dark_brown_border").removeClass("active");
+		$(this).prev().addClass("active");
 
-			let iconCnt = {};
+		getWorryList($(this).val());
+	});
 
-			$.each(result.worryList, function (i, item) {
-				// empathy 초기화
-				empathyArr = [];
-				empathyCntArr = [];
-				iconCnt = {
-					"1001" : 0,
-					"1002" : 0,
-					"1003" : 0,
-					"1004" : 0,
-					"1005" : 0
-				};
+	// list 가져오기
+	function getWorryList(worryCategoryCode) {
+		let data = {};
 
-				if (item.worryEmpathyArray != null) {
-					empathyArr = (item.worryEmpathyArray).split(",");
-					empathyCntArr = (item.worryCntArray).split(",");
-				}
+		if (worryCategoryCode != null) {
+			data = {
+				"worryCategoryCode" : worryCategoryCode
+			}
+		}
 
-				for(i=0; i<empathyArr.length; i++) {
-					iconCnt[empathyArr[i]] = empathyCntArr[i];
-				}
+		$.ajax({
+			url : "${contextPath}/worry/worryList",
+			type : "POST",
+			data : data,
+			success : function (result) {
 
-				html += `
+				let i = 0;
+				let html = "";
+				let empathyArr;
+				let empathyCntArr;
+
+				let iconCnt = {};
+
+				$.each(result.worryList, function (i, item) {
+
+					// empathy 초기화
+					empathyArr = [];
+					empathyCntArr = [];
+					iconCnt = {
+						"1001" : 0,
+						"1002" : 0,
+						"1003" : 0,
+						"1004" : 0,
+						"1005" : 0
+					};
+
+					if (item.worryEmpathyArray != null) {
+						empathyArr = (item.worryEmpathyArray).split(",");
+						empathyCntArr = (item.worryCntArray).split(",");
+					}
+
+					for(i=0; i<empathyArr.length; i++) {
+						iconCnt[empathyArr[i]] = empathyCntArr[i];
+					}
+
+					html += `
 					<div class="board_list_content">
 						<div class="board_flex_wrap">
 							<div class="writer_pic_wrap">
@@ -200,18 +224,25 @@ $(function () {
                         </div>
 					</div>
 				`;
-			});
+				});
 
-			$(".free_board_list_wrap").append(html);
-		},
-		error : function(request, status, error){
-			console.log("ajax 통신 중 오류 발생");
-			console.log(request.responseText);
-		}
+				if (!$.isEmptyObject(data)) { // 카테고리 선택
+					$(".free_board_list_wrap").html(html);
+				} else {
+					$(".free_board_list_wrap").append(html);
+				}
 
 
-	})
-})
+			},
+			error : function(request, status, error){
+				console.log("ajax 통신 중 오류 발생");
+				console.log(request.responseText);
+			}
+
+
+		});
+	}
+
 
 
 

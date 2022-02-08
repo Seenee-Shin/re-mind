@@ -22,13 +22,19 @@ public class BoardDAO {
 	}
 
 	public int insertFreeBoard(Board board) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("boardMapper.insertFreeboard", board);
+		int result = sqlSession.insert("boardMapper.insertFreeboard", board);
+		int boardNo=0;
+		
+		if(result > 0) {
+			boardNo =  board.getBoardNo();
+		}
+		
+		return boardNo;
 	}
 
-	public int insertImgList(List<Image> imgList) {
+	public int insertImgList(Image image) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("imageMapper.insertImgList", imgList);
+		return sqlSession.insert("boardMapper.insertImgList", image);
 	}
 
 	public Board selectBoard(int boardNo) {
