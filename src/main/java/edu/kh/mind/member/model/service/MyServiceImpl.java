@@ -5,10 +5,8 @@ import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.MyDAO;
-import edu.kh.mind.member.model.vo.EmotionCategory;
-import edu.kh.mind.member.model.vo.EmotionDiary;
-import edu.kh.mind.member.model.vo.Mute;
-import edu.kh.mind.member.model.vo.ProfessionHospital;
+import edu.kh.mind.member.model.vo.*;
+import edu.kh.mind.member.social.naver.vo.Naver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,24 @@ public class MyServiceImpl implements MyService {
 
     @Autowired
     private MyDAO dao;
+
+    @Override
+    public int secessionMember(Naver naver, Member loginMember) {
+
+        int result = 0;
+
+        if(naver.getMemberSocialToken() != null){
+
+            result = dao.deleteToken(naver);
+
+            if(result > 0)  result = dao.deleteSocial(loginMember);
+        }else{
+
+            result = dao.secessionMember(loginMember);
+        }
+
+        return result;
+    }
 
     @Override
     public int clearMember(Mute mute) {
