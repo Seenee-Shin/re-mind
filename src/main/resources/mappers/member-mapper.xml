@@ -96,4 +96,20 @@
         WHERE MUTE_NO = #{muteNo} AND MEMBER_NO = #{memberNo}
     </delete>
 
+    <delete id="deleteToken">
+        DELETE FROM MEMBER_SOCIAL
+        WHERE MEMBER_SOCIAL_TOKEN = #{memberSocialToken} AND MEMBER_NO = #{memberNo}
+    </delete>
+    <update id="deleteSocial">
+        UPDATE MEMBER SET
+            MEMBER_PHONE = '',
+            STATUS_CD = '1'
+        WHERE MEMBER_NO = #{memberNo}
+    </update>
+    <update id="secessionMember">
+        UPDATE MEMBER SET
+            STATUS_CD = '1'
+        WHERE MEMBER_NO = #{memberNo}
+    </update>
+
 </mapper>

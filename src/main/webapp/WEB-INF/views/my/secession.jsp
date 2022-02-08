@@ -19,17 +19,25 @@
                         <br>1. 국가공간정보포털은 이용자가 본 약관 내용에 동의하는 경우, 국가공간정보포털의 서비스 제공 행위 및 회원의 서비스 사용 행위에 본 약관이 우선적으로 적용됩니다.
                     </span>
     </div>
-    <div class="ok-pass">
-        <div class="password">
-	        <div class="passtext">비밀번호 : </div>
-            <input class="inputPass" type="password">
+    <form action="secessionMember" method="post">
+        <div class="ok-pass">
+            <div class="password">
+                <c:if test="${empty naver.memberSocialToken}">
+                    <div class="passtext">비밀번호 : </div>
+                    <input class="inputPass" type="password" name="memberPw">
+                </c:if>
+            </div>
         </div>
-    </div>
-    <div class="csdiv">
-        <button id="update">탈퇴</button>
-        <button id="cancel">취소</button>
-    </div>
+        <div class="csdiv">
+            <button id="update">탈퇴</button>
+            <button id="cancel" type="reset">취소</button>
+        </div>
+    </form>
 </article>
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
+
+<script>
+    console.log("토큰 : " + "${empty naver.memberSocialToken}")
+</script>
