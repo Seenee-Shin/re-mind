@@ -125,8 +125,8 @@ public class SecretBoardController {
     	if(board != null) {
     		
     		// 댓글 
-    		//List<Reply> rList = replyService.selectList(boardNo);
-			//model.addAttribute("rList", rList);
+    		List<Reply> rList = replyService.selectList(boardNo);
+    		model.addAttribute("rList", rList);
     		
     		model.addAttribute("board", board);
     		return "secret/view";
