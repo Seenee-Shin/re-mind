@@ -100,6 +100,8 @@ function selectMyReplyList(){
             console.log(selectMyReplyList);
             // console.log(memberNo); 72
                 $(".board-info").empty();
+                $(".my-5").empty();
+                $("tbody").empty();
 
             $.each(selectMyReplyList, function (i,item){
                 // const tr = $("<tr class='board-view'>");
@@ -107,7 +109,6 @@ function selectMyReplyList(){
 
                 console.log(item)
 
-                $(".my-5").empty();
 
                 const tr = $('<tr class=\"board-view\" style=\"background-color: rgb(252, 247, 243);\">');
                 let td = '<td>'+item.boardNo+'</td>' +

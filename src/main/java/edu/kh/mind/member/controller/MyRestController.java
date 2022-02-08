@@ -25,10 +25,9 @@ public class MyRestController {
 //        System.out.println(memberNo); 담김
         List<Reply> selectMyReplyList = service.selectMyReplyList(memberNo);
 
-        System.out.println(selectMyReplyList);
-        for(Reply r : selectMyReplyList){
+        /*for(Reply r : selectMyReplyList){
             System.out.println(r.getMemberNo());
-        }
+        }*/
         model.addAttribute("myBoardList", selectMyReplyList);
 
         return new Gson().toJson(selectMyReplyList);
