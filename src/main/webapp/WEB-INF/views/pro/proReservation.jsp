@@ -9,9 +9,8 @@
 <article class="main_content22">
     <div id="reservation_confirm_wrap" class="float-left">
         <div id="reservation_confirm">
-            <div style="height: 125px;">
-                <img src="${contextPath}/resources/images/pro/pro_img/pro_img1_1.png" class="float-left"
-                     style="width:125px; height: 125px;">
+            <div id="pro_profile_wrap" style="height: 125px;">
+                <img>
                 <div class="reservation_confirm_proname float-left">
                     <p style="font-size: 13px; font-weight: 500; color:#a59999">추천상담사</p>
                     <h1></h1>
@@ -123,10 +122,10 @@
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <!-- js -->
 <script>
-    const loginMemberNo = '${loginMember.memberNo}';
-    const loginMemberNm = '${loginMember.memberName}';
-    const loginMemberId = '${loginMember.memberId}';
-    const loginMemberPhone = '${loginMember.memberPhone}';
+    const loginMemberNo = '${memberNo}';
+    const loginMemberNm = '${memberNm}';
+    const loginMemberId = '${memberId}';
+    const loginMemberPhone = '${memberPhone}';
 </script>
 <script type="text/javascript" src="${contextPath}/resources/js/pro/pro.js"></script>
 <!-- jQuery -->
@@ -173,6 +172,9 @@
                 }
 
                 $(".reservation_confirm_proname > h1").text(item.professionName + "상담사");
+                
+                $("#pro_profile_wrap > img").attr("src",contextPath+item.imagePath+ '/' + item.imageName).attr("class","float-left").attr("style","width:125px; height: 125px;border-radius:50%;");
+                
             });
         },
         error:function (req, sta, er){
