@@ -265,11 +265,15 @@ display: inline-block;
     margin-top: 0px;
 
 }
-.deleteImg{
-	position: fixed;
-    width: 126px;
-    top: 375px;
+.deleteImg>i{
+    top: 10px;
+    right: 10px;
+    position: absolute;
 	
+}
+
+.boardImg{
+    position: relative;
 }
 .boardImg>img{
 	width: 100%;
