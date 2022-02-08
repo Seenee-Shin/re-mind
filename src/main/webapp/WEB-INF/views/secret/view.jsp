@@ -127,18 +127,22 @@
                     </form>
 
                     <div class="comment_list">
-                        <div class="comment_view">
+                        
+                        <c:forEach items="${rList}" var="reply">
+                        
+                       
+                        <div class="comment_view  <c:if test="${reply.parentReplyNo != 0 }"> child </c:if>">
                             <div class="user_info">
                                 <div class="user_pic light_brown_bg" style="background-image: url();">
                                 </div>
 
                                 <div>
-                                    <p>아이디</p>
+                                    <p>${reply.memberFn}</p>
                                 </div>
                             </div>
 
                             <div class="comment">
-                                <p>dhdhdhdhspr ljdn vg;wori</p>
+                                <p>${reply.replyContent}</p>
                             </div>
 
                             <div class="comment_btn">
@@ -148,28 +152,10 @@
                                 <button class="dark-brown"> 삭제 </button> -->
                             </div>
                         </div>
-                        <!-- 대댓글일 경우 클래스 child 붙이기  -->
-                        <div class="comment_view child">
-                            <div class="user_info">
-                                <div class="user_pic light_brown_bg" style="background-image: url();">
-                                </div>
-
-                                <div>
-                                    <p>아이디</p>
-                                </div>
-                            </div>
-
-                            <div class="comment">
-                                <p>dhdhdhdhspr ljdn vg;wori</p>
-                            </div>
-
-                            <div class="comment_btn">
-                                <button type="button" class="dark-brown edit_btn re-comment" onclick=""> 답글 </button>
-                                <!--  자신이 쓴 댓글에 보이기 -->
-                                <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
-                                <button type="button" class="dark-brown edit_btn" onclick=""> 삭제 </button>
-                            </div>
-                        </div>
+                        
+                        
+                       </c:forEach> 
+                        
 
                     </div>
 

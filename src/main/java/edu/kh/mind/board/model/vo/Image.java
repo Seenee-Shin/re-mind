@@ -81,6 +81,13 @@ public class Image {
 		this.professionNo = professionNo;
 	}
 
+	@Override
+	public String toString() {
+		return "Image [imageNo=" + imageNo + ", imagePath=" + imagePath + ", imageName=" + imageName
+				+ ", imageOriginal=" + imageOriginal + ", imageLevel=" + imageLevel + ", memberNo=" + memberNo
+				+ ", boardNo=" + boardNo + ", professionNo=" + professionNo + "]";
+	}
 
+		
 	
 }

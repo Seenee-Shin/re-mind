@@ -34,7 +34,7 @@ import org.springframework.social.oauth2.OAuth2Parameters;
 // 리다이렉트 주소 변경
 @Controller
 @RequestMapping("/social/*")
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember", "naver"})
 public class SocialController {
 
     /* NaverLoginBO */
@@ -185,6 +185,7 @@ public class SocialController {
         }
 
         model.addAttribute("loginMember", loginMember);
+        model.addAttribute("naver", naver);
 
         return path;
     }

@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/worry/*")
@@ -22,8 +24,7 @@ public class WorryBoardController {
 
     // 고민상담 게시판
     @RequestMapping(value="worryList", method=RequestMethod.GET)
-    public String worryBoard(Model model) {
-
+    public String worryBoard(Model model, WorryCategory worryCategory) {
         // 카테고리
         List<WorryCategory> categoryList = service.selectWorryCategory();
 
@@ -37,12 +38,11 @@ public class WorryBoardController {
     // 고민상담 게시글
     @ResponseBody
     @RequestMapping(value="worryList", method=RequestMethod.POST)
-    public HashMap<String, Object> worryList() {
-        System.out.println("start");
+    public HashMap<String, Object> worryList(@RequestParam Map<String, String> param) {
         HashMap<String, Object> map = new HashMap<>();
 
         // 게시글 목록
-        List<Board> worryList = service.selectWorryList();
+        List<Board> worryList = service.selectWorryList(param);
 
         map.put("worryList", worryList);
 

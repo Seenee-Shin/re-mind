@@ -3,10 +3,15 @@ package edu.kh.mind.member.model.service;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
+
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import edu.kh.mind.member.model.vo.Review;
+
+import edu.kh.mind.member.model.vo.*;
+import edu.kh.mind.member.social.naver.vo.Naver;
+
 
 import java.util.List;
 import java.util.Map;
@@ -53,7 +58,17 @@ public interface MyService {
 
 	// 내가 쓴 댓글 조회
     List<Reply> selectMyReplyList(int memberNo);
+
     
     // 후기 등록
 	int reviewInsert(Review review);
+
+
+	List<Mute> selectMuteMember(int memberNo);
+
+	int clearMember(Mute mute);
+
+
+	int secessionMember(Naver naver, Member loginMember);
+
 }
