@@ -67,5 +67,10 @@
         SEQ_MEMBER_SOCIAL_NO.NEXTVAL, #{memberSocialToken}, #{memberNo}, #{socialType})
     </insert>
 
+<!--    소셜로그인 가입이 되어있는지 검삭-->
+    <select id="selectToken" resultType="_int">
+        SELECT COUNT(*) FROM MEMBER_SOCIAL
+        WHERE MEMBER_NO = #{memberNo}
+    </select>
 
 </mapper>
