@@ -20,7 +20,6 @@ public class WorryDAO {
 	 * @return list
 	 */
 	public List<Board> selectWorryList(Map<String, String> map) {
-		System.out.println(map.get("worryCategoryCode"));
 		return sqlSession.selectList("boardMapper.selectWorryList", map);
 	}
 

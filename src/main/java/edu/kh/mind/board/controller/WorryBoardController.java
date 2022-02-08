@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -37,14 +38,11 @@ public class WorryBoardController {
     // 고민상담 게시글
     @ResponseBody
     @RequestMapping(value="worryList", method=RequestMethod.POST)
-    public HashMap<String, Object> worryList(String worryCategoryCode) {
-        System.out.println("start");
+    public HashMap<String, Object> worryList(@RequestParam Map<String, String> param) {
         HashMap<String, Object> map = new HashMap<>();
 
         // 게시글 목록
-        List<Board> worryList = service.selectWorryList(worryCategoryCode);
-
-        System.out.println(worryList);
+        List<Board> worryList = service.selectWorryList(param);
 
         map.put("worryList", worryList);
 

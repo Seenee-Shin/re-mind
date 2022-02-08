@@ -36,6 +36,10 @@
 	                <!-- 카테고리 숨김 -->
 	                <div class="worry_category_wrap hidden">
 	                    <div class="worry_category">
+		                    <div class="check_box_wrap">
+			                    <label for="category_all" class="dark_brown_border">전체</label>
+			                    <input type="radio" id="category_all" name="worryCategory" value="0">
+		                    </div>
 		                    <c:forEach items="${categoryList}" var="category" varStatus="status">
 			                    <div class="check_box_wrap">
 				                    <label for="category_${status.index}" class="dark_brown_border">${category.worryName}</label>
@@ -131,20 +135,40 @@
 	// 카테고리 선택
 	const inputRadio = $("input[name='worryCategory']");
 	inputRadio.on("click", function () {
+		// 검색 초기화
+		$("[name='freeboard_search']").val('');
+		// $("#search_category option[value='0']").attr('selected','selected');
+
 		$(".dark_brown_border").removeClass("active");
 		$(this).prev().addClass("active");
 
-		getWorryList($(this).val());
+		const data = {
+			"worryCategoryCode" : $(this).val()
+		}
+
+		getWorryList(data);
+	});
+
+	// 검색
+	const searchSelect = $("#freeboard_search");
+	searchSelect.on("click", function () {
+		// 카테고리 초기화
+		$(".dark_brown_border").removeClass("active");
+
+		const data = {
+			"searchCategory" : $("#search_category option:selected").val(),
+			"searchText" : $("[name='freeboard_search']").val()
+		}
+
+		getWorryList(data);
 	});
 
 	// list 가져오기
-	function getWorryList(worryCategoryCode) {
+	function getWorryList(searchData) {
 		let data = {};
 
-		if (worryCategoryCode != null) {
-			data = {
-				"worryCategoryCode" : worryCategoryCode
-			}
+		if (searchData != null) {
+			data = searchData;
 		}
 
 		$.ajax({
