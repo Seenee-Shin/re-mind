@@ -1,7 +1,9 @@
 package edu.kh.mind.adminPro.model.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -105,6 +107,12 @@ public class AdminProServiceImpl implements AdminProService{
 		img.setImageLevel(0);
 		
 		int iResult = dao.insertProInfo(proInfo);
+		for (int i = 0; i<3; i++ ) {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("proNo",proInfo.getProfessionNo());
+			map.put("categoryCode",i+1);
+			iResult = dao.insertPrice(map);
+		}
 		int result =0;
 		if(iResult >0) {
 			
@@ -133,7 +141,7 @@ public class AdminProServiceImpl implements AdminProService{
 	}
 
 	@Override
-	public int updateProProfile(ProfessionInformation proInfo) {
+	public int updateProProfile(ProfessionInformation proInfo, MultipartFile proProfile, String webPath, String serverPath) {
 		
 		proInfo.setProfessionIntro(Util.XSS(proInfo.getProfessionIntro()));
 		proInfo.setProfessionIntro(Util.changeNewLine(proInfo.getProfessionIntro()));
@@ -144,7 +152,36 @@ public class AdminProServiceImpl implements AdminProService{
 		proInfo.setProfessionCarrer(Util.XSS(proInfo.getProfessionCarrer()));
 		proInfo.setProfessionCarrer(Util.changeNewLine(proInfo.getProfessionCarrer()));
 		
-		return dao.insertProProfile(proInfo);
+		
+		Image img= new Image();
+		img.setImagePath(webPath);
+		img.setProfessionNo(proInfo.getProfessionNo());
+		img.setImageName(Util.fileRename(proProfile.getOriginalFilename()));
+		img.setImageOriginal(proProfile.getOriginalFilename());
+		img.setImageLevel(1);
+		
+		int iResult = dao.insertProProfile(proInfo);
+		
+		int result =0;
+		if(iResult >0) {
+			
+			result = dao.insertCertification(img);
+			
+			if (result == 1) {
+				try {
+					proProfile.transferTo(new File(serverPath+"/"+img.getImageName()));
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+					
+					throw new InsertCertificationFailException("파일 변환중 문제발생 ");
+				}
+			}else {
+				throw new InsertCertificationFailException();
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -152,11 +189,6 @@ public class AdminProServiceImpl implements AdminProService{
 		return dao.selectPrice(professionNo);
 	}
 
-	@Override
-	public int updatePrice(ProfessionPrice price) {
-		// TODO Auto-generated method stub
-		return dao.updatePrice(price);
-	}
 
 	// 로그인
 	@Override
@@ -190,6 +222,42 @@ public class AdminProServiceImpl implements AdminProService{
 			return null;
 		}
 
+	}
+
+	@Override
+	public ProfessionInformation selectProInfo(int professionNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProfessionInformation updateProInfo(ProfessionInformation proInfo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Profession updatepro(Profession pro) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updatePrice(List<String> counselPrice , int professionNo) {
+		int result =0;
+		
+		System.out.println(counselPrice);
+		for(int i =0; i< counselPrice.size() ; i++) {
+			Map<String, Integer> price = new HashMap<String, Integer>();
+			
+			price.put("professionNo", professionNo);
+			price.put("categoryCode", i+1);
+			price.put("counselPrice", Integer.parseInt(counselPrice.get(i)));
+			
+			result = dao.updatePrice(price);			
+		}
+		
+		return result;
 	}
 
 

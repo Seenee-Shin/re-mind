@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,24 +70,23 @@ public class FreeBoardController {
 	// 글작성 기능 
 	@ResponseBody
     @RequestMapping(value = "insert", method = RequestMethod.POST)
-    public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, Board board, 
-    		List<MultipartFile> images, HttpSession session,RedirectAttributes ra) {
+    public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, 
+    		@RequestPart(value = "images",required = false) List<MultipartFile> images,  HttpSession session,
+    		Board board, String contentFiles) throws Exception {
+		
     	
 		board.setMemberNo(loginMember.getMemberNo());
 		//웹 접근경로(web path), 서버 저장경로(serverPath)
 		String webPath = "/resources/images/board/";
 		
 		String serverPath= session.getServletContext().getRealPath(webPath);
-
+		//System.out.println(board);
+		System.out.println(webPath);
+		System.out.println(serverPath);
+		System.out.println(images);
 		
 		//게시글 작성 후 상세 조회(DB에 입력된 게시글)할 boardNo 
 		int result = service.insertFreeBoard(board, images, webPath, serverPath);
-		
-		if(result > 0) { // insert 성공 
-			Util.swalSetMessage("게시글 등록 성공", null, "success", ra);
-		}else {
-			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-		}
 		
     	return result;
     }
@@ -102,27 +102,11 @@ public class FreeBoardController {
     	int memberNo= 0;
     	//session에 login member가 있을 경우 
     	
-		if(session.getAttribute("loginMember") != null) {
-			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-		}
+//		if(session.getAttribute("loginMember") != null) {
+//			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+//		}
 		
-		Board board = service.selectBoard(boardNo,memberNo);
-		
-		String path =null;
-		//조회 결과에 따른 처리
-		if(board != null) { 
-
-			
-			//게시글이 존재할 때 
-			model.addAttribute("board",board);
-			path = "board/boardView";
-			
-		}else {
-			Util.swalSetMessage("해당 글이 존재하지 않습니다.", null , "info", ra);
-			path = "redirect:../list";
-		}
-		
-		return path;
+		return "free/view";
     	
     }
     

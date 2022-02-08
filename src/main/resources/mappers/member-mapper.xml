@@ -22,6 +22,16 @@
         <result property="socialType" column="SOCIAL_TYPE"/>
     </resultMap>
 
+    <resultMap id="mute_rm" type="Mute">
+        <id property="muteNo" column="MUTE_NO"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="memberName" column="MEMBER_NM"/>
+        <result property="memberPhone" column="MEMBER_PHONE"/>
+        <result property="imagePath" column="IMAGE_PATH"/>
+        <result property="imageName" column="IMAGE_NM"/>
+        <result property="imageLevel" column="IMAGE_LEVEL"/>
+    </resultMap>
+
     <!-- 로그인 -->
     <select id="emailLogin" resultMap="member_rm">
         SELECT * FROM MEMBER
@@ -67,5 +77,39 @@
         SEQ_MEMBER_SOCIAL_NO.NEXTVAL, #{memberSocialToken}, #{memberNo}, #{socialType})
     </insert>
 
+<!--    소셜로그인 가입이 되어있는지 검삭-->
+    <select id="selectToken" resultType="_int">
+        SELECT COUNT(*) FROM MEMBER_SOCIAL
+        WHERE MEMBER_NO = #{memberNo}
+    </select>
+
+    <select id="selectMuteMember" resultMap="mute_rm">
+        SELECT T.MUTE_NO, T.MEMBER_NO, MEMBER_NM, MEMBER_PHONE, IMAGE_PATH, IMAGE_NM
+        FROM MUTE T
+                 JOIN MEMBER ON(T.MUTE_NO = MEMBER.MEMBER_NO)
+                 LEFT JOIN IMAGE ON(IMAGE.MEMBER_NO = T.MUTE_NO)
+        WHERE T.MEMBER_NO = #{memberNo} AND (IMAGE_LEVEL = 0 OR IMAGE_LEVEL IS NULL)
+    </select>
+
+    <delete id="clearMember">
+        DELETE FROM MUTE
+        WHERE MUTE_NO = #{muteNo} AND MEMBER_NO = #{memberNo}
+    </delete>
+
+    <delete id="deleteToken">
+        DELETE FROM MEMBER_SOCIAL
+        WHERE MEMBER_SOCIAL_TOKEN = #{memberSocialToken} AND MEMBER_NO = #{memberNo}
+    </delete>
+    <update id="deleteSocial">
+        UPDATE MEMBER SET
+            MEMBER_PHONE = '',
+            STATUS_CD = '1'
+        WHERE MEMBER_NO = #{memberNo}
+    </update>
+    <update id="secessionMember">
+        UPDATE MEMBER SET
+            STATUS_CD = '1'
+        WHERE MEMBER_NO = #{memberNo}
+    </update>
 
 </mapper>

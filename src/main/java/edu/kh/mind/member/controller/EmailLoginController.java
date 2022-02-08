@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/emailLogin/*")
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember", "naver"})
 public class EmailLoginController {
 
     @Autowired

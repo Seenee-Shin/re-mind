@@ -121,7 +121,7 @@ $(document).on("click", "#calendar td", function (){
     splitDate = $(this).attr("id");
     
 
-    if(splitDate != undefined && $(this).css("color") != "rgb(197, 202, 205)"){
+    if(splitDate != undefined){
         $("#date_chk").text(splitYear +"-"+splitMonth[0]+"-"+ splitDate);
     }
 });
@@ -166,7 +166,8 @@ function requestPay(){
             url : contextPath + "/pro/priceInsert",
             type : "POST",
             // 전문가 번호, 텍스트 테라피 종류 , 횟수
-            data : {"therapySelect":therapySelect, "therapyCount": therapyCount},
+            data : {"therapySelect":therapySelect, "therapyCount": therapyCount,
+            "professionNo":professionNo,"loginMemberNo":loginMemberNo},
 
             success : function(payNo){
 
@@ -178,9 +179,9 @@ function requestPay(){
                     merchant_uid : 'merchant_' + new Date().getTime(),
                     name : '마음연구소 re:mind',
                     amount : Number(finallyPrice), //판매 가격
-                    buyer_email : '1234@naver.com',
-                    buyer_name : '홍두깨',
-                    buyer_tel : '010-1234-5678'
+                    buyer_email : loginMemberId,
+                    buyer_name : loginMemberNm,
+                    buyer_tel : loginMemberPhone
                     
                 }, function(rsp) {
 
@@ -196,7 +197,7 @@ function requestPay(){
 
                                 // 4. DB 조회된 총금액과 rsp.paid_amount 가 같으면 결제 성공
                                 if(price == rsp.paid_amount){
-                                    alert("결제가 완료되었습니다.");
+                                    alert("상담 예약이 완료되었습니다. 마음연구소가 당신을 응원합니다!");
                                     
                                     const reservationEnrollDate = $("#date_chk").text();
                                     const reservationEnrollTime = $("#time_chk").text().split(":")[0];
@@ -216,8 +217,7 @@ function requestPay(){
                                         processData: false,
 		                                contentType: false,
                                         success:function(result){
-                                            console.log(result);
-                                            // 여기서 결제 완료창으로 넘어갈지 , 아님 마이페이지로 들어갈지 고민
+                                           location.href = contextPath+"/my/appointment";
                                         },
 
                                     });
@@ -417,6 +417,50 @@ $(document).on("click", "#calendar td", function (){
     if($(this).css("color") == "rgb(25, 62, 160)"
         || $(this).css("color") == "rgb(190, 21, 61)")   return;
     if(index < 7 + backupMonthFirstDay) return;
+
+    // backupDate 1차
+    // backupTime 2차
+
+    let m = [];
+    let d = [];
+    for(let i = 0; i < backupDate.length; i++){
+        m[i] = backupDate[i].split("-")[1];
+        d[i] = backupDate[i].split("-")[2];
+    }
+
+    const select = $("#time_select");
+
+    let makeSelect;
+    makeSelect =
+        '<option>선택</option>' +
+        '<option>08:00</option>' +
+        '<option>10:00</option>' +
+        '<option>12:00</option>' +
+        '<option>14:00</option>' +
+        '<option>16:00</option>' +
+        '<option>18:00</option>';
+
+    select.empty();
+    select.append(makeSelect);
+
+    for(let i = 0; i < m.length; i++){
+	
+          if( Number.parseInt($(this).attr("id")) == Number.parseInt(d[i]) && month + 1 == Number.parseInt(m[i])){
+
+            if(Number.parseInt(backupTime[i]) == 8)
+                select.children().eq(1).attr("disabled", true);
+            if(Number.parseInt(backupTime[i]) == 10)
+                select.children().eq(2).attr("disabled", true);
+            if(Number.parseInt(backupTime[i]) == 12)
+                select.children().eq(3).attr("disabled", true);
+            if(Number.parseInt(backupTime[i]) == 14)
+                select.children().eq(4).attr("disabled", true);
+            if(Number.parseInt(backupTime[i]) == 16)
+                select.children().eq(5).attr("disabled", true);
+            if(Number.parseInt(backupTime[i]) == 18)
+                select.children().eq(6).attr("disabled", true);
+        }
+    }
 
     $("#calendar td").removeClass("YMcss");
     $(this).addClass("YMcss");

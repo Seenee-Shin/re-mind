@@ -29,4 +29,6 @@ public interface ProService {
 
 
     Profession selectPro(int professionNo);
+
+    List<Profession> selectMemberProfession(int professionNo);
 }

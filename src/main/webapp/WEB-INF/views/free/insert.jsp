@@ -65,10 +65,11 @@
 		                            <label for="addFileBtn">
 		                                <i class="fas fa-image dark-brown" ></i>
 		                            </label>
-										<input type="file" name="images" id='addFileBtn' accept="audio/*, video/*, image/*" multiple style="display: none"> 
+		                            	<!-- name="images" -->
+										<input type="file"  id='addFileBtn' accept="audio/*, video/*, image/*" multiple style="display: none"> 
 		                            <button class="submit_btn light_brown_bg">작성</button>
 		                        </div>
-		                    </div>
+		                    </div> 
                         <!-- 모바일 글쓰기 모달창 -->
 			                <div class="posting_modal_warp hidden">
 			                    <div class="modal">
@@ -117,7 +118,8 @@
 						                          	<label for="mfile">
 						                               <i class="fas fa-image dark-brown"></i>
 						                           	</label>
-													<input type="file" name="images" id='mfile' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
+						                           	<!-- name="images" -->
+													<input type="file"  id='mfile' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
 				
 				                                    <div class="m_btn_area">
 				                                        <button class="submit_btn light_brown_bg">작성</button>
