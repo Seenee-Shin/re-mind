@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class WorryDAO {
@@ -18,8 +19,9 @@ public class WorryDAO {
 	 * 고민상담 게시글
 	 * @return list
 	 */
-	public List<Board> selectWorryList() {
-		return sqlSession.selectList("boardMapper.selectWorryList");
+	public List<Board> selectWorryList(Map<String, String> map) {
+		System.out.println(map.get("worryCategoryCode"));
+		return sqlSession.selectList("boardMapper.selectWorryList", map);
 	}
 
 	/**
