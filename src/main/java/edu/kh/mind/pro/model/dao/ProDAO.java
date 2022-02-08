@@ -84,5 +84,7 @@ public class ProDAO {
 	}
 
 
-
+    public List<Profession> selectMemberProfession(int professionNo) {
+		return sqlSession.selectList("professionMapper.selectMemberProfession", professionNo);
+    }
 }

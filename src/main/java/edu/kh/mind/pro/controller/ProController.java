@@ -61,11 +61,17 @@ public class ProController {
 		return "pro/proView";
 	}
 	
-	@RequestMapping("proReservation")
-	public String proReservation(Model model) {
+	@RequestMapping("proReservation/{professionNo}")
+	public String proReservation(Model model, @PathVariable("professionNo") int professionNo) {
 		
 		model.addAttribute("css", "pro/proReservation");
     	model.addAttribute("header", "main");
+
+		List<Profession> pList = service.selectMemberProfession(professionNo);
+
+		for(Profession p : pList){
+			System.out.println(p.getProfessionName());
+		}
 		
 		return "pro/proReservation";
 	}

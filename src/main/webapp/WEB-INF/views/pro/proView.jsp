@@ -36,7 +36,7 @@
 	                    </ul>
 	                </div>
 	            </div>
-	
+
 	            <div class="pro_intro">
 	                <p>누구보다 아름다운 삶을 응원하겠습니다.</p>
 	                <p>#가족 #대인관계 #자존감상실 #연인</p>
@@ -104,18 +104,18 @@
 	                <p>
 	                    <span>당신에게 건네는 손을 잡아주세요</span>
 	                    바쁘게 하루하루 살다 보면 문득 나라는사람이 누구지, 지금 뭐하고있는거지라는 생각이 들 때가 있습니다.<br>
-	                    잠깐이라도 상담을 통해 나의 허전한 마음을 어루만져주시는 건 어떨까요? 그리고 저도 당신의 시간에 함께하고싶습니다.   
-	                </p> 
+	                    잠깐이라도 상담을 통해 나의 허전한 마음을 어루만져주시는 건 어떨까요? 그리고 저도 당신의 시간에 함께하고싶습니다.
+	                </p>
 	            </li>
 	            <li>
 	                <h2>상담사 이야기</h2>
 	                <p>
 	                    <span>심리상담을 망설이는 분에게</span>
-	                    여러분이 처해있는 상황과 환경에 상관없이 여러분 그 자체로 정말로 귀한 사람이며<br> 
-	                    여러분의 가치는 세상 그 무엇과도 바꿀 수 없습니다.<br> <br> 
-	                    
-	                    지쳐있나요? <br> 
-	                    혼자서는 헤쳐 나가지 못할 것 같은 막막함이 느껴지시나요? <br> 
+	                    여러분이 처해있는 상황과 환경에 상관없이 여러분 그 자체로 정말로 귀한 사람이며<br>
+	                    여러분의 가치는 세상 그 무엇과도 바꿀 수 없습니다.<br> <br>
+
+	                    지쳐있나요? <br>
+	                    혼자서는 헤쳐 나가지 못할 것 같은 막막함이 느껴지시나요? <br>
 	                    여러분은 절대 혼자가 아니에요. 그 길에 여러분과 함께 동행하겠습니다.
 	                </p>
 	                <p>
@@ -124,7 +124,7 @@
 	                    내가 조금 부족한 것 같아도, 실패한 것 같고 남들과 비교했을 때 열등한 것 같은 <br>
 	                    내 자신을 인정하고 사랑할 수 있게 됩니다.<br>
 	                    남들과 비교할 수 없는 여러분의 소중함을 깨닫게 됩니다.<br><br>
-	
+
 	                    둘째, 여러분들이 어려운 문제를 해결해 가는 길에 혼자라고 느끼지 않도록 동행하며 성장할 수 있게 됩니다.<br>
 	                    셋째, 여러분의 생각과 감정을 좀 더 자연스럽게 표현할 수 있게 됩니다.
 	                </p>
@@ -171,13 +171,13 @@
 	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
 	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
 	                                    <li><img src="${contextPath}/resources/images/pro/star-half.png"></li>
-	                                </ul> 
+	                                </ul>
 	                            </div>
 	                        </div>
 	                        <div class="review_bottom_box clear-both">
 	                            <p>
 	                                다른 상담소들보다 훨씬좋고 자기자신 편이 되도록 많이 도와주시고 생각과감정을 수용하게 도움이 많이 됩니다 <br>
-	                                자기가 자기자신편이 되는게 가장 중요한것같은데 자기자신에대한불신이 내려않고 신뢰랑 안정감이 느껴집니다.  
+	                                자기가 자기자신편이 되는게 가장 중요한것같은데 자기자신에대한불신이 내려않고 신뢰랑 안정감이 느껴집니다.
 	                            </p>
 	                        </div>
 	                    </li>
@@ -197,21 +197,21 @@
 	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
 	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
 	                                    <li><img src="${contextPath}/resources/images/pro/star-half.png"></li>
-	                                </ul> 
+	                                </ul>
 	                            </div>
 	                        </div>
 	                        <div class="review_bottom_box clear-both">
 	                            <p>
 	                                다른 상담소들보다 훨씬좋고 자기자신 편이 되도록 많이 도와주시고 생각과감정을 수용하게 도움이 많이 됩니다 <br>
-	                                자기가 자기자신편이 되는게 가장 중요한것같은데 자기자신에대한불신이 내려않고 신뢰랑 안정감이 느껴집니다.  
+	                                자기가 자기자신편이 되는게 가장 중요한것같은데 자기자신에대한불신이 내려않고 신뢰랑 안정감이 느껴집니다.
 	                            </p>
 	                        </div>
 	                    </li>
 	                </ul>
 	            </li>
 	        </ul>
-	            
-	
+
+
 	    </div>
 	</div>
 	<div class="pro_reservation_wrap">
@@ -252,7 +252,7 @@
             </ul>
         </div>
     </div>
-   
+
     <div class="mobile_pro_btn_wrap float-right">
         <button type="button" class="mo_consultation_inquiry_btn" onclick="test()">상담문의</button>
         <button type="button" class="mo_pro_reservation_btn float-right" onclick="proReservation();">예약하기</button>
@@ -261,10 +261,15 @@
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
-</body>
-</html>
+
 
 <script>
 	const profession = "${profession.counselCategoryCode}";
 	console.log(profession)
+	const professionNo = "${profession.professionNo}";
+
+	function proReservation(){
+		location.href = contextPath + "/pro/proReservation/" + professionNo;
+	}
+
 </script>

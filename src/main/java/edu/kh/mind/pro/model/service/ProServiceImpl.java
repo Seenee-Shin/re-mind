@@ -61,7 +61,12 @@ public class ProServiceImpl implements ProService{
 		
 		return price;
 	}
-	
+
+	@Override
+	public List<Profession> selectMemberProfession(int professionNo) {
+		return dao.selectMemberProfession(professionNo);
+	}
+
 	@Override
 	public int reservationUpdate(Payment payment, Reservation reservation) {
 		
