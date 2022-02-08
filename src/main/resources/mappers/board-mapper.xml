@@ -41,12 +41,20 @@
 		<result property="worryCntArray" column="CNT_ARRAY"/>
 
 
+		<collection property="imgList" column="BOARD_NO"
 		<!--<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
-		<collection property="profileImgList" column="BOARD_NO"
-					javaType="java.util.ArrayList" ofType="Image" select="selectFropileImageList"/>
+					
+<!-- 		<collection property="profileImgList" column="BOARD_NO"
+					javaType="java.util.ArrayList" ofType="Image" select="selectProfileImageList"/>
+					
 		<collection property="emList" column="BOARD_NO"
+<<<<<<< HEAD
+		
+					javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/> -->
+=======
 					javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>-->
+>>>>>>> 1c044e2d52588f2c74800fad054045c4caedfe40
 	</resultMap>
 
 	<resultMap type="Image" id="image_rm">
@@ -77,9 +85,11 @@
 
 		<!-- 게시판 이미지 조회-->
 	<select id="selectBoardImageList" resultMap="image_rm">
-		SELECT * FROM IMAGE
-		WHERE BOARD_NO = #{boardNo}
-		ORDER BY IMAGE_LEVEL
+		<if test="#{boardNo} != null ">
+			SELECT * FROM IMAGE
+			WHERE BOARD_NO = #{boardNo}
+			ORDER BY IMAGE_LEVEL
+		</if>
 	</select>
 
 	
@@ -113,8 +123,7 @@
 	<![CDATA[
 		SELECT BOARD_NO,BOARD_CONTENT,
 				TO_CHAR(BOARD_CREATE_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT",
-				TO_CHAR(BOARD_MODIFY_DT, 'YYYY-MM-DD') "BOARD_MODIFY_DT",
-		       SCRAP_CHECK_CD,MEMBER_NO,EM_CHECK_CD,ANON_CHECK_CD
+				TO_CHAR(BOARD_MODIFY_DT, 'YYYY-  SCRAP_CHECK_CD,MEMBER_NO,EM_CHECK_CD,ANON_CHECK_CD 
 		FROM BOARD
 		WHERE BOARD_STATUS_CD = 201 
 		AND BOARD_CATEGORY_CD = 101

@@ -68,7 +68,7 @@
 										<input type="file" name="images" id='addFileBtn' accept="audio/*, video/*, image/*" multiple style="display: none"> 
 		                            <button class="submit_btn light_brown_bg">작성</button>
 		                        </div>
-		                    </div>
+		                    </div> 
                         <!-- 모바일 글쓰기 모달창 -->
 			                <div class="posting_modal_warp hidden">
 			                    <div class="modal">
