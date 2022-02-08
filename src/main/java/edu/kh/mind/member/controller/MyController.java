@@ -200,12 +200,15 @@ public class MyController {
     @GetMapping("map")
     public String map(Model model){
         model.addAttribute("css", "my/map");
+
         return "my/map";
     }
 
     @GetMapping("muteMember")
     public String muteMember(Model model){
         model.addAttribute("css", "my/muteMember");
+//        model.addAttribute("header", "main");
+
         return "my/muteMember";
     }
 

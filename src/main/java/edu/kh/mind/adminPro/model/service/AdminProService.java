@@ -55,10 +55,13 @@ public interface AdminProService {
 	
 	/** 상담사 프로필 등록
 	 * @param proInfo
+	 * @param serverPath 
+	 * @param webPath 
+	 * @param proProfile 
 	 * @return
 	 */
 
-	int updateProProfile(ProfessionInformation proInfo);
+	int updateProProfile(ProfessionInformation proInfo, MultipartFile proProfile, String webPath, String serverPath);
 
 	/** 가격조회
 	 * @param professionNo 
@@ -67,10 +70,11 @@ public interface AdminProService {
 	List<ProfessionPrice> selectPrice(int professionNo);
 
 	/** 가격 수정
-	 * @param price
+	 * @param counselPrice
+	 * @param professionNo 
 	 * @return
 	 */
-	int updatePrice(ProfessionPrice price);
+	int updatePrice(List<String> counselPrice, int professionNo);
 
 
 
@@ -87,4 +91,10 @@ public interface AdminProService {
 	 * @return
 	 */
 	List<ChatMessage> joinChat(ChatJoin chat);
+
+	ProfessionInformation selectProInfo(int professionNo);
+
+	ProfessionInformation updateProInfo(ProfessionInformation proInfo);
+
+	Profession updatepro(Profession pro);
 }

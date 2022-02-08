@@ -7,8 +7,8 @@
 <jsp:include page="../procommon/header.jsp"></jsp:include>
 
 <main>
-   <h2>상담사 프로필</h2>
-   <form action="update/${loginPro.professionNo}" method="post" enctype="multipart/form-data" role="form" onsubmit="getCheckBoxVal()">
+   <h2>상담사 프로필 : ${loginPro.professionNo}</h2>
+   <form action="../update/${loginPro.professionNo}" method="post" enctype="multipart/form-data" role="form" onsubmit="return getCheckBoxVal()">
 
        <section class="proflieWrap">
            <article class="proInfoWrap">
@@ -61,7 +61,7 @@
                   			<label for="${c.worryName}">${c.worryName}</label>
                    		</div>
                    </c:forEach>
-             		<input type="hidden" name="professionTag" id="worryCategory" value=""/>
+             		<input type="text" name="worryCategoryCode" id="worryCategory" value=""/>
                </div>
            </article>
 
@@ -84,20 +84,19 @@
 
        <section class="priceWrap">
            <h3>가격 정보</h3>
-           <c:forEach items="${price}" var="p">
-           
-	           <article class="proPrice">
-                   <label for = "${p.counselCategoryCode}">
-                   		<c:choose>
-                   			<c:when test="${p.counselCategoryCode} == 1 ">채팅상담</c:when>
-                   			<c:when test="${p.counselCategoryCode} == 2 ">화상상담</c:when>
-                   			<c:otherwise> 전화상담</c:otherwise>
-                   		</c:choose>
-                   </label>
-                   <input type="number" name="counselPrice" value="${p.counselPrice}" id="${p.counselCategoryCode}">원 
-	           </article>
-           </c:forEach>
-          
+	           <c:forEach items="${price}" var="p">
+	           ${p.counselCategoryCode}
+		           <article class="proPrice">
+	                   <label for = "${p.counselCategoryCode}">
+	                   		<c:choose>
+	                   			<c:when test="${p.counselCategoryCode == 1}">채팅상담</c:when>
+	                   			<c:when test="${p.counselCategoryCode == 2}">화상상담</c:when>
+	                   			<c:otherwise> 전화상담</c:otherwise>
+	                   		</c:choose>
+	                   </label>
+	                   <input type="number" name="counselPrice" value="${p.counselPrice}" id="${p.counselCategoryCode}">원 
+		           </article>
+	           </c:forEach>
        </section>
        
        <button>수정하기</button>
@@ -154,9 +153,10 @@
         var worryCategoy = "" // 문자열 선언
  
         $('input:checkbox[name=worryCategoryOne]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
-        	worryCategoy += this.value + " ";
+        	worryCategoy += this.value + ",";
         });
         $('#worryCategory').val(worryCategoy);
+        return true;
         
     }
 
