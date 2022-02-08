@@ -40,8 +40,9 @@
 
 		<result property="worryEmpathyArray" column="EMPATHY_ARRAY"/>
 		<result property="worryCntArray" column="CNT_ARRAY"/>
+		<!--
 		<collection property="imgList" column="BOARD_NO"
-					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
+					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>-->
 
 		<!--<collection property="profileImgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectProfileImageList"/>
