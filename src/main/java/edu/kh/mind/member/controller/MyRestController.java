@@ -1,12 +1,14 @@
 package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
+import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.member.model.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,11 +21,16 @@ public class MyRestController {
     MyService service;
 
     @RequestMapping(value = "myReplyList", method = RequestMethod.GET)
-    public String selectMyReplyList(int memberNo, Model model, Reply reply){
+    public String selectMyReplyList(int memberNo, Model model, Reply reply,
+                                    @RequestParam(value="cp", required = false, defaultValue="1")int cp){
 
         model.addAttribute("css", "my/myBoardList");
 //        System.out.println(memberNo); 담김
         List<Reply> selectMyReplyList = service.selectMyReplyList(memberNo);
+
+        Pagination pagination = null;
+
+        pagination = service.getPagination(cp, memberNo);
 
         /*for(Reply r : selectMyReplyList){
             System.out.println(r.getMemberNo());

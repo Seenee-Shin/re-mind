@@ -11,7 +11,7 @@
     <div class="div-btn-info">
         <div class="db-line"></div>
         <div class="div-btn" id="select_myBoardList">내가 쓴 게시글</div>
-        <div class="div-btn" id="select_myReplyList" onclick="selectMyReplyList()">내가 쓴 댓글</div>
+        <div class="div-btn" id="select_myReplyList" <%--onclick="selectMyReplyList()"--%>>내가 쓴 댓글</div>
         <div class="div-btn" id="select_myScrapList">스크랩 한 글</div>
         <div class="div-btn" id="select_myEmpathyList">공감 한 글</div>
     </div>
@@ -123,7 +123,13 @@
 
 
 
+    <ul id="pagingul"></ul>
+
 </article>
+
+<%--<select id="dataPerPage">--%>
+<%--    <option value="10">10개씩보기</option>--%>
+<%--</select>--%>
 
 <%-- 강사님 코드 참고 --%>
 <div class="my-5">
@@ -169,9 +175,6 @@
 <script src="${contextPath}/resources/js/my/myBoardList.js"></script>
 <script>
 
-
-
-
     let qs = "";
 
     // 쿼리스트링에 cp가 없으면 1, 있으면 작성된 값
@@ -180,6 +183,7 @@
     }else{
         qs += "?cp=" + getParam("cp");
     }
+
 
     location.href = "myBoardList" + qs;
 </script>
