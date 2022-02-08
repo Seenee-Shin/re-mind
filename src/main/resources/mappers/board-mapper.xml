@@ -39,7 +39,7 @@
 
 		<result property="worryEmpathyArray" column="EMPATHY_ARRAY"/>
 		<result property="worryCntArray" column="CNT_ARRAY"/>
-		
+
 		<!--<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
 					
