@@ -42,20 +42,16 @@
 
 
 		<collection property="imgList" column="BOARD_NO"
-		<!--<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
 					
-<!-- 		<collection property="profileImgList" column="BOARD_NO"
+		<collection property="profileImgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectProfileImageList"/>
 					
 		<collection property="emList" column="BOARD_NO"
-<<<<<<< HEAD
 		
-					javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/> -->
-=======
-					javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>-->
->>>>>>> 1c044e2d52588f2c74800fad054045c4caedfe40
+						javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>
 	</resultMap>
+
 
 	<resultMap type="Image" id="image_rm">
 		<id property="imageNo" column="IMAGE_NO"/>
