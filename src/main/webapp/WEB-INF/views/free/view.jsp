@@ -157,16 +157,12 @@
 			                         </div>
 			
 			                         <div class="comment_btn">
-				                         <c:choose>
 				                         
-				                         	<c:when test="${loginMember.memberNo == board.memberNo }">
-				                            	<button class="dark-brown" onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
-				                            	<button class="dark-brown" onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
-				                         	</c:when>
-				                         	<c:otherwise>
-				                            	<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
-				                            </c:otherwise>
-				                         </c:choose>
+			                            	<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
+				                         	<c:if test="${loginMember.memberNo == reply.memberNo }">
+				                            	<button class="dark-brown edit_btn " onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
+				                            	<button class="dark-brown edit_btn " onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
+				                            </c:if>	
 		                         	</div>
 		                     	</div>
 	                 		</c:forEach> 
@@ -181,6 +177,7 @@
 		<form action="#" method="POST" name="requestForm">
 			<input type="hidden" name="cp" value="${param.cp }">
 			<input type="hidden" name="boardNo" value="${board.boardNo}">
+			<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
 		</form>
     
     </main>
@@ -214,7 +211,4 @@
 	let beforeReplyRow;
 </script>
 
-<script src="${contextPath}/resources/js/board/reply.js"></script>
-
-</body>
-</html>
+<script src="${contextPath}/resources/js/board/replyCopy.js"></script>
