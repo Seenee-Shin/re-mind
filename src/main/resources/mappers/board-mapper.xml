@@ -241,5 +241,12 @@
 		WHERE BOARD_STATUS_CD != 203
 		AND MEMBER_NO = #{memberNo}
 	</select>
+	
+	<!-- 게시글 삭제  -->
+	<update id="deleteBoard">
+		UPDATE BOARD SET 
+		BOARD_STATUS_CD = 203
+		WHERE BOARD_NO = #{boardNo} 
+	</update>
 
 </mapper>

@@ -226,21 +226,53 @@
 <div class="mobile_pro_reservation_wrap">
     <div class="float-left">
         <div class="mobile_pro_name">
-            김효린 상담사
+			${profession.professionName}상담사
         </div>
         <div class="mobile_price">
             <ul>
                 <li>
-                    <img src="${contextPath}/resources/images/pro/mobile_text_therapy.png">
-                    <p>25,000원</p>
+					<img src="${contextPath}/resources/images/pro/mobile_text_therapy.png">
+					<c:choose>
+						<c:when test="${splitCategory[0] == 1}">
+							<p>${splitPrice[0]}원</p>
+						</c:when>
+						<c:otherwise>
+							<p class="float-left">-</p>
+						</c:otherwise>
+					</c:choose>
+
                 </li>
                 <li>
-                    <img src="${contextPath}/resources/images/pro/mobile_face_therapy.png">
-                    <p>50,000원</p>
+					<img src="${contextPath}/resources/images/pro/mobile_face_therapy.png">
+					<c:choose>
+						<c:when test="${splitCategory[0] == 2}">
+							<p>${splitPrice[0]}원</p>
+						</c:when>
+						<c:when test="${splitCategory[1] == 2}">
+							<p>${splitPrice[1]}원</p>
+						</c:when>
+						<c:otherwise>
+
+							<p>-</p>
+						</c:otherwise>
+					</c:choose>
                 </li>
                 <li>
                     <img src="${contextPath}/resources/images/pro/mobile_voice_therapy.png">
-                    <p>35,000원</p>
+					<c:choose>
+						<c:when test="${splitCategory[0] == 3}">
+							<p>${splitPrice[0]}원</p>
+						</c:when>
+						<c:when test="${splitCategory[1] == 3}">
+							<p>${splitPrice[1]}원</p>
+						</c:when>
+						<c:when test="${splitCategory[2] == 3}">
+							<p>${splitPrice[2]}원</p>
+						</c:when>
+						<c:otherwise>
+							<p>-</p>
+						</c:otherwise>
+					</c:choose>
                 </li>
             </ul>
         </div>

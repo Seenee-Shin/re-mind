@@ -11,6 +11,11 @@ togle.addEventListener('click', ()=>{
     
 // })
 
+//textarea 길이 자동조절 
+function resize(obj) {
+    obj.style.height = '1px';
+    obj.style.height = (12 + obj.scrollHeight) + 'px';
+}
 
 // modal close + popup close
 const closePopup = document.querySelectorAll(".close_popup_btn");
