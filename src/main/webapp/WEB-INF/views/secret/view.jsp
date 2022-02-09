@@ -29,10 +29,12 @@
                     </div>
                     
                     <!-- 자신의 글일때 수정, 삭제버튼 생성 -->
-                    <div class="edit_btn_wrap">
-                        <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
-                        <button type="button" class="dark-brown edit_btn" onclick="" > 삭제 </button>
-                    </div>
+                    <c:if test="${loginMember.memberNo == board.memberNo }">
+	                    <div class="edit_btn_wrap">
+	                        <button type="button" class="dark-brown edit_btn" onclick="updateForm()"> 수정 </button>
+	                        <button type="button" class="dark-brown edit_btn" onclick="deleteBoard();"> 삭제 </button>
+	                    </div>
+					</c:if>
 
                     <div class=" posting">
                         <p>${board.boardContent}</p>
