@@ -6,6 +6,7 @@ import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionPrice;
+import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.pro.model.service.ProService;
 import edu.kh.mind.pro.model.vo.Payment;
 import edu.kh.mind.pro.model.vo.Reservation;
@@ -58,11 +59,19 @@ public class ProController {
     	model.addAttribute("header", "main");
 
 		Profession pro = service.selectPro(professionNo);
-
-		System.out.println(pro.getProfessionName());
-
+		
+		// 상담사 정보 담기
 		model.addAttribute("profession", pro);
-
+		
+		// 후기 리스트 가지고오기
+		List<Review> reviewList = service.reviewListSelect(professionNo);
+		
+		System.out.println(reviewList);
+		
+		// 후기 리스트 담기
+		model.addAttribute("reviewList", reviewList);
+		
+		
 		return "pro/proView";
 	}
 	
@@ -111,6 +120,8 @@ public class ProController {
 		return new Gson().toJson(pList);
 	}
 	
+	
+	// 총 금액이 맞으면 update
 	@ResponseBody
 	@RequestMapping(value="priceInsert", method=RequestMethod.POST)
 	public int priceInsert(@RequestParam("therapySelect") int counselCategoryCode,@RequestParam("therapyCount") int totalCnt,
@@ -134,6 +145,7 @@ public class ProController {
 		return payNo;
 	}
 	
+	// 아이포트 가격과 db에 있는 총 금액과 맞는지 확인용
 	@ResponseBody
 	@RequestMapping(value="priceSelect", method=RequestMethod.POST)
 	public int priceSelect(@RequestParam("payNo") int payNo) {

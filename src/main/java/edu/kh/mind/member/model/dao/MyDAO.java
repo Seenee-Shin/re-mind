@@ -88,8 +88,7 @@ public class MyDAO {
     
     // 후기 등록
 	public int reviewInsert(Review review) {
-
-	return sqlSession.insert("reviewMapper.reviewInsert", review);
+		return sqlSession.insert("reviewMapper.reviewInsert", review);
 	}	
 
 	public List<Mute> selectMuteMember(int memberNo) {

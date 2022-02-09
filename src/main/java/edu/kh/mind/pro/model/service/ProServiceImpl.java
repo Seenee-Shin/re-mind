@@ -3,6 +3,7 @@ package edu.kh.mind.pro.model.service;
 import edu.kh.mind.member.model.vo.Profession;
 
 import edu.kh.mind.member.model.vo.ProfessionPrice;
+import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.pro.model.dao.ProDAO;
 import edu.kh.mind.pro.model.vo.Payment;
 import edu.kh.mind.pro.model.vo.Reservation;
@@ -60,7 +61,8 @@ public class ProServiceImpl implements ProService{
         
         return pm.getPayNo();
     }
-
+    
+    // 아임 포트와 비교할 총 금액 select
 	@Override
 	public int priceSelect(int payNo) {
 		
@@ -68,12 +70,8 @@ public class ProServiceImpl implements ProService{
 		
 		return price;
 	}
-
-	@Override
-	public List<Profession> selectMemberProfession(int professionNo) {
-		return dao.selectMemberProfession(professionNo);
-	}
-
+	
+	// 총 금액이 맞다면 payment update, reservation insert 진행
 	@Override
 	public int reservationUpdate(Payment payment, Reservation reservation) {
 		
@@ -87,8 +85,7 @@ public class ProServiceImpl implements ProService{
 		return result;
 	}
 	
-	
-	// 취소버튼 눌렀을 경우
+	// 결제 취소버튼 눌렀을 경우
 	@Transactional
 	@Override
 	public int paymentDelete(int payNo) {
@@ -108,9 +105,22 @@ public class ProServiceImpl implements ProService{
 
 		return result2;
 	}
+	
+	@Override
+	public List<Profession> selectMemberProfession(int professionNo) {
+		return dao.selectMemberProfession(professionNo);
+	}
+	
 
 	@Override
 	public Profession selectPro(int professionNo) {
 		return dao.selectPro(professionNo);
+	}
+	
+	// 후기 select
+	@Override
+	public List<Review> reviewListSelect(int professionNo) {
+		
+		return dao.reviewListSelect(professionNo);
 	}
 }

@@ -76,7 +76,15 @@
 			data : {"reviewStarPoint":reviewCount,"reviewContent":reviewContent},
 
 			success:function(result){
-				console.log(result);
+				if (result > 0){
+					alert("후기 등록이 완료되었습니다.");
+					
+					// 모달창 닫기
+					$("#letter_area_wrap").css("display","none");
+					$(".close_popup_btn").css("display","none");
+					// 후기 리스트 목록 함수 넣기
+					// 자신이 쓴 후기 리스트 목록 함수 넣기
+				}
 			},
 
 		});

@@ -7,10 +7,11 @@ import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
+import edu.kh.mind.member.model.vo.Member;
+import edu.kh.mind.member.model.vo.Mute;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
 import edu.kh.mind.member.model.vo.Review;
 
-import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
 

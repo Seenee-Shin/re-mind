@@ -8,11 +8,13 @@
     	<result property="reviewStarPoint" column="REVIEW_STARPOINT"/>
     	<result property="professionNo" column="PROFESSION_NO"/>
     	<result property="memberNo" column="MEMBER_NO"/>
+    	<result property="reviewDate" column="REVIEW_DT"/>
+    	<result property="reservationNo" column="RESERVATION_NO"/>
     </resultMap>
     
     
-    <insert id="reviewInsert" >
+    <insert id="reviewInsert">
     	INSERT INTO REVIEW
-    	VALUES(SEQ_REVIEW_NO.NEXTVAL,#{reviewContent},#{reviewStarPoint},1,{memberNo})
+    	VALUES(SEQ_REVIEW_NO.NEXTVAL,#{reviewContent},#{reviewStarPoint},1,#{memberNo},DEFAULT,101)
     </insert>
 </mapper>

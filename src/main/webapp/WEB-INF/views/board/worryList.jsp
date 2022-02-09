@@ -62,17 +62,17 @@
 									<div class="worry_category">
 										<c:forEach items="${categoryList}" var="category" varStatus="status">
 											<div class="check_box_wrap">
-												<label for="normal_${status.index}" class="dark_brown_border">${category.worryName}</label>
-												<input type="radio" id="normal_${status.index}" name="worryCategory" value="${category.worryCategoryCode}">
+												<label for="normal_${status.index}" class="dark_brown_border ${status.index == 0 ? "active" : ""}">${category.worryName}</label>
+												<input type="radio" id="normal_${status.index}" name="worryCategoryCode" value="${category.worryCategoryCode}" ${status.index == 0 ? "checked" : ""}>
 											</div>
 										</c:forEach>
 	                                </div>
 	                            </div>
 								<div class="post_title">
-									<input type="text" id="postTitle" name="postTitle" placeholder="제목을 입력해주세요">
+									<input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력해주세요">
 								</div>
 	                            <div class="writing">
-	                                <textarea class="grey_bg" name="" id="post_textarea" rows="15" placeholder="무슨 고민이 있나요?"></textarea>
+	                                <textarea class="grey_bg" name="boardContent" id="boardContent" rows="15" placeholder="무슨 고민이 있나요?"></textarea>
 	                            </div>
 	                        </div>
 
@@ -80,20 +80,17 @@
 
 	                        <div class="write_option_area">
 	                            <div class="check_box_wrap">
-	                                <label for="comment" class="light_brown_bg"> 댓글허용 </label>
-	                                <input type="checkbox"  name="writeOption" value="comment" id="comment">
+	                                <label for="replyCheckCode" class="light_brown_bg"> 댓글허용 </label>
+	                                <input type="checkbox"  name="replyCheckCode" value="0" id="replyCheckCode">
 	                            </div>
-	
+
 	                            <div class="check_box_wrap">
-	                                <label for="scrap" class="light_brown_bg">스크랩허용</label>
-									<input type="checkbox"  name="writeOption" value="scrap" id="scrap">
-	                                    
+	                                <label for="scrapCheckCode" class="light_brown_bg">스크랩허용</label>
+									<input type="checkbox"  name="scrapCheckCode" value="0" id="scrapCheckCode">
 	                            </div>
-	                            
 	                            <div class="check_box_wrap">
-	                                <label for="like" class="light_brown_bg"> 공감 허용</label>
-	                                <input type="checkbox"  name="writeOption" value="like" id="like">
-	
+	                                <label for="empathyCheckCode" class="light_brown_bg"> 공감 허용</label>
+	                                <input type="checkbox"  name="empathyCheckCode" value="0" id="empathyCheckCode">
 	                            </div>
 
 	                        </div>
@@ -276,7 +273,7 @@
 
 
 	// 고민작성하기 카테고리 선택
-	const selectRadio = $(".postModal input[name='worryCategory']");
+	const selectRadio = $(".postModal input[name='worryCategoryCode']");
 	selectRadio.on("click", function () {
 		$(".postModal [name='freeboard_search']").val('');
 		$(".postModal [name='search_category']").val('id');
@@ -286,15 +283,38 @@
 		_this.prev().addClass("active");
 	});
 
-	// 고민작성하기 댓글, 스크랩, 공감 선택
-	$("[name='writeOption']").on("click", function () {
+	// 고민작성하기 댓글
+	$("#replyCheckCode").on("click", function () {
 		if ($(this).is(":checked")) {
 			$(this).prev().addClass("dark_brown_bg").addClass("active");
+			$(this).val(1);
 		} else {
 			$(this).prev().removeClass("dark_brown_bg").removeClass("active");
+			$(this).val(0);
 		}
 	});
 
+	// 고민작성하기 스크랩
+	$("#scrapCheckCode").on("click", function () {
+		if ($(this).is(":checked")) {
+			$(this).prev().addClass("dark_brown_bg").addClass("active");
+			$(this).val(1);
+		} else {
+			$(this).prev().removeClass("dark_brown_bg").removeClass("active");
+			$(this).val(0);
+		}
+	});
+
+	// 고민작성하기 공감
+	$("#empathyCheckCode").on("click", function () {
+		if ($(this).is(":checked")) {
+			$(this).prev().addClass("dark_brown_bg").addClass("active");
+			$(this).val(1);
+		} else {
+			$(this).prev().removeClass("dark_brown_bg").removeClass("active");
+			$(this).val(0);
+		}
+	});
 
 
 

@@ -30,7 +30,7 @@
 		                                <div class="my_pic light_brown_bg" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});"> </div>
 		                            </div>
 		                            <div class="writing">
-		                                <textarea class="grey_bg" name="boardContent" id="post_textarea" rows="5" placeholder="무슨일이 있었나요?"></textarea>
+		                                <textarea class="grey_bg" name="boardContent" id="post_textarea" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="무슨일이 있었나요?"></textarea>
 		                            </div>
 		                        </div>
 		                        
@@ -82,7 +82,7 @@
 			                                        <div class="my_pic light_brown_bg" style="background-image: url();">
 			                                        </div>
 			                                        <div class="m_writing">
-			                                            <textarea name="boardContent" id="m_post_text" rows="5" placeholder="무슨일이 있었나요?"></textarea>
+			                                            <textarea name="boardContent" id="m_post_text" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="무슨일이 있었나요?" ></textarea>
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -136,7 +136,7 @@
                	     		<div class="board_write_warp grey_bg " >
                	     			<div id="free_board_write">
 		                            <div class="writing" style="min-height: 100px;">
-		                            	<div style="text-align: center; color: grey; font-size: 20px;">글은 작성하시려면 로그인 해주세요</div>
+		                            	<div  class = "reqLogin" style="text-align: center; color: grey; font-size: 20px; margin: auto;">글은 작성하시려면 로그인 해주세요</div>
 		                            </div>
 	                            </div>
                            	</div>

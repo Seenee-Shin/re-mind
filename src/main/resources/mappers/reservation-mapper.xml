@@ -33,10 +33,16 @@
 		<result property="reservationPayNo" column="RESERVATION_PAY_NO"/>
 	</resultMap>
 	
-	<resultMap type="ProfessionPrice" id="ProfessionPrice_rm">
-		<id property="professionNo" column="PROFESSION_NO"/>
-		<result property="counselCategoryCode" column="COUNSEL_CATEGORY_NO"/>
-		<result property="counselPrice" column="COUNSEL_PRICE"/>
+	<!-- 상담사 리뷰 vo -->
+	<resultMap type="Review" id="Review_rm">
+		<id property="REVIEW_NO" column="REVIEW_NO"/>
+		<result property="reviewContent" column="REVIEW_CONTENT"/>
+		<result property="reviewStarPoint" column="REVIEW_STARPOINT"/>
+		<result property="professionNo" column="PROFESSION_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="reviewDate" column="REVIEW_DT"/>
+		<result property="reservationNo" column="RESERVATION_NO"/>
+		<result property="counselCategoryNm" column="COUNSEL_CATEGORY_NM"/>
 	</resultMap>
 	
 	<!-- 상담예약결제 insert -->
@@ -92,7 +98,6 @@
 		]]>
 	</insert>
 	
-	
 	<!-- 결제 취소가 되었을 경우  -->
 	
 	<!-- prservation_no select -->
@@ -109,5 +114,15 @@
 	<delete id="paymentDelete">
 		DELETE FROM PAYMENT WHERE PAY_NO = #{payNo}
 	</delete>
+	
+	<select id="reviewListSelect" resultMap="Review_rm">
+		SELECT REVIEW_CONTENT, REVIEW_STARPOINT,
+		 TO_CHAR(REVIEW_DT, 'YYYY"-"MM"-"DD' ) REVIEW_DT, 
+		 COUNSEL_CATEGORY_NM
+		FROM REVIEW
+		JOIN RESERVATION R USING(RESERVATION_NO)
+		JOIN COUNSEL_CATEGORY C ON(C.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO)
+		WHERE PROFESSION_NO = #{professionNo}
+	</select>
 	
 </mapper>
