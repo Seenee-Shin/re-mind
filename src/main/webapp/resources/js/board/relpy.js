@@ -118,7 +118,7 @@ function addReply(){
 			
 			
 			$.ajax({
-				url : contextPath + "/reply/",
+				url : contextPath + "/reply/insert",
 		        data : {"boardNo" : boardNo,
 		        		"memberNo " : memberNo,
 		        		"replyContent" : replyContent}, // 현재 게시글 번호

@@ -52,7 +52,6 @@
                          <div class="comment_btn">
                          <c:choose>
                          
-                         </c:choose>
                          	<c:when test="${loginMember.memberNo == board.memberNo }">
                             	<button class="dark-brown" onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
                             	<button class="dark-brown" onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
@@ -60,6 +59,7 @@
                          	<c:otherwise>
                             	<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
                             </c:otherwise>
+                         </c:choose>
                          </div>
                      </div>
                       
