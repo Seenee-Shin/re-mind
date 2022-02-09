@@ -30,16 +30,16 @@ function selectReplyList(){
 
                 const userInfo = $('<div class="user_info">');
 
-                const rWriterPic = $('<div class="user_pic light_brown_bg"  style="background-image: url()";>') ;
+                const rWriterPic = $('<div class="user_pic light_brown_bg"  style="background-image: url();">') ;
                 const rWriterFnWrap = $('<div>')  ;
-                const rWriterFn = $('<p>').text(reply.memberName)  ;
+                const rWriterFn = $('<p>').html(reply.memberFn);
                 //const rDate = $('<p class="rDate">').text('작성일 : ' + reply.replyCreateDate);
 
                 // rWriterFnWrap에 자식으로 rWriterFn 추가
                 rWriterFnWrap.append(rWriterFn);
-                rWriterFnWrap.append(rWriterPic);
                 //rWriterFnWrap.append(rDate);
                 
+                userInfo.append(rWriterPic);
                 userInfo.append(rWriterFnWrap)
                 
                 
