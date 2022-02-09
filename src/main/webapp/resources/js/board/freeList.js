@@ -1,6 +1,6 @@
 $(function () {
 	// list 가져오기
-	getWorryList();
+	getFreeList();
 })
 
 function selectFreeBoardList(){

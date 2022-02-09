@@ -155,6 +155,43 @@
 			WHERE BOARD_NO = #{boardNo} GROUP BY EMPATHY_STATUS_NM
 		</if>
 	</select>
+    <!-- 자유게시판 게시글 -->
+	<select id="selectFreeList" resultMap="board_rm">
+		SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
+			MEMBER.MEMBER_NO, MEMBER.MEMBER_FN, MEMBER_NM,
+			w.WORRY_NM WORRY_CATEGORY_NM,
+			e.EMPATHY_ARRAY, e.CNT_ARRAY
+		FROM BOARD
+		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
+		LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
+		LEFT JOIN(
+			SELECT
+				a.BOARD_NO,
+				LISTAGG(  a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
+				LISTAGG(  a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
+			FROM (
+				SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
+				FROM EMPATHY
+				GROUP BY BOARD_NO, EMPATHY_STATUS_CD
+			) a
+			GROUP BY BOARD_NO
+		) e on e.BOARD_NO = BOARD.BOARD_NO
+		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
+
+		<if test="searchCategory != null">
+			<bind name="val" value="'%' + searchText + '%'"/>
+
+			<choose>
+				<when test="searchCategory == 'id'">
+					AND MEMBER_ID LIKE #{val}
+				</when>
+				<otherwise>
+					AND BOARD_CONTENT LIKE #{val}
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY BOARD.BOARD_NO DESC
+	</select>
     
 	
 	<!-- 자유게시판 게시글 작성 -->
@@ -270,6 +307,13 @@
 		AND MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 게시글 수정  -->
+	<update id="updateBoard">
+		UPDATE BOARD SET 
+		BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent}
+		WHERE BOARD_NO = #{boardNo} 
+	</update>	
 	<!-- 게시글 삭제  -->
 	<update id="deleteBoard">
 		UPDATE BOARD SET 
