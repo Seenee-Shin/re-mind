@@ -68,8 +68,7 @@
 
 	<!-- 댓글 삽입 -->
 	<insert id="insertReply" >
-		INSERT INTO REPLY 
-		VALUES(SEQ_REPLY_NO.NEXTVAL,#{replyContent},DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{boardNo},#{memberNo},DEFAULT,DEFAULT)
+		INSERT INTO REPLY VALUES(SEQ_REPLY_NO.NEXTVAL,#{replyContent},DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{boardNo},#{memberNo},DEFAULT,DEFAULT )  
 	</insert>
 
 	<!-- 댓글 수정  -->

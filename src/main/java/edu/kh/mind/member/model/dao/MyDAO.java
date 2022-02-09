@@ -80,11 +80,11 @@ public class MyDAO {
 		return sqlSession.selectList("replyMapper.selectMyReplyList", map);
     }
 
-    
+
     // 후기 등록
 	public int reviewInsert(Review review) {
 		return sqlSession.insert("reviewMapper.reviewInsert", review);
-	}	
+	}
 
 	public List<Mute> selectMuteMember(int memberNo) {
 		return sqlSession.selectList("memberMapper.selectMuteMember", memberNo);
@@ -132,6 +132,25 @@ public class MyDAO {
 	public List<Reservation> selectReservation(int memberNo) {
 		return sqlSession.selectList("memberMapper.selectReservation", memberNo);
 	}
+
+	/**
+	 * 상담 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	public int appointmentDecrease(Reservation reservation) {
+		return sqlSession.update("memberMapper.appointmentDecrease", reservation);
+	}
+
+	/**
+	 * 상담 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	public int appointmentCancel(Reservation reservation) {
+		return sqlSession.update("memberMapper.appointmentCancel", reservation);
+	}
+
 	// 내가 공감한 게시글(수)
 	public int countEmpathyList(Map<String, Integer> map) {
 		return sqlSession.selectOne("boardMapper.countEmpathyList", map);
@@ -146,7 +165,17 @@ public class MyDAO {
 	public Image getMyImage(int memberNo) {
 		return sqlSession.selectOne("boardMapper.getMyImage", memberNo);
 	}
+	public int selectProfile(Image image) {
+		return sqlSession.selectOne("boardMapper.selectProfile", image);
+	}
 
+	public int updateImage(Image image) {
+		return sqlSession.update("boardMapper.updateImage", image);
+	}
+
+	public int insertImage(Image image) {
+		return sqlSession.insert("boardMapper.insertImage", image);
+	}
 
 	// 내 찜 사 페이징
 	public int getCounselorPagination(int memberNo) {
