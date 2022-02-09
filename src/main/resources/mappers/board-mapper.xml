@@ -78,6 +78,7 @@
 
     </resultMap>
 
+
 	<resultMap id="scrap_rm" type="Scrap">
 		<id property="scrapNo" column="SCRAP_NO"/>
 		<result property="memberNo" column="MEMBER_NO"/>
@@ -97,6 +98,7 @@
 
     	<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
     </resultMap>-->
+
 
 		<!-- 특정 게시판 이미지 조회-->
 

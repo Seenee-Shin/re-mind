@@ -16,7 +16,9 @@ public class Reservation {
 	private int PayNo;
 
 	private int memberNo;
+	private String memberName;
 	private int professionNo;
+	private String professionName;
 	private int statusCode;
 
 	public Reservation() {
@@ -118,6 +120,22 @@ public class Reservation {
 		this.statusCode = statusCode;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
+	}
+
 	@Override
 	public String toString() {
 		return "Reservation{" +
@@ -131,7 +149,9 @@ public class Reservation {
 				", counselCategoryNm='" + counselCategoryNm + '\'' +
 				", PayNo=" + PayNo +
 				", memberNo=" + memberNo +
+				", memberName='" + memberName + '\'' +
 				", professionNo=" + professionNo +
+				", professionName='" + professionName + '\'' +
 				", statusCode=" + statusCode +
 				'}';
 	}

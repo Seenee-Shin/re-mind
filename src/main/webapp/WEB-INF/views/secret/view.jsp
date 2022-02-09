@@ -17,29 +17,67 @@
                 </div>
                 <article class="board_view_wrap">
                     <div class="posting_time">
-                        <p>${board.createDate}</p>
+                       <c:choose>
+                    	<c:when test="${empty board.modifyDate}">
+	                        <p>${board.createDate}</p>
+                    	</c:when>
+                    
+                    	<c:otherwise>
+	                        <p>${board.modifyDate}</p>
+                       	</c:otherwise>
+                    </c:choose>
                     </div>
                     <div class="profile_wrap">
                         <div class="writer_pic light_brown_bg" style="background-image: url();">
                         </div>
 
                         <div class="writer_id">
+                        <c:choose>
+                        <c:when test="${board.anonCheckCode == 1}">
                             <p>${board.memberFn}</p>
+                       	</c:when>
+                       	
+                        <c:otherwise>
+                            <p>익명</p>
+                        </c:otherwise>
+                        
+                        </c:choose>
                         </div>
                     </div>
                     
+                   
+        
+              	 	 
+              	 	 
                     <!-- 자신의 글일때 수정, 삭제버튼 생성 -->
-                    <div class="edit_btn_wrap">
-                        <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
-                        <button type="button" class="dark-brown edit_btn" onclick="" > 삭제 </button>
-                    </div>
-
+     				 <c:if test="${loginMember.memberNo == board.memberNo }">
+	                    <div class="edit_btn_wrap">
+	                        <button type="button" class="dark-brown edit_btn" onclick="updateForm()"> 수정 </button>
+	                        <button type="button" class="dark-brown edit_btn" onclick="deleteBoard();"> 삭제 </button>
+	                    </div>
+					</c:if>
+					
+					 <c:if test="${board.boardCategoryCode != 104 }">
+              	 	 <p class="otherCategory">다른 게시판 글입니다.</p>
+              	 	 </c:if>
+              	 	
+              	 	 <c:if test="${board.boardCategoryCode == 104 }">
                     <div class=" posting">
                         <p>${board.boardContent}</p>
-                        <div class="post_img"></div>
-                    </div>                   
+                        
+                        <c:if test="${board.imgList != null}">
+                        <div class="post_img">
+	                        <c:forEach items="${board.imgList}" var="img" varStatus="status">
+             		       		<div id="img${status.index}" class="viewBoardImg"> <img src="${contextPath}${img.imagePath}${img.imageName}">
+				       			</div>
+	                        </c:forEach>
+                        </div>
+                        </c:if>
+                       
+                    </div>     
+                    </c:if>                 
 
-
+					
 					<c:if test="${board.empathyCheckCode == 1}">
                     <div class="like_warp">
                         <div id="like_smile" onclick="">
@@ -76,14 +114,17 @@
                     </div>
 					</c:if>
 					
+					
                     <div class="report_scrap_wrap">
                         <!-- 스크랩 허용 했을 경우만 -->
+                       
 					<c:if test="${board.scrapCheckCode == 1}">
                         <a href="">
                             <i class="fas fa-archive"></i>  
                             <p>스크랩</p>
                         </a>
     				</c:if>
+    				
                         <a href="">
                             <i class="fas fa-exclamation-triangle"></i>
                             <p>신고</p>
@@ -92,6 +133,7 @@
 
 
                 </article>
+                
                 
 				<c:if test="${board.replyCheckCode == 1}">
                 <article class="comment_view_wrap">
@@ -153,17 +195,14 @@
                             </div>
                         </div>
                         
-                        
                        </c:forEach> 
-                        
-
                     </div>
-
-
-
                 </article>
-                </c:if>
+             	</c:if>
+             	 	
+             
             
+            	
             </section>
         </div>
 
@@ -173,6 +212,7 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/board/secretBoard.js"></script>
 
 </body>
 </html>
