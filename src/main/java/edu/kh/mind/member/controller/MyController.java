@@ -295,9 +295,14 @@ public class MyController {
             Util.swalSetMessage("소셜로그인 회원은 정보수정이 불가능합니다.", null, "info", ra);
             path = "redirect:/";
         }
-
-
         return path;
+    }
+    @PostMapping("updateMyInfo")
+    public String updateMyInfo(Member member){
+
+
+
+        return null;
     }
 
     @GetMapping("loadProMap")
