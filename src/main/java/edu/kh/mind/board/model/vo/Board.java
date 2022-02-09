@@ -62,12 +62,32 @@ public class Board {
 
 	private String empathyStatusName;
 
-		/*<result property="reviewStarpoint" column="REVIEW_STARPOINT"/>
-		<result property="proIntro" column="PRO_INTRO"/>
-		<result property="counselPrice" column="COUNSEL_PRICE"/>*/
+	private int avgReviewStarpoint;
+	private int countStar;
 	private int reviewStarpoint;
 	private String proIntro;
 	private int counselPrice;
+
+
+	public Board() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getAvgReviewStarpoint() {
+		return avgReviewStarpoint;
+	}
+
+	public void setAvgReviewStarpoint(int avgReviewStarpoint) {
+		this.avgReviewStarpoint = avgReviewStarpoint;
+	}
+
+	public int getCountStar() {
+		return countStar;
+	}
+
+	public void setCountStar(int countStar) {
+		this.countStar = countStar;
+	}
 
 	public int getReviewStarpoint() {
 		return reviewStarpoint;
@@ -142,11 +162,6 @@ public class Board {
 		return imagePath;
 	}
 
-
-
-	public Board() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getBoardNo() {
 		return boardNo;

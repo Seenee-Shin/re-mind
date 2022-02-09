@@ -89,15 +89,16 @@
 	$(function () {
 		const emotionRecordData = JSON.stringify(${emotionRecordData});
 
-		if (emotionRecordData != undefined) {
+		if (emotionRecordData != "null") {
 			const emotionDiary = JSON.parse(emotionRecordData);
 
 			// progress bar
 			let index = 0;
 			const emotionArray = JSON.parse(emotionDiary.emotionArray);
 			$.each(emotionArray, function (key, value) {
-				$(".progress_bar").eq(index).children().children().text(value + "%");
-				$(".progress_bar").eq(index).children().val(value);
+				let progressName = $(".progress_bar").eq(index).children();
+				progressName.children().text(value + "%");
+				progressName.val(value);
 				index++;
 			});
 

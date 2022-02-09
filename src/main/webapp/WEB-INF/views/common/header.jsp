@@ -174,7 +174,7 @@
 			                <hr>
 			                <li><a href="#">마이상담</a>
 			                    <ul>
-			                        <li><a href="#">상담 예약 조회</a></li>
+			                        <li><a href="${contextPath}/my/appointment">상담 예약 조회</a></li>
 			                        <li><a href="#">지난 상담 내역</a></li>
 			                        <li><a href="#">상담후기</a></li>
 			                        <li><a href="${contextPath}/my/counselor">찜한 상담사</a></li>

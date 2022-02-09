@@ -58,6 +58,23 @@ public class MyController {
         return "my/appointment";
     }
 
+    // 상담 예약 취소
+    @ResponseBody
+    @RequestMapping(value="appointmentCancel", method=RequestMethod.POST)
+    public int appointmentCancel(@ModelAttribute("loginMember") Member loginMember, Reservation reservation) {
+
+        System.out.println(loginMember.getMemberNo());
+        System.out.println(reservation.getReservationNo());
+
+        reservation.setMemberNo(loginMember.getMemberNo());
+        int result = service.appointmentCancel(reservation);
+
+
+        return result;
+    }
+
+
+
     @RequestMapping("appointment/past")
     public String appointmentPast(Model model) {
     	model.addAttribute("css", "my");
@@ -199,7 +216,7 @@ public class MyController {
 
 
     @GetMapping("counselor")
-    public String counselor(Model model, HttpSession session, RedirectAttributes ra,
+    public String counselor(Model model, HttpSession session, RedirectAttributes ra, Board board,
                             @RequestParam(value="cp", required = false, defaultValue="1")int cp){
     	model.addAttribute("css", "my/counselor");
 
@@ -207,23 +224,24 @@ public class MyController {
         Pagination pagination = null;
         List<Board> counselorList = null;
         String path = "";
+
         if(session.getAttribute("loginMember") != null) {
             memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 
-            System.out.println(memberNo);
+//            System.out.println(memberNo);
             pagination = service.getCounselorPagination(cp, memberNo);
-            System.out.println(pagination.toString());
+            System.out.println(pagination);
 
             counselorList = service.selectCounselorList(pagination);
 
+            model.addAttribute("pagination", pagination);
+            model.addAttribute("counselorList", counselorList);
             path = "my/counselor";
         } else {
             Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
 
             path = "redirect:/";
         }
-        model.addAttribute("pagination", pagination);
-        model.addAttribute("counselorList", counselorList);
 
         return path;
     }

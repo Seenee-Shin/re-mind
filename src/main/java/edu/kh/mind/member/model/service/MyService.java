@@ -54,8 +54,6 @@ public interface MyService {
 	// 내가 쓴글 조회
 	List<Board> myBoardList(Map<String, Integer> map);
 
-	// 페이징
-	Pagination getPagination(int cp, int memberNo);
 
 	// 내가 쓴 댓글 조회
     List<Reply> selectMyReplyList(Map<String, Integer> map);
@@ -86,6 +84,14 @@ public interface MyService {
 	 * @return reservationList
 	 */
 	List<Reservation> selectReservation(int memberNo);
+
+	/**
+	 * 상담 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	int appointmentCancel(Reservation reservation);
+
 	// 내가 공감한 게시글(수)
 	int countEmpathyList(Map<String, Integer> map);
 
@@ -93,12 +99,12 @@ public interface MyService {
 	List<Board> myEmpathyList(Map<String, Integer> map);
 
 	Image getMyImage(int memberNo);
-
+  
 	int updateMyForm(Image image, MultipartFile images, String webPath, String serverPath);
-
-	// 내가 찜한 상담사 목록
-	List<Board> selectCounselorList(Pagination pagination);
 
 	// 내 찜 사 페이징
 	Pagination getCounselorPagination(int cp, int memberNo);
+
+	// 내가 찜한 상담사 목록
+	List<Board> selectCounselorList(Pagination pagination);
 }
