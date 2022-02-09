@@ -143,13 +143,11 @@ public class FreeBoardController {
     
     @RequestMapping(value="update", method=RequestMethod.POST)
     public String secretUpdate(Model model, Board board,
-						RedirectAttributes ra, HttpSession session ) {
-
+						RedirectAttributes ra, HttpSession session, @ModelAttribute("loginMember") Member loginMember) {
     	
-    			
     			// 2) 게시글 수정 Service 호출 
+    			board.setMemberNo(loginMember.getMemberNo());
     			int result = service.updateBoard(board);
-    			
     			
     			String path = null;
     			if(result > 0) { 
