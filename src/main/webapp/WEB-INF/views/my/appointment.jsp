@@ -29,11 +29,10 @@
 				</li>
 				<c:forEach items="${reservationList}" var="reservation">
 					<li>
-						<div class="img_div"><img src="${contextPath}/resource/images/sample1.jpg"></div>
-						<div class="date_div">${reservation.reservationEnrollDate}2022-01-22</div>
-						<div class="time_div">${reservation.reservationEnrollTime}:00</div>
-						<div class="profession_div">${reservation.professionNo}</div>
-
+						<div class="img_div"><img src="${contextPath}/resources/images/sample1.jpg"></div><!-- 전문가 프로필 -->
+						<div class="date_div">${reservation.reservationEnrollDate}</div>
+						<div class="time_div">${reservation.reservationEnrollTime}:00 </div>
+						<div class="profession_div">${reservation.professionName}</div>
 						<div class="category_div">채팅</div>
 						<c:choose>
 							<c:when test="${reservation.reservationStatusCode == 1}">

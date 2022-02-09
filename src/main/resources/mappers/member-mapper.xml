@@ -35,19 +35,21 @@
     <resultMap id="reservation_rm" type="Reservation">
         <id property="reservationNo" column="RESERVATION_NO"/>
 
-        <result property="reservationEnrollDate" column=""/>
-        <result property="reservationEnrollTime" column=""/>
-        <result property="reservationStatusCode" column=""/>
-        <result property="reservationCancel" column=""/>
-        <result property="counselCategoryNo" column=""/>
-        <result property="reservationPayNo" column=""/>
-        <result property="counselCategoryNm" column=""/>
-        <result property="PayNo" column=""/>
-        <result property="memberNo" column=""/>
-        <result property="professionNo" column=""/>
-        <result property="statusCode" column=""/>
-    </resultMap>
+        <result property="reservationEnrollDate" column="RESERVATION_ENROLL_DT"/>
+        <result property="reservationEnrollTime" column="RESERVATION_ENROLL_TIME"/>
+        <result property="reservationStatusCode" column="RESERVATION_STATUS_CODE"/>
+        <result property="reservationCancel" column="RESERVATION_CANCEL"/>
+        <result property="counselCategoryNo" column="COUNSEL_CATEGORY_NO"/>
+        <result property="reservationPayNo" column="RESERVATION_PAY_NO"/>
+        <result property="counselCategoryNm" column="COUNSEL_CATEGORY_NM"/>
+        <result property="PayNo" column="PAY_NO"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="memberName" column="MEMBER_NM"/>
 
+        <result property="professionNo" column="PROFESSION_NO"/>
+        <result property="professionName" column="PROFESSION_NM"/>
+        <result property="statusCode" column="STATUS_CD"/>
+    </resultMap>
     <!-- 로그인 -->
     <select id="emailLogin" resultMap="member_rm">
         SELECT * FROM MEMBER
@@ -130,12 +132,15 @@
 
     <select id="selectReservation" resultMap="reservation_rm">
         SELECT r.RESERVATION_NO, TO_CHAR(r.RESERVATION_ENROLL_DT, 'YYYY-MM-DD') RESERVATION_ENROLL_DT,
-            r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
-            rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD
+            r.RESERVATION_ENROLL_TIME , r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
+            rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD,
+            m.MEMBER_NM, p.PROFESSION_NM
         FROM RESERVATION r
         JOIN RESERVATION_PAYMENT rp ON rp.RESERVATION_PAY_NO = r.RESERVATION_PAY_NO
-        JOIN COUNSEL_CATEGORY cc ON CC.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO
-        WHERE MEMBER_NO = #{memberNo}
+        JOIN COUNSEL_CATEGORY cc ON cc.COUNSEL_CATEGORY_NO = r.COUNSEL_CATEGORY_NO
+        JOIN MEMBER m ON m.MEMBER_NO = rp.MEMBER_NO
+        JOIN PROFESSION p ON p.PROFESSION_NO = rp.PROFESSION_NO
+        WHERE rp.MEMBER_NO = #{memberNo}
         AND r.RESERVATION_STATUS_CD = 1
         ORDER BY r.RESERVATION_ENROLL_DT DESC, r.RESERVATION_ENROLL_TIME ASC
     </select>
