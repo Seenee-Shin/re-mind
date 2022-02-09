@@ -3,6 +3,44 @@
 input:focus, textarea:focus, select:focus{
     outline: none;}
 
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: "Noto Sansf KR", sans-serif;
+  padding: 4px;
+  width:110px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 600;
+  color:#A59999;
+  border: 1px solid #A59999;
+  border-radius: 15px;
+}
+
+select:hover {
+	background-color:#E5D4C5;
+	color: white;
+	border-color:#E5D4C5 ;
+	
+}
+
+.deleteImg{position:absolute; top:10px; right:10px;}
+
+.boardImg{
+    position: relative;
+}
+.boardImg>img{
+	width: 100%;
+	height: 100%;
+}
+
+
+select:disabled {
+  opacity: 0.5;
+}
+
 .back_btn{
     margin: 20px;
     font-size: 25px;
@@ -40,23 +78,40 @@ input:focus, textarea:focus, select:focus{
 
 /* 본문 내용 */
 
-.board_update_wrap>.posting{
+#posting{
+    background-color: #f8f8f8;
     min-height: 150px;
     margin-top: 20px;
+    padding: 20px;
 }
 
-.board_update_wrap>.posting>textarea{
+
+textarea{
     resize: none;
     display: block;
     width: 100%;
-    min-height: 400px;
+    border: 0px;
+    padding: 10px;
+    
+}
+
+#posting>textarea{
+    resize: none;
+    display: block;
+    width: 100%;
     border: 0px;
     background-color: #f8f8f8;
     padding: 15px;
 }
 
+.imgWrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 /* 작성 옵션  */
-.board_update_wrap>.btn_area{
+.btn_area{
     display: flex;
     justify-content: space-between;
     align-items: center;

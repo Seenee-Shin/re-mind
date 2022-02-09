@@ -176,18 +176,12 @@ public class MyController {
     // 리뷰 등록
     @ResponseBody
     @RequestMapping(value="reviewInsert", method=RequestMethod.POST)
-    private int reviewInsert(@ModelAttribute("loginMember") Member loginMember,Review review) {
-    	
-    	
-    	System.out.println(review.getReviewContent());
-    	System.out.println(review.getReviewStarPoint());
+    public int reviewInsert(@ModelAttribute("loginMember") Member loginMember,Review review) {
     	
     	// 전문가 번호 추가해야함
     	review.setMemberNo(loginMember.getMemberNo());
     	
     	int result = service.reviewInsert(review);
-    	
-    	System.out.println(result);
     	
     	return result;
     }

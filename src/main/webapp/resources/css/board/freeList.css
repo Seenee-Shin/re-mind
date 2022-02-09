@@ -258,6 +258,9 @@ display: inline-block;
     font-weight: 400;
     color: #B0B0B0;
 }
+.reqLogin{
+	text-align: center; color: grey; font-size: 20px; line-height: 100px; font-weight: 500;
+}
     
 .posting{
     margin: 10px;
