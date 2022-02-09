@@ -123,4 +123,11 @@ public class ProServiceImpl implements ProService{
 		
 		return dao.reviewListSelect(professionNo);
 	}
+	
+	// 별점만 가지고오기
+	@Override
+	public List<Review> starPointSelect(int professionNo) {
+
+		return dao.starPointSelect(professionNo);
+	}
 }

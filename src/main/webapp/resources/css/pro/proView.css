@@ -433,3 +433,13 @@ html{
 
 }
 
+.starpoint_box{position:relative;background:url(../../images/my/star.png) 0 0 no-repeat;font-size:0;}
+.starpoint_box .starpoint_bg{display:block;position:absolute;top:0;left:0;height:18px;background:url(../../images/my/star.png) 0 -20px no-repeat; pointer-events:none;}
+.starpoint_box .label_star{display:inline-block;width:10px;height:18px;box-sizing:border-box;}
+.starpoint_box .star_radio{opacity:0;width:0;height:0;position:absolute;}
+.blind{position:absolute;clip:rect(0 0 0 0);margin:-1px;width:1px;height: 1px;overflow:hidden;}
+
+.starpoint_box2{position:relative;background:url(../../images/my/star.png) 0 0 no-repeat;font-size:0;}
+.starpoint_box2 .starpoint_bg2{display:block;position:absolute;top:0;left:0;height:18px;background:url(../../images/my/star.png) 0 -20px no-repeat; pointer-events:none;}
+.starpoint_box2 .label_star2{display:inline-block;width:10px;height:18px;box-sizing:border-box;}
+.starpoint_box2 .star_radio2{opacity:0;width:0;height:0;position:absolute;}

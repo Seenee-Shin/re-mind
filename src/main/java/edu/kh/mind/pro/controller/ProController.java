@@ -75,6 +75,20 @@ public class ProController {
 		return "pro/proView";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="starPointSelect", method=RequestMethod.POST)
+	public String starPointSelect(int professionNo){
+		
+		List<Review> starPoint = service.starPointSelect(professionNo);
+		System.out.println(starPoint);
+		
+		return new Gson().toJson(starPoint);
+		
+	}
+	
+	
+	
+	
 	@RequestMapping("proReservation/{professionNo}")
 	public String proReservation(Model model, @PathVariable("professionNo") int professionNo,
 			RedirectAttributes ra, HttpSession session) {

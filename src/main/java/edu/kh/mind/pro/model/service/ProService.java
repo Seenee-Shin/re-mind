@@ -35,4 +35,7 @@ public interface ProService {
     
     // 후기 가지고 오기
 	List<Review> reviewListSelect(int professionNo);
+	
+	// 별점 가지고오기
+	List<Review> starPointSelect(int professionNo);
 }
