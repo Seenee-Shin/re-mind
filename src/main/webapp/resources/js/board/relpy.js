@@ -100,10 +100,10 @@ function selectReplyList(){
 
 
 
-
+const replyContent = $('#replyContent').val()
 
 //댓글 삽입
-function addReply(){
+function addComment(){
 	
 	if(loginMemberNo == ""){ // 로그인이 되어 있지 않은 경우
         alert("로그인 후 이용해 주세요.");
@@ -120,7 +120,7 @@ function addReply(){
 			$.ajax({
 				url : contextPath + "/reply/insert",
 		        data : {"boardNo" : boardNo,
-		        		"memberNo " : memberNo,
+		        		"memberNo " : loginMemberNo,
 		        		"replyContent" : replyContent}, // 현재 게시글 번호
 		        type : "POST",
 		        
