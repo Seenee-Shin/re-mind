@@ -98,4 +98,10 @@ public class ProDAO {
 	public List<Review> starPointSelect(int professionNo) {
 		return sqlSession.selectList("reservationMapper.starPointSelect", professionNo);
 	}
+	
+	// 상담사 별 후기 평균
+	public int starPointAverage(int professionNo) {
+
+		return sqlSession.selectOne("reservationMapper.starPointAverage", professionNo);
+	}
 }

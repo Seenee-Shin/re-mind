@@ -130,4 +130,10 @@ public class ProServiceImpl implements ProService{
 
 		return dao.starPointSelect(professionNo);
 	}
+	
+	// 상담사 별 후기 평점
+	@Override
+	public int starPointAverage(int professionNo) {
+		return dao.starPointAverage(professionNo);
+	}
 }
