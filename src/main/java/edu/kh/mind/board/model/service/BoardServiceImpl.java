@@ -155,6 +155,13 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+	@Override
+	public int deleteBoard(int boardNo) {
+		// TODO Auto-generated method stub
+		return dao.deleteBoard(boardNo);
+	}
 		
 }
 
