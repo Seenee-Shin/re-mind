@@ -29,6 +29,9 @@
 		<result property="replyCount" column="REPLY_COUNT"/>
 		<result property="memberImage" column="MEMBER_IMAGE"/>
 
+		<result property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
+		<result property="myEnrollDate" column="BOARD_CREATE_DT"/>
+
 		<result property="professionImage" column="PROFESSION_IMAGE"/>
 		
 		<result property="likeCount" column="L_COUNT"/>
@@ -45,6 +48,8 @@
 		<result property="imagePath" column="IMAGE_PATH"/>
 		<result property="postNo" column="POST_NO"/>
 		<result property="maxValue" column="MAX_VALUE"/>
+
+		<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
 
 		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
@@ -291,5 +296,32 @@
 		   JOIN BOARD USING(BOARD_NO)
 		WHERE SCRAP.MEMBER_NO = #{memberNo} AND BOARD.BOARD_STATUS_CD = 201
 	</select>
+
+	<select id="countEmpathyList" resultType="_int">
+		SELECT COUNT(*) MAX_VALUE FROM EMPATHY
+			JOIN BOARD USING(BOARD_NO)
+		WHERE EMPATHY.MEMBER_NO = #{memberNo} AND BOARD.BOARD_STATUS_CD = 201
+	</select>
+
+	<select id="myEmpathyList" resultMap="board_rm">
+		SELECT * FROM(
+			SELECT ROWNUM AS RNUM, TEST.* FROM(
+				SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_READ_COUNT,
+						TO_CHAR(ENROLL_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT", IMAGE_PATH, IMAGE_NM,
+						EMP.MEMBER_NO, EMPATHY_STATUS_NM, MEMBER.MEMBER_FN
+				FROM EMPATHY EMP
+					JOIN BOARD USING(BOARD_NO)
+					LEFT JOIN IMAGE USING(BOARD_NO)
+					JOIN EMPATHY_STATUS USING(EMPATHY_STATUS_CD)
+					JOIN MEMBER ON (MEMBER.MEMBER_NO = BOARD.MEMBER_NO)
+				WHERE EMP.MEMBER_NO = #{memberNo} AND BOARD_STATUS_CD = 201
+				ORDER BY ENROLL_DT DESC
+			) TEST)
+		WHERE RNUM BETWEEN #{first} AND #{last}
+	</select>
+
+
+
+
 
 </mapper>
