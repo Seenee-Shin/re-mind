@@ -153,4 +153,17 @@ public class MyDAO {
 	public Image getMyImage(int memberNo) {
 		return sqlSession.selectOne("boardMapper.getMyImage", memberNo);
 	}
+
+
+	public int selectProfile(Image image) {
+		return sqlSession.selectOne("boardMapper.selectProfile", image);
+	}
+
+	public int updateImage(Image image) {
+		return sqlSession.update("boardMapper.updateImage", image);
+	}
+
+	public int insertImage(Image image) {
+		return sqlSession.insert("boardMapper.insertImage", image);
+	}
 }

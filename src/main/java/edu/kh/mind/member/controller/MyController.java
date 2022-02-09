@@ -22,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -309,11 +311,25 @@ public class MyController {
         model.addAttribute("memberImage", image);
         return path;
     }
-    @PostMapping("updateMyInfo")
+    @PostMapping("updateMyInfoo")
     public String updateMyInfo(Member member,
-                               @ModelAttribute("loginMember") Member loginMember){
+                               Image image,
+                               @ModelAttribute("loginMember") Member loginMember,
+                               HttpSession session, RedirectAttributes ra,
+                               MultipartHttpServletRequest multiReq,
+                               @RequestParam(value = "images", required = false) MultipartFile images){
 
-        
+        // 1) 로그인 회원 번호를 image에 세팅
+        image.setMemberNo(loginMember.getMemberNo());
+
+        // 2) 웹 접근 경로, 서버 저장 경로
+        String webPath = "/resources/images/my/";
+        String serverPath = session.getServletContext().getRealPath(webPath);
+        System.out.println("serverPath : " + serverPath);
+
+        // 3) 게시글 삽입 Service 호출
+        int result = service.updateMyForm(image, images, webPath, serverPath);
+        // -> Service 수행 후 삽입된 게시글 번호를 얻어올 예정
 
 
 
