@@ -80,4 +80,10 @@ public interface MyService {
 	int countReplyList(Map<String, Integer> map);
 
 	int countScrapList(Map<String, Integer> map);
+
+	// 내가 공감한 게시글(수)
+	int countEmpathyList(Map<String, Integer> map);
+
+	// 내가 공감한 게시글
+	List<Board> myEmpathyList(Map<String, Integer> map);
 }

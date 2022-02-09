@@ -90,4 +90,27 @@ public class MyRestController {
     }
 
 
+    @RequestMapping(value = "myEmpathyList", method = RequestMethod.POST)
+    public String myEmpathyList(@RequestParam(value = "memberNo", required = false) int memberNo,
+                              @RequestParam(value = "first", required = false) int first,
+                              @RequestParam(value = "last", required = false) int last){
+        Map<String, Integer> map = new HashMap<>();
+
+        map.put("memberNo", memberNo);
+        map.put("first", first);
+        map.put("last", last);
+
+        Board board = new Board();
+        board.setMaxValue(service.countEmpathyList(map));
+
+        List<Board> myEmpathyList = service.myEmpathyList(map);
+
+        myEmpathyList.add(board);
+
+        return new Gson().toJson(myEmpathyList);
+    }
+
+
+
+
 }

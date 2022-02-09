@@ -121,7 +121,20 @@ $("#select_myScrapList").on("click", function (){
     resultList.length = 0;
     calcPagination();
     getScrapList();
+
 });
+
+$("#select_myEmpathyList").on("click", function (){
+
+    btnNumber = 4;
+    currentPage = 1;
+
+    resultList.length = 0;
+    calcPagination();
+    getEmpathyList();
+
+});
+
 
 
 var resultList = [];
@@ -190,6 +203,7 @@ $(document).on("click", "#pagination div", function (){
     if(btnNumber == 1)      getBoardList();
     else if(btnNumber == 2) getReplyList();
     else if(btnNumber == 3) getScrapList();
+    else if(btnNumber == 4) getEmpathyList();
 
     makeList();
 });
@@ -211,6 +225,7 @@ $(document).on("click", "#pagination span", function (){
     if(btnNumber == 1)      getBoardList();
     else if(btnNumber == 2) getReplyList();
     else if(btnNumber == 3) getScrapList();
+    else if(btnNumber == 4) getEmpathyList();
 
     makeList();
 });
@@ -302,4 +317,31 @@ $(function (){
 });
 
 
+function getEmpathyList(){
+    $.ajax({
+        url: "myEmpathyList",
+        type: "POST",
+        data: {
+            "memberNo": memberNo,
+            "first":first,
+            "last":last
+        },
+        dataType: "json",
+        success: function (result) {
 
+            $.each(result, function (i, item){
+                if(result.length - 1 == i){
+                    listCount = Number.parseInt(item.maxValue);
+                    return;
+                }
+                resultList[i] = item;
+                console.log(item);
+            });
+        },
+        error: function (error, status) {
+            console.log("error : " + error + "\n" + "status : " + status);
+        }
+    }).done(function (){
+        makeList();
+    });
+};

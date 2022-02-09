@@ -156,4 +156,16 @@ public class MyServiceImpl implements MyService {
 		
 		return dao.reviewInsert(review);
 	}
+
+    // 내가 공감한 게시글(수)
+    @Override
+    public int countEmpathyList(Map<String, Integer> map) {
+        return dao.countEmpathyList(map);
+    }
+
+    // 내가 공감한 게시글
+    @Override
+    public List<Board> myEmpathyList(Map<String, Integer> map) {
+        return dao.myEmpathyList(map);
+    }
 }
