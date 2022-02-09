@@ -30,14 +30,19 @@ function selectReplyList(){
 
                 const userInfo = $('<div class="user_info">');
 
-                const rWriterPic = $('<div class="user_pic light_brown_bg">').style('',reply.memberName)  ;
-                const rWriterFnWrap = $('<div class="rWriterFnWrap">')  ;
-                const rWriterFn = $('<p class = "rWriterFn">').text(reply.memberName)  ;
-                const rDate = $('<p class="rDate">').text('작성일 : ' + reply.replyCreateDate);
+                const rWriterPic = $('<div class="user_pic light_brown_bg"  style="background-image: url()";>') ;
+                const rWriterFnWrap = $('<div>')  ;
+                const rWriterFn = $('<p>').text(reply.memberName)  ;
+                //const rDate = $('<p class="rDate">').text('작성일 : ' + reply.replyCreateDate);
 
                 // rWriterFnWrap에 자식으로 rWriterFn 추가
-                rWriterFnWrap.append(rWriterFn,rDate);
-                userInfo.append(rWriterPic, rWriterFnWrap)
+                rWriterFnWrap.append(rWriterFn);
+                rWriterFnWrap.append(rWriterPic);
+                //rWriterFnWrap.append(rDate);
+                
+                userInfo.append(rWriterFnWrap)
+                
+                
 
                 // 댓글 내용
                 const comment = $('<div class="comment">');
@@ -46,7 +51,9 @@ function selectReplyList(){
 
 				comment.append(commentp)
 				
-				comment_view.append(userInfo,comment)
+				
+				comment_view.append(userInfo)
+				comment_view.append(comment)
 
 
                 // 버튼 영역 요소 생성
@@ -64,8 +71,10 @@ function selectReplyList(){
                     //       append(), after(), before() 요소 삽입 메소드를 작성할 예정
                     childReply.attr("onclick", "showInsertReply("+ reply.replyNo + ", this)");
 
-    
-                    replyBtnArea.append(comment_view);
+    				
+                    replyBtnArea.append(childReply);
+                    comment_view.append(replyBtnArea)
+                    
                 }
 
 
@@ -78,13 +87,14 @@ function selectReplyList(){
                     const deleteReply = $('<button>').addClass('dark-brown edit_btn').text('삭제');      
                     deleteReply.attr("onclick", "deleteReply("+reply.replyNo+")");
 
-                    replyBtnArea.append(showUpdate, deleteReply);
+                    replyBtnArea.append(showUpdate);
+                    replyBtnArea.append(deleteReply);
                 }
 
                 comment_view.append(replyBtnArea);
 
                 // ul 태그에 li요소를 하나씩 마지막 자식으로 삽입
-                $("#comment_list").append();
+                $("#comment_list").append(comment_view);
 
             });
 
@@ -100,7 +110,6 @@ function selectReplyList(){
 
 
 
-const replyContent = $('#replyContent').val()
 
 //댓글 삽입
 function addComment(){
@@ -121,7 +130,7 @@ function addComment(){
 				url : contextPath + "/reply/insert",
 		        data : {"boardNo" : boardNo,
 		        		"memberNo " : loginMemberNo,
-		        		"replyContent" : replyContent}, // 현재 게시글 번호
+		        		"replyContent" : $("#replyContent").val()}, // 현재 게시글 번호
 		        type : "POST",
 		        
 		        success : function(result){
@@ -145,3 +154,6 @@ function addComment(){
 		} //else2 end
 	}//else1 end 
 }
+
+
+

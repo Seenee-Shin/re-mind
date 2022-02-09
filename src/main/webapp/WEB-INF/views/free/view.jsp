@@ -181,6 +181,7 @@
 		<form action="#" method="POST" name="requestForm">
 			<input type="hidden" name="cp" value="${param.cp }">
 			<input type="hidden" name="boardNo" value="${board.boardNo}">
+			<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
 		</form>
     
     </main>
@@ -214,7 +215,4 @@
 	let beforeReplyRow;
 </script>
 
-<script src="${contextPath}/resources/js/board/reply.js"></script>
-
-</body>
-</html>
+<script src="${contextPath}/resources/js/board/replyCopy.js"></script>
