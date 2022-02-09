@@ -11,6 +11,7 @@ import edu.kh.mind.member.model.vo.Review;
 
 import edu.kh.mind.member.social.naver.vo.Naver;
 import edu.kh.mind.pro.model.vo.Reservation;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
@@ -92,4 +93,12 @@ public interface MyService {
 	List<Board> myEmpathyList(Map<String, Integer> map);
 
 	Image getMyImage(int memberNo);
+
+	int updateMyForm(Image image, MultipartFile images, String webPath, String serverPath);
+
+	// 내가 찜한 상담사 목록
+	List<Board> selectCounselorList(Pagination pagination);
+
+	// 내 찜 사 페이징
+	Pagination getCounselorPagination(int cp, int memberNo);
 }

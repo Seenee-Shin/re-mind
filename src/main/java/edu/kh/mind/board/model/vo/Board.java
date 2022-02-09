@@ -62,6 +62,37 @@ public class Board {
 
 	private String empathyStatusName;
 
+		/*<result property="reviewStarpoint" column="REVIEW_STARPOINT"/>
+		<result property="proIntro" column="PRO_INTRO"/>
+		<result property="counselPrice" column="COUNSEL_PRICE"/>*/
+	private int reviewStarpoint;
+	private String proIntro;
+	private int counselPrice;
+
+	public int getReviewStarpoint() {
+		return reviewStarpoint;
+	}
+
+	public void setReviewStarpoint(int reviewStarpoint) {
+		this.reviewStarpoint = reviewStarpoint;
+	}
+
+	public String getProIntro() {
+		return proIntro;
+	}
+
+	public void setProIntro(String proIntro) {
+		this.proIntro = proIntro;
+	}
+
+	public int getCounselPrice() {
+		return counselPrice;
+	}
+
+	public void setCounselPrice(int counselPrice) {
+		this.counselPrice = counselPrice;
+	}
+
 	public Date getMyEnrollDate() {
 		return myEnrollDate;
 	}
