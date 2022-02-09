@@ -38,4 +38,7 @@ public interface ProService {
 	
 	// 별점 가지고오기
 	List<Review> starPointSelect(int professionNo);
+	
+	// 상담사별 별점 평균
+	int starPointAverage(int professionNo);
 }

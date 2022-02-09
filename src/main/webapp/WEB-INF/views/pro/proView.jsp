@@ -341,16 +341,13 @@
 		type:"POST",
 		data : {"professionNo":professionNo},
 		dataType:"JSON",
-		success : function(starPoint){
+		success : function(starPointAverage){
 
-			$.each(starPoint, function(i,point) {
-
-				for(let j = 0; j<=10; j++){
-					if(point.reviewStarPoint == j){
-						$(".starpoint_box .starpoint_bg").eq(i).css("width", (j*10) + "%");
-					}
+			for(let j = 0; j<=10; j++){
+				if(starPointAverage == j){
+					$(".starpoint_box2 .starpoint_bg2").css("width", (j*10) + "%");
 				}
-			});
+			}
 
 		},
 	

@@ -131,4 +131,11 @@
 		SELECT REVIEW_STARPOINT FROM REVIEW WHERE PROFESSION_NO = #{professionNo} ORDER BY REVIEW_NO
 	</select>
 	
+	<!-- 상담사별 후기 평균 가지고오기 -->
+	<select id="starPointAverage" resultType="_int">
+		SELECT AVG(REVIEW_STARPOINT)
+		FROM REVIEW
+		WHERE PROFESSION_NO = #{professionNo}
+	</select>
+	
 </mapper>
