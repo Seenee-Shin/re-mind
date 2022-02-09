@@ -1,17 +1,22 @@
 package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
+import edu.kh.mind.board.model.vo.Scrap;
+import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
+import edu.kh.mind.member.model.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/my/*")
@@ -20,25 +25,92 @@ public class MyRestController {
     @Autowired
     MyService service;
 
-    @RequestMapping(value = "myReplyList", method = RequestMethod.GET)
-    public String selectMyReplyList(int memberNo, Model model, Reply reply,
-                                    @RequestParam(value="cp", required = false, defaultValue="1")int cp){
+    @PostMapping("myReplyList")
+    public String selectMyReplyList(@RequestParam(value = "memberNo", required = false) int memberNo,
+                                    @RequestParam(value = "first", required = false) int first,
+                                    @RequestParam(value = "last", required = false) int last){
 
-        model.addAttribute("css", "my/myBoardList");
-//        System.out.println(memberNo); 담김
-        List<Reply> selectMyReplyList = service.selectMyReplyList(memberNo);
+        Map<String, Integer> map = new HashMap<>();
 
-        Pagination pagination = null;
+        map.put("memberNo", memberNo);
+        map.put("first", first);
+        map.put("last", last);
 
-        pagination = service.getPagination(cp, memberNo);
+        List<Reply> selectMyReplyList = service.selectMyReplyList(map);
 
-        /*for(Reply r : selectMyReplyList){
-            System.out.println(r.getMemberNo());
-        }*/
-        model.addAttribute("myBoardList", selectMyReplyList);
+        Reply reply = new Reply();
+        reply.setMaxValue(service.countReplyList(map));
+
+        selectMyReplyList.add(reply);
 
         return new Gson().toJson(selectMyReplyList);
     }
+
+    @PostMapping("myBoardList")
+    public String myBoardList(@RequestParam(value = "memberNo", required = false) int memberNo,
+                              @RequestParam(value = "first", required = false) int first,
+                              @RequestParam(value = "last", required = false) int last){
+
+        Map<String, Integer> map = new HashMap<>();
+
+        System.out.println("first : " + first + " / last : " + last);
+
+        map.put("memberNo", memberNo);
+        map.put("first", first);
+        map.put("last", last);
+
+        Board board = new Board();
+        board.setMaxValue(service.countBoardList(map));
+
+        List<Board> myBoardList = service.myBoardList(map);
+        myBoardList.add(board);
+
+        return new Gson().toJson(myBoardList);
+    }
+
+    @PostMapping("myScrapList")
+    public String myScrapList(@RequestParam(value = "memberNo", required = false) int memberNo,
+                              @RequestParam(value = "first", required = false) int first,
+                              @RequestParam(value = "last", required = false) int last){
+
+        Map<String, Integer> map = new HashMap<>();
+
+        map.put("memberNo", memberNo);
+        map.put("first", first);
+        map.put("last", last);
+
+        Scrap scrap = new Scrap();
+        scrap.setMaxValue(service.countScrapList(map));
+
+        List<Scrap> sList = service.myScrapList(map);
+
+        sList.add(scrap);
+
+        return new Gson().toJson(sList);
+    }
+
+
+    @RequestMapping(value = "myEmpathyList", method = RequestMethod.POST)
+    public String myEmpathyList(@RequestParam(value = "memberNo", required = false) int memberNo,
+                              @RequestParam(value = "first", required = false) int first,
+                              @RequestParam(value = "last", required = false) int last){
+        Map<String, Integer> map = new HashMap<>();
+
+        map.put("memberNo", memberNo);
+        map.put("first", first);
+        map.put("last", last);
+
+        Board board = new Board();
+        board.setMaxValue(service.countEmpathyList(map));
+
+        List<Board> myEmpathyList = service.myEmpathyList(map);
+
+        myEmpathyList.add(board);
+
+        return new Gson().toJson(myEmpathyList);
+    }
+
+
 
 
 }

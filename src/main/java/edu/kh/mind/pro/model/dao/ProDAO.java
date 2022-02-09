@@ -3,6 +3,7 @@ package edu.kh.mind.pro.model.dao;
 
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionPrice;
+import edu.kh.mind.member.model.vo.Review;
 
 import java.util.List;
 
@@ -87,4 +88,9 @@ public class ProDAO {
     public List<Profession> selectMemberProfession(int professionNo) {
 		return sqlSession.selectList("professionMapper.selectMemberProfession", professionNo);
     }
+    
+    // 후기 가지고 오기
+	public List<Review> reviewListSelect(int professionNo) {
+		return sqlSession.selectList("reservationMapper.reviewListSelect", professionNo);
+	}
 }

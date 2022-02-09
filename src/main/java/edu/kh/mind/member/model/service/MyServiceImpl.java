@@ -3,6 +3,7 @@ package edu.kh.mind.member.model.service;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
+import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.MyDAO;
 
@@ -104,8 +105,23 @@ public class MyServiceImpl implements MyService {
 
     // 내 게시글 조회
     @Override
-    public List<Board> myBoardList(Pagination pagination) {
-        return dao.myBoardList(pagination);
+    public List<Board> myBoardList(Map<String, Integer> map) {
+        return dao.myBoardList(map);
+    }
+
+    @Override
+    public int countBoardList(Map<String, Integer> map) {
+        return dao.countBoardList(map);
+    }
+
+    @Override
+    public int countScrapList(Map<String, Integer> map) {
+        return dao.countScrapList(map);
+    }
+
+    @Override
+    public List<Scrap> myScrapList(Map<String, Integer> map) {
+        return dao.myScrapList(map);
     }
 
     // 페이징 처리
@@ -119,10 +135,15 @@ public class MyServiceImpl implements MyService {
         return new Pagination(listCount, cp);
     }
 
+    @Override
+    public int countReplyList(Map<String, Integer> map) {
+        return dao.countReplyList(map);
+    }
+
     // 내 댓글 조회
     @Override
-    public List<Reply> selectMyReplyList(int memberNo) {
-        return dao.selectMyReplyList(memberNo);
+    public List<Reply> selectMyReplyList(Map<String, Integer> map) {
+        return dao.selectMyReplyList(map);
     }
 
     // 후기 등록
@@ -135,4 +156,16 @@ public class MyServiceImpl implements MyService {
 		
 		return dao.reviewInsert(review);
 	}
+
+    // 내가 공감한 게시글(수)
+    @Override
+    public int countEmpathyList(Map<String, Integer> map) {
+        return dao.countEmpathyList(map);
+    }
+
+    // 내가 공감한 게시글
+    @Override
+    public List<Board> myEmpathyList(Map<String, Integer> map) {
+        return dao.myEmpathyList(map);
+    }
 }

@@ -13,10 +13,10 @@
 	                <img src="${contextPath}/resources/images/pro/best.png" class="pro_best">
 				<c:choose>
 					<c:when test="${empty profession.imagePath}">
-	                	<img src="${contextPath}/resources/images/basicProfile.png" class="profile">
+	                	<img src="${contextPath}/resources/images/basicProfile.png" class="profile" style="border-radius:50px;">
 					</c:when>
 					<c:otherwise>
-						<img src="${contextPath}${profession.imagePath}/${profession.imageName}" class="profile">
+						<img src="${contextPath}${profession.imagePath}/${profession.imageName}" style="border-radius:100px;" class="profile">
 					</c:otherwise>
 				</c:choose>
 	        </div>
@@ -148,58 +148,63 @@
 	            <li id="pro_revice">
 	                <h2>후기</h2>
 	                <ul class="pro_review_wrap">
-	                    <li class="pro_review_li">
-	                        <div class="pro_best_reiew">
-	                            <img src="${contextPath}/resources/images/pro/best_review.png">
-	                        </div>
-	                        <div class="review_top_box">
-	                            <div class="float-left">
-	                                <p>1회기권구매고객/보이스테라피</p>
-	                                <p>2021.01.21</p>
-	                            </div>
-	                            <div class="float-right">
-	                                <ul class="pro_score">
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star-half.png"></li>
-	                                </ul>
-	                            </div>
-	                        </div>
-	                        <div class="review_bottom_box clear-both">
-	                            <p>
-	                                다른 상담소들보다 훨씬좋고 자기자신 편이 되도록 많이 도와주시고 생각과감정을 수용하게 도움이 많이 됩니다 <br>
-	                                자기가 자기자신편이 되는게 가장 중요한것같은데 자기자신에대한불신이 내려않고 신뢰랑 안정감이 느껴집니다.
-	                            </p>
-	                        </div>
-	                    </li>
-	                    <li class="pro_review_li">
-	                        <div class="pro_best_reiew">
-	                            <img src="${contextPath}/resources/images/pro/best_review.png">
-	                        </div>
-	                        <div class="review_top_box">
-	                            <div class="float-left">
-	                                <p>1회기권구매고객/보이스테라피</p>
-	                                <p>2021.01.21</p>
-	                            </div>
-	                            <div class="float-right">
-	                                <ul class="pro_score">
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star-half.png"></li>
-	                                </ul>
-	                            </div>
-	                        </div>
-	                        <div class="review_bottom_box clear-both">
-	                            <p>
-	                                다른 상담소들보다 훨씬좋고 자기자신 편이 되도록 많이 도와주시고 생각과감정을 수용하게 도움이 많이 됩니다 <br>
-	                                자기가 자기자신편이 되는게 가장 중요한것같은데 자기자신에대한불신이 내려않고 신뢰랑 안정감이 느껴집니다.
-	                            </p>
-	                        </div>
-	                    </li>
+						<c:choose>
+							<c:when test="${empty reviewList}">
+							<li>
+								<p id="reveiw_no">아직 후기가 없어요!</p>
+							</li>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${reviewList}" var="review">
+									<li class="pro_review_li">
+										<!--  <div class="pro_best_reiew">
+											 <img src="${contextPath}/resources/images/pro/best_review.png">
+										 </div> -->
+										 <div class="review_top_box">
+											 <div class="float-left">
+												 <p>${review.counselCategoryNm} 이용고객님</p>
+												 <p>${review.reviewDate}</p>
+											 </div>
+											 <div class="float-right">
+												 <!-- ------------------------------- -->
+												 <div class="starpoint_wrap">
+													<div class="starpoint_box">
+													  <label for="starpoint_1" class="label_star" title="1"><span class="blind">1점</span></label>
+													  <label for="starpoint_2" class="label_star" title="2"><span class="blind">2점</span></label>
+													  <label for="starpoint_3" class="label_star" title="3"><span class="blind">3점</span></label>
+													  <label for="starpoint_4" class="label_star" title="4"><span class="blind">4점</span></label>
+													  <label for="starpoint_5" class="label_star" title="5"><span class="blind">5점</span></label>
+													  <label for="starpoint_6" class="label_star" title="6"><span class="blind">6점</span></label>
+													  <label for="starpoint_7" class="label_star" title="7"><span class="blind">7점</span></label>
+													  <label for="starpoint_8" class="label_star" title="8"><span class="blind">8점</span></label>
+													  <label for="starpoint_9" class="label_star" title="9"><span class="blind">9점</span></label>
+													  <label for="starpoint_10" class="label_star" title="10"><span class="blind">10점</span></label>
+													  <input type="radio" name="starpoint" id="starpoint_1" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_2" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_3" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_4" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_5" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_6" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_7" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_8" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_9" class="star_radio">
+													  <input type="radio" name="starpoint" id="starpoint_10" class="star_radio">
+													  <span class="starpoint_bg"></span>
+													</div>
+											  	</div>
+												 <!-- ------------------------------- --> 
+											 </div>
+										 </div>
+										 <div class="review_bottom_box clear-both">
+											 <p>
+												${review.reviewContent}
+											 </p>
+										 </div>
+									 </li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						
 	                </ul>
 	            </li>
 	        </ul>
@@ -252,7 +257,6 @@
 							<p>${splitPrice[1]}원</p>
 						</c:when>
 						<c:otherwise>
-
 							<p>-</p>
 						</c:otherwise>
 					</c:choose>
