@@ -13,6 +13,7 @@ import edu.kh.mind.member.model.vo.ProfessionHospital;
 import edu.kh.mind.member.model.vo.Review;
 
 import edu.kh.mind.member.social.naver.vo.Naver;
+import edu.kh.mind.pro.model.vo.Reservation;
 
 
 import java.util.List;
@@ -80,4 +81,16 @@ public interface MyService {
 	int countReplyList(Map<String, Integer> map);
 
 	int countScrapList(Map<String, Integer> map);
+
+	/**
+	 * 상담 예약 조회
+	 * @param memberNo
+	 * @return reservationList
+	 */
+	List<Reservation> selectReservation(int memberNo);
+	// 내가 공감한 게시글(수)
+	int countEmpathyList(Map<String, Integer> map);
+
+	// 내가 공감한 게시글
+	List<Board> myEmpathyList(Map<String, Integer> map);
 }

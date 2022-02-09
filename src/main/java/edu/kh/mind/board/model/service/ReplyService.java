@@ -12,4 +12,10 @@ public interface ReplyService {
 	 */
 	List<Reply> selectList(int boardNo);
 
+	int insertReply(Reply reply);
+
+	int updateReply(Reply reply);
+
+	int deleteReply(int replyNo);
+
 }

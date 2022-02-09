@@ -64,6 +64,7 @@ textarea {
 }
 
 
+
 input[type='radio'],input[type='radio']:checked {appearance: none; width: 22px; height: 22px; border-radius: 100%; margin-right: 0.1rem;}
 input[type='radio'] {background:url('../images/icon/radio_none.png') no-repeat center center;}
 input[type='radio']:checked {background:url('../images/icon/radio_active.png') no-repeat center center;}
@@ -323,8 +324,8 @@ a{
     flex-wrap: wrap;
 }
 .viewBoardImg{
-	width: 250px;
-	height: 250px;
+	width: 200px;
+	height: 200px;
 }
 .viewBoardImg > img{
 	width: 100%

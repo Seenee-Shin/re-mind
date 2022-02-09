@@ -12,6 +12,7 @@ import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
+import edu.kh.mind.pro.model.vo.Reservation;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -113,8 +114,8 @@ public class MyDAO {
 	}
 
 
-	public List<Scrap> myScrapList(Map<String, Integer> memberNo) {
-		return sqlSession.selectList("boardMapper.myScrapList", memberNo);
+	public List<Scrap> myScrapList(Map<String, Integer> map) {
+		return sqlSession.selectList("boardMapper.myScrapList", map);
 	}
 
 	public int countBoardList(Map<String, Integer> map) {
@@ -127,5 +128,24 @@ public class MyDAO {
 
 	public int countScrapList(Map<String, Integer> map) {
 		return sqlSession.selectOne("boardMapper.countScrapList", map);
+	}
+
+	/**
+	 * 상담 예약 조회
+	 * @param memberNo
+	 * @return reservationList
+	 */
+	public List<Reservation> selectReservation(int memberNo) {
+		return sqlSession.selectList("memberMapper.selectReservation", memberNo);
+	}
+	// 내가 공감한 게시글(수)
+	public int countEmpathyList(Map<String, Integer> map) {
+		return sqlSession.selectOne("boardMapper.countEmpathyList", map);
+	}
+
+	// 내가 공감한 게시글
+	public List<Board> myEmpathyList(Map<String, Integer> map) {
+//		System.out.println(map.get("memberNo"));
+		return sqlSession.selectList("boardMapper.myEmpathyList",map);
 	}
 }

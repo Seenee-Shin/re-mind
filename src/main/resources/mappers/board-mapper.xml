@@ -29,6 +29,8 @@
 		<result property="replyCount" column="REPLY_COUNT"/>
 		<result property="memberImage" column="MEMBER_IMAGE"/>
 
+		<result property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
+
 		<result property="professionImage" column="PROFESSION_IMAGE"/>
 		
 		<result property="likeCount" column="L_COUNT"/>
@@ -45,6 +47,8 @@
 		<result property="imagePath" column="IMAGE_PATH"/>
 		<result property="postNo" column="POST_NO"/>
 		<result property="maxValue" column="MAX_VALUE"/>
+
+		<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
 
 		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
@@ -152,6 +156,43 @@
 			FROM EMPATHY JOIN EMPATHY_STATUS USING(EMPATHY_STATUS_CD)
 			WHERE BOARD_NO = #{boardNo} GROUP BY EMPATHY_STATUS_NM
 		</if>
+	</select>
+    <!-- 자유게시판 게시글 -->
+	<select id="selectFreeList" resultMap="board_rm">
+		SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
+			MEMBER.MEMBER_NO, MEMBER.MEMBER_FN, MEMBER_NM,
+			w.WORRY_NM WORRY_CATEGORY_NM,
+			e.EMPATHY_ARRAY, e.CNT_ARRAY
+		FROM BOARD
+		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
+		LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
+		LEFT JOIN(
+			SELECT
+				a.BOARD_NO,
+				LISTAGG(  a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
+				LISTAGG(  a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
+			FROM (
+				SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
+				FROM EMPATHY
+				GROUP BY BOARD_NO, EMPATHY_STATUS_CD
+			) a
+			GROUP BY BOARD_NO
+		) e on e.BOARD_NO = BOARD.BOARD_NO
+		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
+
+		<if test="searchCategory != null">
+			<bind name="val" value="'%' + searchText + '%'"/>
+
+			<choose>
+				<when test="searchCategory == 'id'">
+					AND MEMBER_ID LIKE #{val}
+				</when>
+				<otherwise>
+					AND BOARD_CONTENT LIKE #{val}
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY BOARD.BOARD_NO DESC
 	</select>
     
 	
@@ -268,6 +309,13 @@
 		AND MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 게시글 수정  -->
+	<update id="updateBoard">
+		UPDATE BOARD SET 
+		BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent}
+		WHERE BOARD_NO = #{boardNo} 
+	</update>	
 	<!-- 게시글 삭제  -->
 	<update id="deleteBoard">
 		UPDATE BOARD SET 
@@ -293,5 +341,32 @@
 		   JOIN BOARD USING(BOARD_NO)
 		WHERE SCRAP.MEMBER_NO = #{memberNo} AND BOARD.BOARD_STATUS_CD = 201
 	</select>
+
+	<select id="countEmpathyList" resultType="_int">
+		SELECT COUNT(*) MAX_VALUE FROM EMPATHY
+			JOIN BOARD USING(BOARD_NO)
+		WHERE EMPATHY.MEMBER_NO = #{memberNo} AND BOARD.BOARD_STATUS_CD = 201
+	</select>
+
+	<select id="myEmpathyList" resultMap="board_rm">
+		SELECT * FROM(
+			SELECT ROWNUM AS RNUM, TEST.* FROM(
+				SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_READ_COUNT,
+						TO_CHAR(ENROLL_DT, 'YYYY-MM-DD') "BOARD_CREATE_DT", IMAGE_PATH, IMAGE_NM,
+						EMP.MEMBER_NO, EMPATHY_STATUS_NM, MEMBER.MEMBER_FN
+				FROM EMPATHY EMP
+					JOIN BOARD USING(BOARD_NO)
+					LEFT JOIN IMAGE USING(BOARD_NO)
+					JOIN EMPATHY_STATUS USING(EMPATHY_STATUS_CD)
+					JOIN MEMBER ON (MEMBER.MEMBER_NO = BOARD.MEMBER_NO)
+				WHERE EMP.MEMBER_NO = #{memberNo} AND BOARD_STATUS_CD = 201
+				ORDER BY ENROLL_DT DESC
+			) TEST)
+		WHERE RNUM BETWEEN #{first} AND #{last}
+	</select>
+
+
+
+
 
 </mapper>

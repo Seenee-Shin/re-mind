@@ -23,4 +23,22 @@ public class ReplyDAO {
 	public List<Reply> selectList(int boardNo) {
 		return sqlSession.selectList("replyMapper.selectList", boardNo);
 	}
+
+
+	public int insertReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("replyMapper.insertReply",reply);
+	}
+
+
+	public int updateReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("replyMapper.updateReply",reply);
+	}
+
+
+	public int deleteReply(int replyNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("replyMapper.deleteReply",replyNo);
+	}
 }
