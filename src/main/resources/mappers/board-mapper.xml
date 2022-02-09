@@ -168,8 +168,8 @@
 
 	<!-- 고민상담 게시글 -->
 	<select id="selectWorryList" resultMap="board_rm">
-		SELECT MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM,
-			BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
+		SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
+			MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM,
 			w.WORRY_NM WORRY_CATEGORY_NM,
 			e.EMPATHY_ARRAY, e.CNT_ARRAY
 		FROM BOARD
@@ -203,7 +203,20 @@
 				</otherwise>
 			</choose>
 		</if>
-</select>
+		ORDER BY BOARD.BOARD_NO DESC
+	</select>
+
+	<!-- 고민상담 게시글 작성 -->
+	<insert id="insertWorryBoard" useGeneratedKeys="true" parameterType="Board">
+
+		<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO BOARD
+		VALUES(#{boardNo}, #{boardTitle}, #{boardContent}, DEFAULT, DEFAULT, DEFAULT, #{replyCheckCode},
+			#{scrapCheckCode}, #{boardCategoryCode}, #{memberNo}, DEFAULT, DEFAULT, #{empathyCheckCode}, DEFAULT, #{worryCategoryCode})
+	</insert>
    
 	<!-- 작성 날짜 역순 / 최신 순 -->
 	<select id="myBoardList" resultMap="board_rm" >

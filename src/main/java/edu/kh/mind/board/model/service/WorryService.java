@@ -2,6 +2,7 @@ package edu.kh.mind.board.model.service;
 
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.WorryCategory;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -19,4 +20,6 @@ public interface WorryService {
 	 * @return list
 	 */
 	List<WorryCategory> selectWorryCategory();
+
+	int insertWorryBoard(Board board, List<MultipartFile> images, String webPath, String serverPath);
 }
