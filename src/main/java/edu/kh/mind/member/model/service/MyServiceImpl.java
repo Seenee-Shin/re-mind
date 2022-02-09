@@ -18,7 +18,10 @@ import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +113,47 @@ public class MyServiceImpl implements MyService {
     @Override
     public int countBoardList(Map<String, Integer> map) {
         return dao.countBoardList(map);
+    }
+
+    @Override
+    public int updateMyForm(Image image, MultipartFile images, String webPath, String serverPath) {
+
+        int result = dao.selectProfile(image);
+        System.out.println("result : " + result);
+        if(result > 0){//업데이트
+
+            if(images.getOriginalFilename() != null && !images.getOriginalFilename().equals("")){
+                image.setImagePath(webPath);
+                image.setImageOriginal(images.getOriginalFilename());
+                image.setImageName(Util.fileRename(image.getImageOriginal()));
+                image.setImageLevel(0);
+
+                if(!images.isEmpty())   result = dao.updateImage(image);
+
+                File saveFile = new File(serverPath, image.getImageName());
+                try {
+                    images.transferTo(saveFile);
+                }catch (Exception e){
+
+                }
+
+            }
+
+        }else{//인설트
+
+            if(images.getOriginalFilename() != null && !images.getOriginalFilename().equals("")){
+                image.setImagePath(webPath);
+                image.setImageOriginal(images.getOriginalFilename());
+                image.setImageName(Util.fileRename(image.getImageOriginal()));
+                image.setImageLevel(0);
+
+                if(!images.isEmpty())   result = dao.insertImage(image);
+
+            }
+            
+        }
+
+        return 0;
     }
 
     @Override
