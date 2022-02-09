@@ -14,7 +14,6 @@ import edu.kh.mind.board.model.vo.Reply;
 
 
 @RestController
-
 @RequestMapping("/reply/*")
 public class ReplyController {
 	

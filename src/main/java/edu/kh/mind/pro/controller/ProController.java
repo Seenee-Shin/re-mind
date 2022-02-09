@@ -75,6 +75,31 @@ public class ProController {
 		return "pro/proView";
 	}
 	
+	// 각 후기의 별점만 SELECT
+	@ResponseBody
+	@RequestMapping(value="starPointSelect", method=RequestMethod.POST)
+	public String starPointSelect(int professionNo){
+		
+		List<Review> starPoint = service.starPointSelect(professionNo);
+		System.out.println(starPoint);
+		
+		return new Gson().toJson(starPoint);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="starPointAverage", method=RequestMethod.POST)
+	public int starPointAverage(int professionNo){
+	
+		int starPointAverage = service.starPointAverage(professionNo);
+		
+		return starPointAverage;
+		
+	}
+	
+	
+	
+	
 	@RequestMapping("proReservation/{professionNo}")
 	public String proReservation(Model model, @PathVariable("professionNo") int professionNo,
 			RedirectAttributes ra, HttpSession session) {

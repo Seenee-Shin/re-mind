@@ -1,9 +1,6 @@
 package edu.kh.mind.member.model.service;
 
-import edu.kh.mind.board.model.vo.Board;
-import edu.kh.mind.board.model.vo.Pagination;
-import edu.kh.mind.board.model.vo.Reply;
-import edu.kh.mind.board.model.vo.Scrap;
+import edu.kh.mind.board.model.vo.*;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.MyDAO;
 
@@ -113,6 +110,11 @@ public class MyServiceImpl implements MyService {
     @Override
     public int countBoardList(Map<String, Integer> map) {
         return dao.countBoardList(map);
+    }
+
+    @Override
+    public Image getMyImage(int memberNo) {
+        return dao.getMyImage(memberNo);
     }
 
     @Override

@@ -1,3 +1,4 @@
+
 // 댓글 목록 조회
 function selectReplyList(){
 
@@ -95,4 +96,52 @@ function selectReplyList(){
         }
                 
     });
+}
+
+
+
+
+
+//댓글 삽입
+function addReply(){
+	
+	if(loginMemberNo == ""){ // 로그인이 되어 있지 않은 경우
+        alert("로그인 후 이용해 주세요.");
+  
+    }else{ // 로그인한 경우
+
+        // 댓글 미작성한 경우
+        if( $("#replyContent").val().trim().length == 0  ){
+            alert("댓글을 작성한 후 버튼을 클릭해주세요.");
+            $("#replyContent").focus();
+		}else{
+			
+			
+			$.ajax({
+				url : contextPath + "/reply/insert",
+		        data : {"boardNo" : boardNo,
+		        		"memberNo " : memberNo,
+		        		"replyContent" : replyContent}, // 현재 게시글 번호
+		        type : "POST",
+		        
+		        success : function(result){
+					console.log(result)
+					if(result > 0){
+						 $("#replyContent").val("");
+						 
+						 selectReplyList(); 
+					}else{
+						alert("댓글 삽입 실패");
+					}
+				},
+				
+				error : function(req, status, error){
+					console.log("댓글 삽입 실패");
+                    console.log(req.responseText);
+				}
+				
+			}) //ajax end
+			
+		} //else2 end
+	}//else1 end 
 }

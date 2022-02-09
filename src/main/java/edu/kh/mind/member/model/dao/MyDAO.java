@@ -1,6 +1,7 @@
 package edu.kh.mind.member.model.dao;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Reply;
 
 import edu.kh.mind.board.model.vo.Scrap;
@@ -168,6 +169,7 @@ public class MyDAO {
 		return sqlSession.selectList("boardMapper.myEmpathyList",map);
 	}
 
-
-
+	public Image getMyImage(int memberNo) {
+		return sqlSession.selectOne("boardMapper.getMyImage", memberNo);
+	}
 }

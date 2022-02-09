@@ -27,13 +27,30 @@
 	                </div>
 	                <div class="pro_score_wrap float-left">
 	                    <span>추천 전문가</span>
-	                    <ul class="pro_score">
-	                        <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                        <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                        <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                        <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                        <li><img src="${contextPath}/resources/images/pro/star-half.png"></li>
-	                    </ul>
+
+						<div class="starpoint_box2">
+							<label for="starpoint_1" class="label_star2" title="1"><span class="blind">1점</span></label>
+							<label for="starpoint_2" class="label_star2" title="2"><span class="blind">2점</span></label>
+							<label for="starpoint_3" class="label_star2" title="3"><span class="blind">3점</span></label>
+							<label for="starpoint_4" class="label_star2" title="4"><span class="blind">4점</span></label>
+							<label for="starpoint_5" class="label_star2" title="5"><span class="blind">5점</span></label>
+							<label for="starpoint_6" class="label_star2" title="6"><span class="blind">6점</span></label>
+							<label for="starpoint_7" class="label_star2" title="7"><span class="blind">7점</span></label>
+							<label for="starpoint_8" class="label_star2" title="8"><span class="blind">8점</span></label>
+							<label for="starpoint_9" class="label_star2" title="9"><span class="blind">9점</span></label>
+							<label for="starpoint_10" class="label_star2" title="10"><span class="blind">10점</span></label>
+							<input type="radio" name="starpoint" id="starpoint_11" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_12" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_13" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_14" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_15" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_16" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_17" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_18" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_19" class="star_radio2">
+							<input type="radio" name="starpoint" id="starpoint_20" class="star_radio2">
+							<span class="starpoint_bg2"></span>
+						</div>
 	                </div>
 	            </div>
 
@@ -166,33 +183,29 @@
 												 <p>${review.reviewDate}</p>
 											 </div>
 											 <div class="float-right">
-												 <!-- ------------------------------- -->
-												 <div class="starpoint_wrap">
-													<div class="starpoint_box">
-													  <label for="starpoint_1" class="label_star" title="1"><span class="blind">1점</span></label>
-													  <label for="starpoint_2" class="label_star" title="2"><span class="blind">2점</span></label>
-													  <label for="starpoint_3" class="label_star" title="3"><span class="blind">3점</span></label>
-													  <label for="starpoint_4" class="label_star" title="4"><span class="blind">4점</span></label>
-													  <label for="starpoint_5" class="label_star" title="5"><span class="blind">5점</span></label>
-													  <label for="starpoint_6" class="label_star" title="6"><span class="blind">6점</span></label>
-													  <label for="starpoint_7" class="label_star" title="7"><span class="blind">7점</span></label>
-													  <label for="starpoint_8" class="label_star" title="8"><span class="blind">8점</span></label>
-													  <label for="starpoint_9" class="label_star" title="9"><span class="blind">9점</span></label>
-													  <label for="starpoint_10" class="label_star" title="10"><span class="blind">10점</span></label>
-													  <input type="radio" name="starpoint" id="starpoint_1" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_2" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_3" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_4" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_5" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_6" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_7" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_8" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_9" class="star_radio">
-													  <input type="radio" name="starpoint" id="starpoint_10" class="star_radio">
-													  <span class="starpoint_bg"></span>
-													</div>
-											  	</div>
-												 <!-- ------------------------------- --> 
+												<div class="starpoint_box">
+													<label for="starpoint_1" class="label_star" title="1"><span class="blind">1점</span></label>
+													<label for="starpoint_2" class="label_star" title="2"><span class="blind">2점</span></label>
+													<label for="starpoint_3" class="label_star" title="3"><span class="blind">3점</span></label>
+													<label for="starpoint_4" class="label_star" title="4"><span class="blind">4점</span></label>
+													<label for="starpoint_5" class="label_star" title="5"><span class="blind">5점</span></label>
+													<label for="starpoint_6" class="label_star" title="6"><span class="blind">6점</span></label>
+													<label for="starpoint_7" class="label_star" title="7"><span class="blind">7점</span></label>
+													<label for="starpoint_8" class="label_star" title="8"><span class="blind">8점</span></label>
+													<label for="starpoint_9" class="label_star" title="9"><span class="blind">9점</span></label>
+													<label for="starpoint_10" class="label_star" title="10"><span class="blind">10점</span></label>
+													<input type="radio" name="starpoint" id="starpoint_1" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_2" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_3" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_4" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_5" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_6" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_7" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_8" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_9" class="star_radio">
+													<input type="radio" name="starpoint" id="starpoint_10" class="star_radio">
+													<span class="starpoint_bg"></span>
+												</div>
 											 </div>
 										 </div>
 										 <div class="review_bottom_box clear-both">
@@ -300,5 +313,44 @@
 	function proReservation(){
 		location.href = contextPath + "/pro/proReservation/" + professionNo;
 	}
+
+	// 각각 후기 평점
+	$.ajax({
+		url:contextPath+'/pro/starPointSelect',
+		type:"POST",
+		data : {"professionNo":professionNo},
+		dataType:"JSON",
+		success : function(starPoint){
+
+			$.each(starPoint, function(i,point) {
+
+				for(let j = 0; j<=10; j++){
+					if(point.reviewStarPoint == j){
+						$(".starpoint_box .starpoint_bg").eq(i).css("width", (j*10) + "%");
+					}
+				}
+			});
+
+		},
+	
+	});
+
+	// 상담사 총 후기 평점
+	$.ajax({
+		url:contextPath+'/pro/starPointAverage',
+		type:"POST",
+		data : {"professionNo":professionNo},
+		dataType:"JSON",
+		success : function(starPointAverage){
+
+			for(let j = 0; j<=10; j++){
+				if(starPointAverage == j){
+					$(".starpoint_box2 .starpoint_bg2").css("width", (j*10) + "%");
+				}
+			}
+
+		},
+	
+	});
 
 </script>

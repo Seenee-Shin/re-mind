@@ -1,10 +1,7 @@
 package edu.kh.mind.member.model.service;
 
-import edu.kh.mind.board.model.vo.Board;
-import edu.kh.mind.board.model.vo.Pagination;
-import edu.kh.mind.board.model.vo.Reply;
+import edu.kh.mind.board.model.vo.*;
 
-import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.Member;
@@ -102,5 +99,5 @@ public interface MyService {
 	// 내가 공감한 게시글
 	List<Board> myEmpathyList(Map<String, Integer> map);
 
-
+	Image getMyImage(int memberNo);
 }

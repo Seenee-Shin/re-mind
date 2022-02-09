@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,6 +57,8 @@ public class SecretBoardController {
 
         return "secret/list";
     }
+    
+    
 	
     // 털어놓기 게시글
     @ResponseBody
@@ -72,7 +75,48 @@ public class SecretBoardController {
         return map;
     }
 
-
+	//게시판 글작성 페이지 연결
+	@RequestMapping(value = "insert", method = RequestMethod.GET)
+	public String secretBoardinsert(Model model) {
+    	model.addAttribute("css", "board/secretList");
+    	model.addAttribute("header", "community");
+    	
+    	return "secret/insert";
+	}
+    
+    
+    
+    
+    //글 작성 
+    @ResponseBody
+    @RequestMapping(value = "insert", method = RequestMethod.POST)
+    public int secretBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, 
+    		@RequestPart(value = "images",required = false) List<MultipartFile> images,  HttpSession session,
+    		Board board, String contentFiles) throws Exception {
+		
+    	
+		board.setMemberNo(loginMember.getMemberNo());
+		//웹 접근경로(web path), 서버 저장경로(serverPath)
+		String webPath = "/resources/images/board/";
+		
+		String serverPath= session.getServletContext().getRealPath(webPath);
+		//System.out.println(board);
+		System.out.println(webPath);
+		System.out.println(serverPath);
+		System.out.println(images);
+		
+		//게시글 작성 후 상세 조회(DB에 입력된 게시글)할 boardNo 
+		int result = service.insertSecretBoard(board, images, webPath, serverPath);
+		
+    	return result;
+    }
+    
+    
+    
+    
+    
+    
+    
 	// 수정
     @RequestMapping(value="update", method=RequestMethod.GET)
     public String secretUpdate(Model model, Board board,
@@ -107,18 +151,15 @@ public class SecretBoardController {
     public String SecretView(Model model, 
     							@PathVariable("boardNo") int boardNo,
     							RedirectAttributes ra, 
-    							//@ModelAttribute("loginMember") Member loginMember,
     							HttpSession session) {
-    	model.addAttribute("css", "board/freeView");
+    	model.addAttribute("css", "board/secretView");
     	model.addAttribute("header", "community");
     	
     	int memberNo = 0;
     	
-    	
-    	
-		/*if(session.getAttribute("loginMember") != null) {
+		if(session.getAttribute("loginMember") != null) {
 			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-		}*/
+		}
     	
 		Board board = service.selectBoard(boardNo, memberNo);
 		
@@ -129,15 +170,24 @@ public class SecretBoardController {
     		model.addAttribute("rList", rList);
     		
     		model.addAttribute("board", board);
-    		return "secret/view";
     		
-    	}else {
-    		return "redirect:";
     	}
     	
-		
+    	return "secret/view";
     	
     }
+    
+    
+  //-------- 모바일 댓글창 --------------
+	
+  	@RequestMapping("mobileComment")
+      public String mobileCommentView(Model model) {
+      	
+      	model.addAttribute("css", "board/mobileComment"); //각 페이지 css 추가 태그 
+      	model.addAttribute("header", "main"); //헤더구분 사이드메뉴가 없는 페이지일 경우 main작성  
+      	 
+          return "board/mobileComment";
+      }
     
     
     

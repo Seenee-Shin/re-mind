@@ -78,6 +78,7 @@
 
     </resultMap>
 
+
 	<resultMap id="scrap_rm" type="Scrap">
 		<id property="scrapNo" column="SCRAP_NO"/>
 		<result property="memberNo" column="MEMBER_NO"/>
@@ -97,6 +98,7 @@
 
     	<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
     </resultMap>-->
+
 
 		<!-- 특정 게시판 이미지 조회-->
 
@@ -311,13 +313,15 @@
 	<update id="updateBoard">
 		UPDATE BOARD SET 
 		BOARD_TITLE = #{boardTitle},
-		BOARD_CONTENT = #{boardContent}
+		BOARD_CONTENT = #{boardContent},
+		BOARD_MODIFY_DT = SYSDATE
 		WHERE BOARD_NO = #{boardNo} 
 	</update>	
 	<!-- 게시글 삭제  -->
 	<update id="deleteBoard">
 		UPDATE BOARD SET 
-		BOARD_STATUS_CD = 203
+		BOARD_STATUS_CD = 203,
+		BOARD_MODIFY_DT = SYSDATE
 		WHERE BOARD_NO = #{boardNo} 
 	</update>
 
@@ -363,6 +367,11 @@
 		WHERE RNUM BETWEEN #{first} AND #{last}
 	</select>
 
+	<select id="getMyImage" resultMap="image_rm">
+		SELECT IMAGE_PATH, IMAGE_NM
+		FROM IMAGE
+		WHERE MEMBER_NO = #{memberNo} AND IMAGE_LEVEL = 0
+	</select>
 
 
 

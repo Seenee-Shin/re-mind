@@ -56,38 +56,38 @@
 
 
 					<c:if test="${board.empathyCheckCode == 1}">
-	                    <div class="like_warp">
-	                        <div id="like_smile" onclick="">
-	                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
-	                            <p>좋아요</p>
-	                            <p class="like_count">34</p>
-	                        </div>
-	
-	                        <div id="like_hug" onclick="">
-	                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
-	                            <p>응원해요</p>
-	                            <p  class="like_count">34</p>
-	                        </div>
-	
-	                        <div id="like_amazed" onclick="">
-	                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
-	                            <p>놀랐어요</p>
-	                            <p  class="like_count">34</p>
-	                        </div>
-	                        
-	                        <div id="like_angry" onclick="">
-	                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
-	                            <p>화나요</p>
-	                            <p  class="like_count">34</p>
-	                        </div>
-	
-	                        <div id="like_crying" onclick="">
-	                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
-	                            <p>슬퍼요</p>
-	                            <p  class="like_count">34</p>
-	                        </div>
-	                    </div>
-                    </c:if>
+                    <div class="like_warp">
+                        <div id="like_smile" onclick="">
+                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
+                            <p>좋아요</p>
+                            <p class="like_count">34</p>
+                        </div>
+
+                        <div id="like_hug" onclick="">
+                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
+                            <p>응원해요</p>
+                            <p  class="like_count">34</p>
+                        </div>
+
+                        <div id="like_amazed" onclick="">
+                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
+                            <p>놀랐어요</p>
+                            <p  class="like_count">34</p>
+                        </div>
+                        
+                        <div id="like_angry" onclick="">
+                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
+                            <p>화나요</p>
+                            <p  class="like_count">34</p>
+                        </div>
+
+                        <div id="like_crying" onclick="">
+                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
+                            <p>슬퍼요</p>
+                            <p  class="like_count">34</p>
+                        </div>
+                    </div>
+					</c:if>
 
                     <div class="report_scrap_wrap">
                         <!-- 스크랩 허용 했을 경우만 -->
@@ -109,6 +109,7 @@
 				
 				<c:if test="${board.replyCheckCode == 1}">
 					<jsp:include page="reply.jsp"/>
+					
                 </c:if>
                 
             
