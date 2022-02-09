@@ -83,8 +83,6 @@
 					<c:if test="${board.empathyCheckCode == 1}">
                     <div class="like_warp">
                         <div id="like_smile" onclick="">
-                        	<input type="radio" name="empathy" value="">
-                        	<label for=""></label>
                             <img src="${contextPath}/resources/images/icon/smile.png" alt="">
                             <p>좋아요</p>
                             <p class="like_count">34</p>
