@@ -395,7 +395,7 @@
 					}
 
 					const li = $('<li class="pro">');
-					const aHref = $('<a href= '+contextPath+'/pro/proView/'+item.professionNo+'>');
+					const aHref = $('<a href= '+contextPath+'/pro/proView/'+item.professionNo+' onclick="reviewList();">');
 
 					const pro_profile = $('<div class="pro_profile">');
 					const pro_profile_img1 = $('<img src="/mind/resources/images/pro/best.png" class="pro_best">');

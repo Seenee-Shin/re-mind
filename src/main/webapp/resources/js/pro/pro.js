@@ -32,6 +32,9 @@ $(".detail_btn").on("click",function(){
     $(".detail_btn").removeClass("detail_contents_click");
     $(this).addClass("detail_contents_click");
 
+    $(".detail_btn").removeClass("proViewNav");
+    $(this).addClass("proViewNav");
+
 });    
 
 // 예상 수강료
@@ -475,4 +478,9 @@ function setHgight(){
         $("#tuition_date").css("height","560px");
         $("#reservation_confirm_wrap").css("height","1120px");
     }
+}
+
+// 뷰 클릭시
+function reviewList(){
+    
 }

@@ -121,7 +121,20 @@ $("#select_myScrapList").on("click", function (){
     resultList.length = 0;
     calcPagination();
     getScrapList();
+
 });
+
+$("#select_myEmpathyList").on("click", function (){
+
+    btnNumber = 4;
+    currentPage = 1;
+
+    resultList.length = 0;
+    calcPagination();
+    getEmpathyList();
+
+});
+
 
 
 var resultList = [];
@@ -135,7 +148,7 @@ function makeList(){
 
         let tr = $('<tr class="board-view" style="background-color: rgb(252, 247, 243);">');
 
-        let td1;
+        let td1 = $("<td>-</td>");
         if(item.boardNo != undefined)
             td1 = $("<td>"+item.boardNo+"</td>");
         else if(item.postNo != 0)
@@ -143,7 +156,7 @@ function makeList(){
 
         let td2 = $("<td>"+item.boardTitle+"</td>");
 
-        let td3;
+        let td3 = $("<td>-</td>");
         if(item.replyCreateDate != undefined)
             td3 = $("<td>"+item.replyCreateDate+"</td>");
         else if(item.createDate != undefined)
@@ -190,6 +203,7 @@ $(document).on("click", "#pagination div", function (){
     if(btnNumber == 1)      getBoardList();
     else if(btnNumber == 2) getReplyList();
     else if(btnNumber == 3) getScrapList();
+    else if(btnNumber == 4) getEmpathyList();
 
     makeList();
 });
@@ -211,6 +225,7 @@ $(document).on("click", "#pagination span", function (){
     if(btnNumber == 1)      getBoardList();
     else if(btnNumber == 2) getReplyList();
     else if(btnNumber == 3) getScrapList();
+    else if(btnNumber == 4) getEmpathyList();
 
     makeList();
 });
@@ -302,4 +317,31 @@ $(function (){
 });
 
 
+function getEmpathyList(){
+    $.ajax({
+        url: "myEmpathyList",
+        type: "POST",
+        data: {
+            "memberNo": memberNo,
+            "first":first,
+            "last":last
+        },
+        dataType: "json",
+        success: function (result) {
 
+            $.each(result, function (i, item){
+                if(result.length - 1 == i){
+                    listCount = Number.parseInt(item.maxValue);
+                    return;
+                }
+                resultList[i] = item;
+                console.log(item);
+            });
+        },
+        error: function (error, status) {
+            console.log("error : " + error + "\n" + "status : " + status);
+        }
+    }).done(function (){
+        makeList();
+    });
+};
