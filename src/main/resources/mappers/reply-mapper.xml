@@ -55,5 +55,7 @@
 	ORDER SIBLINGS BY REPLY_NO
 	</select>
 
+	<!-- 댓글 삽입 -->
+
 
 </mapper>

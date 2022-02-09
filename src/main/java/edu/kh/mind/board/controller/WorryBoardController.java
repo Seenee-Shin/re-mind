@@ -32,6 +32,7 @@ public class WorryBoardController {
         model.addAttribute("categoryList", categoryList);
 
         model.addAttribute("css", "board/worryList");
+        model.addAttribute("header", "community");
 
         return "board/worryList";
     }
@@ -44,7 +45,6 @@ public class WorryBoardController {
 
         // 게시글 목록
         List<Board> worryList = service.selectWorryList(param);
-
         map.put("worryList", worryList);
 
         return map;

@@ -11,13 +11,13 @@ import edu.kh.mind.board.model.vo.Board;
 public interface BoardService {
 
 
-	List<Board> selectBoardList();
+	List<Board> selectBoardList(Map<String, String> param);
 
 	int insertFreeBoard(Board board, List<MultipartFile> images, String webPath, String serverPath);
 
 	Board selectBoard(int boardNo, int memberNo);
 
-	int updateBoard(Board board, List<MultipartFile> images, String webPath, String serverPath, String deleteImages);
+	int updateBoard(Board board);
 
 	Board selectBoard(int boardNo);
 
