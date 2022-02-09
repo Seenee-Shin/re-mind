@@ -28,10 +28,43 @@
                    <p>아이디</p>
                </div>
            </div>
+           <textarea name="replyContent" id="replyContent" rows="3"></textarea>
+           <button class="option_btn dark_brown_bg" id="addReply" onclick="addReply();"> 등록 </button>
+       	</div>
+       	<hr style="border-color:grey; ">       
+       
+	     <div class="comment_list" id="comment_list">
+			<c:forEach items="${rList}" var="reply">
+                     <div class="comment_view  <c:if test="${reply.parentReplyNo != 0 }"> child </c:if>">
+                         <div class="user_info">
+                             <div class="user_pic light_brown_bg" style="background-image: url();">
+                             </div>
 
-           <textarea name="" id="" rows="3"></textarea>
-           <button class="option_btn dark_brown_bg"> 등록 </button>
-       </div>
+                             <div>
+                                 <p>${reply.memberFn}</p>
+                             </div>
+                         </div>
+
+                         <div class="comment">
+                             <p>${reply.replyContent}</p>
+                         </div>
+
+                         <div class="comment_btn">
+                         <c:choose>
+                         
+                         </c:choose>
+                         	<c:when test="${loginMember.memberNo == board.memberNo }">
+                            	<button class="dark-brown" onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
+                            	<button class="dark-brown" onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
+                         	</c:when>
+                         	<c:otherwise>
+                            	<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
+                            </c:otherwise>
+                         </div>
+                     </div>
+                      
+                  </c:forEach> 
+                </div>
 
 <!-- 	                    <div class="comment_list" id="comment_list">
 	                        <div class="comment_view">
@@ -95,4 +128,4 @@
 </script>
 
 
-<script src="${contextPath}/resources/js/reply.js"></script>
+<script src="${contextPath}/resources/js/board/reply.js"></script>

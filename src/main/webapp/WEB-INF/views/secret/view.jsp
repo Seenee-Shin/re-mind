@@ -51,11 +51,13 @@
               	 	 
                     <!-- 자신의 글일때 수정, 삭제버튼 생성 -->
      				 <c:if test="${loginMember.memberNo == board.memberNo }">
+
 	                    <div class="edit_btn_wrap">
 	                        <button type="button" class="dark-brown edit_btn" onclick="updateForm()"> 수정 </button>
 	                        <button type="button" class="dark-brown edit_btn" onclick="deleteBoard();"> 삭제 </button>
 	                    </div>
 					</c:if>
+
 					
 					 <c:if test="${board.boardCategoryCode != 104 }">
               	 	 <p class="otherCategory">다른 게시판 글입니다.</p>

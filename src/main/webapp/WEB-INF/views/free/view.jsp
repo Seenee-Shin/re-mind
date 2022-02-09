@@ -109,6 +109,7 @@
 				
 				<c:if test="${board.replyCheckCode == 1}">
 					<jsp:include page="reply.jsp"/>
+					
                 </c:if>
                 
             
