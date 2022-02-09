@@ -164,11 +164,13 @@ public class MyDAO {
 
 	// 내가 찜한 상담사 목록
 	public List<Board> selectCounselorList(Pagination pagination) {
+		System.out.println(pagination);
 		return sqlSession.selectList("boardMapper.selectCounselorList", pagination);
 	}
 
 	// 내 찜 사 페이징
 	public int getCounselorPagination(int memberNo) {
+		System.out.println(memberNo);
 		return sqlSession.selectOne("boardMapper.getCounselorListCount", memberNo);
 	}
 }

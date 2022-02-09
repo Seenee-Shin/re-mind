@@ -199,24 +199,33 @@ public class MyController {
 
 
     @GetMapping("counselor")
-    public String counselor(Model model,
+    public String counselor(Model model, HttpSession session, RedirectAttributes ra,
                             @RequestParam(value="cp", required = false, defaultValue="1")int cp){
     	model.addAttribute("css", "my/counselor");
 
         int memberNo = 0;
         Pagination pagination = null;
         List<Board> counselorList = null;
+        String path = "";
+        if(session.getAttribute("loginMember") != null) {
+            memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 
-        System.out.println(memberNo);
-        pagination = service.getCounselorPagination(cp, memberNo);
-        System.out.println(pagination.toString());
+            System.out.println(memberNo);
+            pagination = service.getCounselorPagination(cp, memberNo);
+            System.out.println(pagination.toString());
 
-        counselorList = service.selectCounselorList(pagination);
+            counselorList = service.selectCounselorList(pagination);
 
+            path = "my/counselor";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
         model.addAttribute("pagination", pagination);
         model.addAttribute("counselorList", counselorList);
 
-        return "my/counselor";
+        return path;
     }
 
     @GetMapping("enquiry")
