@@ -135,7 +135,7 @@ function makeList(){
 
         let tr = $('<tr class="board-view" style="background-color: rgb(252, 247, 243);">');
 
-        let td1;
+        let td1 = $("<td>-</td>");
         if(item.boardNo != undefined)
             td1 = $("<td>"+item.boardNo+"</td>");
         else if(item.postNo != 0)
@@ -143,7 +143,7 @@ function makeList(){
 
         let td2 = $("<td>"+item.boardTitle+"</td>");
 
-        let td3;
+        let td3 = $("<td>-</td>");
         if(item.replyCreateDate != undefined)
             td3 = $("<td>"+item.replyCreateDate+"</td>");
         else if(item.createDate != undefined)
