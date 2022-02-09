@@ -84,59 +84,37 @@ const empathyCheckCode =  $('select[name=empathyCheckCode]').val();
 
 function postingValidate(){
 	//사진 배열에 담기
-	var form = $("form")[0];        
- 	var formData = new FormData(form);
- 	console.log(formData);
- 	
- 	/*var data = {   
-    "boardContent"    : boardContent,
-    "replyCheckCode"     : replyCheckCode,
-    "scrapCheckCode"  : scrapCheckCode,
-    "empathyCheckCode" : empathyCheckCode
-	}*/
-	
-	/*formData.append("boardContent" , boardContent);	
-	formData.append("replyCheckCode" , replyCheckCode);	
-	formData.append("scrapCheckCode" , scrapCheckCode);	
-	formData.append("empathyCheckCode" , empathyCheckCode);	*/
- 	
-	for (var i = 0; i < content_files.length; i++) {
+	const form = $("form")[0];
+ 	const formData = new FormData(form);
+
+	for (let i = 0; i < content_files.length; i++) {
 		// 삭제 안한것만 담아 준다. 
 		if(!content_files[i].is_delete){
-			console.log(content_files[i]);
 			formData.append('images', content_files[i]);
 		}
-		
-		
-		console.log(formData);
-		//console.log(data);
-		
 	}
-	//formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
-	console.log(formData);
-		
+
 	$.ajax({
-   	      type: "POST",
-   	   	  enctype: "multipart/form-data",
-   	      url: "insert",
-       	  data : formData,
-       	  processData: false,
-   	      contentType: false,
-   	      success: function (result) {
-   	    	if(result > 0){
-   	    		alert("글작성 완료");
-   	    		
-   	    		
-   	    		
+		type: "POST",
+		enctype: "multipart/form-data",
+		url: "insert",
+		data : formData,
+		processData: false,
+		contentType: false,
+		success: function (result) {
+			if(result > 0){
+				alert("글작성 완료");
+				location.reload();
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
-   	      },
-   	      error: function (xhr, status, error) {
-   	    	alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
-   	      }
-   	    });
-   	    return false;
-	}
+			},
+		error: function (xhr, status, error) {
+			alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
+		}
+    });
+
+	return false;
+}
 	
 // 수정버튼 클릭 시 동작
 function updateForm(){
