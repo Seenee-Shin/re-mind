@@ -175,4 +175,21 @@ public class MyServiceImpl implements MyService {
     public List<Board> myEmpathyList(Map<String, Integer> map) {
         return dao.myEmpathyList(map);
     }
+
+    // 상담 예약 취소
+    @Override
+    public int appointmentCancel(Reservation reservation) {
+        // 상담 예약 사용 횟수 감소
+        int result = dao.appointmentDecrease(reservation);
+
+        System.out.println("---------------------");
+        System.out.println(result);
+
+        if (result > 0) {
+            // 상담 예약 취소
+            result = dao.appointmentCancel(reservation);
+        }
+
+        return result;
+    }
 }

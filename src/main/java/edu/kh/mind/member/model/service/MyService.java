@@ -88,9 +88,19 @@ public interface MyService {
 	 * @return reservationList
 	 */
 	List<Reservation> selectReservation(int memberNo);
+
+	/**
+	 * 상담 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	int appointmentCancel(Reservation reservation);
+
 	// 내가 공감한 게시글(수)
 	int countEmpathyList(Map<String, Integer> map);
 
 	// 내가 공감한 게시글
 	List<Board> myEmpathyList(Map<String, Integer> map);
+
+
 }

@@ -36,7 +36,10 @@
 						<div class="category_div">채팅</div>
 						<c:choose>
 							<c:when test="${reservation.reservationStatusCode == 1}">
-								<div class="status_div">예약</div>
+								<div class="status_div">예약
+									<button type="button" class="reservationCancel" data-value="${reservation.reservationNo}"> 취소하기</button>
+								</div>
+
 							</c:when>
 							<c:when test="${reservation.reservationStatusCode == 3}">
 								<div class="status_div">예약 취소</div>
@@ -65,11 +68,30 @@
 	})
 
 
+	// 예약 취소
+	$(".reservationCancel").on("click", function () {
+		console.log($(this).data("value"));
+
+		if(confirm("예약 취소하시겠습니까?")) {
+
+			$.ajax({
+				url : "appointmentCancel",
+				type : "POST",
+				data : {
+					"reservationNo" : $(this).data("value")
+				},
+				success : function (result) {
+					console.log(result);
+				},
+				error : function () {
+
+				}
+			})
+		}
+
+	})
+
 
 </script>
-
-</body>
-</html>
-
 
 

@@ -138,6 +138,25 @@ public class MyDAO {
 	public List<Reservation> selectReservation(int memberNo) {
 		return sqlSession.selectList("memberMapper.selectReservation", memberNo);
 	}
+
+	/**
+	 * 상담 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	public int appointmentDecrease(Reservation reservation) {
+		return sqlSession.update("memberMapper.appointmentDecrease", reservation);
+	}
+
+	/**
+	 * 상담 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	public int appointmentCancel(Reservation reservation) {
+		return sqlSession.update("memberMapper.appointmentCancel", reservation);
+	}
+
 	// 내가 공감한 게시글(수)
 	public int countEmpathyList(Map<String, Integer> map) {
 		return sqlSession.selectOne("boardMapper.countEmpathyList", map);
@@ -148,4 +167,7 @@ public class MyDAO {
 //		System.out.println(map.get("memberNo"));
 		return sqlSession.selectList("boardMapper.myEmpathyList",map);
 	}
+
+
+
 }
