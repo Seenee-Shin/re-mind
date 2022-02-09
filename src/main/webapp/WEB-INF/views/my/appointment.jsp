@@ -70,18 +70,34 @@
 
 	// 예약 취소
 	$(".reservationCancel").on("click", function () {
-		console.log($(this).data("value"));
 
+		const _this = $(this);
 		if(confirm("예약 취소하시겠습니까?")) {
 
 			$.ajax({
 				url : "appointmentCancel",
 				type : "POST",
 				data : {
-					"reservationNo" : $(this).data("value")
+					"reservationNo" : _this.data("value")
 				},
 				success : function (result) {
-					console.log(result);
+					if (result == 1) {
+						swal({
+							title : "예약 취소 되었습니다.",
+							icon  : "success"
+						});
+
+						const div = $("<div class='status_div'>");
+						div.text("예약 취소");
+						_this.parent().html(div);
+					} else {
+						swal({
+							title : "취소할 수 없습니다.",
+							icon  : "error"
+						});
+					}
+
+
 				},
 				error : function () {
 

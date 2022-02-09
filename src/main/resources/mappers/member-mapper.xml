@@ -141,7 +141,6 @@
         JOIN MEMBER m ON m.MEMBER_NO = rp.MEMBER_NO
         JOIN PROFESSION p ON p.PROFESSION_NO = rp.PROFESSION_NO
         WHERE rp.MEMBER_NO = #{memberNo}
-        AND r.RESERVATION_STATUS_CD = 1
         ORDER BY r.RESERVATION_ENROLL_DT DESC, r.RESERVATION_ENROLL_TIME ASC
     </select>
 
@@ -153,7 +152,9 @@
     </update>
 
     <update id="appointmentCancel">
-
+        UPDATE RESERVATION SET RESERVATION_STATUS_CD = 3, RESERVATION_CANCEL = '예약 취소'
+        WHERE RESERVATION_NO = #{reservationNo}
+        AND RESERVATION_STATUS_CD = 1
     </update>
 
 </mapper>

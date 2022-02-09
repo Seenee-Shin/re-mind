@@ -70,7 +70,7 @@ public class MyController {
         int result = service.appointmentCancel(reservation);
 
 
-        return 0;
+        return result;
     }
 
 
