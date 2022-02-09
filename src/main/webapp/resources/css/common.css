@@ -57,6 +57,12 @@ hr{
   border-top: 1px solid #ededed;
 }
 
+textarea {
+    min-height: 5rem;
+    overflow-y: hidden;
+    resize: none;
+}
+
 
 input[type='radio'],input[type='radio']:checked {appearance: none; width: 22px; height: 22px; border-radius: 100%; margin-right: 0.1rem;}
 input[type='radio'] {background:url('../images/icon/radio_none.png') no-repeat center center;}

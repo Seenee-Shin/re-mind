@@ -116,8 +116,6 @@ public class FreeBoardController {
 		Board board = service.selectBoard(boardNo, memberNo);
 		
     	if(board != null) {
-    		
-    		
     		// 댓글 
     		List<Reply> rList = rService.selectList(boardNo);
     		model.addAttribute("rList", rList);
@@ -131,12 +129,16 @@ public class FreeBoardController {
     	
     }
     
-    //게시판 글수정 
-    @RequestMapping("update/{boardNo}")
-    public String freeBoardUpdate(Model model) {
+    //게시판 글수정 화면 전환
+
+    //게시판 글수정 화면 전환
+    @RequestMapping(value="updateForm")
+    public String freeBoardUpdate(int boardNo, Model model) {
     	model.addAttribute("css", "board/update");
     	model.addAttribute("header", "community");
     	
+    	Board board = service.selectBoard(boardNo);
+    	model.addAttribute("board", board);
     	return "free/update";
     }
 	// 수정
@@ -169,12 +171,25 @@ public class FreeBoardController {
     			return "redirect:"+path;
     		}
     		
-    
-    @RequestMapping("delete")
-    public String freeBoarDelete(Model model) {
+    //게시글 삭제 연결 
+    @RequestMapping(value="delete")
+    public String freeBoarDelete(int boardNo, Model model, RedirectAttributes ra) {
     	model.addAttribute("header", "community");
     	model.addAttribute("css", "board/freeList");
-    	return "free/list";
+    	
+    	int result = service.deleteBoard(boardNo);
+    	
+    	String path = null;
+		
+		if(result > 0) {
+			Util.swalSetMessage("게시글 삭제 성공", null, "success", ra);
+			path = "insert";
+			
+		}else {
+			Util.swalSetMessage("게시글 삭제 실패", null, "error", ra);
+			path = "view/" + boardNo;
+		}
+    	return "redirect:" + path;
     }
     
     //예외처리
