@@ -24,7 +24,7 @@ main{
   	background-image: url("../../resources/images/mainbg.jpg");
   	        background-repeat : no-repeat;
         background-size : cover;
-        background-position: 50;
+       /*  background-position: 50; */
   }
   
   .main_banner_p1 {

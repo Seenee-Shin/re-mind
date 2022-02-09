@@ -116,8 +116,6 @@ public class FreeBoardController {
 		Board board = service.selectBoard(boardNo, memberNo);
 		
     	if(board != null) {
-    		
-    		
     		// 댓글 
     		List<Reply> rList = rService.selectList(boardNo);
     		model.addAttribute("rList", rList);
@@ -131,12 +129,16 @@ public class FreeBoardController {
     	
     }
     
-    //게시판 글수정 
-    @RequestMapping("update/{boardNo}")
-    public String freeBoardUpdate(Model model) {
+    //게시판 글수정 화면 전환
+
+    //게시판 글수정 화면 전환
+    @RequestMapping(value="updateForm")
+    public String freeBoardUpdate(int boardNo, Model model) {
     	model.addAttribute("css", "board/update");
     	model.addAttribute("header", "community");
     	
+    	Board board = service.selectBoard(boardNo);
+    	model.addAttribute("board", board);
     	return "free/update";
     }
 	// 수정

@@ -30,6 +30,8 @@ var fileNum = 0;
 // 첨부파일 배열
 var content_files = new Array();
 
+var delete_files = new Array();
+
 function fileCheck(e) {
     var files = e.target.files;
     
@@ -105,6 +107,9 @@ function postingValidate(){
 		if(!content_files[i].is_delete){
 			console.log(content_files[i]);
 			formData.append('images', content_files[i]);
+		}else{
+			delete_files.push(content_files[i]);
+			formData.append('deletImages',delete_files[i]);
 		}
 		
 		
@@ -114,7 +119,8 @@ function postingValidate(){
 	}
 	//formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
 	console.log(formData);
-		
+	
+	//삽입
 	$.ajax({
    	      type: "POST",
    	   	  enctype: "multipart/form-data",
@@ -126,8 +132,6 @@ function postingValidate(){
    	    	if(result > 0){
    	    		alert("글작성 완료");
    	    		
-   	    		
-   	    		
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
    	      },
@@ -138,21 +142,8 @@ function postingValidate(){
    	    return false;
 	}
 	
-// 수정버튼 클릭 시 동작
-function updateForm(){
-	document.requestForm.action = "../update";
-	document.requestForm.method = "POST";
-	document.requestForm.submit();
-}
+	
 
-//닫기 버튼시 동작
-function deleteBoard(){
-	if(confirm("정말 삭제하시겠습니까?")){
-	document.requestForm.action = "../delete";
-	document.requestForm.method = "POST";
-	document.requestForm.submit();
-	}
-}
 
 /*시간 몇분전 표시 */
 function displayedAt(createdAt) {
