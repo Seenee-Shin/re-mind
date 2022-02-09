@@ -148,58 +148,43 @@
 	            <li id="pro_revice">
 	                <h2>후기</h2>
 	                <ul class="pro_review_wrap">
-	                    <li class="pro_review_li">
-	                        <div class="pro_best_reiew">
-	                            <img src="${contextPath}/resources/images/pro/best_review.png">
-	                        </div>
-	                        <div class="review_top_box">
-	                            <div class="float-left">
-	                                <p>1회기권구매고객/보이스테라피</p>
-	                                <p>2021.01.21</p>
-	                            </div>
-	                            <div class="float-right">
-	                                <ul class="pro_score">
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star-half.png"></li>
-	                                </ul>
-	                            </div>
-	                        </div>
-	                        <div class="review_bottom_box clear-both">
-	                            <p>
-	                                다른 상담소들보다 훨씬좋고 자기자신 편이 되도록 많이 도와주시고 생각과감정을 수용하게 도움이 많이 됩니다 <br>
-	                                자기가 자기자신편이 되는게 가장 중요한것같은데 자기자신에대한불신이 내려않고 신뢰랑 안정감이 느껴집니다.
-	                            </p>
-	                        </div>
-	                    </li>
-	                    <li class="pro_review_li">
-	                        <div class="pro_best_reiew">
-	                            <img src="${contextPath}/resources/images/pro/best_review.png">
-	                        </div>
-	                        <div class="review_top_box">
-	                            <div class="float-left">
-	                                <p>1회기권구매고객/보이스테라피</p>
-	                                <p>2021.01.21</p>
-	                            </div>
-	                            <div class="float-right">
-	                                <ul class="pro_score">
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star.png"></li>
-	                                    <li><img src="${contextPath}/resources/images/pro/star-half.png"></li>
-	                                </ul>
-	                            </div>
-	                        </div>
-	                        <div class="review_bottom_box clear-both">
-	                            <p>
-	                                다른 상담소들보다 훨씬좋고 자기자신 편이 되도록 많이 도와주시고 생각과감정을 수용하게 도움이 많이 됩니다 <br>
-	                                자기가 자기자신편이 되는게 가장 중요한것같은데 자기자신에대한불신이 내려않고 신뢰랑 안정감이 느껴집니다.
-	                            </p>
-	                        </div>
-	                    </li>
+						<c:choose>
+							<c:when test="${empty reviewList}">
+							<li>
+								<p id="reveiw_no">아직 후기가 없어요!</p>
+							</li>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${reviewList}" var="review">
+									<li class="pro_review_li">
+										<!--  <div class="pro_best_reiew">
+											 <img src="${contextPath}/resources/images/pro/best_review.png">
+										 </div> -->
+										 <div class="review_top_box">
+											 <div class="float-left">
+												 <p>${review.counselCategoryNm}이용 고객님</p>
+												 <p>${review.reviewDate}</p>
+											 </div>
+											 <div class="float-right">
+												 <ul class="pro_score">
+													 <li><img src="${contextPath}/resources/images/pro/star.png"></li>
+													 <li><img src="${contextPath}/resources/images/pro/star.png"></li>
+													 <li><img src="${contextPath}/resources/images/pro/star.png"></li>
+													 <li><img src="${contextPath}/resources/images/pro/star.png"></li>
+													 <li><img src="${contextPath}/resources/images/pro/star-half.png"></li>
+												 </ul>
+											 </div>
+										 </div>
+										 <div class="review_bottom_box clear-both">
+											 <p>
+												${review.reviewContent}
+											 </p>
+										 </div>
+									 </li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						
 	                </ul>
 	            </li>
 	        </ul>
