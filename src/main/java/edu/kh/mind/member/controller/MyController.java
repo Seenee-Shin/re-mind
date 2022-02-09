@@ -196,12 +196,24 @@ public class MyController {
     }
 
 
-
-
-
     @GetMapping("counselor")
-    public String counselor(Model model){
+    public String counselor(Model model,
+                            @RequestParam(value="cp", required = false, defaultValue="1")int cp){
     	model.addAttribute("css", "my/counselor");
+
+        int memberNo = 0;
+        Pagination pagination = null;
+        List<Board> counselorList = null;
+
+        System.out.println(memberNo);
+        pagination = service.getCounselorPagination(cp, memberNo);
+        System.out.println(pagination.toString());
+
+        counselorList = service.selectCounselorList(pagination);
+
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("counselorList", counselorList);
+
         return "my/counselor";
     }
 

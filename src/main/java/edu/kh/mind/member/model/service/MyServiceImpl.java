@@ -130,11 +130,8 @@ public class MyServiceImpl implements MyService {
     // 페이징 처리
     @Override
     public Pagination getPagination(int cp, int memberNo) {
-
         // 전체 게시글 수
         int listCount = dao.getBoardListCount(memberNo);
-//        System.out.println(listCount);
-
         return new Pagination(listCount, cp);
     }
 
@@ -177,4 +174,18 @@ public class MyServiceImpl implements MyService {
     public List<Board> myEmpathyList(Map<String, Integer> map) {
         return dao.myEmpathyList(map);
     }
+
+    // 내 찜 사
+    @Override
+    public List<Board> selectCounselorList(Pagination pagination) {
+        return dao.selectCounselorList(pagination);
+    }
+    // 내 찜 사 페이징 처리
+    @Override
+    public Pagination getCounselorPagination(int cp, int memberNo) {
+        int listCount = dao.getCounselorPagination(memberNo);
+        return new Pagination(listCount, cp);
+    }
+
+
 }
