@@ -157,16 +157,12 @@
 			                         </div>
 			
 			                         <div class="comment_btn">
-				                         <c:choose>
 				                         
-				                         	<c:when test="${loginMember.memberNo == board.memberNo }">
-				                            	<button class="dark-brown" onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
-				                            	<button class="dark-brown" onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
-				                         	</c:when>
-				                         	<c:otherwise>
-				                            	<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
-				                            </c:otherwise>
-				                         </c:choose>
+			                            	<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
+				                         	<c:if test="${loginMember.memberNo == reply.memberNo }">
+				                            	<button class="dark-brown edit_btn " onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
+				                            	<button class="dark-brown edit_btn " onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
+				                            </c:if>	
 		                         	</div>
 		                     	</div>
 	                 		</c:forEach> 
