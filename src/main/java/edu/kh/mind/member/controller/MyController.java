@@ -2,6 +2,7 @@ package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
@@ -15,6 +16,7 @@ import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
+import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +42,15 @@ public class MyController {
     private MyService service;
     
 
+    // 상담 예약 조회
     @RequestMapping("appointment")
-    public String appointment(Model model) {
+    public String appointment(Model model, @ModelAttribute("loginMember") Member loginMember) {
+
+        int memberNo = loginMember.getMemberNo();
+
+        List<Reservation> reservationList = service.selectReservation(memberNo);
+
+    	model.addAttribute("reservationList", reservationList);
 
     	model.addAttribute("css", "my");
         return "my/appointment";
@@ -283,21 +292,32 @@ public class MyController {
     }
 
     @GetMapping("updateMyInfo")
-    public String updateMyInfo(Model model, HttpSession session, RedirectAttributes ra){
-        model.addAttribute("css", "my/muteMember");
-
+    public String updateMyInfo(Model model, HttpSession session, RedirectAttributes ra,
+                               @ModelAttribute("loginMember") Member loginMember){
         Naver naver = ((Naver)session.getAttribute("naver"));
 
         String path = null;
+        Image image = null;
         if(naver == null){
+            image = service.getMyImage(loginMember.getMemberNo());
             path = "my/updateMyInfo";
         }else{
             Util.swalSetMessage("소셜로그인 회원은 정보수정이 불가능합니다.", null, "info", ra);
             path = "redirect:/";
         }
 
-
+        model.addAttribute("memberImage", image);
         return path;
+    }
+    @PostMapping("updateMyInfo")
+    public String updateMyInfo(Member member,
+                               @ModelAttribute("loginMember") Member loginMember){
+
+        
+
+
+
+        return null;
     }
 
     @GetMapping("loadProMap")

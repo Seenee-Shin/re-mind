@@ -27,41 +27,45 @@
 	                    
 	
 	                    <div id= "posting">
-	                        <textarea  onkeydown="resize(this)" onkeyup="resize(this)">${board.boardContent}</textarea>
+	                        <textarea name="boardContent"  onkeydown="resize(this)" onkeyup="resize(this)">${board.boardContent}</textarea>
 	                        <div class="imgWrap">
-	                        	 <c:forEach items="${board.imgList}" var="img" varStatus="status">
-	             		       		<div id="img${status.index}" class="boardImg"> 
-	             		       		<img src="${contextPath}${img.imagePath}${img.imageName}">
-	             		       			<div class="deleteImg" onclick="deleteImage()"><i class="fas fa-times"></i>
-	             		       			</div>
-					       			</div>
-		                        </c:forEach>
+		                        <c:choose>
+		                        	<c:when test="${!empty board.imgList}">
+			                        	 <c:forEach items="${board.imgList}" var="img" varStatus="status">
+			             		       		<div id="img${status.index}" class="boardImg"> 
+			             		       		<img src="${contextPath}${img.imagePath}${img.imageName}">
+							       			</div>
+				                        </c:forEach>
+		                        	</c:when>
+		                        </c:choose>
 	                        </div>
 	                    </div> 
 	                    
 	                    
 	                    <div class="btn_area">
-	                        <a>
-	                            <i class="fas fa-image dark-brown"></i>
-	                        </a>
-	                        
+                           <label for="addFileBtn">
+                               <i class="fas fa-image dark-brown" ></i>
+                           </label>
+                           	<!-- name="images" -->
+							<input type="file"  id='addFileBtn'  accept="audio/*, video/*, image/*" multiple onclick="loadImg()" style="display: none">
+							<input type="hidden" name="delete_files" id="delete_files">
 	                        <div class="write_option_area">
 	                            <div class="check_box_wrap">
-	                                     <select id="replyCheckCode" name="replyCheckCode">
+                                    <select id="replyCheckCode" name="replyCheckCode">
 									    <option value="1">댓글 허용</option>
 									    <option value="2">댓글 비허용</option>
 								    </select>  		                            
 	                            </div>
 	
 	                            <div class="check_box_wrap">
-	                                     <select id="scrapCheckCode" name="scrapCheckCode">
+                                     <select id="scrapCheckCode" name="scrapCheckCode">
 									    <option value="1">스크랩 허용</option>
 									    <option value="2">스크랩 비허용</option>
 								    </select>  		                            
 	                            </div>
 	                            
 	                            <div class="check_box_wrap">
-	                                     <select id="empathyCheckCode" name="empathyCheckCode">
+                                     <select id="empathyCheckCode" name="empathyCheckCode">
 									    <option value="1">공감 허용</option>
 									    <option value="2">공감 비허용</option>
 								    </select>  		                            
@@ -74,14 +78,20 @@
 	                    <button type="submit" class="dark-brown edit_btn"> 수정 </button>
 	                    <button type="button" class="dark-brown edit_btn" onclick=""> 목록으로  </button>
 	                </div>
+	                
+	             <!-- update 진행 시 사용할 게시글 번호 -->
+				<input type="hidden" name="cp" value="${param.cp}">
+				<input type="hidden" name="boardNo" value="${board.boardNo}">
+				<input type="hidden" name="deleteImages" value="">
 	
 				</form>
             </section>
         </div>
     </main>
 <!-- header include -->
-<jsp:include page="../common/footer.jsp"></jsp:include>
+<jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+
 
 </body>
 </html>

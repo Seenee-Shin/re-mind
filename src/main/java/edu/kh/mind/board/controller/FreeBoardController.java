@@ -50,20 +50,18 @@ public class FreeBoardController {
 	
     //게시판 리스트 연결
 	@ResponseBody
-	@RequestMapping(value = "list", method = RequestMethod.GET)
-    public String freeBoardList(Model model) {
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+    public HashMap<String, Object> freeBoardList(Model model, @RequestParam Map<String, String> param) {
+		HashMap<String, Object> map = new HashMap<>();
+		
+    	List<Board> freeBoardList = service.selectBoardList(param);
     	
-    	model.addAttribute("css", "board/freeList");
-    	model.addAttribute("header", "community");
+    	map.put("freeBoardList", freeBoardList);
     	
-    	List<Board> freeBoardList = service.selectBoardList();
-    	
-    	System.out.println(freeBoardList);
-    	
-        return new Gson().toJson(freeBoardList);
+        return map;
     }
     
-	//게시판 글작성 페이지 연결
+	//게시판 글작성,게시판 페이지 연결
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String freeBoardinsert(Model model) {
     	model.addAttribute("css", "board/freeList");
@@ -145,17 +143,11 @@ public class FreeBoardController {
     
     @RequestMapping(value="update", method=RequestMethod.POST)
     public String secretUpdate(Model model, Board board,
-						@RequestParam("deleteImages") String deleteImages,
-						@RequestParam("images") List<MultipartFile> images,
-						RedirectAttributes ra, HttpSession session ) {
-
+						RedirectAttributes ra, HttpSession session, @ModelAttribute("loginMember") Member loginMember) {
     	
-    			String webPath = "/resources/images/board/"; 
-    			String serverPath = session.getServletContext().getRealPath(webPath);
-    			
     			// 2) 게시글 수정 Service 호출 
-    			int result = service.updateBoard(board, images, webPath, serverPath, deleteImages);
-    			
+    			board.setMemberNo(loginMember.getMemberNo());
+    			int result = service.updateBoard(board);
     			
     			String path = null;
     			if(result > 0) { 
@@ -171,7 +163,7 @@ public class FreeBoardController {
     			return "redirect:"+path;
     		}
     		
-    //게시글 삭제 연결 
+    //게시글 삭제
     @RequestMapping(value="delete")
     public String freeBoarDelete(int boardNo, Model model, RedirectAttributes ra) {
     	model.addAttribute("header", "community");

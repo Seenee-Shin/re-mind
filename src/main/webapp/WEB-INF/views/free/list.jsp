@@ -4,7 +4,6 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 
 <!-- header include -->
-            <div class="free_board_list_wrap" id="BoardListArea">
 
                 <!-- 게시판 하나 시작  -->
                 <div class="board_list_content">
@@ -13,10 +12,12 @@
                         <div class="writer_pic_wrap">
                             <div class="writer_pic light_brown_bg" style="background-image: url();">
                             </div>
+                            <c:if test="${!loginMember.memberNo == board.memberNo }">
                             <ul class="userMenu hidden">
 	                            <li> <a href=""> 차단</a> </li>
 	                            <li> <a href=""> 검색</a> </li>
-                            </ul>                            
+                            </ul>
+                            </c:if>                           
                         </div>
 
 
@@ -34,7 +35,6 @@
                         </a>
                     </div>
                     <div class="board_icon_wrap">
-                        <!-- 댓글 아이콘 -->
 						<c:choose>
 							<c:when test="${board.replyCheckCode == 1}">
 		                        <div class="commnet_wrap">
@@ -72,11 +72,9 @@
 						</c:choose>
                     </div>
                 </div>  
-            </div>    
 <script>
 	//전역변수 생성 
 	const loginMemberNo = "${loginMember.memberNo}"
 	const boardNo = "${board.boardNo}";
 </script>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="${contextPath}/resources/js/board/freeList.js"></script>

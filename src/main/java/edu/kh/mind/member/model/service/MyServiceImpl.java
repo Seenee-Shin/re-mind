@@ -1,9 +1,6 @@
 package edu.kh.mind.member.model.service;
 
-import edu.kh.mind.board.model.vo.Board;
-import edu.kh.mind.board.model.vo.Pagination;
-import edu.kh.mind.board.model.vo.Reply;
-import edu.kh.mind.board.model.vo.Scrap;
+import edu.kh.mind.board.model.vo.*;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.dao.MyDAO;
 
@@ -17,6 +14,7 @@ import edu.kh.mind.member.model.vo.Review;
 
 import edu.kh.mind.member.social.naver.vo.Naver;
 
+import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -115,6 +113,11 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
+    public Image getMyImage(int memberNo) {
+        return dao.getMyImage(memberNo);
+    }
+
+    @Override
     public int countScrapList(Map<String, Integer> map) {
         return dao.countScrapList(map);
     }
@@ -156,6 +159,12 @@ public class MyServiceImpl implements MyService {
 		
 		return dao.reviewInsert(review);
 	}
+
+    // 상담 예약 조회
+    @Override
+    public List<Reservation> selectReservation(int memberNo) {
+        return dao.selectReservation(memberNo);
+    }
 
     // 내가 공감한 게시글(수)
     @Override

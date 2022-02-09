@@ -23,11 +23,10 @@ public class BoardServiceImpl implements BoardService{
 
 
 	@Override
-	public List<Board> selectBoardList() {
+	public List<Board> selectBoardList(Map<String, String> param) {
+		param.put("boardCategoryCode", "101");
 		
-		
-		
-		return dao.selectBoardList();
+		return dao.selectBoardList(param);
 	}
 
 
@@ -149,18 +148,20 @@ public class BoardServiceImpl implements BoardService{
 		return board;
 	}
 
-	@Override
-	public int updateBoard(Board board, List<MultipartFile> images, String webPath, String serverPath,
-			String deleteImages) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 
 	@Override
 	public int deleteBoard(int boardNo) {
 		// TODO Auto-generated method stub
 		return dao.deleteBoard(boardNo);
+	}
+
+
+	@Override
+	public int updateBoard(Board board) {
+		board.setBoardContent( Util.XSS( board.getBoardContent() )  );
+		board.setBoardContent( Util.changeNewLine( board.getBoardContent() )  );
+		
+		return dao.updateBoard(board);
 	}
 		
 }

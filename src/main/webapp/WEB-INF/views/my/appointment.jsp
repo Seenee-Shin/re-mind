@@ -27,40 +27,26 @@
 					<div>상담 유형</div>
 					<div>상태</div>
 				</li>
-				<li>
-					<div class="img_div"><img src="../../images/sample1.jpg"></div>
-					<div class="date_div">2022-01-22</div>
-					<div class="time_div">15:00</div>
-					<div class="profession_div">이덕희</div>
-					<div class="category_div">채팅</div>
-					<div class="status_div">상담 예약</div><!-- 상담 대기 일때 취소 가능-->
-				</li>
-				<li>
-					<div class="img_div"><img src="../../images/sample1.jpg"></div>
-					<div class="date_div">2022-01-12</div>
-					<div class="time_div">09:00</div>
-					<div class="profession_div">이덕희</div>
-					<div class="category_div">채팅</div>
-					<div class="status_div">상담 대기</div><!-- 상담 대기 일때 취소 가능-->
-				</li>
-				<li>
-					<div class="img_div"><img src="../../images/sample1.jpg"></div>
-					<div class="date_div">2022-01-05</div>
-					<div class="time_div">13:00</div>
-					<div class="profession_div">이덕희</div>
-					<div class="category_div">채팅</div>
-					<div class="status_div">상담 취소</div><!-- 상담 대기 일때 취소 가능-->
-				</li>
-				<li>
-					<div class="img_div"><img src="../../images/sample1.jpg"></div>
-					<div class="date_div">2021-12-27</div>
-					<div class="time_div">11:00</div>
-					<div class="profession_div">이덕희</div>
-					<div class="category_div">채팅</div>
-					<div class="status_div">상담 완료</div><!-- 상담 대기 일때 취소 가능-->
-				</li>
-
-
+				<c:forEach items="${reservationList}" var="reservation">
+					<li>
+						<div class="img_div"><img src="${contextPath}/resources/images/sample1.jpg"></div><!-- 전문가 프로필 -->
+						<div class="date_div">${reservation.reservationEnrollDate}</div>
+						<div class="time_div">${reservation.reservationEnrollTime}:00 </div>
+						<div class="profession_div">${reservation.professionName}</div>
+						<div class="category_div">채팅</div>
+						<c:choose>
+							<c:when test="${reservation.reservationStatusCode == 1}">
+								<div class="status_div">예약</div>
+							</c:when>
+							<c:when test="${reservation.reservationStatusCode == 3}">
+								<div class="status_div">예약 취소</div>
+							</c:when>
+							<c:otherwise>
+								<div class="status_div">상담 완료</div>
+							</c:otherwise>
+						</c:choose>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
 

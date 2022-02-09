@@ -14,7 +14,6 @@ import edu.kh.mind.board.model.vo.Reply;
 
 
 @RestController
-
 @RequestMapping("/reply/*")
 public class ReplyController {
 	
@@ -36,6 +35,29 @@ public class ReplyController {
 		// Gson.toJson(object) : object를 JSON형태로 변환
 		return new Gson().toJson(rList);
 	}
+	
+	// 댓글 삽입 
+		@RequestMapping(value="insert", method=RequestMethod.POST)
+		public int insertReply(Reply reply/*커맨드 객체*/) {
+			return service.insertReply(reply);
+		}
+		
+		
+		// 댓글 수정 
+		@RequestMapping(value="update", method=RequestMethod.POST)
+		public int updateReply(Reply reply/*커맨드 객체*/) {
+								//replyNo, replyContent
+			return service.updateReply(reply);
+		}
+		
+		
+		
+		// 댓글 삭제 
+		@RequestMapping(value="delete", method=RequestMethod.POST)
+		public int deleteReply(int replyNo) {
+			return service.deleteReply(replyNo);
+		}
+	
 	
 
 }

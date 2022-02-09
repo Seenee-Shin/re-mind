@@ -63,6 +63,7 @@ input:focus, textarea:focus, select:focus{
 .posting{
     min-height: 150px;
     margin-top: 20px;
+    margin-bottom: 100px;
 }
 
 
@@ -308,6 +309,7 @@ p{
     /* 본문내용 */
     .posting{
         margin-left: 20px;
+        margin-bottom: 50px;
     
     }
     /* 좋아요 */

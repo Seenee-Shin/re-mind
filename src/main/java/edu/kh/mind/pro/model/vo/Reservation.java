@@ -14,9 +14,14 @@ public class Reservation {
 	
 	private String counselCategoryNm;
 	private int PayNo;
-	
+
+	private int memberNo;
+	private String memberName;
+	private int professionNo;
+	private String professionName;
+	private int statusCode;
+
 	public Reservation() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getReservationNo() {
@@ -91,13 +96,63 @@ public class Reservation {
 		PayNo = payNo;
 	}
 
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public int getProfessionNo() {
+		return professionNo;
+	}
+
+	public void setProfessionNo(int professionNo) {
+		this.professionNo = professionNo;
+	}
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
+	}
+
 	@Override
 	public String toString() {
-		return "Reservation [reservationNo=" + reservationNo + ", reservationEnrollDate=" + reservationEnrollDate
-				+ ", reservationEnrollTime=" + reservationEnrollTime + ", reservationStatusCode="
-				+ reservationStatusCode + ", reservationCancel=" + reservationCancel + ", counselCategoryNo="
-				+ counselCategoryNo + ", reservationPayNo=" + reservationPayNo + ", counselCategoryNm="
-				+ counselCategoryNm + ", PayNo=" + PayNo + "]";
+		return "Reservation{" +
+				"reservationNo=" + reservationNo +
+				", reservationEnrollDate=" + reservationEnrollDate +
+				", reservationEnrollTime=" + reservationEnrollTime +
+				", reservationStatusCode=" + reservationStatusCode +
+				", reservationCancel='" + reservationCancel + '\'' +
+				", counselCategoryNo=" + counselCategoryNo +
+				", reservationPayNo=" + reservationPayNo +
+				", counselCategoryNm='" + counselCategoryNm + '\'' +
+				", PayNo=" + PayNo +
+				", memberNo=" + memberNo +
+				", memberName='" + memberName + '\'' +
+				", professionNo=" + professionNo +
+				", professionName='" + professionName + '\'' +
+				", statusCode=" + statusCode +
+				'}';
 	}
-	
 }

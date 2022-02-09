@@ -115,6 +115,7 @@
 		DELETE FROM PAYMENT WHERE PAY_NO = #{payNo}
 	</delete>
 	
+	<!-- 후기 가지고오기 -->
 	<select id="reviewListSelect" resultMap="Review_rm">
 		SELECT REVIEW_CONTENT, REVIEW_STARPOINT,
 		 TO_CHAR(REVIEW_DT, 'YYYY"-"MM"-"DD' ) REVIEW_DT, 
@@ -122,6 +123,18 @@
 		FROM REVIEW
 		JOIN RESERVATION R USING(RESERVATION_NO)
 		JOIN COUNSEL_CATEGORY C ON(C.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO)
+		WHERE PROFESSION_NO = #{professionNo}
+	</select>
+	
+	<!-- 별점만 가지고 오기 -->
+	<select id="starPointSelect" resultMap="Review_rm">
+		SELECT REVIEW_STARPOINT FROM REVIEW WHERE PROFESSION_NO = #{professionNo} ORDER BY REVIEW_NO
+	</select>
+	
+	<!-- 상담사별 후기 평균 가지고오기 -->
+	<select id="starPointAverage" resultType="_int">
+		SELECT AVG(REVIEW_STARPOINT)
+		FROM REVIEW
 		WHERE PROFESSION_NO = #{professionNo}
 	</select>
 	

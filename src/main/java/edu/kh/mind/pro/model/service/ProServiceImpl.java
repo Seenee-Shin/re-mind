@@ -123,4 +123,17 @@ public class ProServiceImpl implements ProService{
 		
 		return dao.reviewListSelect(professionNo);
 	}
+	
+	// 별점만 가지고오기
+	@Override
+	public List<Review> starPointSelect(int professionNo) {
+
+		return dao.starPointSelect(professionNo);
+	}
+	
+	// 상담사 별 후기 평점
+	@Override
+	public int starPointAverage(int professionNo) {
+		return dao.starPointAverage(professionNo);
+	}
 }

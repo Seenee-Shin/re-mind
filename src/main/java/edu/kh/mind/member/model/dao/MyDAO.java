@@ -1,6 +1,7 @@
 package edu.kh.mind.member.model.dao;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Reply;
 
 import edu.kh.mind.board.model.vo.Scrap;
@@ -12,6 +13,7 @@ import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
+import edu.kh.mind.pro.model.vo.Reservation;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -129,6 +131,14 @@ public class MyDAO {
 		return sqlSession.selectOne("boardMapper.countScrapList", map);
 	}
 
+	/**
+	 * 상담 예약 조회
+	 * @param memberNo
+	 * @return reservationList
+	 */
+	public List<Reservation> selectReservation(int memberNo) {
+		return sqlSession.selectList("memberMapper.selectReservation", memberNo);
+	}
 	// 내가 공감한 게시글(수)
 	public int countEmpathyList(Map<String, Integer> map) {
 		return sqlSession.selectOne("boardMapper.countEmpathyList", map);
@@ -138,5 +148,9 @@ public class MyDAO {
 	public List<Board> myEmpathyList(Map<String, Integer> map) {
 //		System.out.println(map.get("memberNo"));
 		return sqlSession.selectList("boardMapper.myEmpathyList",map);
+	}
+
+	public Image getMyImage(int memberNo) {
+		return sqlSession.selectOne("boardMapper.getMyImage", memberNo);
 	}
 }

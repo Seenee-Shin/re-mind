@@ -260,6 +260,11 @@ public class AdminProServiceImpl implements AdminProService{
 		return result;
 	}
 
+	@Override
+	public List<Profession> classList(int professionNo) {
+		return dao.classList(professionNo);
+	}
+
 
 	//이메일 인증 키 검증
 
