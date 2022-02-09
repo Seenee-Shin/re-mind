@@ -73,10 +73,6 @@ public class MyDAO {
 		return sqlSession.selectList("boardMapper.myBoardList", map);
 	}
 
-	// 페이징 처리 필요한 전체 게시글 계산
-	public int getBoardListCount(int memberNo) {
-		return sqlSession.selectOne("boardMapper.getBoardListCount", memberNo);
-	}
 
 	// 내 댓글 보기
     public List<Reply> selectMyReplyList(Map<String, Integer> map) {
@@ -169,7 +165,6 @@ public class MyDAO {
 	public Image getMyImage(int memberNo) {
 		return sqlSession.selectOne("boardMapper.getMyImage", memberNo);
 	}
-
 	public int selectProfile(Image image) {
 		return sqlSession.selectOne("boardMapper.selectProfile", image);
 	}
@@ -182,15 +177,16 @@ public class MyDAO {
 		return sqlSession.insert("boardMapper.insertImage", image);
 	}
 
+	// 내 찜 사 페이징
+	public int getCounselorPagination(int memberNo) {
+		System.out.println(memberNo);
+		return sqlSession.selectOne("boardMapper.getCounselorListCount", memberNo);
+	}
+
 	// 내가 찜한 상담사 목록
 	public List<Board> selectCounselorList(Pagination pagination) {
 		System.out.println(pagination);
 		return sqlSession.selectList("boardMapper.selectCounselorList", pagination);
 	}
 
-	// 내 찜 사 페이징
-	public int getCounselorPagination(int memberNo) {
-		System.out.println(memberNo);
-		return sqlSession.selectOne("boardMapper.getCounselorListCount", memberNo);
-	}
 }
