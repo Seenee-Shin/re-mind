@@ -49,6 +49,9 @@
 		<result property="maxValue" column="MAX_VALUE"/>
 
 		<result property="empathyStatusName" column="EMPATHY_STATUS_NM"/>
+		<result property="reviewStarpoint" column="REVIEW_STARPOINT"/>
+		<result property="proIntro" column="PRO_INTRO"/>
+		<result property="counselPrice" column="COUNSEL_PRICE"/>
 
 		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
@@ -305,7 +308,7 @@
 	<!-- 전체 게시글 수 count -->
 	<select id="getBoardListCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD
-		WHERE BOARD_STATUS_CD != 203
+		WHERE BOARD_STATUS_CD = 201
 		AND MEMBER_NO = #{memberNo}
 	</select>
 	
@@ -371,6 +374,31 @@
 		SELECT IMAGE_PATH, IMAGE_NM
 		FROM IMAGE
 		WHERE MEMBER_NO = #{memberNo} AND IMAGE_LEVEL = 0
+	</select>
+	
+	<!-- 내찜사 페이징 전체 수 -->
+	<select id="getCounselorListCount" resultMap="board_rm">
+		SELECT COUNT(*) FROM PROFESSION_WISH
+		WHERE MEMBER_NO = #{memberNo};
+	</select>
+
+	<!-- 내찜사 목록 -->
+	<select id="selectCounselorList" resultMap="board_rm">
+		SELECT DISTINCT IMAGE_NM, IMAGE_PATH,
+						(SELECT AVG(REVIEW_STARPOINT)
+						 FROM REVIEW
+						 GROUP BY PROFESSION_NO) "AVG_REVIEW_STARPOINT",
+						COUNT(REVIEW_STARPOINT) "COUNT_STAR", PROFESSION_NM, PRO_INTRO,
+						LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
+		FROM PROFESSION
+			JOIN IMAGE USING(PROFESSION_NO)
+			JOIN REVIEW USING(PROFESSION_NO)
+			JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
+			JOIN PROFESSION_PRICE USING(PROFESSION_NO)
+			JOIN PROFESSION_WISH USING(PROFESSION_NO)
+		WHERE PROFESSION_WISH.MEMBER_NO = #{memberNo} /* 찜을 누른 회원 번호 */
+		GROUP BY IMAGE_NM, IMAGE_PATH, REVIEW_STARPOINT,
+			PROFESSION_NM, PRO_INTRO
 	</select>
 
 	<select id="selectProfile" resultType="_int">

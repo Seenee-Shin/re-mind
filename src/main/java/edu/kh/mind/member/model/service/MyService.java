@@ -95,4 +95,10 @@ public interface MyService {
 	Image getMyImage(int memberNo);
 
 	int updateMyForm(Image image, MultipartFile images, String webPath, String serverPath);
+
+	// 내가 찜한 상담사 목록
+	List<Board> selectCounselorList(Pagination pagination);
+
+	// 내 찜 사 페이징
+	Pagination getCounselorPagination(int cp, int memberNo);
 }

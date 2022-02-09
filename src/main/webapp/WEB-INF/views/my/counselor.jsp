@@ -71,3 +71,8 @@
 </article>
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
+
+<script>
+    <!-- 세션에 올라가있는 loinMember -->
+    const memberNo = ${loginMember.memberNo};
+</script>
