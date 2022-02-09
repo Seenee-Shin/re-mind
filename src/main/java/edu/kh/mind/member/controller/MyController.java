@@ -242,37 +242,10 @@ public class MyController {
     }
 
     @GetMapping("myBoardList")
-    public String myBoardList(Model model,
-                              @ModelAttribute("loginMember") Member loginMember,
-                              HttpSession session,RedirectAttributes ra, Board board,
-                              @RequestParam(value="cp", required = false, defaultValue="1")int cp){
+    public String myBoardList(Model model){
         model.addAttribute("css", "my/myBoardList");
 
-        String path = null;
-        int memberNo = 0;
-        Pagination pagination = null;
-
-
-        if (session.getAttribute("loginMember") != null) {
-            memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
-            pagination = service.getPagination(cp, memberNo);
-//            System.out.println(pagination);
-            pagination.setMemberNo(memberNo);
-
-            List<Board> myBoardList = service.myBoardList(pagination);
-//            System.out.println(myBoardList.get(board.getBoardNo()).toString());
-
-
-
-            model.addAttribute("pagination", pagination);
-            model.addAttribute("myBoardList", myBoardList);
-            path = "my/myBoardList";
-        } else {
-            Util.swalSetMessage("로그인이 필요합니다.", null, "info", ra);
-            path = "/";
-        }
-        return path;
-
+        return "my/myBoardList";
     }
 
     @GetMapping("postscript")

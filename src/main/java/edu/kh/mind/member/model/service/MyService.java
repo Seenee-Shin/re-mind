@@ -4,6 +4,7 @@ import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
 
+import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -51,13 +52,13 @@ public interface MyService {
 
 
 	// 내가 쓴글 조회
-	List<Board> myBoardList(Pagination pagination);
+	List<Board> myBoardList(Map<String, Integer> map);
 
 	// 페이징
 	Pagination getPagination(int cp, int memberNo);
 
 	// 내가 쓴 댓글 조회
-    List<Reply> selectMyReplyList(int memberNo);
+    List<Reply> selectMyReplyList(Map<String, Integer> map);
 
     
     // 후기 등록
@@ -71,4 +72,11 @@ public interface MyService {
 
 	int secessionMember(Naver naver, Member loginMember);
 
+	List<Scrap> myScrapList(Map<String, Integer> map);
+
+	int countBoardList(Map<String, Integer> map);
+
+	int countReplyList(Map<String, Integer> map);
+
+	int countScrapList(Map<String, Integer> map);
 }
