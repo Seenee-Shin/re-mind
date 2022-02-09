@@ -101,6 +101,16 @@ public class AdminProController {
 		return "adminPro/proRegister";
 	}
 
+	
+	// 클래스 
+	@RequestMapping(value = "classList", method=RequestMethod.GET)
+	@ResponseBody
+	public String classList(HttpSession session ) {
+		return null;
+	}
+	
+	
+	
 	// 아이디 중복 검사
 	@RequestMapping(value = "emailDupCheck", method=RequestMethod.GET)
 	@ResponseBody

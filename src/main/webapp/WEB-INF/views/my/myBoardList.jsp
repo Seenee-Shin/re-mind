@@ -27,38 +27,36 @@
         </tr>
         </thead>
         <tbody>
-            <c:choose>
+<%--            <c:choose>--%>
 
-                <c:when test="${empty myBoardList && empty selectMyReplyList}">
-                    <%-- 조회된 게시글 목록이 없을 때 --%>
-                    <tr>
-                        <td colspan="4">게시글이 존재하지 않습니다.</td>
-                    </tr>
-                </c:when>
-                <c:otherwise>
-                    <c:forEach items="${myBoardList}" var="myBoard">
-                        <%-- 조회된 게시글 목록이 있을 때 --%>
-                        <tr class="board-view">
-                            <td>${myBoard.boardNo}</td>
-                            <td>${myBoard.boardTitle}
-                                    <%-- <a href="${contextPath}/mind/board/view/${myBoard.boardNo}">--%>
-                                    <%-- 상제조회 페이지 완성시 --%>
-                            </td>
-                            <td>${myBoard.createDate}</td>
-                            <td>${myBoard.readCount}</td>
-                        </tr>
-                    </c:forEach>
-                </c:otherwise>
+<%--                <c:when test="${empty myBoardList && empty selectMyReplyList}">--%>
+<%--                    &lt;%&ndash; 조회된 게시글 목록이 없을 때 &ndash;%&gt;--%>
+<%--                    <tr>--%>
+<%--                        <td colspan="4">게시글이 존재하지 않습니다.</td>--%>
+<%--                    </tr>--%>
+<%--                </c:when>--%>
+<%--                <c:otherwise>--%>
+<%--                    <c:forEach items="${myBoardList}" var="myBoard">--%>
+<%--                        &lt;%&ndash; 조회된 게시글 목록이 있을 때 &ndash;%&gt;--%>
+<%--                        <tr class="board-view">--%>
+<%--                            <td>${myBoard.boardNo}</td>--%>
+<%--                            <td>${myBoard.boardTitle}--%>
+<%--                                    &lt;%&ndash; <a href="${contextPath}/mind/board/view/${myBoard.boardNo}">&ndash;%&gt;--%>
+<%--                                    &lt;%&ndash; 상제조회 페이지 완성시 &ndash;%&gt;--%>
+<%--                            </td>--%>
+<%--                            <td>${myBoard.createDate}</td>--%>
+<%--                            <td>${myBoard.readCount}</td>--%>
+<%--                        </tr>--%>
+<%--                    </c:forEach>--%>
+<%--                </c:otherwise>--%>
 
-            </c:choose>
-
-            <%--
+<%--            </c:choose>--%>
         <tr class="board-view">
             <td>33</td>
             <td>너무 힘드네요...너무 힘드네요... 너무 힘드네요...</td>
             <td>2021.05.17</td>
             <td>12</td>
-        </tr>--%>
+        </tr>
         </tbody>
     </table>
 
@@ -122,48 +120,43 @@
     </div>
 
 
-
-    <ul id="pagingul"></ul>
+    <div id="pagination"></div>
 
 </article>
 
-<%--<select id="dataPerPage">--%>
-<%--    <option value="10">10개씩보기</option>--%>
-<%--</select>--%>
 
-<%-- 강사님 코드 참고 --%>
-<div class="my-5">
-    <ul class="pagination">
+<%--<div class="my-5">--%>
+<%--    <ul class="pagination">--%>
 
-        <c:if test="${pagination.startPage != 1 }">
-            <li><a class="page-link" href="myBoardList?cp=1${c}${s}">&lt;&lt;</a></li>
-            <li><a class="page-link"
-                   href="myBoardList?cp=${pagination.prevPage}${s}">&lt;</a></li>
-        </c:if>
+<%--        <c:if test="${pagination.startPage != 1 }">--%>
+<%--            <li><a class="page-link" href="myBoardList?cp=1${c}${s}">&lt;&lt;</a></li>--%>
+<%--            <li><a class="page-link"--%>
+<%--                   href="myBoardList?cp=${pagination.prevPage}${s}">&lt;</a></li>--%>
+<%--        </c:if>--%>
 
-        <%-- 페이지네이션 번호 목록 --%>
-        <c:forEach begin="${pagination.startPage}"
-                   end="${pagination.endPage}" step="1" var="i">
-            <c:choose>
-                <c:when test="${i == pagination.currentPage}">
-                    <li><a class="page-link"
-                           style="color: black; font-weight: bold;">${i}</a></li>
-                </c:when>
+<%--        &lt;%&ndash; 페이지네이션 번호 목록 &ndash;%&gt;--%>
+<%--        <c:forEach begin="${pagination.startPage}"--%>
+<%--                   end="${pagination.endPage}" step="1" var="i">--%>
+<%--            <c:choose>--%>
+<%--                <c:when test="${i == pagination.currentPage}">--%>
+<%--                    <li><a class="page-link"--%>
+<%--                           style="color: black; font-weight: bold;">${i}</a></li>--%>
+<%--                </c:when>--%>
 
-                <c:otherwise>
-                    <li><a class="page-link" href="myBoardList?cp=${i}${c}${s}">${i}</a></li>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
+<%--                <c:otherwise>--%>
+<%--                    <li><a class="page-link" href="myBoardList?cp=${i}${c}${s}">${i}</a></li>--%>
+<%--                </c:otherwise>--%>
+<%--            </c:choose>--%>
+<%--        </c:forEach>--%>
 
-        <c:if test="${pagination.endPage != pagination.maxPage }">
-            <li><a class="page-link"
-                   href="myBoardList?cp=${pagination.nextPage}${c}${s}">&gt;</a></li>
-            <li><a class="page-link"
-                   href="myBoardList?cp=${pagination.maxPage }${s}">&gt;&gt;</a></li>
-        </c:if>
-    </ul>
-</div>
+<%--        <c:if test="${pagination.endPage != pagination.maxPage }">--%>
+<%--            <li><a class="page-link"--%>
+<%--                   href="myBoardList?cp=${pagination.nextPage}${c}${s}">&gt;</a></li>--%>
+<%--            <li><a class="page-link"--%>
+<%--                   href="myBoardList?cp=${pagination.maxPage }${s}">&gt;&gt;</a></li>--%>
+<%--        </c:if>--%>
+<%--    </ul>--%>
+<%--</div>--%>
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
@@ -173,17 +166,4 @@
     const memberNo = ${loginMember.memberNo};
 </script>
 <script src="${contextPath}/resources/js/my/myBoardList.js"></script>
-<script>
 
-    let qs = "";
-
-    // 쿼리스트링에 cp가 없으면 1, 있으면 작성된 값
-    if(getParam("cp") == null){
-        qs += "?cp=1";
-    }else{
-        qs += "?cp=" + getParam("cp");
-    }
-
-
-    location.href = "myBoardList" + qs;
-</script>
