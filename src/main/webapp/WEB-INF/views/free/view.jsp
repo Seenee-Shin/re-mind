@@ -142,7 +142,7 @@
 					       
 					     <div class="comment_list" id="comment_list">
 							<c:forEach items="${rList}" var="reply">
-			                     <div class="comment_view  <c:if test="${reply.parentReplyNo != 0 }"> child </c:if>">
+			                     <div class="comment_view  <c:if test="${reply.parentReplyNo != 0}"> child </c:if>">
 			                         <div class="user_info">
 			                             <div class="user_pic light_brown_bg" style="background-image: url();">
 			                             </div>
@@ -157,7 +157,6 @@
 			                         </div>
 			
 			                         <div class="comment_btn">
-				                         
 			                            	<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
 				                         	<c:if test="${loginMember.memberNo == reply.memberNo }">
 				                            	<button class="dark-brown edit_btn " onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>

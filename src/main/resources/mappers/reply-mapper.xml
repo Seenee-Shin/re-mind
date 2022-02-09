@@ -68,20 +68,28 @@
 
 	<!-- 댓글 삽입 -->
 	<insert id="insertReply" >
-		INSERT INTO REPLY VALUES(SEQ_REPLY_NO.NEXTVAL,#{replyContent},DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{boardNo},#{memberNo},DEFAULT,DEFAULT )  
+		INSERT INTO REPLY VALUES(SEQ_REPLY_NO.NEXTVAL,#{replyContent},DEFAULT,
+		DEFAULT,DEFAULT,DEFAULT,#{boardNo},#{memberNo},DEFAULT,
+		 	<if test="parentReplyNo == 0">
+		 		NULL
+		 	</if>
+		 	
+		 	<if test="parentReplyNo != 0">
+			   #{parentReplyNo} 
+		 	</if> )  
 	</insert>
 
 	<!-- 댓글 수정  -->
 	<update id="updateReply">
 		UPDATE REPLY SET 
 		REPLY_CONTENT = #{replyContent}, REPLY_MODIFY_DT = SYSDATE
-		WHERE REPLY_NO = #{replyNo};
+		WHERE REPLY_NO = #{replyNo}
 	</update>
 	
 	<!-- 댓글 삭제  -->
 	<update id="deleteReply">
 		UPDATE REPLY SET 
 		REPLY_STATUS_CD = 302, REPLY_MODIFY_DT = SYSDATE
-		WHERE REPLY_NO = #{replyNo};
+		WHERE REPLY_NO = #{replyNo}
 	</update>
 </mapper>

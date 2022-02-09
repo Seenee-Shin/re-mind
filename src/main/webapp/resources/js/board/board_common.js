@@ -105,7 +105,8 @@ function postingValidate(){
 		contentType: false,
 		success: function (result) {
 			if(result > 0){
-   	    		alert("글작성 완료");
+                swal({"title" : "글이 작성되었습니다." , 
+                      "icon" : "success"});
    	    		$("#input_file").val("");
    	    		const imgWrap = document.querySelector("#imgWrap");
 
@@ -124,10 +125,12 @@ function postingValidate(){
 				// 새로 고침
 				// location.reload();
 			} else
-				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+			    swal({"title" : "글작성 실패" , 
+                      "icon" : "error"});
 			},
 		error: function (xhr, status, error) {
-			alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
+			    swal({"title" : "서버 연결 오류" , 
+                      "icon" : "error"});
 		}
     });
 
