@@ -15,7 +15,6 @@ public class ReplyServiceImpl implements ReplyService {
 	private ReplyDAO dao;
 
 	// 댓글 목록 조회
-	@Override
 	public List<Reply> selectList(int boardNo) {
 		return dao.selectList(boardNo);
 	}

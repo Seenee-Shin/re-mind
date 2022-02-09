@@ -99,7 +99,7 @@
                     <a href="#">커뮤니티</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
                         <li><a href="${contextPath}/free/insert">자유게시판</a></li>
-                        <li><a href="/worryList">고민상담 게시판</a></li>
+                        <li><a href="${contextPath}/worry/worryList">고민상담 게시판</a></li>
                         <li><a href="/m">마인드 포스팃</a></li>
                         <li><a href="/secretList">털어놓기</a></li>
                     </ul>

@@ -245,8 +245,20 @@ select{
     color:#A59999;
 }
 
-.check_box_wrap>label.dark_brown_border:hover{background-color:#E5D4C5; color: white; border-color:#E5D4C5 ;}
-.check_box_wrap>label.dark_brown_border.active{background-color:#A59999; color: white;}
+.check_box_wrap>label.dark_brown_border:hover{background-color:#E5D4C5; color: white; border-color:#E5D4C5;}
+.check_box_wrap>label.dark_brown_border.active{background-color:#A59999; color: white; border-color:#A59999;}
+
+#imgWrap{text-align: left;}
+.deleteImg{position:absolute; top:10px; right:10px;}
+
+.boardImg{
+    position: relative;
+    width:20%;
+    height: auto;
+}
+.boardImg>img{
+    width: 100%;
+}
 
 
 .write_option_area{
@@ -280,10 +292,8 @@ select{
 #openCategoryBtn{
 	    display: flow-root;
 }
-.board_write_warp>.btn_area>a>i{
-    font-size: 25px;
-    cursor: pointer;
-}
+.board_write_warp > .btn_area > label > i{font-size: 25px; cursor: pointer;}
+
 .m_side_menu{
     display: none;
 }

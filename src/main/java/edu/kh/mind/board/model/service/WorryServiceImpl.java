@@ -18,12 +18,10 @@ public class WorryServiceImpl implements WorryService {
 
 	// 고민상담 게시글
 	@Override
-	public List<Board> selectWorryList(String worryCategoryCode) {
-		Map<String, String> map = new HashMap<>();
-		map.put("worryCategoryCode", worryCategoryCode);
-		map.put("boardCategoryCode", "102");
+	public List<Board> selectWorryList(Map<String, String> param) {
+		param.put("boardCategoryCode", "102");
 
-		return dao.selectWorryList(map);
+		return dao.selectWorryList(param);
 	}
 
 	// 고민상담 카테고리
