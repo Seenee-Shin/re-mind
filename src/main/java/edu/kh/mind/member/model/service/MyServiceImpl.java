@@ -127,14 +127,6 @@ public class MyServiceImpl implements MyService {
         return dao.myScrapList(map);
     }
 
-    // 페이징 처리
-    @Override
-    public Pagination getPagination(int cp, int memberNo) {
-        // 전체 게시글 수
-        int listCount = dao.getBoardListCount(memberNo);
-        return new Pagination(listCount, cp);
-    }
-
     @Override
     public int countReplyList(Map<String, Integer> map) {
         return dao.countReplyList(map);
@@ -175,17 +167,20 @@ public class MyServiceImpl implements MyService {
         return dao.myEmpathyList(map);
     }
 
-    // 내 찜 사
-    @Override
-    public List<Board> selectCounselorList(Pagination pagination) {
-        return dao.selectCounselorList(pagination);
-    }
     // 내 찜 사 페이징 처리
+    @Transactional
     @Override
     public Pagination getCounselorPagination(int cp, int memberNo) {
         int listCount = dao.getCounselorPagination(memberNo);
         return new Pagination(listCount, cp);
     }
+
+    // 내 찜 사
+    @Override
+    public List<Board> selectCounselorList(Pagination pagination) {
+        return dao.selectCounselorList(pagination);
+    }
+
 
 
 }
