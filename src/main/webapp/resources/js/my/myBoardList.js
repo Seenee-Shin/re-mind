@@ -94,13 +94,14 @@ function calcPagination(){
 }
 
 
-var btnNumber;
+var btnNumber = 1;
 $("#select_myBoardList").on("click", function (){
 
     btnNumber = 1;
     currentPage = 1;
 
     resultList.length = 0;
+    calcPagination();
     getBoardList();
 });
 $("#select_myReplyList").on("click", function (){
@@ -109,6 +110,7 @@ $("#select_myReplyList").on("click", function (){
     currentPage = 1;
 
     resultList.length = 0;
+    calcPagination();
     getReplyList();
 });
 $("#select_myScrapList").on("click", function (){
@@ -117,6 +119,7 @@ $("#select_myScrapList").on("click", function (){
     currentPage = 1;
 
     resultList.length = 0;
+    calcPagination();
     getScrapList();
 });
 
@@ -181,6 +184,7 @@ $(document).on("click", "#pagination div", function (){
     const clickable = $(this).text();
 
     currentPage = Number.parseInt(clickable);
+
     calcPagination();
 
     if(btnNumber == 1)      getBoardList();
@@ -201,6 +205,12 @@ $(document).on("click", "#pagination span", function (){
         else                    currentPage = currentPage - 10;
     }else if(clickable == '<<')  currentPage = 1;
     else if(clickable == '>>')   currentPage = maxPage;
+
+    calcPagination();
+
+    if(btnNumber == 1)      getBoardList();
+    else if(btnNumber == 2) getReplyList();
+    else if(btnNumber == 3) getScrapList();
 
     makeList();
 });
