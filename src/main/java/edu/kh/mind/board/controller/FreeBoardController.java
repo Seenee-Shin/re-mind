@@ -171,12 +171,25 @@ public class FreeBoardController {
     			return "redirect:"+path;
     		}
     		
-    
-    @RequestMapping("delete")
-    public String freeBoarDelete(Model model) {
+    //게시글 삭제 연결 
+    @RequestMapping(value="delete")
+    public String freeBoarDelete(int boardNo, Model model, RedirectAttributes ra) {
     	model.addAttribute("header", "community");
     	model.addAttribute("css", "board/freeList");
-    	return "free/list";
+    	
+    	int result = service.deleteBoard(boardNo);
+    	
+    	String path = null;
+		
+		if(result > 0) {
+			Util.swalSetMessage("게시글 삭제 성공", null, "success", ra);
+			path = "insert";
+			
+		}else {
+			Util.swalSetMessage("게시글 삭제 실패", null, "error", ra);
+			path = "view/" + boardNo;
+		}
+    	return "redirect:" + path;
     }
     
     //예외처리
