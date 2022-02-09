@@ -23,6 +23,7 @@
 		<typeAlias type="edu.kh.mind.board.model.vo.MindPost" alias="MindPost"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Empathy" alias="Empathy"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Image" alias="Image"/>
+		<typeAlias type="edu.kh.mind.board.model.vo.Scrap" alias="Scrap"/>
 
 
 		<typeAlias type="edu.kh.mind.selftest.model.vo.Selftest" alias="Selftest"/>

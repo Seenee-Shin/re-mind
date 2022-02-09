@@ -36,9 +36,6 @@ $(document).on("click", ".div-btn", function(){
 });
 $(".div-btn").eq(0).click();
 
-
-// console.log($(".side_menu li"));
-
 var backupWidth;
 window.onresize = function(){
     var innerWidth = window.innerWidth;
@@ -72,130 +69,237 @@ $(document).on("click", ".opImg > img", function(){
 });
 
 
-// $(window).scroll(function(e){
-//     // console.log($(this).scrollTop());
-//
-//     underLineDraw(line, $(".div-btn").eq(backupIndex));
-// });
-
-
-/*
-
-
-let totalData; //총 데이터 수
-let dataPerPage = 10; //한 페이지에 나타낼 글 수
-let pageCount = 10; //페이징에 나타낼 페이지 수
-let globalCurrentPage=1; //현재 페이지
-
-var qwe = [];
-
-*/
-
-// console.log(qwe);
-//
-// console.log(totalData);
-
-/*
-//현재 페이지(currentPage)와 페이지당 글 개수(dataPerPage) 반영
-function displayData(currentPage, dataPerPage) {
-
-    let chartHtml = "";
-
-//Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림..
-    currentPage = Number(currentPage);
-    dataPerPage = Number(dataPerPage);
-
-    for (
-        var i = (currentPage - 1) * dataPerPage;
-        i < (currentPage - 1) * dataPerPage + dataPerPage;
-        i++
-    ) {
-        let td = '<td>' + qwe[i].boardNo + '</td>' +
-            '<td>' + qwe.boardTitle + '</td>' +
-            '<td>' + qwe.replyCreateDate + '</td>' +
-            '<td>' + qwe.readCount + '</td>';
-
-
-        }
-        const tr = $('<tr class=\"board-view\" style=\"background-color: rgb(252, 247, 243);\">');
-
-        tr.append(td);
-        $("tbody").append(tr);
-}*/
-
-
 var currentPage = 1;
-var listCount;
-
 var limit = 10;
 var pageSize = 10;
+var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
+last = currentPage * limit;
+first = last - (limit - 1) <= 0 ? 1 : last - (limit - 1);
+function calcPagination(){
 
-var maxPage;
-var startPage;
-var endPage;
+    maxPage = Number.parseInt(Math.floor(listCount / limit));
+    startPage = (currentPage-1) / pageSize * pageSize + 1;
+    endPage = startPage + pageSize - 1;
 
-var prevPage;
-var nextPage;
-// private int currentPage;		// 현재 페이지 번호
-// private int listCount;			// 전체 게시글 수
-// private int limit = 10;			// 한 페이지 목록에 보여지는 게시글 수
-// private int pageSize = 10;		// 보여질 페이지 번호 개수
-// private int maxPage;			// 마지막 페이지 번호
-// private int startPage;			// 보여지는 맨 앞 페이지 번호
-// private int endPage;			// 보여지는 맨 뒤 페이지 번호
-// private int prevPage;			// 이전 페이지의 페이지 번호 맨 끝
-// private int nextPage;			// 다음 페이지의 페이지 번호 맨 앞
+    if(endPage > maxPage)   endPage = maxPage;
 
+    if(currentPage <= 10)	prevPage = 1;
+    else                    prevPage = startPage - 1;
+
+    if(endPage == maxPage) nextPage = maxPage;
+    else				   nextPage = endPage + 1;
+
+    last = currentPage * limit;
+    first = last - (limit - 1) <= 0 ? 1 : last - (limit - 1);
+}
+
+
+var btnNumber = 1;
+$("#select_myBoardList").on("click", function (){
+
+    btnNumber = 1;
+    currentPage = 1;
+
+    resultList.length = 0;
+    calcPagination();
+    getBoardList();
+});
 $("#select_myReplyList").on("click", function (){
 
+    btnNumber = 2;
+    currentPage = 1;
+
+    resultList.length = 0;
+    calcPagination();
+    getReplyList();
+});
+$("#select_myScrapList").on("click", function (){
+
+    btnNumber = 3;
+    currentPage = 1;
+
+    resultList.length = 0;
+    calcPagination();
+    getScrapList();
+});
+
+
+var resultList = [];
+function makeList(){
+    calcPagination();
+
+    $("tbody").empty();
+    $(".pagination").empty();
+
+    $.each(resultList, function (i, item){
+
+        let tr = $('<tr class="board-view" style="background-color: rgb(252, 247, 243);">');
+
+        let td1;
+        if(item.boardNo != undefined)
+            td1 = $("<td>"+item.boardNo+"</td>");
+        else if(item.postNo != 0)
+            td1 = $("<td>"+item.postNo+"</td>");
+
+        let td2 = $("<td>"+item.boardTitle+"</td>");
+
+        let td3;
+        if(item.replyCreateDate != undefined)
+            td3 = $("<td>"+item.replyCreateDate+"</td>");
+        else if(item.createDate != undefined)
+            td3 = $("<td>"+item.createDate+"</td>");
+        else if(item.enrollDate != undefined)
+            td3 = $("<td>"+item.enrollDate+"</td>");
+
+        let td4 = $("<td>"+item.readCount+"</td>");
+
+        tr.append(td1, td2, td3, td4);
+        $("tbody").append(tr);
+    });
+
+    const pagination = $("#pagination");
+
+    pagination.empty();
+    const leftSpan = $('<span><</span>');
+    const leftDoubleSpan = $('<span><<</span>');
+
+    const rightSpan = $('<span>></span>');
+    const rightDoubleSpan = $('<span>>></span>');
+
+    pagination.append(leftDoubleSpan, leftSpan);
+    for(let i = endPage - 9; i <= endPage; i++){
+        if(i < 1) i = 1;
+
+        if(currentPage == i)
+            pagination.append($('<div style="background-color: #dddddd;">' + i + '</div>'));
+        else
+            pagination.append($('<div>' + i + '</div>'));
+    }
+    pagination.append(rightSpan, rightDoubleSpan);
+    colorSet();
+}
+
+$(document).on("click", "#pagination div", function (){
+    const index = $("#pagination div").index($(this));
+    const clickable = $(this).text();
+
+    currentPage = Number.parseInt(clickable);
+
+    calcPagination();
+
+    if(btnNumber == 1)      getBoardList();
+    else if(btnNumber == 2) getReplyList();
+    else if(btnNumber == 3) getScrapList();
+
+    makeList();
+});
+
+$(document).on("click", "#pagination span", function (){
+    const clickable = $(this).text();
+
+    if(clickable == '>'){
+        if(currentPage > maxPage - 11)  currentPage = maxPage;
+        else                            currentPage = currentPage + 10;
+    }else if(clickable == '<'){
+        if(currentPage < 11)    currentPage = 1;
+        else                    currentPage = currentPage - 10;
+    }else if(clickable == '<<')  currentPage = 1;
+    else if(clickable == '>>')   currentPage = maxPage;
+
+    calcPagination();
+
+    if(btnNumber == 1)      getBoardList();
+    else if(btnNumber == 2) getReplyList();
+    else if(btnNumber == 3) getScrapList();
+
+    makeList();
+});
+
+
+function getReplyList(){
     $.ajax({
         url: "myReplyList",
-        type: "GET",
-        data: {"memberNo": memberNo},
+        type: "POST",
+        data: {
+            "memberNo": memberNo,
+            "first":first,
+            "last":last
+        },
         dataType: "json",
         success: function (result) {
-
-            listCount = result.length;
-
-            console.log(listCount)
-            maxPage = Number.parseInt(Math.floor(listCount / limit));
-            startPage = (currentPage-1) / pageSize * pageSize + 1;
-            endPage = startPage + pageSize - 1;
-
-            if(endPage > maxPage)   endPage = maxPage;
-
-            if(currentPage <= 10)	prevPage = 1;
-            else                    prevPage = startPage - 1;
-
-            if(endPage == maxPage) nextPage = maxPage;
-            else				   nextPage = endPage + 1;
-
-            $("tbody").empty();
-            $(".pagination").empty();
-
             $.each(result, function (i, item){
-
-                let last = currentPage * 10;
-                var first = last - (10 - 1) <= 0 ? 1 : last - (10 - 1);
-
-                if(i > last || i <= first)    return;
-
-                let tr = $('<tr className="board-view" style="background-color: rgb(252, 247, 243);">');
-                let td1 = $("<td>"+item.replyNo+"</td>");
-                let td2 = $("<td>"+item.boardTitle+"</td>");
-                let td3 = $("<td>"+item.replyCreateDate+"</td>");
-                let td4 = $("<td>"+item.readCount+"</td>");
-
-                tr.append(td1, td2, td3, td4);
-                $("tbody").append(tr);
-
+                if(result.length - 1 == i){
+                    listCount = Number.parseInt(item.maxValue);
+                    return;
+                }
+                resultList[i] = item;
             });
         },
         error: function (error, status) {
             console.log("error : " + error + "\n" + "status : " + status);
         }
     }).done(function (){
-        colorSet();
+        makeList();
     });
+}
+
+function getScrapList(){
+    $.ajax({
+        url: "myScrapList",
+        type: "POST",
+        data: {
+            "memberNo": memberNo,
+            "first":first,
+            "last":last
+        },
+        dataType: "json",
+        success: function (result) {
+            $.each(result, function (i, item){
+                if(result.length - 1 == i){
+                    listCount = Number.parseInt(item.maxValue);
+                    return;
+                }
+                resultList[i] = item;
+            });
+        },
+        error: function (error, status) {
+            console.log("error : " + error + "\n" + "status : " + status);
+        }
+    }).done(function (){
+        makeList();
+    });
+}
+
+function getBoardList(){
+    $.ajax({
+        url: "myBoardList",
+        type: "POST",
+        data: {
+            "memberNo": memberNo,
+            "first":first,
+            "last":last
+        },
+        dataType: "json",
+        success: function (result) {
+            $.each(result, function (i, item){
+                // currentPage = 1;
+                if(result.length - 1 == i){
+                    listCount = Number.parseInt(item.maxValue);
+                    return;
+                }
+                resultList[i] = item;
+            });
+        },
+        error: function (error, status) {
+            console.log("error : " + error + "\n" + "status : " + status);
+        }
+    }).done(function (){
+        makeList();
+    });
+}
+$(function (){
+    getBoardList();
 });
+
+
 
