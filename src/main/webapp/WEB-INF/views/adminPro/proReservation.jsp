@@ -73,15 +73,15 @@ $(function () {
 	            language: lang_kor,
 	            data: data,
 	            columns: [
-	               { data: null,
-	            	 render: function(data){
-	            		 console.log(data.memberNo)
-	            	 }},
+	               { data: "reservationNo"},
 	               { data: "memberNo" },
-	               { data: "statusCode" },
+	               { data: "reservationStatusCode" },
 	               { data: "reservationEnrollDate"},
-	               { data: "reservationEnrollTime" },
-	               { data: "counselCategoryName"}
+	               { data: null,
+	            	   render: function(data){
+	            		   return data.reservationEnrollTime + ":00";
+	            	   }},
+	               { data: "counselCategoryNm"}
 	            ]
 	         })
 	      }
