@@ -78,10 +78,6 @@ function fileDelete(fileNum){
     console.log(content_files);
 }
 
-const boardContent =  $('textarea[name=boardContent]').val();
-const replyCheckCode =  $('select[name=replyCheckCode]').val();
-const scrapCheckCode =  $('select[name=scrapCheckCode]').val();
-const empathyCheckCode =  $('select[name=empathyCheckCode]').val();
 
 
 function postingValidate(){
@@ -130,7 +126,22 @@ function postingValidate(){
    	      contentType: false,
    	      success: function (result) {
    	    	if(result > 0){
+				
    	    		alert("글작성 완료");
+   	    		$("#input_file").val("");
+   	    		const imgWrap = document.querySelector("#imgWrap");
+
+				while (imgWrap.hasChildNodes()) {	// 부모노드가 자식이 있는지 여부를 알아낸다
+				  imgWrap.removeChild(
+				    imgWrap.firstChild
+				  );
+				}
+				// 내용삭제
+				$("#post_textarea").val(""); 
+				$("replyCheckCode").val("1")
+				$("scrapCheckCode").val("1")
+				$("empathyCheckCode").val("1")
+				
    	    		
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");

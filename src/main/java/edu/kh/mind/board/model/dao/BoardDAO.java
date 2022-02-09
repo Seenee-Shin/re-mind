@@ -47,4 +47,9 @@ public class BoardDAO {
 		return sqlSession.update("boardMapper.increaseReadCount",boardNo);
 	}
 
+	public int deleteBoard(int boardNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.deleteBoard", boardNo);
+	}
+
 }
