@@ -58,6 +58,23 @@ public class MyController {
         return "my/appointment";
     }
 
+    // 상담 예약 취소
+    @ResponseBody
+    @RequestMapping(value="appointmentCancel", method=RequestMethod.POST)
+    public int appointmentCancel(@ModelAttribute("loginMember") Member loginMember, Reservation reservation) {
+
+        System.out.println(loginMember.getMemberNo());
+        System.out.println(reservation.getReservationNo());
+
+        reservation.setMemberNo(loginMember.getMemberNo());
+        int result = service.appointmentCancel(reservation);
+
+
+        return result;
+    }
+
+
+
     @RequestMapping("appointment/past")
     public String appointmentPast(Model model) {
     	model.addAttribute("css", "my");
