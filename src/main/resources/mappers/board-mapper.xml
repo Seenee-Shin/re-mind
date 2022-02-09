@@ -30,7 +30,6 @@
 		<result property="memberImage" column="MEMBER_IMAGE"/>
 
 		<result property="empathyStatusCode" column="EMPATHY_STATUS_CD"/>
-		<result property="myEnrollDate" column="BOARD_CREATE_DT"/>
 
 		<result property="professionImage" column="PROFESSION_IMAGE"/>
 		
