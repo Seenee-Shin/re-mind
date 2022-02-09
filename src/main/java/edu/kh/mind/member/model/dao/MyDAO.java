@@ -1,9 +1,9 @@
 package edu.kh.mind.member.model.dao;
 
 import edu.kh.mind.board.model.vo.Board;
-import edu.kh.mind.board.model.vo.Pagination;
 import edu.kh.mind.board.model.vo.Reply;
 
+import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -12,7 +12,6 @@ import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
-import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -71,14 +70,8 @@ public class MyDAO {
 	}
 
 	// 내 게시글 보기
-    public List<Board> myBoardList(Pagination pagination) {
-
-		int offset = (pagination.getCurrentPage() -1) * pagination.getLimit();
-		int limit = pagination.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, limit);
-
-		return sqlSession.selectList("boardMapper.myBoardList", pagination, rowBounds);
+    public List<Board> myBoardList(Map<String, Integer> map) {
+		return sqlSession.selectList("boardMapper.myBoardList", map);
 	}
 
 	// 페이징 처리 필요한 전체 게시글 계산
@@ -87,9 +80,9 @@ public class MyDAO {
 	}
 
 	// 내 댓글 보기
-    public List<Reply> selectMyReplyList(int memberNo) {
+    public List<Reply> selectMyReplyList(Map<String, Integer> map) {
 //		System.out.println(memberNo); 담김
-		return sqlSession.selectList("replyMapper.selectMyReplyList", memberNo);
+		return sqlSession.selectList("replyMapper.selectMyReplyList", map);
     }
 
     
@@ -117,5 +110,22 @@ public class MyDAO {
 	public int secessionMember(Member loginMember) {
 		return sqlSession.update("memberMapper.secessionMember", loginMember);
 
+	}
+
+
+	public List<Scrap> myScrapList(Map<String, Integer> memberNo) {
+		return sqlSession.selectList("boardMapper.myScrapList", memberNo);
+	}
+
+	public int countBoardList(Map<String, Integer> map) {
+		return sqlSession.selectOne("boardMapper.countBoardList", map);
+	}
+
+	public int countReplyList(Map<String, Integer> map) {
+		return sqlSession.selectOne("replyMapper.countReplyList", map);
+	}
+
+	public int countScrapList(Map<String, Integer> map) {
+		return sqlSession.selectOne("boardMapper.countScrapList", map);
 	}
 }

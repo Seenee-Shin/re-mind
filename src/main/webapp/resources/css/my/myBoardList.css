@@ -16,23 +16,27 @@
     position: absolute;
     background-color: #A59999;
     top: 240px;
-    left: 0px;
+    left: 0;
     height: 5px;
     transition: 0.3s;
 }
 
-.pagination {
-    display: inline-flex;
-    padding-left: 0;
-    list-style: none;
-    /* padding-right: 0; */
-    margin: 40px auto;
-    float: right;
-}
+/*.pagination {*/
+/*    display: inline-flex;*/
+/*    padding-left: 0;*/
+/*    list-style: none;*/
+/*    !* padding-right: 0; *!*/
+/*    margin: 40px auto;*/
+/*    float: right;*/
+/*}*/
 
-.pagination li {
-    margin: 0 2px;
-}
+/*.pagination li {*/
+/*    margin: 0 2px;*/
+/*}*/
+
+#pagination{display: flex; place-content: center; margin: 30px 0;}
+#pagination *{border: 1px solid #ccc; height: 30px; line-height: 28px; width: 40px; text-align: center;}
+#pagination div:hover, #pagination span:hover{cursor: pointer; background-color: #ccc;}
 
 
 /* .div-btn:nth-child(1){border-bottom: 2px solid black;} */
@@ -43,23 +47,24 @@ thead > tr > th:nth-child(2), td:nth-child(2){width: 40%; text-overflow: ellipsi
 thead > tr > th:nth-child(3), td:nth-child(3){width: 20%;}
 thead > tr > th:nth-child(4), td:nth-child(4){width: 25%;}
 .board-view > td:not(td:nth-child(2)){text-align: center; padding: 15px;}
+table tr{text-align: center;}
 
 @media screen and (max-width: 768px) and (min-width: 0px) {
 
 
-    .pagination {
-        display: inline-flex;
-        padding-left: 0;
-        list-style: none;
-        /* padding-right: 0; */
-        margin: 40px auto;
-        /* float: right; */
-        width: 100%;
-    }
+    /*.pagination {*/
+    /*    display: inline-flex;*/
+    /*    padding-left: 0;*/
+    /*    list-style: none;*/
+    /*    !* padding-right: 0; *!*/
+    /*    margin: 40px auto;*/
+    /*    !* float: right; *!*/
+    /*    width: 100%;*/
+    /*}*/
 
-    .pagination li {
-        margin: 0;
-    }
+    /*.pagination li {*/
+    /*    margin: 0;*/
+    /*}*/
 
     .main_content{padding: 0;}
     .footer_wrap{display: none;}

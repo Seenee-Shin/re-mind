@@ -49,6 +49,48 @@ public class Board {
 	private String worryEmpathyArray;
 	private String worryCntArray;
 
+
+	private String imageName;
+	private String imagePath;
+	private int postNo;
+
+	private int maxValue;
+
+	public void setMaxValue(int maxValue) {
+		this.maxValue = maxValue;
+	}
+
+	public int getMaxValue() {
+		return maxValue;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+
+	public void setPostNo(int postNo) {
+		this.postNo = postNo;
+	}
+
+	public int getPostNo() {
+		return postNo;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+
+
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
