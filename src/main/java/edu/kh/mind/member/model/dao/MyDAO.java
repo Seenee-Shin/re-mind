@@ -84,11 +84,11 @@ public class MyDAO {
 		return sqlSession.selectList("replyMapper.selectMyReplyList", map);
     }
 
-    
+
     // 후기 등록
 	public int reviewInsert(Review review) {
 		return sqlSession.insert("reviewMapper.reviewInsert", review);
-	}	
+	}
 
 	public List<Mute> selectMuteMember(int memberNo) {
 		return sqlSession.selectList("memberMapper.selectMuteMember", memberNo);
@@ -161,6 +161,7 @@ public class MyDAO {
 
 	public int insertImage(Image image) {
 		return sqlSession.insert("boardMapper.insertImage", image);
+	}
 
 	// 내가 찜한 상담사 목록
 	public List<Board> selectCounselorList(Pagination pagination) {
