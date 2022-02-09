@@ -97,4 +97,6 @@ public interface AdminProService {
 	ProfessionInformation updateProInfo(ProfessionInformation proInfo);
 
 	Profession updatepro(Profession pro);
+
+	List<Profession> classList(int professionNo);
 }

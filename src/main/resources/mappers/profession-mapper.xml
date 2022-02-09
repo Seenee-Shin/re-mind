@@ -82,6 +82,24 @@
 		<result property="professionNo" column="BOARD_NO"/>
 	</resultMap>
 	
+	
+	    <resultMap id="reservation_rm" type="Reservation">
+        <id property="reservationNo" column="RESERVATION_NO"/>
+
+        <result property="reservationEnrollDate" column="RESERVATION_ENROLL_DT"/>
+        <result property="reservationEnrollTime" column="RESERVATION_ENROLL_TIME"/>
+        <result property="reservationStatusCode" column="RESERVATION_STATUS_CD"/>
+        <result property="reservationCancel" column="RESERVATION_CANCEL"/>
+        <result property="counselCategoryNo" column="COUNSEL_CATEGORY_NO"/>
+        <result property="reservationPayNo" column="RESERVATION_PAY_NO"/>
+        <result property="counselCategoryNm" column="COUNSEL_CATEGORY_NM"/>
+        <result property="PayNo" column="RESERVATION_PAY_NO"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="professionNo" column="PROFESSION_NO"/>
+        <result property="statusCode" column="STATUS_CD"/>
+    </resultMap>
+	
+	
 <!--    그그그머냐ㅐ 그거 검색 -->
     <select id="selectProfession" resultMap="profession_rm">
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
@@ -255,5 +273,19 @@
         WHERE CHATTING_NO = #{chattingNo}
         ORDER BY CHAT_NO
     </select>
+    
+    
+    <!-- 예약리스트 조회 -->
+    <select id="classList" resultMap="reservation_rm">
+    SELECT r.RESERVATION_NO, r.RESERVATION_ENROLL_DT, r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
+	rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD
+	FROM RESERVATION_PAYMENT rp
+	JOIN RESERVATION r ON r.RESERVATION_PAY_NO = RP.RESERVATION_PAY_NO
+	JOIN COUNSEL_CATEGORY cc ON CC.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO
+	WHERE PROFESSION_NO = #{professionNo}
+	AND rp.STATUS_CD = 1
+	ORDER BY RESERVATION_ENROLL_DT, RESERVATION_ENROLL_TIME
+    </select>
+    
 
 </mapper>

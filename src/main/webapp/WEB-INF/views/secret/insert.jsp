@@ -8,7 +8,7 @@
 
         <section class="main_content">    
             <!-- 메인 -->
-            <h3 class="comunity_title">자유롭게 글을 남겨주세요</h3>
+            <h3 class="comunity_title">힘들었던 일 모두 털어놓으세요! </h3>
             
               <div class="search_area">
               <select name="search_category" id="">
@@ -58,6 +58,13 @@
 										    <option value="2">공감 비허용</option>
 									    </select>  		                            
 		                            </div>
+		                            
+		                            <div class="check_box_wrap">
+                                       <select id="anonCheckCode" name="anonCheckCode">
+										    <option value="1">닉네임 공개</option>
+										    <option value="2">닉네임 비공개</option>
+									    </select>  		                            
+		                            </div>
 		                        </div>
 		                        
 		                        <hr>
@@ -65,10 +72,11 @@
 		                            <label for="addFileBtn">
 		                                <i class="fas fa-image dark-brown" ></i>
 		                            </label>
-										<input type="file" name="images" id='addFileBtn' accept="audio/*, video/*, image/*" multiple style="display: none"> 
+		                            	<!-- name="images" -->
+										<input type="file"  id='addFileBtn' accept="audio/*, video/*, image/*" multiple style="display: none"> 
 		                            <button class="submit_btn light_brown_bg">작성</button>
 		                        </div>
-		                    </div>
+		                    </div> 
                         <!-- 모바일 글쓰기 모달창 -->
 			                <div class="posting_modal_warp hidden">
 			                    <div class="modal">
@@ -109,6 +117,13 @@
 														    <option value="2">공감 비허용</option>
 													    </select>  
 			                                        </div>
+			                                        
+			                                          <div class="check_box_wrap">
+				                                       <select id="mAnonCheckCode" name="anonCheckCode">
+														    <option value="1">닉네임 공개</option>
+														    <option value="2">닉네임 비공개</option>
+													    </select>  
+			                                        </div>
 			                              		</div>
 			                                
 				                                <hr>
@@ -117,7 +132,8 @@
 						                          	<label for="mfile">
 						                               <i class="fas fa-image dark-brown"></i>
 						                           	</label>
-													<input type="file" name="images" id='mfile' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
+						                           	<!-- name="images" -->
+													<input type="file"  id='mfile' accept="audio/*, video/*, image/*" multiple onchange="loadImg();" style="display: none"> 
 				
 				                                    <div class="m_btn_area">
 				                                        <button class="submit_btn light_brown_bg">작성</button>
@@ -146,7 +162,7 @@
 
 
             <!-- 게시판 리스트 -->
-            <jsp:include page="list.jsp"/> 
+           <jsp:include page="list.jsp"/> 
             
         </section>
     </div>
