@@ -16,8 +16,27 @@ public class Member {
     //프로필 사진 imagePath
     private String memberImage;
     private int statusCode;
+
+    private String imagePath;
+    private String imageName;
     public Member(){}
 
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
 
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
