@@ -2,28 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/>
 
 <!-- header include -->
 <jsp:include page="../procommon/header.jsp"></jsp:include>
 
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/>
- 
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
-
-
 <main>
 	<h1>상담사 예약 목록</h1>
 
+	
 	<table id="table_id" class="display">
            <thead>
                <tr>
-                   <th>번호</th>
-                   <th>클래스명</th>
-                   <th>강사명</th>
-                   <th>신청상태</th>
-                   <th>신청일자</th>
-                   <th></th>
+                   <th>예약번호</th>
+                   <th>회원번호</th>
+                   <th>상태코드</th>
+                   <th>예약날짜</th>
+                   <th>예약시간</th>
+                   <th>예약구분</th>
                </tr>
            </thead>
            <tbody>
@@ -34,11 +30,35 @@
 
 <!-- header include -->
 <jsp:include page="../procommon/footer.jsp"></jsp:include>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+var lang_kor = {
+        "decimal" : "",
+        "emptyTable" : "데이터가 없습니다.",
+        "info" : "_START_ - _END_ (총 _TOTAL_ 개)",
+        "infoEmpty" : "0개",
+        "infoFiltered" : "(전체 _MAX_ 개 중 검색결과)",
+        "infoPostFix" : "",
+        "thousands" : ",",
+        "lengthMenu" : "_MENU_ 개씩 보기",
+        "loadingRecords" : "로딩중...",
+        "processing" : "처리중...",
+        "search" : "검색 : ",
+        "zeroRecords" : "검색된 데이터가 없습니다.",
+        "paginate" : {
+            "first" : "첫 페이지",
+            "last" : "마지막 페이지",
+            "next" : "다음",
+            "previous" : "이전"
+        },
+        "aria" : {
+            "sortAscending" : " :  오름차순 정렬",
+            "sortDescending" : " :  내림차순 정렬"
+        }
+    };
+
 
 $(function () {
 	   createTable();
@@ -46,42 +66,22 @@ $(function () {
 
 	function createTable() {
 	   $.ajax({
-	      url: "classList",
+	      url: "reservationList",
 	      type: "GET",
-	      dataType: "JSON",
 	      success: function (data) {
 	         $('#table_id').DataTable({
 	            language: lang_kor,
 	            data: data,
-	            order: [[4, "asc"]],
 	            columns: [
-	               { data: "classNo" },
-	               {
-	                  data: null,
-	                  render: function (data, type, row) {
-	                     return '<a href="class/'+ data.classNo +'">' + data.className + '</a>';
-	                  }
-	               },
-	               { data: "memberName" },
-	               {
-	                  data: null,
-	                  render: function (data, type, row) {
-	                     if(data.classStatus == 0){
-	                        return "신청완료";
-	                     }else{
-	                        return "검토중";
-	                     }
-	                  }
-	               },
-	               { data: "classRequestDate" },
-	               {
-	                  data: null,
-	                  render: function (data, type, row) {
-	                     return '<button onclick="agree(' + data.classNo + ', ' + data.memberNo + ', \'' + data.className + '\')">승인</button>'
-	                        + '<button onclick="deny(' + data.classNo + ', ' + data.memberNo + ', \'' + data.className + '\')">거절</button>';
-	                  },
-	                  orderable: false
-	               }
+	               { data: null,
+	            	 render: function(data){
+	            		 console.log(data.memberNo)
+	            	 }},
+	               { data: "memberNo" },
+	               { data: "statusCode" },
+	               { data: "reservationEnrollDate"},
+	               { data: "reservationEnrollTime" },
+	               { data: "counselCategoryName"}
 	            ]
 	         })
 	      }

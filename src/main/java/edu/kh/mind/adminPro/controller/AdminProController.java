@@ -20,11 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.kh.mind.adminPro.model.service.AdminProService;
 import edu.kh.mind.common.util.Util;
-
-import edu.kh.mind.member.model.vo.Profession;
-import edu.kh.mind.member.model.vo.ProfessionHospital;
-import edu.kh.mind.member.model.vo.ProfessionInformation;
-import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.pro.model.vo.WorryCategory;
 
 @Controller
@@ -103,10 +98,19 @@ public class AdminProController {
 
 	
 	// 클래스 
-	@RequestMapping(value = "classList", method=RequestMethod.GET)
 	@ResponseBody
-	public String classList(HttpSession session ) {
-		return null;
+	@RequestMapping(value ="reservationList", method=RequestMethod.GET)
+	public List<Profession> reservationList(HttpSession session, Model model ) {
+		
+		int professionNo = ((Profession)session.getAttribute("loginPro")).getProfessionNo();
+		
+		System.out.println("professionNo : " + professionNo);
+		
+		List<Profession> data = service.classList(professionNo);
+		
+		System.out.println(data);
+		
+	    return data;
 	}
 	
 	
