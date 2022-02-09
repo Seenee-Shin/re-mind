@@ -1,10 +1,7 @@
 package edu.kh.mind.member.model.dao;
 
-import edu.kh.mind.board.model.vo.Board;
-import edu.kh.mind.board.model.vo.Image;
-import edu.kh.mind.board.model.vo.Reply;
+import edu.kh.mind.board.model.vo.*;
 
-import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -152,5 +149,15 @@ public class MyDAO {
 
 	public Image getMyImage(int memberNo) {
 		return sqlSession.selectOne("boardMapper.getMyImage", memberNo);
+	}
+
+	// 내가 찜한 상담사 목록
+	public List<Board> selectCounselorList(Pagination pagination) {
+		return sqlSession.selectList("boardMapper.selectCounselorList", pagination);
+	}
+
+	// 내 찜 사 페이징
+	public int getCounselorPagination(int memberNo) {
+		return sqlSession.selectOne("boardMapper.getCounselorListCount", memberNo);
 	}
 }
