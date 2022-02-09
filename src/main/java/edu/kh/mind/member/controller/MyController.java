@@ -180,9 +180,9 @@ public class MyController {
     	
     	// 전문가 번호 추가해야함
     	review.setMemberNo(loginMember.getMemberNo());
-    	
+
     	int result = service.reviewInsert(review);
-    	
+
     	return result;
     }
 
@@ -312,6 +312,11 @@ public class MyController {
 
         return new Gson().toJson(proList);
     }
+
+
+
+
+
 
     // @ExceptionHandler(처리할 예외.class)
     @ExceptionHandler(Exception.class)
