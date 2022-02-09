@@ -130,4 +130,9 @@ public class AdminProDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("professionMapper.insertPrice", map);
 	}
+
+
+	public List<Profession> classList(int professionNo) {
+		return sqlSession.selectList("professionMapper.classList", professionNo);
+	}
 }

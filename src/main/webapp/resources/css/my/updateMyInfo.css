@@ -36,7 +36,7 @@ input{outline: none;}
 .ph{text-align: center;}
 .update-info{display: none}
 .update-img{text-align: center;}
-.update-img > img{border-radius: 50%; width: 8em; height: 8em; cursor: pointer;}
+.update-img img{border-radius: 50%; width: 8em; height: 8em; cursor: pointer;}
 
 @media screen and (max-width: 768px) and (min-width: 0px) {
 	.update-info{display: block;}
