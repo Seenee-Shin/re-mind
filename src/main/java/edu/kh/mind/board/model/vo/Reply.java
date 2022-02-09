@@ -16,9 +16,18 @@ public class Reply {
     private String boardTitle;
     private String boardCategoryName;
     private String memberFn;
+    private int maxValue;
 
     public int getReadCount() {
         return readCount;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
     }
 
     public void setReadCount(int readCount) {
