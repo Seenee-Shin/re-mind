@@ -146,9 +146,11 @@
                 
             </form>
 
-
+			 <div class="free_board_list_wrap" id="BoardListArea">
+			 
+			 </div>
             <!-- 게시판 리스트 -->
-            <jsp:include page="list.jsp"/> 
+          <%--   <jsp:include page="list.jsp"/>  --%>
             
         </section>
     </div>
@@ -158,7 +160,124 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"/>
 <script src="${contextPath}/resources/js/board/board_common.js"></script>
-
-
-
 <script src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+
+<script>
+$(function () {
+	// list 가져오기
+	getFreeList();
+})
+
+
+	// 검색
+	const searchSelect = $("#freeboard_search");
+	searchSelect.on("click", function () {
+		
+		const data = {
+			"searchCategory" : $("#search_category option:selected").val(),
+			"searchText" : $("[name='freeboard_search']").val()
+		}
+
+		getFreeList(data);
+	});
+	
+	// list 가져오기
+	function getFreeList(searchData) {
+		let data = {};
+
+		if (searchData != null) {
+			data = searchData;
+		}
+
+		$.ajax({
+			url : "${contextPath}/free/list",
+			type : "POST",
+			data : data,
+			success : function (result) {
+
+				let html = "";
+				let empathyArr;
+				let empathyCntArr;
+				let iconCnt = {};
+
+				$.each(result.freeBoardList, function (i, item) {
+
+					// empathy 초기화
+					empathyArr = [];
+					empathyCntArr = [];
+					iconCnt = {
+						"1001" : 0,
+						"1002" : 0,
+						"1003" : 0,
+						"1004" : 0,
+						"1005" : 0
+					};
+
+					if (item.worryEmpathyArray != null) {
+						empathyArr = (item.worryEmpathyArray).split(",");
+						empathyCntArr = (item.worryCntArray).split(",");
+					}
+
+					for(i=0; i<empathyArr.length; i++) {
+						iconCnt[empathyArr[i]] = empathyCntArr[i];
+					}
+
+					html += `
+						<div class="board_list_content">
+							<div class="board_flex_wrap">
+								<div class="writer_pic_wrap">
+									<div class="writer_pic light_brown_bg" style="background-image: url();"></div>
+									<ul class="userMenu hidden">
+										<li> <a href=""> 차단</a> </li>
+										<li> <a href=""> 검색</a> </li>
+									</ul>
+								</div>
+								<a href="">
+									<div class="posting_info">
+										<div class="writer_id">
+											<p class="userInfo">` + item.memberId + `</p>
+											<p> ` + item.createDate + `</p>
+										</div>
+										<div class="posting">
+											<p>` + item.boardTitle + `</p>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="board_icon_wrap">
+								<div class="comment_wrap">
+	                                <i class="far fa-comment dark-brown"></i>
+	                                <p>` + 5 + `</p>
+	                            </div>
+								<div class="like_warp">
+	                                <img src="${contextPath}/resources/images/icon/smile.png" alt="" data-icon="1001">
+	                                <p>`+ iconCnt[1001] +`</p>
+	                                <img src="${contextPath}/resources/images/icon/hug.png" alt="" data-icon="1002">
+	                                <p>`+ iconCnt[1002] +`</p>
+	                                <img src="${contextPath}/resources/images/icon/amazed.png" alt="" data-icon="1003">
+	                                <p>`+ iconCnt[1003] +`</p>
+	                                <img src="${contextPath}/resources/images/icon/angry.png" alt="" data-icon="1004">
+	                                <p>`+ iconCnt[1004] +`</p>
+	                                <img src="${contextPath}/resources/images/icon/crying.png" alt="" data-icon="1005">
+	                                <p>`+ iconCnt[1005] +`</p>
+	                            </div>
+	                        </div>
+						</div>
+					`;
+					});
+				$(".free_board_list_wrap").html(html);
+				
+				
+
+
+			},
+			error : function(request, status, error){
+				console.log("ajax 통신 중 오류 발생");
+				console.log(request.responseText);
+			}
+
+
+		});
+	}
+
+</script>
