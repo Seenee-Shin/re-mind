@@ -27,7 +27,7 @@
 	                    
 	
 	                    <div id= "posting">
-	                        <textarea  onkeydown="resize(this)" onkeyup="resize(this)">${board.boardContent}</textarea>
+	                        <textarea name="boardContent"  onkeydown="resize(this)" onkeyup="resize(this)">${board.boardContent}</textarea>
 	                        <div class="imgWrap">
 		                        <c:choose>
 		                        	<c:when test="${!empty board.imgList}">
@@ -78,6 +78,11 @@
 	                    <button type="submit" class="dark-brown edit_btn"> 수정 </button>
 	                    <button type="button" class="dark-brown edit_btn" onclick=""> 목록으로  </button>
 	                </div>
+	                
+	             <!-- update 진행 시 사용할 게시글 번호 -->
+				<input type="hidden" name="cp" value="${param.cp}">
+				<input type="hidden" name="boardNo" value="${board.boardNo}">
+				<input type="hidden" name="deleteImages" value="">
 	
 				</form>
             </section>
