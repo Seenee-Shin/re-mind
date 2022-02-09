@@ -14,9 +14,12 @@ public class Reservation {
 	
 	private String counselCategoryNm;
 	private int PayNo;
-	
+
+	private int memberNo;
+	private int professionNo;
+	private int statusCode;
+
 	public Reservation() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getReservationNo() {
@@ -91,13 +94,45 @@ public class Reservation {
 		PayNo = payNo;
 	}
 
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public int getProfessionNo() {
+		return professionNo;
+	}
+
+	public void setProfessionNo(int professionNo) {
+		this.professionNo = professionNo;
+	}
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+
 	@Override
 	public String toString() {
-		return "Reservation [reservationNo=" + reservationNo + ", reservationEnrollDate=" + reservationEnrollDate
-				+ ", reservationEnrollTime=" + reservationEnrollTime + ", reservationStatusCode="
-				+ reservationStatusCode + ", reservationCancel=" + reservationCancel + ", counselCategoryNo="
-				+ counselCategoryNo + ", reservationPayNo=" + reservationPayNo + ", counselCategoryNm="
-				+ counselCategoryNm + ", PayNo=" + PayNo + "]";
+		return "Reservation{" +
+				"reservationNo=" + reservationNo +
+				", reservationEnrollDate=" + reservationEnrollDate +
+				", reservationEnrollTime=" + reservationEnrollTime +
+				", reservationStatusCode=" + reservationStatusCode +
+				", reservationCancel='" + reservationCancel + '\'' +
+				", counselCategoryNo=" + counselCategoryNo +
+				", reservationPayNo=" + reservationPayNo +
+				", counselCategoryNm='" + counselCategoryNm + '\'' +
+				", PayNo=" + PayNo +
+				", memberNo=" + memberNo +
+				", professionNo=" + professionNo +
+				", statusCode=" + statusCode +
+				'}';
 	}
-	
 }
