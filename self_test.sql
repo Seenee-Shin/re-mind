@@ -1753,7 +1753,7 @@ BEGIN
                     DEFAULT,
                     DEFAULT,
                     FLOOR(DBMS_RANDOM.VALUE(101,104)),
-                    72,/*회원번호*/
+                    142,/*회원번호*/
                     DEFAULT,
                     DEFAULT,
                     DEFAULT,
@@ -1768,22 +1768,24 @@ END;
 --(댓글)작성 날짜 역순 ( 최신 순)
 SELECT REPLY.REPLY_NO, BOARD_TITLE,  
         TO_CHAR(REPLY_CREATE_DT, 'YYYY-MM-DD') "REPLY_CREATE_DT" ,
-        BOARD_CATEGORY_NM, MEMBER_FN, MEMBER_NO
+        BOARD_CATEGORY_NM, MEMBER.MEMBER_FN, REPLY.MEMBER_NO, BOARD.BOARD_NO, BOARD_READ_COUNT,
+        POST_NO, REPLY_NESTED_CD
         FROM REPLY
             JOIN BOARD ON (BOARD.BOARD_NO = REPLY.BOARD_NO)
             JOIN BOARD_CATEGORY USING(BOARD_CATEGORY_CD)
             JOIN MEMBER ON (MEMBER.MEMBER_NO = REPLY.MEMBER_NO)
-        WHERE MEMBER_NO = 72
+            LEFT JOIN MIND_POST ON( MEMBER.MEMBER_NO = MIND_POST.MEMBER_NO)
+        WHERE REPLY.MEMBER_NO = 72
             AND BOARD.BOARD_STATUS_CD = 201
             AND STATUS_CD = 0
             AND REPLY_STATUS_CD = 301
-    ORDER BY REPLY_CREATE_DT DESC;
+    ORDER BY REPLY_NO DESC;
 
 
 CREATE SEQUENCE SEQ_REPLY_NO;
 -- 보드(댓글) 테이블 샘플 데이터
 BEGIN
-    FOR N IN 1..50 LOOP
+    FOR N IN 1..100 LOOP
         INSERT INTO REPLY
         VALUES(SEQ_REPLY_NO.NEXTVAL,
                     '나의 ' || SEQ_REPLY_NO.CURRVAL || '번째 댓글',
@@ -1792,7 +1794,7 @@ BEGIN
                     DEFAULT, /* DEFAULT 301 상태*/
                     DEFAULT, /* DEFAULT 401 상태*/
                     72,
-                    72,/*회원 번호*/
+                    142,/*회원 번호*/
                     2,/*전문가 번호*/
                     default
                 );
@@ -1801,8 +1803,25 @@ BEGIN
 END;
 /
 
+commit;
+select * from reply;
 --------------------------------------------------
 ----------------------------------------------------
+-- 스크랩 한 글 테이블
+CREATE TABLE SCRAP (
+	MEMBER_NO	NUMBER		NOT NULL,
+	BOARD_NO	NUMBER		NOT NULL
+    
+    MEMBER_NO REFERENCES MEMBER (MEMBER_NO) ON DELETE CASCADE;
+    BOARD_NO REFERENCES BOARD (BOARD_NO) ON DELETE CASCADE;
+);
+drop table SCRAP;
+COMMENT ON COLUMN "SCRAP"."MEMBER_NO" IS '회원 번호';
+
+COMMENT ON COLUMN "SCRAP"."BOARD_NO" IS '게시글 번호';
+
+ALTER TABLE SCRAP MODIFY MEMBER_NO 
+
 
 ALTER TABLE BOARD MODIFY BOARD_READ_COUNT  NOT NULL;
 
