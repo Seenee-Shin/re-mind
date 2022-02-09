@@ -139,6 +139,15 @@ public class BoardServiceImpl implements BoardService{
 	      return board;
 	   }
 
+	
+	//수정화면 전환용 
+	@Override
+	public Board selectBoard(int boardNo) {
+		Board board = dao.selectBoard(boardNo);
+		
+		board.setBoardContent( Util.changeNewLine2( board.getBoardContent() )  );
+		return board;
+	}
 
 	@Override
 	public int updateBoard(Board board, List<MultipartFile> images, String webPath, String serverPath,

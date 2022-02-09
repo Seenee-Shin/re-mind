@@ -182,8 +182,8 @@
 	                            <div class="comment_btn">
 	                                <button type="button" class="dark-brown edit_btn re-comment" onclick=""> 답글 </button>
 	                                <!--  자신이 쓴 댓글에 보이기 -->
-	                                <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
-	                                <button type="button" class="dark-brown edit_btn" onclick=""> 삭제 </button>
+	                                <button type="button" class="dark-brown edit_btn" onclick="updateForm()"> 수정 </button>
+	                                <button type="button" class="dark-brown edit_btn" onclick="updateForm()"> 삭제 </button>
 	                            </div>
 	                        </div>
 	
@@ -195,12 +195,32 @@
             </section>
         </div>
 
-
+		<form action="#" method="POST" name="requestForm">
+			<input type="hidden" name="cp" value="${param.cp }">
+			<input type="hidden" name="boardNo" value="${board.boardNo}">
+		</form>
     
     </main>
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script type="text/javascript">
 
+	//수정버튼 클릭 시 동작
+	function updateForm(){
+		document.requestForm.action = "../updateForm";
+		document.requestForm.method = "POST";
+		document.requestForm.submit();
+	}
+	
+	//닫기 버튼시 동작
+	function deleteBoard(){
+		if(confirm("정말 삭제하시겠습니까?")){
+		document.requestForm.action = "../delete";
+		document.requestForm.method = "POST";
+		document.requestForm.submit();
+		}
+	}
+</script>
 </body>
 </html>
