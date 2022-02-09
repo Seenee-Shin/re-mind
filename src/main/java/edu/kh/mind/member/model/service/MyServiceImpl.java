@@ -17,6 +17,7 @@ import edu.kh.mind.member.model.vo.Review;
 
 import edu.kh.mind.member.social.naver.vo.Naver;
 
+import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -156,4 +157,10 @@ public class MyServiceImpl implements MyService {
 		
 		return dao.reviewInsert(review);
 	}
+
+    // 상담 예약 조회
+    @Override
+    public List<Reservation> selectReservation(int memberNo) {
+        return dao.selectReservation(memberNo);
+    }
 }

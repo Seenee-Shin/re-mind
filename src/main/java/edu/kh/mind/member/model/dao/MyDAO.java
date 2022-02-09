@@ -12,6 +12,7 @@ import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
+import edu.kh.mind.pro.model.vo.Reservation;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -127,5 +128,14 @@ public class MyDAO {
 
 	public int countScrapList(Map<String, Integer> map) {
 		return sqlSession.selectOne("boardMapper.countScrapList", map);
+	}
+
+	/**
+	 * 상담 예약 조회
+	 * @param memberNo
+	 * @return reservationList
+	 */
+	public List<Reservation> selectReservation(int memberNo) {
+		return sqlSession.selectList("memberMapper.selectReservation", memberNo);
 	}
 }
