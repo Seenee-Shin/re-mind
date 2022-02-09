@@ -283,9 +283,21 @@ public class MyController {
     }
 
     @GetMapping("updateMyInfo")
-    public String updateMyInfo(Model model){
+    public String updateMyInfo(Model model, HttpSession session, RedirectAttributes ra){
         model.addAttribute("css", "my/muteMember");
-        return "my/updateMyInfo";
+
+        Naver naver = ((Naver)session.getAttribute("naver"));
+
+        String path = null;
+        if(naver == null){
+            path = "my/updateMyInfo";
+        }else{
+            Util.swalSetMessage("소셜로그인 회원은 정보수정이 불가능합니다.", null, "info", ra);
+            path = "redirect:/";
+        }
+
+
+        return path;
     }
 
     @GetMapping("loadProMap")
