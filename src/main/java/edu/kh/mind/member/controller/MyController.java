@@ -178,10 +178,15 @@ public class MyController {
     @RequestMapping(value="reviewInsert", method=RequestMethod.POST)
     private int reviewInsert(@ModelAttribute("loginMember") Member loginMember,Review review) {
     	
+    	
+    	System.out.println(review.getReviewContent());
+    	System.out.println(review.getReviewStarPoint());
+    	
     	// 전문가 번호 추가해야함
     	review.setMemberNo(loginMember.getMemberNo());
     	
     	int result = service.reviewInsert(review);
+    	
     	System.out.println(result);
     	
     	return result;
