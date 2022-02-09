@@ -100,7 +100,7 @@ function selectReplyList(){
 
 
 
-
+const replyContent = $('#replyContent').val()
 
 //댓글 삽입
 function addComment(){
@@ -120,7 +120,7 @@ function addComment(){
 			$.ajax({
 				url : contextPath + "/reply/insert",
 		        data : {"boardNo" : boardNo,
-		        		"memberNo " : memberNo,
+		        		"memberNo " : loginMemberNo,
 		        		"replyContent" : replyContent}, // 현재 게시글 번호
 		        type : "POST",
 		        
