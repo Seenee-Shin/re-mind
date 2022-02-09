@@ -17,4 +17,10 @@ public interface BoardService {
 
 	Board selectBoard(int boardNo, int memberNo);
 
+	int updateBoard(Board board, List<MultipartFile> images, String webPath, String serverPath, String deleteImages);
+
+	Board selectBoard(int boardNo);
+
+	int deleteBoard(int boardNo);
+
 }

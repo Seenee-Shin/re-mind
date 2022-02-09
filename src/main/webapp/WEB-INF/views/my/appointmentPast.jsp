@@ -38,7 +38,7 @@
 					<div class="category_div">채팅</div>
 					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
 					<div class="review_div">
-						<button type="button" class="btn">후기작성</button>
+						<button type="button" class="btn" onclick="proPostscript();">후기작성</button>
 					</div>
 				</li>
 				<li>
@@ -72,6 +72,14 @@
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
+<script type="text/javascript">
+	
+    function proPostscript(){
+    	layerPopup("proPostscript");
+    }
+    
+</script>
+
 </body>
 </html>
 

@@ -218,6 +218,13 @@ html{
     position: absolute;
 }
 
+/* 후기 없을때 */
+#reveiw_no {
+    text-align: center;
+    font-size: 20px;
+    color:#90a0a6;
+}
+
 /* --------------------------------------- */
 
 /* 오른쪽 상담 예약 영역 */
@@ -399,6 +406,10 @@ html{
         background-color: #a59999;
         border: 1px solid #a59999;
         color:#fff;
+    }
+
+    #reveiw_no {
+        height: 150px;
     }
    
 }

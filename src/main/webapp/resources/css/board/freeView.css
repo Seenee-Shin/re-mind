@@ -65,6 +65,8 @@ input:focus, textarea:focus, select:focus{
     margin-top: 20px;
 }
 
+
+
 /* 공감버튼 */
 .like_warp{
     text-align: center;
@@ -273,6 +275,7 @@ p{
     /* 게시팡 상세 */
     .board_view_wrap, .back_btn{
         margin-left: 10px;
+        margin-right: 10px;
     }
     /* 댓글 */
     .comment_view_wrap{

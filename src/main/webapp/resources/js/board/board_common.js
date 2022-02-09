@@ -30,6 +30,8 @@ var fileNum = 0;
 // 첨부파일 배열
 var content_files = new Array();
 
+var delete_files = new Array();
+
 function fileCheck(e) {
     var files = e.target.files;
     
@@ -76,80 +78,80 @@ function fileDelete(fileNum){
     console.log(content_files);
 }
 
-const boardContent =  $('textarea[name=boardContent]').val();
-const replyCheckCode =  $('select[name=replyCheckCode]').val();
-const scrapCheckCode =  $('select[name=scrapCheckCode]').val();
-const empathyCheckCode =  $('select[name=empathyCheckCode]').val();
 
 
 function postingValidate(){
 	//사진 배열에 담기
-	var form = $("form")[0];        
- 	var formData = new FormData(form);
- 	console.log(formData);
- 	
- 	/*var data = {   
-    "boardContent"    : boardContent,
-    "replyCheckCode"     : replyCheckCode,
-    "scrapCheckCode"  : scrapCheckCode,
-    "empathyCheckCode" : empathyCheckCode
-	}*/
-	
-	/*formData.append("boardContent" , boardContent);	
-	formData.append("replyCheckCode" , replyCheckCode);	
-	formData.append("scrapCheckCode" , scrapCheckCode);	
-	formData.append("empathyCheckCode" , empathyCheckCode);	*/
- 	
-	for (var i = 0; i < content_files.length; i++) {
+	const form = $("form")[0];
+ 	const formData = new FormData(form);
+
+	for (let i = 0; i < content_files.length; i++) {
 		// 삭제 안한것만 담아 준다. 
 		if(!content_files[i].is_delete){
-			console.log(content_files[i]);
 			formData.append('images', content_files[i]);
+		}else{
+			delete_files.push(content_files[i]);
+			formData.append('deletImages',delete_files[i]);
 		}
-		
-		
-		console.log(formData);
-		//console.log(data);
-		
 	}
-	//formData.append('key', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
-	console.log(formData);
-		
+
+	//삽입
 	$.ajax({
-   	      type: "POST",
-   	   	  enctype: "multipart/form-data",
-   	      url: "insert",
-       	  data : formData,
-       	  processData: false,
-   	      contentType: false,
-   	      success: function (result) {
-   	    	if(result > 0){
+		type: "POST",
+		enctype: "multipart/form-data",
+		url: "insert",
+		data : formData,
+		processData: false,
+		contentType: false,
+		success: function (result) {
+			if(result > 0){
    	    		alert("글작성 완료");
+   	    		$("#input_file").val("");
+   	    		const imgWrap = document.querySelector("#imgWrap");
+
+				while (imgWrap.hasChildNodes()) {	// 부모노드가 자식이 있는지 여부를 알아낸다
+					imgWrap.removeChild(
+						imgWrap.firstChild
+					);
+				}
+
+				// 내용삭제
+				$("#post_textarea").val(""); 
+				$("replyCheckCode").val("1");
+				$("scrapCheckCode").val("1");
+				$("empathyCheckCode").val("1");
+
+				// 새로 고침
+				// location.reload();
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
-   	      },
-   	      error: function (xhr, status, error) {
-   	    	alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
-   	      }
-   	    });
-   	    return false;
-	}
+			},
+		error: function (xhr, status, error) {
+			alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
+		}
+    });
+
+	return false;
+}
+	
+	
+
 
 /*시간 몇분전 표시 */
 function displayedAt(createdAt) {
-  const milliSeconds = new Date() - createdAt
-  const seconds = milliSeconds / 1000
-  if (seconds < 60) return `방금 전`
-  const minutes = seconds / 60
-  if (minutes < 60) return `${Math.floor(minutes)}분 전`
-  const hours = minutes / 60
-  if (hours < 24) return `${Math.floor(hours)}시간 전`
-  const days = hours / 24
-  if (days < 7) return `${Math.floor(days)}일 전`
-  const weeks = days / 7
-  if (weeks < 5) return `${Math.floor(weeks)}주 전`
-  const months = days / 30
-  if (months < 12) return `${Math.floor(months)}개월 전`
-  const years = days / 365
-  return `${Math.floor(years)}년 전`
+	const milliSeconds = new Date() - createdAt
+	const seconds = milliSeconds / 1000
+	if (seconds < 60) return `방금 전`
+	const minutes = seconds / 60
+	if (minutes < 60) return `${Math.floor(minutes)}분 전`
+	const hours = minutes / 60
+	if (hours < 24) return `${Math.floor(hours)}시간 전`
+	const days = hours / 24
+	if (days < 7) return `${Math.floor(days)}일 전`
+	const weeks = days / 7
+	if (weeks < 5) return `${Math.floor(weeks)}주 전`
+	const months = days / 30
+	if (months < 12) return `${Math.floor(months)}개월 전`
+	const years = days / 365
+	return `${Math.floor(years)}년 전`
 }
