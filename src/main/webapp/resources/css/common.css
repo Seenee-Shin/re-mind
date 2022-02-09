@@ -220,10 +220,7 @@ a{
   width:19%;
 }
 
-.header_menu_wrap .dep1 > li>ul{
-  position: absolute;
-  width: 100%;
-}
+.header_menu_wrap .dep1 > li>ul{position: absolute; width: 100%; z-index:3000; border:1px solid #ededed;}
 @media (hover: hover) {
 .header_menu_wrap .dep1 > li:hover > a{
   color: #A59999;
