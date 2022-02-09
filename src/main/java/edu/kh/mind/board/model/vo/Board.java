@@ -1,5 +1,6 @@
 package edu.kh.mind.board.model.vo;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,6 +30,9 @@ public class Board {
 	private int worryCategoryCode;
 	private String worryCategoryName;
 
+	/* 마이 페이지 enroll_dt 용*/
+	private Date myEnrollDate;
+
 	//댓글 수 변수 
 	private int replyCount;
 	
@@ -55,6 +59,24 @@ public class Board {
 	private int postNo;
 
 	private int maxValue;
+
+	private String empathyStatusName;
+
+	public Date getMyEnrollDate() {
+		return myEnrollDate;
+	}
+
+	public void setMyEnrollDate(Date myEnrollDate) {
+		this.myEnrollDate = myEnrollDate;
+	}
+
+	public String getEmpathyStatusName() {
+		return empathyStatusName;
+	}
+
+	public void setEmpathyStatusName(String empathyStatusName) {
+		this.empathyStatusName = empathyStatusName;
+	}
 
 	public void setMaxValue(int maxValue) {
 		this.maxValue = maxValue;

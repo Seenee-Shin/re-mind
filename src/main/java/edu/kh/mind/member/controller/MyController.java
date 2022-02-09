@@ -15,6 +15,7 @@ import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
+import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +41,15 @@ public class MyController {
     private MyService service;
     
 
+    // 상담 예약 조회
     @RequestMapping("appointment")
-    public String appointment(Model model) {
+    public String appointment(Model model, @ModelAttribute("loginMember") Member loginMember) {
+
+        int memberNo = loginMember.getMemberNo();
+
+        List<Reservation> reservationList = service.selectReservation(memberNo);
+
+    	model.addAttribute("reservationList", reservationList);
 
     	model.addAttribute("css", "my");
         return "my/appointment";

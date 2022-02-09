@@ -225,7 +225,8 @@
 										<p> ` + item.createDate + `</p>
 									</div>
 									<div class="posting">
-										<p>` + item.boardTitle + `</p>
+										<p class="listTitle">` + item.boardTitle + `</p> </br>
+										<p>` + item.boardContent + `</p>
 									</div>
 								</div>
 							</a>

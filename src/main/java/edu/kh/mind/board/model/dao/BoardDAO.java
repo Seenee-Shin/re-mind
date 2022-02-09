@@ -1,6 +1,7 @@
 package edu.kh.mind.board.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ public class BoardDAO {
 	@Autowired //의존성 주입
 	private SqlSessionTemplate sqlSession;
 
-	public List<Board> selectBoardList() {
+	public List<Board> selectBoardList(Map<String, String> param) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("boardMapper.selectBoardList");
+		return sqlSession.selectList("boardMapper.selectBoardList",param);
 	}
 
 	public int insertFreeBoard(Board board) {
@@ -50,6 +51,11 @@ public class BoardDAO {
 	public int deleteBoard(int boardNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
+	}
+
+	public int updateBoard(Board board) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.updateBoard",board);
 	}
 
 }
