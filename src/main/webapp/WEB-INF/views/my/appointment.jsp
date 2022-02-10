@@ -12,7 +12,7 @@
 		<div class="title">상담 예약 조회</div>
 		<div class="select-area">
 			<select class="reservation_select">
-				<option>전체</option>
+				<option value="0">전체</option>
 				<option value="1">상담 예약</option>
 				<option value="4">상담 완료</option>
 				<option value="3">상담 취소</option>
@@ -20,42 +20,9 @@
 		</div>
 		<div class="appointment_list">
 			<ul>
-				<li>
-					<div>예약 날짜</div>
-					<div>예약 시간</div>
-					<div>상담사</div>
-					<div>상담 유형</div>
-					<div>상태</div>
-				</li>
-				<c:forEach items="${reservationList}" var="reservation">
-					<li>
-						<div class="img_div"><img src="${contextPath}/resources/images/sample1.jpg"></div><!-- 전문가 프로필 -->
-						<div class="date_div">${reservation.reservationEnrollDate}</div>
-						<div class="time_div">${reservation.reservationEnrollTime}:00 </div>
-						<div class="profession_div" data-profession="${reservation.professionNo}">${reservation.professionName}</div>
-						<div class="category_div">채팅</div>
-						<c:choose>
-							<c:when test="${reservation.reservationStatusCode == 1}">
-								<div class="status_div">예약
-									<button type="button" class="reservationCancel" data-value="${reservation.reservationNo}"> 취소하기</button>
-								</div>
-
-							</c:when>
-							<c:when test="${reservation.reservationStatusCode == 3}">
-								<div class="status_div">예약 취소</div>
-							</c:when>
-							<c:otherwise>
-								<div class="status_div">상담 완료</div>
-							</c:otherwise>
-						</c:choose>
-					</li>
-				</c:forEach>
 			</ul>
 		</div>
-
-
 	</div>
-
 
 </article>
 
@@ -63,10 +30,16 @@
 <jsp:include page="../common/footer.jsp"></jsp:include>
 
 <script>
-	$(".profession_div").on("click", function () {
-		const professionNo = $(this).data("profession");
-		location.href = contextPath + "/pro/proView/" + professionNo;
-	})
+	const today = new Date();
+	$(function () {
+		// 상담 예약 조회
+		reservationList(0);
+
+		// 상담 예약 selectBox
+		$(".reservation_select").on("change", function () {
+			reservationList($(this).val());
+		})
+	});
 
 	// 예약 취소
 	$(".reservationCancel").on("click", function () {
@@ -99,9 +72,118 @@
 
 	})
 
-	$(".reservation_select").on("change", function () {
-		//
-	})
+	// 상담 예약 조회
+	function reservationList(reservationStatusCode) {
+		$.ajax({
+			url : contextPath + "/my/appointment",
+			type : "POST",
+			data : {"reservationStatusCode" : reservationStatusCode},
+			dataType : "JSON",
+			success : function (data) {
+				ajaxDom(JSON.stringify(data));
+			},
+			error : function () {
+
+			}
+		})
+	}
+
+	// list dom
+	function ajaxDom(data) {
+		const appointListUl = $(".appointment_list > ul");
+		appointListUl.empty();
+
+		const theadLi = $("<li>");
+		const theadDiv = [];
+
+		for(let i=0; i<5; i++) {
+			theadDiv[i] = $("<div>");
+			switch(i) {
+				case 0 : theadDiv[i].text("예약 날짜"); break;
+				case 1 : theadDiv[i].text("예약 시간"); break;
+				case 2 : theadDiv[i].text("상담사"); break;
+				case 3 : theadDiv[i].text("상담 유형"); break;
+				default : theadDiv[i].text("상태");
+
+			}
+			theadLi.append(theadDiv[i]);
+
+		}
+		appointListUl.append(theadLi);
+
+		const reservationList = JSON.parse(data);
+		if (reservationList.length > 0) {
+			$.each(reservationList, function (key, value) {
+				const tbodyLi = $("<li>");
+				tbodyLi.data("test", "123123");
+
+				const liDiv_1 = $("<div class='img_div'>");
+				const tbodyImg = $("<img>");
+				tbodyImg.attr("src", "${contextPath}/resources/images/sample1.jpg");
+				liDiv_1.append(tbodyImg[key]);
+				tbodyLi.append(liDiv_1);
+
+				const liDiv_2 = $("<div class='date_div'>");
+				liDiv_2.text(value.reservationEnrollDate);
+				tbodyLi.append(liDiv_2);
+
+				const liDiv_3 = $("<div class='time_div'>");
+				liDiv_3.text(value.reservationEnrollTime + ":00");
+				tbodyLi.append(liDiv_3);
+
+				const liDiv_4 = $("<div class='profession_div' style='cursor:pointer;'>");
+				liDiv_4.text(value.professionName);
+				liDiv_4.attr("onclick", "inputProfession(" + value.professionNo + ")");
+				tbodyLi.append(liDiv_4);
+
+				const liDiv_5 = $("<div class='category_div'>");
+				liDiv_5.text(value.counselCategoryNm);
+				if (dateFormat(today) == value.reservationEnrollDate && value.counselCategoryNo == 1) {
+					if (today.getHours() > (value.reservationEnrollTime - 1) && today.getHours() < (value.reservationEnrollTime + 2)) {
+						liDiv_5.addClass("chatting");
+						liDiv_5.text("입장하기");
+						liDiv_5.attr("onclick", "inputChat(" + value.reservationNo + ")");
+					}
+				}
+				tbodyLi.append(liDiv_5);
+
+				const liDiv_6 = $("<div class='status_div'>");
+				if (value.reservationStatusCode == 1) {
+					const tbodyButton = $("<button type='button' class='reservationCancel'>");
+					tbodyButton.data("value", value.reservationNo);
+					tbodyButton.text("취소하기");
+
+					liDiv_6.text("예약 ");
+					liDiv_6.append(tbodyButton);
+
+				} else if (value.reservationStatusCode == 3) {
+					liDiv_6.text("예약 취소");
+
+				} else {
+					liDiv_6.text("상담 완료");
+
+				}
+				tbodyLi.append(liDiv_6);
+				appointListUl.append(tbodyLi);
+			})
+		} else {
+			const noneData = $("<li>");
+			noneData.css("width", "100%").css("text-align", "center");
+			noneData.text("조회 목록이 없습니다.");
+			appointListUl.append(noneData);
+		}
+	}
+
+
+	// 상담사 상세
+	function inputProfession(professionNo) {
+		location.href = contextPath + "/pro/proView/" + professionNo;
+	}
+
+	// 채팅 입장
+	function inputChat(reservationNo) {
+		location.href = contextPath + "/chat/room/" + reservationNo;
+	}
 
 
 </script>

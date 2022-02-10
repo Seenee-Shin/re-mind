@@ -126,11 +126,11 @@ public class MyDAO {
 
 	/**
 	 * 상담 예약 조회
-	 * @param memberNo
+	 * @param reservation
 	 * @return reservationList
 	 */
-	public List<Reservation> selectReservation(int memberNo) {
-		return sqlSession.selectList("memberMapper.selectReservation", memberNo);
+	public List<Reservation> selectReservation(Reservation reservation) {
+		return sqlSession.selectList("memberMapper.selectReservation", reservation);
 	}
 
 	/**
