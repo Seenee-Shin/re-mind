@@ -83,7 +83,7 @@
 	</resultMap>
 	
 	
-	    <resultMap id="reservation_rm" type="Reservation">
+	 <resultMap id="reservation_rm" type="Reservation">
         <id property="reservationNo" column="RESERVATION_NO"/>
 
         <result property="reservationEnrollDate" column="RESERVATION_ENROLL_DT"/>
@@ -98,9 +98,23 @@
         <result property="professionNo" column="PROFESSION_NO"/>
         <result property="statusCode" column="STATUS_CD"/>
     </resultMap>
+    
+    
+	<!-- 쪽지 vo -->
+	<resultMap type="Letter" id="Letter_rm">
+        <id property="letterNo" column="LETTER_NO"/>
+        <result property="letterContent" column="LETTER_CONTENT"/>
+        <result property="letterDate" column="LETTER_DT"/>
+        <result property="letterRead" column="LETTER_READ"/>
+        <result property="letterType" column="LETTER_TYPE"/>
+        <result property="letterStatusCode" column="LETTER_STATUS_CD"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="professionNo" column="PROFESSION_NO"/>
+        <result property="letterReply" column="LETTER_REPLY"/>
+    </resultMap>
 	
-	
-<!--    그그그머냐ㅐ 그거 검색 -->
+
+	<!--    그그그머냐ㅐ 그거 검색 -->
     <select id="selectProfession" resultMap="profession_rm">
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
                PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
@@ -297,9 +311,15 @@
         DELETE FROM PROFESSION_WISH
         WHERE MEMBER_NO = #{memberNo} AND PROFESSION_NO = #{professionNo}
     </delete>
+    
     <insert id="insertWish">
         INSERT INTO PROFESSION_WISH VALUES(#{memberNo}, #{professionNo})
     </insert>
     
+    <!-- 상담사 쪽지 문의보내기 -->
+    <insert id="proLetterInsert">
+    	INSERT INTO LETTER
+    	VALUES(SEQ_LETTER_NO.NEXTVAL,#{letterContent},SYSDATE,0,1,0,#{memberNo},#{professionNo},NULL)
+    </insert>
 
 </mapper>

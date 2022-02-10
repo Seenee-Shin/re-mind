@@ -3,6 +3,7 @@ package edu.kh.mind.pro.model.service;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.member.model.vo.Review;
+import edu.kh.mind.pro.model.vo.Letter;
 import edu.kh.mind.pro.model.vo.Payment;
 import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
@@ -46,4 +47,7 @@ public interface ProService {
 	int selectWishPro(Map<String, Integer> map);
 
 	int updateWish(Map<String, Integer> map);
+	
+	// 상담 문의 쪽지 보내기
+	int proLetterInsert(Letter letter);
 }

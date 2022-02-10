@@ -17,8 +17,8 @@ html{
 }
 .wishHeart{
     position: absolute;
-    right: 100px;
-    top: 70px;
+    right: 30px;
+    top: 30px;
 }
 .wishHeart img{width: 27px; height: 27px;}
 .wishHeart img:hover{cursor: pointer;}
@@ -280,6 +280,7 @@ html{
 }
 .consultation_inquiry_btn{
         width:25%;
+        height: 55px;
         padding: 3px 5px;
         float: left;
 }
