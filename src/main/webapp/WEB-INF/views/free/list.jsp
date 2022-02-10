@@ -4,7 +4,8 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 
 <!-- header include -->
-
+		<article id="free_borad_wrap">
+			<div class="free_board_list_wrap" id="">
                 <!-- 게시판 하나 시작  -->
 	                <div class="board_list_content"> <!-- 1 -->
 	                    <!-- 프로필 시작 -->
@@ -77,7 +78,10 @@
 							</c:otherwise>
 							</c:choose>
 	                    </div> 
-	                </div>  
+	                </div>
+                </div>
+            </article>
+	                 	 
 <script>
 	//전역변수 생성 
 	const loginMemberNo = "${loginMember.memberNo}"
