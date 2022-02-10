@@ -214,8 +214,9 @@
 							<div class="writer_pic_wrap">
 								<div class="writer_pic light_brown_bg" style="background-image: url();"></div>
 								<ul class="userMenu hidden">
-									<li> <a href=""> 차단</a> </li>
-									<li> <a href=""> 검색</a> </li>
+									<li> <a class="block">차단</a> </li>
+									<input class="hidden" value= ` + item.memberNo + `>
+									<li> <a>검색</a> </li>
 								</ul>
 							</div>
 							<a href="">
@@ -316,8 +317,6 @@
 			$(this).val(2);
 		}
 	});
-
-
 
 
 

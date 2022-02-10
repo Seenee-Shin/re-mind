@@ -425,5 +425,9 @@
 	</insert>
 
 
+	<insert id="memberBlock">
+		INSERT INTO MUTE VALUES(#{memberNo}, #{loginMember})
+	</insert>
+
 
 </mapper>
