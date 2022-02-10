@@ -15,7 +15,7 @@
     <c:when test="${empty counselorList}">
         <%-- 조회된 내찜사 목록이 없을 때 --%>
         <tr>
-            <td colspan="1">게시글이 존재하지 않습니다.</td>
+            <td colspan="1">목록이 존재하지 않습니다.</td>
         </tr>
     </c:when>
     <c:otherwise>
