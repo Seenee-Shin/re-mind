@@ -12,6 +12,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.kh.mind.pro.model.vo.Letter;
 import edu.kh.mind.pro.model.vo.Payment;
 import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
@@ -116,5 +117,10 @@ public class ProDAO {
 
 	public int insertWish(Map<String, Integer> map) {
 		return  sqlSession.insert("professionMapper.insertWish", map);
+	}
+	
+	// 상담사 문의 쪽지 보내기
+	public int proLetterInsert(Letter letter) {
+		return sqlSession.insert("professionMapper.proLetterInsert", letter);
 	}
 }

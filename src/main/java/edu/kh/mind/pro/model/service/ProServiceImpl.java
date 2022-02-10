@@ -5,6 +5,7 @@ import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.pro.model.dao.ProDAO;
+import edu.kh.mind.pro.model.vo.Letter;
 import edu.kh.mind.pro.model.vo.Payment;
 import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
@@ -153,5 +154,11 @@ public class ProServiceImpl implements ProService{
 	@Override
 	public int starPointAverage(int professionNo) {
 		return dao.starPointAverage(professionNo);
+	}
+	
+	// 상담사 문의 쪽지 보내기
+	@Override
+	public int proLetterInsert(Letter letter) {
+		return dao.proLetterInsert(letter);
 	}
 }
