@@ -6,6 +6,7 @@ import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.member.model.vo.Review;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +104,17 @@ public class ProDAO {
 	public int starPointAverage(int professionNo) {
 
 		return sqlSession.selectOne("reservationMapper.starPointAverage", professionNo);
+	}
+
+    public int selectWishPro(Map<String, Integer> map) {
+		return sqlSession.selectOne("professionMapper.selectWishPro", map);
+    }
+
+	public int deleteWish(Map<String, Integer> map) {
+		return sqlSession.delete("professionMapper.deleteWish", map);
+	}
+
+	public int insertWish(Map<String, Integer> map) {
+		return  sqlSession.insert("professionMapper.insertWish", map);
 	}
 }

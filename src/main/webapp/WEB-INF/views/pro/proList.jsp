@@ -474,5 +474,3 @@
 	}
 	makePro();
 </script>
-</body>
-</html>
