@@ -174,7 +174,7 @@
 			            <ul>
 			                <li><a href="${contextPath}/my/emotionRecord">증상기록</a></li>
 			                <hr>
-			                <li><a href="javascript:void(0);">마이상담</a>
+			                <li><a href="${contextPath}/my/appointment">마이상담</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/appointment">상담 예약 조회</a></li>
 			                        <li><a href="#">지난 상담 내역</a></li>
@@ -184,7 +184,6 @@
 			                </li>
 			                <hr>
 			                <li><a href="${contextPath}/my/myBoardList">마이활동</a>
-			                <li><a href="javascript:void(0);">마이활동</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/myBoardList">게시글 내역</a></li>
 			                        <li><a href="${contextPath}/my/letterList">쪽지</a></li>
@@ -194,7 +193,6 @@
 			                </li>
 			                <hr>
 			                <li><a href="${contextPath}/my/updateMyInfo">마이정보</a>
-			                <li><a href="javascript:void(0);">마이정보</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/updateMyInfo">회원정보 수정</a></li>
 			                        <li><a href="${contextPath}/my/secession">회원탈퇴</a></li>
