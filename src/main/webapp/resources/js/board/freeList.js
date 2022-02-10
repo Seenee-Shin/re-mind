@@ -3,6 +3,8 @@ $(function () {
 	getFreeList();
 })
 
+
+
 function selectFreeBoardList(){
 	$.ajax({
 	    url : contextPath+"/free/list",
