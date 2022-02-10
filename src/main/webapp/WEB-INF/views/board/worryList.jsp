@@ -80,17 +80,17 @@
 
 	                        <div class="write_option_area">
 	                            <div class="check_box_wrap">
-	                                <label for="replyCheckCode" class="light_brown_bg"> 댓글허용 </label>
-	                                <input type="checkbox"  name="replyCheckCode" value="0" id="replyCheckCode">
+	                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active"> 댓글허용 </label>
+	                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
 	                            </div>
 
 	                            <div class="check_box_wrap">
-	                                <label for="scrapCheckCode" class="light_brown_bg">스크랩허용</label>
-									<input type="checkbox"  name="scrapCheckCode" value="0" id="scrapCheckCode">
+	                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩허용</label>
+									<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
 	                            </div>
 	                            <div class="check_box_wrap">
-	                                <label for="empathyCheckCode" class="light_brown_bg"> 공감 허용</label>
-	                                <input type="checkbox"  name="empathyCheckCode" value="0" id="empathyCheckCode">
+	                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active"> 공감 허용</label>
+	                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
 	                            </div>
 
 	                        </div>
@@ -221,7 +221,7 @@
 							<a href="">
 								<div class="posting_info">
 									<div class="writer_id">
-										<p class="userInfo">` + item.memberId + `</p>
+										<p class="userInfo">` + item.memberFn + `</p>
 										<p> ` + item.createDate + `</p>
 									</div>
 									<div class="posting">
@@ -302,7 +302,7 @@
 			$(this).val(1);
 		} else {
 			$(this).prev().removeClass("dark_brown_bg").removeClass("active");
-			$(this).val(0);
+			$(this).val(2);
 		}
 	});
 
@@ -313,7 +313,7 @@
 			$(this).val(1);
 		} else {
 			$(this).prev().removeClass("dark_brown_bg").removeClass("active");
-			$(this).val(0);
+			$(this).val(2);
 		}
 	});
 

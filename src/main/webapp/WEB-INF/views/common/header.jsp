@@ -87,33 +87,33 @@
             <ul class="dep1">
 
                 <li>
-                    <a href="#">상담예약</a> <p class="menu_toggle">+</p>
+                    <a href="javascript:void(0);">상담예약</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
-                        <li><a href="#">상담사 찾기</a></li>
+                        <li><a href="${contextPath}/pro/proList">상담사 찾기</a></li>
                         <li><a href="${contextPath}/my/map">상담센터 찾기</a></li>
                         <li><a href="${contextPath}/selftest/selftestForm">자가진단</a></li>
                     </ul>
 
                 </li>
                 <li>
-                    <a href="#">커뮤니티</a> <p class="menu_toggle">+</p>
+                    <a href="javascript:void(0);">커뮤니티</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
                         <li><a href="${contextPath}/free/insert">자유게시판</a></li>
                         <li><a href="${contextPath}/worry/worryList">고민상담 게시판</a></li>
-                        <li><a href="/m">마인드 포스팃</a></li>
-                        <li><a href="/secretList">털어놓기</a></li>
+                        <li><a href="${contextPath}/post/list">마인드 포스팃</a></li>
+                        <li><a href="${contextPath}/secret/secretList">털어놓기</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">공지사항</a> <p class="menu_toggle">+</p>
+                    <a href="javascript:void(0);">공지사항</a> <p class="menu_toggle">+</p>
                 </li>
                 <li><!-- 로그인 안했으면 로그인 버튼 -->
                     <!-- <a href="">로그인</a> -->
-                    <a href="#">마이페이지</a> <p class="menu_toggle">+</p>
+                    <a href="javascript:void(0);">마이페이지</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
                         <li><a href="${contextPath}/my/emotionRecord">감정기록</a></li>
-                        <li><a href="#">마이 상담</a></li>
-                        <li><a href="#">마이 활동</a></li>
+                        <li><a href="${contextPath}/my/appointment">마이 상담</a></li>
+                        <li><a href="${contextPath}/my/myBoardList">마이 활동</a></li>
                         <li><a href="#">마이 정보</a></li>
                     </ul>
                 </li>
@@ -123,7 +123,7 @@
 
                     <c:choose>
                         <c:when test="${empty sessionScope.loginMember}">
-                            <a href="#" class="login_btn">로그인</a>
+                            <a href="javascript:void(0);" class="login_btn">로그인</a>
                         </c:when>
                         <c:otherwise>
                             ${sessionScope.loginMember.memberName}
@@ -154,13 +154,14 @@
 		                <hr>
 		                <ul class="side_menu_dep1">
 		                    <li class="w_side_menu"><a href="${contextPath}/free/insert">자유게시판</a></li>
-		                    <li class="m_side_menu"><a href="${contextPath}/free/insert">자유</a></li>
-		                    <li class="w_side_menu"><a href="#">고민상담 게시판</a> </li>
-		                    <li class="m_side_menu"><a href="#">고민상담</a></li>
-		                    <li class="w_side_menu"><a href="#">마인드포스팃</a></li>
-		                    <li class="m_side_menu"><a href="#">포스팃</a></li>
-		                    <li class="w_side_menu"><a href="#">털어놓기</a></li>
-		                    <li class="m_side_menu"><a href="#">털어놓기</a></li>
+		                    <li class="w_side_menu"><a href="${contextPath}/worry/worryList">고민상담 게시판</a> </li>
+		                    <li class="w_side_menu"><a href="${contextPath}/post/list">마인드포스팃</a></li>
+		                    <li class="w_side_menu"><a href="${contextPath}/secret/secretList">털어놓기</a></li>
+
+                            <li class="m_side_menu"><a href="${contextPath}/free/insert">자유</a></li>
+                            <li class="m_side_menu"><a href="${contextPath}/worry/worryList">고민상담</a></li>
+                            <li class="m_side_menu"><a href="${contextPath}/post/list">포스팃</a></li>
+		                    <li class="m_side_menu"><a href="${contextPath}/secret/secretList">털어놓기</a></li>
 		                </ul>
 		            </section>
 	        	</c:when>
@@ -172,7 +173,7 @@
 			            <ul>
 			                <li><a href="${contextPath}/my/emotionRecord">증상기록</a></li>
 			                <hr>
-			                <li><a href="#">마이상담</a>
+			                <li><a href="javascript:void(0);">마이상담</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/appointment">상담 예약 조회</a></li>
 			                        <li><a href="#">지난 상담 내역</a></li>
@@ -181,7 +182,7 @@
 			                    </ul>
 			                </li>
 			                <hr>
-			                <li><a href="#">마이활동</a>
+			                <li><a href="javascript:void(0);">마이활동</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/myBoardList">게시글 내역</a></li>
 			                        <li><a href="#">쪽지</a></li>
@@ -190,7 +191,7 @@
 			                    </ul>
 			                </li>
 			                <hr>
-			                <li><a href="#">마이정보</a>
+			                <li><a href="javascript:void(0);">마이정보</a>
 			                    <ul>
 			                        <li><a href="">회원정보 수정</a></li>
 			                        <li><a href="">회원탈퇴</a></li>

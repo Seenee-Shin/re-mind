@@ -24,7 +24,7 @@
 			</div>
 
 			<div class="sign_up_wrap">
-				<a href="#self">회원가입</a>
+				<a href="javascript:layerPopup('signUp');">회원가입</a>
 				<a href="#self">비밀번호 찾기</a>
 			</div>
 		</div>
