@@ -315,7 +315,7 @@ $.ajax({
 				html+='		</div>';
 			}
 			
-			html+='		<a href="${contextPath}/view/'+item.boardNo+'">'
+			html+='		<a href="${contextPath}/free/view/'+item.boardNo+'">'
 				+'			<div class="posting_info">'
 				+'				<div class="writer_id">'
 	            +'					<p class="userInfo">'+item.memberFn+'</p>'
