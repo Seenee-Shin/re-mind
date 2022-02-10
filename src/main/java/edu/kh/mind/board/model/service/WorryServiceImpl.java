@@ -36,6 +36,7 @@ public class WorryServiceImpl implements WorryService {
 		return dao.selectWorryCategory();
 	}
 
+	// 고민상담 등록
 	@Override
 	public int insertWorryBoard(Board board, List<MultipartFile> images, String webPath, String serverPath) {
 		board.setBoardContent(Util.XSS((String)board.getBoardContent()));
@@ -104,5 +105,26 @@ public class WorryServiceImpl implements WorryService {
 			}
 		}
 		return boardNo;
+	}
+
+	// 고민상담 등록
+	@Override
+	public Board selectWorryBoard(int boardNo, int memberNo) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("boardCategoryCode", 102);
+		map.put("boardNo", boardNo);
+
+		Board board = dao.selectWorryBoard(map);
+		if(board != null && board.getMemberNo() != memberNo ) {
+
+			// 조회수 증가
+			int result = dao.increaseReadCount(boardNo); // 몇번 글의 조회수를 증가하는지 알아야하기에 boardNo가 넘어간다
+
+			if(result > 0) {
+				board.setReadCount( board.getReadCount() + 1);
+			}
+		}
+
+		return board;
 	}
 }

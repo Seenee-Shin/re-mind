@@ -56,4 +56,17 @@ public class WorryDAO {
 	public int insertImgList(Image image) {
 		return sqlSession.insert("boardMapper.insertImgList", image);
 	}
+
+	/**
+	 * 고민상담 상세
+	 * @param map
+	 * @return result
+	 */
+	public Board selectWorryBoard(Map<String, Integer> map) {
+		return sqlSession.selectOne("boardMapper.selectWorryBoard", map);
+	}
+
+	public int increaseReadCount(int boardNo) {
+		return sqlSession.update("boardMapper.increaseReadCount",boardNo);
+	}
 }

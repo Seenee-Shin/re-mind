@@ -10,8 +10,9 @@ import java.util.Map;
 public interface WorryService {
 
 	/**
-	 * 고민상담 게시글
-	 * @return list
+	 * 고민상담 조회
+	 * @param param
+	 * @return
 	 */
 	List<Board> selectWorryList(Map<String, String> param);
 
@@ -22,4 +23,12 @@ public interface WorryService {
 	List<WorryCategory> selectWorryCategory();
 
 	int insertWorryBoard(Board board, List<MultipartFile> images, String webPath, String serverPath);
+
+	/**
+	 * 고민상담 상세
+	 * @param boardNo
+	 * @param memberNo
+	 * @return result
+	 */
+    Board selectWorryBoard(int boardNo, int memberNo);
 }
