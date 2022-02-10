@@ -25,7 +25,7 @@ function selectReplyList(){
                 const comment_view  = $('<div class="comment_view">');
 
                 // 자식 댓글인 경우 li요소에 클래스 추가
-                if(!reply.parentReplyNo){comment_view.addClass("child")} ;
+                if(reply.parentReplyNo != 0){comment_view.addClass("child")} ;
 
 
                 const userInfo = $('<div class="user_info">');
