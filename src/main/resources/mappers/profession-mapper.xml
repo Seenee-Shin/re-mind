@@ -286,6 +286,20 @@
 	AND rp.STATUS_CD = 1
 	ORDER BY RESERVATION_ENROLL_DT, RESERVATION_ENROLL_TIME
     </select>
+
+    <select id="selectWishPro" resultType="_int">
+        SELECT COUNT(*)
+        FROM PROFESSION_WISH
+        WHERE MEMBER_NO = #{memberNo} AND PROFESSION_NO = #{professionNo}
+    </select>
+
+    <delete id="deleteWish">
+        DELETE FROM PROFESSION_WISH
+        WHERE MEMBER_NO = #{memberNo} AND PROFESSION_NO = #{professionNo}
+    </delete>
+    <insert id="insertWish">
+        INSERT INTO PROFESSION_WISH VALUES(#{memberNo}, #{professionNo})
+    </insert>
     
 
 </mapper>
