@@ -8,7 +8,7 @@
 
 <article class="main_content">
     <div class="update-mypage">회원정보 수정</div>
-    <form action="updateMyInfoo" method="POST" enctype="multipart/form-data">
+    <form action="updateMyInfoo" name="updateForm" method="POST" enctype="multipart/form-data" onsubmit="return memberUpdateValidate();" role="form">
         <div class="update-img">
 
     <%--        if(item.imagePath == undefined)//기본프로필이 없으면--%>
@@ -41,13 +41,13 @@
             <tr>
                 <td>비밀번호</td>
                 <td>
-                    <input class="pass" type="password" placeholder="비밀번호를 입력해주세요.">
-                    <div>123</div>
+                    <input class="pass" name="memberPw" type="password" placeholder="비밀번호를 입력해주세요.">
+                    <div></div>
                 </td>
             </tr>
             <tr>
                 <td>닉네임</td>
-                <td><input class="nickname" type="text" value="더키"></td>
+                <td><input class="nickname" name="memberFName" type="text" value="${loginMember.memberFName}"></td>
             </tr>
             <tr>
                 <c:set var="ph" value="${fn:split(loginMember.memberPhone, '-') }"/>
@@ -77,7 +77,7 @@
             <div>${loginMember.memberName}</div>
             <hr>
             <div class="updateNN">닉네임</div>
-            <div>${loginMember.memberFName}</div>
+            <div><input class="nickname" name="memberFName" type="text" value="${loginMember.memberFName}"></div>
             <hr>
             <div class="updateEmail">이메일</div>
             <div>${loginMember.memberId}</div>
@@ -91,48 +91,43 @@
             <hr>
             <div class="updatePW">비밀번호</div>
             <div class="pwResult">
-                입력 : <input type="password" class="pass"> <span class="pwSpan">유효성</span><br>
-                <button>비밀번호 변경</button>
+                입력 : <input type="password" name="memberPw" class="pass"> <span class="pwSpan">유효성</span><br>
+<%--                <button>비밀번호 변경</button>--%>
             </div>
         </div>
 
         <div class="csdiv">
-            <button id="update">수정</button>
+            <button id="update" type="submit">수정</button>
             <button id="cancel" type="reset">취소</button>
         </div>
     </form>
 </article>
-<div id="fileName"></div>
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <%--<script src="${contextPath}/resources/js/my/updateMyInfo.js"></script>--%>
 <script>
-    // 정규식검사
+    const updateCheckObj = {
+        passWord: false,
+        memberFName:true
+    }
+
     $(".pass").on("input", function (){
-        const index = $(".pass1").index($(this));
-        const reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        const index = $(".pass").index($(this));
+        // const reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
         let pw = $(this).val();
 
-        if(pw.trim().length == 0){
-            $(".pass").eq(0).next().text("");
-            return;
-        }
+        if(pw.trim().length < 7)    updateCheckObj.passWord = false;
+        else                        updateCheckObj.passWord = true;
 
-        if(reg.test(pw)){
-            if(index == 0) {//컴
-                $(".pass").eq(0).next().text("사용 가능한 비밀번호입니다.").css("color", "springgreen");
-            }else{
-                $(".pass").eq(1).next().text("사용 가능한 비밀번호입니다.").css("color", "springgreen");
-            }
-        }else{
-            if(index == 0){//컴
-                $(".pass").eq(0).next().text("사용할 수 없는 비밀번호입니다.").css("color", "red");
-            }else{//모
-                $(".pass").eq(1).next().text("사용할 수 없는 비밀번호입니다.").css("color", "red");
-            }
-        }
+        // if(reg.test(pw)){
+        //     if(index == 0)  updateCheckObj.passWord = true;
+        //     else            updateCheckObj.passWord = true;
+        // }else{
+        //     if(index == 0)  updateCheckObj.passWord = false;
+        //     else            updateCheckObj.passWord = false;
+        // }
     });
 
     function loadFile(input) {
@@ -151,10 +146,22 @@
             $(input).before(fileClone.clone());
             $(input).remove(); // 원본 삭제
         }
-
         name.textContent = file.name;
+    }
 
+    $(".nickname").on("input", function (){
+        if($(this).val().length < 3)
+            updateCheckObj.memberFName = false;
+        else
+            updateCheckObj.memberFName = true;
+    });
 
+    function memberUpdateValidate(){
+
+        for( key in updateCheckObj ){
+            if(!updateCheckObj[key])
+                return false;
+        }
     }
 
 
