@@ -10,6 +10,7 @@
 
 .appointment_list > ul > li{height:46px; line-height:44px; clear:both; border-bottom: 1px solid #ededed;}
 .appointment_list > ul > li > div{float:left; width:20%; text-align:center; height:46px; line-height:44px; font-size: 15px;}
+.appointment_list > ul > li > div.profession_div{cursor: pointer;}
 .appointment_list > ul > li:first-child > div{font-size:16px; font-weight:bold; background-color: #E5D4C5; color: white;}
 
 .appointment_list > ul > li > .img_div{display:none;}
