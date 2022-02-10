@@ -16,77 +16,85 @@
 	            </div>
 	            <article class="board_view_wrap">
 	                <div class="posting_time">
-	                    <div class="edit_btn_wrap">
-	                        <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
-	                        <button type="button" class="dark-brown edit_btn" onclick="" > 삭제 </button>
-	                    </div>
-	                    <p> 15분전</p>
+						<c:if test="${loginMember.memberNo == board.memberNo }">
+							<div class="edit_btn_wrap">
+								<button type="button" class="dark-brown edit_btn" onclick="updateForm()"> 수정 </button>
+								<button type="button" class="dark-brown edit_btn" onclick="deleteBoard();"> 삭제 </button>
+							</div>
+						</c:if>
+						<c:choose>
+							<c:when test="${empty board.modifyDate}">
+								<p>${board.createDate}</p>
+							</c:when>
+
+							<c:otherwise>
+								<p>${board.modifyDate}</p>
+							</c:otherwise>
+						</c:choose>
 	                </div>
 	                <div class="profile_wrap">
 	                    <div class="writer_pic light_brown_bg" style="background-image: url();">
 	                    </div>
 	
 	                    <div class="writer_id">
-	                        <p>아이디</p>
+							<p>${board.memberFn}</p>
 	                    </div>
 	                </div>
 	                
 	                <!-- 자신의 글일때 수정, 삭제버튼 생성 -->
-	                
+
 	                <div class="post_title">
-	                    <h2>심각한 알콜 중독자도 술을 끊을 수 있을까요? ㅠㅠ</h2>
+	                    <h2>${board.boardTitle}</h2>
 	                </div>
 	
 	                <div class=" posting">
 	                    <p>
-	                        아빠가 30년정도 알콜중독자인데요
-	                        2년전에 술먹고 행패 부려서 강제 입원 2번정도 시켜봤는데
-	                        그땐 한달 입원하고 꺼내달라고 온갖 욕 다 해서 꺼내줬어요
-	                        그리고 이번에 술 몇일 안먹었더니 금단현상으로 섬망증상이 보여서 이대론 냅둘수 없어서 입원시켰는데
-	                        이제 안끊으면 안될거 같아요. . 전엔 술 안먹어도 섬망증상 같은건 없었는데 더 이상 술이 몸에 받질 않는거 같아서
-	                        제발 끊고 인간답게 살아줬으면 좋겄어요
-	                        근데 저희 아빠 처럼 심각한 알콜중독자들은 병원에 오래 있으려고 하지도 않고 끊기 힘들다는데.. 어쩌죠?
-	                        저도 가족인연 끊고 살고 싶은데 걷잡을 수 없을때가 오면 너무 후회 할 것 같고 두 다리 쭉 펴고 못 잘거 같아요 ..
-	                        그 병원이 보건복지부에서 운영 하는 곳이고 알콜치료전문이래서 이번엔 어떻게 해서든 아빠가 꺼내달라고 해도 제가 울고불고 애원하면서 몇개월만 치료 받자고 해볼건데..
-	                        만약 아빠가 치료받길 원하고 몇개월 치료 받고 나오면 끊을 수 있을까요?
+							${board.boardContent}
 	                    </p>
-	                    <div class="post_img"></div>
-	                </div>                   
-	
-	
-	                <div class="like_warp">
-	                    <input type="radio" name="empathy" value="1001" id="like_smile" onclick="">
-	                        <img src="${contextPath}/resources/images/icon/smile.png" alt="">
-	                        <p>좋아요</p>
-	                        <p class="like_count">34</p>
-	                    </div>
-	
-	                    <div id="like_hug" onclick="">
-	                        <img src="${contextPath}/resources/images/icon/hug.png" alt="">
-	                        <p>응원해요</p>
-	                        <p  class="like_count">34</p>
-	                    </div>
-	
-	                    <div id="like_amazed" onclick="">
-	                        <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
-	                        <p>놀랐어요</p>
-	                        <p  class="like_count">34</p>
-	                    </div>
-	                    
-	                    <div id="like_angry" onclick="">
-	                        <img src="${contextPath}/resources/images/icon/angry.png" alt="">
-	                        <p>화나요</p>
-	                        <p  class="like_count">34</p>
-	                    </div>
-	
-	                    <div id="like_crying" onclick="">
-	                        <img src="${contextPath}/resources/images/icon/crying.png" alt="">
-	                        <p>슬퍼요</p>
-	                        <p  class="like_count">34</p>
-	                    </div>
+	                    <div class="post_img">
+							<c:forEach items="${board.imgList}" var="img" varStatus="status">
+								<div id="img${status.index}" class="viewBoardImg"> <img src="${contextPath}${img.imagePath}${img.imageName}">
+								</div>
+							</c:forEach>
+						</div>
 	                </div>
+
+					<c:if test="${board.empathyCheckCode == 1}">
+
+						<div class="like_warp">
+							<div id="like_smile" onclick="">
+								<img src="${contextPath}/resources/images/icon/smile.png" alt="">
+								<p>좋아요</p>
+								<p class="like_count">${empathyMap.get("1001")}</p>
+							</div>
+
+							<div id="like_hug" onclick="">
+								<img src="${contextPath}/resources/images/icon/hug.png" alt="">
+								<p>응원해요</p>
+								<p  class="like_count">${empathyMap.get("1002")}</p>
+							</div>
+
+							<div id="like_amazed" onclick="">
+								<img src="${contextPath}/resources/images/icon/amazed.png" alt="">
+								<p>놀랐어요</p>
+								<p  class="like_count">${empathyMap.get("1003")}</p>
+							</div>
+
+							<div id="like_angry" onclick="">
+								<img src="${contextPath}/resources/images/icon/angry.png" alt="">
+								<p>화나요</p>
+								<p  class="like_count">${empathyMap.get("1004")}</p>
+							</div>
+
+							<div id="like_crying" onclick="">
+								<img src="${contextPath}/resources/images/icon/crying.png" alt="">
+								<p>슬퍼요</p>
+								<p  class="like_count">${empathyMap.get("1005")}</p>
+							</div>
+						</div>
+					</c:if>
 	                
-	                <div class="report_scrap_wrap">
+	                <%--<div class="report_scrap_wrap">
 	                    <div class="comment_top dark-brown">
 	                        <div>
 	                            <i class="far fa-comment"></i>
@@ -105,11 +113,92 @@
 	                        <i class="fas fa-exclamation-triangle"></i>
 	                        <p>신고</p>
 	                    </a>
-	                </div> 
-	
-	                <!-- /////////////////////////////////////////////////////////////////////// -->
-	                
-	                <div class="insertReply">
+	                </div>--%>
+
+					<div class="report_scrap_wrap">
+						<!-- 스크랩 허용 했을 경우만 -->
+						<a id="btnTwitter" class="link-icon twitter"  href="javascript:shareTwitter();">
+							<img alt="" src="${contextPath}/resources/images/icon/icon-twitter.png;">
+						</a>
+						<a id="btnFacebook" class="link-icon facebook"  href="javascript:shareFacebook();">
+							<img alt="" src="${contextPath}/resources/images/icon/icon-facebook.png;">
+						</a>
+						<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao(); ">
+							<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
+						</a>
+
+						<a href="">
+							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
+						</a>
+					</div>
+
+				</article>
+
+					<!-- /////////////////////////////////////////////////////////////////////// -->
+
+				<c:if test="${board.replyCheckCode == 1}">
+					<article class="comment_view_wrap">
+						<div class="comment_top dark-brown">
+							<div>
+								<i class="far fa-comment"></i>
+								<span>댓글</span>
+								<span>(55)</span>
+							</div>
+
+							<div class="m_comment_wirte" onclick="openComment()">
+								<i class="far fa-comment"></i>
+								<span>댓글</span>
+								<span>(55)</span>
+							</div>
+						</div>
+
+						<div class="write_comment">
+
+							<div class="user_info">
+								<div class="user_pic light_brown_bg" style="background-image: url();">
+								</div>
+
+								<div>
+									<p>아이디</p>
+								</div>
+							</div>
+
+							<textarea name="replyContent" id="replyContent" rows="3"></textarea>
+							<button class="option_btn dark_brown_bg" id="addReply" onclick="addComment();"> 등록 </button>
+						</div>
+						<hr style="border-color:grey; ">
+
+
+						<div class="comment_list" id="comment_list">
+							<c:forEach items="${rList}" var="reply">
+								<div class="comment_view  <c:if test="${reply.parentReplyNo != 0}"> child </c:if>">
+									<div class="user_info">
+										<div class="user_pic light_brown_bg" style="background-image: url();">
+										</div>
+
+										<div>
+											<p>${reply.memberFn}</p>
+										</div>
+									</div>
+
+									<div class="comment">
+										<p>${reply.replyContent}</p>
+									</div>
+
+									<div class="comment_btn">
+										<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
+										<c:if test="${loginMember.memberNo == reply.memberNo }">
+											<button class="dark-brown edit_btn " onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
+											<button class="dark-brown edit_btn " onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
+										</c:if>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</article>
+				</c:if>
+
+	                <%--<div class="insertReply">
 	                    <textarea></textarea>
 	                    <button>확인</button>
 	                </div>
@@ -189,18 +278,86 @@
 	
 	
 	
-	            </article>
+	            </article>--%>
 	        
 	        </article>
 	    </div>
-	
-	
-	
+
+		<form action="#" method="POST" name="requestForm">
+			<input type="hidden" name="cp" value="${param.cp }">
+			<input type="hidden" name="boardNo" value="${board.boardNo}">
+			<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
+		</form>
+
 	</main>
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_worry_board.js"></script>
 
-</body>
-</html>
+<script type="text/javascript">
+
+	//수정버튼 클릭 시 동작
+	function updateForm(){
+		document.requestForm.action = "../updateForm";
+		document.requestForm.method = "POST";
+		document.requestForm.submit();
+	}
+
+	//닫기 버튼시 동작
+	function deleteBoard(){
+		if(confirm("정말 삭제하시겠습니까?")){
+			document.requestForm.action = "../delete";
+			document.requestForm.method = "POST";
+			document.requestForm.submit();
+		}
+	}
+
+
+	// 로그인한 회원의 회원 번호, 비로그인 시 "" (빈문자열)
+	const loginMemberNo = "${loginMember.memberNo}";
+	// 현재 게시글 번호
+	const boardNo = ${board.boardNo};
+	// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
+	let beforeReplyRow;
+</script>
+
+<script>
+	//트위터 공유
+	function shareTwitter() {
+		var sendText = "re:maind 게시글 공유"; // 전달할 텍스트
+		var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
+		window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+	}
+
+	function shareFacebook() {
+		var sendUrl = "https://www.naver.com/"; // 전달할 URL
+//	    var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
+		window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+	}
+
+	/* 	function shareKakao() {
+
+              // 사용할 앱의 JavaScript 키 설정
+              Kakao.init('6218050ca27459717c1f03b78a03958d');
+
+              // 카카오링크 버튼 생성
+              Kakao.Link.createDefaultButton({
+                container: '#btnKakao', // 카카오공유버튼ID
+                objectType: 'feed',
+                content: {
+                  title: "re:mind", // 보여질 제목
+                  description: "자유게시판 게시글 공유", // 보여질 설명
+                  imageUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo", // 콘텐츠 URL
+                  link: {
+                     mobileWebUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo",
+                     webUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo;"
+                  }
+                }
+              });
+            } */
+</script>
+
+
+
+<script src="${contextPath}/resources/js/board/replyCopy.js"></script>

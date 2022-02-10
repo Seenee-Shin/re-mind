@@ -342,8 +342,7 @@
 			if(result > 0) {
 				$(".wishHeart img").attr("src", contextPath + "/resources/images/pro/redHeart.png");
 				wishCheck = 1;
-			}
-			else{
+			}else{
 				$(".wishHeart img").attr("src", contextPath + "/resources/images/pro/blackHeart.png");
 				wishCheck = 0;
 			}

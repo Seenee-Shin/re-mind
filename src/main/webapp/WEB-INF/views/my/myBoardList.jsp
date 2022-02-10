@@ -67,7 +67,7 @@
             <c:choose>
                 <c:when test="${empty myBoardList}">
                     <%-- 조회된 게시글 목록이 없을 때 --%>
-                    <div>조회된 게시글이 없습니다.</div>
+                    <div>조회된 목록이 없습니다.</div>
                 </c:when>
                 <c:otherwise>
                     <c:forEach items="${myBoardList}" var="myBoard">

@@ -182,16 +182,12 @@
 			success : function (result) {
 
 				let html = "";
-				let empathyArr;
-				let empathyCntArr;
-				let iconCnt = {};
-
 				$.each(result.worryList, function (i, item) {
 
 					// empathy 초기화
-					empathyArr = [];
-					empathyCntArr = [];
-					iconCnt = {
+					let empathyArr = [];
+					let empathyCntArr = [];
+					let iconCnt = {
 						"1001" : 0,
 						"1002" : 0,
 						"1003" : 0,
@@ -218,7 +214,7 @@
 									<li> <a href=""> 검색</a> </li>
 								</ul>
 							</div>
-							<a href="">
+							<a href="${contextPath}/worry/view/` + item.boardNo + `">
 								<div class="posting_info">
 									<div class="writer_id">
 										<p class="userInfo">` + item.memberFn + `</p>
@@ -316,11 +312,6 @@
 			$(this).val(2);
 		}
 	});
-
-
-
-
-
 
 </script>
 

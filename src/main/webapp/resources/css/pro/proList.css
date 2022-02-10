@@ -197,6 +197,9 @@ input:focus {outline:none;}
 }
 .pro_intro p{
     margin-bottom: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 /* --------------------------------- */
