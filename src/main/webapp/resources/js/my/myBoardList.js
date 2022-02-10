@@ -165,7 +165,18 @@ function makeList(){
     calcPagination();
 
     $("tbody").empty();
-    $(".pagination").empty();
+
+    if(resultList.length == 0){
+
+        swal({
+            title: "게시글이 존재하지 않습니다.",
+            text: "",
+            icon: "info",
+            button: "확인",
+        });
+        $("#pagination").empty();
+        return;
+    }
 
     $.each(resultList, function (i, item){
 
@@ -176,22 +187,24 @@ function makeList(){
         let td3 = $("<td>-</td>");
         let td4 = $("<td>"+item.readCount+"</td>");
 
+
+
         // 주소 이동시키야지
         if(btnNumber == 1){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='#'>"+item.boardTitle+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>");
             td3 = $("<td>"+timeForToday(item.createDate)+"</td>");
         }else if(btnNumber == 2){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='#'>"+item.replyContent+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.replyContent+"</a></td>");
             td3 = $("<td>"+timeForToday(item.replyCreateDate)+"</td>");
         }else if(btnNumber == 3){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='#'>"+item.boardTitle+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>");
             td3 = $("<td>"+timeForToday(item.enrollDate)+"</td>");
         }else if(btnNumber == 4){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='#'>"+item.boardTitle+"</a></td>")
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>")
             td3 = $("<td>"+timeForToday(item.createDate)+"</td>");
         }
 
@@ -365,7 +378,6 @@ function getEmpathyList(){
                     return;
                 }
                 resultList[i] = item;
-                console.log(item);
             });
         },
         error: function (error, status) {
