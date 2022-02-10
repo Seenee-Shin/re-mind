@@ -189,4 +189,11 @@ public class MyDAO {
 		return sqlSession.selectList("boardMapper.selectCounselorList", pagination);
 	}
 
+	public String selectPw(Member member) {
+		return sqlSession.selectOne("memberMapper.selectPw", member);
+	}
+
+	public int updateMemberFName(Member member) {
+		return sqlSession.update("memberMapper.updateMemberFName", member);
+	}
 }

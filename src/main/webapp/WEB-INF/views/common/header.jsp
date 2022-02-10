@@ -114,6 +114,7 @@
                         <li><a href="${contextPath}/my/emotionRecord">감정기록</a></li>
                         <li><a href="${contextPath}/my/appointment">마이 상담</a></li>
                         <li><a href="${contextPath}/my/myBoardList">마이 활동</a></li>
+                        <li><a href="${contextPath}/my/updateMyInfo">마이 정보</a></li>
                         <li><a href="#">마이 정보</a></li>
                     </ul>
                 </li>
@@ -182,19 +183,21 @@
 			                    </ul>
 			                </li>
 			                <hr>
+			                <li><a href="${contextPath}/my/myBoardList">마이활동</a>
 			                <li><a href="javascript:void(0);">마이활동</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/myBoardList">게시글 내역</a></li>
-			                        <li><a href="#">쪽지</a></li>
-			                        <li><a href="#">문의사항</a></li>
-			                        <li><a href="#">차단한 회원</a></li>
+			                        <li><a href="${contextPath}/my/letterList">쪽지</a></li>
+			                        <li><a href="${contextPath}/my/enquiry">문의사항</a></li>
+			                        <li><a href="${contextPath}/my/muteMember">차단한 회원</a></li>
 			                    </ul>
 			                </li>
 			                <hr>
+			                <li><a href="${contextPath}/my/updateMyInfo">마이정보</a>
 			                <li><a href="javascript:void(0);">마이정보</a>
 			                    <ul>
-			                        <li><a href="">회원정보 수정</a></li>
-			                        <li><a href="">회원탈퇴</a></li>
+			                        <li><a href="${contextPath}/my/updateMyInfo">회원정보 수정</a></li>
+			                        <li><a href="${contextPath}/my/secession">회원탈퇴</a></li>
 			                    </ul>
 			                </li>
 			            </ul>

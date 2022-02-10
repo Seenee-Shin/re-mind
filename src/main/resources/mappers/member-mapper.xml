@@ -157,4 +157,16 @@
         AND RESERVATION_STATUS_CD = 1
     </update>
 
+    <select id="selectPw" resultType="string">
+        SELECT MEMBER_PW
+        FROM MEMBER
+        WHERE MEMBER_NO = #{memberNo} AND STATUS_CD = 0
+    </select>
+
+    <update id="updateMemberFName">
+        UPDATE MEMBER SET
+            MEMBER_FN = #{memberFName}
+        WHERE MEMBER_NO = #{memberNo} AND STATUS_CD = 0
+    </update>
+
 </mapper>
