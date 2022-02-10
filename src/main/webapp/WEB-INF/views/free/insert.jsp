@@ -147,7 +147,79 @@
             </form>
 
 			 <div class="free_board_list_wrap" id="BoardListArea">
-			 
+                <!-- 게시판 하나 시작  -->
+                <div class="board_list_content"> <!-- 1 -->
+                    <!-- 프로필 시작 -->
+                    <div class="board_flex_wrap"> <!-- 2 -->
+                        <div class="writer_pic_wrap"> <!-- 3 -->
+                            <div class="writer_pic light_brown_bg" style="background-image: url();"> <!-- 4 -->
+                            </div>
+                            
+                            <c:if test="${!loginMember.memberNo == board.memberNo }">
+                            <ul class="userMenu hidden"> <!-- 4 -->
+	                            <li> <!-- 5 -->
+	                            	<a href=""> 차단</a> <!-- 6 -->
+	                            </li>
+	                            <li> 
+	                            	<a href=""> 검색</a> 
+                           		</li>
+                            </ul>
+                            </c:if> 
+                                                      
+                        </div>
+
+
+                        <a href="/view/${board.boardNo}"> <!-- 3 -->
+	                        <div class="posting_info"> <!-- 4 -->
+	                            <div class="writer_id"> <!-- 5 -->
+	                                <p>${board.memberFn}</p> <!-- 6 -->
+	                                
+	                                <p>${board.createDate}</p><!-- 6 -->
+	                            </div>
+	                            <div class="posting"> <!-- 5 -->
+	                                <p>${board.boardContent}</p><!-- 6 -->
+	                            </div>
+	                        </div>
+                        </a>
+                    </div>
+                    <div class="board_icon_wrap"> <!-- 2 -->
+						<c:choose>
+						<c:when test="${board.replyCheckCode == 1}">
+                        <div class="commnet_wrap">  <!-- 3 -->
+                            <i class="far fa-comment dark-brown"></i> <!-- 4 -->
+                            <p>${board.replyCount}</p><!-- 4 -->
+                        </div>
+                        </c:when>
+                        <c:otherwise>
+                       	<div class="commnet_wrap"> <!-- 3 -->
+                       	</div>
+                        </c:otherwise>
+                        </c:choose>
+
+                 		<!-- 공감수 표시 -->
+						<c:choose >
+						<c:when test="${board.empathyCheckCode == 1}">
+                        <div class="like_warp"> <!-- 3  -->
+                            <img src="${contextPath}/resources/images/icon/smile.png" alt=""> <!-- 4  -->
+                            <p>${board.likeCount}</p> <!-- 4  -->
+                            <img src="${contextPath}/resources/images/icon/hug.png" alt=""> <!-- 4  -->
+                            <p>${board.cheerCount}</p> <!-- 4  -->
+                            <img src="${contextPath}/resources/images/icon/amazed.png" alt=""> <!-- 4  -->
+                            <p>${board.surpriseCount}</p> <!-- 4  -->
+                            <img src="${contextPath}/resources/images/icon/angry.png" alt=""> <!-- 4  -->
+                            <p>${board.angryCount}</p> <!-- 4  -->
+                            <img src="${contextPath}/resources/images/icon/crying.png" alt=""> <!-- 4  -->
+                            <p>${board.sadCount}</p><!-- 4  -->
+                        </div>
+						</c:when>
+							
+						<c:otherwise>
+                        <div class="like_warp"> <!-- 3 -->
+                        </div>
+						</c:otherwise>
+						</c:choose>
+                    </div> 
+                </div>  
 			 </div>
             <!-- 게시판 리스트 -->
           <%--   <jsp:include page="list.jsp"/>  --%>
@@ -163,121 +235,5 @@
 <script src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
 
 <script>
-$(function () {
-	// list 가져오기
-	getFreeList();
-})
-
-
-	// 검색
-	const searchSelect = $("#freeboard_search");
-	searchSelect.on("click", function () {
-		
-		const data = {
-			"searchCategory" : $("#search_category option:selected").val(),
-			"searchText" : $("[name='freeboard_search']").val()
-		}
-
-		getFreeList(data);
-	});
-	
-	// list 가져오기
-	function getFreeList(searchData) {
-		let data = {};
-
-		if (searchData != null) {
-			data = searchData;
-		}
-
-		$.ajax({
-			url : "${contextPath}/free/list",
-			type : "POST",
-			data : data,
-			success : function (result) {
-
-				let html = "";
-				let empathyArr;
-				let empathyCntArr;
-				let iconCnt = {};
-
-				$.each(result.freeBoardList, function (i, item) {
-
-					// empathy 초기화
-					empathyArr = [];
-					empathyCntArr = [];
-					iconCnt = {
-						"1001" : 0,
-						"1002" : 0,
-						"1003" : 0,
-						"1004" : 0,
-						"1005" : 0
-					};
-
-					if (item.worryEmpathyArray != null) {
-						empathyArr = (item.worryEmpathyArray).split(",");
-						empathyCntArr = (item.worryCntArray).split(",");
-					}
-
-					for(i=0; i<empathyArr.length; i++) {
-						iconCnt[empathyArr[i]] = empathyCntArr[i];
-					}
-
-					html += `
-						<div class="board_list_content">
-							<div class="board_flex_wrap">
-								<div class="writer_pic_wrap">
-									<div class="writer_pic light_brown_bg" style="background-image: url();"></div>
-									<ul class="userMenu hidden">
-										<li> <a href=""> 차단</a> </li>
-										<li> <a href=""> 검색</a> </li>
-									</ul>
-								</div>
-								<a href="">
-									<div class="posting_info">
-										<div class="writer_id">
-											<p class="userInfo">` + item.memberId + `</p>
-											<p> ` + item.createDate + `</p>
-										</div>
-										<div class="posting">
-											<p>` + item.boardTitle + `</p>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="board_icon_wrap">
-								<div class="comment_wrap">
-	                                <i class="far fa-comment dark-brown"></i>
-	                                <p>` + 5 + `</p>
-	                            </div>
-								<div class="like_warp">
-	                                <img src="${contextPath}/resources/images/icon/smile.png" alt="" data-icon="1001">
-	                                <p>`+ iconCnt[1001] +`</p>
-	                                <img src="${contextPath}/resources/images/icon/hug.png" alt="" data-icon="1002">
-	                                <p>`+ iconCnt[1002] +`</p>
-	                                <img src="${contextPath}/resources/images/icon/amazed.png" alt="" data-icon="1003">
-	                                <p>`+ iconCnt[1003] +`</p>
-	                                <img src="${contextPath}/resources/images/icon/angry.png" alt="" data-icon="1004">
-	                                <p>`+ iconCnt[1004] +`</p>
-	                                <img src="${contextPath}/resources/images/icon/crying.png" alt="" data-icon="1005">
-	                                <p>`+ iconCnt[1005] +`</p>
-	                            </div>
-	                        </div>
-						</div>
-					`;
-					});
-				$(".free_board_list_wrap").html(html);
-				
-				
-
-
-			},
-			error : function(request, status, error){
-				console.log("ajax 통신 중 오류 발생");
-				console.log(request.responseText);
-			}
-
-
-		});
-	}
 
 </script>

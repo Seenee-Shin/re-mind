@@ -48,6 +48,7 @@ public class FreeBoardController {
 
 	//--------------자유게시판--------------------
 	
+	
     //게시판 리스트 연결
 	@ResponseBody
 	@RequestMapping(value = "list", method = RequestMethod.POST)
