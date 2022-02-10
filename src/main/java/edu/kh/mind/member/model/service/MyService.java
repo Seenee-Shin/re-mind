@@ -100,7 +100,7 @@ public interface MyService {
 
 	Image getMyImage(int memberNo);
   
-	int updateMyForm(Image image, MultipartFile images, String webPath, String serverPath);
+	int updateMyForm(Member member, Image image, MultipartFile images, String webPath, String serverPath);
 
 	// 내 찜 사 페이징
 	Pagination getCounselorPagination(int cp, int memberNo);

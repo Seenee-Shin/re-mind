@@ -91,16 +91,18 @@
 
                     <div class="report_scrap_wrap">
                         <!-- 스크랩 허용 했을 경우만 -->
-                        <c:if test="${board.scrapCheckCode == 1} ">
-	                        <a href="">
-	                            <i class="fas fa-archive"></i>  
-	                            <p>스크랩</p>
-	                        </a>
-                        </c:if>
+	                      	<a id="btnTwitter" class="link-icon twitter"  href="javascript:shareTwitter();">
+	                      		<img alt="" src="${contextPath}/resources/images/icon/icon-twitter.png;">
+	                      	</a>
+							<a id="btnFacebook" class="link-icon facebook"  href="javascript:shareFacebook();">
+								<img alt="" src="${contextPath}/resources/images/icon/icon-facebook.png;">
+							</a>    
+							<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao(); ">
+								<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
+							</a>    
     
                         <a href="">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <p>신고</p>
+							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
                         </a>
                     </div> 
                     
@@ -209,5 +211,42 @@
 	// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 	let beforeReplyRow;
 </script>
+<script>
+	//트위터 공유 
+	function shareTwitter() {
+	    var sendText = "re:maind 게시글 공유"; // 전달할 텍스트
+	    var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
+	    window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+	}
+	
+	function shareFacebook() {
+	    var sendUrl = "https://www.naver.com/"; // 전달할 URL
+//	    var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
+	    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+	}
+
+/* 	function shareKakao() {
+		 
+		  // 사용할 앱의 JavaScript 키 설정
+		  Kakao.init('6218050ca27459717c1f03b78a03958d');
+		 
+		  // 카카오링크 버튼 생성
+		  Kakao.Link.createDefaultButton({
+		    container: '#btnKakao', // 카카오공유버튼ID
+		    objectType: 'feed',
+		    content: {
+		      title: "re:mind", // 보여질 제목
+		      description: "자유게시판 게시글 공유", // 보여질 설명
+		      imageUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo", // 콘텐츠 URL
+		      link: {
+		         mobileWebUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo",
+		         webUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo;"
+		      }
+		    }
+		  });
+		} */
+</script>
+
+
 
 <script src="${contextPath}/resources/js/board/replyCopy.js"></script>

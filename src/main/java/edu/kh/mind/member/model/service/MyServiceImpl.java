@@ -16,12 +16,12 @@ import edu.kh.mind.member.social.naver.vo.Naver;
 
 import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +31,9 @@ public class MyServiceImpl implements MyService {
 
     @Autowired
     private MyDAO dao;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Override
     public int secessionMember(Naver naver, Member loginMember) {
@@ -116,44 +119,53 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public int updateMyForm(Image image, MultipartFile images, String webPath, String serverPath) {
+    public int updateMyForm(Member member, Image image, MultipartFile images, String webPath, String serverPath) {
 
-        int result = dao.selectProfile(image);
-        System.out.println("result : " + result);
-        if(result > 0){//업데이트
+        int result = 0;
 
-            if(images.getOriginalFilename() != null && !images.getOriginalFilename().equals("")){
-                image.setImagePath(webPath);
-                image.setImageOriginal(images.getOriginalFilename());
-                image.setImageName(Util.fileRename(image.getImageOriginal()));
-                image.setImageLevel(0);
+        String memberPw = dao.selectPw(member);
+        System.out.println("memberPw : " + memberPw);
 
-                if(!images.isEmpty())   result = dao.updateImage(image);
+        if(encoder.matches(member.getMemberPw(), memberPw)){// 비밀번호 일치 하면
 
-                File saveFile = new File(serverPath, image.getImageName());
-                try {
-                    images.transferTo(saveFile);
-                }catch (Exception e){
+            // 닉네임 변경
+            result = dao.updateMemberFName(member);
 
-                }
-
-            }
-
-        }else{//인설트
-
-            if(images.getOriginalFilename() != null && !images.getOriginalFilename().equals("")){
-                image.setImagePath(webPath);
-                image.setImageOriginal(images.getOriginalFilename());
-                image.setImageName(Util.fileRename(image.getImageOriginal()));
-                image.setImageLevel(0);
-
-                if(!images.isEmpty())   result = dao.insertImage(image);
-
-            }
+            System.out.println("result : " + result);
             
+            if(images.getOriginalFilename() != null && !images.getOriginalFilename().equals("")) {
+                image.setImagePath(webPath);
+                image.setImageOriginal(images.getOriginalFilename());
+                image.setImageName(Util.fileRename(image.getImageOriginal()));
+                image.setImageLevel(0);
+
+                // 프로필 이미지가 이미 있는지 체크 count
+                result = dao.selectProfile(image);
+                if(result > 0) {//업데이트
+                    if(!images.isEmpty())   result = dao.updateImage(image);
+
+                    File saveFile = new File(serverPath, image.getImageName());
+                    try {
+                        images.transferTo(saveFile);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }else{// 인설트
+                    if(!images.isEmpty())   result = dao.insertImage(image);
+                    File saveFile = new File(serverPath, image.getImageName());
+                    try {
+                        images.transferTo(saveFile);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }else{
+            result = 0;
         }
 
-        return 0;
+
+        return result;
     }
 
     @Override

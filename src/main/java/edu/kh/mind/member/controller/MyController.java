@@ -19,6 +19,7 @@ import edu.kh.mind.member.social.naver.vo.Naver;
 
 import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -243,6 +244,7 @@ public class MyController {
             System.out.println(pagination);
 
             counselorList = service.selectCounselorList(pagination);
+            System.out.println(counselorList);
 
             model.addAttribute("pagination", pagination);
             model.addAttribute("counselorList", counselorList);
@@ -360,29 +362,43 @@ public class MyController {
         model.addAttribute("memberImage", image);
         return path;
     }
+
     @PostMapping("updateMyInfoo")
-    public String updateMyInfo(Member member,
+    public String updateMyInfo(Member member, Model model,
                                Image image,
                                @ModelAttribute("loginMember") Member loginMember,
                                HttpSession session, RedirectAttributes ra,
-                               MultipartHttpServletRequest multiReq,
+                               @RequestParam Map<String, String> param,
                                @RequestParam(value = "images", required = false) MultipartFile images){
 
         // 1) 로그인 회원 번호를 image에 세팅
         image.setMemberNo(loginMember.getMemberNo());
+
+        member.setMemberPw(param.get("memberPw"));
+        member.setMemberFName(param.get("memberFName"));
+        member.setMemberNo(loginMember.getMemberNo());
 
         // 2) 웹 접근 경로, 서버 저장 경로
         String webPath = "/resources/images/my/";
         String serverPath = session.getServletContext().getRealPath(webPath);
         System.out.println("serverPath : " + serverPath);
 
-        // 3) 게시글 삽입 Service 호출
-        int result = service.updateMyForm(image, images, webPath, serverPath);
-        // -> Service 수행 후 삽입된 게시글 번호를 얻어올 예정
+        int result = service.updateMyForm(member, image, images, webPath, serverPath);
 
+        String path = null;
 
+        if(result > 0){
+            path = "redirect:/";
+            Util.swalSetMessage("회원 정보 수정 성공!", null, "success", ra);
 
-        return null;
+            loginMember.setMemberFName(member.getMemberFName());
+            model.addAttribute("loginMember", loginMember);
+        }else{
+            path = "redirect:/";
+            Util.swalSetMessage("회원 정보 수정 실패!", null, "error", ra);
+        }
+
+        return path;
     }
 
     @GetMapping("loadProMap")

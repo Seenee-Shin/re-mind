@@ -14,7 +14,7 @@
 		<result property="boardNo" column="REPLY_NO"/>
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="professionNo" column="PROFESSION_NO"/>
-		<result property="parentReplyNo" column="REPLY_NESTED_CD"/>
+		<result property="parentReplyNo" column="PARENT_REPLY_NO"/>
 
 		<result property="boardTitle" column="BOARD_TITLE"/>
 		<result property="readCount" column="BOARD_READ_COUNT"/>
