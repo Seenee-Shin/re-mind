@@ -59,6 +59,9 @@
 	                <p>#가족 #대인관계 #자존감상실 #연인</p>
 	            </div>
 	        </div>
+			<div class="wishHeart">
+				<img src="${contextPath}/resources/images/pro/blackHeart.png">
+			</div>
 
 			<c:set var="splitPrice" value="${fn:split(profession.counselPrice,',')}"/>
 			<c:set var="splitCategory" value="${fn:split(profession.counselCategoryCode,',')}"/>
@@ -309,6 +312,7 @@
 	const profession = "${profession.counselCategoryCode}";
 	console.log(profession)
 	const professionNo = "${profession.professionNo}";
+	const memberNo = "${loginMember.memberNo}";
 
 	function proReservation(){
 		location.href = contextPath + "/pro/proReservation/" + professionNo;
@@ -351,6 +355,47 @@
 
 		},
 	
+	});
+
+	var wishCheck;
+	$.ajax({
+		url:"checkWish",
+		data:{
+			"professionNo": professionNo,
+			"memberNo": memberNo},
+		success:function (result){
+			console.log(result)
+			if(result > 0) {
+				$(".wishHeart img").attr("src", contextPath + "/resources/images/pro/redHeart.png");
+				wishCheck = 1;
+			}
+			else{
+				$(".wishHeart img").attr("src", contextPath + "/resources/images/pro/blackHeart.png");
+				wishCheck = 0;
+			}
+		}
+	});
+
+	$(".wishHeart img").on("click", function (){
+
+		if($(this).attr("src") == contextPath + "/resources/images/pro/redHeart.png"){
+			$(this).attr("src", contextPath + "/resources/images/pro/blackHeart.png");
+			wishCheck = 0;
+		}else{
+			$(this).attr("src", contextPath + "/resources/images/pro/redHeart.png");
+			wishCheck = 1;
+		}
+
+		$.ajax({
+			url:"updateWish",
+			data:{
+				"professionNo": professionNo,
+				"memberNo": memberNo,
+				"wishCheck": wishCheck},
+			success:function (result){
+
+			}
+		});
 	});
 
 </script>

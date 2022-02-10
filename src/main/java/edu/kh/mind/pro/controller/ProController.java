@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -51,6 +53,35 @@ public class ProController {
 
 		return new Gson().toJson(pList);
 	}
+
+	@GetMapping("proView/updateWish")
+	@ResponseBody
+	public int proWish(@RequestParam(value = "professionNo", required = false) int professionNo,
+					   @RequestParam(value = "memberNo", required = false) int memberNo,
+					   @RequestParam(value = "wishCheck", required = false) int wishCheck){
+
+		Map<String, Integer> map = new HashMap<>();
+		map.put("professionNo", professionNo);
+		map.put("memberNo", memberNo);
+		map.put("wishCheck", wishCheck);
+
+		return service.updateWish(map);
+	}
+	@GetMapping("proView/checkWish")
+	@ResponseBody
+	public int checkWish(@RequestParam(value = "professionNo", required = false) int professionNo,
+					   @RequestParam(value = "memberNo", required = false) int memberNo){
+
+		// 찜했는지 안했는지 확인
+		Map<String, Integer> map = new HashMap<>();
+		map.put("professionNo", professionNo);
+		map.put("memberNo", memberNo);
+
+		int result = service.selectWishPro(map);
+		System.out.println("result : " + result);
+
+		return service.selectWishPro(map);
+	}
 	
 	@RequestMapping("proView/{professionNo}")
 	public String proView(Model model, @PathVariable("professionNo") int professionNo) {
@@ -65,8 +96,6 @@ public class ProController {
 		
 		// 후기 리스트 가지고오기
 		List<Review> reviewList = service.reviewListSelect(professionNo);
-		
-		System.out.println(reviewList);
 		
 		// 후기 리스트 담기
 		model.addAttribute("reviewList", reviewList);

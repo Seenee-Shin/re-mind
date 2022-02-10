@@ -12,7 +12,16 @@
 html{
     scroll-behavior: smooth;
 }
-
+.pro_profile_wrap{
+    position: relative;
+}
+.wishHeart{
+    position: absolute;
+    right: 100px;
+    top: 70px;
+}
+.wishHeart img{width: 27px; height: 27px;}
+.wishHeart img:hover{cursor: pointer;}
 /* --------------------------------------- */
 
 /* 왼쪽 상담사 디테일 내용 */
