@@ -66,7 +66,7 @@ public class Board {
 	private int countStar;
 	private int reviewStarpoint;
 	private String proIntro;
-	private int counselPrice;
+	private String counselPrice;
 
 
 	public Board() {
@@ -105,11 +105,11 @@ public class Board {
 		this.proIntro = proIntro;
 	}
 
-	public int getCounselPrice() {
+	public String getCounselPrice() {
 		return counselPrice;
 	}
 
-	public void setCounselPrice(int counselPrice) {
+	public void setCounselPrice(String counselPrice) {
 		this.counselPrice = counselPrice;
 	}
 

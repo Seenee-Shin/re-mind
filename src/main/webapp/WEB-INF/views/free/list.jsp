@@ -6,72 +6,78 @@
 <!-- header include -->
 
                 <!-- 게시판 하나 시작  -->
-                <div class="board_list_content">
-                    <!-- 프로필 시작 -->
-                    <div class="board_flex_wrap">
-                        <div class="writer_pic_wrap">
-                            <div class="writer_pic light_brown_bg" style="background-image: url();">
-                            </div>
-                            <c:if test="${!loginMember.memberNo == board.memberNo }">
-                            <ul class="userMenu hidden">
-	                            <li> <a href=""> 차단</a> </li>
-	                            <li> <a href=""> 검색</a> </li>
-                            </ul>
-                            </c:if>                           
-                        </div>
-
-
-                        <a href="/view/${board.boardNo}">
-	                        <div class="posting_info">
-	                            <div class="writer_id">
-	                                <p>${board.memberFn}</p> 
-	                                
-	                                <p>${board.createDate}</p>
+	                <div class="board_list_content"> <!-- 1 -->
+	                    <!-- 프로필 시작 -->
+	                    <div class="board_flex_wrap"> <!-- 2 -->
+	                        <div class="writer_pic_wrap"> <!-- 3 -->
+	                            <div class="writer_pic light_brown_bg" style="background-image: url();"> <!-- 4 -->
 	                            </div>
-	                            <div class="posting">
-	                                <p>${board.boardContent}</p>
-	                            </div>
+	                            
+	                            <c:if test="${!loginMember.memberNo == board.memberNo }">
+	                            <ul class="userMenu hidden"> <!-- 4 -->
+		                            <li> <!-- 5 -->
+		                            	<a href=""> 차단</a> <!-- 6 -->
+		                            </li>
+		                            <li> 
+		                            	<a href=""> 검색</a> 
+                            		</li>
+	                            </ul>
+	                            </c:if> 
+	                                                      
 	                        </div>
-                        </a>
-                    </div>
-                    <div class="board_icon_wrap">
-						<c:choose>
-							<c:when test="${board.replyCheckCode == 1}">
-		                        <div class="commnet_wrap">
-		                            <i class="far fa-comment dark-brown"></i>
-		                            <p>${board.replyCount}</p>
+	
+	
+	                        <a href="/view/${board.boardNo}"> <!-- 3 -->
+		                        <div class="posting_info"> <!-- 4 -->
+		                            <div class="writer_id"> <!-- 5 -->
+		                                <p>${board.memberFn}</p> <!-- 6 -->
+		                                
+		                                <p>${board.createDate}</p><!-- 6 -->
+		                            </div>
+		                            <div class="posting"> <!-- 5 -->
+		                                <p>${board.boardContent}</p><!-- 6 -->
+		                            </div>
 		                        </div>
+	                        </a>
+	                    </div>
+	                    <div class="board_icon_wrap"> <!-- 2 -->
+							<c:choose>
+							<c:when test="${board.replyCheckCode == 1}">
+	                        <div class="commnet_wrap">  <!-- 3 -->
+	                            <i class="far fa-comment dark-brown"></i> <!-- 4 -->
+	                            <p>${board.replyCount}</p><!-- 4 -->
+	                        </div>
 	                        </c:when>
 	                        <c:otherwise>
-	                        	<div class="commnet_wrap">
-	                        	</div>
+                        	<div class="commnet_wrap"> <!-- 3 -->
+                        	</div>
 	                        </c:otherwise>
-                        </c:choose>
-
-                 		<!-- 공감수 표시 -->
-						<c:choose >
+	                        </c:choose>
+	
+	                 		<!-- 공감수 표시 -->
+							<c:choose >
 							<c:when test="${board.empathyCheckCode == 1}">
-		                        <div class="like_warp">
-		                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
-		                            <p>${board.likeCount}</p>
-		                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
-		                            <p>${board.cheerCount}</p>
-		                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
-		                            <p>${board.surpriseCount}</p>
-		                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
-		                            <p>${board.angryCount}</p>
-		                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
-		                            <p>${board.sadCount}</p>
-		                        </div>
+	                        <div class="like_warp"> <!-- 3  -->
+	                            <img src="${contextPath}/resources/images/icon/smile.png" alt=""> <!-- 4  -->
+	                            <p>${board.likeCount}</p> <!-- 4  -->
+	                            <img src="${contextPath}/resources/images/icon/hug.png" alt=""> <!-- 4  -->
+	                            <p>${board.cheerCount}</p> <!-- 4  -->
+	                            <img src="${contextPath}/resources/images/icon/amazed.png" alt=""> <!-- 4  -->
+	                            <p>${board.surpriseCount}</p> <!-- 4  -->
+	                            <img src="${contextPath}/resources/images/icon/angry.png" alt=""> <!-- 4  -->
+	                            <p>${board.angryCount}</p> <!-- 4  -->
+	                            <img src="${contextPath}/resources/images/icon/crying.png" alt=""> <!-- 4  -->
+	                            <p>${board.sadCount}</p><!-- 4  -->
+	                        </div>
 							</c:when>
-							
+								
 							<c:otherwise>
-		                        <div class="like_warp">
-		                        </div>
+	                        <div class="like_warp"> <!-- 3 -->
+	                        </div>
 							</c:otherwise>
-						</c:choose>
-                    </div>
-                </div>  
+							</c:choose>
+	                    </div> 
+	                </div>  
 <script>
 	//전역변수 생성 
 	const loginMemberNo = "${loginMember.memberNo}"
