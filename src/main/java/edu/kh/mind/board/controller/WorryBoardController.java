@@ -75,6 +75,31 @@ public class WorryBoardController {
         return result;
     }
 
+
+    
+    // 회원 차단
+    @ResponseBody
+    @RequestMapping(value = "block", method = RequestMethod.GET)
+    public int memberBlock(@ModelAttribute("loginMember") Member loginMember, int muteMember) {
+    	
+    	System.out.println(loginMember.getMemberNo());
+    	System.out.println(muteMember);
+    	
+    	 HashMap<String, Integer> map = new HashMap<>();
+    	 map.put("loginMember", loginMember.getMemberNo());
+    	 map.put("memberNo", muteMember);
+    	 
+    	 int result = 0;
+    	 
+    	 if(loginMember.getMemberNo()== muteMember) {
+    		 result = 0;
+    	 }else {
+    		 result = service.memberBlock(map);
+    	 }
+    	 
+    	return result;
+    }
+
     //  고민상담 상세
     @RequestMapping(value="view/{boardNo}")
     public String worryView(Model model, @PathVariable("boardNo") int boardNo, HttpSession session) {
@@ -124,5 +149,6 @@ public class WorryBoardController {
 
         return "/common/error";
     }
+
 
 }

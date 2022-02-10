@@ -451,5 +451,9 @@
 		AND BOARD.BOARD_STATUS_CD = 201
 	</select>
 
+	<insert id="memberBlock">
+		INSERT INTO MUTE VALUES(#{memberNo}, #{loginMember})
+	</insert>
+
 
 </mapper>

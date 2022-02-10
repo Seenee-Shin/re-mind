@@ -3,10 +3,13 @@ package edu.kh.mind.board.model.dao;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.WorryCategory;
+import edu.kh.mind.member.model.vo.Member;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +60,17 @@ public class WorryDAO {
 		return sqlSession.insert("boardMapper.insertImgList", image);
 	}
 
+
+	/** 회원 차단
+	 * @param map
+	 * @return result
+	 */
+	public int memberBlock(HashMap<String, Integer> map) {
+		return sqlSession.insert("boardMapper.memberBlock", map);
+	}
+
+	
+
 	/**
 	 * 고민상담 상세
 	 * @param map
@@ -69,4 +83,5 @@ public class WorryDAO {
 	public int increaseReadCount(int boardNo) {
 		return sqlSession.update("boardMapper.increaseReadCount",boardNo);
 	}
+
 }
