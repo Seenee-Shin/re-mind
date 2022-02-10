@@ -90,6 +90,7 @@
 					</c:if>
 
                     <div class="report_scrap_wrap">
+	                    <c:if test="${board.scrapCheckCode == 1}">
                         <!-- 스크랩 허용 했을 경우만 -->
 	                      	<a id="btnTwitter" class="link-icon twitter"  href="javascript:shareTwitter();">
 	                      		<img alt="" src="${contextPath}/resources/images/icon/icon-twitter.png;">
@@ -100,7 +101,7 @@
 							<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao(); ">
 								<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
 							</a>    
-    
+	    				</c:if>
                         <a href="">
 							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
                         </a>

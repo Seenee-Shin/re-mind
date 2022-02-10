@@ -137,34 +137,76 @@ $("#select_myEmpathyList").on("click", function (){
 
 
 
+function timeForToday(value) {
+    const today = new Date();
+    const timeValue = new Date(value);
+
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+    if (betweenTime < 1) return '방금전';
+    if (betweenTime < 60) {
+        return `${betweenTime}분전`;
+    }
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+        return `${betweenTimeHour}시간전`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+        return `${betweenTimeDay}일전`;
+    }
+
+    return `${Math.floor(betweenTimeDay / 365)}년전`;
+}
+
 var resultList = [];
 function makeList(){
     calcPagination();
 
     $("tbody").empty();
-    $(".pagination").empty();
+
+    if(resultList.length == 0){
+
+        swal({
+            title: "게시글이 존재하지 않습니다.",
+            text: "",
+            icon: "info",
+            button: "확인",
+        });
+        $("#pagination").empty();
+        return;
+    }
 
     $.each(resultList, function (i, item){
 
         let tr = $('<tr class="board-view" style="background-color: rgb(252, 247, 243);">');
 
         let td1 = $("<td>-</td>");
-        if(item.boardNo != undefined)
-            td1 = $("<td>"+item.boardNo+"</td>");
-        else if(item.postNo != 0)
-            td1 = $("<td>"+item.postNo+"</td>");
-
-        let td2 = $("<td>"+item.boardTitle+"</td>");
-
+        let td2 = $("<td>-</td>");
         let td3 = $("<td>-</td>");
-        if(item.replyCreateDate != undefined)
-            td3 = $("<td>"+item.replyCreateDate+"</td>");
-        else if(item.createDate != undefined)
-            td3 = $("<td>"+item.createDate+"</td>");
-        else if(item.enrollDate != undefined)
-            td3 = $("<td>"+item.enrollDate+"</td>");
-
         let td4 = $("<td>"+item.readCount+"</td>");
+
+
+
+        // 주소 이동시키야지
+        if(btnNumber == 1){
+            td1 = $("<td>"+item.boardNo+"</td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>");
+            td3 = $("<td>"+timeForToday(item.createDate)+"</td>");
+        }else if(btnNumber == 2){
+            td1 = $("<td>"+item.boardNo+"</td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.replyContent+"</a></td>");
+            td3 = $("<td>"+timeForToday(item.replyCreateDate)+"</td>");
+        }else if(btnNumber == 3){
+            td1 = $("<td>"+item.boardNo+"</td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>");
+            td3 = $("<td>"+timeForToday(item.enrollDate)+"</td>");
+        }else if(btnNumber == 4){
+            td1 = $("<td>"+item.boardNo+"</td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>")
+            td3 = $("<td>"+timeForToday(item.createDate)+"</td>");
+        }
 
         tr.append(td1, td2, td3, td4);
         $("tbody").append(tr);
@@ -192,6 +234,7 @@ function makeList(){
     colorSet();
 }
 
+
 $(document).on("click", "#pagination div", function (){
     const index = $("#pagination div").index($(this));
     const clickable = $(this).text();
@@ -208,18 +251,21 @@ $(document).on("click", "#pagination div", function (){
     makeList();
 });
 
+function leftRightCalc(str){
+    if(str == '>'){
+        if(currentPage > maxPage - 11)  currentPage = maxPage;
+        else                            currentPage = currentPage + 10;
+    }else if(str == '<'){
+        if(currentPage < 11)    currentPage = 1;
+        else                    currentPage = currentPage - 10;
+    }else if(str == '<<')  currentPage = 1;
+    else if(str == '>>')   currentPage = maxPage;
+}
+
 $(document).on("click", "#pagination span", function (){
     const clickable = $(this).text();
 
-    if(clickable == '>'){
-        if(currentPage > maxPage - 11)  currentPage = maxPage;
-        else                            currentPage = currentPage + 10;
-    }else if(clickable == '<'){
-        if(currentPage < 11)    currentPage = 1;
-        else                    currentPage = currentPage - 10;
-    }else if(clickable == '<<')  currentPage = 1;
-    else if(clickable == '>>')   currentPage = maxPage;
-
+    leftRightCalc(clickable);
     calcPagination();
 
     if(btnNumber == 1)      getBoardList();
@@ -229,7 +275,6 @@ $(document).on("click", "#pagination span", function (){
 
     makeList();
 });
-
 
 function getReplyList(){
     $.ajax({
@@ -297,7 +342,6 @@ function getBoardList(){
         dataType: "json",
         success: function (result) {
             $.each(result, function (i, item){
-                // currentPage = 1;
                 if(result.length - 1 == i){
                     listCount = Number.parseInt(item.maxValue);
                     return;
@@ -328,14 +372,12 @@ function getEmpathyList(){
         },
         dataType: "json",
         success: function (result) {
-
             $.each(result, function (i, item){
                 if(result.length - 1 == i){
                     listCount = Number.parseInt(item.maxValue);
                     return;
                 }
                 resultList[i] = item;
-                console.log(item);
             });
         },
         error: function (error, status) {
