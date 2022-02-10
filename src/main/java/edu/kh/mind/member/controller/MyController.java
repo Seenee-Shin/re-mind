@@ -234,6 +234,7 @@ public class MyController {
             System.out.println(pagination);
 
             counselorList = service.selectCounselorList(pagination);
+            System.out.println(counselorList);
 
             model.addAttribute("pagination", pagination);
             model.addAttribute("counselorList", counselorList);
