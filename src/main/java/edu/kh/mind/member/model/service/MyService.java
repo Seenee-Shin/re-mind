@@ -80,10 +80,10 @@ public interface MyService {
 
 	/**
 	 * 상담 예약 조회
-	 * @param memberNo
+	 * @param reservation
 	 * @return reservationList
 	 */
-	List<Reservation> selectReservation(int memberNo);
+	List<Reservation> selectReservation(Reservation reservation);
 
 	/**
 	 * 상담 예약 취소

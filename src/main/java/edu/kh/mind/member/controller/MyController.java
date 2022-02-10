@@ -1,6 +1,7 @@
 package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Pagination;
@@ -44,18 +45,27 @@ public class MyController {
     private MyService service;
     
 
-    // 상담 예약 조회
-    @RequestMapping("appointment")
+    // 상담 예약 조회 페이지
+    @RequestMapping(value="appointment", method=RequestMethod.GET)
     public String appointment(Model model, @ModelAttribute("loginMember") Member loginMember) {
-
-        int memberNo = loginMember.getMemberNo();
-
-        List<Reservation> reservationList = service.selectReservation(memberNo);
-
-    	model.addAttribute("reservationList", reservationList);
 
     	model.addAttribute("css", "my");
         return "my/appointment";
+    }
+
+    // 상담 예약 조회
+    @ResponseBody
+    @RequestMapping(value="appointment", method=RequestMethod.POST)
+    public String appointmentAjax(Model model, @ModelAttribute("loginMember") Member loginMember, Reservation reservation) {
+
+        int memberNo = loginMember.getMemberNo();
+        reservation.setMemberNo(memberNo);
+
+        List<Reservation> reservationList = service.selectReservation(reservation);
+
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+
+        return gson.toJson(reservationList);
     }
 
     // 상담 예약 취소

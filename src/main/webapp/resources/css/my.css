@@ -15,6 +15,10 @@
 
 .appointment_list > ul > li > .img_div{display:none;}
 
+
+.appointment_list .chatting:hover{cursor:pointer; background-color:#A59999;}
+.appointment_list .profession_div:hover{cursor:pointer; background-color:#A59999;}
+
 /* 상담 예약 조회(e) */
 
 

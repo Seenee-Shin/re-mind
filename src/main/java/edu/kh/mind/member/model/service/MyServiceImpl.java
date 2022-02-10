@@ -195,8 +195,8 @@ public class MyServiceImpl implements MyService {
 
     // 상담 예약 조회
     @Override
-    public List<Reservation> selectReservation(int memberNo) {
-        return dao.selectReservation(memberNo);
+    public List<Reservation> selectReservation(Reservation reservation) {
+        return dao.selectReservation(reservation);
     }
 
     // 내가 공감한 게시글(수)

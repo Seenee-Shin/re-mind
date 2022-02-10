@@ -141,6 +141,10 @@
         JOIN MEMBER m ON m.MEMBER_NO = rp.MEMBER_NO
         JOIN PROFESSION p ON p.PROFESSION_NO = rp.PROFESSION_NO
         WHERE rp.MEMBER_NO = #{memberNo}
+        AND r.RESERVATION_ENROLL_DT >= TO_DATE(SYSDATE, 'YYYY-MM-DD')
+        <if test="reservationStatusCode != 0">
+            AND r.RESERVATION_STATUS_CD = #{reservationStatusCode}
+        </if>
         ORDER BY r.RESERVATION_ENROLL_DT DESC, r.RESERVATION_ENROLL_TIME ASC
     </select>
 
