@@ -8,6 +8,7 @@ import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.member.model.vo.Review;
 import edu.kh.mind.pro.model.service.ProService;
+import edu.kh.mind.pro.model.vo.Letter;
 import edu.kh.mind.pro.model.vo.Payment;
 import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
@@ -241,6 +242,20 @@ public class ProController {
 	public int reviewInsert(@RequestParam("payNo") int payNo) {
 	
 		int result = service.paymentDelete(payNo);
+		
+		return result;
+	}
+	
+	// 상담사 문의하기
+	@ResponseBody
+	@RequestMapping(value="proLetterInsert", method=RequestMethod.POST)
+	public int proLetterInsert(Letter letter, HttpSession session,RedirectAttributes ra) {
+		
+		System.out.println(letter.getLetterContent());
+		System.out.println(letter.getProfessionNo());
+		System.out.println(letter.getMemberNo());
+	
+		int result = service.proLetterInsert(letter);
 		
 		return result;
 	}

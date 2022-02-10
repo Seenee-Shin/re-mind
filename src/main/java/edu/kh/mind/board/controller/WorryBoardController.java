@@ -1,7 +1,10 @@
 package edu.kh.mind.board.controller;
 
+import com.google.gson.JsonObject;
+import edu.kh.mind.board.model.service.ReplyService;
 import edu.kh.mind.board.model.service.WorryService;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.member.model.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/worry/*")
@@ -22,6 +23,9 @@ public class WorryBoardController {
 
     @Autowired
     private WorryService service;
+
+    @Autowired
+    private ReplyService replyService;
 
     // 고민상담 게시판
     @RequestMapping(value="worryList", method=RequestMethod.GET)
@@ -71,6 +75,7 @@ public class WorryBoardController {
         return result;
     }
 
+
     
     // 회원 차단
     @ResponseBody
@@ -94,4 +99,56 @@ public class WorryBoardController {
     	 
     	return result;
     }
+
+    //  고민상담 상세
+    @RequestMapping(value="view/{boardNo}")
+    public String worryView(Model model, @PathVariable("boardNo") int boardNo, HttpSession session) {
+
+
+        int memberNo = 0;
+        if (session.getAttribute("loginMember") != null) {
+            memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+        }
+
+        Board board = service.selectWorryBoard(boardNo, memberNo);
+
+        if (board != null) {
+            // 댓글
+            List<Reply> replyList = replyService.selectList(boardNo);
+
+            String empathyArr[] = board.getWorryEmpathyArray().split(",");
+            String cntArr[] = board.getWorryCntArray().split(",");
+
+            Map<String, Integer> empathyMap = new HashMap<>();
+            for (int i=1001; i<1006; i++) {
+                String keyStr = Integer.toString(i);
+                int key = Arrays.asList(empathyArr).indexOf(keyStr);
+                if (key >= 0) {
+                    empathyMap.put(keyStr, Integer.valueOf(cntArr[key]));
+                } else {
+                    empathyMap.put(keyStr, 0);
+                }
+            }
+
+            model.addAttribute("css", "board/worryView");
+            model.addAttribute("replyList", replyList);
+            model.addAttribute("board", board);
+            model.addAttribute("empathyMap", empathyMap);
+
+            return "board/worryView";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    //예외처리
+    @ExceptionHandler(Exception.class)
+    public String exceptionHandler(Exception e, Model model) {
+        model.addAttribute("errorMessage", "서비스 이용 중 문제가 발생했습니다.");
+        model.addAttribute("e", e);
+
+        return "/common/error";
+    }
+
+
 }

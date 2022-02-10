@@ -60,6 +60,7 @@ public class WorryDAO {
 		return sqlSession.insert("boardMapper.insertImgList", image);
 	}
 
+
 	/** 회원 차단
 	 * @param map
 	 * @return result
@@ -69,4 +70,18 @@ public class WorryDAO {
 	}
 
 	
+
+	/**
+	 * 고민상담 상세
+	 * @param map
+	 * @return result
+	 */
+	public Board selectWorryBoard(Map<String, Integer> map) {
+		return sqlSession.selectOne("boardMapper.selectWorryBoard", map);
+	}
+
+	public int increaseReadCount(int boardNo) {
+		return sqlSession.update("boardMapper.increaseReadCount",boardNo);
+	}
+
 }

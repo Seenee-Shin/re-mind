@@ -187,8 +187,6 @@ function makeList(){
         let td3 = $("<td>-</td>");
         let td4 = $("<td>"+item.readCount+"</td>");
 
-
-
         // 주소 이동시키야지
         if(btnNumber == 1){
             td1 = $("<td>"+item.boardNo+"</td>");
@@ -236,7 +234,6 @@ function makeList(){
 
 
 $(document).on("click", "#pagination div", function (){
-    const index = $("#pagination div").index($(this));
     const clickable = $(this).text();
 
     currentPage = Number.parseInt(clickable);
