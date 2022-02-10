@@ -19,7 +19,7 @@ public class BoardDAO {
 
 	public List<Board> selectBoardList(Map<String, String> param) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("boardMapper.selectBoardList",param);
+		return sqlSession.selectList("boardMapper.selectFreeList",param);
 	}
 
 	public int insertFreeBoard(Board board) {

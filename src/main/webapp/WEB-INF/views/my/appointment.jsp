@@ -11,11 +11,11 @@
 	<div class="appointment">
 		<div class="title">상담 예약 조회</div>
 		<div class="select-area">
-			<select>
+			<select class="reservation_select">
 				<option>전체</option>
-				<option>상담 대기</option>
-				<option>상담 완료</option>
-				<option>상담 취소</option>
+				<option value="1">상담 예약</option>
+				<option value="4">상담 완료</option>
+				<option value="3">상담 취소</option>
 			</select>
 		</div>
 		<div class="appointment_list">
@@ -32,11 +32,14 @@
 						<div class="img_div"><img src="${contextPath}/resources/images/sample1.jpg"></div><!-- 전문가 프로필 -->
 						<div class="date_div">${reservation.reservationEnrollDate}</div>
 						<div class="time_div">${reservation.reservationEnrollTime}:00 </div>
-						<div class="profession_div">${reservation.professionName}</div>
+						<div class="profession_div" data-profession="${reservation.professionNo}">${reservation.professionName}</div>
 						<div class="category_div">채팅</div>
 						<c:choose>
 							<c:when test="${reservation.reservationStatusCode == 1}">
-								<div class="status_div">예약</div>
+								<div class="status_div">예약
+									<button type="button" class="reservationCancel" data-value="${reservation.reservationNo}"> 취소하기</button>
+								</div>
+
 							</c:when>
 							<c:when test="${reservation.reservationStatusCode == 3}">
 								<div class="status_div">예약 취소</div>
@@ -61,15 +64,46 @@
 
 <script>
 	$(".profession_div").on("click", function () {
-		layerPopup("signUp");
+		const professionNo = $(this).data("profession");
+		location.href = contextPath + "/pro/proView/" + professionNo;
+	})
+
+	// 예약 취소
+	$(".reservationCancel").on("click", function () {
+
+		const _this = $(this);
+		if(confirm("예약 취소하시겠습니까?")) {
+
+			$.ajax({
+				url : "appointmentCancel",
+				type : "POST",
+				data : {
+					"reservationNo" : _this.data("value")
+				},
+				success : function (result) {
+					if (result == 1) {
+						swal({title : "예약 취소 되었습니다.", icon  : "success"});
+
+						const div = $("<div class='status_div'>");
+						div.text("예약 취소");
+						_this.parent().html(div);
+					} else {
+						swal({title : "취소할 수 없습니다.", icon  : "error"});
+					}
+				},
+				error : function () {
+
+				}
+			});
+		}
+
+	})
+
+	$(".reservation_select").on("change", function () {
+		//
 	})
 
 
-
 </script>
-
-</body>
-</html>
-
 
 

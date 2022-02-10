@@ -8,6 +8,7 @@ import edu.kh.mind.pro.model.vo.Reservation;
 import edu.kh.mind.pro.model.vo.ReservationPayMent;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProService {
 
@@ -41,4 +42,8 @@ public interface ProService {
 	
 	// 상담사별 별점 평균
 	int starPointAverage(int professionNo);
+
+	int selectWishPro(Map<String, Integer> map);
+
+	int updateWish(Map<String, Integer> map);
 }

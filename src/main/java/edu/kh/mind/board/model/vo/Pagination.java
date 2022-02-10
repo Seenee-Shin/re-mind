@@ -17,6 +17,8 @@ public class Pagination {
 
         private int memberNo;
 
+        private int professionNo;
+
 
         public Pagination(int listCount, int currentPage) {
             this.listCount = listCount;
@@ -33,9 +35,6 @@ public class Pagination {
 
             makePagination();
         }
-
-
-
 
         public int getCurrentPage() {
             return currentPage;
@@ -73,7 +72,15 @@ public class Pagination {
             makePagination();
         }
 
-        public int getMaxPage() {
+    public int getProfessionNo() {
+        return professionNo;
+    }
+
+    public void setProfessionNo(int professionNo) {
+        this.professionNo = professionNo;
+    }
+
+    public int getMaxPage() {
             return maxPage;
         }
         public void setMaxPage(int maxPage) {

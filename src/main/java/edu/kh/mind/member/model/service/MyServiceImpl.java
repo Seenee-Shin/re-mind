@@ -16,9 +16,12 @@ import edu.kh.mind.member.social.naver.vo.Naver;
 
 import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +31,9 @@ public class MyServiceImpl implements MyService {
 
     @Autowired
     private MyDAO dao;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Override
     public int secessionMember(Naver naver, Member loginMember) {
@@ -113,6 +119,56 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
+    public int updateMyForm(Member member, Image image, MultipartFile images, String webPath, String serverPath) {
+
+        int result = 0;
+
+        String memberPw = dao.selectPw(member);
+        System.out.println("memberPw : " + memberPw);
+
+        if(encoder.matches(member.getMemberPw(), memberPw)){// 비밀번호 일치 하면
+
+            // 닉네임 변경
+            result = dao.updateMemberFName(member);
+
+            System.out.println("result : " + result);
+            
+            if(images.getOriginalFilename() != null && !images.getOriginalFilename().equals("")) {
+                image.setImagePath(webPath);
+                image.setImageOriginal(images.getOriginalFilename());
+                image.setImageName(Util.fileRename(image.getImageOriginal()));
+                image.setImageLevel(0);
+
+                // 프로필 이미지가 이미 있는지 체크 count
+                result = dao.selectProfile(image);
+                if(result > 0) {//업데이트
+                    if(!images.isEmpty())   result = dao.updateImage(image);
+
+                    File saveFile = new File(serverPath, image.getImageName());
+                    try {
+                        images.transferTo(saveFile);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }else{// 인설트
+                    if(!images.isEmpty())   result = dao.insertImage(image);
+                    File saveFile = new File(serverPath, image.getImageName());
+                    try {
+                        images.transferTo(saveFile);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }else{
+            result = 0;
+        }
+
+
+        return result;
+    }
+
+    @Override
     public Image getMyImage(int memberNo) {
         return dao.getMyImage(memberNo);
     }
@@ -125,17 +181,6 @@ public class MyServiceImpl implements MyService {
     @Override
     public List<Scrap> myScrapList(Map<String, Integer> map) {
         return dao.myScrapList(map);
-    }
-
-    // 페이징 처리
-    @Override
-    public Pagination getPagination(int cp, int memberNo) {
-
-        // 전체 게시글 수
-        int listCount = dao.getBoardListCount(memberNo);
-//        System.out.println(listCount);
-
-        return new Pagination(listCount, cp);
     }
 
     @Override
@@ -176,5 +221,35 @@ public class MyServiceImpl implements MyService {
     @Override
     public List<Board> myEmpathyList(Map<String, Integer> map) {
         return dao.myEmpathyList(map);
+    }
+
+    // 내 찜 사 페이징 처리
+    @Transactional
+    @Override
+    public Pagination getCounselorPagination(int cp, int memberNo) {
+        int listCount = dao.getCounselorPagination(memberNo);
+        return new Pagination(listCount, cp);
+    }
+
+    // 내 찜 사
+    @Override
+    public List<Board> selectCounselorList(Pagination pagination) {
+        return dao.selectCounselorList(pagination);
+    }
+
+
+    // 상담 예약 취소
+    @Override
+    public int appointmentCancel(Reservation reservation) {
+
+        // 상담 예약 사용 횟수 감소
+        int result = dao.appointmentDecrease(reservation);
+
+        if (result > 0) {
+            // 상담 예약 취소
+            result = dao.appointmentCancel(reservation);
+        }
+
+        return result;
     }
 }

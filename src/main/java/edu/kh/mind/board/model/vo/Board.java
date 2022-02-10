@@ -62,6 +62,57 @@ public class Board {
 
 	private String empathyStatusName;
 
+	private int avgReviewStarpoint;
+	private int countStar;
+	private int reviewStarpoint;
+	private String proIntro;
+	private int counselPrice;
+
+
+	public Board() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getAvgReviewStarpoint() {
+		return avgReviewStarpoint;
+	}
+
+	public void setAvgReviewStarpoint(int avgReviewStarpoint) {
+		this.avgReviewStarpoint = avgReviewStarpoint;
+	}
+
+	public int getCountStar() {
+		return countStar;
+	}
+
+	public void setCountStar(int countStar) {
+		this.countStar = countStar;
+	}
+
+	public int getReviewStarpoint() {
+		return reviewStarpoint;
+	}
+
+	public void setReviewStarpoint(int reviewStarpoint) {
+		this.reviewStarpoint = reviewStarpoint;
+	}
+
+	public String getProIntro() {
+		return proIntro;
+	}
+
+	public void setProIntro(String proIntro) {
+		this.proIntro = proIntro;
+	}
+
+	public int getCounselPrice() {
+		return counselPrice;
+	}
+
+	public void setCounselPrice(int counselPrice) {
+		this.counselPrice = counselPrice;
+	}
+
 	public Date getMyEnrollDate() {
 		return myEnrollDate;
 	}
@@ -111,11 +162,6 @@ public class Board {
 		return imagePath;
 	}
 
-
-
-	public Board() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getBoardNo() {
 		return boardNo;

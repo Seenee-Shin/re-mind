@@ -1,10 +1,7 @@
 package edu.kh.mind.member.model.dao;
 
-import edu.kh.mind.board.model.vo.Board;
-import edu.kh.mind.board.model.vo.Image;
-import edu.kh.mind.board.model.vo.Reply;
+import edu.kh.mind.board.model.vo.*;
 
-import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.member.model.vo.EmotionCategory;
 import edu.kh.mind.member.model.vo.EmotionDiary;
 import edu.kh.mind.member.model.vo.ProfessionHospital;
@@ -76,10 +73,6 @@ public class MyDAO {
 		return sqlSession.selectList("boardMapper.myBoardList", map);
 	}
 
-	// 페이징 처리 필요한 전체 게시글 계산
-	public int getBoardListCount(int memberNo) {
-		return sqlSession.selectOne("boardMapper.getBoardListCount", memberNo);
-	}
 
 	// 내 댓글 보기
     public List<Reply> selectMyReplyList(Map<String, Integer> map) {
@@ -87,11 +80,11 @@ public class MyDAO {
 		return sqlSession.selectList("replyMapper.selectMyReplyList", map);
     }
 
-    
+
     // 후기 등록
 	public int reviewInsert(Review review) {
 		return sqlSession.insert("reviewMapper.reviewInsert", review);
-	}	
+	}
 
 	public List<Mute> selectMuteMember(int memberNo) {
 		return sqlSession.selectList("memberMapper.selectMuteMember", memberNo);
@@ -139,6 +132,25 @@ public class MyDAO {
 	public List<Reservation> selectReservation(int memberNo) {
 		return sqlSession.selectList("memberMapper.selectReservation", memberNo);
 	}
+
+	/**
+	 * 상담 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	public int appointmentDecrease(Reservation reservation) {
+		return sqlSession.update("memberMapper.appointmentDecrease", reservation);
+	}
+
+	/**
+	 * 상담 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	public int appointmentCancel(Reservation reservation) {
+		return sqlSession.update("memberMapper.appointmentCancel", reservation);
+	}
+
 	// 내가 공감한 게시글(수)
 	public int countEmpathyList(Map<String, Integer> map) {
 		return sqlSession.selectOne("boardMapper.countEmpathyList", map);
@@ -152,5 +164,36 @@ public class MyDAO {
 
 	public Image getMyImage(int memberNo) {
 		return sqlSession.selectOne("boardMapper.getMyImage", memberNo);
+	}
+	public int selectProfile(Image image) {
+		return sqlSession.selectOne("boardMapper.selectProfile", image);
+	}
+
+	public int updateImage(Image image) {
+		return sqlSession.update("boardMapper.updateImage", image);
+	}
+
+	public int insertImage(Image image) {
+		return sqlSession.insert("boardMapper.insertImage", image);
+	}
+
+	// 내 찜 사 페이징
+	public int getCounselorPagination(int memberNo) {
+		System.out.println(memberNo);
+		return sqlSession.selectOne("boardMapper.getCounselorListCount", memberNo);
+	}
+
+	// 내가 찜한 상담사 목록
+	public List<Board> selectCounselorList(Pagination pagination) {
+		System.out.println(pagination);
+		return sqlSession.selectList("boardMapper.selectCounselorList", pagination);
+	}
+
+	public String selectPw(Member member) {
+		return sqlSession.selectOne("memberMapper.selectPw", member);
+	}
+
+	public int updateMemberFName(Member member) {
+		return sqlSession.update("memberMapper.updateMemberFName", member);
 	}
 }

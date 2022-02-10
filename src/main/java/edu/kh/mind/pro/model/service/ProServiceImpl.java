@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProServiceImpl implements ProService{
@@ -30,7 +31,24 @@ public class ProServiceImpl implements ProService{
         return dao.selectAllProfession();
     }
 
-    // 총 금액 insert
+	@Override
+	public int updateWish(Map<String, Integer> map) {
+
+		int result = 0;
+		if(map.get("wishCheck") > 0)
+			result = dao.insertWish(map);
+		else
+			result = dao.deleteWish(map);
+
+		return result;
+	}
+
+	@Override
+	public int selectWishPro(Map<String, Integer> map) {
+		return dao.selectWishPro(map);
+	}
+
+	// 총 금액 insert
     @Transactional
     @Override
     public int priceInsert(ProfessionPrice pfp, ReservationPayMent rv) {

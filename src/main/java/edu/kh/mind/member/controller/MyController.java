@@ -18,10 +18,13 @@ import edu.kh.mind.member.social.naver.vo.Naver;
 
 import edu.kh.mind.pro.model.vo.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,6 +58,23 @@ public class MyController {
     	model.addAttribute("css", "my");
         return "my/appointment";
     }
+
+    // 상담 예약 취소
+    @ResponseBody
+    @RequestMapping(value="appointmentCancel", method=RequestMethod.POST)
+    public int appointmentCancel(@ModelAttribute("loginMember") Member loginMember, Reservation reservation) {
+
+        System.out.println(loginMember.getMemberNo());
+        System.out.println(reservation.getReservationNo());
+
+        reservation.setMemberNo(loginMember.getMemberNo());
+        int result = service.appointmentCancel(reservation);
+
+
+        return result;
+    }
+
+
 
     @RequestMapping("appointment/past")
     public String appointmentPast(Model model) {
@@ -189,20 +209,42 @@ public class MyController {
     	
     	// 전문가 번호 추가해야함
     	review.setMemberNo(loginMember.getMemberNo());
-    	
+
     	int result = service.reviewInsert(review);
-    	
+
     	return result;
     }
 
 
-
-
-
     @GetMapping("counselor")
-    public String counselor(Model model){
+    public String counselor(Model model, HttpSession session, RedirectAttributes ra, Board board,
+                            @RequestParam(value="cp", required = false, defaultValue="1")int cp){
     	model.addAttribute("css", "my/counselor");
-        return "my/counselor";
+
+        int memberNo = 0;
+        Pagination pagination = null;
+        List<Board> counselorList = null;
+        String path = "";
+
+        if(session.getAttribute("loginMember") != null) {
+            memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+
+//            System.out.println(memberNo);
+            pagination = service.getCounselorPagination(cp, memberNo);
+            System.out.println(pagination);
+
+            counselorList = service.selectCounselorList(pagination);
+
+            model.addAttribute("pagination", pagination);
+            model.addAttribute("counselorList", counselorList);
+            path = "my/counselor";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+
+        return path;
     }
 
     @GetMapping("enquiry")
@@ -309,15 +351,43 @@ public class MyController {
         model.addAttribute("memberImage", image);
         return path;
     }
-    @PostMapping("updateMyInfo")
-    public String updateMyInfo(Member member,
-                               @ModelAttribute("loginMember") Member loginMember){
 
-        
+    @PostMapping("updateMyInfoo")
+    public String updateMyInfo(Member member, Model model,
+                               Image image,
+                               @ModelAttribute("loginMember") Member loginMember,
+                               HttpSession session, RedirectAttributes ra,
+                               @RequestParam Map<String, String> param,
+                               @RequestParam(value = "images", required = false) MultipartFile images){
 
+        // 1) 로그인 회원 번호를 image에 세팅
+        image.setMemberNo(loginMember.getMemberNo());
 
+        member.setMemberPw(param.get("memberPw"));
+        member.setMemberFName(param.get("memberFName"));
+        member.setMemberNo(loginMember.getMemberNo());
 
-        return null;
+        // 2) 웹 접근 경로, 서버 저장 경로
+        String webPath = "/resources/images/my/";
+        String serverPath = session.getServletContext().getRealPath(webPath);
+        System.out.println("serverPath : " + serverPath);
+
+        int result = service.updateMyForm(member, image, images, webPath, serverPath);
+
+        String path = null;
+
+        if(result > 0){
+            path = "redirect:/";
+            Util.swalSetMessage("회원 정보 수정 성공!", null, "success", ra);
+
+            loginMember.setMemberFName(member.getMemberFName());
+            model.addAttribute("loginMember", loginMember);
+        }else{
+            path = "redirect:/";
+            Util.swalSetMessage("회원 정보 수정 실패!", null, "error", ra);
+        }
+
+        return path;
     }
 
     @GetMapping("loadProMap")
@@ -332,6 +402,11 @@ public class MyController {
 
         return new Gson().toJson(proList);
     }
+
+
+
+
+
 
     // @ExceptionHandler(처리할 예외.class)
     @ExceptionHandler(Exception.class)

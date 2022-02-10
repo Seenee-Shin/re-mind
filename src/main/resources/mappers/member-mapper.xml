@@ -37,7 +37,7 @@
 
         <result property="reservationEnrollDate" column="RESERVATION_ENROLL_DT"/>
         <result property="reservationEnrollTime" column="RESERVATION_ENROLL_TIME"/>
-        <result property="reservationStatusCode" column="RESERVATION_STATUS_CODE"/>
+        <result property="reservationStatusCode" column="RESERVATION_STATUS_CD"/>
         <result property="reservationCancel" column="RESERVATION_CANCEL"/>
         <result property="counselCategoryNo" column="COUNSEL_CATEGORY_NO"/>
         <result property="reservationPayNo" column="RESERVATION_PAY_NO"/>
@@ -132,7 +132,7 @@
 
     <select id="selectReservation" resultMap="reservation_rm">
         SELECT r.RESERVATION_NO, TO_CHAR(r.RESERVATION_ENROLL_DT, 'YYYY-MM-DD') RESERVATION_ENROLL_DT,
-            r.RESERVATION_ENROLL_TIME , r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
+            r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, r.RESERVATION_STATUS_CD, cc.COUNSEL_CATEGORY_NM,
             rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD,
             m.MEMBER_NM, p.PROFESSION_NM
         FROM RESERVATION r
@@ -141,8 +141,32 @@
         JOIN MEMBER m ON m.MEMBER_NO = rp.MEMBER_NO
         JOIN PROFESSION p ON p.PROFESSION_NO = rp.PROFESSION_NO
         WHERE rp.MEMBER_NO = #{memberNo}
-        AND r.RESERVATION_STATUS_CD = 1
         ORDER BY r.RESERVATION_ENROLL_DT DESC, r.RESERVATION_ENROLL_TIME ASC
     </select>
+
+    <update id="appointmentDecrease">
+        UPDATE RESERVATION_PAYMENT SET USED_CNT = USED_CNT - 1
+        WHERE MEMBER_NO = 3
+        AND STATUS_CD = 1
+        AND USED_CNT > 0
+    </update>
+
+    <update id="appointmentCancel">
+        UPDATE RESERVATION SET RESERVATION_STATUS_CD = 3, RESERVATION_CANCEL = '예약 취소'
+        WHERE RESERVATION_NO = #{reservationNo}
+        AND RESERVATION_STATUS_CD = 1
+    </update>
+
+    <select id="selectPw" resultType="string">
+        SELECT MEMBER_PW
+        FROM MEMBER
+        WHERE MEMBER_NO = #{memberNo} AND STATUS_CD = 0
+    </select>
+
+    <update id="updateMemberFName">
+        UPDATE MEMBER SET
+            MEMBER_FN = #{memberFName}
+        WHERE MEMBER_NO = #{memberNo} AND STATUS_CD = 0
+    </update>
 
 </mapper>
