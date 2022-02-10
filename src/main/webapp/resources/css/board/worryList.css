@@ -36,7 +36,7 @@
     margin-top: 15px;
 }
 
-
+.main_content > .worry_search_area{margin-left:30px;}
 
 
 input:focus, textarea:focus, select:focus{
