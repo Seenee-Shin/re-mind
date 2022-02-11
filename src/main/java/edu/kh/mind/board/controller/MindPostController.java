@@ -52,12 +52,15 @@ public class MindPostController {
     // 글 작성 
     @RequestMapping(value="insert", method=RequestMethod.POST)
     public String postInsert(MindPost post, 
-    		@ModelAttribute("loginMember") Member loginMember,
+    		HttpSession session,
     		RedirectAttributes ra) {
     	
-    	post.setMemberNo( loginMember.getMemberNo());
+    	int postNo = 0;
     	
-    	int postNo = service.insertPost(post);
+    	if(session.getAttribute("loginMember") != null) {
+    	post.setMemberNo( ((Member)session.getAttribute("loginMember")).getMemberNo());
+    	postNo = service.insertPost(post);
+    	}
     	
     	String title;
 		String icon;
@@ -66,7 +69,7 @@ public class MindPostController {
     			title="연구 성공!";
 				icon = "success";
     		}else {
-    			title="연구 실패";
+    			title="로그인을 해주세요";
  				icon = "error";
     		}
     	

@@ -105,7 +105,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:void(0);">공지사항</a> <p class="menu_toggle">+</p>
+                    <a href="${contextPath}/notice/list">공지사항</a> <p class="menu_toggle">+</p>
                 </li>
                 <li><!-- 로그인 안했으면 로그인 버튼 -->
                     <!-- <a href="">로그인</a> -->
