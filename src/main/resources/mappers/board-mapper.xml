@@ -164,13 +164,12 @@
 	</select>
     <!-- 자유게시판 게시글 -->
 	<select id="selectFreeList" resultMap="board_rm">
-		SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
-			MEMBER.MEMBER_NO, MEMBER.MEMBER_FN, MEMBER_NM,
-			w.WORRY_NM WORRY_CATEGORY_NM,REPLY_CHECK_CD,SCRAP_CHECK_CD,EM_CHECK_CD
+    		SELECT MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_FN,
+			BOARD.BOARD_NO, BOARD_CONTENT, BOARD_CREATE_DT,
+			REPLY_CHECK_CD,SCRAP_CHECK_CD,EM_CHECK_CD,ANON_CHECK_CD,
 			e.EMPATHY_ARRAY, e.CNT_ARRAY
 		FROM BOARD
 		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
-		LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
 		LEFT JOIN(
 			SELECT
 				a.BOARD_NO,
@@ -183,7 +182,7 @@
 			) a
 			GROUP BY BOARD_NO
 		) e on e.BOARD_NO = BOARD.BOARD_NO
-		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
+		WHERE BOARD_CATEGORY_CD = 101
 
 		<if test="searchCategory != null">
 			<bind name="val" value="'%' + searchText + '%'"/>
@@ -255,12 +254,11 @@
 			GROUP BY BOARD_NO
 		) e on e.BOARD_NO = BOARD.BOARD_NO
 		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
-		<if test="worryCategoryCode != null">
-			AND BOARD.WORRY_CATEGORY_CD = #{worryCategoryCode}
-		</if>
+		
+		
 		<if test="searchCategory != null">
 			<bind name="val" value="'%' + searchText + '%'"/>
-
+			
 			<choose>
 				<when test="searchCategory == 'id'">
 					AND MEMBER_ID LIKE #{val}
@@ -427,6 +425,36 @@
 			#{imageLevel}, #{memberNo}, DEFAULT, DEFAULT)
 	</insert>
 
+	<select id="selectWorryBoard" resultMap="board_rm">
+		SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, EM_CHECK_CD,
+			TO_CHAR(BOARD_CREATE_DT, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"' ) BOARD_CREATE_DT,
+			TO_CHAR(BOARD_MODIFY_DT, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"' ) BOARD_MODIFY_DT,
+			BOARD.WORRY_CATEGORY_CD, MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_FN,
+			w.WORRY_NM WORRY_CATEGORY_NM,
+			e.EMPATHY_ARRAY, e.CNT_ARRAY
+		FROM BOARD
+		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
+		LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
+		LEFT JOIN(
+			SELECT
+				a.BOARD_NO,
+				LISTAGG(  a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
+				LISTAGG(  a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
+			FROM (
+				SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
+				FROM EMPATHY
+				GROUP BY BOARD_NO, EMPATHY_STATUS_CD
+			) a
+			GROUP BY BOARD_NO
+		) e on e.BOARD_NO = BOARD.BOARD_NO
+		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
+		AND BOARD.BOARD_NO = #{boardNo}
+		AND BOARD.BOARD_STATUS_CD = 201
+	</select>
+
+	<insert id="memberBlock">
+		INSERT INTO MUTE VALUES(#{memberNo}, #{loginMember})
+	</insert>
 
 
 </mapper>

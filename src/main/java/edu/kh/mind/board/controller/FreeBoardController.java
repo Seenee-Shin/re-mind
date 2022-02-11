@@ -52,7 +52,7 @@ public class FreeBoardController {
     //게시판 리스트 연결
 	@ResponseBody
 	@RequestMapping(value = "list", method = RequestMethod.POST)
-    public HashMap<String, Object> freeBoardList(Model model, @RequestParam Map<String, String> param) {
+    public HashMap<String, Object> freeBoardList(@RequestParam Map<String, String> param) {
 		HashMap<String, Object> map = new HashMap<>();
 		
     	List<Board> freeBoardList = service.selectBoardList(param);

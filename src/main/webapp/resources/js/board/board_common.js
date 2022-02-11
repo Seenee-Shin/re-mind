@@ -1,6 +1,6 @@
 
 /* 프로필 누를시 유저메뉴 보기 */
-const elements = document.getElementsByClassName("writer_pic");
+/*const elements = document.getElementsByClassName("writer_pic");
 const userMenu = document.getElementsByClassName("userMenu")
 
 	for (let i = 0; i < elements.length; i++) {
@@ -9,8 +9,39 @@ const userMenu = document.getElementsByClassName("userMenu")
 	    userMenu[i].classList.toggle("hidden");
 		
 	});
-}
+}*/
 
+// 프로필 누를 시 유저 메뉴
+$(document).on("click", ".writer_pic", function() {
+      $(this).next().toggle();
+});
+   
+// 회원 차단    
+$(document).on("click", ".block", function(){
+	const muteMember = $(this).parent().next().val();
+	var answer = confirm("차단하시겠습니까?");	
+	
+	if(answer){
+		$.ajax({
+			url : "block",
+			data : {"muteMember" : muteMember},
+			success : function(result){
+			if(result > 0){
+                swal({"title" : "차단되었습니다." , 
+                      "icon" : "success"});
+
+                selectReplyList(); // 댓글 목록 다시 출력
+          
+            } else{
+                swal({"title" : "회원 차단 실패" , 
+                      "icon" : "error"});
+            }
+           }
+			
+		});
+	}
+	
+});
 
 
 //파일 업로드 스크립트

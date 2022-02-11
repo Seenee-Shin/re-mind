@@ -38,9 +38,8 @@
 		<typeAlias type="edu.kh.mind.pro.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.Reservation" alias="Reservation"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.WorryCategory" alias="WorryCategory"/>
+		<typeAlias type="edu.kh.mind.pro.model.vo.Letter" alias="Letter"/>
 		
-		
-
 	</typeAliases>
 
 	<!-- SQL이 작성된 파일 지정 -->
