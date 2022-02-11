@@ -115,7 +115,6 @@
                         <li><a href="${contextPath}/my/appointment">마이 상담</a></li>
                         <li><a href="${contextPath}/my/myBoardList">마이 활동</a></li>
                         <li><a href="${contextPath}/my/updateMyInfo">마이 정보</a></li>
-                        <li><a href="#">마이 정보</a></li>
                     </ul>
                 </li>
                 <li ><!-- 로그인 했으면 로그아웃 버튼 보이기
