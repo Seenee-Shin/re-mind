@@ -59,4 +59,9 @@ public class SecretDAO {
 		return sqlSession.update("secretMapper.deleteBoard", boardNo);
 	}
 
+
+	public int countSecretList() {
+		return sqlSession.selectOne("secretMapper.countSecretList");
+	}
+
 }

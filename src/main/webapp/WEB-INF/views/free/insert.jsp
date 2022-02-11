@@ -274,15 +274,17 @@ $.ajax({
 	data : data,
 	success : function (result) {
 		
-		console.log(freeBoardList)
-
 		let html = "";
 		var freeBoardList = $('#BoardListArea')
 		let empathyArr;
 		let empathyCntArr;
 		let iconCnt = {};
 		
+		//console.log(result.length)
+		
 		$.each(result.freeBoardList, function (i, item) {
+			
+			console.log(item)
 
 			// empathy 초기화
 			empathyArr = [];
@@ -375,5 +377,56 @@ $.ajax({
 
 });
 }
+
+//페이지네이션(무한스크롤 변수 선언)
+var currentPage = 1;
+var infinityLimit = 2; // 한번에 보여질 result 수
+var pageSize = 10;
+var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
+// 선 계산(ajax로 넘겨야됨)
+last = currentPage * infinityLimit;
+first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+function calcPagination(){
+
+   maxPage = Number.parseInt(Math.floor(listCount / infinityLimit));
+   startPage = (currentPage-1) / pageSize * pageSize + 1;
+   endPage = startPage + pageSize - 1;
+
+   if(endPage > maxPage)   endPage = maxPage;
+
+   if(currentPage <= infinityLimit)   prevPage = 1;
+   else                    prevPage = startPage - 1;
+
+   if(endPage == maxPage) nextPage = maxPage;
+   else               nextPage = endPage + 1;
+
+   last = currentPage * infinityLimit;
+   first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+}
+calcPagination()
+
+
+// 무한스크롤
+function YesScroll () {
+   if(last >= listCount)   return;
+
+   const pagination = document.querySelector('.paginaiton');
+   const fullContent = document.querySelector('.main_content2');
+   const screenHeight = screen.height;
+
+   let oneTime = false;
+   document.addEventListener('scroll',OnScroll,{passive:true})
+   function OnScroll () {
+      const fullHeight = fullContent.clientHeight;
+      const scrollPosition = pageYOffset;
+      if (fullHeight-screenHeight/2 <= scrollPosition && !oneTime) {
+         oneTime = true;
+         currentPage = currentPage + 1;
+         calcPagination();
+         makePro();
+      }
+   }
+}
+YesScroll();
 
 </script>

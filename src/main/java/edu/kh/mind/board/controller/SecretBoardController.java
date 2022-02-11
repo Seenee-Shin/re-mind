@@ -51,16 +51,25 @@ public class SecretBoardController {
     // 털어놓기 게시글
     @ResponseBody
     @RequestMapping(value="list", method=RequestMethod.POST)
-    public HashMap<String, Object> secretBoardList(@RequestParam Map<String, String> param) {
+    public String secretBoardList(@RequestParam Map<String, String> param) {
       
     	HashMap<String, Object> map = new HashMap<>();
+    	
+    	System.out.println(param.get("last") + param.get("first"));
 
         // 게시글 목록
         List<Board> secretBoardList = service.selectSecretList(param);
+        
+        Board board = new Board();
+        int result = service.countSecretList();
+        board.setMaxValue(result);
+        
+        secretBoardList.add(board);
+        
 
         map.put("secretList", secretBoardList);
 
-        return map;
+        return new Gson().toJson(secretBoardList);
     }
 
     
