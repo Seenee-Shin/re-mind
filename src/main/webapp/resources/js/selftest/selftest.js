@@ -16,6 +16,16 @@ let flag = false;
 총 문항 갯수 allQuestionLen
 */
 
+$(function () {
+    // 자가진단 선택
+    if (type) {
+        ctCode = type;
+        $(".selfTest_op").eq(ctCode-1).click();
+    } else {
+        $(".selfTest_op").eq(0).click();
+    }
+})
+
 $(".selfTest_prev_btn, .selfTest_next_btn").css("display", "block");
 
 
@@ -64,7 +74,6 @@ $(".selfTest_op").on("click", function (){
     ctCode = $(this).attr("id");
     const index = $(this).index($(this));
     const nm = $(this).text();
-    console.log(nm);
 
     $.ajax({
         url : "selftestQuestion",
