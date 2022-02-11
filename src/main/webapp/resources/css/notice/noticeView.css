@@ -95,17 +95,18 @@
     }
 
     .notice_content{
-        min-height: 300px;
-        height: 300px;
+        min-height: 100x;
     }
    
 
     .notice_title  p{
         font-size: 15px;
+        overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
     }
 
-    .notice_subject{
-        font-size: 13px;
+    .notice_date{
+        font-size: 12px;
+        
     }
 
     .notice_prev * , .notice_next * {
@@ -118,6 +119,7 @@
 
     .notice_button{
         margin-bottom: 20px;
+        margin-top : 30px;
     }
     .notice_button button{
         width: 70px;
