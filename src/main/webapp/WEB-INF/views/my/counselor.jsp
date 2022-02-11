@@ -25,7 +25,7 @@
                 <td>
                     <c:choose >
                         <c:when test="${empty counselor.imagePath}">
-                            <img class="profile" src="${contextPath}/resources/images/basicProfile.png"
+                            <img class="profile" src="${contextPath}/resources/images/basicProfile.png">
                         </c:when>
                         <c:otherwise>
                             <img class="profile" src="${contextPath}${counselor.imagePath}"/>
