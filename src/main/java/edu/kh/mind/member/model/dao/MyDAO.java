@@ -11,6 +11,7 @@ import edu.kh.mind.member.model.vo.*;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
 import edu.kh.mind.pro.model.vo.Reservation;
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -185,8 +186,11 @@ public class MyDAO {
 
 	// 내가 찜한 상담사 목록
 	public List<Board> selectCounselorList(Pagination pagination) {
-//		System.out.println(pagination);
-		return sqlSession.selectList("boardMapper.selectCounselorList", pagination);
+		int offset = (pagination.getCurrentPage() -1) * pagination.getLimit();
+		int limit = pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("boardMapper.selectCounselorList", pagination, rowBounds);
 	}
 
 	public String selectPw(Member member) {
