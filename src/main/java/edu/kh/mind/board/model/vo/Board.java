@@ -67,10 +67,36 @@ public class Board {
 	private int reviewStarpoint;
 	private String proIntro;
 	private String counselPrice;
-
+	private int priceMin;
+	private int reviewCount;
+	private int reviewAvg;
 
 	public Board() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getPriceMin() {
+		return priceMin;
+	}
+
+	public void setPriceMin(int priceMin) {
+		this.priceMin = priceMin;
+	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public int getReviewAvg() {
+		return reviewAvg;
+	}
+
+	public void setReviewAvg(int reviewAvg) {
+		this.reviewAvg = reviewAvg;
 	}
 
 	public int getAvgReviewStarpoint() {

@@ -10,14 +10,18 @@
             <!-- 메인 -->
             <h3 class="comunity_title">힘들었던 일 모두 털어놓으세요! </h3>
             
-              <div class="search_area">
-              <select name="search_category" id="">
-                  <option value="">아이디</option>
-                  <option value="">내용</option>
-              </select>
-              <input type="text" name="freeboard_search">
-              <button class="submit_btn light_brown_bg"> 검색 </button>
-              </div>
+            	<div class="free_search_area">
+	                    <div class="search_area">
+	                        <div class="search_wrap">
+	                            <select name="search_category" id="search_category">
+	                                <option value="id">닉네임</option>
+	                                <option value="content">내용</option>
+	                            </select>
+	                            <input type="text" name="freeboard_search">
+	                            <button type="button" class="submit_btn light_brown_bg" id="freeboard_search"> 검색 </button>
+	                        </div>
+	                    </div>
+	                </div>
               
 			<form action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate()">
                 <article id="free_borad_wrap">
@@ -161,8 +165,7 @@
             </form>
 
 
-            <!-- 게시판 리스트 -->
-           <jsp:include page="list.jsp"/> 
+        	<div class="free_board_list_wrap" id="BoardListArea">
             
         </section>
     </div>
@@ -171,8 +174,150 @@
 
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"/>
-<script src="${contextPath}/resources/js/board/board_common.js"></script>
+<script src="${contextPath}/resources/js/board/board_common.js"></script> 
+<script src="${contextPath}/resources/js/board/comunity_freeboard.js"></script> 
 
 
 
-<script src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script>
+const loginMemberNo = "${loginMember.memberNo}";
+$(function () {
+	// list 가져오기
+	getFreeList();
+});
+
+//검색
+const searchSelect = $("#freeboard_search");
+searchSelect.on("click", function () {
+
+	const searchText = $("[name='freeboard_search']").val().trim();
+	if (searchText != "") {
+		const data = {
+			"searchCategory" : $("#search_category option:selected").val(),
+			"searchText" : searchText
+		}
+		getFreeList(data);
+	} else {
+		getFreeList();
+	}
+});
+
+//list 가져오기
+function getFreeList(searchData) {
+let data = {};
+
+if (searchData != null) {
+	data = searchData;
+}
+
+$.ajax({
+	url : "${contextPath}/secret/list",
+	type : "POST",
+	data : data,
+	success : function (result) {
+
+		let html = "";
+		var secretBoardList = $('#BoardListArea')
+		let empathyArr;
+		let empathyCntArr;
+		let iconCnt = {};
+		
+		$.each(result.secretList, function (i, item) {
+
+			// empathy 초기화
+			empathyArr = [];
+			empathyCntArr = [];
+			iconCnt = {
+				"1001" : 0,
+				"1002" : 0,
+				"1003" : 0,
+				"1004" : 0,
+				"1005" : 0
+			};
+
+			if (item.worryEmpathyArray != null) {
+				empathyArr = (item.worryEmpathyArray).split(",");
+				empathyCntArr = (item.worryCntArray).split(",");
+			}
+
+			for(i=0; i<empathyArr.length; i++) {
+				iconCnt[empathyArr[i]] = empathyCntArr[i];
+			}
+			
+			html+=   '<div class="board_list_content">'
+              		+'	<div class="board_flex_wrap">'
+                   	+'		<div class="writer_pic_wrap">'
+                    +'			<div class="writer_pic light_brown_bg" style="background-image: url();"></div>';
+              
+             if(loginMemberNo != item.memberNo){
+				html +='			<ul class="userMenu hidden">'
+					+'				<li> <a class="block"> 차단</a> </li>'
+					+'				<input class="hidden" value = '+ item.memberNo +'>'
+					+'				<li> <a href=""> 검색</a> </li>'
+                    +'			</ul>'
+                    +'		</div>';
+			}else{
+				html+='		</div>';
+			}
+			
+			html+='		<a href="${contextPath}/secret/view/'+item.boardNo+'">'
+				+'			<div class="posting_info">'
+				+'				<div class="writer_id">'
+	            +'					<p class="userInfo">'+item.memberFn+'</p>'
+	            +'					<p>'+item.createDate+'</p>'
+	            +'				</div>'
+	            +'				<div class="posting">'
+	            +'					<p>'+item.boardContent+'</p>'
+	            +'				</div>'
+	            +'			</div>'
+	            +'		</a>'
+	            +'	</div>'
+	            +'	<div class="board_icon_wrap">';
+	            console.log(typeof item.replyCheckCode);
+	          	if(item.replyCheckCode == 1){
+					html += `
+						<div class="comment_wrap">
+							<i class="far fa-comment dark-brown"> ` + item.replyCount + `</i>
+							<p></p>
+						</div>
+					`
+				}else{
+					html += '<div class="comment_wrap"></div>';
+				}
+				
+				if(item.empathyCheckCode == 1){
+					html+='		<div class="like_warp">'
+						+'            <img src="${contextPath}/resources/images/icon/smile.png" alt="">'
+						+'            <p>'+iconCnt[1001]+'</p>'
+						+'            <img src="${contextPath}/resources/images/icon/hug.png" alt="">'
+						+'            <p>'+iconCnt[1002]+'</p>'
+						+'           <img src="${contextPath}/resources/images/icon/amazed.png" alt="">'
+						+'           <p>'+iconCnt[1003]+'</p>'
+						+'           <img src="${contextPath}/resources/images/icon/angry.png" alt="">'
+						+'           <p>'+iconCnt[1004]+'</p>'
+						+'           <img src="${contextPath}/resources/images/icon/crying.png" alt="">'
+						+'           <p>'+iconCnt[1005]+'</p>'
+						+'        </div>';
+				}else{
+					html+='		<div class="like_warp">'
+					+'        </div>';
+				}
+				
+				html+='    </div>'
+					+'</div>'
+		});
+		$(".free_board_list_wrap").html(html)
+
+	},
+	error : function(request, status, error){
+		console.log("ajax 통신 중 오류 발생");
+		console.log(request.responseText);
+	}
+
+
+});
+}
+
+
+
+</script>

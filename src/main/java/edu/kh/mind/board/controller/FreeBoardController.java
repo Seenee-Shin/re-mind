@@ -101,7 +101,6 @@ public class FreeBoardController {
     public String SecretView(Model model, 
     							@PathVariable("boardNo") int boardNo,
     							RedirectAttributes ra, 
-    							@ModelAttribute("loginMember") Member loginMember,
     							HttpSession session) {
     	model.addAttribute("css", "board/freeView");
     	model.addAttribute("header", "community");
