@@ -2,12 +2,14 @@ package edu.kh.mind.board.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,38 +46,27 @@ public class SecretBoardController {
     private ReplyService replyService;
 	
 	
-	// 털어놓기 게시판
-    @RequestMapping(value="secretList", method=RequestMethod.GET)
-    public String secretBoard(Model model) {
-
-        // 카테고리
-        List<WorryCategory> categoryList = service.selectWorryCategory();
-
-        model.addAttribute("categoryList", categoryList);
-
-        model.addAttribute("css", "board/worryList");
-
-        return "secret/list";
-    }
-    
     
 	
     // 털어놓기 게시글
     @ResponseBody
-    @RequestMapping(value="secretList", method=RequestMethod.POST)
-    public HashMap<String, Object> worryList() {
+    @RequestMapping(value="list", method=RequestMethod.POST)
+    public HashMap<String, Object> secretBoardList(@RequestParam Map<String, String> param) {
       
     	HashMap<String, Object> map = new HashMap<>();
 
         // 게시글 목록
-        List<Board> secretList = service.selectSecretList();
+        List<Board> secretBoardList = service.selectSecretList(param);
 
-        map.put("secretList", secretList);
+        map.put("secretList", secretBoardList);
 
         return map;
     }
 
-	//게시판 글작성 페이지 연결
+    
+    
+    
+	//게시판 글작성, 게시판 페이지 연결
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String secretBoardinsert(Model model) {
     	model.addAttribute("css", "board/secretList");
@@ -112,13 +103,55 @@ public class SecretBoardController {
     }
     
     
+    //게시판 상세조회
+    @RequestMapping("view/{boardNo}")
+    public String SecretView(Model model, 
+    							@PathVariable("boardNo") int boardNo,
+    							RedirectAttributes ra, 
+    							@ModelAttribute("loginMember") Member loginMember,
+    							HttpSession session) {
+    	model.addAttribute("css", "board/secretView");
+    	model.addAttribute("header", "community");
+    	
+    	int memberNo = 0;
+    	
+		if(session.getAttribute("loginMember") != null) {
+			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		}
+    	
+		Board board = service.selectBoard(boardNo, memberNo);
+		
+    	if(board != null) {
+    		
+    		// 댓글 
+    		List<Reply> rList = replyService.selectList(boardNo);
+    		model.addAttribute("rList", rList);
+    		
+    		model.addAttribute("board", board);
+    		return "secret/view";
+    		
+    	}else {
+    		
+    		return "redirect:";
+    	}
+    	
+    }
     
-    
+    //게시판 글수정 화면 전환
+    @RequestMapping(value="updateForm")
+    public String freeBoardUpdate(int boardNo, Model model) {
+    	model.addAttribute("css", "board/update");
+    	model.addAttribute("header", "community");
+    	
+    	Board board = service.selectBoard(boardNo);
+    	model.addAttribute("board", board);
+    	return "secret/update";
+    }
     
     
     
 	// 수정
-    @RequestMapping(value="update", method=RequestMethod.GET)
+    @RequestMapping(value="update", method=RequestMethod.POST)
     public String secretUpdate(Model model, Board board,
 						@RequestParam("deleteImages") String deleteImages,
 						@RequestParam("images") List<MultipartFile> images,
@@ -146,36 +179,39 @@ public class SecretBoardController {
     			return "redirect:"+path;
     		}
     		
-    //게시판 상세조회
-    @RequestMapping("view/{boardNo}")
-    public String SecretView(Model model, 
-    							@PathVariable("boardNo") int boardNo,
-    							RedirectAttributes ra, 
-    							HttpSession session) {
-    	model.addAttribute("css", "board/secretView");
+    //게시글 삭제
+    @RequestMapping(value="delete")
+    public String freeBoarDelete(int boardNo, Model model, RedirectAttributes ra) {
     	model.addAttribute("header", "community");
+    	model.addAttribute("css", "board/secretList");
     	
-    	int memberNo = 0;
+    	int result = service.deleteBoard(boardNo);
     	
-		if(session.getAttribute("loginMember") != null) {
-			memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-		}
-    	
-		Board board = service.selectBoard(boardNo, memberNo);
+    	String path = null;
 		
-    	if(board != null) {
-    		
-    		// 댓글 
-    		List<Reply> rList = replyService.selectList(boardNo);
-    		model.addAttribute("rList", rList);
-    		
-    		model.addAttribute("board", board);
-    		
-    	}
-    	
-    	return "secret/view";
-    	
+		if(result > 0) {
+			Util.swalSetMessage("게시글 삭제 성공", null, "success", ra);
+			path = "insert";
+			
+		}else {
+			Util.swalSetMessage("게시글 삭제 실패", null, "error", ra);
+			path = "view/" + boardNo;
+		}
+    	return "redirect:" + path;
     }
+    
+    //예외처리
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e, Model model) {
+		
+		//Model : 데이터 전달용 객체(Map형식, request범위)
+		
+		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
+		model.addAttribute("e", e);
+		
+		return "/common/error";
+	}
+
     
     
   //-------- 모바일 댓글창 --------------
