@@ -38,7 +38,7 @@
 		// 오늘 등록된 감정 기록
 		const today = new Date();
 		const emotionRecordData = JSON.stringify(${emotionRecordData});
-		if (emotionRecordData != "null") {
+		if (emotionRecordData != "null" && emotionRecordData != undefined) {
 			ajaxDom(JSON.parse(emotionRecordData), dateFormat(today));
 		}
 

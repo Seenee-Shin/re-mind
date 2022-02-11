@@ -6,12 +6,12 @@
 <!-- header include -->
 <jsp:include page="../common/header.jsp"></jsp:include>
 
-	        <article class="main_content">    
+	        <article class="main_content">
 	            <!-- 메인 -->
-	
+
 	            <div class="back_btn">
 	                <a href="">
-	                    <i class="fas fa-arrow-left"></i> 
+	                    <i class="fas fa-arrow-left"></i>
 	                </a>
 	            </div>
 	            <article class="board_view_wrap">
@@ -35,18 +35,18 @@
 	                <div class="profile_wrap">
 	                    <div class="writer_pic light_brown_bg" style="background-image: url();">
 	                    </div>
-	
+
 	                    <div class="writer_id">
 							<p>${board.memberFn}</p>
 	                    </div>
 	                </div>
-	                
+
 	                <!-- 자신의 글일때 수정, 삭제버튼 생성 -->
 
 	                <div class="post_title">
 	                    <h2>${board.boardTitle}</h2>
 	                </div>
-	
+
 	                <div class=" posting">
 	                    <p>
 							${board.boardContent}
@@ -93,22 +93,22 @@
 							</div>
 						</div>
 					</c:if>
-	                
+
 	                <%--<div class="report_scrap_wrap">
 	                    <div class="comment_top dark-brown">
 	                        <div>
 	                            <i class="far fa-comment"></i>
-	                            <span>댓글</span> 
+	                            <span>댓글</span>
 	                            <span>(55)</span>
 	                        </div>
 	                    </div>
-	                    
+
 	                    <!-- 스크랩 허용 했을 경우만 -->
 	                    <a href="">
-	                        <i class="fas fa-archive"></i>  
+	                        <i class="fas fa-archive"></i>
 	                        <p>스크랩</p>
 	                    </a>
-	
+
 	                    <a href="">
 	                        <i class="fas fa-exclamation-triangle"></i>
 	                        <p>신고</p>
@@ -116,6 +116,13 @@
 	                </div>--%>
 
 					<div class="report_scrap_wrap">
+						<div class="comment_wrap">
+							<c:if test="${board.replyCheckCode == 1}">
+							<i class="far fa-comment dark-brown"> '+item.replyCount+'</i>
+							<p></p>
+							</c:if>
+						</div>
+
 						<!-- 스크랩 허용 했을 경우만 -->
 						<a id="btnTwitter" class="link-icon twitter"  href="javascript:shareTwitter();">
 							<img alt="" src="${contextPath}/resources/images/icon/icon-twitter.png;">
@@ -123,13 +130,13 @@
 						<a id="btnFacebook" class="link-icon facebook"  href="javascript:shareFacebook();">
 							<img alt="" src="${contextPath}/resources/images/icon/icon-facebook.png;">
 						</a>
-						<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao(); ">
+						<%--<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao(); ">
 							<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
 						</a>
 
 						<a href="">
 							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
-						</a>
+						</a>--%>
 					</div>
 
 				</article>
@@ -202,9 +209,9 @@
 	                    <textarea></textarea>
 	                    <button>확인</button>
 	                </div>
-	
+
 	                <div class="replyInsertOpen">답변 달기</div>
-	
+
 	                <article class="replyAll">
 	                    <div class="replyInfo">
 	                        <div class="reply1Line">
@@ -222,34 +229,34 @@
 	                        <div class="reply-content">
 	                            <p>
 	                                아버지의 질병으로 인해 걱정이 많으시겠네요.<br><br>
-	
+
 	                                많은 환자들은 자신의 질환에 대해 상대적으로 심각하지 않게 받아들이고<br>
 	                                그로 인해 치료 시기와 기간 모두 지연되는 경우가 많습니다.<br><br>
-	
+
 	                                병이 오래 될 수록 그런 경향이 많습니다.<br>
 	                                대부분의 병은 조기에 발견하면 상대적으로 치료가 쉽고<br>
 	                                만성으로 갈 수록 치료가 어렵게 됩니다.<br><br>
-	
+
 	                                아버지께서 문제음주 발생 후 오래 되지 않았더라고 해도<br>
 	                                30년 정도의 음주 경력이면 알코올 의존이라는 질환에서도<br>
 	                                상당히 만성으로 진행된 상태라고 생각이 됩니다.<br><br>
-	
+
 	                                그렇다고 좌절해서 아무것도 안할 수 는 없겠지요.<br><br>
-	
+
 	                                환자분이 치료의지가 강하고 병원, 가족, 환자, 지인들 모두 합심하여<br>
 	                                열심히 노력 한다면 치료의 가능성은 여전히 있다고 생각합니다.<br><br>
-	
+
 	                                치료의 개념을 앞으로 절대 술을 먹지 않는 것이라고 한다면<br>
 	                                반복된 음주로 인해 기운이 빠지시겠지만<br>
 	                                조금 더 넓혀 생각해서 최대한 단주의 기간을 늘리고<br><br>
-	
+
 	                                혹시 다시 음주를 하더라도 스스로 빠른 대처를 할 수 있게 되는 것 만으로도<br>
 	                                충분히 치료 시도의 의미가 있을 것이라 생각 됩니다.<br><br>
-	
+
 	                                정답을 가지고 시작하는 일은 많지 않을 것이라 생각 됩니다.<br><br>
-	
+
 	                                알코올 의존은 질환이기 때문에 병원에서 치료 받지 않으면 매우 힘든 병입니다.<br><br>
-	
+
 	                                개개인마다 치료의 결과가 크게 다르기도 합니다.<br>
 	                                전문가의 진료를 받고 도움을 받으시길 바랍니다.<br>
 	                            </p>
@@ -275,11 +282,11 @@
 	                        </div>
 	                    </div>
 	                </article>
-	
-	
-	
+
+
+
 	            </article>--%>
-	        
+
 	        </article>
 	    </div>
 
