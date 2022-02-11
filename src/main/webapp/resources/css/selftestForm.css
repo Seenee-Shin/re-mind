@@ -145,19 +145,17 @@ height: 40px;
     text-align: center;
     line-height: 42px;
     margin-right: 50px;
-    color: rgb(165 153 153);
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+    background-color:#fff;
+    color:#A59999;
 }
+.selfTest_result.active{background-color:#A59999; color:#fff;}
 
 .selfTest_btn{
     display: flex;
     justify-content: flex-end;
-}
-
-.selfTest_prev_btn{
-    display: none;
 }
 
 .selfTest_prev_btn,
@@ -171,6 +169,8 @@ height: 40px;
     font-weight: bold;
     margin-left: 40px;   
 }
+
+.selfTest_prev_btn.hidden, .selfTest_next_btn.hidden{display: none;}
 
 #selfTest_result_btn{
     display: none;

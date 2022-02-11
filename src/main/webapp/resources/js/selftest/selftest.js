@@ -26,14 +26,12 @@ $(function () {
     }
 })
 
-$(".selfTest_prev_btn, .selfTest_next_btn").css("display", "block");
-
 
 function addACount(){
     for(let i = 0; i < allAnswerLen; i++){
         $(".selfTest_result").eq(i).text(QUES[i].answerContent);
     }
-    $(".selfTest_result").css("backgroundColor", "#fff").css("color","#A59999");
+    $(".selfTest_result").removeClass("active");
 }
 
 function addQCount(){
@@ -53,6 +51,8 @@ function next(){
 
     $(".selfTest_content > span:first-child").text(nowQNo);
 
+    // 이전 다음 버튼
+    hiddenBtn();
 }
 
 function prev(){
@@ -67,13 +67,39 @@ function prev(){
 
     $(".selfTest_content > span:first-child").text(nowQNo);
 
+    // 이전 다음 버튼
+    hiddenBtn();
 }
 
-$(".selfTest_op").on("click", function (){
+// 이전 다음 버튼 노출
+function hiddenBtn() {
+    if (nowQNo == '1') {
+        $(".selfTest_prev_btn").addClass("hidden");
+    } else  if (nowQNo == allQuestionLen) {
+        $(".selfTest_next_btn").addClass("hidden");
+    } else {
+        $(".selfTest_prev_btn").removeClass("hidden");
+        $(".selfTest_next_btn").removeClass("hidden");
+    }
+}
+
+// 초기화
+function reset() {
+    nowQNo = 1;
+    allAnswerLen = undefined;
+}
+
+// 증상 선택
+$(".selfTest_op").on("click", function () {
+
+    reset();
 
     ctCode = $(this).attr("id");
     const index = $(this).index($(this));
     const nm = $(this).text();
+
+    $(".selfTest_op").removeClass("active");
+    $(this).addClass("active");
 
     $.ajax({
         url : "selftestQuestion",
@@ -82,6 +108,7 @@ $(".selfTest_op").on("click", function (){
         dataType : "json",
         success : function (result){
             QUES = result;
+
             if(ctCode == 1) {
                 allAnswerLen = 4; //  전체 답변 수
                 allQuestionLen = result.length - allAnswerLen;
@@ -200,6 +227,9 @@ $(".selfTest_op").on("click", function (){
                 addACount();
             }
 
+            // 이전 다음 버튼
+            hiddenBtn();
+
         },
         error(request,status,error){
             console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -209,12 +239,12 @@ $(".selfTest_op").on("click", function (){
 
 });
 
-
+// 딥변
 $(".selfTest_result").on("click", function (){
     flag = true;
-    $(this).css("backgroundColor", "#fff").css("color", "#A59999");
 
-    $(this).css("backgroundColor", "#A59999").css("color", "#fff");
+    $(".selfTest_result").removeClass("active");
+    $(this).addClass("active");
 });
 
 
