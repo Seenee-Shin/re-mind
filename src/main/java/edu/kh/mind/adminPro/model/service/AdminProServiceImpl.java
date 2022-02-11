@@ -109,7 +109,7 @@ public class AdminProServiceImpl implements AdminProService{
 		int iResult = dao.insertProInfo(proInfo);
 		for (int i = 0; i<3; i++ ) {
 			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("proNo",proInfo.getProfessionNo());
+			map.put("professionNo",proInfo.getProfessionNo());
 			map.put("categoryCode",i+1);
 			iResult = dao.insertPrice(map);
 		}
@@ -162,12 +162,20 @@ public class AdminProServiceImpl implements AdminProService{
 		
 		int iResult = dao.insertProProfile(proInfo);
 		
-		int result =0;
+		Image result;
+		int p = 0;
 		if(iResult >0) {
+			result = dao.selectProfilePic(img);
 			
-			result = dao.insertCertification(img);
+			if(result == null) {
+				p =  dao.insertProfilePic(img);
+				
+			}else {
+				p = dao.updateProfilePic(img);
+			}
 			
-			if (result == 1) {
+			
+			if (p == 1) {
 				try {
 					proProfile.transferTo(new File(serverPath+"/"+img.getImageName()));
 					
@@ -181,7 +189,7 @@ public class AdminProServiceImpl implements AdminProService{
 			}
 		}
 		
-		return result;
+		return p;
 	}
 
 	@Override
@@ -263,6 +271,12 @@ public class AdminProServiceImpl implements AdminProService{
 	@Override
 	public List<Profession> classList(int professionNo) {
 		return dao.classList(professionNo);
+	}
+
+	@Override
+	public Profession selectProfessionRegister(Profession profession) {
+		// TODO Auto-generated method stub
+		return dao.selectProfessionRegister(profession);
 	}
 
 
