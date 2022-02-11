@@ -14,7 +14,7 @@
 	                    <div class="search_area">
 	                        <div class="search_wrap">
 	                            <select name="search_category" id="search_category">
-	                                <option value="id">아이디</option>
+	                                <option value="id">닉네임</option>
 	                                <option value="content">내용</option>
 	                            </select>
 	                            <input type="text" name="freeboard_search">
@@ -248,12 +248,16 @@ $(function () {
 const searchSelect = $("#freeboard_search");
 searchSelect.on("click", function () {
 
-	const data = {
-		"searchCategory" : $("#search_category option:selected").val(),
-		"searchText" : $("[name='freeboard_search']").val()
+	const searchText = $("[name='freeboard_search']").val().trim();
+	if (searchText != "") {
+		const data = {
+			"searchCategory" : $("#search_category option:selected").val(),
+			"searchText" : searchText
+		}
+		getFreeList(data);
+	} else {
+		getFreeList();
 	}
-
-	getFreeList(data);
 });
 
 //list 가져오기
