@@ -113,7 +113,7 @@
 	            </div>
 	
 	            <div class="clear-both">
-	                <h2 class="pro_category_title">상담사 자격증</h2>
+<!-- 	                <h2 class="pro_category_title">상담사 자격증</h2>
 	                <div>
 	                    <ul class="moblie_pro_radio">
 	                        <li>
@@ -135,7 +135,7 @@
 	                            </label>
 	                        </li>
 	                    </ul>
-	                </div>
+	                </div> -->
 	            </div>
 	        </div>
 	    </div>

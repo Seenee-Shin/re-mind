@@ -11,7 +11,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height:480px;
+    height:400px;
     margin-bottom: 50px;
 
   }
@@ -21,9 +21,10 @@ main{
   }
   
   .main_banner {
-  	background-image: url("../../resources/images/mainbg.jpg");
+  	background-image: url("../../resources/images/6057300.jpg");
   	        background-repeat : no-repeat;
         background-size : cover;
+        background-position: right;
        /*  background-position: 50; */
   }
   

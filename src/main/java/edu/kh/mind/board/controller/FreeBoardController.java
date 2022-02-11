@@ -22,6 +22,7 @@ import edu.kh.mind.board.model.service.ReplyService;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Reply;
+import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Member;
 
@@ -183,6 +184,22 @@ public class FreeBoardController {
 		}
     	return "redirect:" + path;
     }
+    
+    
+    //스크랩하기 
+    @ResponseBody
+    @RequestMapping(value = "boardScrap", method = RequestMethod.GET)
+    public int boardScrap(@RequestParam int memberNo, @RequestParam int boardNo) {
+    	Scrap scrap =new Scrap();
+    	scrap.setBoardNo(boardNo);
+    	scrap.setMemberNo(memberNo);
+    	
+    	int result = service.boardScrap(scrap);
+    	
+    	return result;
+    }
+    
+    
     
     //예외처리
 	@ExceptionHandler(Exception.class)

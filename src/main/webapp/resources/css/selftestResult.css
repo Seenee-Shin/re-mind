@@ -27,16 +27,17 @@
     margin-top: 3vh;
 }
 
+
 #selfTest_btn{
     margin: 0 auto;
     margin-top: 7vh;
-    width: 15vw;
-    height: 70px;
+    width: 11vw;
+    height: 40px;
     border: none;
     border-radius: 50px;
     background: rgb(229 212 197);
     color: rgb(255 255 255);
-    font-size: 1.6em;
+    font-size: 1em;
     font-weight: bold;
 }
 
