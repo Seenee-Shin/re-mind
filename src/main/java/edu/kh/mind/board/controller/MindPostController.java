@@ -90,7 +90,6 @@ public class MindPostController {
     @RequestMapping("saveCoord")
     @ResponseBody
     public int updatePost(MindPost post) {
-    	System.out.println(post.getCoordLeft());
     	return service.updatePost(post);
     }
     
