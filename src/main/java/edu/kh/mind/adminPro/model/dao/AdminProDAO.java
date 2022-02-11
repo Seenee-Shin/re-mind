@@ -60,9 +60,9 @@ public class AdminProDAO {
 
 
 	
-	public int insertCertification(Image img) {
+	public int insertProfilePic(Image img) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("professionMapper.insertCertification", img);
+		return sqlSession.insert("professionMapper.insertProfilePic", img);
 	}
 
 
@@ -135,4 +135,30 @@ public class AdminProDAO {
 	public List<Profession> classList(int professionNo) {
 		return sqlSession.selectList("professionMapper.classList", professionNo);
 	}
+
+
+	public Profession selectProfessionRegister(Profession profession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("professionMapper.selectProfessionRegister",profession);
+	}
+
+
+	public int insertCertification(Image img) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("professionMapper.insertCertification",img);
+	}
+
+
+	public Image selectProfilePic(Image img) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("professionMapper.selectProfilePic", img);
+	}
+
+
+	public int updateProfilePic(Image img) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("professionMapper.updateProfilePic", img);
+	}
+
+
 }

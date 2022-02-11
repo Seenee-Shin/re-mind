@@ -85,7 +85,7 @@
        <section class="priceWrap">
            <h3>가격 정보</h3>
 	           <c:forEach items="${price}" var="p">
-	           ${p.counselCategoryCode}
+	           
 		           <article class="proPrice">
 	                   <label for = "${p.counselCategoryCode}">
 	                   		<c:choose>
