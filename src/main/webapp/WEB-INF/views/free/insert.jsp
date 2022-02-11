@@ -340,9 +340,7 @@ $.ajax({
 					+'            <p></p>'
 					+'        </div>'; //comment wrap close 
 				}else{
-					html+=
-					+'		<div class="comment_wrap">'
-					+'        </div>';
+					html += '<div class="comment_wrap"></div>';
 				}
 				
 				if(item.empathyCheckCode == 1){

@@ -14,7 +14,7 @@
 	                    <div class="search_area">
 	                        <div class="search_wrap">
 	                            <select name="search_category" id="search_category">
-	                                <option value="id">아이디</option>
+	                                <option value="id">닉네임</option>
 	                                <option value="content">내용</option>
 	                            </select>
 	                            <input type="text" name="freeboard_search">
@@ -211,7 +211,6 @@ $.ajax({
 	type : "POST",
 	data : data,
 	success : function (result) {
-		
 
 		let html = "";
 		var secretBoardList = $('#BoardListArea')
@@ -270,17 +269,16 @@ $.ajax({
 	            +'		</a>'
 	            +'	</div>'
 	            +'	<div class="board_icon_wrap">';
-	            
+	            console.log(typeof item.replyCheckCode);
 	          	if(item.replyCheckCode == 1){
-					html+= 
-					'		<div class="comment_wrap">'
-					+'            <i class="far fa-comment dark-brown"> '+item.replyCount+'</i>'
-					+'            <p></p>'
-					+'        </div>'; //comment wrap close 
+					html += `
+						<div class="comment_wrap">
+							<i class="far fa-comment dark-brown"> ` + item.replyCount + `</i>
+							<p></p>
+						</div>
+					`
 				}else{
-					html+=
-					+'		<div class="comment_wrap">'
-					+'        </div>';
+					html += '<div class="comment_wrap"></div>';
 				}
 				
 				if(item.empathyCheckCode == 1){
