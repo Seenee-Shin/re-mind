@@ -57,7 +57,7 @@
     </div>
     <!-- 버튼 -->
     <div class="selfTest_btn">
-      <button class="selfTest_prev_btn" onclick="prev()" type="button">이전</button>
+      <button class="selfTest_prev_btn hidden" onclick="prev()" type="button">이전</button>
       <button id="selfTest_next_btn" class="selfTest_next_btn" onclick="next()" type="button">다음</button>
     </div>
     <button type="button" class="mb_selfTest_btn">테스트 진행</button>
