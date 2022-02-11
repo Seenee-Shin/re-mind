@@ -159,14 +159,15 @@
 		$(".worry_search_area .dark_brown_border").eq(0).addClass("active");
 		$(".worry_search_area input[name='worryCategory']").eq(0).prop("checked", true);
 
-		if ($("[name='freeboard_search']").val().trim() != "") {
+		const searchText = $("[name='freeboard_search']").val().trim();
+		if (searchText != "") {
 			const data = {
 				"searchCategory" : $("#search_category option:selected").val(),
-				"searchText" : $("[name='freeboard_search']").val()
+				"searchText" : searchText
 			}
-			getWorryList(data);
+			getFreeList(data);
 		} else {
-			getWorryList();
+			getFreeList();
 		}
 	});
 
