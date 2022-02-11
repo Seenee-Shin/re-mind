@@ -190,12 +190,16 @@ $(function () {
 const searchSelect = $("#freeboard_search");
 searchSelect.on("click", function () {
 
-	const data = {
-		"searchCategory" : $("#search_category option:selected").val(),
-		"searchText" : $("[name='freeboard_search']").val()
+	const searchText = $("[name='freeboard_search']").val().trim();
+	if (searchText != "") {
+		const data = {
+			"searchCategory" : $("#search_category option:selected").val(),
+			"searchText" : searchText
+		}
+		getFreeList(data);
+	} else {
+		getFreeList();
 	}
-
-	getFreeList(data);
 });
 
 //list 가져오기
