@@ -57,4 +57,14 @@ tr > td:nth-of-type(2){width: 70%; display: grid;}
     .pagination li {
         margin: 0;
     }
+
+
 }
+
+/*별점*/
+
+  .starpoint_box{position:relative;background:url(../../images/my/star2.png) 0 0 no-repeat;font-size:0;width:100px;}
+.starpoint_box .starpoint_bg{display:block;position:absolute;top:0;left:0;height:18px;background:url(../../images/my/star2.png) 0 -20px no-repeat; pointer-events:none;}
+.starpoint_box .label_star{display:inline-block;width:10px;height:18px;box-sizing:border-box;}
+.starpoint_box .star_radio{opacity:0;width:0;height:0;position:absolute;}
+.blind{position:absolute;clip:rect(0 0 0 0);margin:-1px;width:1px;height: 1px;overflow:hidden;}
