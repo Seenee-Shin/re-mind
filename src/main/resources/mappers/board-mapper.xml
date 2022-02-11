@@ -189,7 +189,7 @@
 
 			<choose>
 				<when test="searchCategory == 'id'">
-					AND MEMBER_ID LIKE #{val}
+					AND MEMBER_FN LIKE #{val}
 				</when>
 				<otherwise>
 					AND BOARD_CONTENT LIKE #{val}
@@ -254,14 +254,12 @@
 			GROUP BY BOARD_NO
 		) e on e.BOARD_NO = BOARD.BOARD_NO
 		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
-		
-		
 		<if test="searchCategory != null">
 			<bind name="val" value="'%' + searchText + '%'"/>
 			
 			<choose>
 				<when test="searchCategory == 'id'">
-					AND MEMBER_ID LIKE #{val}
+					AND MEMBER_FN LIKE #{val}
 				</when>
 				<otherwise>
 					AND BOARD_CONTENT LIKE #{val}

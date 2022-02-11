@@ -23,7 +23,7 @@
 	                    <div class="search_area">
 	                        <div class="search_wrap">
 	                            <select name="search_category" id="search_category">
-	                                <option value="id">아이디</option>
+	                                <option value="id">닉네임</option>
 	                                <option value="content">내용</option>
 	                            </select>
 	                            <input type="text" name="freeboard_search">
@@ -159,12 +159,15 @@
 		$(".worry_search_area .dark_brown_border").eq(0).addClass("active");
 		$(".worry_search_area input[name='worryCategory']").eq(0).prop("checked", true);
 
-		const data = {
-			"searchCategory" : $("#search_category option:selected").val(),
-			"searchText" : $("[name='freeboard_search']").val()
+		if ($("[name='freeboard_search']").val().trim() != "") {
+			const data = {
+				"searchCategory" : $("#search_category option:selected").val(),
+				"searchText" : $("[name='freeboard_search']").val()
+			}
+			getWorryList(data);
+		} else {
+			getWorryList();
 		}
-
-		getWorryList(data);
 	});
 
 	// list 가져오기
