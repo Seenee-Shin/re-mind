@@ -111,24 +111,42 @@ public class WorryBoardController {
         }
 
         Board board = service.selectWorryBoard(boardNo, memberNo);
+        System.out.println(board);
 
         if (board != null) {
             // 댓글
             List<Reply> replyList = replyService.selectList(boardNo);
 
-            String empathyArr[] = board.getWorryEmpathyArray().split(",");
-            String cntArr[] = board.getWorryCntArray().split(",");
+            System.out.println(replyList);
 
+            System.out.println(board.getWorryEmpathyArray());
             Map<String, Integer> empathyMap = new HashMap<>();
-            for (int i=1001; i<1006; i++) {
-                String keyStr = Integer.toString(i);
-                int key = Arrays.asList(empathyArr).indexOf(keyStr);
-                if (key >= 0) {
-                    empathyMap.put(keyStr, Integer.valueOf(cntArr[key]));
-                } else {
-                    empathyMap.put(keyStr, 0);
+
+            if (board.getWorryEmpathyArray() != null) {
+                String empathyArr[] = board.getWorryEmpathyArray().split(",");
+                String cntArr[] = board.getWorryCntArray().split(",");
+
+
+                for (int i=1001; i<1006; i++) {
+                    String keyStr = Integer.toString(i);
+                    System.out.println("keyStr : " + keyStr);
+
+
+                    int key = Arrays.asList(empathyArr).indexOf(keyStr);
+                    System.out.println("key : " + key);
+
+
+                    if (key >= 0) {
+                        empathyMap.put(keyStr, Integer.valueOf(cntArr[key]));
+                    } else {
+                        empathyMap.put(keyStr, 0);
+                    }
                 }
             }
+
+
+            System.out.println(empathyMap);
+
 
             model.addAttribute("css", "board/worryView");
             model.addAttribute("replyList", replyList);
