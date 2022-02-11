@@ -49,6 +49,7 @@
             <input type="checkbox" name="accept" id="accept2" required>(필수)  상담윤리에 대한 교육을 이수하였으며, 상담학회의 윤리규정을 중용 할 것임을 서약합니다. <br>
             <br>
             <br>
+            <input type="hidden" name="professionNo" id="professionNo" value="${professionNo}">
             <button style="display: inline-block; text-align: center;">등록하기</button>
         </div>
     </form>
