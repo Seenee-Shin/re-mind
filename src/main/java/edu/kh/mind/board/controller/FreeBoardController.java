@@ -53,14 +53,14 @@ public class FreeBoardController {
     //게시판 리스트 연결
 	@ResponseBody
 	@RequestMapping(value = "list", method = RequestMethod.POST)
-    public String freeBoardList(@RequestParam Map<String, String> param) {
+    public HashMap<String, Object>  freeBoardList(@RequestParam Map<String, String> param) {
 		HashMap<String, Object> map = new HashMap<>();
 		
     	List<Board> freeBoardList = service.selectBoardList(param);
     	
-//    	map.put("freeBoardList", freeBoardList);
+    	map.put("freeBoardList", freeBoardList);
     	
-        return new Gson().toJson(freeBoardList);
+        return map;
     }
     
 	//게시판 글작성,게시판 페이지 연결
