@@ -13,7 +13,7 @@ import java.util.Map;
 
 public interface ProService {
 
-    List<Profession> selectProfession(List<String> worryCtCd);
+    List<Profession> selectProfession(Map<String, Object> worryCtCd);
 
     List<Profession> selectAllProfession(Map<String, Integer> param);
 

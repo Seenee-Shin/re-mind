@@ -100,7 +100,7 @@
                     <ul class="dep2">
                         <li><a href="${contextPath}/free/insert">자유게시판</a></li>
                         <li><a href="${contextPath}/worry/worryList">고민상담 게시판</a></li>
-                        <li><a href="${contextPath}/post/list">마인드 포스팃</a></li>
+                        <li><a href="${contextPath}/post/list">이 달의 연구</a></li>
                         <li><a href="${contextPath}/secret/insert">털어놓기</a></li>
                     </ul>
                 </li>
@@ -155,13 +155,13 @@
 		                <ul class="side_menu_dep1">
 		                    <li class="w_side_menu"><a href="${contextPath}/free/insert">자유게시판</a></li>
 		                    <li class="w_side_menu"><a href="${contextPath}/worry/worryList">고민상담 게시판</a> </li>
-		                    <li class="w_side_menu"><a href="${contextPath}/post/list">마인드포스팃</a></li>
-		                    <li class="w_side_menu"><a href="${contextPath}/secret/secretList">털어놓기</a></li>
+		                    <li class="w_side_menu"><a href="${contextPath}/post/list">이 달의 연구</a></li>
+		                    <li class="w_side_menu"><a href="${contextPath}/secret/insert">털어놓기</a></li>
 
                             <li class="m_side_menu"><a href="${contextPath}/free/insert">자유</a></li>
                             <li class="m_side_menu"><a href="${contextPath}/worry/worryList">고민상담</a></li>
-                            <li class="m_side_menu"><a href="${contextPath}/post/list">포스팃</a></li>
-		                    <li class="m_side_menu"><a href="${contextPath}/secret/secretList">털어놓기</a></li>
+                            <li class="m_side_menu"><a href="${contextPath}/post/list">이 달의 연구</a></li>
+		                    <li class="m_side_menu"><a href="${contextPath}/secret/insert">털어놓기</a></li>
 		                </ul>
 		            </section>
 	        	</c:when>

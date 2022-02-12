@@ -23,7 +23,7 @@ public class ProServiceImpl implements ProService{
     private ProDAO dao;
 
     @Override
-    public List<Profession> selectProfession(List<String> worryCtCd) {
+    public List<Profession> selectProfession(Map<String, Object> worryCtCd) {
         return dao.selectProfession(worryCtCd);
     }
 

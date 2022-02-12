@@ -10,7 +10,7 @@
 	<div id="pro_search_wrap">
 		    <div id="pro_search_div">
 		        <input type="text" name="proSearchInput" id="pro_searchInput" placeholder="상담사 이름 검색">
-		        <button><img src="${contextPath}/resources/images/pro/loupe.png" style="width:23px;"></button>
+		        <div id="nameSearch"><img src="${contextPath}/resources/images/pro/loupe.png" style="width:23px;"></div>
 		    </div>
 	    </div>
 	    <div id="mobile_pro_category_warp">
@@ -27,33 +27,25 @@
 	                <h2 class="pro_category_title">나의 고민 키워드</h2>
 	                <p>*상담받고 싶은 고민과 나를 설명하는키워드를 선택해주세요.<br>(최대 5개 선택가능) </p>
 	                <div style="margin-top: 20px;">
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="1">우울</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="2">불안</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="3">분노</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="4">강박</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="5">무기력</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="6">자살</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="7">자존감상실</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="8">자해</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="9">스트레스</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="10">트라우마</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="11">공황</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="12">상실</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="13">대인관계</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="14">친구</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="15">부부</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="16">연인</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="17">가족</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="18">직장</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="19">진로</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="20">취업</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style"  value="21">육아</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="22">해외생활</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="23">중독</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="24">섭식장애</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="25">성소수자</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="26">성생활</button>
-	                    <button type="button" class="mobile_cate_btn cate_btn_style" value="27">감정조절</button>
+	                    <button type="button" class="cate_btn" value="1">일반고민</button>
+	                    <button type="button" class="cate_btn" value="2">취업/진로</button>
+	                    <button type="button" class="cate_btn" value="3">직장</button>
+	                    <button type="button" class="cate_btn" value="4">연애</button>
+	                    <button type="button" class="cate_btn" value="5">성추행</button>
+	                    <button type="button" class="cate_btn" value="6">결혼/육아</button>
+	                    <button type="button" class="cate_btn" value="7">대인관계</button>
+	                    <button type="button" class="cate_btn" value="8">외모</button>
+	                    <button type="button" class="cate_btn" value="9">가족</button>
+	                    <button type="button" class="cate_btn" value="10">학업/고시</button>
+	                    <button type="button" class="cate_btn" value="11">금전/사업</button>
+	                    <button type="button" class="cate_btn" value="12">성생활</button>
+	                    <button type="button" class="cate_btn" value="13">이별/이혼</button>
+	                    <button type="button" class="cate_btn" value="14">중독/집착</button>
+	                    <button type="button" class="cate_btn" value="15">투병/신체</button>
+	                    <button type="button" class="cate_btn" value="16">정신건강</button>
+	                    <button type="button" class="cate_btn" value="17">LGBT</button>
+	                    <button type="button" class="cate_btn" value="18">자아/성격</button>
+	                    <button type="button" class="cate_btn" value="19">따돌림</button>
 	                </div>
 	            </div>
 	            <div>
@@ -61,26 +53,26 @@
 	                <div>
 	                    <ul class="moblie_pro_radio">
 	                        <li>
-	                            <label class="test22" for="unrelated">
-	                                <input type="radio" id="unrelated" name="consultation_type" checked>
+	                            <label class="test22" for="m_unrelated">
+	                                <input type="radio" id="m_unrelated" name="consultation_type" checked>
 	                                <span>무관</span>
 	                            </label>
 	                        </li>
 	                        <li>
-	                            <label class="test22" for="text_counseling">
-	                                <input type="radio" id="text_counseling" name="consultation_type">
+	                            <label class="test22" for="m_text_counseling">
+	                                <input type="radio" id="m_text_counseling" name="consultation_type">
 	                                <span>텍스트테라피</span>
 	                            </label>
 	                        </li>
 	                        <li>
-	                            <label class="test22" for="voice_counseling">
-	                                <input type="radio" id="voice_counseling" name="consultation_type">
+	                            <label class="test22" for="m_voice_counseling">
+	                                <input type="radio" id="m_voice_counseling" name="consultation_type">
 	                                <span>보이스테라피</span>
 	                            </label>
 	                        </li>
 	                        <li>
-	                            <label class="test22" for="face_counseling">
-	                                <input type="radio" id="face_counseling" name="consultation_type">
+	                            <label class="test22" for="m_face_counseling">
+	                                <input type="radio" id="m_face_counseling" name="consultation_type">
 	                                <span>페이스테라피</span>
 	                            </label>
 	                        </li>
@@ -92,20 +84,20 @@
 	                <h2 class="pro_category_title">상담사 성별</h2>
 	                <ul class="moblie_pro_radio">
 	                    <li>
-	                        <label class="test22" for="unrelated2">
-	                            <input type="radio" id="unrelated2" name="pro_gender" checked>
+	                        <label class="test22" for="m_unrelated2">
+	                            <input type="radio" id="m_unrelated2" name="pro_gender" checked>
 	                            <span>무관</span>
 	                        </label>
 	                    </li>
 	                    <li>
-	                        <label class="test22" for="pro_male">
-	                            <input type="radio" id="pro_male" name="pro_gender">
+	                        <label class="test22" for="m_pro_male2">
+	                            <input type="radio" id="m_pro_male2" name="pro_gender">
 	                            <span>남자</span>
 	                        </label>
 	                    </li>
 	                    <li>
-	                        <label class="test22" for="pro_famale">
-	                            <input type="radio" id="pro_famale" name="pro_gender">
+	                        <label class="test22" for="m_pro_famale2">
+	                            <input type="radio" id="m_pro_famale2" name="pro_gender">
 	                            <span>여자</span>
 	                        </label>
 	                    </li>
@@ -145,33 +137,25 @@
 	                <th><p>나의 고민 키워드</p></th>
 	                <td colspan="3">
 	                    <span>*상담받고 싶은 고민과 나를 설명하는키워드를 선택해주세요.(최대 5개 선택가능) </span><br>
-	                    <button type="button" class="cate_btn" value="1">우울</button>
-	                    <button type="button" class="cate_btn" value="2">불안</button>
-	                    <button type="button" class="cate_btn" value="3">분노</button>
-	                    <button type="button" class="cate_btn" value="4">강박</button>
-	                    <button type="button" class="cate_btn" value="5">무기력</button>
-	                    <button type="button" class="cate_btn" value="6">자살</button>
-	                    <button type="button" class="cate_btn" value="7">자존감상실</button>
-	                    <button type="button" class="cate_btn" value="8">자해</button>
-	                    <button type="button" class="cate_btn" value="9">스트레스</button>
-	                    <button type="button" class="cate_btn" value="10">트라우마</button>
-	                    <button type="button" class="cate_btn" value="11">공황</button>
-	                    <button type="button" class="cate_btn" value="12">상실</button>
-	                    <button type="button" class="cate_btn" value="13">대인관계</button>
-	                    <button type="button" class="cate_btn" value="14">친구</button>
-	                    <button type="button" class="cate_btn" value="15">부부</button>
-	                    <button type="button" class="cate_btn" value="16">연인</button>
-	                    <button type="button" class="cate_btn" value="17">가족</button>
-	                    <button type="button" class="cate_btn" value="18">직장</button>
-	                    <button type="button" class="cate_btn" value="19">진로</button>
-	                    <button type="button" class="cate_btn" value="20">취업</button>
-	                    <button type="button" class="cate_btn" value="21">육아</button>
-	                    <button type="button" class="cate_btn" value="22">해외생활</button>
-	                    <button type="button" class="cate_btn" value="23">중독</button>
-	                    <button type="button" class="cate_btn" value="24">섭식장애</button>
-	                    <button type="button" class="cate_btn" value="25">성소수자</button>
-	                    <button type="button" class="cate_btn" value="26">성생활</button>
-	                    <button type="button" class="cate_btn" value="27">감정조절</button>
+	                    <button type="button" class="cate_btn" value="1">일반고민</button>
+	                    <button type="button" class="cate_btn" value="2">취업/진로</button>
+	                    <button type="button" class="cate_btn" value="3">직장</button>
+	                    <button type="button" class="cate_btn" value="4">연애</button>
+	                    <button type="button" class="cate_btn" value="5">성추행</button>
+	                    <button type="button" class="cate_btn" value="6">결혼/육아</button>
+	                    <button type="button" class="cate_btn" value="7">대인관계</button>
+	                    <button type="button" class="cate_btn" value="8">외모</button>
+	                    <button type="button" class="cate_btn" value="9">가족</button>
+	                    <button type="button" class="cate_btn" value="10">학업/고시</button>
+	                    <button type="button" class="cate_btn" value="11">금전/사업</button>
+	                    <button type="button" class="cate_btn" value="12">성생활</button>
+	                    <button type="button" class="cate_btn" value="13">이별/이혼</button>
+	                    <button type="button" class="cate_btn" value="14">중독/집착</button>
+	                    <button type="button" class="cate_btn" value="15">투병/신체</button>
+	                    <button type="button" class="cate_btn" value="16">정신건강</button>
+	                    <button type="button" class="cate_btn" value="17">LGBT</button>
+	                    <button type="button" class="cate_btn" value="18">자아/성격</button>
+	                    <button type="button" class="cate_btn" value="19">따돌림</button>
 	                </td>
 	            </tr>
 	            <tr class="pro_tr">
@@ -215,7 +199,8 @@
 	                        </li>
 	                    </ul>
 	                </td>
-	                <th><p>상담사 자격증</p></th>
+	                </tr>
+	                <!-- <th><p>상담사 자격증</p></th>
 	                <td>
 	                    <ul class="pro_radio">
 	                        <li>
@@ -269,7 +254,7 @@
 	                        </li>
 	                    </ul>
 	                </td>
-	            </tr>
+	            </tr> -->
 	        </table>
 	    </div>
 	    <div id="pro_list_wrap">
@@ -335,6 +320,8 @@
 			}
 		}
 	}
+
+
 
 </script>
 

@@ -53,19 +53,33 @@ public class FreeBoardController {
     //게시판 리스트 연결
 	@ResponseBody
 	@RequestMapping(value = "list", method = RequestMethod.POST)
-    public HashMap<String, Object>  freeBoardList(@RequestParam Map<String, String> param) {
-		HashMap<String, Object> map = new HashMap<>();
+    public Map<String, String>  freeBoardList(@RequestParam Map<String, String> param, HttpSession session) {
+		
+		
+		if(session.getAttribute("loginMember") != null) {
+			param.put("memberNo",((Member)session.getAttribute("loginMember")).getMemberNo()+"");
+		}
+		
+		Map<String, String> map = new HashMap<>();
 		
     	List<Board> freeBoardList = service.selectBoardList(param);
+    	System.out.println(freeBoardList.size());
+
+    	//map.put("freeBoardList", freeBoardList);
+    	int listCount = service.countFreeList();
+    	map.put("listCount", listCount+"");
     	
-    	map.put("freeBoardList", freeBoardList);
+    	String gson = new Gson().toJson(freeBoardList);
+    	map.put("result", gson);
     	
-        return map;
+    	
+        return  map;
     }
     
 	//게시판 글작성,게시판 페이지 연결
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String freeBoardinsert(Model model) {
+    	
     	model.addAttribute("css", "board/freeList");
     	model.addAttribute("header", "community");
     	
