@@ -9,7 +9,7 @@ public class Letter {
     private int letterStatusCode;
     private int memberNo;
     private int professionNo;
-    private int professionName;
+    private String professionName;
 
     public Letter(){}
 
@@ -69,11 +69,11 @@ public class Letter {
         this.professionNo = professionNo;
     }
 
-    public int getProfessionName() {
+    public String getProfessionName() {
         return professionName;
     }
 
-    public void setProfessionName(int professionName) {
+    public void setProfessionName(String professionName) {
         this.professionName = professionName;
     }
 }

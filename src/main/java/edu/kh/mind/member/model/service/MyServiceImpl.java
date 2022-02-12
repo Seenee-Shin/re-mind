@@ -238,8 +238,8 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public int deleteCounselor(Map<String, Integer> map) {
-        return dao.deleteCounselor(map);
+    public int deleteCounselor(Board board) {
+        return dao.deleteCounselor(board);
     }
 
     // 상담 예약 취소
@@ -259,6 +259,6 @@ public class MyServiceImpl implements MyService {
 
     @Override
     public List<Letter> myLetterList(int memberNo) {
-        return null;
+        return dao.myLetterList(memberNo);
     }
 }

@@ -109,20 +109,19 @@ public class MyRestController {
     }
 
     @RequestMapping(value = "myLetterList", method = RequestMethod.GET)
-    public String myLetterList(HttpSession session, Model model){
-        int memberNo = ((Profession)session.getAttribute("loginMember")).getMemberNo();
-
-
+    public List<Letter> myLetterList(HttpSession session, Model model){
+        int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
         System.out.println(memberNo);
+        System.out.println("qwe");
 
 //
-        List<Letter> myLetterList = service.myLetterList(memberNo);
+        List<Letter> data = service.myLetterList(memberNo);
+        System.out.println(data);
 //
 //        System.out.println(data);
 //
-        return null;
+        return data;
     }
-
 
 
 }

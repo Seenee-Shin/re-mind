@@ -201,7 +201,11 @@ public class MyDAO {
 		return sqlSession.update("memberMapper.updateMemberFName", member);
 	}
 
-    public int deleteCounselor(Map<String, Integer> map) {
-		return sqlSession.delete("boardMapper.deleteCounselor",map);
+    public int deleteCounselor(Board board) {
+		return sqlSession.delete("boardMapper.deleteCounselor",board);
     }
+
+	public List<Letter> myLetterList(int memberNo) {
+		return sqlSession.selectList("boardMapper.myLetterList", memberNo);
+	}
 }

@@ -173,25 +173,23 @@
 <%--<c:if test="${ !empty requestScope.counselorList }">--%>
 
 <%--    <!-- 세션에 올라가있는 loinMember -->--%>
-<%--    const memberNo = ${loginMember.memberNo};--%>
+    const memberNo = ${loginMember.memberNo};
 
 <%--    const professionNo = ${counselorList.professionNo};--%>
 
-<%--console.log(memberNo);--%>
-<%--        console.log(professionNo);--%>
-
-<%--    function deleteCounselor(){--%>
-<%--        if(confirm("찜을 해제하시겠습니까?")){--%>
-<%--                $.ajax({--%>
-<%--                    url:"deleteCounselor",--%>
-<%--                    data:{--%>
-<%--                        "professionNo": professionNo,--%>
-<%--                        "memberNo": memberNo},--%>
-<%--                    success:function (result){--%>
-<%--                        console.log(url);--%>
-<%--                    }--%>
-<%--                });--%>
-<%--        }--%>
-<%--    }--%>
+    function deleteCounselor(professionNo){
+        if(confirm("찜을 해제하시겠습니까?")){
+                $.ajax({
+                    url:"deleteCounselor",
+                    type:"POST",
+                    data:{
+                        "professionNo": professionNo,
+                        "memberNo": memberNo},
+                    success:function (result){
+                        // console.log(url);
+                    }
+                });
+        }
+    }
 <%--    </c:if>--%>
 </script>

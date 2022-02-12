@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my/letterList.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/>
 <!-- header include -->
 <jsp:include page="../common/header.jsp"></jsp:include>
 
@@ -19,50 +21,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="message-view">
-                <td>이덕희</td>
-                <td>안녕하세요</td>
-                <td>2022.01.01</td>
-            </tr>
-            <tr class="message-view">
-                <td>관리자</td>
-                <td>안녕하세요. 가입을 축하드립니다.</td>
-                <td>2021.11.21</td>
-            </tr>
-            <tr class="message-view">
-                <td>user01</td>
-                <td>안녕하세요 반가워요 반가워요 반가워요 반가워요</td>
-                <td>2021.05.17</td>
-            </tr>
+<%--            <tr class="message-view">--%>
+<%--                <td>이덕희</td>--%>
+<%--                <td>안녕하세요</td>--%>
+<%--                <td>2022.01.01</td>--%>
+<%--            </tr>--%>
+<%--            <tr class="message-view">--%>
+<%--                <td>관리자</td>--%>
+<%--                <td>안녕하세요. 가입을 축하드립니다.</td>--%>
+<%--                <td>2021.11.21</td>--%>
+<%--            </tr>--%>
+<%--            <tr class="message-view">--%>
+<%--                <td>user01</td>--%>
+<%--                <td>안녕하세요 반가워요 반가워요 반가워요 반가워요</td>--%>
+<%--                <td>2021.05.17</td>--%>
+<%--            </tr>--%>
         </tbody>
     </table>
 
-    <table>
-<%--        <thead>--%>
-<%--        <tr>--%>
-<%--            <th class="thead-th">보낸사람</th>--%>
-<%--            <th class="thead-th">내용</th>--%>
-<%--            <th class="thead-th">날짜</th>--%>
-<%--        </tr>--%>
-<%--        </thead>--%>
-<%--        <tbody>--%>
-<%--        <tr class="message-view">--%>
-<%--            <td>이덕희</td>--%>
-<%--            <td>안녕하세요</td>--%>
-<%--            <td>2022.01.01</td>--%>
-<%--        </tr>--%>
-<%--        <tr class="message-view">--%>
-<%--            <td>관리자</td>--%>
-<%--            <td>안녕하세요. 가입을 축하드립니다.</td>--%>
-<%--            <td>2021.11.21</td>--%>
-<%--        </tr>--%>
-<%--        <tr class="message-view">--%>
-<%--            <td>user01</td>--%>
-<%--            <td>안녕하세요 반가워요 반가워요 반가워요 반가워요</td>--%>
-<%--            <td>2021.05.17</td>--%>
-<%--        </tr>--%>
-<%--        </tbody>--%>
-    </table>
 
     <div class="message-info">
         <div class="message-list">
@@ -134,33 +110,28 @@
             "sortDescending" : " :  내림차순 정렬"
         }
     };
-
-
     $(function () {
         createTable();
     })
 
     function createTable() {
+
         $.ajax({
             url: "myLetterList",
             type: "GET",
             success: function (data) {
+                console.log(data);
                 $('#table_id').DataTable({
                     language: lang_kor,
                     data: data,
                     columns: [
-                        { data: "professionNo"},
-                        { data: "letterContent" },
-                        { data: "letterDate" },
-                        { data: null,
-                            render: function(data){
-                                return data.reservationEnrollTime + ":00";
-                            }},
-                        { data: "counselCategoryNm"}
+                        {data: "professionName"},
+                        {data: "letterContent"},
+                        {data: "letterDate"}
                     ]
                 })
             }
-        })
+        });
     }
 
 </script>

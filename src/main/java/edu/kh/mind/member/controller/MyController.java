@@ -264,23 +264,12 @@ public class MyController {
     }
 
     @RequestMapping(value = "deleteCounselor", method = RequestMethod.POST)
-    public String deleteCounselor(Model model, HttpSession session, RedirectAttributes ra){
+    public String deleteCounselor(Model model, HttpSession session, RedirectAttributes ra,Board board){
 
         String path = null;
-        int memberNo = 0;
-        int professionNo = 0;
-        List<Board> counselorList = null;
-        memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-        professionNo = ((Board)session.getAttribute("counselorList")).getProfessionNo();
-        System.out.println(memberNo);
-        System.out.println(professionNo);
-
-        Map<String, Integer> map = new HashMap<>();
-        map.put("professionNo", professionNo);
-        map.put("memberNo", memberNo);
 
 
-        int result = service.deleteCounselor(map);
+        int result = service.deleteCounselor(board);
         System.out.println(result);
 
         if (result > 0) {
