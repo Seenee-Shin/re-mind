@@ -187,7 +187,7 @@ public class BoardServiceImpl implements BoardService{
 			if(result > 0){
 				result =2;
 			}else {
-				result =0;
+				result =0; 
 			}
 		}
 		

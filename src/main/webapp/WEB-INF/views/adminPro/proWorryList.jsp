@@ -10,13 +10,12 @@
 <main>
 	<h1>고민게시판 목록</h1>
 
-	
 	<table id="table_id" class="display">
            <thead>
                <tr>
-                   <th>번호</th>
-                   <th>게시판번호</th>
+                   <th>게시판 번호</th>
                    <th>제목</th>
+                   <th>고민 카테고리</th>
                    <th>작성일</th>
                </tr>
            </thead>
@@ -64,22 +63,17 @@ $(function () {
 
 	function createTable() {
 	   $.ajax({
-	      url: "reservationList",
+	      url: "proWorryList",
 	      type: "GET",
 	      success: function (data) {
 	         $('#table_id').DataTable({
 	            language: lang_kor,
 	            data: data,
 	            columns: [
-	               { data: "reservationNo"},
-	               { data: "memberNo" },
-	               { data: "reservationStatusCode" },
-	               { data: "reservationEnrollDate"},
-	               { data: null,
-	            	   render: function(data){
-	            		   return data.reservationEnrollTime + ":00";
-	            	   }},
-	               { data: "counselCategoryNm"}
+	               { data: "boardNo"},
+	               { data: "boardTitle" },
+	               { data: "worryCategoryName" },
+	               { data: "createDate"},
 	            ]
 	         })
 	      }

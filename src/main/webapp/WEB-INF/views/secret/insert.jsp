@@ -154,7 +154,7 @@
                	     		<div class="board_write_warp grey_bg " >
                	     			<div id="free_board_write">
 		                            <div class="writing" style="min-height: 100px;">
-		                            	<div style="text-align: center; color: grey; font-size: 20px;">글은 작성하시려면 로그인 해주세요</div>
+		                            	<div class = "reqLogin" style="text-align: center; color: grey; font-size: 20px; margin: auto;">글은 작성하시려면 로그인 해주세요</div>
 		                            </div>
 	                            </div>
                            	</div>
