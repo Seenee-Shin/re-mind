@@ -8,7 +8,7 @@
     margin: 10px 0 30px 10px;
     padding: 5px;
     overflow: auto;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgb(255, 255, 255);
     z-index: 3;
     font-size: 12px;
     border-radius: 10px;
@@ -24,7 +24,7 @@
     margin: 10px 0 30px 330px;
     padding: 5px;
     overflow: auto;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgb(255, 255, 255);
     z-index: 4;
     font-size: 12px;
     border-radius: 10px;

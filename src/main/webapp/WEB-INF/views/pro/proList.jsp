@@ -10,7 +10,7 @@
 	<div id="pro_search_wrap">
 		    <div id="pro_search_div">
 		        <input type="text" name="proSearchInput" id="pro_searchInput" placeholder="상담사 이름 검색">
-		        <button><img src="${contextPath}/resources/images/pro/loupe.png" style="width:23px;"></button>
+		        <div id="nameSearch"><img src="${contextPath}/resources/images/pro/loupe.png" style="width:23px;"></div>
 		    </div>
 	    </div>
 	    <div id="mobile_pro_category_warp">
@@ -320,6 +320,21 @@
 			}
 		}
 	}
+
+	$("#nameSearch").on("click", function (){
+		const nameValue = $("#pro_searchInput").val();
+
+		if(nameValue.length < 1)	return false;
+
+		$.ajax({
+			url:"",
+			data:{"nameValue": nameValue},
+			success:function (result){
+
+			}
+		});
+
+	});
 
 </script>
 

@@ -32,7 +32,7 @@ main{
     float: left;
 
 }
-#pro_search_div > button{
+#pro_search_div > div{
     border: none;
     background-color: #fff;
     margin-top: 10px;
@@ -43,7 +43,7 @@ input:focus {outline:none;}
 /* 상담사 카테고리 전체 */
 #pro_category_warp{
     max-width:1200px;
-    height: 490px;
+    height: 410px;
     margin:10px 0 50px 0;
     background-color: #f8f8f8;
     border-radius: 10px;

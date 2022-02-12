@@ -42,6 +42,16 @@ replyCheckCode.val(1)
 calcPagination();
 function makePro(){
 
+    let nameValue;
+
+    $("#nameSearch").on("click", function (){
+        nameValue = $("#pro_searchInput").val();
+
+        if(nameValue.length < 1)	return false;
+
+
+    });
+
     $.ajax({
         url:"proCategory",
         data:{
@@ -60,7 +70,6 @@ function makePro(){
                     listCount = Number.parseInt(item.maxValue);
                     return;
                 }
-                console.log(item)
 
                 let category = item.counselCategoryCode.split(",");
                 let price = item.counselPrice.split(",");
