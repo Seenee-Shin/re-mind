@@ -10,88 +10,90 @@
     <div class="wish-page">찜한 상담사</div>
 
     <table>
-<%--        <c:set  value="${counselor.reviewAvg}" var="reviewAvg"/>--%>
 
-<c:choose>
+        <c:choose>
 
-    <c:when test="${empty counselorList}">
-        <%-- 조회된 내찜사 목록이 없을 때 --%>
-        <tr>
-            <td colspan="1">목록이 존재하지 않습니다.</td>
-        </tr>
-    </c:when>
-    <c:otherwise>
-        <c:forEach items="${counselorList}" var="counselor">
+            <c:when test="${empty counselorList}">
+                <%-- 조회된 내찜사 목록이 없을 때 --%>
+                <tr>
+                    <td colspan="1">목록이 존재하지 않습니다.</td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${counselorList}" var="counselor">
 
-            <%-- 조회된 게시글 목록이 있을 때 --%>
-            <tr>
-                <td>
-                    <c:choose >
-                        <c:when test="${empty counselor.imagePath}">
-                            <img class="profile" src="${contextPath}/resources/images/basicProfile.png">
-                        </c:when>
-                        <c:otherwise>
-                            <img class="profile" src="${contextPath}${counselor.imagePath}/${counselor.imageName}"/>
-                        </c:otherwise>
-                    </c:choose>
-<%--                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAYAAAB2+A+pAAAAAXNSR0IArs4c6QAAArVJREFUSA2tVs1rE0EUf28TWr8uBQU/AqLGhAh+QWhrTECwePJiC1r0IHit4MU/Qw8evAoe9OZRTwqCNVEpaC+Wpqle4gfiURobdvN8b9JdZ7a7k822C8u++b3fx87sZFqAlBc1jpfkTikHJ60Qer1pdac0SB9MOANyp7wwjY7eF49Q1/0iWhzJHsWJ5a/D+qSbcdedDoL0OgAHF+mCUVtivR6cFzCGXmqaLx4EcNtEoLSIQADZHFaXvweuCYrhZ0zeFT9U/FXNWIIsgzJ8MNL/7+tbRWF+L+Y51FLTQmEvdLyfvLYZ3Y9NPNiZ2Y/l5m8dt9VZqufPAmZ22UhBb92bCodKTzBc781Ro/gy4NoK8tZQHXsePSWiMzbudvUQ8RO/5nUHz60swdjoBKJzr79DtyvC9BFvyVBZnGl8Y6oXLvL5+5hnf8iUbW3Es/wGjnMTK81XvpOxq1XDGT3FxGc+YatP5SWeWqh4GjPWQ+hN/haPHxDQHh1PWiPgH+bewVrrUZQmNljIVD+WBw+fcPh4lDgO49APkKEbWFltxXPiOhs40YUszLcXOfzEAKpqc+hnqOZOI752bXzjG0cSP7bHGC9E9qLBAvQ10d0NdHDwGs7wbLNWF62puKzRoMhycDDRbKTSBibQ2DfXQukA/O3Kn8BNL8hCdTzycTkVfgc+LHqwYySH5aUf4Z4/3mToN9Sz414Nh/Lvssuhd6HauiS31ILpOqVhrY6Fa3sw0jVdoHYsOeNYW73PYXwE8s01CCa7Wb9CWr0ldWwwvS0d5l/ypC/gkIeQ2VfGWnPRx/ynwqQnnOCiyb5HABhFbDCQWmb2gl/oOJex2rqNlUbHUGsD6SmOcFnT/88kfrktwTTLBi8Ad5/E8yvPtQxrqbiiEW2C3W2Y0bt8js/qOQNMMRAP8YqS/gMbzegG1X8tjgAAAABJRU5ErkJggg==">--%>
-                </td>
-                <td>
-                    <div class="bold14px">
-                        <span class="bold14px">${counselor.professionName}</span>
-                        <span class="bold12ccc">MASTER</span>
-                            ${counselor.reviewAvg}(${counselor.reviewCount})
+                    <%-- 조회된 게시글 목록이 있을 때 --%>
+                    <tr>
+                        <td>
+<%--                            <div style="display: none">${counselor.professionNo}</div>--%>
+                            <c:choose >
+                                <c:when test="${empty counselor.imagePath}">
+                                    <img class="profile" src="${contextPath}/resources/images/basicProfile.png">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="profile" src="${contextPath}${counselor.imagePath}/${counselor.imageName}"/>
+                                </c:otherwise>
+                            </c:choose>
+                                <%--                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAYAAAB2+A+pAAAAAXNSR0IArs4c6QAAArVJREFUSA2tVs1rE0EUf28TWr8uBQU/AqLGhAh+QWhrTECwePJiC1r0IHit4MU/Qw8evAoe9OZRTwqCNVEpaC+Wpqle4gfiURobdvN8b9JdZ7a7k822C8u++b3fx87sZFqAlBc1jpfkTikHJ60Qer1pdac0SB9MOANyp7wwjY7eF49Q1/0iWhzJHsWJ5a/D+qSbcdedDoL0OgAHF+mCUVtivR6cFzCGXmqaLx4EcNtEoLSIQADZHFaXvweuCYrhZ0zeFT9U/FXNWIIsgzJ8MNL/7+tbRWF+L+Y51FLTQmEvdLyfvLYZ3Y9NPNiZ2Y/l5m8dt9VZqufPAmZ22UhBb92bCodKTzBc781Ro/gy4NoK8tZQHXsePSWiMzbudvUQ8RO/5nUHz60swdjoBKJzr79DtyvC9BFvyVBZnGl8Y6oXLvL5+5hnf8iUbW3Es/wGjnMTK81XvpOxq1XDGT3FxGc+YatP5SWeWqh4GjPWQ+hN/haPHxDQHh1PWiPgH+bewVrrUZQmNljIVD+WBw+fcPh4lDgO49APkKEbWFltxXPiOhs40YUszLcXOfzEAKpqc+hnqOZOI752bXzjG0cSP7bHGC9E9qLBAvQ10d0NdHDwGs7wbLNWF62puKzRoMhycDDRbKTSBibQ2DfXQukA/O3Kn8BNL8hCdTzycTkVfgc+LHqwYySH5aUf4Z4/3mToN9Sz414Nh/Lvssuhd6HauiS31ILpOqVhrY6Fa3sw0jVdoHYsOeNYW73PYXwE8s01CCa7Wb9CWr0ldWwwvS0d5l/ypC/gkIeQ2VfGWnPRx/ynwqQnnOCiyb5HABhFbDCQWmb2gl/oOJex2rqNlUbHUGsD6SmOcFnT/88kfrktwTTLBi8Ad5/E8yvPtQxrqbiiEW2C3W2Y0bt8js/qOQNMMRAP8YqS/gMbzegG1X8tjgAAAABJRU5ErkJggg==">--%>
+                        </td>
+                        <td>
+                            <div class="bold14px">
+                                <span class="bold14px">${counselor.professionName}</span>
+                                <span class="bold12ccc">MASTER</span>
+                                    ${counselor.reviewAvg}(${counselor.reviewCount})
 
-                        <div class="starpoint_box">
-                            <label for="starpoint_1" class="label_star" title="1"><span class="blind">1점</span></label>
-                            <label for="starpoint_2" class="label_star" title="2"><span class="blind">2점</span></label>
-                            <label for="starpoint_3" class="label_star" title="3"><span class="blind">3점</span></label>
-                            <label for="starpoint_4" class="label_star" title="4"><span class="blind">4점</span></label>
-                            <label for="starpoint_5" class="label_star" title="5"><span class="blind">5점</span></label>
-                            <label for="starpoint_6" class="label_star" title="6"><span class="blind">6점</span></label>
-                            <label for="starpoint_7" class="label_star" title="7"><span class="blind">7점</span></label>
-                            <label for="starpoint_8" class="label_star" title="8"><span class="blind">8점</span></label>
-                            <label for="starpoint_9" class="label_star" title="9"><span class="blind">9점</span></label>
-                            <label for="starpoint_10" class="label_star" title="10"><span class="blind">10점</span></label>
-                            <input type="radio" name="starpoint" id="starpoint_1" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_2" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_3" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_4" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_5" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_6" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_7" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_8" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_9" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_10" class="star_radio">
-                            <span class="starpoint_bg" style="width:${counselor.reviewAvg*10}%"></span>
-                        </div>
+                                <div class="starpoint_box">
+                                    <label for="starpoint_1" class="label_star" title="1"><span class="blind">1점</span></label>
+                                    <label for="starpoint_2" class="label_star" title="2"><span class="blind">2점</span></label>
+                                    <label for="starpoint_3" class="label_star" title="3"><span class="blind">3점</span></label>
+                                    <label for="starpoint_4" class="label_star" title="4"><span class="blind">4점</span></label>
+                                    <label for="starpoint_5" class="label_star" title="5"><span class="blind">5점</span></label>
+                                    <label for="starpoint_6" class="label_star" title="6"><span class="blind">6점</span></label>
+                                    <label for="starpoint_7" class="label_star" title="7"><span class="blind">7점</span></label>
+                                    <label for="starpoint_8" class="label_star" title="8"><span class="blind">8점</span></label>
+                                    <label for="starpoint_9" class="label_star" title="9"><span class="blind">9점</span></label>
+                                    <label for="starpoint_10" class="label_star" title="10"><span class="blind">10점</span></label>
+                                    <input type="radio" name="starpoint" id="starpoint_1" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_2" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_3" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_4" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_5" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_6" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_7" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_8" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_9" class="star_radio">
+                                    <input type="radio" name="starpoint" id="starpoint_10" class="star_radio">
+                                    <span class="starpoint_bg" style="width:${counselor.reviewAvg*10}%"></span>
+                                </div>
 
-                       <%-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAYAAAB2+A+pAAAAAXNSR0IArs4c6QAAArVJREFUSA2tVs1rE0EUf28TWr8uBQU/AqLGhAh+QWhrTECwePJiC1r0IHit4MU/Qw8evAoe9OZRTwqCNVEpaC+Wpqle4gfiURobdvN8b9JdZ7a7k822C8u++b3fx87sZFqAlBc1jpfkTikHJ60Qer1pdac0SB9MOANyp7wwjY7eF49Q1/0iWhzJHsWJ5a/D+qSbcdedDoL0OgAHF+mCUVtivR6cFzCGXmqaLx4EcNtEoLSIQADZHFaXvweuCYrhZ0zeFT9U/FXNWIIsgzJ8MNL/7+tbRWF+L+Y51FLTQmEvdLyfvLYZ3Y9NPNiZ2Y/l5m8dt9VZqufPAmZ22UhBb92bCodKTzBc781Ro/gy4NoK8tZQHXsePSWiMzbudvUQ8RO/5nUHz60swdjoBKJzr79DtyvC9BFvyVBZnGl8Y6oXLvL5+5hnf8iUbW3Es/wGjnMTK81XvpOxq1XDGT3FxGc+YatP5SWeWqh4GjPWQ+hN/haPHxDQHh1PWiPgH+bewVrrUZQmNljIVD+WBw+fcPh4lDgO49APkKEbWFltxXPiOhs40YUszLcXOfzEAKpqc+hnqOZOI752bXzjG0cSP7bHGC9E9qLBAvQ10d0NdHDwGs7wbLNWF62puKzRoMhycDDRbKTSBibQ2DfXQukA/O3Kn8BNL8hCdTzycTkVfgc+LHqwYySH5aUf4Z4/3mToN9Sz414Nh/Lvssuhd6HauiS31ILpOqVhrY6Fa3sw0jVdoHYsOeNYW73PYXwE8s01CCa7Wb9CWr0ldWwwvS0d5l/ypC/gkIeQ2VfGWnPRx/ynwqQnnOCiyb5HABhFbDCQWmb2gl/oOJex2rqNlUbHUGsD6SmOcFnT/88kfrktwTTLBi8Ad5/E8yvPtQxrqbiiEW2C3W2Y0bt8js/qOQNMMRAP8YqS/gMbzegG1X8tjgAAAABJRU5ErkJggg=="
-                             width="14" height="14" alt="작은 별점 2점 이미지">--%>
+                                    <%-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAYAAAB2+A+pAAAAAXNSR0IArs4c6QAAArVJREFUSA2tVs1rE0EUf28TWr8uBQU/AqLGhAh+QWhrTECwePJiC1r0IHit4MU/Qw8evAoe9OZRTwqCNVEpaC+Wpqle4gfiURobdvN8b9JdZ7a7k822C8u++b3fx87sZFqAlBc1jpfkTikHJ60Qer1pdac0SB9MOANyp7wwjY7eF49Q1/0iWhzJHsWJ5a/D+qSbcdedDoL0OgAHF+mCUVtivR6cFzCGXmqaLx4EcNtEoLSIQADZHFaXvweuCYrhZ0zeFT9U/FXNWIIsgzJ8MNL/7+tbRWF+L+Y51FLTQmEvdLyfvLYZ3Y9NPNiZ2Y/l5m8dt9VZqufPAmZ22UhBb92bCodKTzBc781Ro/gy4NoK8tZQHXsePSWiMzbudvUQ8RO/5nUHz60swdjoBKJzr79DtyvC9BFvyVBZnGl8Y6oXLvL5+5hnf8iUbW3Es/wGjnMTK81XvpOxq1XDGT3FxGc+YatP5SWeWqh4GjPWQ+hN/haPHxDQHh1PWiPgH+bewVrrUZQmNljIVD+WBw+fcPh4lDgO49APkKEbWFltxXPiOhs40YUszLcXOfzEAKpqc+hnqOZOI752bXzjG0cSP7bHGC9E9qLBAvQ10d0NdHDwGs7wbLNWF62puKzRoMhycDDRbKTSBibQ2DfXQukA/O3Kn8BNL8hCdTzycTkVfgc+LHqwYySH5aUf4Z4/3mToN9Sz414Nh/Lvssuhd6HauiS31ILpOqVhrY6Fa3sw0jVdoHYsOeNYW73PYXwE8s01CCa7Wb9CWr0ldWwwvS0d5l/ypC/gkIeQ2VfGWnPRx/ynwqQnnOCiyb5HABhFbDCQWmb2gl/oOJex2rqNlUbHUGsD6SmOcFnT/88kfrktwTTLBi8Ad5/E8yvPtQxrqbiiEW2C3W2Y0bt8js/qOQNMMRAP8YqS/gMbzegG1X8tjgAAAABJRU5ErkJggg=="
+                                          width="14" height="14" alt="작은 별점 2점 이미지">--%>
 
-    <%--                    4.96(666)--%>
-                    </div>
-                    <div class="pro-content">
-                        ${counselor.proIntro}
-    <%--                    말하다보면 편안해지는 마법같은 상담--%>
-    <%--                    말하다보면 편안해지는 마법같은 상담--%>
-    <%--                    말하다보면 편안해지는 마법같은 상담--%>
-    <%--                    말하다보면 편안해지는 마법같은 상담--%>
-                    </div>
-                    <div class="bold14px">
-                        ${counselor.priceMin}원부터~
-    <%--            75,000원부터--%>
-                    </div>
-            </td>
-            <td>
-                <img class="lovewish"
-                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRK1CC8pJ2AvDkkM2wwkVuU5GSQZdVLPj7kg&usqp=CAU"
-                     alt="">
-            </td>
-        </tr>
-        </c:forEach>
-    </c:otherwise>
-</c:choose>
+                                    <%--                    4.96(666)--%>
+                            </div>
+                            <div class="pro-content">
+                                    ${counselor.proIntro}
+                                    <%--                    말하다보면 편안해지는 마법같은 상담--%>
+                                    <%--                    말하다보면 편안해지는 마법같은 상담--%>
+                                    <%--                    말하다보면 편안해지는 마법같은 상담--%>
+                                    <%--                    말하다보면 편안해지는 마법같은 상담--%>
+                            </div>
+                            <div class="bold14px">
+                                    ${counselor.priceMin}원부터~
+                                    <%--            75,000원부터--%>
+                            </div>
+                        </td>
+                        <td>
+                            <img class="lovewish"
+                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRK1CC8pJ2AvDkkM2wwkVuU5GSQZdVLPj7kg&usqp=CAU"
+                                 alt=""
+                                 onclick="deleteCounselor(${counselor.professionNo})" >
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:otherwise>
+
+        </c:choose>
         <%--<tr>
             <td>
                 <img class="profile"
@@ -159,13 +161,37 @@
 </div>
 
 
+<%-- session에 message 속성이 존재하는 경우 alert창으로 해당 내용을 출력 --%>
+
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 
 <script src="${contextPath}/resources/js/my/counselor.js"></script>
+
 <script>
 
-    <!-- 세션에 올라가있는 loinMember -->
-    const memberNo = ${loginMember.memberNo};
+<%--<c:if test="${ !empty requestScope.counselorList }">--%>
 
+<%--    <!-- 세션에 올라가있는 loinMember -->--%>
+<%--    const memberNo = ${loginMember.memberNo};--%>
+
+<%--    const professionNo = ${counselorList.professionNo};--%>
+
+<%--console.log(memberNo);--%>
+<%--        console.log(professionNo);--%>
+
+<%--    function deleteCounselor(){--%>
+<%--        if(confirm("찜을 해제하시겠습니까?")){--%>
+<%--                $.ajax({--%>
+<%--                    url:"deleteCounselor",--%>
+<%--                    data:{--%>
+<%--                        "professionNo": professionNo,--%>
+<%--                        "memberNo": memberNo},--%>
+<%--                    success:function (result){--%>
+<%--                        console.log(url);--%>
+<%--                    }--%>
+<%--                });--%>
+<%--        }--%>
+<%--    }--%>
+<%--    </c:if>--%>
 </script>

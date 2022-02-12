@@ -39,7 +39,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/my/*")
-@SessionAttributes({"loginMember", "naver"})
+@SessionAttributes({"loginMember", "naver", "counselorList"})
 public class MyController {
 
     @Autowired
@@ -226,6 +226,7 @@ public class MyController {
     }
 
 
+
     @GetMapping("counselor")
     public String counselor(Model model, HttpSession session, RedirectAttributes ra, Board board,
                             @RequestParam(value="cp", required = false, defaultValue="1")int cp){
@@ -242,9 +243,13 @@ public class MyController {
 //            System.out.println(memberNo);
             pagination = service.getCounselorPagination(cp, memberNo);
             pagination.setMemberNo(memberNo);
-            System.out.println(pagination);
 
             counselorList = service.selectCounselorList(pagination);
+
+//
+//            ra.addFlashAttribute("pagination", pagination);
+//            ra.addAttribute("counselorList", counselorList);
+            System.out.println(counselorList);
 
             model.addAttribute("pagination", pagination);
             model.addAttribute("counselorList", counselorList);
@@ -256,6 +261,36 @@ public class MyController {
         }
 
         return path;
+    }
+
+    @RequestMapping(value = "deleteCounselor", method = RequestMethod.POST)
+    public String deleteCounselor(Model model, HttpSession session, RedirectAttributes ra){
+
+        String path = null;
+        int memberNo = 0;
+        int professionNo = 0;
+        List<Board> counselorList = null;
+        memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+        professionNo = ((Board)session.getAttribute("counselorList")).getProfessionNo();
+        System.out.println(memberNo);
+        System.out.println(professionNo);
+
+        Map<String, Integer> map = new HashMap<>();
+        map.put("professionNo", professionNo);
+        map.put("memberNo", memberNo);
+
+
+        int result = service.deleteCounselor(map);
+        System.out.println(result);
+
+        if (result > 0) {
+            Util.swalSetMessage("삭제 되었습니다.", null, "success", ra);
+
+        } else {
+            Util.swalSetMessage("삭제에 실패하셨습니다.", null, "error", ra);
+        }
+
+        return "my/counselor";
     }
 
     @GetMapping("enquiry")

@@ -237,6 +237,10 @@ public class MyServiceImpl implements MyService {
         return dao.selectCounselorList(pagination);
     }
 
+    @Override
+    public int deleteCounselor(Map<String, Integer> map) {
+        return dao.deleteCounselor(map);
+    }
 
     // 상담 예약 취소
     @Override

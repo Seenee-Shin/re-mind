@@ -67,7 +67,7 @@ $("#therapy_select").change(function(){
     $("#therapy_chk").text(therapySelectText);
 });    
 
-$("#therapy_count").change(function(){ 
+$("#therapy_count").on("change",function(){
     therapyCount = $(this).val();
 
     if(therapySelect == 1){
@@ -98,7 +98,7 @@ function calc(){
 }    
 
 // 시간 선택
-$("#time_select").change(function(){
+$("#time_select").on("change",function(){
     timeSelect = $("#time_select option:selected").text();
 
     $("#time_chk").text(timeSelect);

@@ -110,4 +110,6 @@ public interface MyService {
 
 	// 쪽지 리스트 조회
 	List<Letter> myLetterList(int memberNo);
+
+    int deleteCounselor(Map<String, Integer> map);
 }
