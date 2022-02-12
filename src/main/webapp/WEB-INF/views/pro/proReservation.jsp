@@ -10,10 +10,10 @@
     <div id="reservation_confirm_wrap" class="float-left">
         <div id="reservation_confirm">
             <div id="pro_profile_wrap" style="height: 125px;">
-                <img>
+                <img src="${contextPath}${proImg.imagePath}/${proImg.imageName}" class="float-left" style="width:125px; height: 125px;border-radius:50%;">
                 <div class="reservation_confirm_proname float-left">
                     <p style="font-size: 13px; font-weight: 500; color:#a59999">추천상담사</p>
-                    <h1></h1>
+                    <h1>${proImg.professionName}상담사</h1>
                 </div>
             </div>
 
@@ -171,11 +171,11 @@
                         .css("color", "rgb(197, 202, 205)");
                 }
 
-                $(".reservation_confirm_proname > h1").text(item.professionName + "상담사");
+              /*   $(".reservation_confirm_proname > h1").text(item.professionName + "상담사");
 
                 console.log(item)
                 
-                $("#pro_profile_wrap > img").attr("src",contextPath+item.imagePath+ '/' + item.imageName).attr("class","float-left").attr("style","width:125px; height: 125px;border-radius:50%;");
+                $("#pro_profile_wrap > img").attr("src",contextPath+item.imagePath+ '/' + item.imageName).attr("class","float-left").attr("style","width:125px; height: 125px;border-radius:50%;"); */
             });
         },
         error:function (req, sta, er){

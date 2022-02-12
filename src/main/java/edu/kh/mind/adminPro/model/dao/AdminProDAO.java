@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
 
 import edu.kh.mind.member.model.vo.Profession;
@@ -159,6 +160,22 @@ public class AdminProDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.update("professionMapper.updateProfilePic", img);
 	}
+
+
+	public String CounselCategoryCodeSelect(int professionNo) {
+		return sqlSession.selectOne("professionMapper.CounselCategoryCodeSelect", professionNo);
+	}
+
+	//	고민게시판 리스트
+	public List<Board> proWorryListSelect(Profession loginPro) {
+		
+		return sqlSession.selectList("boardMapper.proWorryListSelect", loginPro);
+	}
+
+	
+	
+	// 상담사 페이지 - 고민 카테고리 가지고 오기 
+
 
 
 }

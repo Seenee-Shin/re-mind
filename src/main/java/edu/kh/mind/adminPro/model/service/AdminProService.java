@@ -1,5 +1,6 @@
 package edu.kh.mind.adminPro.model.service;
 
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.member.model.vo.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -102,4 +103,11 @@ public interface AdminProService {
 	
 	// 등록용 승인코드 조회
 	Profession selectProfessionRegister(Profession profession);
+	
+	// 고민 카테고리 가지고오기
+	String CounselCategoryCodeSelect(int professionNo);
+	
+	// 고민 카테고리 리스트 가지고 오기
+	List<Board> proWorryListSelect(Profession loginPro);
+	
 }
