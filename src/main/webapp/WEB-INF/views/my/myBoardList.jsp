@@ -51,12 +51,7 @@
 <%--                </c:otherwise>--%>
 
 <%--            </c:choose>--%>
-        <tr class="board-view">
-            <td>33</td>
-            <td>너무 힘드네요...너무 힘드네요... 너무 힘드네요...</td>
-            <td>2021.05.17</td>
-            <td>12</td>
-        </tr>
+
         </tbody>
     </table>
 
