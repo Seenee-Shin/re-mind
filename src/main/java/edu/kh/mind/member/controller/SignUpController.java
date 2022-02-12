@@ -68,7 +68,7 @@ public class SignUpController {
     /* 이메일 인증 */
     @RequestMapping(value="mailCheck", method=RequestMethod.GET)
     @ResponseBody
-    public String mailCheckGET(String email) throws Exception{
+    public String mailCheckGET(String email ,RedirectAttributes ra) throws Exception{
         
         /* 뷰(View)로부터 넘어온 데이터 확인 */
     	  logger.info("이메일 데이터 전송 확인");
@@ -99,7 +99,9 @@ public class SignUpController {
               helper.setSubject(title);
               helper.setText(content,true);
               mailSender.send(message);
-              
+              	
+          		
+	 			
           }catch(Exception e) {
               e.printStackTrace();
           }
