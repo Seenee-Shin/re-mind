@@ -321,20 +321,7 @@
 		}
 	}
 
-	$("#nameSearch").on("click", function (){
-		const nameValue = $("#pro_searchInput").val();
 
-		if(nameValue.length < 1)	return false;
-
-		$.ajax({
-			url:"",
-			data:{"nameValue": nameValue},
-			success:function (result){
-
-			}
-		});
-
-	});
 
 </script>
 
