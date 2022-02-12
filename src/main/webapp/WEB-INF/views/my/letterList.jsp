@@ -9,31 +9,59 @@
 <article class="main_content">
     <div class="message-page">쪽지</div>
     <hr>
-    <table>
+
+    <table id="table_id" class="display">
         <thead>
-        <tr>
-            <th class="thead-th">보낸사람</th>
-            <th class="thead-th">내용</th>
-            <th class="thead-th">날짜</th>
-        </tr>
+            <tr>
+                <th class="thead-th">보낸사람</th>
+                <th class="thead-th">내용</th>
+                <th class="thead-th">날짜</th>
+            </tr>
         </thead>
         <tbody>
-        <tr class="message-view">
-            <td>이덕희</td>
-            <td>안녕하세요</td>
-            <td>2022.01.01</td>
-        </tr>
-        <tr class="message-view">
-            <td>관리자</td>
-            <td>안녕하세요. 가입을 축하드립니다.</td>
-            <td>2021.11.21</td>
-        </tr>
-        <tr class="message-view">
-            <td>user01</td>
-            <td>안녕하세요 반가워요 반가워요 반가워요 반가워요</td>
-            <td>2021.05.17</td>
-        </tr>
+            <tr class="message-view">
+                <td>이덕희</td>
+                <td>안녕하세요</td>
+                <td>2022.01.01</td>
+            </tr>
+            <tr class="message-view">
+                <td>관리자</td>
+                <td>안녕하세요. 가입을 축하드립니다.</td>
+                <td>2021.11.21</td>
+            </tr>
+            <tr class="message-view">
+                <td>user01</td>
+                <td>안녕하세요 반가워요 반가워요 반가워요 반가워요</td>
+                <td>2021.05.17</td>
+            </tr>
         </tbody>
+    </table>
+
+    <table>
+<%--        <thead>--%>
+<%--        <tr>--%>
+<%--            <th class="thead-th">보낸사람</th>--%>
+<%--            <th class="thead-th">내용</th>--%>
+<%--            <th class="thead-th">날짜</th>--%>
+<%--        </tr>--%>
+<%--        </thead>--%>
+<%--        <tbody>--%>
+<%--        <tr class="message-view">--%>
+<%--            <td>이덕희</td>--%>
+<%--            <td>안녕하세요</td>--%>
+<%--            <td>2022.01.01</td>--%>
+<%--        </tr>--%>
+<%--        <tr class="message-view">--%>
+<%--            <td>관리자</td>--%>
+<%--            <td>안녕하세요. 가입을 축하드립니다.</td>--%>
+<%--            <td>2021.11.21</td>--%>
+<%--        </tr>--%>
+<%--        <tr class="message-view">--%>
+<%--            <td>user01</td>--%>
+<%--            <td>안녕하세요 반가워요 반가워요 반가워요 반가워요</td>--%>
+<%--            <td>2021.05.17</td>--%>
+<%--        </tr>--%>
+<%--        </tbody>--%>
     </table>
 
     <div class="message-info">
@@ -75,8 +103,65 @@
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
-<script src="${contextPath}/resources/js/my/letterList.js"></script>
-<script>
 
+
+<script src="${contextPath}/resources/js/my/letterList.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
+
+<script type="text/javascript">
+    var lang_kor = {
+        "decimal" : "",
+        "emptyTable" : "데이터가 없습니다.",
+        "info" : "_START_ - _END_ (총 _TOTAL_ 개)",
+        "infoEmpty" : "0개",
+        "infoFiltered" : "(전체 _MAX_ 개 중 검색결과)",
+        "infoPostFix" : "",
+        "thousands" : ",",
+        "lengthMenu" : "_MENU_ 개씩 보기",
+        "loadingRecords" : "로딩중...",
+        "processing" : "처리중...",
+        "search" : "검색 : ",
+        "zeroRecords" : "검색된 데이터가 없습니다.",
+        "paginate" : {
+            "first" : "첫 페이지",
+            "last" : "마지막 페이지",
+            "next" : "다음",
+            "previous" : "이전"
+        },
+        "aria" : {
+            "sortAscending" : " :  오름차순 정렬",
+            "sortDescending" : " :  내림차순 정렬"
+        }
+    };
+
+
+    $(function () {
+        createTable();
+    })
+
+    function createTable() {
+        $.ajax({
+            url: "reservationList",
+            type: "GET",
+            success: function (data) {
+                $('#table_id').DataTable({
+                    language: lang_kor,
+                    data: data,
+                    columns: [
+                        { data: "reservationNo"},
+                        { data: "memberNo" },
+                        { data: "reservationStatusCode" },
+                        { data: "reservationEnrollDate"},
+                        { data: null,
+                            render: function(data){
+                                return data.reservationEnrollTime + ":00";
+                            }},
+                        { data: "counselCategoryNm"}
+                    ]
+                })
+            }
+        })
+    }
 
 </script>
