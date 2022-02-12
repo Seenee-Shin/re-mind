@@ -9,7 +9,7 @@
 
 <main>
 	<h1>고민게시판 목록</h1>
-
+	
 	<table id="table_id" class="display">
            <thead>
                <tr>
@@ -64,7 +64,7 @@ $(function () {
 	function createTable() {
 	   $.ajax({
 	      url: "proWorryList",
-	      type: "GET",
+	      type: "POST",
 	      success: function (data) {
 	         $('#table_id').DataTable({
 	            language: lang_kor,
