@@ -20,7 +20,7 @@ $(function () {
     // 자가진단 선택
     if (type) {
         ctCode = type;
-        $(".selfTest_op").eq(ctCode-1).click();
+        $(".selfTest_op").eq(type-1).click();
     } else {
         $(".selfTest_op").eq(0).click();
     }
