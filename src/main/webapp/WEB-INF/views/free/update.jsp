@@ -21,7 +21,7 @@
 	                        </div>
 	
 	                        <div class="writer_id">
-	                            <p>아이디</p>
+	                            <p>${loginMember.memberFName}</p>
 	                        </div>
 	                    </div>
 	                    
@@ -43,33 +43,24 @@
 	                    
 	                    
 	                    <div class="btn_area">
-                           <label for="addFileBtn">
-                               <i class="fas fa-image dark-brown" ></i>
-                           </label>
                            	<!-- name="images" -->
 							<input type="file"  id='addFileBtn'  accept="audio/*, video/*, image/*" multiple onclick="loadImg()" style="display: none">
 							<input type="hidden" name="delete_files" id="delete_files">
 	                        <div class="write_option_area">
 	                            <div class="check_box_wrap">
-                                    <select id="replyCheckCode" name="replyCheckCode">
-									    <option value="1">댓글 허용</option>
-									    <option value="2">댓글 비허용</option>
-								    </select>  		                            
+	                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
+	                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
 	                            </div>
-	
+
 	                            <div class="check_box_wrap">
-                                     <select id="scrapCheckCode" name="scrapCheckCode">
-									    <option value="1">스크랩 허용</option>
-									    <option value="2">스크랩 비허용</option>
-								    </select>  		                            
+	                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩 허용</label>
+									<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
 	                            </div>
-	                            
 	                            <div class="check_box_wrap">
-                                     <select id="empathyCheckCode" name="empathyCheckCode">
-									    <option value="1">공감 허용</option>
-									    <option value="2">공감 비허용</option>
-								    </select>  		                            
+	                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active">공감 허용</label>
+	                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
 	                            </div>
+
 	                        </div>
 	                    </div>
 	                </article>
@@ -80,9 +71,8 @@
 	                </div>
 	                
 	             <!-- update 진행 시 사용할 게시글 번호 -->
-				<input type="hidden" name="cp" value="${param.cp}">
 				<input type="hidden" name="boardNo" value="${board.boardNo}">
-				<input type="hidden" name="deleteImages" value="">
+				<input type="hidden" name="deleteImages" value="${memberNo}">
 	
 				</form>
             </section>
@@ -91,7 +81,39 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script>
+// 고민작성하기 댓글
+$("#replyCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
+		$(this).val(0);
+	}
+});
 
+// 고민작성하기 스크랩
+$("#scrapCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("스크랩 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("스크랩 비허용");
+		$(this).val(2);
+	}
+});
 
-</body>
-</html>
+// 고민작성하기 공감
+$("#empathyCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("공감 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("공감 비허용");
+		$(this).val(2);
+	}
+});
+
+</script>
+

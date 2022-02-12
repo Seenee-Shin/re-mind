@@ -58,7 +58,7 @@ hr{
 }
 
 textarea {
-    min-height: 5rem;
+    min-height: 3rem;
     overflow-y: hidden;
     resize: none;
 }
@@ -186,6 +186,7 @@ header{height: 100px;}
 	    margin: auto;
     width: 130px;
     margin-top: 40px;
+    margin-left: 0px;
 }
 
 
@@ -364,7 +365,7 @@ a{
       width: 70%;
       clear: both;
   }
-  .header_logo_wrap>img{
+  .header_logo_wrap>a>img{
 	    margin: auto;
     width: 100px;
     margin-top: 35px;
@@ -372,6 +373,7 @@ a{
 }
   .header_menu_wrap {
       width: 100%;
+      background-color: white;
   }
   .header_menu_wrap .dep1{
       margin-top: 0;
@@ -384,6 +386,7 @@ a{
       margin-left: 40px;
       text-align: left;
       font-size: 17px;
+      color:grey;
   }
   .header_menu_wrap .dep1 > li:nth-child(4) {
       width: 100%;
