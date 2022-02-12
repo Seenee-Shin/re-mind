@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.board.model.vo.WorryCategory;
 
 public interface SecretService {
@@ -23,6 +24,8 @@ public interface SecretService {
 	int deleteBoard(int boardNo);
 
 	int countSecretList();
+
+	int boardScrap(Scrap scrap);
 	
 
 }
