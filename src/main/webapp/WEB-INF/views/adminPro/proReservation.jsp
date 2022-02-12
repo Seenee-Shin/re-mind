@@ -22,7 +22,7 @@
                    <th>예약구분</th>
                </tr>
            </thead>
-           <tbody>
+           <tbody style="text-align:center;">
            </tbody>
        </table>
 </main>
@@ -76,7 +76,19 @@ $(function () {
 	               { data: "reservationNo"},
 	               { data: "memberNo" },
 	               { data: "reservationStatusCode" },
-	               { data: "reservationEnrollDate"},
+	               { data: null,
+	            	   render : function(data){
+	            		   var d = new Date(data.reservationEnrollDate),
+	            		    
+	            		    month = '' + (d.getMonth() + 1) , 
+	            		    day = '' + d.getDate(), 
+	            		    year = d.getFullYear();
+	            		    
+	            		    if (month.length < 2) month = '0' + month; 
+	            		    if (day.length < 2) day = '0' + day; 
+	            		     
+	            		  return [year, month, day].join('-');
+	            	   }},
 	               { data: null,
 	            	   render: function(data){
 	            		   return data.reservationEnrollTime + ":00";
