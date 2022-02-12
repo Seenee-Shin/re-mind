@@ -17,6 +17,7 @@ $(".cate_btn").on("click", function (){
     for(let i = 0; i < $(".cate_btn").length; i++){
         if($(".cate_btn").eq(i).attr("id") != undefined){
             clickable[count] = $(".cate_btn").eq(i).attr("id");
+            $(".cate_btn").eq(i).attr("class", "cate_btn_click cate_btn");
             count = count + 1;
         }else{
             clickable.splice(count, 1);
@@ -40,6 +41,7 @@ replyCheckCode.val(1)
 
 calcPagination();
 function makePro(){
+
     $.ajax({
         url:"proCategory",
         data:{
