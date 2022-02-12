@@ -1,5 +1,6 @@
 package edu.kh.mind.board.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +79,15 @@ public class SecretDAO {
 
 	public int deleteScrap(Scrap scrap) {
 		return sqlSession.delete("secretMapper.deleteScrap",scrap);
+	}
+
+
+	/** 회원 차단
+	 * @param map
+	 * @return result
+	 */
+	public int memberBlock(HashMap<String, Integer> map) {
+		return sqlSession.insert("secretMapper.memberBlock", map);
 	}
 
 }

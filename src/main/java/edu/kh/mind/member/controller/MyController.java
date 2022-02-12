@@ -39,7 +39,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/my/*")
-@SessionAttributes({"loginMember", "naver"})
+@SessionAttributes({"loginMember", "naver", "counselorList"})
 public class MyController {
 
     @Autowired
@@ -226,6 +226,7 @@ public class MyController {
     }
 
 
+
     @GetMapping("counselor")
     public String counselor(Model model, HttpSession session, RedirectAttributes ra, Board board,
                             @RequestParam(value="cp", required = false, defaultValue="1")int cp){
@@ -242,9 +243,13 @@ public class MyController {
 //            System.out.println(memberNo);
             pagination = service.getCounselorPagination(cp, memberNo);
             pagination.setMemberNo(memberNo);
-            System.out.println(pagination);
 
             counselorList = service.selectCounselorList(pagination);
+
+//
+//            ra.addFlashAttribute("pagination", pagination);
+//            ra.addAttribute("counselorList", counselorList);
+            System.out.println(counselorList);
 
             model.addAttribute("pagination", pagination);
             model.addAttribute("counselorList", counselorList);
@@ -258,6 +263,25 @@ public class MyController {
         return path;
     }
 
+    @RequestMapping(value = "deleteCounselor", method = RequestMethod.POST)
+    public String deleteCounselor(Model model, HttpSession session, RedirectAttributes ra,Board board){
+
+        String path = null;
+
+
+        int result = service.deleteCounselor(board);
+        System.out.println(result);
+
+        if (result > 0) {
+            Util.swalSetMessage("삭제 되었습니다.", null, "success", ra);
+
+        } else {
+            Util.swalSetMessage("삭제에 실패하셨습니다.", null, "error", ra);
+        }
+
+        return "my/counselor";
+    }
+
     @GetMapping("enquiry")
     public String enquiry(Model model){
     	model.addAttribute("css", "my/enquiry");
@@ -267,6 +291,10 @@ public class MyController {
     @GetMapping("letterList")
     public String letterList(Model model){
     	model.addAttribute("css", "my/letterList");
+
+
+
+
         return "my/letterList";
     }
 

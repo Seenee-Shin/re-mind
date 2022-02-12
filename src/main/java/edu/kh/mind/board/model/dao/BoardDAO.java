@@ -81,4 +81,16 @@ public class BoardDAO {
     public List<Board> selectMainBoardList() {
 		return sqlSession.selectList("boardMapper.selectMainBoardList");
     }
+
+	public int countFreeList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.countSecretList");
+	}
+
+	public String selectMuteMember(Map<String, String> param) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.selectMuteMember", param);
+	}
+
+
 }

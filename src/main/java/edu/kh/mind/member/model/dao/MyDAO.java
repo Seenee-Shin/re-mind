@@ -200,4 +200,12 @@ public class MyDAO {
 	public int updateMemberFName(Member member) {
 		return sqlSession.update("memberMapper.updateMemberFName", member);
 	}
+
+    public int deleteCounselor(Board board) {
+		return sqlSession.delete("boardMapper.deleteCounselor",board);
+    }
+
+	public List<Letter> myLetterList(int memberNo) {
+		return sqlSession.selectList("boardMapper.myLetterList", memberNo);
+	}
 }

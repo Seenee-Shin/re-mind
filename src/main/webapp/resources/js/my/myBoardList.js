@@ -164,17 +164,17 @@ function makeList(){
 
     $("tbody").empty();
 
-    if(resultList.length == 0){
-
-        swal({
-            title: "게시글이 존재하지 않습니다.",
-            text: "",
-            icon: "info",
-            button: "확인",
-        });
-        $("#pagination").empty();
-        return;
-    }
+    // if(resultList.length == 0){
+    //
+    //     swal({
+    //         title: "게시글이 존재하지 않습니다.",
+    //         text: "",
+    //         icon: "info",
+    //         button: "확인",
+    //     });
+    //     $("#pagination").empty();
+    //     return;
+    // }
 
     $.each(resultList, function (i, item){
         console.log(resultList);

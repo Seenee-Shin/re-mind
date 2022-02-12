@@ -155,7 +155,9 @@
         $('input:checkbox[name=worryCategoryOne]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
         	worryCategoy += this.value + ",";
         });
-        $('#worryCategory').val(worryCategoy);
+        
+        
+        $('#worryCategory').val(worryCategoy.slice(0,-1));
         return true;
         
     }

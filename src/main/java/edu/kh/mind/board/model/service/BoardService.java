@@ -32,4 +32,7 @@ public interface BoardService {
 	 * @return mainBoardList
 	 */
     List<Board> selectMainBoardList();
+
+	int countFreeList();
+
 }
