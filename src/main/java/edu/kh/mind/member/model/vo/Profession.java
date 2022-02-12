@@ -34,7 +34,35 @@ public class Profession {
    private String reservationEnrollDate;
    private String reservationEnrollTime;
 
+   private int maxValue;
+   private int starAvg;
+   private int reviewCount;
+
     public Profession(){}
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setStarAvg(int starAvg) {
+        this.starAvg = starAvg;
+    }
+
+    public int getStarAvg() {
+        return starAvg;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
+    }
 
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
