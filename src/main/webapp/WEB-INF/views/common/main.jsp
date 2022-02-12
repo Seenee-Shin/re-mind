@@ -73,48 +73,14 @@
             </div>
         </div>
         <div>
-            <div class="main_content2_content_board">
-                <button>#우울증</button>
-                <button>전문가답변</button>
-                <p>불면증/수면장애 고치고 싶어요ㅠㅠ</p>
-                <p>작년에 너무 힘들었고 그 동안은 스트레스를
-                    받아도 잠은 자려고 했는데 언젠가부터 밤 새려고
-                    하거나 새벽 늦게 자는 게 완전 습관이 돼
-                    버렸어요 누워있다가 해뜰 때 자는 경우가
-                    대부분이고 당연히 밤낮 바뀌고요. 그래서인지
-                    탈모도 약간 생긴 것 같고..일찍 자야겠다 마음
-                    먹고 누워서 휴대폰을 안 봐도 잠을 못 자는데
-                    정신과에서 약 처방받는 게 맞겠죠..?
-                </p>
-            </div>
-            <div class="main_content2_content_board">
-                <button>#우울증</button>
-                <button>전문가답변</button>
-                <p>불면증/수면장애 고치고 싶어요ㅠㅠ</p>
-                <p>작년에 너무 힘들었고 그 동안은 스트레스를
-                    받아도 잠은 자려고 했는데 언젠가부터 밤 새려고
-                    하거나 새벽 늦게 자는 게 완전 습관이 돼
-                    버렸어요 누워있다가 해뜰 때 자는 경우가
-                    대부분이고 당연히 밤낮 바뀌고요. 그래서인지
-                    탈모도 약간 생긴 것 같고..일찍 자야겠다 마음
-                    먹고 누워서 휴대폰을 안 봐도 잠을 못 자는데
-                    정신과에서 약 처방받는 게 맞겠죠..?
-                </p>
-            </div>
-            <div class="main_content2_content_board">
-                <button>#우울증</button>
-                <button>전문가답변</button>
-                <p>불면증/수면장애 고치고 싶어요ㅠㅠ</p>
-                <p>작년에 너무 힘들었고 그 동안은 스트레스를
-                    받아도 잠은 자려고 했는데 언젠가부터 밤 새려고
-                    하거나 새벽 늦게 자는 게 완전 습관이 돼
-                    버렸어요 누워있다가 해뜰 때 자는 경우가
-                    대부분이고 당연히 밤낮 바뀌고요. 그래서인지
-                    탈모도 약간 생긴 것 같고..일찍 자야겠다 마음
-                    먹고 누워서 휴대폰을 안 봐도 잠을 못 자는데
-                    정신과에서 약 처방받는 게 맞겠죠..?
-                </p>
-            </div>
+            <c:forEach items="${listBoard}" var="board">
+                <div class="main_content2_content_board">
+                    <%--<button>#우울증</button>--%>
+                    <button>${board.boardCategoryName}</button>
+                    <%--<p>${board.boardTitle}</p>--%>
+                    <p>${board.boardContent}</p>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </article>

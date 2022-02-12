@@ -140,11 +140,14 @@
             JOIN PROFESSION USING(PROFESSION_NO)
             JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
             LEFT JOIN IMAGE USING(PROFESSION_NO)
-        WHERE PROFESSION_NO IN (SELECT PROFESSION_NO FROM PROFESSION_INFORMATION
-            WHERE
+        WHERE PROFESSION_NO IN (
+            SELECT PROFESSION_NO
+            FROM PROFESSION_INFORMATION
+            WHERE BOARD_NO IS NULL
             <foreach collection="list" item="category" open="(" close=")" separator=" OR ">
-                PRO_TAG LIKE '%' || #{category} || '%'
-            </foreach>) AND BOARD_NO IS NULL
+                AND PRO_TAG LIKE '%' || #{category} || '%'
+            </foreach>
+        )
         GROUP BY PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR, PRO_INTRO,
             PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM
     </select>

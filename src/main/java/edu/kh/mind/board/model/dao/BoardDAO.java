@@ -74,4 +74,11 @@ public class BoardDAO {
 		return sqlSession.delete("boardMapper.deleteScrap",scrap);
 	}
 
+	/**
+	 * 메인 커뮤니티
+	 * @return list
+	 */
+    public List<Board> selectMainBoardList() {
+		return sqlSession.selectList("boardMapper.selectMainBoardList");
+    }
 }

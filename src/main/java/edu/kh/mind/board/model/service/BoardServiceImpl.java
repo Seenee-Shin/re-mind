@@ -194,6 +194,12 @@ public class BoardServiceImpl implements BoardService{
 
 		return result;
 	}
-		
+
+	// 메인 커뮤니티
+	@Override
+	public List<Board> selectMainBoardList() {
+		return dao.selectMainBoardList();
+	}
+
 }
 
