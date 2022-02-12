@@ -6,7 +6,7 @@
 <!-- header include -->
 <jsp:include page="../common/header.jsp"/>
 
-        <section class="main_content">    
+        <article class="main_content">
             <!-- 메인 -->
             <h3 class="comunity_title">힘들었던 일 모두 털어놓으세요! </h3>
             
@@ -167,7 +167,7 @@
 
         	<div class="free_board_list_wrap" id="BoardListArea">
             
-        </section>
+        </article>
     </div>
 </main>
 
@@ -204,7 +204,7 @@ searchSelect.on("click", function () {
 
 //페이지네이션(무한스크롤 변수 선언)
 var currentPage = 1;
-var infinityLimit = 2; // 한번에 보여질 result 수
+var infinityLimit = 5; // 한번에 보여질 result 수
 var pageSize = 10;
 var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
 // 선 계산(ajax로 넘겨야됨)
@@ -243,11 +243,11 @@ function YesScroll () {
    function OnScroll () {
       const fullHeight = fullContent.clientHeight;
       const scrollPosition = pageYOffset;
+
+	   // console.log(fullHeight - screenHeight/2, scrollPosition)
       
-      console.log(fullHeight-screenHeight/2 > scrollPosition)
-      if (fullHeight-screenHeight/2 <= scrollPosition && !oneTime) {
+      if (fullHeight-screenHeight/2 - 100<= scrollPosition && !oneTime) {
          oneTime = true;
-         console.log("나옴? : " + oneTime)
          currentPage = currentPage + 1;
          calcPagination();
          getFreeList();
@@ -263,123 +263,125 @@ if (searchData != null) {
 	data = searchData;
 }
 
-$.ajax({
-	url : "${contextPath}/secret/list",
-	type : "POST",
-	data : {
-		"last":last,
-		"first":first
-	},
-	dataType:"JSON",
-	success : function (result) {
-		YesScroll();
+	$.ajax({
+		url : "${contextPath}/secret/list",
+		type : "POST",
+		data : {
+			"last":last,
+			"first":first
+		},
+		dataType:"JSON",
+		success : function (result) {
+			YesScroll();
 
-		let html = "";
-		var secretBoardList = $('#BoardListArea')
-		let empathyArr;
-		let empathyCntArr;
-		let iconCnt = {};
-		
-		$.each(result, function (i, item) {
-			console.log(item)
-			if(result.length - 1 == i){
-				listCount = Number.parseInt(item.maxValue);
-				return;
-			}
+			let html = "";
+			var secretBoardList = $('#BoardListArea')
+			let empathyArr;
+			let empathyCntArr;
+			let iconCnt = {};
 
-			// empathy 초기화
-			empathyArr = [];
-			empathyCntArr = [];
-			iconCnt = {
-				"1001" : 0,
-				"1002" : 0,
-				"1003" : 0,
-				"1004" : 0,
-				"1005" : 0
-			};
-
-			if (item.worryEmpathyArray != null) {
-				empathyArr = (item.worryEmpathyArray).split(",");
-				empathyCntArr = (item.worryCntArray).split(",");
-			}
-
-			for(i=0; i<empathyArr.length; i++) {
-				iconCnt[empathyArr[i]] = empathyCntArr[i];
-			}
-			
-			html+=   '<div class="board_list_content">'
-              		+'	<div class="board_flex_wrap">'
-                   	+'		<div class="writer_pic_wrap">'
-                    +'			<div class="writer_pic light_brown_bg" style="background-image: url();"></div>';
-              
-             if(loginMemberNo != item.memberNo){
-				html +='			<ul class="userMenu hidden">'
-					+'				<li> <a class="block"> 차단</a> </li>'
-					+'				<input class="hidden" value = '+ item.memberNo +'>'
-					+'				<li> <a href=""> 검색</a> </li>'
-                    +'			</ul>'
-                    +'		</div>';
-			}else{
-				html+='		</div>';
-			}
-			
-			html+='		<a href="${contextPath}/secret/view/'+item.boardNo+'">'
-				+'			<div class="posting_info">'
-				+'				<div class="writer_id">'
-	            +'					<p class="userInfo">'+item.memberFn+'</p>'
-	            +'					<p>'+item.createDate+'</p>'
-	            +'				</div>'
-	            +'				<div class="posting">'
-	            +'					<p>'+item.boardContent+'</p>'
-	            +'				</div>'
-	            +'			</div>'
-	            +'		</a>'
-	            +'	</div>'
-	            +'	<div class="board_icon_wrap">';
-	            console.log(typeof item.replyCheckCode);
-	          	if(item.replyCheckCode == 1){
-					html += `
-						<div class="comment_wrap">
-							<i class="far fa-comment dark-brown"> ` + item.replyCount + `</i>
-							<p></p>
-						</div>
-					`
-				}else{
-					html += '<div class="comment_wrap"></div>';
+			$.each(result, function (i, item) {
+				console.log(item)
+				if(result.length - 1 == i){
+					listCount = Number.parseInt(item.maxValue);
+					return;
 				}
-				
-				if(item.empathyCheckCode == 1){
-					html+='		<div class="like_warp">'
-						+'            <img src="${contextPath}/resources/images/icon/smile.png" alt="">'
-						+'            <p>'+iconCnt[1001]+'</p>'
-						+'            <img src="${contextPath}/resources/images/icon/hug.png" alt="">'
-						+'            <p>'+iconCnt[1002]+'</p>'
-						+'           <img src="${contextPath}/resources/images/icon/amazed.png" alt="">'
-						+'           <p>'+iconCnt[1003]+'</p>'
-						+'           <img src="${contextPath}/resources/images/icon/angry.png" alt="">'
-						+'           <p>'+iconCnt[1004]+'</p>'
-						+'           <img src="${contextPath}/resources/images/icon/crying.png" alt="">'
-						+'           <p>'+iconCnt[1005]+'</p>'
+
+				// empathy 초기화
+				empathyArr = [];
+				empathyCntArr = [];
+				iconCnt = {
+					"1001" : 0,
+					"1002" : 0,
+					"1003" : 0,
+					"1004" : 0,
+					"1005" : 0
+				};
+
+				if (item.worryEmpathyArray != null) {
+					empathyArr = (item.worryEmpathyArray).split(",");
+					empathyCntArr = (item.worryCntArray).split(",");
+				}
+
+				for(i=0; i<empathyArr.length; i++) {
+					iconCnt[empathyArr[i]] = empathyCntArr[i];
+				}
+
+				const board_list_content = $('<div class="board_list_content">');
+				html+=   '<div class="board_list_content">'
+						+'	<div class="board_flex_wrap">'
+						+'		<div class="writer_pic_wrap">'
+						+'			<div class="writer_pic light_brown_bg" style="background-image: url();"></div>';
+
+				 if(loginMemberNo != item.memberNo){
+					html +='			<ul class="userMenu hidden">'
+						+'				<li> <a class="block"> 차단</a> </li>'
+						+'				<input class="hidden" value = '+ item.memberNo +'>'
+						+'				<li> <a href=""> 검색</a> </li>'
+						+'			</ul>'
+						+'		</div>';
+				}else{
+					html+='		</div>';
+				}
+
+				html+='		<a href="${contextPath}/secret/view/'+item.boardNo+'">'
+					+'			<div class="posting_info">'
+					+'				<div class="writer_id">'
+					+'					<p class="userInfo">'+item.memberFn+'</p>'
+					+'					<p>'+item.createDate+'</p>'
+					+'				</div>'
+					+'				<div class="posting">'
+					+'					<p>'+item.boardContent+'</p>'
+					+'				</div>'
+					+'			</div>'
+					+'		</a>'
+					+'	</div>'
+					+'	<div class="board_icon_wrap">';
+					console.log(typeof item.replyCheckCode);
+					if(item.replyCheckCode == 1){
+						html += `
+							<div class="comment_wrap">
+								<i class="far fa-comment dark-brown"> ` + item.replyCount + `</i>
+								<p></p>
+							</div>
+						`
+					}else{
+						html += '<div class="comment_wrap"></div>';
+					}
+
+					if(item.empathyCheckCode == 1){
+						html+='		<div class="like_warp">'
+							+'            <img src="${contextPath}/resources/images/icon/smile.png" alt="">'
+							+'            <p>'+iconCnt[1001]+'</p>'
+							+'            <img src="${contextPath}/resources/images/icon/hug.png" alt="">'
+							+'            <p>'+iconCnt[1002]+'</p>'
+							+'           <img src="${contextPath}/resources/images/icon/amazed.png" alt="">'
+							+'           <p>'+iconCnt[1003]+'</p>'
+							+'           <img src="${contextPath}/resources/images/icon/angry.png" alt="">'
+							+'           <p>'+iconCnt[1004]+'</p>'
+							+'           <img src="${contextPath}/resources/images/icon/crying.png" alt="">'
+							+'           <p>'+iconCnt[1005]+'</p>'
+							+'        </div>';
+					}else{
+						html+='		<div class="like_warp">'
 						+'        </div>';
-				}else{
-					html+='		<div class="like_warp">'
-					+'        </div>';
-				}
-				
-				html+='    </div>'
-					+'</div>'
-		});
-		$(".free_board_list_wrap").html(html)
+					}
 
-	},
-	error : function(request, status, error){
-		console.log("ajax 통신 중 오류 발생");
-		console.log(request.responseText);
-	}
+					html+='    </div>'
+						+'</div>'
+			});
+			$(".free_board_list_wrap").append(html)
+
+		},
+		error : function(request, status, error){
+			console.log("ajax 통신 중 오류 발생");
+			console.log(request.responseText);
+		}
 
 
-});
+	});
 }
+getFreeList()
 
 
 
