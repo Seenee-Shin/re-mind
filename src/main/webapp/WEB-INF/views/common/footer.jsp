@@ -31,7 +31,6 @@
     <script src="${contextPath}/resources/js/common/common.js"></script>
     <script src="${contextPath}/resources/js/common/main.js"></script>
 
-    <script src="${contextPath}/resources/js/selftest/selftest.js"></script>
     <script src="${contextPath}/resources/js/google/googleAPI.js"></script>
     
     <%-- request scope에 "title"이라는 키 값이 존재하는 경우 --%>

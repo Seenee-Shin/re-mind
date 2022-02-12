@@ -10,7 +10,7 @@
     <div>
         <p class="main_banner_p1">마음 속 이야기를 들어주는</p>
         <p class="main_banner_p2 animate__backInDown">RE:MIND</p>
-        <button class="main_banner_btn" type="button" onclick="location.href='#';">
+        <button class="main_banner_btn" type="button" onclick="location.href='${contextPath}/pro/proList';">
             상담 예약
         </button>
     </div>
@@ -24,31 +24,31 @@
     </div>
     <div>
         <div>
-            <div class="main_content1_cir">
+            <div class="main_content1_cir" data-type="1">
             	<img alt="" src="${contextPath}/resources/images/main/depression.png">
             </div>
             <p>우울증</p>
         </div>
         <div>
-            <div class="main_content1_cir">
+            <div class="main_content1_cir" data-type="2">
             	<img alt="" src="${contextPath}/resources/images/main/Anxiety.png">
             </div>
             <p>불안장애</p>
         </div>
         <div>
-            <div class="main_content1_cir">
+            <div class="main_content1_cir" data-type="5">
             	<img alt="" src="${contextPath}/resources/images/main/stress.png">
             </div>
             <p>스트레스</p>
         </div>
         <div>
-            <div class="main_content1_cir">
+            <div class="main_content1_cir" data-type="6">
             	<img alt="" src="${contextPath}/resources/images/main/panic.png">
             </div>
             <p>자존감</p>
         </div>
         <div>
-            <div class="main_content1_cir">
+            <div class="main_content1_cir" data-type="4">
             	<img alt="" src="${contextPath}/resources/images/main/bulimia.png">
             </div>
             <p>폭식증</p>
@@ -60,7 +60,6 @@
             <p>알콜중독</p>
         </div>
     </div>
-
 </article>
 
 <!-- 메인 컨텐트2 -->

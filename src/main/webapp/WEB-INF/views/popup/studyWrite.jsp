@@ -12,24 +12,28 @@
  	
 	<form action="insert" method="POST">
  	<div class="bg_select">
- 		<div class="beaker">
- 			<img src="${contextPath}/resources/images/board/mindPost/beaker1.png">
- 		</div>
- 		<div class="beaker">
- 			<img src="${contextPath}/resources/images/board/mindPost/beaker2.png">
- 		</div>
- 		<div class="beaker">
- 			<img src="${contextPath}/resources/images/board/mindPost/beaker3.png">
- 		</div>
- 		<div class="beaker">
- 			<img src="${contextPath}/resources/images/board/mindPost/beaker4.png">
- 		</div>
  	</div>
+ 	
  	<div class="beaker_radio">
- 			<input type="radio" class="radioFirst" name="itemImgNo" value="1" checked="checked">
-			<input type="radio" name="itemImgNo" value="2">
-			<input type="radio" name="itemImgNo" value="3">
-			<input type="radio" name="itemImgNo" value="4">
+ 			<input type="radio"  id="beaker1" class="radioFirst" name="itemImgNo" value="1" checked="checked">
+ 			<div class="beaker">
+ 			<label for="beaker1"><img src="${contextPath}/resources/images/board/mindPost/beaker1.png"> </label>
+ 			</div>
+ 			
+			<input type="radio"  id="beaker2" name="itemImgNo" value="2">
+			 <div class="beaker">
+ 			<label for="beaker2"><img src="${contextPath}/resources/images/board/mindPost/beaker2.png"></label>
+ 			</div>
+ 		
+			<input type="radio"  id="beaker3" name="itemImgNo" value="3">
+			<div class="beaker">
+ 			<label for="beaker3"><img src="${contextPath}/resources/images/board/mindPost/beaker3.png"></label>
+ 			</div>
+ 		
+			<input type="radio"  id="beaker4" name="itemImgNo" value="4">
+			<div class="beaker">
+ 			<label for="beaker4"><img src="${contextPath}/resources/images/board/mindPost/beaker4.png"></label>
+ 			</div>
  	</div>
  	
  	<div class="study_write">

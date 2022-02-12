@@ -24,6 +24,7 @@
 		<typeAlias type="edu.kh.mind.board.model.vo.Empathy" alias="Empathy"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Image" alias="Image"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Scrap" alias="Scrap"/>
+		<typeAlias type="edu.kh.mind.notice.model.vo.Notice" alias="Notice"/>
 
 
 		<typeAlias type="edu.kh.mind.selftest.model.vo.Selftest" alias="Selftest"/>
@@ -56,6 +57,7 @@
 		<mapper resource="/mappers/reply-mapper.xml"/>
 		<mapper resource="/mappers/secret-mapper.xml"/>
 		<mapper resource="/mappers/review-mapper.xml"/>
+		<mapper resource="/mappers/notice-mapper.xml"/>
 	</mappers>
 
 </configuration>

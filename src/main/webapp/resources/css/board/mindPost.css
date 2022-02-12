@@ -184,6 +184,22 @@
 	
 }
 
+.beaker_radio [type=radio]{
+	position:absolute;
+	opacity:0;
+	width:0;
+	height:0;
+}
+
+.beaker_radio [type=radio]+div {
+  cursor: pointer;
+}
+
+.beaker_radio [type=radio]:checked +div  {
+  outline: 2px solid #a59999;
+  outline-offset : 3px;
+}
+
 .beaker img{
 	width:50px;
 	height: 50px;
@@ -201,9 +217,6 @@
 	margin-left: 35px;
 }
 
-.beaker_radio input[type='radio']:checked {
-    margin-right: 40px;
-}
 
 .study_write{
 	width : 80%;

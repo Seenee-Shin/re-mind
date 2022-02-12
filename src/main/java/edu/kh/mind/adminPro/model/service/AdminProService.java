@@ -99,4 +99,7 @@ public interface AdminProService {
 	Profession updatepro(Profession pro);
 
 	List<Profession> classList(int professionNo);
+	
+	// 등록용 승인코드 조회
+	Profession selectProfessionRegister(Profession profession);
 }

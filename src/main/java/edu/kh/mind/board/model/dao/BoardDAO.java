@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.board.model.vo.Scrap;
 
 @Repository
 public class BoardDAO {
@@ -56,6 +57,21 @@ public class BoardDAO {
 	public int updateBoard(Board board) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("boardMapper.updateBoard",board);
+	}
+
+	public Scrap selectScrap(Scrap scrap) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.selectScrap",scrap);
+	}
+
+	public int insertScrap(Scrap scrap) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("boardMapper.insertScrap", scrap);
+	}
+
+	public int deleteScrap(Scrap scrap) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("boardMapper.deleteScrap",scrap);
 	}
 
 }
