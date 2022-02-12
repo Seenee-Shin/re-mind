@@ -42,7 +42,7 @@ $(document).on("click", ".block", function(){
 });
 
 
-//파일 업로드 스크립트
+/*//파일 업로드 스크립트
 $(document).ready(function()
 		// input file 파일 첨부시 fileCheck 함수 실행
 		{
@@ -153,6 +153,7 @@ function postingValidate(){
 
 				// 새로 고침
 				
+				
 				;
 			} else
 			    swal({"title" : "글작성 실패" , 
@@ -165,7 +166,7 @@ function postingValidate(){
     });
 
 	return false;
-}
+}*/
 	
 	
 
