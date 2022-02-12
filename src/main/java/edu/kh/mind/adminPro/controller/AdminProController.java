@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.kh.mind.adminPro.model.service.AdminProService;
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.pro.model.vo.WorryCategory;
 
@@ -36,7 +37,7 @@ public class AdminProController {
 
 		String path = "adminPro/proLogin";
 		if (session.getAttribute("loginPro") != null) {
-			path = "redirect:/adminPro/proReservation";
+			path = "redirect:/adminPro/proWorryList";
 		}
 
 		return path;
@@ -66,7 +67,7 @@ public class AdminProController {
 		if (loginPro != null) {
 			if (loginPro.getStatusCode() == 4) {
 				model.addAttribute("loginPro", loginPro);
-				path = "redirect:/adminPro/proReservation";
+				path = "redirect:/adminPro/proWorryList";
 			} else if(loginPro.getStatusCode() == 3) {
 				
 				model.addAttribute("loginPro", loginPro);
@@ -86,6 +87,17 @@ public class AdminProController {
 	public String proReservation() {
 
 		return "adminPro/proReservation";
+	}
+	
+	// 상담사 고민 상담 페이지
+	@RequestMapping("proWorryList")
+	public String proWorryList(@ModelAttribute("loginPro") Profession pro, Model model) {
+		
+		// 리스트 model로 넘기기
+		
+		//List<Board> proWorryList = service.proWorryListSelect(pro.getProfessionNo());
+		
+		return "adminPro/proWorryList";
 	}
 
 	
