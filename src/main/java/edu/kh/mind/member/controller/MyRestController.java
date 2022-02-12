@@ -1,13 +1,11 @@
 package edu.kh.mind.member.controller;
 
 import com.google.gson.Gson;
-import edu.kh.mind.board.model.vo.Board;
-import edu.kh.mind.board.model.vo.Pagination;
-import edu.kh.mind.board.model.vo.Reply;
-import edu.kh.mind.board.model.vo.Scrap;
+import edu.kh.mind.board.model.vo.*;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.MyService;
 import edu.kh.mind.member.model.vo.Member;
+import edu.kh.mind.member.model.vo.Profession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -110,13 +108,20 @@ public class MyRestController {
         return new Gson().toJson(myEmpathyList);
     }
 
-    @RequestMapping("letterList")
-    public String letterList(){
+    @RequestMapping(value = "myLetterList", method = RequestMethod.GET)
+    public List<Letter> myLetterList(HttpSession session, Model model){
+        int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+        System.out.println(memberNo);
+        System.out.println("qwe");
 
-        return null;
+//
+        List<Letter> data = service.myLetterList(memberNo);
+        System.out.println(data);
+//
+//        System.out.println(data);
+//
+        return data;
     }
-
-
 
 
 }
