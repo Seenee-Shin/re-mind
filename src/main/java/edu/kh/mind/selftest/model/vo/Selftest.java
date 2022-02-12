@@ -19,8 +19,18 @@ public class Selftest{
     private int resultRate;
     private String resultGender;
 
+    private int queCount;
+
     public Selftest() {
         super();
+    }
+
+    public int getQueCount() {
+        return queCount;
+    }
+
+    public void setQueCount(int queCount) {
+        this.queCount = queCount;
     }
 
     public int getAnswerNo() {

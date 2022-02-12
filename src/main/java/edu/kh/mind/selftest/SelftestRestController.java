@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/selftest/*")
@@ -19,7 +20,7 @@ public class SelftestRestController {
     private SelftestService service;
 
     @RequestMapping(value = "selftestQuestion", method = RequestMethod.POST)
-    public String selftestForm(Model model, int categoryNo, Selftest selftest){
+    public Map<String, Object> selftestForm(Model model, int categoryNo, Selftest selftest){
 
         model.addAttribute("css", "selftestForm");
         model.addAttribute("header", "main");
@@ -29,12 +30,13 @@ public class SelftestRestController {
         selftest.setCategoryNo(categoryNo);
 
 
-        List<Selftest> selectQ = service.selectQ(selftest);
-//        System.out.println("List : " + selectQ);
+        Map<String, Object> selectQ = service.selectQ(selftest);
+
+        System.out.println("List : " + selectQ);
 
 
 
-        return new Gson().toJson(selectQ);
+        return selectQ;
     }
 
     @RequestMapping(value = "mbSelftest", method = RequestMethod.POST)
