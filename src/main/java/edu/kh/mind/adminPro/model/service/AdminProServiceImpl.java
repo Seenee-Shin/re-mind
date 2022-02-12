@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.mind.adminPro.model.dao.AdminProDAO;
 import edu.kh.mind.adminPro.model.exception.InsertCertificationFailException;
+import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.common.util.MailHandler;
 import edu.kh.mind.common.util.TempKey;
@@ -278,8 +279,21 @@ public class AdminProServiceImpl implements AdminProService{
 		// TODO Auto-generated method stub
 		return dao.selectProfessionRegister(profession);
 	}
+	
+	// 고민카테고리 가지고오기
+	@Override
+	public String CounselCategoryCodeSelect(int professionNo) {
 
+		return dao.CounselCategoryCodeSelect(professionNo);
+	}
+	
+	// 고민 게시판 리스트
+	@Override
+	public List<Board> proWorryListSelect(Profession loginPro) {
+		return dao.proWorryListSelect(loginPro);
+	}
 
+	
 	//이메일 인증 키 검증
 
 

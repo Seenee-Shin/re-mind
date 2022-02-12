@@ -98,17 +98,18 @@ function makePro(){
                 const pro_name = $('<div class="pro_name float-left">');
                 const pro_name_h1 = $('<h1>'+item.professionName+'</h1>');
                 pro_name.append(pro_name_h1)
-                const pro_score_wrap = $('<div class="pro_score_wrap float-left">');
-                const pro_score_wrap_span = $('<span>추천 전문가</span>');
+                const review = $("<div style='float:left; margin-top:20px'>");
+                const pro_reiew_count_span = $('<span style="margin-left:5px">('+item.reviewCount+')</span>');
 				
 				const starpoint_box2 = $('<div class="starpoint_box2">');
-				//const starpoint_bg = $('<span class="starpoint_bg" style = "width : 100%">');
+				//const starpoint_bg = $('<span class="starpoint_bg" style = "width : 100% ">');
 				const testdiv = $('<div  style="width:'+Number.parseInt(item.starAvg)*10+'%" class="testdiv">');
 				const no_star_img = $('<img src="/mind/resources/images/pro/no_star.png" class="no_star">');
 				const star_img = $('<img src="/mind/resources/images/pro/all_star.png" class="star">');
 				testdiv.append(star_img);
 				//starpoint_bg.append(star_img);
 				starpoint_box2.append(no_star_img,testdiv);
+                review.append(pro_reiew_count_span,starpoint_box2);
                 
                 // for(let i = 1; i <= 5; i++){
                 //     if(item.starAvg > i * 2){
@@ -120,7 +121,7 @@ function makePro(){
                 
                 
                
-                pro_intro_wrap_div.append(pro_name, starpoint_box2);
+                pro_intro_wrap_div.append(pro_name, review);
                 const pro_intro = $('<div class="pro_intro">');
                 const pro_intro_p1 = $('<p>' + item.professionIntro + '</p>');
                 const pro_intro_p2 = $('<p>#가족 #대인관계 #자존감상실 #연인</p>');

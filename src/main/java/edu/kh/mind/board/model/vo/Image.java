@@ -13,6 +13,8 @@ public class Image {
 	private int boardNo;
 	private int professionNo;
 	
+	private String professionName;
+	
 	public Image() {
 		// TODO Auto-generated constructor stub
 	}
@@ -80,14 +82,22 @@ public class Image {
 	public void setProfessionNo(int professionNo) {
 		this.professionNo = professionNo;
 	}
+	
+	
+	public String getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
+	}
 
 	@Override
 	public String toString() {
 		return "Image [imageNo=" + imageNo + ", imagePath=" + imagePath + ", imageName=" + imageName
 				+ ", imageOriginal=" + imageOriginal + ", imageLevel=" + imageLevel + ", memberNo=" + memberNo
-				+ ", boardNo=" + boardNo + ", professionNo=" + professionNo + "]";
+				+ ", boardNo=" + boardNo + ", professionNo=" + professionNo + ", professionName=" + professionName + "]";
 	}
-
 		
 	
 }
