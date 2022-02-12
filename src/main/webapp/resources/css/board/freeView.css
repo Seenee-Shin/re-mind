@@ -41,7 +41,9 @@ input:focus, textarea:focus, select:focus{
     border: 0px solid;
 
 }
-
+.grey{
+	filter:grayscale(100%);
+}
 /* 수정삭제 버튼 */
 .edit_btn_wrap{
     text-align: right;

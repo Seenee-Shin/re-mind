@@ -92,8 +92,8 @@
                     <div class="report_scrap_wrap">
 	                    <c:if test="${board.scrapCheckCode == 1}">
                         <!-- 스크랩 허용 했을 경우만 -->
-	                      	<a id="btnScrap" class="link-icon twitter"   href="javascript:boardScrap();">
-	                      		<img alt="" src="${contextPath}/resources/images/icon/bookmark.png;">
+	                      	<a id="btnScrap" class="link-icon scrap"   href="javascript:boardScrap(); ">
+	                      		<img alt="" src="${contextPath}/resources/images/icon/bookmark.png;" class="grey">
 	                      	</a>
 	                      	<a id="btnTwitter" class="link-icon twitter"  href="javascript:shareTwitter();">
 	                      		<img alt="" src="${contextPath}/resources/images/icon/icon-twitter.png;">
@@ -266,6 +266,8 @@
 					swal({"title" : "로그인 후 이용해 주세요." , 
 	                      "icon" : "error"});
 					}else{
+						
+					$("#btnScrap").children().removeClass(".child")	
 					swal({"title" : "스크랩 완료" , 
 	                      "icon" : "success"});
 					}
@@ -277,6 +279,7 @@
 		                      "icon" : "error"});
 						}
 					else{
+						$("#btnScrap").children().addClass(".child")	
 						swal({"title" : "스크랩 해제" , 
 	                      "icon" : "success"});
 					}
