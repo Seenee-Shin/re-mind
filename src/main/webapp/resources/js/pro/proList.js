@@ -8,6 +8,11 @@ $(".cate_btn").on("click", function (){
 
     if( $(this).attr("id") == undefined ){
         if(clickable.length > 4)	return;
+
+        ul.empty();
+        currentPage = 1;
+        calcPagination();
+
         $(this).attr("id", val).css("backgroundColor", "rgb(166 166 168)").css("color", "white");
     }else if( $(this).attr("id") != undefined ){
         $(this).removeAttr("id").css("backgroundColor", "white").css("color", "black");
@@ -34,11 +39,18 @@ function makeComma(str) {
     return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 }
 
-
+const ul = $("#pro_list");
 const replyCheckCode = $("#comment, #mComment")
 const checkbox = $("input[type='checkbox']")
 replyCheckCode.val(1)
-
+let nameValue;
+$(document).on("input", "#pro_searchInput", function (){
+    nameValue = $("#pro_searchInput").val();
+});
+$("#nameSearch").on("click", function (){
+    ul.empty();
+    makePro();
+});
 calcPagination();
 function makePro(){
 
@@ -47,13 +59,12 @@ function makePro(){
         data:{
             "worryCtCd": clickable,
             "last":last,
-            "first":first
+            "first":first,
+            "proName":nameValue
         },
         dataType:"JSON",
         success:function (result){
             YesScroll();
-            const ul = $("#pro_list");
-            // ul.empty();
             $.each(result, function (i, item){
 				
 				console.log(item);
@@ -62,7 +73,6 @@ function makePro(){
                     listCount = Number.parseInt(item.maxValue);
                     return;
                 }
-                console.log(item)
 
                 let category = item.counselCategoryCode.split(",");
                 let price = item.counselPrice.split(",");
