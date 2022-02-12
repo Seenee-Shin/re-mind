@@ -110,13 +110,6 @@ public class MyRestController {
         return new Gson().toJson(myEmpathyList);
     }
 
-    @RequestMapping("letterList")
-    public String letterList(){
-
-        return null;
-    }
-
-
 
 
 }

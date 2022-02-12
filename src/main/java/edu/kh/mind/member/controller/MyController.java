@@ -267,6 +267,10 @@ public class MyController {
     @GetMapping("letterList")
     public String letterList(Model model){
     	model.addAttribute("css", "my/letterList");
+
+
+
+
         return "my/letterList";
     }
 

@@ -142,17 +142,16 @@
 
     function createTable() {
         $.ajax({
-            url: "reservationList",
+            url: "my/letterList",
             type: "GET",
             success: function (data) {
                 $('#table_id').DataTable({
                     language: lang_kor,
                     data: data,
                     columns: [
-                        { data: "reservationNo"},
-                        { data: "memberNo" },
-                        { data: "reservationStatusCode" },
-                        { data: "reservationEnrollDate"},
+                        { data: "professionNo"},
+                        { data: "letterContent" },
+                        { data: "letterDate" },
                         { data: null,
                             render: function(data){
                                 return data.reservationEnrollTime + ":00";
