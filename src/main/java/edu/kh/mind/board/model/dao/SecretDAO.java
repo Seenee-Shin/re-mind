@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.board.model.vo.WorryCategory;
 
 @Repository
@@ -62,6 +63,21 @@ public class SecretDAO {
 
 	public int countSecretList() {
 		return sqlSession.selectOne("secretMapper.countSecretList");
+	}
+
+
+	public Scrap selectScrap(Scrap scrap) {
+		return sqlSession.selectOne("secretMapper.selectScrap",scrap);
+	}
+
+
+	public int insertScrap(Scrap scrap) {
+		return sqlSession.insert("secretMapper.insertScrap", scrap);
+	}
+
+
+	public int deleteScrap(Scrap scrap) {
+		return sqlSession.delete("secretMapper.deleteScrap",scrap);
 	}
 
 }

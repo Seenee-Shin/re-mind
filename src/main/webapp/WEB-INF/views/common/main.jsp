@@ -48,13 +48,13 @@
             <p>자존감</p>
         </div>
         <div>
-            <div class="main_content1_cir" data-type="4">
+            <div class="main_content1_cir" data-type="3">
             	<img alt="" src="${contextPath}/resources/images/main/bulimia.png">
             </div>
             <p>폭식증</p>
         </div>
         <div>
-            <div class="main_content1_cir">
+            <div class="main_content1_cir" data-type="4">
             	<img alt="" src="${contextPath}/resources/images/main/Alcoholism.png">
             </div>
             <p>알콜중독</p>

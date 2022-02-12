@@ -48,8 +48,8 @@ public class ProDAO {
         return sqlSession.selectList("professionMapper.selectProfession", worryCtCd);
     }
 
-    public List<Profession> selectAllProfession() {
-        return sqlSession.selectList("professionMapper.selectAllProfession");
+    public List<Profession> selectAllProfession(Map<String, Integer> param) {
+        return sqlSession.selectList("professionMapper.selectAllProfession", param);
     }
 
 	public Profession selectPro(int professionNo) {
@@ -123,4 +123,8 @@ public class ProDAO {
 	public int proLetterInsert(Letter letter) {
 		return sqlSession.insert("professionMapper.proLetterInsert", letter);
 	}
+
+    public int selectProfessionCount() {
+		return sqlSession.selectOne("professionMapper.selectProfessionCount", null);
+    }
 }
