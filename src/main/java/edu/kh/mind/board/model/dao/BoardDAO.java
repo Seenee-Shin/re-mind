@@ -74,6 +74,14 @@ public class BoardDAO {
 		return sqlSession.delete("boardMapper.deleteScrap",scrap);
 	}
 
+	/**
+	 * 메인 커뮤니티
+	 * @return list
+	 */
+    public List<Board> selectMainBoardList() {
+		return sqlSession.selectList("boardMapper.selectMainBoardList");
+    }
+
 	public int countFreeList() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("boardMapper.countSecretList");
@@ -83,5 +91,6 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("boardMapper.selectMuteMember", param);
 	}
+
 
 }

@@ -40,6 +40,7 @@
 		<typeAlias type="edu.kh.mind.pro.model.vo.Reservation" alias="Reservation"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.WorryCategory" alias="WorryCategory"/>
 		<typeAlias type="edu.kh.mind.pro.model.vo.Letter" alias="Letter"/>
+		<typeAlias type="edu.kh.mind.board.model.vo.Letter" alias="MyLetter"/>
 		
 	</typeAliases>
 

@@ -157,6 +157,7 @@
         )TEMP)
         WHERE RNUM BETWEEN #{first} AND #{last}
     </select>
+
     <select id="selectAllProfession" resultMap="profession_rm">
         SELECT * FROM(
                          SELECT ROWNUM AS RNUM, TEMP.*,
