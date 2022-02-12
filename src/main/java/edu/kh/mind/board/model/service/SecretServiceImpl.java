@@ -18,6 +18,10 @@ import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.common.util.Util;
 
+/**
+ * @author 82105
+ *
+ */
 @Service
 public class SecretServiceImpl implements SecretService {
 
@@ -294,7 +298,16 @@ public class SecretServiceImpl implements SecretService {
 
 		return result;
 	}
+	
+	
+	// 회원 차단 
+	@Override
+	public int memberBlock(HashMap<String, Integer> map) {
+		return dao.memberBlock(map);
+	}
 
+	
+	
 
 	
 	
