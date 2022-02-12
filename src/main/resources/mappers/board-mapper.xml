@@ -471,5 +471,18 @@
 		INSERT INTO MUTE VALUES(#{memberNo}, #{loginMember})
 	</insert>
 
+	<!-- 스크랩 여부 조회 -->
+	<select id="selectScrap" resultMap="scrap_rm">
+		SELECT SCRAP_NO FROM SCRAP WHERE BOARD_NO = #{boardNo} AND MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 스크랩하기 -->
+	<insert id="insertScrap">
+		INSERT INTO SCRAP VALUES(SEQ_SCRAP_NO.NEXTVAL,#{memberNo} ,#{boardNo}, DEFAULT)
+	</insert>
+	
+	<delete id="deleteScrap">
+		DELETE FROM SCRAP WHERE BOARD_NO = #{boardNo} AND MEMBER_NO = #{memberNo}
+	</delete>
 
 </mapper>

@@ -13,6 +13,7 @@ import edu.kh.mind.adminPro.model.exception.InsertCertificationFailException;
 import edu.kh.mind.board.model.dao.BoardDAO;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.common.util.Util;
 
 @Service
@@ -162,6 +163,36 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoardContent( Util.changeNewLine( board.getBoardContent() )  );
 		
 		return dao.updateBoard(board);
+	}
+
+
+	@Override
+	public int boardScrap(Scrap scrap) {
+		
+		Scrap selectScrap = dao.selectScrap(scrap);
+		System.out.println(selectScrap);
+		
+		int result = 0;
+		if(selectScrap == null) {
+			result = dao.insertScrap(scrap);
+			
+			System.out.println(scrap);
+			if(result > 0) {
+				result = 1;
+			}else {
+				result = 0;
+			}
+		}else {
+			result = dao.deleteScrap(scrap);
+			if(result > 0){
+				result =2;
+			}else {
+				result =0;
+			}
+		}
+		
+
+		return result;
 	}
 		
 }

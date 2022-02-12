@@ -33,6 +33,10 @@
         <result property="memberPhone" column="MEMBER_PHONE"/>
         <result property="reservationEnrollDate" column="RESERVATION_ENROLL_DT"/>
         <result property="reservationEnrollTime" column="RESERVATION_ENROLL_TIME"/>
+
+        <result property="starAvg" column="REVIEW_STARPOINT"/>
+        <result property="reviewCount" column="REVIEW_COUNT"/>
+        <result property="maxValue" column="MAX_VALUE"/>
     </resultMap>
     
     <resultMap id="professionInfo_rm" type="ProfessionInfo">
@@ -116,6 +120,16 @@
 	    	SELECT STATUS_CD FROM PROFESSION WHERE PROFESSION_NO = #{professionNo}
 	    </select>
 
+    <select id="selectProfessionCount" resultType="_int">
+        SELECT COUNT(*) MAX_VALUE FROM(
+              SELECT COUNT(*)
+              FROM PROFESSION_PRICE
+                       JOIN PROFESSION USING(PROFESSION_NO)
+                       LEFT JOIN IMAGE USING(PROFESSION_NO)
+              WHERE BOARD_NO IS NULL AND IMAGE_LEVEL = 1 AND PROFESSION.STATUS_CD = 4
+              GROUP BY PROFESSION_NO
+          )
+    </select>
 	<!--    그그그머냐ㅐ 그거 검색 -->
     <select id="selectProfession" resultMap="profession_rm">
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
@@ -135,17 +149,26 @@
             PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM
     </select>
     <select id="selectAllProfession" resultMap="profession_rm">
-        SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
-               PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
-               LISTAGG(COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
-               LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
-        FROM PROFESSION_PRICE
-            JOIN PROFESSION USING(PROFESSION_NO)
-            JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
-            LEFT JOIN IMAGE USING(PROFESSION_NO)
-        WHERE BOARD_NO IS NULL
-        GROUP BY PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR, PRO_INTRO,
-            PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM
+        SELECT * FROM(
+                         SELECT ROWNUM AS RNUM, TEMP.*,
+                                (SELECT COUNT(*) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO) REVIEW_COUNT,
+                                (SELECT NVL(AVG(REVIEW_STARPOINT), 0) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO) REVIEW_STARPOINT
+                         FROM(
+                                 SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
+                                        PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
+                                        COUNSEL_CATEGORY_NO,
+                                        COUNSEL_PRICE
+                                 FROM (SELECT PP.PROFESSION_NO,
+                                              LISTAGG(PP.COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
+        LISTAGG(PP.COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_PRICE
+                                       FROM PROFESSION_PRICE PP
+                                       GROUP BY PP.PROFESSION_NO) PR
+                                          JOIN PROFESSION USING(PROFESSION_NO)
+                                          JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
+                                          LEFT JOIN IMAGE USING(PROFESSION_NO)
+                                 WHERE BOARD_NO IS NULL AND IMAGE_LEVEL = 1 AND PROFESSION.STATUS_CD = 4
+                             )TEMP)
+        WHERE RNUM BETWEEN #{first} AND #{last}
     </select>
     
     <select id="selectProOne" resultMap="profession_rm">

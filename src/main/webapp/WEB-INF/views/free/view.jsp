@@ -92,6 +92,9 @@
                     <div class="report_scrap_wrap">
 	                    <c:if test="${board.scrapCheckCode == 1}">
                         <!-- 스크랩 허용 했을 경우만 -->
+	                      	<a id="btnScrap" class="link-icon twitter"   href="javascript:boardScrap();">
+	                      		<img alt="" src="${contextPath}/resources/images/icon/bookmark.png;">
+	                      	</a>
 	                      	<a id="btnTwitter" class="link-icon twitter"  href="javascript:shareTwitter();">
 	                      		<img alt="" src="${contextPath}/resources/images/icon/icon-twitter.png;">
 	                      	</a>
@@ -226,7 +229,7 @@
 	    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 	}
 
-/* 	function shareKakao() {
+/*  	function shareKakao() {
 		 
 		  // 사용할 앱의 JavaScript 키 설정
 		  Kakao.init('6218050ca27459717c1f03b78a03958d');
@@ -245,7 +248,52 @@
 		      }
 		    }
 		  });
-		} */
+		}  */
+ 	
+ 	function boardScrap() {
+ 		
+ 		$.ajax({
+ 			url : "${contextPath}/free/boardScrap",
+ 			type : "get",
+ 			data : {"boardNo" : boardNo,
+ 					"memberNo" : loginMemberNo },
+			success : function (result) {
+				
+				console.log(result)
+				if(result == 1){
+					
+					if(!loginMemberNo){
+					swal({"title" : "로그인 후 이용해 주세요." , 
+	                      "icon" : "error"});
+					}else{
+					swal({"title" : "스크랩 완료" , 
+	                      "icon" : "success"});
+					}
+
+				}else if (result == 2){
+					
+					if(!loginMemberNo){
+						swal({"title" : "로그인 후 이용해 주세요." , 
+		                      "icon" : "error"});
+						}
+					else{
+						swal({"title" : "스크랩 해제" , 
+	                      "icon" : "success"});
+					}
+					
+				}else{
+					
+				}
+			},
+			
+			error: function (xhr, status, error) {
+			    swal({"title" : "서버 연결 오류" , 
+                      "icon" : "error"});
+		}
+ 			
+ 		})
+		
+	}
 </script>
 
 

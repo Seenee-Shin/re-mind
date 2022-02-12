@@ -35,3 +35,5 @@
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
+
+<script src="${contextPath}/resources/js/selftest/selftest.js"></script>

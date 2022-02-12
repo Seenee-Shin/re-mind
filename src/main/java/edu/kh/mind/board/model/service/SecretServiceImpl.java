@@ -29,6 +29,10 @@ public class SecretServiceImpl implements SecretService {
 		param.put("boardCategoryCode", "104");
 		return dao.selectSecretList(param);
 	}
+	@Override
+	public int countSecretList() {
+		return dao.countSecretList();
+	}
 
 	
 	@Override

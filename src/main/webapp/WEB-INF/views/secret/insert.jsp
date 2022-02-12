@@ -202,6 +202,59 @@ searchSelect.on("click", function () {
 	}
 });
 
+//페이지네이션(무한스크롤 변수 선언)
+var currentPage = 1;
+var infinityLimit = 2; // 한번에 보여질 result 수
+var pageSize = 10;
+var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
+// 선 계산(ajax로 넘겨야됨)
+last = currentPage * infinityLimit;
+first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+function calcPagination(){
+
+   maxPage = Number.parseInt(Math.floor(listCount / infinityLimit));
+   startPage = (currentPage-1) / pageSize * pageSize + 1;
+   endPage = startPage + pageSize - 1;
+
+   if(endPage > maxPage)   endPage = maxPage;
+
+   if(currentPage <= infinityLimit)   prevPage = 1;
+   else                    prevPage = startPage - 1;
+
+   if(endPage == maxPage) nextPage = maxPage;
+   else               nextPage = endPage + 1;
+
+   last = currentPage * infinityLimit;
+   first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+}
+calcPagination()
+
+
+// 무한스크롤
+function YesScroll () {
+   if(last >= listCount)   return;
+
+   const pagination = document.querySelector('.paginaiton');
+   const fullContent = document.querySelector('.main_content');
+   const screenHeight = screen.height;
+
+   let oneTime = false;
+   document.addEventListener('scroll',OnScroll,{passive:true})
+   function OnScroll () {
+      const fullHeight = fullContent.clientHeight;
+      const scrollPosition = pageYOffset;
+      
+      console.log(fullHeight-screenHeight/2 > scrollPosition)
+      if (fullHeight-screenHeight/2 <= scrollPosition && !oneTime) {
+         oneTime = true;
+         console.log("나옴? : " + oneTime)
+         currentPage = currentPage + 1;
+         calcPagination();
+         getFreeList();
+      }
+   }
+}
+
 //list 가져오기
 function getFreeList(searchData) {
 let data = {};
@@ -213,8 +266,13 @@ if (searchData != null) {
 $.ajax({
 	url : "${contextPath}/secret/list",
 	type : "POST",
-	data : data,
+	data : {
+		"last":last,
+		"first":first
+	},
+	dataType:"JSON",
 	success : function (result) {
+		YesScroll();
 
 		let html = "";
 		var secretBoardList = $('#BoardListArea')
@@ -222,7 +280,12 @@ $.ajax({
 		let empathyCntArr;
 		let iconCnt = {};
 		
-		$.each(result.secretList, function (i, item) {
+		$.each(result, function (i, item) {
+			console.log(item)
+			if(result.length - 1 == i){
+				listCount = Number.parseInt(item.maxValue);
+				return;
+			}
 
 			// empathy 초기화
 			empathyArr = [];
@@ -317,6 +380,7 @@ $.ajax({
 
 });
 }
+
 
 
 

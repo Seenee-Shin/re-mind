@@ -18,15 +18,15 @@
   <form method="POST" class="self_content_form">
     <div class="self_content_option">
       <div class="self_content_option1">
-        <div id="1" class="selfTest_op">우울증</div>
-        <div id="2"  class="selfTest_op">불안장애</div>
-        <div id="3"  class="selfTest_op">폭식증</div>
-        <div id="4"  class="selfTest_op">알코올의존</div>
-        <div id="5"  class="selfTest_op">스트레스</div>
+        <div id="1" class="selfTest_op <c:if test="${type == '1'}">active</c:if>">우울증</div>
+        <div id="2" class="selfTest_op <c:if test="${type == '2'}">active</c:if>">불안장애</div>
+        <div id="3" class="selfTest_op <c:if test="${type == '3'}">active</c:if>">폭식증</div>
+        <div id="4" class="selfTest_op <c:if test="${type == '4'}">active</c:if>">알코올의존</div>
+        <div id="5" class="selfTest_op <c:if test="${type == '5'}">active</c:if>">스트레스</div>
       </div>
       <div class="self_content_option2">
-        <div id="6"  class="selfTest_op">자존감</div>
-        <div id="7"  class="selfTest_op">인터넷중독</div>
+        <div id="6" class="selfTest_op <c:if test="${type == '6'}">active</c:if>">자존감</div>
+        <div id="7" class="selfTest_op <c:if test="${type == '7'}">active</c:if>">인터넷중독</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
@@ -36,9 +36,9 @@
       <div class="selfTest_title">
         <h1>자존감 자가진단 테스트</h1>
         <div>
-          이 검사는 자신에 대해서 어떻게 느끼는 지를 <br>
-          알아보기 위한 것입니다.<br><br>
-          각 문자를 읽고, 자신에게 해당되는 정도를 <br>
+          이 검사는 자신에 대해서 어떻게 느끼는 지를 
+          알아보기 위한 것입니다.<br>
+          각 문자를 읽고, 자신에게 해당되는 정도를
           나타내는 항목에 체크하여 주십시오.
         </div>
       </div>
@@ -57,18 +57,23 @@
     </div>
     <!-- 버튼 -->
     <div class="selfTest_btn">
-      <button class="selfTest_prev_btn" onclick="prev()" type="button">이전</button>
+      <button class="selfTest_prev_btn hidden" onclick="prev()" type="button">이전</button>
       <button id="selfTest_next_btn" class="selfTest_next_btn" onclick="next()" type="button">다음</button>
     </div>
     <button type="button" class="mb_selfTest_btn">테스트 진행</button>
   </form>
-    <button type="button" id="selfTest_result_btn" style="display:block;">테스트 결과</button>
+  <button type="button" id="selfTest_result_btn" style="display:block;">테스트 결과</button>
 </article>
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
+
 <script>
-
-
+  let type = false;
+  if ("${type}" != null) {
+    type = "${type}";
+  }
 
 </script>
+
+<script src="${contextPath}/resources/js/selftest/selftest.js"></script>

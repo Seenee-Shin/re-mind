@@ -21,6 +21,8 @@ public interface SecretService {
 	Board selectBoard(int boardNo);
 
 	int deleteBoard(int boardNo);
+
+	int countSecretList();
 	
 
 }

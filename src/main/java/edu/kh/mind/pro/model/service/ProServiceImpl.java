@@ -28,8 +28,8 @@ public class ProServiceImpl implements ProService{
     }
 
     @Override
-    public List<Profession> selectAllProfession() {
-        return dao.selectAllProfession();
+    public List<Profession> selectAllProfession(Map<String, Integer> param) {
+        return dao.selectAllProfession(param);
     }
 
 	@Override
@@ -47,6 +47,11 @@ public class ProServiceImpl implements ProService{
 	@Override
 	public int selectWishPro(Map<String, Integer> map) {
 		return dao.selectWishPro(map);
+	}
+
+	@Override
+	public int selectProfessionCount() {
+		return dao.selectProfessionCount();
 	}
 
 	// 총 금액 insert
