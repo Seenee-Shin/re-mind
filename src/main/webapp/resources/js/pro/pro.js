@@ -130,7 +130,8 @@ $(document).on("click", "#calendar td", function (){
 });
 
 // 상담사 목록페이지 카테고리 선택(모바일)
-$("#mobile_category_btn").on("click",function(){
+$(document).on("click","#mobile_category_btn", function(){
+    alert("dddd")
     $("#mobile_pro_category").css("display","block");
     $("#header").css("display","none");
     $("#mobile_category_btn").css("display","none");
