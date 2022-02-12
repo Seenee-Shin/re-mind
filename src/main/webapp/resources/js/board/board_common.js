@@ -154,7 +154,8 @@ function postingValidate(){
 				$("empathyCheckCode").val("1");
 
 				// 새로 고침
-				// location.reload();
+				
+				;
 			} else
 			    swal({"title" : "글작성 실패" , 
                       "icon" : "error"});

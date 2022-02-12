@@ -244,6 +244,60 @@ $(function () {
 	// list 가져오기
 	getFreeList();
 })
+
+//페이지네이션(무한스크롤 변수 선언)
+var currentPage = 1;
+var infinityLimit = 5; // 한번에 보여질 result 수
+var pageSize = 10;
+var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
+// 선 계산(ajax로 넘겨야됨)
+last = currentPage * infinityLimit;
+first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+function calcPagination(){
+
+   maxPage = Number.parseInt(Math.floor(listCount / infinityLimit));
+   startPage = (currentPage-1) / pageSize * pageSize + 1;
+   endPage = startPage + pageSize - 1;
+
+   if(endPage > maxPage)   endPage = maxPage;
+
+   if(currentPage <= infinityLimit)   prevPage = 1;
+   else                    prevPage = startPage - 1;
+
+   if(endPage == maxPage) nextPage = maxPage;
+   else               nextPage = endPage + 1;
+
+   last = currentPage * infinityLimit;
+   first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+}
+calcPagination()
+
+
+// 무한스크롤
+function YesScroll () {
+   if(last >= listCount)   return;
+
+   const pagination = document.querySelector('.paginaiton');
+   const fullContent = document.querySelector('.main_content');
+   const screenHeight = screen.height;
+
+   let oneTime = false;
+   document.addEventListener('scroll',OnScroll,{passive:true})
+   function OnScroll () {
+      const fullHeight = fullContent.clientHeight;
+      const scrollPosition = pageYOffset;
+
+	   // console.log(fullHeight - screenHeight/2, scrollPosition)
+      
+      if (fullHeight-screenHeight/2 - 100<= scrollPosition && !oneTime) {
+    	  console.log("test");
+         oneTime = true;
+         currentPage = currentPage + 1;
+         calcPagination();
+         getFreeList();
+      }
+   }
+}
 // 검색
 const searchSelect = $("#freeboard_search");
 searchSelect.on("click", function () {
@@ -262,89 +316,96 @@ searchSelect.on("click", function () {
 
 //list 가져오기
 function getFreeList(searchData) {
-let data = {};
+	let data = {};
+	
+	if (searchData != null) {
+		data = searchData;
+	}
+	console.log({
+		"last":last,
+		"first":first		
+	});
 
-if (searchData != null) {
-	data = searchData;
-}
-
-$.ajax({
-	url : "${contextPath}/free/list",
-	type : "POST",
-	data : data,
-	success : function (result) {
-		
-		let html = "";
-		var freeBoardList = $('#BoardListArea')
-		let empathyArr;
-		let empathyCntArr;
-		let iconCnt = {};
-		
-		console.log(result.length)
-		
-		$.each(result.freeBoardList, function (i, item) {
+	$.ajax({
+		url : "${contextPath}/free/list",
+		type : "POST",
+		data : {
+			"last":last,
+			"first":first		
+		},
+		dataType:"JSON",
+		success : function (result) {
+			YesScroll();
 			
-			console.log(item)
+			let html = "";
+			var freeBoardList = $('#BoardListArea')
+			let empathyArr;
+			let empathyCntArr;
+			let iconCnt = {};
 
-			// empathy 초기화
-			empathyArr = [];
-			empathyCntArr = [];
-			iconCnt = {
-				"1001" : 0,
-				"1002" : 0,
-				"1003" : 0,
-				"1004" : 0,
-				"1005" : 0
-			};
-
-			if (item.worryEmpathyArray != null) {
-				empathyArr = (item.worryEmpathyArray).split(",");
-				empathyCntArr = (item.worryCntArray).split(",");
-			}
-
-			for(i=0; i<empathyArr.length; i++) {
-				iconCnt[empathyArr[i]] = empathyCntArr[i];
-			}
-			
-			html+=   '<div class="board_list_content">'
-              		+'	<div class="board_flex_wrap">'
-                   	+'		<div class="writer_pic_wrap">'
-                    +'			<div class="writer_pic light_brown_bg" style="background-image: url();"></div>';
-              
-             if(loginMemberNo != item.memberNo){
-				html +='			<ul class="userMenu hidden">'
-					+'				<li> <a href=""> 차단</a> </li>'
-					+'				<li> <a href=""> 검색</a> </li>'
-                    +'			</ul>'
-                    +'		</div>';
-			}else{
-				html+='		</div>';
-			}
-			
-			html+='		<a href="${contextPath}/free/view/'+item.boardNo+'">'
-				+'			<div class="posting_info">'
-				+'				<div class="writer_id">'
-	            +'					<p class="userInfo">'+item.memberFn+'</p>'
-	            +'					<p>'+item.createDate+'</p>'
-	            +'				</div>'
-	            +'				<div class="posting">'
-	            +'					<p>'+item.boardContent+'</p>'
-	            +'				</div>'
-	            +'			</div>'
-	            +'		</a>'
-	            +'	</div>'
-	            +'	<div class="board_icon_wrap">';
-	            
+			console.log(JSON.parse(result.result));
+			$.each(JSON.parse(result.result), function (i, item) {
+				
+	
+				// empathy 초기화
+				empathyArr = [];
+				empathyCntArr = [];
+				iconCnt = {
+					"1001" : 0,
+					"1002" : 0,
+					"1003" : 0,
+					"1004" : 0,
+					"1005" : 0
+				};
+	
+				if (item.worryEmpathyArray != null) {
+					empathyArr = (item.worryEmpathyArray).split(",");
+					empathyCntArr = (item.worryCntArray).split(",");
+				}
+	
+				for(i=0; i<empathyArr.length; i++) {
+					iconCnt[empathyArr[i]] = empathyCntArr[i];
+				}
+				
+				html+=   '<div class="board_list_content">'
+	              		+'	<div class="board_flex_wrap">'
+	                   	+'		<div class="writer_pic_wrap">'
+	                    +'			<div class="writer_pic light_brown_bg" style="background-image: url();"></div>';
+	             if(loginMemberNo != item.memberNo){
+					html +='			<ul class="userMenu hidden">'
+						+'				<li> <a href="" class ="block"> 차단</a> </li>'
+						+'				<input class="hidden" value = '+ item.memberNo +'>'
+						+'				<li> <a href=""> 검색</a> </li>'
+	                    +'			</ul>'
+	                    +'		</div>';
+				}else{
+					html+='		</div>';
+				}
+				
+				html+='		<a href="${contextPath}/free/view/'+item.boardNo+'">'
+					+'			<div class="posting_info">'
+					+'				<div class="writer_id">'
+		            +'					<p class="userInfo">'+item.memberFn+'</p>'
+		            +'					<p>'+item.createDate+'</p>'
+		            +'				</div>'
+		            +'				<div class="posting">'
+		            +'					<p>'+item.boardContent+'</p>'
+		            +'				</div>'
+		            +'			</div>'
+		            +'		</a>'
+		            +'	</div>'
+		            +'	<div class="board_icon_wrap">';
+		            
 	          	if(item.replyCheckCode == 1){
 					html+= 
 					'		<div class="comment_wrap">'
 					+'            <i class="far fa-comment dark-brown"> '+item.replyCount+'</i>'
 					+'            <p></p>'
-					+'        </div>'; //comment wrap close 
+					+'        </div>'; 
 				}else{
 					html += '<div class="comment_wrap"></div>';
 				}
-				
+	          	
 				if(item.empathyCheckCode == 1){
 					html+='		<div class="like_warp">'
 						+'            <img src="${contextPath}/resources/images/icon/smile.png" alt="">'
@@ -365,19 +426,17 @@ $.ajax({
 				
 				html+='    </div>'
 					+'</div>'
-		});
-		$(".free_board_list_wrap").html(html)
-
-	},
-	error : function(request, status, error){
-		console.log("ajax 통신 중 오류 발생");
-		console.log(request.responseText);
-	}
-
-
-});
+			});
+			$(".free_board_list_wrap").append(html);
+		},
+		error : function(request, status, error){
+			console.log("ajax 통신 중 오류 발생");
+			console.log(request.responseText);
+		}
+	
+	
+	});
 }
-
 
 
 </script>
