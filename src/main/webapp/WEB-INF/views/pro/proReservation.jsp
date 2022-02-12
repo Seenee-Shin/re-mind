@@ -172,9 +172,10 @@
                 }
 
                 $(".reservation_confirm_proname > h1").text(item.professionName + "상담사");
+
+                console.log(item)
                 
                 $("#pro_profile_wrap > img").attr("src",contextPath+item.imagePath+ '/' + item.imageName).attr("class","float-left").attr("style","width:125px; height: 125px;border-radius:50%;");
-                
             });
         },
         error:function (req, sta, er){

@@ -43,7 +43,7 @@ input:focus {outline:none;}
 /* 상담사 카테고리 전체 */
 #pro_category_warp{
     max-width:1200px;
-    height: 490px;
+    height:400px;
     margin:10px 0 50px 0;
     background-color: #f8f8f8;
     border-radius: 10px;
@@ -153,6 +153,7 @@ input:focus {outline:none;}
 .profile{
     width:200px;
     height:200px;
+    border-radius: 100px;
 }
 /* ----------------------------------- */
 /* 전문가 설명랩 */
@@ -422,3 +423,6 @@ input:focus {outline:none;}
     }
     
 }
+
+.testdiv{overflow-x:hidden;position:absolute;top:0;left:0;}
+.starpoint_box2{position: relative; float:left;}
