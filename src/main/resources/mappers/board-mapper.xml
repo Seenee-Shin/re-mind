@@ -191,7 +191,7 @@
 		WHERE BOARD_CATEGORY_CD = 101 AND BOARD_STATUS_CD = 201 
 		
 		<if test="muteMember != null">
-			AND MEMBER.MEMBER_NO NOT IN (201)
+			AND MEMBER.MEMBER_NO NOT IN (${muteMember})
 		</if>
 		ORDER BY BOARD_CREATE_DT DESC 
 		) TEMP)

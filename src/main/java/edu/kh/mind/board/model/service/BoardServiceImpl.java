@@ -32,6 +32,8 @@ public class BoardServiceImpl implements BoardService{
 			String muteMember  = dao.selectMuteMember(param);
 			param.put("muteMember", muteMember);
 			
+			System.out.println(param.get("muteMember"));
+			
 		}
 		
 		List<Board> result =  dao.selectBoardList(param);
