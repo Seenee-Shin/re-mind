@@ -9,13 +9,12 @@
           <article class="main_content">
               <div class="study">
                 <p>이 달의 연구</p>
-                <p>주제를 선택해 생각을 공유해보세요</p>
+                <p>생각을 공유해보세요!</p>
               </div>
               <div class="study_title">
-                  <p>오늘 점심은 무엇을 드시나요? <br> 
-                      점심 메뉴 추천하기</p>
+                  <p>여러분 모두 고생하셨습니다! <br> 
+                      종강 소감 말하기</p>
                  <button class="study_submit">작성하기</button>
-                 
               </div>
               <div class="study_content">
                   <div class="image_wrap">
