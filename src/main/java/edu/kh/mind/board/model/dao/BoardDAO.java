@@ -74,4 +74,14 @@ public class BoardDAO {
 		return sqlSession.delete("boardMapper.deleteScrap",scrap);
 	}
 
+	public int countFreeList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.countSecretList");
+	}
+
+	public String selectMuteMember(Map<String, String> param) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.selectMuteMember", param);
+	}
+
 }
