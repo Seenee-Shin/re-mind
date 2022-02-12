@@ -45,7 +45,7 @@ public class ProDAO {
 		return sqlSession.selectOne("reservationMapper.priceSelect",payNo);
 	}
 	
-    public List<Profession> selectProfession(List<String> worryCtCd) {
+    public List<Profession> selectProfession(Map<String, Object> worryCtCd) {
         return sqlSession.selectList("professionMapper.selectProfession", worryCtCd);
     }
 

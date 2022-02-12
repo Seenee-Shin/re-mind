@@ -1,5 +1,6 @@
 package edu.kh.mind.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,8 @@ public interface SecretService {
 	int countSecretList();
 
 	int boardScrap(Scrap scrap);
+
+	int memberBlock(HashMap<String, Integer> map);
 	
 
 }

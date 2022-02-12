@@ -27,7 +27,26 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> selectBoardList(Map<String, String> param) {
 		param.put("boardCategoryCode", "101");
 		
-		return dao.selectBoardList(param);
+		if(param.get("memberNo") != null) {
+			
+			String muteMember  = dao.selectMuteMember(param);
+			param.put("muteMember", muteMember);
+			
+			System.out.println(param.get("muteMember"));
+			
+		}
+		
+		List<Board> result =  dao.selectBoardList(param);
+		
+		
+		
+		
+		return result;
+	}
+	@Override
+	public int countFreeList() {
+		// TODO Auto-generated method stub
+		return dao.countFreeList();
 	}
 
 
@@ -194,6 +213,12 @@ public class BoardServiceImpl implements BoardService{
 
 		return result;
 	}
-		
+
+	// 메인 커뮤니티
+	@Override
+	public List<Board> selectMainBoardList() {
+		return dao.selectMainBoardList();
+	}
+
 }
 

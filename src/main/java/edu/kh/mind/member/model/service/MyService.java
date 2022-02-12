@@ -107,4 +107,9 @@ public interface MyService {
 
 	// 내가 찜한 상담사 목록
 	List<Board> selectCounselorList(Pagination pagination);
+
+	// 쪽지 리스트 조회
+	List<Letter> myLetterList(int memberNo);
+
+    int deleteCounselor(Board board);
 }

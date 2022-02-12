@@ -27,4 +27,12 @@ public interface BoardService {
 
 	int boardScrap(Scrap scrap);
 
+	/**
+	 *  메인 커뮤니티
+	 * @return mainBoardList
+	 */
+    List<Board> selectMainBoardList();
+
+	int countFreeList();
+
 }

@@ -10,7 +10,7 @@
             <!-- 메인 -->
             <h3 class="comunity_title">자유롭게 글을 남겨주세요</h3>
             
-				<div class="free_search_area">
+				<!-- <div class="free_search_area">
 	                    <div class="search_area">
 	                        <div class="search_wrap">
 	                            <select name="search_category" id="search_category">
@@ -21,7 +21,7 @@
 	                            <button type="button" class="submit_btn light_brown_bg" id="freeboard_search"> 검색 </button>
 	                        </div>
 	                    </div>
-	                </div>
+	                </div> -->
               
 			<form action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate()">
                 <article id="free_borad_wrap">
@@ -31,7 +31,7 @@
 	                   	 	<div class="board_write_warp grey_bg " >
 		                        <div id="free_board_write">
 		                            <div class="writer_pic_wrap">
-		                                <div class="my_pic light_brown_bg" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});"> </div>
+		                                <div class="my_pic" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});"> </div>
 		                            </div>
 		                            <div class="writing">
 		                                <textarea class="grey_bg" name="boardContent" id="post_textarea" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="무슨일이 있었나요?"></textarea>
@@ -42,26 +42,20 @@
 								</div>
 		                        
 		                        <div class="write_option_area">
-		                            <div class="check_box_wrap">
-                                       <select id="replyCheckCode" name="replyCheckCode">
-										    <option value="1">댓글 허용</option>
-										    <option value="2">댓글 비허용</option>
-									    </select>  		                            
+	                	            <div class="check_box_wrap">
+		                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
+		                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
 		                            </div>
-		
+	
 		                            <div class="check_box_wrap">
-                                       <select id="scrapCheckCode" name="scrapCheckCode">
-										    <option value="1">스크랩 허용</option>
-										    <option value="2">스크랩 비허용</option>
-									    </select>  		                            
+		                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩 허용</label>
+										<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
 		                            </div>
-		                            
 		                            <div class="check_box_wrap">
-                                       <select id="empathyCheckCode" name="empathyCheckCode">
-										    <option value="1">공감 허용</option>
-										    <option value="2">공감 비허용</option>
-									    </select>  		                            
+		                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active">공감 허용</label>
+		                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
 		                            </div>
+
 		                        </div>
 		                        
 		                        <hr>
@@ -83,7 +77,7 @@
 			                                <div id="m_free_board_write">
 			                                    <i class="fas fa-times" id="closeModal"></i>
 			                                    <div class="writer_wrap">
-			                                        <div class="my_pic light_brown_bg" style="background-image: url();">
+			                                        <div class="my_pic" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});">
 			                                        </div>
 			                                        <div class="m_writing">
 			                                            <textarea name="boardContent" id="m_post_text" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="무슨일이 있었나요?" ></textarea>
@@ -244,6 +238,182 @@ $(function () {
 	// list 가져오기
 	getFreeList();
 })
+
+//파일 업로드 스크립트
+$(document).ready(function()
+		// input file 파일 첨부시 fileCheck 함수 실행
+		{
+			$("#addFileBtn").on("change", fileCheck);
+		});
+		
+
+// 파일 현재 필드 숫자 totalCount랑 비교값
+var fileCount = 0;
+// 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
+var totalCount = 5;
+// 파일 고유넘버
+var fileNum = 0;
+// 첨부파일 배열
+var content_files = new Array();
+
+var delete_files = new Array();
+
+function fileCheck(e) {
+    var files = e.target.files;
+    
+    // 파일 배열 담기
+    var filesArr = Array.prototype.slice.call(files);
+    
+    // 파일 개수 확인 및 제한
+    if (fileCount + filesArr.length > totalCount) {
+      alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
+      return;
+    } else {
+    	 fileCount = fileCount + filesArr.length;
+    }
+    
+    // 각각의 파일 배열담기 및 기타
+    filesArr.forEach(function (f) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+	
+        content_files.push(f);
+        
+        $('#imgWrap').append(
+       		'<div id="img'+fileNum+'"class="boardImg"> <img src="'+ e.target.result+'">'
+       		+'<div class="deleteImg" onclick="fileDelete(\'file' + fileNum + '\')"><i class="fas fa-times"></i></div>'
+       		+'</div>'
+		);
+        fileNum ++;
+      };
+      reader.readAsDataURL(f);
+    });
+    console.log(content_files);
+    //초기화 한다.
+    $("#input_file").val("");
+  }
+
+// 파일 부분 삭제 함수
+function fileDelete(fileNum){
+    var no = fileNum.replace(/[^0-9]/g, "");
+    content_files[no].is_delete = true;
+    
+	$('#img' + no).remove();
+	
+	fileCount --;
+    console.log(content_files);
+}
+
+
+
+function postingValidate(){
+	//사진 배열에 담기
+	const form = $("form")[0];
+ 	const formData = new FormData(form);
+
+	for (let i = 0; i < content_files.length; i++) {
+		// 삭제 안한것만 담아 준다. 
+		if(!content_files[i].is_delete){
+			formData.append('images', content_files[i]);
+		}else{
+			delete_files.push(content_files[i]);
+			formData.append('deletImages',delete_files[i]);
+		}
+	}
+
+	//삽입
+	$.ajax({
+		type: "POST",
+		enctype: "multipart/form-data",
+		url: "insert",
+		data : formData,
+		processData: false,
+		contentType: false,
+		success: function (result) {
+			if(result > 0){
+                swal({"title" : "글이 작성되었습니다." , 
+                      "icon" : "success"});
+   	    		$("#input_file").val("");
+   	    		const imgWrap = document.querySelector("#imgWrap");
+
+				while (imgWrap.hasChildNodes()) {	// 부모노드가 자식이 있는지 여부를 알아낸다
+					imgWrap.removeChild(
+						imgWrap.firstChild
+					);
+				}
+				getFreeList();
+				// 내용삭제
+				$("#post_textarea").val(""); 
+				$("replyCheckCode").val("1");
+				$("scrapCheckCode").val("1");
+				$("empathyCheckCode").val("1");
+
+			} else
+			    swal({"title" : "글작성 실패" , 
+                      "icon" : "error"});
+			},
+		error: function (xhr, status, error) {
+			    swal({"title" : "서버 연결 오류" , 
+                      "icon" : "error"});
+		}
+    });
+
+	return false;
+}
+
+//페이지네이션(무한스크롤 변수 선언)
+var currentPage = 1;
+var infinityLimit = 5; // 한번에 보여질 result 수
+var pageSize = 10;
+var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
+// 선 계산(ajax로 넘겨야됨)
+last = currentPage * infinityLimit;
+first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+function calcPagination(){
+
+   maxPage = Number.parseInt(Math.floor(listCount / infinityLimit));
+   startPage = (currentPage-1) / pageSize * pageSize + 1;
+   endPage = startPage + pageSize - 1;
+
+   if(endPage > maxPage)   endPage = maxPage;
+
+   if(currentPage <= infinityLimit)   prevPage = 1;
+   else                    prevPage = startPage - 1;
+
+   if(endPage == maxPage) nextPage = maxPage;
+   else               nextPage = endPage + 1;
+
+   last = currentPage * infinityLimit;
+   first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+}
+calcPagination()
+
+
+// 무한스크롤
+function YesScroll () {
+   if(last >= listCount)   return;
+
+   const pagination = document.querySelector('.paginaiton');
+   const fullContent = document.querySelector('.main_content');
+   const screenHeight = screen.height;
+
+   let oneTime = false;
+   document.addEventListener('scroll',OnScroll,{passive:true})
+   function OnScroll () {
+      const fullHeight = fullContent.clientHeight;
+      const scrollPosition = pageYOffset;
+
+	   // console.log(fullHeight - screenHeight/2, scrollPosition)
+      
+      if (fullHeight-screenHeight/2 - 100<= scrollPosition && !oneTime) {
+    	  console.log("test");
+         oneTime = true;
+         currentPage = currentPage + 1;
+         calcPagination();
+         getFreeList();
+      }
+   }
+}
 // 검색
 const searchSelect = $("#freeboard_search");
 searchSelect.on("click", function () {
@@ -262,89 +432,96 @@ searchSelect.on("click", function () {
 
 //list 가져오기
 function getFreeList(searchData) {
-let data = {};
+	let data = {};
+	
+	if (searchData != null) {
+		data = searchData;
+	}
+	console.log({
+		"last":last,
+		"first":first		
+	});
 
-if (searchData != null) {
-	data = searchData;
-}
-
-$.ajax({
-	url : "${contextPath}/free/list",
-	type : "POST",
-	data : data,
-	success : function (result) {
-		
-		let html = "";
-		var freeBoardList = $('#BoardListArea')
-		let empathyArr;
-		let empathyCntArr;
-		let iconCnt = {};
-		
-		console.log(result.length)
-		
-		$.each(result.freeBoardList, function (i, item) {
+	$.ajax({
+		url : "${contextPath}/free/list",
+		type : "POST",
+		data : {
+			"last":last,
+			"first":first		
+		},
+		dataType:"JSON",
+		success : function (result) {
+			YesScroll();
 			
-			console.log(item)
+			let html = "";
+			var freeBoardList = $('#BoardListArea')
+			let empathyArr;
+			let empathyCntArr;
+			let iconCnt = {};
 
-			// empathy 초기화
-			empathyArr = [];
-			empathyCntArr = [];
-			iconCnt = {
-				"1001" : 0,
-				"1002" : 0,
-				"1003" : 0,
-				"1004" : 0,
-				"1005" : 0
-			};
-
-			if (item.worryEmpathyArray != null) {
-				empathyArr = (item.worryEmpathyArray).split(",");
-				empathyCntArr = (item.worryCntArray).split(",");
-			}
-
-			for(i=0; i<empathyArr.length; i++) {
-				iconCnt[empathyArr[i]] = empathyCntArr[i];
-			}
-			
-			html+=   '<div class="board_list_content">'
-              		+'	<div class="board_flex_wrap">'
-                   	+'		<div class="writer_pic_wrap">'
-                    +'			<div class="writer_pic light_brown_bg" style="background-image: url();"></div>';
-              
-             if(loginMemberNo != item.memberNo){
-				html +='			<ul class="userMenu hidden">'
-					+'				<li> <a href=""> 차단</a> </li>'
-					+'				<li> <a href=""> 검색</a> </li>'
-                    +'			</ul>'
-                    +'		</div>';
-			}else{
-				html+='		</div>';
-			}
-			
-			html+='		<a href="${contextPath}/free/view/'+item.boardNo+'">'
-				+'			<div class="posting_info">'
-				+'				<div class="writer_id">'
-	            +'					<p class="userInfo">'+item.memberFn+'</p>'
-	            +'					<p>'+item.createDate+'</p>'
-	            +'				</div>'
-	            +'				<div class="posting">'
-	            +'					<p>'+item.boardContent+'</p>'
-	            +'				</div>'
-	            +'			</div>'
-	            +'		</a>'
-	            +'	</div>'
-	            +'	<div class="board_icon_wrap">';
-	            
+			console.log(JSON.parse(result.result));
+			$.each(JSON.parse(result.result), function (i, item) {
+				
+	
+				// empathy 초기화
+				empathyArr = [];
+				empathyCntArr = [];
+				iconCnt = {
+					"1001" : 0,
+					"1002" : 0,
+					"1003" : 0,
+					"1004" : 0,
+					"1005" : 0
+				};
+	
+				if (item.worryEmpathyArray != null) {
+					empathyArr = (item.worryEmpathyArray).split(",");
+					empathyCntArr = (item.worryCntArray).split(",");
+				}
+	
+				for(i=0; i<empathyArr.length; i++) {
+					iconCnt[empathyArr[i]] = empathyCntArr[i];
+				}
+				
+				html+=   '<div class="board_list_content">'
+	              		+'	<div class="board_flex_wrap">'
+	                   	+'		<div class="writer_pic_wrap">'
+	                    +'			<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>';
+	             if(loginMemberNo != item.memberNo){
+					html +='			<ul class="userMenu hidden">'
+						+'				<li> <a href="" class ="block"> 차단</a> </li>'
+						+'				<input class="hidden" value = '+ item.memberNo +'>'
+						+'				<li> <a href=""> 검색</a> </li>'
+	                    +'			</ul>'
+	                    +'		</div>';
+				}else{
+					html+='		</div>';
+				}
+				
+				html+='		<a href="${contextPath}/free/view/'+item.boardNo+'">'
+					+'			<div class="posting_info">'
+					+'				<div class="writer_id">'
+		            +'					<p class="userInfo">'+item.memberFn+'</p>'
+		            +'					<p>'+item.createDate+'</p>'
+		            +'				</div>'
+		            +'				<div class="posting">'
+		            +'					<p>'+item.boardContent+'</p>'
+		            +'				</div>'
+		            +'			</div>'
+		            +'		</a>'
+		            +'	</div>'
+		            +'	<div class="board_icon_wrap">';
+		            
 	          	if(item.replyCheckCode == 1){
 					html+= 
 					'		<div class="comment_wrap">'
 					+'            <i class="far fa-comment dark-brown"> '+item.replyCount+'</i>'
 					+'            <p></p>'
-					+'        </div>'; //comment wrap close 
+					+'        </div>'; 
 				}else{
 					html += '<div class="comment_wrap"></div>';
 				}
-				
+	          	
 				if(item.empathyCheckCode == 1){
 					html+='		<div class="like_warp">'
 						+'            <img src="${contextPath}/resources/images/icon/smile.png" alt="">'
@@ -365,19 +542,48 @@ $.ajax({
 				
 				html+='    </div>'
 					+'</div>'
-		});
-		$(".free_board_list_wrap").html(html)
-
-	},
-	error : function(request, status, error){
-		console.log("ajax 통신 중 오류 발생");
-		console.log(request.responseText);
-	}
-
-
-});
+			});
+			$(".free_board_list_wrap").append(html);
+		},
+		error : function(request, status, error){
+			console.log("ajax 통신 중 오류 발생");
+			console.log(request.responseText);
+		}
+	
+	
+	});
 }
+// 고민작성하기 댓글
+$("#replyCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
+		$(this).val(0);
+	}
+});
 
+// 고민작성하기 스크랩
+$("#scrapCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("스크랩 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("스크랩 비허용");
+		$(this).val(2);
+	}
+});
 
+// 고민작성하기 공감
+$("#empathyCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("공감 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("공감 비허용");
+		$(this).val(2);
+	}
+});
 
 </script>

@@ -30,8 +30,6 @@ $(document).on("click", ".block", function(){
                 swal({"title" : "차단되었습니다." , 
                       "icon" : "success"});
 
-                selectReplyList(); // 댓글 목록 다시 출력
-          
             } else{
                 swal({"title" : "회원 차단 실패" , 
                       "icon" : "error"});
@@ -44,7 +42,7 @@ $(document).on("click", ".block", function(){
 });
 
 
-//파일 업로드 스크립트
+/*//파일 업로드 스크립트
 $(document).ready(function()
 		// input file 파일 첨부시 fileCheck 함수 실행
 		{
@@ -154,7 +152,9 @@ function postingValidate(){
 				$("empathyCheckCode").val("1");
 
 				// 새로 고침
-				// location.reload();
+				
+				
+				;
 			} else
 			    swal({"title" : "글작성 실패" , 
                       "icon" : "error"});
@@ -166,7 +166,7 @@ function postingValidate(){
     });
 
 	return false;
-}
+}*/
 	
 	
 

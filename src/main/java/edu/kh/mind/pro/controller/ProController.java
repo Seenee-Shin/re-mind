@@ -46,15 +46,29 @@ public class ProController {
 
 	@GetMapping("proCategory")
 	@ResponseBody
-	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<String> worryCtCd,
+	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<Integer> worryCtCd,
 							  @RequestParam Map<String, Integer> param){
 
-		List<Profession> pList;
+		List<Profession> pList = new ArrayList<>();
 
-		System.out.println(param.get("last") + " / " + param.get("first"));
+		System.out.println(param.get("last") + " / " + param.get("first") + " / " + param.get("proName"));
 
-		if(worryCtCd != null)	pList = service.selectProfession(worryCtCd);
-		else					pList = service.selectAllProfession(param);
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("tt", worryCtCd);
+		map.put("first", param.get("first"));
+		map.put("last", param.get("last"));
+		map.put("proName", param.get("proName"));
+
+		System.out.println(map.get("tt"));
+		System.out.println(worryCtCd);
+
+		if(param.get("proName") == null){
+			if(worryCtCd != null)	pList = service.selectProfession(map);
+			else					pList = service.selectAllProfession(param);
+		}else{
+
+		}
 
 		int result = service.selectProfessionCount();
 

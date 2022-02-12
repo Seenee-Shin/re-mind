@@ -39,6 +39,7 @@ input:focus, textarea:focus, select:focus{
     height: 50px;
     border-radius: 50px;
     border: 0px solid;
+    background-size: cover;
 
 }
 .grey{
@@ -168,6 +169,7 @@ input:focus, textarea:focus, select:focus{
     border-radius: 50px;
     display: inline-block;
     margin-bottom: 5px;
+    background-size: cover;
 }
 
 .write_comment>.option_btn {
@@ -318,9 +320,18 @@ p{
         margin-left: 0px;
         background-color: #A59999;
     }
-
-    .comment_view_wrap> form, .comment_list {
+     .write_comment, .comment_list {
         display: none;
+    } 
+    
+    .write_comment.active{
+    	display: flex;
+    	padding: 10px;
+    }
+        
+	.comment_list.active {
+    	display: block;
+    	padding: 0px 10px;
     }
     .comment_top> div:nth-child(1){
         display: none;
