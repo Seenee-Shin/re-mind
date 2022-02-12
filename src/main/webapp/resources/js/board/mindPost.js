@@ -55,9 +55,12 @@ const coordinate = null;
 
 $(".item").on("mouseup",function(e){
     isDragging = false;
-      const coordLeft = $(this).position().left;
-      const coordTop = $(this).position().top;
+      const Left = $(this).position().left;
+      const Top = $(this).position().top;
 	  const postNo = $(this).children(".postNo").val();
+
+		coordLeft = Math.floor(Left);
+		coordTop = Math.floor(Top);
 	
 	$.ajax({
 		url : "saveCoord",

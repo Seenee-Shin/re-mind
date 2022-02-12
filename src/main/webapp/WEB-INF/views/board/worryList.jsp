@@ -23,7 +23,7 @@
 	                    <div class="search_area">
 	                        <div class="search_wrap">
 	                            <select name="search_category" id="search_category">
-	                                <option value="id">아이디</option>
+	                                <option value="id">닉네임</option>
 	                                <option value="content">내용</option>
 	                            </select>
 	                            <input type="text" name="freeboard_search">
@@ -80,16 +80,16 @@
 
 	                        <div class="write_option_area">
 	                            <div class="check_box_wrap">
-	                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active"> 댓글허용 </label>
+	                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
 	                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
 	                            </div>
 
 	                            <div class="check_box_wrap">
-	                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩허용</label>
+	                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩 허용</label>
 									<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
 	                            </div>
 	                            <div class="check_box_wrap">
-	                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active"> 공감 허용</label>
+	                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active">공감 허용</label>
 	                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
 	                            </div>
 
@@ -159,12 +159,16 @@
 		$(".worry_search_area .dark_brown_border").eq(0).addClass("active");
 		$(".worry_search_area input[name='worryCategory']").eq(0).prop("checked", true);
 
-		const data = {
-			"searchCategory" : $("#search_category option:selected").val(),
-			"searchText" : $("[name='freeboard_search']").val()
+		const searchText = $("[name='freeboard_search']").val().trim();
+		if (searchText != "") {
+			const data = {
+				"searchCategory" : $("#search_category option:selected").val(),
+				"searchText" : searchText
+			}
+			getFreeList(data);
+		} else {
+			getFreeList();
 		}
-
-		getWorryList(data);
 	});
 
 	// list 가져오기
@@ -231,7 +235,7 @@
 						<div class="board_icon_wrap">
 							<div class="comment_wrap">
                                 <i class="far fa-comment dark-brown"></i>
-                                <p>` + 5 + `</p>
+                                <p>` + item.replyCount + `</p>
                             </div>
 							<div class="like_warp">
                                 <img src="${contextPath}/resources/images/icon/smile.png" alt="" data-icon="1001">
@@ -284,10 +288,10 @@
 	// 고민작성하기 댓글
 	$("#replyCheckCode").on("click", function () {
 		if ($(this).is(":checked")) {
-			$(this).prev().addClass("dark_brown_bg").addClass("active");
+			$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
 			$(this).val(1);
 		} else {
-			$(this).prev().removeClass("dark_brown_bg").removeClass("active");
+			$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
 			$(this).val(0);
 		}
 	});
@@ -295,10 +299,10 @@
 	// 고민작성하기 스크랩
 	$("#scrapCheckCode").on("click", function () {
 		if ($(this).is(":checked")) {
-			$(this).prev().addClass("dark_brown_bg").addClass("active");
+			$(this).prev().addClass("dark_brown_bg").addClass("active").text("스크랩 허용");
 			$(this).val(1);
 		} else {
-			$(this).prev().removeClass("dark_brown_bg").removeClass("active");
+			$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("스크랩 비허용");
 			$(this).val(2);
 		}
 	});
@@ -306,18 +310,13 @@
 	// 고민작성하기 공감
 	$("#empathyCheckCode").on("click", function () {
 		if ($(this).is(":checked")) {
-			$(this).prev().addClass("dark_brown_bg").addClass("active");
+			$(this).prev().addClass("dark_brown_bg").addClass("active").text("공감 허용");
 			$(this).val(1);
 		} else {
-			$(this).prev().removeClass("dark_brown_bg").removeClass("active");
+			$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("공감 비허용");
 			$(this).val(2);
 		}
 	});
-
-
-
-
-
 
 
 </script>

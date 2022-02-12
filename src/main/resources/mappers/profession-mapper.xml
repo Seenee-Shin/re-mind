@@ -116,7 +116,9 @@
         <result property="professionNo" column="PROFESSION_NO"/>
         <result property="letterReply" column="LETTER_REPLY"/>
     </resultMap>
-	
+	    <select id="selectProfessionRegister" resultMap="profession_rm">
+	    	SELECT STATUS_CD FROM PROFESSION WHERE PROFESSION_NO = #{professionNo}
+	    </select>
 
     <select id="selectProfessionCount" resultType="_int">
         SELECT COUNT(*) MAX_VALUE FROM(
@@ -131,7 +133,7 @@
 	<!--    그그그머냐ㅐ 그거 검색 -->
     <select id="selectProfession" resultMap="profession_rm">
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
-               PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
+               PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,STATUS_CD
                LISTAGG(COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
                LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
         FROM PROFESSION_PRICE
@@ -236,6 +238,7 @@
 		INSERT INTO IMAGE (IMAGE_NO,IMAGE_PATH,IMAGE_NM,IMAGE_ORIGINAL,IMAGE_LEVEL,PROFESSION_NO)
 		VALUES(SEQ_IMAGE_NO.NEXTVAL,#{imagePath},#{imageName},#{imageOriginal},#{imageLevel},#{professionNo})
 	</insert>
+	
 
     <!-- 프로필 view용 가격조회 -->
     <select id="selectPrice" resultMap="professionPrice_rm">
@@ -275,7 +278,7 @@
     </insert>
 
 	<insert id="insertPrice">
-		ISERT INTO PROFESSION_PRICE VALUES(#{professionNo},#{counsulPrice},0) 
+		INSERT INTO PROFESSION_PRICE VALUES(#{professionNo},#{categoryCode},0) 
 	</insert>
     <!-- 로그인 -->
     <select id="proLogin" resultMap="profession_rm">
@@ -288,7 +291,28 @@
         UPDATE PROFESSION_PRICE SET COUNSEL_PRICE =#{counselPrice}
         WHERE PROFESSION_NO = #{professionNo} AND COUNSEL_CATEGORY_NO=#{categoryCode}
     </update>
+    
+    <select id="selectProfilePic" parameterType="Image"  resultMap="image_rm">
+    	SELECT IMAGE_NO FROM IMAGE WHERE PROFESSION_NO=#{professionNo} AND IMAGE_LEVEL=#{imageLevel}
+    </select>
 
+	<!-- 상담사 프로필사진 Insert-->
+	<insert id="insertProfilePic" parameterType="Image">
+		INSERT INTO IMAGE (IMAGE_NO,IMAGE_PATH,IMAGE_NM,IMAGE_ORIGINAL,IMAGE_LEVEL,PROFESSION_NO)
+		VALUES(SEQ_IMAGE_NO.NEXTVAL,#{imagePath},#{imageName},#{imageOriginal},#{imageLevel},#{professionNo})
+	</insert>
+	
+	<!-- 상담사 사진 업데이트  -->
+	<update id="updateProfilePic">
+		UPDATE IMAGE SET 
+			IMAGE_PATH = #{imagePath},
+			IMAGE_NM = #{imageName},
+			IMAGE_ORIGINAL=#{imageOriginal}
+			
+		WHERE PROFESSION_NO=#{professionNo}
+		AND IMAGE_LEVEL=#{imageLevel}
+			
+	</update>
 
 
     <!-- 채팅방 입장 -->

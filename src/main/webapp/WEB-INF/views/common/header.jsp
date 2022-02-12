@@ -101,11 +101,11 @@
                         <li><a href="${contextPath}/free/insert">자유게시판</a></li>
                         <li><a href="${contextPath}/worry/worryList">고민상담 게시판</a></li>
                         <li><a href="${contextPath}/post/list">마인드 포스팃</a></li>
-                        <li><a href="${contextPath}/secret/secretList">털어놓기</a></li>
+                        <li><a href="${contextPath}/secret/insert">털어놓기</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:void(0);">공지사항</a> <p class="menu_toggle">+</p>
+                    <a href="${contextPath}/notice/list">공지사항</a> <p class="menu_toggle">+</p>
                 </li>
                 <li><!-- 로그인 안했으면 로그인 버튼 -->
                     <!-- <a href="">로그인</a> -->
@@ -115,7 +115,6 @@
                         <li><a href="${contextPath}/my/appointment">마이 상담</a></li>
                         <li><a href="${contextPath}/my/myBoardList">마이 활동</a></li>
                         <li><a href="${contextPath}/my/updateMyInfo">마이 정보</a></li>
-                        <li><a href="#">마이 정보</a></li>
                     </ul>
                 </li>
                 <li ><!-- 로그인 했으면 로그아웃 버튼 보이기

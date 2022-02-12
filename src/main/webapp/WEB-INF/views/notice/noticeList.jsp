@@ -23,84 +23,34 @@
                     </thead>
                    
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>[중요]커뮤니티 웹 회원 개인정보처리방침 개정 고지</td>
-                            <td>2022.01.05</td>
-                        </tr>
+                    <c:choose>
+						
+						<c:when test="${empty noticeList}"> 
+							<tr>
+								<td colspan="3">게시글이 존재하지 않습니다.</td>
+							</tr>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach items="${noticeList}" var="notice">
+								<tr>
+									<td>${notice.noticeNo}</td>
+									<td class="boardTitle">
+										<a href="${contextPath}/notice/view/${notice.noticeNo}">
+													${notice.noticeTitle} </a></td>
+									<td>${notice.createDate}</td>
+                        		<tr>
+                        	</c:forEach>
+                         </c:otherwise>
+					</c:choose>	
+										
                     </tbody>
                 </table>
-                <div class="search">
-                    <form class="search_form">
-                        <select>
-                            <option value="title">글제목</option>
-                            <option value="content">내용</option>
-                            <option value="titcont">제목+내용</option>
-                        </select> 
-                        <input type="text">
-                        <button >검색</button>
-                    </form>
-                </div>
+                
 
                     <ul class="pagination">
                      <li class="select_pg"> <a>1</a></li>
-                     <li> <a>2</a></li>
-                     <li> <a>3</a></li>
-                     <li> <a>4</a></li>
-                     <li> <a>5</a></li>
-                     <li> <a>6</a></li>
-                     <li> <a>7</a></li>
-                     <li> <a>8</a></li>
-                     <li> <a>9</a></li>
-                     <li> <a>10</a></li>
                     </ul>
-
-
 
             </article>
 </main>

@@ -177,6 +177,7 @@ function makeList(){
     }
 
     $.each(resultList, function (i, item){
+        console.log(resultList);
 
         let tr = $('<tr class="board-view" style="background-color: rgb(252, 247, 243);">');
 
@@ -188,19 +189,19 @@ function makeList(){
         // 주소 이동시키야지
         if(btnNumber == 1){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 게시글입니다"+"</a></td>");
             td3 = $("<td>"+timeForToday(item.createDate)+"</td>");
         }else if(btnNumber == 2){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.replyContent+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 게시글의 댓글입니다"+"</a></td>");
             td3 = $("<td>"+timeForToday(item.replyCreateDate)+"</td>");
         }else if(btnNumber == 3){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 스크랩한 게시글입니다"+"</a></td>");
             td3 = $("<td>"+timeForToday(item.enrollDate)+"</td>");
         }else if(btnNumber == 4){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardTitle+"</a></td>")
+            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 공감한 게시글입니다"+"</a></td>")
             td3 = $("<td>"+timeForToday(item.createDate)+"</td>");
         }
 

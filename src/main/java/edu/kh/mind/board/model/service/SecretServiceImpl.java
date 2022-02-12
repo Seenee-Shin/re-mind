@@ -25,14 +25,110 @@ public class SecretServiceImpl implements SecretService {
 
 	
 	@Override
-	public List<Board> selectSecretList() {
-		return dao.selectSecretList();
+	public List<Board> selectSecretList(Map<String, String> param) {
+		param.put("boardCategoryCode", "104");
+		return dao.selectSecretList(param);
+	}
+	@Override
+	public int countSecretList() {
+		return dao.countSecretList();
 	}
 
-
+	
 	@Override
-	public List<WorryCategory> selectWorryCategory() {
-		return dao.selectWorryCategory();
+	public int insertSecretBoard(Board board, List<MultipartFile> images, String webPath, String serverPath) {
+		
+		
+		board.setBoardContent(Util.XSS((String)board.getBoardContent()));
+		board.setBoardContent(Util.changeNewLine((String)board.getBoardContent()));
+		
+		board.setBoardCategoryCode(104);
+		
+		System.out.println(images);
+		
+		int boardNo= dao.insertSecretBoard(board);
+		
+		System.out.println(boardNo);
+		
+		if(boardNo>0) {
+			//실제 업로드도니 이미지를 분별하여 list<Boardimages> imgList에 담기
+			List<Image> imgList = new ArrayList<Image>();
+			
+			for(int i = 0 ; i<images.size(); i++) {
+				//i == images index == level
+				
+				//각 인덱스 요소에 파일이 업로드 되었는지 검사
+				if(!images.get(i).getOriginalFilename().equals("")) {
+					//업로드가 된 경우 MultipartFile에서 DB저장에 필요한 데이터를 추출 -> add BoardImage -> add imgList
+					
+					Image img = new Image();
+					img.setImagePath(webPath); //web access
+					img.setImageOriginal(images.get(i).getOriginalFilename()); //OriginalFileName
+					//image rename
+					img.setImageName(Util.fileRename(images.get(i).getOriginalFilename()));
+					img.setImageLevel(i);
+					img.setBoardNo(boardNo); //return from dao 
+					
+					
+					System.out.println(img.toString());
+					imgList.add(img); //add to List
+				}// end if
+			}//end for
+			System.out.println("------------------------");
+			System.out.println(imgList);
+			
+			
+			int result = 0;
+			//upload images if there are infomation about imgList
+			if(!imgList.isEmpty()) {
+				
+				for(int i = 0; i <imgList.size(); i++) {
+					System.out.println("------------------------");
+					System.out.println(imgList.get(i));
+					result += dao.insertImgList(imgList.get(i));
+				}
+				
+				System.out.println(result);
+				//삽입 성공한 행의 개수와 imgList 개수가 같을 경우 파일을 서버에 저장 
+				//1순위로 확인할 것 : servers -> fin server -> Overview -> serve module 확인 
+				
+				
+				// images : MultipartFile List : 실제 파일 + 정보 
+				// imgList : BoardImage List, DB에 저장할 파일 정보
+				if(result == imgList.size()) {
+					for(int i = 0; i <imgList.size(); i++) {
+						
+						//업로드된 파일이 있는 images의 인덱스 요소를 얻어와 지정된 경로와 이름으로 파일로 변환하여 저장
+						try {
+							images.get(imgList.get(i).getImageLevel())
+							.transferTo(new File(serverPath+"/"+ imgList.get(i).getImageName()));
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							
+							throw new InsertCertificationFailException("파일 변환중 문제 발생");
+							
+							//파일 변환이 실패할 경우 사용자 정의 예외 발생
+						}
+					}
+				}else {
+					//업로드된 이미지 수와 삽입된 행의 수가 다를경우 
+					//사용자 정의 예외 발생
+				  throw new InsertCertificationFailException();
+				  
+				}
+			}
+		}
+		return boardNo;
+	}
+
+	// 수정화면 전환용
+	@Override
+	public Board selectBoard(int boardNo) {
+		Board board = dao.selectBoard(boardNo);
+		
+		board.setBoardContent( Util.changeNewLine2( board.getBoardContent() )  );
+		return board;
 	}
 
 
@@ -165,87 +261,13 @@ public class SecretServiceImpl implements SecretService {
 
 
 	@Override
-	public int insertSecretBoard(Board board, List<MultipartFile> images, String webPath, String serverPath) {
-		
-		board.setBoardContent(Util.XSS((String)board.getBoardContent()));
-		board.setBoardContent(Util.changeNewLine((String)board.getBoardContent()));
-		
-		board.setBoardCategoryCode(104);
-		
-		System.out.println(images);
-		
-		int boardNo= dao.insertSecretBoard(board);
-		
-		System.out.println(boardNo);
-		
-		if(boardNo>0) {
-			//실제 업로드도니 이미지를 분별하여 list<Boardimages> imgList에 담기
-			List<Image> imgList = new ArrayList<Image>();
-			
-			for(int i = 0 ; i<images.size(); i++) {
-				//i == images index == level
-				
-				//각 인덱스 요소에 파일이 업로드 되었는지 검사
-				if(!images.get(i).getOriginalFilename().equals("")) {
-					//업로드가 된 경우 MultipartFile에서 DB저장에 필요한 데이터를 추출 -> add BoardImage -> add imgList
-					
-					Image img = new Image();
-					img.setImagePath(webPath); //web access
-					img.setImageOriginal(images.get(i).getOriginalFilename()); //OriginalFileName
-					//image rename
-					img.setImageName(Util.fileRename(images.get(i).getOriginalFilename()));
-					img.setImageLevel(i);
-					img.setBoardNo(boardNo); //return from dao 
-					
-					
-					System.out.println(img.toString());
-					imgList.add(img); //add to List
-				}// end if
-			}//end for
-			System.out.println("------------------------");
-			System.out.println(imgList);
-			
-			
-			int result = 0;
-			//upload images if there are infomation about imgList
-			if(!imgList.isEmpty()) {
-				
-				for(int i = 0; i <imgList.size(); i++) {
-					System.out.println("------------------------");
-					System.out.println(imgList.get(i));
-					result += dao.insertImgList(imgList.get(i));
-				}
-				
-				System.out.println(result);
-				//삽입 성공한 행의 개수와 imgList 개수가 같을 경우 파일을 서버에 저장 
-				//1순위로 확인할 것 : servers -> fin server -> Overview -> serve module 확인 
-				
-				
-				// images : MultipartFile List : 실제 파일 + 정보 
-				// imgList : BoardImage List, DB에 저장할 파일 정보
-				if(result == imgList.size()) {
-					for(int i = 0; i <imgList.size(); i++) {
-						
-						//업로드된 파일이 있는 images의 인덱스 요소를 얻어와 지정된 경로와 이름으로 파일로 변환하여 저장
-						try {
-							images.get(imgList.get(i).getImageLevel())
-							.transferTo(new File(serverPath+"/"+ imgList.get(i).getImageName()));
-						} catch (Exception e) {
-							e.printStackTrace();
-							
-							throw new InsertCertificationFailException("파일 변환중 문제 발생");
-							
-						}
-					}
-				}else {
-				  throw new InsertCertificationFailException();
-				  
-				}
-			}
-		}
-		return boardNo;
+	public int deleteBoard(int boardNo) {
+		return dao.deleteBoard(boardNo);
 	}
+
+
 	
+
 	
 	
 }

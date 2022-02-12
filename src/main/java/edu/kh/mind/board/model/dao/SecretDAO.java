@@ -17,14 +17,10 @@ public class SecretDAO {
 	@Autowired //의존성 주입
 	private SqlSessionTemplate sqlSession;
 
-	public List<Board> selectSecretList() {
-		return sqlSession.selectList("secretMapper.selectSecretList");
+	public List<Board> selectSecretList(Map<String, String> param) {
+		return sqlSession.selectList("secretMapper.selectSecretList", param);
 	}
 
-	public List<WorryCategory> selectWorryCategory() {
-		return sqlSession.selectList("secretMapper.selectWorryCategory");
-	
-	}
 
 	public int updateBoard(Board board) {
 		return sqlSession.update("secretMapper.updateBoard", board);
@@ -51,6 +47,21 @@ public class SecretDAO {
 
 	public int insertImgList(Image image) {
 		return sqlSession.insert("secretMapper.insertImgList", image);
+	}
+
+
+	public Board selectBoard(int boardNo) {
+		return sqlSession.selectOne("secretMapper.selectBoard", boardNo);
+	}
+
+
+	public int deleteBoard(int boardNo) {
+		return sqlSession.update("secretMapper.deleteBoard", boardNo);
+	}
+
+
+	public int countSecretList() {
+		return sqlSession.selectOne("secretMapper.countSecretList");
 	}
 
 }

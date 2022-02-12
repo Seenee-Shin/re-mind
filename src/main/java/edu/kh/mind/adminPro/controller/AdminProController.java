@@ -43,16 +43,16 @@ public class AdminProController {
 	}
 
 	// 로그인 페이지
-	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
-	public String proLoginForm(HttpSession session) {
-
-		String path = "adminPro/proLogin";
-		if (session.getAttribute("loginPro") != null) {
-			path = "redirect:/adminPro/proReservation";
-		}
-		
-		return path;
-	}
+//	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
+//	public String proLoginForm(HttpSession session) {
+//
+//		String path = "adminPro/proLogin";
+//		if (session.getAttribute("loginPro") != null) {
+//			path = "redirect:/adminPro/proReservation";
+//		}
+//		
+//		return path;
+//	}
 
 	// 로그인
 	@RequestMapping(value="proLogin", method = RequestMethod.POST)
@@ -146,7 +146,7 @@ public class AdminProController {
         int result = service.chkAuth(profession);
         
         if(result == 0) {
-            Util.swalSetMessage("다시 인증해주세요","","error", ra);;
+            Util.swalSetMessage("다시 인증해주세요","","error", ra);
             return "redirect:/";
         }else {
         	
@@ -159,54 +159,65 @@ public class AdminProController {
     
     //상담사 정보등록 페이지 연결
     @RequestMapping(value="proRegisterDetail/{professionNo}", method = RequestMethod.GET)
-    public String insertproDetail(){
+    public String insertproDetail(@PathVariable int professionNo,Model model){
     	
+    	model.addAttribute("professionNo",professionNo);
     	return "adminPro/proRegisterDetail";
     }
     
     
     //상담사 정보등록 
     @RequestMapping(value = "proRegisterDetail", method = RequestMethod.POST )
-    public String insertproDetail(@ModelAttribute("loginPro") Profession loginPro, 
-    							 ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile certification,
+    public String insertproDetail( ProfessionHospital proHospital, ProfessionInformation proInfo, MultipartFile certification,Profession profession,
     							Model md, RedirectAttributes ra, HttpSession session) {
     	
+    	
     	//loginPro의 ProfessionNo set
-    	proHospital.setProfessionNo(loginPro.getProfessionNo());
-    	proInfo.setProfessionNo(loginPro.getProfessionNo());
+    	Profession result = service.selectProfessionRegister(profession);
     	
+    	proHospital.setProfessionNo(profession.getProfessionNo());
+    	proInfo.setProfessionNo(profession.getProfessionNo());
     	
-    	//학력증명서 
-    	//웹 접근경로(web path), 서버 저장경로(serverPath)
-		String webPath = "/resources/images/pro/certification";
-		
-		String serverPath= session.getServletContext().getRealPath(webPath);
+    	int StatusCode = result.getStatusCode();
     	
-    	//병원정보 등록
-    	int hResult = service.insertProHospital(proHospital);
-    	
-    	System.out.println(certification);
-    	
-		String path = null; 
-		
-    	if(hResult < 0) {
-			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-			path = "/adminPro/proRegisterDetail"+loginPro.getProfessionNo();
-    	}else {
-    		//학력정보 입력
-    		int iResult = service.insertProInfo(proInfo,certification, webPath, serverPath);
+    	String path = null; 
+    	if(StatusCode == 3) {
+    		
+    		//학력증명서 
+    		//웹 접근경로(web path), 서버 저장경로(serverPath)
+    		String webPath = "/resources/images/pro/certification";
+    		
+    		String serverPath= session.getServletContext().getRealPath(webPath);
+    		
+    		//병원정보 등록
+    		int hResult = service.insertProHospital(proHospital);
+    		
+    		System.out.println(certification);
     		
     		
-    		if(iResult > 0) { // insert 성공 
-    			Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
-    			path = "adminPro/proLogin";
-    		}else {
+    		if(hResult < 0) {
     			Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-    			path = "/adminPro/proRegisterDetail"+loginPro.getProfessionNo();
+    			path = "/adminPro/proRegisterDetail"+result.getProfessionNo();
+    		}else {
+    			//학력정보 입력
+    			int iResult = service.insertProInfo(proInfo,certification, webPath, serverPath);
     			
+    			
+    			if(iResult > 0) { // insert 성공 
+    				Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
+    				path = "proLogin";
+    			}else {
+    				Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
+    				path = "/adminPro/proRegisterDetail"+result.getProfessionNo();
+    				
+    			}
     		}
+    	}else {
+    		Util.swalSetMessage("이미 승인 완료된 상담사입니다. 로그인 해주세요", null, "error", ra);
+			path = "/adminPro/proRegisterDetail"+result.getProfessionNo();
     	}
     	
+ 
     	return "redirect:"+path;
     }
     
@@ -225,8 +236,10 @@ public class AdminProController {
     @RequestMapping(value = "update/{professionNo}" , method = RequestMethod.GET)
     public String AdminProProfile(@PathVariable int professionNo, Model model) {
 		List<WorryCategory> category = service.selectWorryCategory();
+		
 		List<ProfessionPrice> price = service.selectPrice(professionNo);
 		
+		//프로필 정보 조회해 오기
 		
 		model.addAttribute("category", category);
 		model.addAttribute("price", price);
@@ -238,20 +251,18 @@ public class AdminProController {
     //상담사 프로필 삽입
     @RequestMapping(value = "update/{professionNo}", method = RequestMethod.POST)
     public String AdminProProfile(@ModelAttribute("loginPro") Profession loginPro,ProfessionInformation proInfo, ProfessionPrice price, @RequestParam List<String> counselPrice,
-    		 MultipartFile proProfile, HttpSession session, @PathVariable int professionNo, String worryCategoryCode, RedirectAttributes ra ) {
+    		 MultipartFile proProfile, HttpSession session, @PathVariable int professionNo, String worryCategoryCode, RedirectAttributes ra, Model model ) {
 		
 		proInfo.setProfessionNo(loginPro.getProfessionNo());
 		proInfo.setProfessionTag(worryCategoryCode);
 		  
 		System.out.println(proInfo.toString());
 		
-    	//학력증명서 
     	//웹 접근경로(web path), 서버 저장경로(serverPath)
 		String webPath = "/resources/images/pro/pro_img";
-		
 		String serverPath= session.getServletContext().getRealPath(webPath);
 		
-		
+		//상담사 프로필 사진 업 
 		int result = service.updateProProfile(proInfo,proProfile,webPath,serverPath);
 		
 		 
@@ -262,7 +273,10 @@ public class AdminProController {
     		
     		if(pResult > 0) {
     			Util.swalSetMessage("관리자 승인을 기다려 주세요", null, "success", ra);
+    			
+    			
     			path = "/AdminProProfile/"+loginPro.getProfessionNo();
+    			
     			
     		}else {
     			Util.swalSetMessage("프로필 수정 실패", null, "error", ra);

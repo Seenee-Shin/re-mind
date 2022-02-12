@@ -21,7 +21,7 @@
         <thead>
         <tr>
             <th class="thead-th">글번호</th>
-            <th class="thead-th">제목</th>
+            <th class="thead-th">카테고리</th>
             <th class="thead-th">작성일</th>
             <th class="thead-th">조회수</th>
         </tr>

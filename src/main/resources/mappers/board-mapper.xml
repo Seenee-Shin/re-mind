@@ -54,6 +54,9 @@
 		<result property="counselPrice" column="COUNSEL_PRICE"/>
 		<result property="avgReviewStarpoint" column="AVG_REVIEW_STARPOINT"/>
 		<result property="countStar" column="COUNT_STAR"/>
+		<result property="priceMin" column="PRICE_MIN"/>
+		<result property="reviewCount" column="REVIEW_COUNT"/>
+		<result property="reviewAvg" column="REVIEW_AVG"/>
 
 		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
@@ -167,7 +170,8 @@
     		SELECT MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_FN,
 			BOARD.BOARD_NO, BOARD_CONTENT, BOARD_CREATE_DT,
 			REPLY_CHECK_CD,SCRAP_CHECK_CD,EM_CHECK_CD,ANON_CHECK_CD,
-			e.EMPATHY_ARRAY, e.CNT_ARRAY
+			e.EMPATHY_ARRAY, e.CNT_ARRAY,
+			(SELECT COUNT(*) FROM REPLY WHERE BOARD_NO = BOARD.BOARD_NO) REPLY_COUNT
 		FROM BOARD
 		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
 		LEFT JOIN(
@@ -189,7 +193,7 @@
 
 			<choose>
 				<when test="searchCategory == 'id'">
-					AND MEMBER_ID LIKE #{val}
+					AND MEMBER_FN LIKE #{val}
 				</when>
 				<otherwise>
 					AND BOARD_CONTENT LIKE #{val}
@@ -237,7 +241,8 @@
 		SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
 			MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_FN,
 			w.WORRY_NM WORRY_CATEGORY_NM,
-			e.EMPATHY_ARRAY, e.CNT_ARRAY
+			e.EMPATHY_ARRAY, e.CNT_ARRAY,
+			(SELECT COUNT(*) FROM REPLY WHERE BOARD_NO = BOARD.BOARD_NO) REPLY_COUNT
 		FROM BOARD
 		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
 		LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
@@ -254,14 +259,17 @@
 			GROUP BY BOARD_NO
 		) e on e.BOARD_NO = BOARD.BOARD_NO
 		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
-		
-		
+
+		<if test="worryCategoryCode != null">
+			AND BOARD.WORRY_CATEGORY_CD = #{worryCategoryCode}
+		</if>
+
 		<if test="searchCategory != null">
 			<bind name="val" value="'%' + searchText + '%'"/>
 			
 			<choose>
 				<when test="searchCategory == 'id'">
-					AND MEMBER_ID LIKE #{val}
+					AND MEMBER_FN LIKE #{val}
 				</when>
 				<otherwise>
 					AND BOARD_CONTENT LIKE #{val}
@@ -388,21 +396,31 @@
 
 	<!-- 내찜사 목록 -->
 	<select id="selectCounselorList" resultMap="board_rm">
-		SELECT DISTINCT IMAGE_NM, IMAGE_PATH,
-						(SELECT ROUND(AVG(REVIEW_STARPOINT / 2),2)
-						 FROM REVIEW
-						 GROUP BY PROFESSION_NO) AS AVG_REVIEW_STARPOINT,
-						COUNT(REVIEW_STARPOINT) AS COUNT_STAR, PROFESSION_NM, PRO_INTRO,
-						LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
-		FROM PROFESSION_WISH
-			LEFT JOIN IMAGE USING(PROFESSION_NO)
-			LEFT JOIN REVIEW USING(PROFESSION_NO)
-			JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
-			JOIN PROFESSION_PRICE USING(PROFESSION_NO)
-			JOIN PROFESSION USING(PROFESSION_NO)
-		WHERE PROFESSION_WISH.MEMBER_NO = #{memberNo} 
-		GROUP BY IMAGE_NM, IMAGE_PATH, REVIEW_STARPOINT,
-			PROFESSION_NM, PRO_INTRO
+		<![CDATA[
+			SELECT W.PROFESSION_NO, W.MEMBER_NO
+				 , P.PROFESSION_NM
+				 , I.IMAGE_PATH, I.IMAGE_LEVEL, I.IMAGE_NM
+				 , PP.COUNSEL_CATEGORY_NO, PP.COUNSEL_PRICE
+				 , PI.PRO_INTRO
+				 , (SELECT COUNT(*) FROM REVIEW
+					WHERE PROFESSION_NO = W.PROFESSION_NO) AS REVIEW_COUNT
+				 , (SELECT  NVL(ROUND(AVG(REVIEW_STARPOINT),2),0) RS_NVL FROM REVIEW
+					WHERE PROFESSION_NO = W.PROFESSION_NO) AS REVIEW_AVG
+				 , (SELECT MIN(COUNSEL_PRICE) FROM PROFESSION_PRICE
+					WHERE PROFESSION_NO = PP.PROFESSION_NO) AS PRICE_MIN
+			FROM PROFESSION_WISH W
+				LEFT JOIN PROFESSION P ON P.PROFESSION_NO = W.PROFESSION_NO
+				LEFT JOIN IMAGE I ON I.PROFESSION_NO = W.PROFESSION_NO
+				LEFT JOIN PROFESSION_INFORMATION PI ON PI.PROFESSION_NO = W.PROFESSION_NO
+				LEFT JOIN (
+				    SELECT PROFESSION_NO
+						, LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
+						, LISTAGG(COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_CATEGORY_NO
+					FROM PROFESSION_PRICE
+					GROUP BY PROFESSION_NO
+				) PP ON PP.PROFESSION_NO = W.PROFESSION_NO
+			WHERE W.MEMBER_NO = #{memberNo}
+		]]>
 	</select>
 
 	<select id="selectProfile" resultType="_int">
@@ -453,5 +471,18 @@
 		INSERT INTO MUTE VALUES(#{memberNo}, #{loginMember})
 	</insert>
 
+	<!-- 스크랩 여부 조회 -->
+	<select id="selectScrap" resultMap="scrap_rm">
+		SELECT SCRAP_NO FROM SCRAP WHERE BOARD_NO = #{boardNo} AND MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 스크랩하기 -->
+	<insert id="insertScrap">
+		INSERT INTO SCRAP VALUES(SEQ_SCRAP_NO.NEXTVAL,#{memberNo} ,#{boardNo}, DEFAULT)
+	</insert>
+	
+	<delete id="deleteScrap">
+		DELETE FROM SCRAP WHERE BOARD_NO = #{boardNo} AND MEMBER_NO = #{memberNo}
+	</delete>
 
 </mapper>

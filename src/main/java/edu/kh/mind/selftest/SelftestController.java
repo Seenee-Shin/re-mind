@@ -18,10 +18,12 @@ public class SelftestController {
 
 
     @RequestMapping(value = "selftestForm", method = RequestMethod.GET)
-    public String selftestForm(Model model){
-    	
+    public String selftestForm(Model model, String type){
+	    System.out.println(type);
+
     	model.addAttribute("css", "selftestForm");
     	model.addAttribute("header", "main");
+		model.addAttribute("type", type);
     	
         return "selftest/selftestForm";
     }

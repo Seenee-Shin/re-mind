@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Scrap;
 
 public interface BoardService {
 
@@ -22,5 +23,8 @@ public interface BoardService {
 	Board selectBoard(int boardNo);
 
 	int deleteBoard(int boardNo);
+
+
+	int boardScrap(Scrap scrap);
 
 }

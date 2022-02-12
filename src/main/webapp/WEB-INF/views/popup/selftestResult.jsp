@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
+ <link rel="stylesheet" href="${contextPath}/resources/css/selftestResult.css">
+
     <form method="GET">
         <div class="selftest_modal">
             <div class="selftest_modal_title">
