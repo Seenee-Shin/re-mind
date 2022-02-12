@@ -45,12 +45,21 @@ public class ProController {
 
 	@GetMapping("proCategory")
 	@ResponseBody
-	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<String> worryCtCd){
+	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<String> worryCtCd,
+							  @RequestParam Map<String, Integer> param){
 
 		List<Profession> pList;
 
+		System.out.println(param.get("last") + " / " + param.get("first"));
+
 		if(worryCtCd != null)	pList = service.selectProfession(worryCtCd);
-		else					pList = service.selectAllProfession();
+		else					pList = service.selectAllProfession(param);
+
+		int result = service.selectProfessionCount();
+
+		Profession p = new Profession();
+		p.setMaxValue(result);
+		pList.add(p);
 
 		return new Gson().toJson(pList);
 	}
