@@ -13,6 +13,9 @@
         <result property="memberGender" column="MEMBER_GENDER"/>
         <result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
         <result property="statusCode" column="STATUS_CD"/>
+        <result property="imagePath" column="IMAGE_PATH"/>
+        <result property="imageName" column="IMAGE_NM"/>
+        
     </resultMap>
 
     <resultMap id="social_rm" type="Naver">
@@ -57,6 +60,15 @@
         AND STATUS_CD = 0
     </select>
     
+    <!-- 프로필 사진  -->
+    <select id="selectUserPic" resultMap="member_rm">
+		SELECT IMAGE_PATH, IMAGE_NM FROM IMAGE 
+		WHERE MEMBER_NO = (    SELECT MEMBER_NO
+		                       FROM MEMBER 
+		                       WHERE MEMBER_ID = #{memberId}
+		                       AND STATUS_CD = 0)
+		AND IMAGE_LEVEL = 0
+    </select>
      <!-- 아이디 중복 검사 -->
 	 <select id="idDupCheck"  resultType="_int" >
 	 SELECT COUNT(*) FROM MEMBER

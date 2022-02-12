@@ -26,11 +26,21 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     public Member emailLogin(Member member) {
-
+    	
+    	
         Member loginMember = dao.emailLogin(member.getMemberId());
+        
+        if(loginMember != null) {
+        	Member image = dao.selectPic(member.getMemberId());
+        	if(image != null) {
+        		loginMember.setImagePath(image.getImagePath());
+        		loginMember.setImageName(image.getImageName());
+        	}
+        }
 
         if(loginMember != null && encoder.matches(member.getMemberPw(), loginMember.getMemberPw())) {
             loginMember.setMemberPw(null);
+            
         } else {
             loginMember = null;
         }
