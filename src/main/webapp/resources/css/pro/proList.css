@@ -153,6 +153,7 @@ input:focus {outline:none;}
 .profile{
     width:200px;
     height:200px;
+    border-radius: 100px;
 }
 /* ----------------------------------- */
 /* 전문가 설명랩 */
@@ -422,3 +423,6 @@ input:focus {outline:none;}
     }
     
 }
+
+.testdiv{overflow-x:hidden;position:absolute;top:0;left:0;}
+.starpoint_box2{position: relative; float:left;}

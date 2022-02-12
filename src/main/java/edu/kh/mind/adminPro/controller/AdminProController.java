@@ -97,6 +97,7 @@ public class AdminProController {
 		
 		//List<Board> proWorryList = service.proWorryListSelect(pro.getProfessionNo());
 		
+		
 		return "adminPro/proWorryList";
 	}
 
