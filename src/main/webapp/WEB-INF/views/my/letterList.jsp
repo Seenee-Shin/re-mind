@@ -142,7 +142,7 @@
 
     function createTable() {
         $.ajax({
-            url: "my/letterList",
+            url: "myLetterList",
             type: "GET",
             success: function (data) {
                 $('#table_id').DataTable({

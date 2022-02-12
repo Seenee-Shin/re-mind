@@ -252,4 +252,9 @@ public class MyServiceImpl implements MyService {
 
         return result;
     }
+
+    @Override
+    public List<Letter> myLetterList(int memberNo) {
+        return null;
+    }
 }
