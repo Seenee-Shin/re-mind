@@ -204,7 +204,7 @@ searchSelect.on("click", function () {
 
 //페이지네이션(무한스크롤 변수 선언)
 var currentPage = 1;
-var infinityLimit = 14; // 한번에 보여질 result 수
+var infinityLimit = 5; // 한번에 보여질 result 수
 var pageSize = 10;
 var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
 // 선 계산(ajax로 넘겨야됨)
@@ -244,12 +244,10 @@ function YesScroll () {
       const fullHeight = fullContent.clientHeight;
       const scrollPosition = pageYOffset;
 
-	   console.log(fullHeight, screenHeight, scrollPosition)
+	   // console.log(fullHeight - screenHeight/2, scrollPosition)
       
-      console.log(fullHeight-screenHeight/2 > scrollPosition)
-      if (fullHeight-screenHeight/2 <= scrollPosition && !oneTime) {
+      if (fullHeight-screenHeight/2 - 100<= scrollPosition && !oneTime) {
          oneTime = true;
-         console.log("나옴? : " + oneTime)
          currentPage = currentPage + 1;
          calcPagination();
          getFreeList();
@@ -309,6 +307,7 @@ if (searchData != null) {
 					iconCnt[empathyArr[i]] = empathyCntArr[i];
 				}
 
+				const board_list_content = $('<div class="board_list_content">');
 				html+=   '<div class="board_list_content">'
 						+'	<div class="board_flex_wrap">'
 						+'		<div class="writer_pic_wrap">'
@@ -371,7 +370,7 @@ if (searchData != null) {
 					html+='    </div>'
 						+'</div>'
 			});
-			$(".free_board_list_wrap").html(html)
+			$(".free_board_list_wrap").append(html)
 
 		},
 		error : function(request, status, error){
