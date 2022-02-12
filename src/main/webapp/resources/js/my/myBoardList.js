@@ -83,7 +83,7 @@ function calcPagination(){
 
     if(endPage > maxPage)   endPage = maxPage;
 
-    if(currentPage <= 10)	prevPage = 1;
+    if(currentPage <= limit)	prevPage = 1;
     else                    prevPage = startPage - 1;
 
     if(endPage == maxPage) nextPage = maxPage;
@@ -93,48 +93,40 @@ function calcPagination(){
     first = last - (limit - 1) <= 0 ? 1 : last - (limit - 1);
 }
 
+function asdasd(){
+    const thdea = $(".thead-th");
+    if(btnNumber == 2)
+        thdea.eq(1).text("댓글 내용");
+    else
+        thdea.eq(1).text("제목");
+
+}
 
 var btnNumber = 1;
 $("#select_myBoardList").on("click", function (){
-
     btnNumber = 1;
-    currentPage = 1;
-
-    resultList.length = 0;
-    calcPagination();
     getBoardList();
 });
 $("#select_myReplyList").on("click", function (){
-
     btnNumber = 2;
-    currentPage = 1;
-
-    resultList.length = 0;
-    calcPagination();
     getReplyList();
 });
 $("#select_myScrapList").on("click", function (){
-
     btnNumber = 3;
-    currentPage = 1;
-
-    resultList.length = 0;
-    calcPagination();
     getScrapList();
-
 });
 
 $("#select_myEmpathyList").on("click", function (){
-
     btnNumber = 4;
-    currentPage = 1;
-
-    resultList.length = 0;
-    calcPagination();
     getEmpathyList();
-
 });
 
+$(".div-btn").on("click", function (){
+    resultList.length = 0;
+    currentPage = 1;
+    calcPagination();
+    asdasd();
+});
 
 
 function timeForToday(value) {
@@ -158,6 +150,12 @@ function timeForToday(value) {
     }
 
     return `${Math.floor(betweenTimeDay / 365)}년전`;
+}
+function getList(number){
+    if(number == 1)      getBoardList();
+    else if(number == 2) getReplyList();
+    else if(number == 3) getScrapList();
+    else if(number == 4) getEmpathyList();
 }
 
 var resultList = [];
@@ -219,7 +217,9 @@ function makeList(){
     const rightSpan = $('<span>></span>');
     const rightDoubleSpan = $('<span>>></span>');
 
-    pagination.append(leftDoubleSpan, leftSpan);
+    if(currentPage != 1)
+        pagination.append(leftDoubleSpan, leftSpan);
+
     for(let i = endPage - 9; i <= endPage; i++){
         if(i < 1) i = 1;
 
@@ -228,7 +228,10 @@ function makeList(){
         else
             pagination.append($('<div>' + i + '</div>'));
     }
-    pagination.append(rightSpan, rightDoubleSpan);
+
+    if(currentPage != endPage)
+        pagination.append(rightSpan, rightDoubleSpan);
+
     colorSet();
 }
 
@@ -239,11 +242,7 @@ $(document).on("click", "#pagination div", function (){
     currentPage = Number.parseInt(clickable);
 
     calcPagination();
-
-    if(btnNumber == 1)      getBoardList();
-    else if(btnNumber == 2) getReplyList();
-    else if(btnNumber == 3) getScrapList();
-    else if(btnNumber == 4) getEmpathyList();
+    getList(btnNumber);
 
     makeList();
 });
@@ -264,11 +263,7 @@ $(document).on("click", "#pagination span", function (){
 
     leftRightCalc(clickable);
     calcPagination();
-
-    if(btnNumber == 1)      getBoardList();
-    else if(btnNumber == 2) getReplyList();
-    else if(btnNumber == 3) getScrapList();
-    else if(btnNumber == 4) getEmpathyList();
+    getList(btnNumber);
 
     makeList();
 });

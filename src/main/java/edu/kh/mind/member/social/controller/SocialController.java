@@ -146,8 +146,6 @@ public class SocialController {
 
         JSONObject response_obj = (JSONObject) jsonObj.get("response");
 
-        System.out.println("폰 : " + response_obj.get("mobile"));
-
         Naver naver = new Naver();
         naver.setMemberSocialToken(oauthToken.getRefreshToken());
         naver.setSocialType("naver");
