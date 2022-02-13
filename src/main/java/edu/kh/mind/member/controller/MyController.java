@@ -104,7 +104,7 @@ public class MyController {
         String path = "";
 
         if(session.getAttribute("loginMember") != null) {
-            path = "my/appointment/past";
+            path = "my/appointmentPast";
         } else {
             Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
 
@@ -507,7 +507,6 @@ public class MyController {
         image.setMemberNo(loginMember.getMemberNo());
 
         member.setMemberPw(param.get("memberPw"));
-        System.out.println(param.get("mobile_memberFName") + " / " + param.get("memberFName") + loginMember.getMemberFName());
         if(param.get("memberFName").equals(loginMember.getMemberFName())){
             member.setMemberFName(param.get("mobile_memberFName"));
         }else if(param.get("mobile_memberFName").equals(loginMember.getMemberFName())){
