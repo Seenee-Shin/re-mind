@@ -13,19 +13,19 @@
            <article class="proInfoWrap">
                <div class="profile">
                    <h3>등록일자</h3>
-                   <p> 2021-03-21</p>
+                   <p> ${loginPro.professionEnrollDate}</p>
                </div>
                <div class="profile" >
                    <h3>상담사 이름</h3>
-                   <p>홍길동</p>
+                   <p> ${loginPro.professionName}</p>
                </div>
                <div class="profile">
                    <h3>상담사 전화번호</h3>
-                   <p>010-2353-2342</p>
+                   <p>${loginPro.professionPhone}</p>
                </div>
                <div class="profile">
                    <h3>상담사 이메일</h3>
-                   <p>010-2353-2342</p>
+                   <p>${loginPro.professionId}</p>
                </div>
                <div class="profile">
                    <h3>병원명</h3>
@@ -75,7 +75,6 @@
            <h3>가격 정보</h3>
            <article class="proPrice">
                    <label for = "tel">전화상담</label>
-                   <div> 원</div>
            </article>
            <article class="proPrice">
                    <label for = "tel">전화상담</label>
