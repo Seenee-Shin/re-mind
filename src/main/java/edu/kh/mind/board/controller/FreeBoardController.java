@@ -146,14 +146,14 @@ public class FreeBoardController {
 
                     int key = Arrays.asList(empathyArr).indexOf(keyStr);
                     System.out.println("key : " + key);
-
+                    
 
                     if (key >= 0) {
                         empathyMap.put(keyStr, Integer.valueOf(cntArr[key]));
                     } else {
                         empathyMap.put(keyStr, 0);
                     }
-                }
+                } 
             }
 
     		model.addAttribute("rList", rList);
