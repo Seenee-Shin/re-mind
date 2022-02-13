@@ -314,15 +314,15 @@ main{
     border: none;
     border-radius: 50%;
     position: relative;
-    background-color: rgb(238 238 238);
+    background-color: #ffe7d8;
     bottom: 170px;
 }
 
 .main_content3 > div > div:nth-child(2) > div {
     width: 100%;
-    height: 370px;
+    height: 400px;
     position: absolute;
-    bottom: 0px;
+    bottom: -2px;
     border-bottom-left-radius: 200px;
     border-bottom-right-radius: 200px;
     background: url(../images/profile1.png) no-repeat center center;
@@ -341,7 +341,7 @@ main{
 
 .main_content4_bc {
     /* background-color: #f8f8f8; */
-    background-color: #f8f8f8;
+    background-color: #fbf6f2;
     height: 100%;
     position: absolute;
     width: 100%;
@@ -355,14 +355,14 @@ main{
     margin: 0 auto;
     left: 0;
     right: 0;
-    justify-content: space-between;
     padding-top: 75px;
     align-items: center;
-    justify-content: space-evenly;
+        justify-content: center;
 
 }
 .main_content4_content_left {
     height: 100%;
+    margin-right: 60px;
 }
 
 .main_content4_content > div:first-child > div:first-child,
@@ -374,11 +374,12 @@ main{
     padding: 8px 0;
     font-size: 15px;
     font-weight: 600;
-    color: rgb(92 92 92);
-    border: 2px solid rgb(92 92 92);
+    color:  rgb(165 153 153);
+    border: 2px solid rgb(165 153 153);
     font-size: 15px;
     font-weight: 600;
     margin-bottom: 20px;
+    background-color: white;
 }
 
 .main_content4_content > div:first-child > div:nth-child(2) {
@@ -387,7 +388,7 @@ main{
 
 .main_content4_content_left_item {
     padding: 10px;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid rgb(165 153 153);
     display: flex;
     align-items: center;
 }
@@ -400,16 +401,19 @@ main{
     letter-spacing: 1px;
     flex-direction: column;
     align-items: flex-start;
+    width: 30%;
 }
 
 .main_content4_content_left_item > div:first-child > span:first-child {
     font-size: 25px;
     font-weight: bold;
+    color: rgb(165 153 153);
 }
 
 .main_content4_content_left_item > div:first-child > span:last-child {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
+    color: rgb(165 153 153);
 }
 
 
@@ -425,7 +429,8 @@ main{
     overflow: hidden;
     white-space: nowrap;
     height:16px;
-    line-height: 14px;
+    line-height: 29px;
+    height: 30px;
 }
 
 .main_content4_content > div:last-child > div {
@@ -437,7 +442,9 @@ main{
 }
 
 .main_content4_content_postit {
-    background-color: #f1ded0;
+    background-image:  url("../../resources/images/6057300.jpg");
+	 object-fit: none;
+	 background-position: -26px;
 }
 
 .main_content4_content_postit2 {
