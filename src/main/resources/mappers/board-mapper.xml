@@ -306,45 +306,54 @@
 
 	<!-- 고민상담 게시글 -->
 	<select id="selectWorryList" resultMap="board_rm">
-		SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
-			MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_FN,
-			w.WORRY_NM WORRY_CATEGORY_NM,
-			e.EMPATHY_ARRAY, e.CNT_ARRAY,
-			(SELECT COUNT(*) FROM REPLY WHERE BOARD_NO = BOARD.BOARD_NO) REPLY_COUNT
-		FROM BOARD
-		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
-		LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
-		LEFT JOIN(
-			SELECT
-				a.BOARD_NO,
-				LISTAGG(  a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
-				LISTAGG(  a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
-			FROM (
-				SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
-				FROM EMPATHY
-				GROUP BY BOARD_NO, EMPATHY_STATUS_CD
-			) a
-			GROUP BY BOARD_NO
-		) e on e.BOARD_NO = BOARD.BOARD_NO
-		WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM, TEMP.* FROM (
+				SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, BOARD.WORRY_CATEGORY_CD,
+					MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_FN,
+					w.WORRY_NM WORRY_CATEGORY_NM,
+					e.EMPATHY_ARRAY, e.CNT_ARRAY,
+					(SELECT COUNT(*) FROM REPLY WHERE BOARD_NO = BOARD.BOARD_NO) REPLY_COUNT
+				FROM BOARD
+				LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
+				LEFT JOIN WORRY_CATEGORY w ON w.worry_category_cd = BOARD.WORRY_CATEGORY_CD
+				LEFT JOIN(
+					SELECT a.BOARD_NO,
+						LISTAGG( a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
+						LISTAGG( a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
+					FROM (
+						SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
+						FROM EMPATHY
+						GROUP BY BOARD_NO, EMPATHY_STATUS_CD
+					) a
+					GROUP BY BOARD_NO
+				) e on e.BOARD_NO = BOARD.BOARD_NO
+				WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
 
-		<if test="worryCategoryCode != null">
-			AND BOARD.WORRY_CATEGORY_CD = #{worryCategoryCode}
-		</if>
+				<if test="muteMember != null">
+					AND MEMBER.MEMBER_NO NOT IN (${muteMember})
+				</if>
 
-		<if test="searchCategory != null">
-			<bind name="val" value="'%' + searchText + '%'"/>
-			
-			<choose>
-				<when test="searchCategory == 'id'">
-					AND MEMBER_FN LIKE #{val}
-				</when>
-				<otherwise>
-					AND BOARD_CONTENT LIKE #{val}
-				</otherwise>
-			</choose>
-		</if>
-		ORDER BY BOARD.BOARD_NO DESC
+				<if test="worryCategoryCode != null">
+					AND BOARD.WORRY_CATEGORY_CD = #{worryCategoryCode}
+				</if>
+
+				<if test="searchCategory != null">
+					<bind name="val" value="'%' + searchText + '%'"/>
+
+					<choose>
+						<when test="searchCategory == 'id'">
+							AND MEMBER_FN LIKE #{val}
+						</when>
+						<otherwise>
+							AND BOARD_CONTENT LIKE #{val}
+						</otherwise>
+					</choose>
+				</if>
+
+				ORDER BY BOARD.BOARD_CREATE_DT DESC
+			) TEMP
+		)
+		WHERE RNUM BETWEEN  #{first} AND #{last}
 	</select>
 
 	<!-- 고민상담 게시글 작성 -->

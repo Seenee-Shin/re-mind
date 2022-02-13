@@ -172,10 +172,12 @@ select{
 }
 
 #free_board_write>i{
-    display: block;
+    /*display: block;*/
     text-align: right;
     font-size: 25px;
     cursor: pointer;
+    position: absolute;
+    right:40px;
 }
 
 #free_board_write>h4{
