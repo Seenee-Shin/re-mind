@@ -15,13 +15,13 @@
 	    </div>
 	    <div id="mobile_pro_category_warp">
 	        <button id="mobile_category_btn">
-	            <img src="${contextPath}/resources/pro/pro_category_mobile.png" class="float-left mobile_category_img">
+	            <img src="${contextPath}/resources/images/pro/pro_category_mobile.png" class="float-left mobile_category_img">
 	            <p class="float-left">전체필터보기</p>
 	        </button>
 	        <div id="mobile_pro_category">
 	            <div id="mobile_pro_category_title">
 	                <h2 class="float-left">전체필터보기</h2>
-	                <img src="${contextPath}/resources/pro/cancel.png" id="category_cancel_btn" class="float-right">
+	                <img src="${contextPath}/resources/images/pro/cancel.png" id="category_cancel_btn" class="float-right">
 	            </div>
 	            <div id="mobile_pro_category_keyword">
 	                <h2 class="pro_category_title">나의 고민 키워드</h2>
