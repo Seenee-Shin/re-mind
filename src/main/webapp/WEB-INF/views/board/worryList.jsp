@@ -216,11 +216,17 @@
 						iconCnt[empathyArr[i]] = empathyCntArr[i];
 					}
 
+					// 프로필 이미지
+					let writerImg = "${contextPath}/resources/images/basicProfile.png";
+					if (item.imagePath != null) {
+						writerImg = "${contextPath}/" + item.imagePath + item.imageName;
+					}
+
 					html += `
 					<div class="board_list_content">
 						<div class="board_flex_wrap">
 							<div class="writer_pic_wrap">
-								<div class="writer_pic light_brown_bg" style="background-image: url();"></div>
+								<div class="writer_pic light_brown_bg" style="background-image: url(` + writerImg + `); background-size:cover;"></div>
 								<ul class="userMenu hidden">
 									<li> <a class="block">차단</a> </li>
 									<input class="hidden" value= ` + item.memberNo + `>
