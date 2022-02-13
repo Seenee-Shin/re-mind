@@ -204,7 +204,7 @@ function makeList(){
         }else if(btnNumber == 4){
             td1 = $("<td>"+item.boardNo+"</td>");
             td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 공감한 게시글입니다"+"</a></td>")
-            td3 = $("<td>"+timeForToday(item.enrollDate)+"</td>");
+            td3 = $("<td>"+timeForToday(item.empEnrollDate)+"</td>");
         }
 
         tr.append(td1, td2, td3, td4);
