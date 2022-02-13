@@ -10,7 +10,7 @@
                 
                 
                 <p class="incidence">
-                   10 건
+                   4 건
                 </p>
                 
                 <table class="notice_board">

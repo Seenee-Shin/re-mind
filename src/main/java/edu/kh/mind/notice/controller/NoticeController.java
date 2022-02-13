@@ -21,6 +21,7 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping("list")
+
 	public String noticeList(Model model) {
 
 		String type = "";
@@ -31,6 +32,7 @@ public class NoticeController {
 		
 		return "notice/noticeList";
 	}
+	
 	
 	@RequestMapping("view/{noticeNo}")
 	public String selectNotice(Model model, @PathVariable("noticeNo") int noticeNo) {

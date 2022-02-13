@@ -18,8 +18,7 @@
               </div>
               <div class="study_content">
                   <div class="image_wrap">
-                  	<div class="naturally">원래대로</div>
-                  
+
                   	<c:choose>
                   		<c:when test="${empty postList}">
                   		</c:when>

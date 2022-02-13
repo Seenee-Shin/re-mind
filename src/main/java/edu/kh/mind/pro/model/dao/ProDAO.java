@@ -49,10 +49,6 @@ public class ProDAO {
         return sqlSession.selectList("professionMapper.selectProfession", worryCtCd);
     }
 
-    public List<Profession> selectAllProfession(Map<String, Integer> param) {
-        return sqlSession.selectList("professionMapper.selectAllProfession", param);
-    }
-
 	public Profession selectPro(int professionNo) {
 		return sqlSession.selectOne("professionMapper.selectProOne", professionNo);
 	}
@@ -141,4 +137,5 @@ public class ProDAO {
 	public Image proImageNameSelect(int professionNo) {
 		return sqlSession.selectOne("boardMapper.proImageNameSelect", professionNo);
 	}
+
 }
