@@ -10,8 +10,8 @@
             <section class="main_content">    
                 <!-- 메인 -->
 
-                <div class="back_btn">
-                    <a href="">
+                 <div class="back_btn">
+                    <a href="${contextPath}/secret/insert">
                         <i class="fas fa-arrow-left"></i> 
                     </a>
                 </div>
@@ -28,8 +28,10 @@
                     </c:choose>
                     </div>
                     <div class="profile_wrap">
-                        <div class="writer_pic light_brown_bg" style="background-image: url();">
-                        </div>
+                       <div class="writer_pic">
+                        <img class="writer_pic secret_pic" src="${contextPath}/resources/images/basicProfile.png"></div>
+                        
+                        
 
                         <div class="writer_id">
                         <c:choose>
@@ -59,11 +61,6 @@
 					</c:if>
 
 					
-					 <c:if test="${board.boardCategoryCode != 104 }">
-              	 	 <p class="otherCategory">다른 게시판 글입니다.</p>
-              	 	 </c:if>
-              	 	
-              	 	 <c:if test="${board.boardCategoryCode == 104 }">
                     <div class=" posting">
                         <p>${board.boardContent}</p>
                         
@@ -77,7 +74,6 @@
                         </c:if>
                        
                     </div>     
-                    </c:if>                 
 
 					
 					<c:if test="${board.empathyCheckCode == 1}">
@@ -116,7 +112,7 @@
 					
 					
                    <div class="report_scrap_wrap">
-	                    <c:if test="${board.scrapCheckCode == 1}">
+	                       <c:if test="${board.scrapCheckCode == 1}">
                         <!-- 스크랩 허용 했을 경우만 -->
 	                      	<a id="btnScrap" class="link-icon scrap"   href="javascript:boardScrap(); ">
 	                      		<img alt="" src="${contextPath}/resources/images/icon/bookmark.png;" class="grey">
@@ -131,38 +127,45 @@
 								<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
 							</a>    
 	    				</c:if>
-                        <a href="">
+                       <%--  <a href="">
 							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
-                        </a>
+                        </a> --%>
                     </div> 
 
 
                 </article>
                 
-               <c:if test="${board.replyCheckCode == 1}">
+              <c:if test="${board.replyCheckCode == 1}">
 					<article class="comment_view_wrap">
 					    <div class="comment_top dark-brown">
 					        <div>
 					            <i class="far fa-comment"></i>
 					            <span>댓글</span> 
-					            <span>(55)</span>
+					            <span>(${board.replyCount})</span>
 					        </div>
 					
 					        <div class="m_comment_wirte" onclick="openComment()">
 					            <i class="far fa-comment"></i>
 					            <span>댓글</span> 
-					            <span>(55)</span>
+					            <span>(${board.replyCount})</span>
 					        </div>
 					    </div>
-					
-				       <div class="write_comment">
+					     
+					     <div class="write_comment" id="write_comment">
 				           
-				           <div class="user_info">
-				               <div class="user_pic light_brown_bg" style="background-image: url();">
-				               </div>
-				
+				          <div class="user_info">
+                           	<c:choose>
+                           		<c:when test="${!empty loginMember.imagePath}">
+                               		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+                           		</c:when>
+                           		<c:otherwise>
+                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
+                           		</c:otherwise>
+                           		
+                               </c:choose>
+	
 				               <div>
-				                   <p>아이디</p>
+				                   <p>${board.memberFn}</p>
 				               </div>
 				           </div>
 				           
@@ -217,6 +220,13 @@
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/board/secretBoard.js"></script>
 <script type="text/javascript">
+
+
+function openComment() {
+	$('#write_comment').toggleClass('active');
+	$('#comment_list').toggleClass('active');
+}
+
 
 	//수정버튼 클릭 시 동작
 	function updateForm(){
@@ -280,7 +290,7 @@
  	function boardScrap() {
  		
  		$.ajax({
- 			url : "${contextPath}/free/boardScrap",
+ 			url : "${contextPath}/secret/boardScrap",
  			type : "get",
  			data : {"boardNo" : boardNo,
  					"memberNo" : loginMemberNo },

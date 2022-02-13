@@ -14,7 +14,7 @@ public interface SecretService {
 
 	List<Board> selectSecretList(Map<String, String> param);
 
-	int updateBoard(Board board, List<MultipartFile> images, String webPath, String serverPath, String deleteImages);
+	int updateBoard(Board board);
 
 	Board selectBoard(int boardNo, int memberNo);
 
