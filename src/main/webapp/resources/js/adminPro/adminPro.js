@@ -142,10 +142,20 @@ $("#proPw, #proPwCheck").on("input", function(){
 		checkPw2.innerText ="비밀번호 불일치"
 		checkPw2.style.color = "red"
 		registCheckObj.pwd2 = true
-		
-		
 	}
 
-	
-	
 })
+
+// 날짜 변환
+function dateFormat(date) {
+	let month = date.getMonth() + 1;
+	let day = date.getDate();
+	let hour = date.getHours();
+	let minute = date.getMinutes();
+	let second = date.getSeconds();
+
+	month = month >= 10 ? month : '0' + month;
+	day = day >= 10 ? day : '0' + day;
+
+	return date.getFullYear() + '-' + month + '-' + day;
+}

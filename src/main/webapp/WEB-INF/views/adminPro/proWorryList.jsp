@@ -31,54 +31,105 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
 
 <script type="text/javascript">
-var lang_kor = {
-        "decimal" : "",
-        "emptyTable" : "데이터가 없습니다.",
-        "info" : "_START_ - _END_ (총 _TOTAL_ 개)",
-        "infoEmpty" : "0개",
-        "infoFiltered" : "(전체 _MAX_ 개 중 검색결과)",
-        "infoPostFix" : "",
-        "thousands" : ",",
-        "lengthMenu" : "_MENU_ 개씩 보기",
-        "loadingRecords" : "로딩중...",
-        "processing" : "처리중...",
-        "search" : "검색 : ",
-        "zeroRecords" : "검색된 데이터가 없습니다.",
-        "paginate" : {
-            "first" : "첫 페이지",
-            "last" : "마지막 페이지",
-            "next" : "다음",
-            "previous" : "이전"
-        },
-        "aria" : {
-            "sortAscending" : " :  오름차순 정렬",
-            "sortDescending" : " :  내림차순 정렬"
-        }
-    };
+// var lang_kor = {
+//         "decimal" : "",
+//         "emptyTable" : "데이터가 없습니다.",
+//         "info" : "_START_ - _END_ (총 _TOTAL_ 개)",
+//         "infoEmpty" : "0개",
+//         "infoFiltered" : "(전체 _MAX_ 개 중 검색결과)",
+//         "infoPostFix" : "",
+//         "thousands" : ",",
+//         "lengthMenu" : "_MENU_ 개씩 보기",
+//         "loadingRecords" : "로딩중...",
+//         "processing" : "처리중...",
+//         "search" : "검색 : ",
+//         "zeroRecords" : "검색된 데이터가 없습니다.",
+//         "paginate" : {
+//             "first" : "첫 페이지",
+//             "last" : "마지막 페이지",
+//             "next" : "다음",
+//             "previous" : "이전"
+//         },
+//         "aria" : {
+//             "sortAscending" : " :  오름차순 정렬",
+//             "sortDescending" : " :  내림차순 정렬"
+//         }
+//     };
 
 
 $(function () {
 	   createTable();
 	})
 
-	function createTable() {
-	   $.ajax({
-	      url: "proWorryList",
-	      type: "POST",
-	      success: function (data) {
-	         $('#table_id').DataTable({
-	            language: lang_kor,
-	            data: data,
-	            columns: [
-	               { data: "boardNo"},
-	               { data: "boardTitle" },
-	               { data: "worryCategoryName" },
-	               { data: "createDate"},
-	            ]
-	         })
-	      }
-	   })
-	}
+function createTable() {
+    // $.ajax({
+    //     url: "proWorryList",
+    //     type: "POST",
+    //     dataType : "json",
+    //     success: function (data) {
+    //         $('#table_id').DataTable({
+    //             data: data,
+    //             columns: [
+    //                 { data: "boardNo"},
+    //                 { data: "boardTitle" },
+    //                 { data: "worryCategoryName" },
+    //                 { data: "createDate"},
+    //             ],
+    //             language: {
+    //                 zeroRecords: "결과값이 없습니다."
+    //             }
+    //         })
+    //     }
+    // })
+
+    $('#table_id').DataTable({
+        autoWidth: false,
+        info: false,
+        lengthChange: false,
+        ordering: false,
+        paging: false,
+        searching: false,
+        serverSide: true,
+        ajax: {
+            type: 'POST',
+            url: 'proWorryList',
+        },
+        columns: [{
+            data: "boardNo",
+            width: '25%',
+            className: 'dt-body-center'
+        }, {
+            data: "boardTitle",
+            width: '25%',
+            className: 'dt-body-center'
+        }, {
+            data: "worryCategoryName",
+            width: '25%',
+            className: 'dt-body-center'
+        }, {
+            data: "createDate",
+            width: '25%',
+            className: 'dt-body-center'
+        }],
+            columnDefs: [{
+            render: function (data, type, row) {
+                return row.count.format();
+            },
+            targets: [1,2,3]
+        }, {
+            render: function (data, type, row) {
+                return row.amount.format();
+            },
+            targets: [4]
+        }],
+        language: {
+            zeroRecords: "결과값이 없습니다."
+        }
+    });
+
+
+
+}
 
 </script>
 

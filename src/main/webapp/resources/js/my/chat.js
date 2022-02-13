@@ -19,6 +19,7 @@ function sendMessage() {
         const nowDate = new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/, '');
         obj.createDate = nowDate.toString();
 
+        console.log(obj);
         chattingSock.send(JSON.stringify(obj));
 
         message.value = "";

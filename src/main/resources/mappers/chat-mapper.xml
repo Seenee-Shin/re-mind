@@ -14,7 +14,7 @@
 
     <select id="existsChat"  resultType="_int">
         SELECT NVL(MAX(CHATTING_NO), 0)
-        FROM CHATTING_TEST
+        FROM CHATTING
         WHERE RESERVATION_NO = #{reservationNo}
         AND MEMBER_NO = #{memberNo}
         AND CHATTING_STATUS_CD = 1
@@ -24,14 +24,14 @@
         SELECT MESSAGE,
             TO_CHAR(CREATE_DT, 'AM', 'nls_date_language=korean') || ' ' || TO_CHAR(CREATE_DT, 'HH:MI') CREATE_DT,
             MEMBER_NO, PROFESSION_NO, PROFESSION_NM
-        FROM CHATTING_MESSAGE_TEST
+        FROM CHATTING_MESSAGE
         LEFT JOIN PROFESSION USING(PROFESSION_NO)
         WHERE CHATTING_NO = #{chattingNo}
         ORDER BY CHAT_NO
     </select>
 
     <insert id="insertMessage">
-        INSERT INTO CHATTING_MESSAGE_TEST VALUES
+        INSERT INTO CHATTING_MESSAGE VALUES
             (SEQ_CM_NO.NEXTVAL, #{message}, TO_DATE(#{createDate}, 'YYYY-MM-DD HH24:MI:SS'),
             <choose>
                 <when test="professionNo != 0">

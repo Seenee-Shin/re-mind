@@ -138,4 +138,8 @@ public class ProDAO {
 		return sqlSession.selectOne("boardMapper.proImageNameSelect", professionNo);
 	}
 
+	// chat insert
+	public void insertChatting(Reservation reservation) {
+		sqlSession.insert("reservationMapper.insertChatting", reservation);
+	}
 }

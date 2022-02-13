@@ -8,33 +8,33 @@
 <jsp:include page="../procommon/header.jsp"></jsp:include>
 
 <main>
-	<h1>상담사 예약 목록</h1>
+    <h1>상담사 예약 목록</h1>
 
-	
-	<table id="table_id" class="display">
-           <thead>
-               <tr>
-                   <th>예약번호</th>
-                   <th>회원번호</th>
-                   <th>상태코드</th>
-                   <th>예약날짜</th>
-                   <th>예약시간</th>
-                   <th>예약구분</th>
-               </tr>
-           </thead>
-           <tbody style="text-align:center;">
-           </tbody>
-       </table>
+
+    <table id="table_id" class="display">
+        <thead>
+        <tr>
+            <th>예약번호</th>
+            <th>회원번호</th>
+            <th>상태코드</th>
+            <th>예약날짜</th>
+            <th>예약시간</th>
+            <th>예약구분</th>
+        </tr>
+        </thead>
+        <tbody style="text-align:center;">
+        </tbody>
+    </table>
 </main>
 
 
 <!-- header include -->
 <jsp:include page="../procommon/footer.jsp"></jsp:include>
- 
+
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
 
 <script type="text/javascript">
-var lang_kor = {
+    var lang_kor = {
         "decimal" : "",
         "emptyTable" : "데이터가 없습니다.",
         "info" : "_START_ - _END_ (총 _TOTAL_ 개)",
@@ -59,46 +59,69 @@ var lang_kor = {
         }
     };
 
+    const today = new Date();
 
-$(function () {
-	   createTable();
-	})
+    $(function () {
+        createTable();
+    })
 
-	function createTable() {
-	   $.ajax({
-	      url: "reservationList",
-	      type: "GET",
-	      success: function (data) {
-	         $('#table_id').DataTable({
-	            language: lang_kor,
-	            data: data,
-	            columns: [
-	               { data: "reservationNo"},
-	               { data: "memberNo" },
-	               { data: "reservationStatusCode" },
-	               { data: null,
-	            	   render : function(data){
-	            		   var d = new Date(data.reservationEnrollDate),
-	            		    
-	            		    month = '' + (d.getMonth() + 1) , 
-	            		    day = '' + d.getDate(), 
-	            		    year = d.getFullYear();
-	            		    
-	            		    if (month.length < 2) month = '0' + month; 
-	            		    if (day.length < 2) day = '0' + day; 
-	            		     
-	            		  return [year, month, day].join('-');
-	            	   }},
-	               { data: null,
-	            	   render: function(data){
-	            		   return data.reservationEnrollTime + ":00";
-	            	   }},
-	               { data: "counselCategoryNm"}
-	            ]
-	         })
-	      }
-	   })
-	}
+    function createTable() {
+        $.ajax({
+            url: "reservationList",
+            type: "GET",
+            success: function (data) {
+                $('#table_id').DataTable({
+                    language: lang_kor,
+                    data: data,
+                    columns: [
+                        { data: "reservationNo"},
+                        { data: "memberNo" },
+                        { data: "reservationStatusCode" },
+                        { data: null,
+                            render : function(data){
+                                var d = new Date(data.reservationEnrollDate),
+
+                                    month = '' + (d.getMonth() + 1) ,
+                                    day = '' + d.getDate(),
+                                    year = d.getFullYear();
+
+                                if (month.length < 2) month = '0' + month;
+                                if (day.length < 2) day = '0' + day;
+
+                                return [year, month, day].join('-');
+                            }},
+                        { data: null,
+                            render: function(data){
+                                return data.reservationEnrollTime + ":00";
+                            }},
+                        { data: null,
+                            render : function (data) {
+
+                                let btn = data.counselCategoryNm;
+
+                                const dataReservationEnrollDate = dateFormat(new Date(data.reservationEnrollDate));
+
+                                if (dateFormat(today) == dataReservationEnrollDate && data.counselCategoryNo == 1) {
+                                    console.log("start");
+                                    if (today.getHours() >= (data.reservationEnrollTime - 1) && today.getHours() < (Number)(data.reservationEnrollTime + 2)) {
+                                        console.log("second");
+                                        btn = '<button type="button" onclick="inputChat(' + data.reservationNo + ')">입장하기</button>';
+                                    }
+                                }
+
+                                return btn;
+                            }
+                        }
+                    ]
+                })
+            }
+        })
+    }
+
+    // 채팅 입장
+    function inputChat(reservationNo) {
+        location.href = contextPath + "/adminPro/chat/room/" + reservationNo;
+    }
 
 </script>
 
