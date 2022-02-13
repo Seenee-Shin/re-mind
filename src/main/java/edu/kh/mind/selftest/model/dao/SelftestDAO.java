@@ -14,12 +14,16 @@ public class SelftestDAO {
     private SqlSessionTemplate sqlSession;
 
 
-
+    // 문항
     public List<Selftest> selectQ(Selftest selftest) {
         return sqlSession.selectList("selftestMapper.selectQ", selftest);
     }
-
+    // 답변
     public List<Selftest> selectA(Selftest selftest) {
         return sqlSession.selectList("selftestMapper.selectA", selftest);
+    }
+    // 결과
+    public List<Selftest> selectR(Selftest selftest) {
+        return sqlSession.selectList("selftestMapper.selectR", selftest);
     }
 }
