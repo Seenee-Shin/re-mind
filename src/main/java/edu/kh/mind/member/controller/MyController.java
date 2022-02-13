@@ -475,11 +475,10 @@ public class MyController {
         String path = null;
         Image image = null;
 
-
         if(session.getAttribute("loginMember") != null) {
             if(naver == null){
                 image = service.getMyImage(loginMember.getMemberNo());
-                path = "my/postscript";
+                path = "my/updateMyInfo";
             }else{
                 Util.swalSetMessage("소셜로그인 회원은 정보수정이 불가능합니다.", null, "info", ra);
                 path = "redirect:/";
