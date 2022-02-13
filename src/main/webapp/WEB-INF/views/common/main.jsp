@@ -228,7 +228,7 @@
                         </div>
                         <div>
                             <p>
-                                ${notice.noticeContent}
+                                ${notice.noticeTitle}
 <%--                                    지역사회서비스 제공 기관 / 바우처 서비스--%>
                             </p>
                         </div>
@@ -247,7 +247,7 @@
     </c:forEach>
             <div>
                 <div class="main_content4_content_postit">
-                    <div>마인드 포스트잇</div>
+                    <div>이달의 연구</div>
                     <div>잊고 있었던 가치나 자신에 대한 생각을 해볼 수 있도록
                         스스로를 돌아보는 질문에 답변을 해보세요.
                     </div>
@@ -379,7 +379,7 @@
         </div>
         <div>
             <div class="mb_main_content4_content_postit2">
-                <div>마인드 포스트잇</div>
+                <div>이달의 연구</div>
                 <div>잊고 있었던 가치나 자신에 대한 생각을 해볼 수 있도록
                     스스로를 돌아보는 질문에 답변을 해보세요.
                 </div>
