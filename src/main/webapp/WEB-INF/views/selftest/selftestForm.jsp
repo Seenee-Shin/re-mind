@@ -40,7 +40,7 @@
     </div>
     <button type="button" class="mb_selfTest_btn">테스트 진행</button>
   </form>
-  <button type="button" id="selfTest_result_btn" style="display:block;" onclick="resultScore()">테스트 결과</button>
+  <button type="button" id="selfTest_result_btn"  onclick="resultScore()">테스트 결과</button>
 </article>
 
 <!-- footer include -->
