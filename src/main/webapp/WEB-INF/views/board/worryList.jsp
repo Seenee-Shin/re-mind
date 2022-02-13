@@ -480,14 +480,15 @@
 			const fullHeight = fullContent.clientHeight;
 			const scrollPosition = pageYOffset;
 
-			// console.log(fullHeight - screenHeight/2, scrollPosition)
+			//이상함
+			console.log(fullHeight-screenHeight/2 - 100);
 
-			if (fullHeight-screenHeight/2 - 100<= scrollPosition && !oneTime) {
+			if (fullHeight-screenHeight/2 - 350<= scrollPosition && !oneTime) {
 				console.log("test");
 				oneTime = true;
 				currentPage = currentPage + 1;
 				calcPagination();
-				getFreeList();
+				getWorryList();
 			}
 		}
 	}
