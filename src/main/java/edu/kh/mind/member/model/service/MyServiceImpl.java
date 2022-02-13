@@ -257,6 +257,7 @@ public class MyServiceImpl implements MyService {
         return result;
     }
 
+    // 쪽지 리스트
     @Override
     public List<Letter> myLetterList(int memberNo) {
         return dao.myLetterList(memberNo);

@@ -24,8 +24,7 @@ $(function () {
     } else {
         $(".selfTest_op").eq(0).click();
     }
-})
-
+});
 
 function next(){
     count = count + 1;
@@ -123,13 +122,21 @@ function ajax(){
                 + '</div>'
 
             let html2 = "";
-            console.log(result.Answer.length);
+            let html3 = "";
+            // console.log(result.Answer.length);   총 길이
 
 
+            if(ctCode == 4){
+                html3 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[0].answerType +')">' + result.Answer[0].answerContent + '</div>'
+                      + '<div class="selfTest_result" onclick="saveScore('+ result.Answer[1].answerType +')">' + result.Answer[1].answerContent + '</div>';
+
+            }else{
                 for(let i=0; i< result.Answer.length; i++){
                     html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +')">' + result.Answer[i].answerContent + '</div>';
 
+                }
             }
+
 
             //console.log(html2);
             //     +     '   <div id="btn1" class="selfTest_result">' result.Answer[0] '</div>'
@@ -137,7 +144,13 @@ function ajax(){
             // +     '   <div id="btn3" class="selfTest_result">대체로 그렇다</div>'
             // +       '<div id="btn4" class="selfTest_result">항상 그렇다</div>'
             $(".selfTest").html(html);
+            if (ctCode == 4){
+
+                $("#selfTest_content_option").append(html3);
+            }else{
             $("#selfTest_content_option").append(html2);
+
+            }
 
         },
         error(request,status,error){
