@@ -9,7 +9,7 @@ import edu.kh.mind.notice.model.vo.Notice;
 
 public interface NoticeService {
 
-	List<Notice> noticeList();
+	List<Notice> noticeList(String type);
 
 	Notice selectNotice(int noticeNo);
 

@@ -47,6 +47,8 @@ public class Board {
 	private int angryCount;
 	private int surpriseCount;
 	
+	
+	private List<Image> profileImgList;
 	private List<Image> imgList;
 	private List<Empathy> emList;
 
@@ -472,5 +474,13 @@ public class Board {
 				", worryEmpathyArray='" + worryEmpathyArray + '\'' +
 				", worryCntArray='" + worryCntArray + '\'' +
 				'}';
+	}
+
+	public List<Image> getProfileImgList() {
+		return profileImgList;
+	}
+
+	public void setProfileImgList(List<Image> profileImgList) {
+		this.profileImgList = profileImgList;
 	}
 }

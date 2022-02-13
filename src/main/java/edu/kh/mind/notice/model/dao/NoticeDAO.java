@@ -15,8 +15,8 @@ public class NoticeDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	
-	public List<Notice> noticeList() {
-		return sqlSession.selectList("noticeMapper.noticeList");
+	public List<Notice> noticeList(String type) {
+		return sqlSession.selectList("noticeMapper.noticeList", type);
 	}
 
 

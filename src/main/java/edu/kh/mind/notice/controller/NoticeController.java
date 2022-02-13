@@ -21,10 +21,11 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping("list")
-	public String noticeList( Model model) {
-		
-		
-		List<Notice> noticeList = service.noticeList();
+
+	public String noticeList(Model model) {
+
+		String type = "";
+		List<Notice> noticeList = service.noticeList(type);
 		
 		model.addAttribute("css", "notice/noticeList");
 		model.addAttribute("noticeList", noticeList);

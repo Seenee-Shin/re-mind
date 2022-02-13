@@ -67,10 +67,10 @@
 
 		<collection property="imgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectBoardImageList"/>
-
-		<!--<collection property="profileImgList" column="BOARD_NO"
+		
+		<collection property="profileImgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectProfileImageList"/>
-		<collection property="emList" column="BOARD_NO"
+		<!--<collection property="emList" column="BOARD_NO"
 						javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>-->
 	</resultMap>
 
@@ -137,11 +137,19 @@
 			ORDER BY IMAGE_LEVEL
 		</if>
 	</select>
+	
+	<select id="selectProfileImageList" resultMap="image_rm">
+		<if test="#{boardNo} != null ">
+			SELECT * FROM IMAGE
+			WHERE MEMBER_NO = #{memberNo}
+			AND IMAGE_LEVEL = 0
+		</if>
+	</select>
 
 	
 	<!-- 게시판 이미지 삽입 -->
 	<insert id="insertImgList" >
-		
+
    		INSERT INTO IMAGE VALUES (SEQ_IMAGE_NO.NEXTVAL, #{imagePath},
 					 #{imageName},
 					 #{imageOriginal},

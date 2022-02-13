@@ -14,8 +14,8 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeDAO dao;
 
 	@Override
-	public List<Notice> noticeList() {
-		return dao.noticeList();
+	public List<Notice> noticeList(String type) {
+		return dao.noticeList(type);
 	}
 
 	@Override
