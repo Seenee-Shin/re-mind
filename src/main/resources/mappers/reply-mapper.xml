@@ -11,7 +11,7 @@
 		<result property="replyStatusCode" column="REPLY_STATUS_CD"/>
 		<result property="replyNestedCode" column="REPLY_NESTED_CD"/>
 
-		<result property="boardNo" column="REPLY_NO"/>
+		<result property="boardNo" column="BOARD_NO"/>
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="professionNo" column="PROFESSION_NO"/>
 		<result property="parentReplyNo" column="PARENT_REPLY_NO"/>
@@ -24,11 +24,12 @@
 
 	</resultMap>
 
+	<!-- 내 댓글 조회 -->
 	<select id="selectMyReplyList" resultMap="reply_rm">
 		SELECT * FROM(
 		   SELECT ROWNUM AS RNUM, TEMP.* FROM(
-			   SELECT REPLY.REPLY_NO, REPLY.REPLY_CONTENT, BOARD_TITLE, REPLY_CREATE_DT, BOARD_CATEGORY_NM, MEMBER.MEMBER_FN,
-					  REPLY.MEMBER_NO, BOARD.BOARD_NO, BOARD_READ_COUNT, REPLY_NESTED_CD, IMAGE_PATH, IMAGE_NM
+			   SELECT BOARD.BOARD_NO, REPLY.REPLY_CONTENT, BOARD_TITLE, REPLY_CREATE_DT, BOARD_CATEGORY_NM, MEMBER.MEMBER_FN,
+					  REPLY.MEMBER_NO, REPLY.REPLY_NO, BOARD_READ_COUNT, REPLY_NESTED_CD, IMAGE_PATH, IMAGE_NM
 			   FROM REPLY
 						JOIN BOARD ON (BOARD.BOARD_NO = REPLY.BOARD_NO)
 						JOIN BOARD_CATEGORY USING(BOARD_CATEGORY_CD)

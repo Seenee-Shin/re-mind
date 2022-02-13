@@ -48,16 +48,27 @@ public class MyController {
 
     // 상담 예약 조회 페이지
     @RequestMapping(value="appointment", method=RequestMethod.GET)
-    public String appointment(Model model, @ModelAttribute("loginMember") Member loginMember) {
+    public String appointment(Model model, @ModelAttribute("loginMember") Member loginMember,
+                              HttpSession session, RedirectAttributes ra) {
 
     	model.addAttribute("css", "my");
-        return "my/appointment";
+        String path = "";
+
+        if(session.getAttribute("loginMember") != null) {
+            path = "my/appointment";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+        return path;
     }
 
     // 상담 예약 조회
     @ResponseBody
     @RequestMapping(value="appointment", method=RequestMethod.POST)
     public String appointmentAjax(Model model, @ModelAttribute("loginMember") Member loginMember, Reservation reservation) {
+
 
         int memberNo = loginMember.getMemberNo();
         reservation.setMemberNo(memberNo);
@@ -87,9 +98,19 @@ public class MyController {
 
 
     @RequestMapping("appointment/past")
-    public String appointmentPast(Model model) {
+    public String appointmentPast(Model model, HttpSession session, RedirectAttributes ra) {
     	model.addAttribute("css", "my");
-        return "my/appointmentPast";
+
+        String path = "";
+
+        if(session.getAttribute("loginMember") != null) {
+            path = "my/appointment/past";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+        return path;
     }
 
     // 감정 기록 페이지
@@ -246,10 +267,7 @@ public class MyController {
 
             counselorList = service.selectCounselorList(pagination);
 
-//
-//            ra.addFlashAttribute("pagination", pagination);
-//            ra.addAttribute("counselorList", counselorList);
-            System.out.println(counselorList);
+//            System.out.println(counselorList);
 
             model.addAttribute("pagination", pagination);
             model.addAttribute("counselorList", counselorList);
@@ -263,6 +281,8 @@ public class MyController {
         return path;
     }
 
+    // 찜삭제
+    @ResponseBody
     @RequestMapping(value = "deleteCounselor", method = RequestMethod.POST)
     public String deleteCounselor(Model model, HttpSession session, RedirectAttributes ra,Board board){
 
@@ -283,37 +303,78 @@ public class MyController {
     }
 
     @GetMapping("enquiry")
-    public String enquiry(Model model){
+    public String enquiry(Model model, HttpSession session, RedirectAttributes ra){
     	model.addAttribute("css", "my/enquiry");
-        return "my/enquiry";
+
+        String path = "";
+
+        if(session.getAttribute("loginMember") != null) {
+            path = "my/enquiry";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+        
+        return path;
     }
 
     @GetMapping("letterList")
-    public String letterList(Model model){
+    public String letterList(Model model, HttpSession session, RedirectAttributes ra){
     	model.addAttribute("css", "my/letterList");
 
+        String path = "";
+
+        if(session.getAttribute("loginMember") != null) {
+            path = "my/letterList";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
 
 
 
-        return "my/letterList";
+        return path;
     }
 
     @GetMapping("map")
-    public String map(Model model){
+    public String map(Model model, HttpSession session, RedirectAttributes ra){
         model.addAttribute("css", "my/map");
 
-        return "my/map";
+        String path = "";
+
+        if(session.getAttribute("loginMember") != null) {
+            path = "my/map";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+
+        return path;
     }
 
     @GetMapping("muteMember")
-    public String muteMember(Model model, @ModelAttribute("loginMember") Member loginMember){
+    public String muteMember(Model model, @ModelAttribute("loginMember") Member loginMember,
+                             HttpSession session, RedirectAttributes ra){
         model.addAttribute("css", "my/muteMember");
 //        model.addAttribute("header", "main");
-        List<Mute> mList = service.selectMuteMember(loginMember.getMemberNo());
+        String path = "";
 
-        model.addAttribute("mList", mList);
+        if(session.getAttribute("loginMember") != null) {
 
-        return "my/muteMember";
+            List<Mute> mList = service.selectMuteMember(loginMember.getMemberNo());
+
+            model.addAttribute("mList", mList);
+            path = "my/muteMember";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+
+        return path;
     }
 
     @GetMapping("clearMember")
@@ -331,26 +392,60 @@ public class MyController {
     }
 
     @GetMapping("myBoardList")
-    public String myBoardList(Model model){
+    public String myBoardList(Model model, HttpSession session, RedirectAttributes ra){
         model.addAttribute("css", "my/myBoardList");
 
-        return "my/myBoardList";
+        String path = "";
+
+        if(session.getAttribute("loginMember") != null) {
+
+            path = "my/myBoardList";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+
+        return path;
     }
 
     @GetMapping("postscript")
-    public String postscript(Model model){
+    public String postscript(Model model, HttpSession session, RedirectAttributes ra){
         model.addAttribute("css", "my/postscript");
-        return "my/postscript";
+
+        String path = "";
+
+        if(session.getAttribute("loginMember") != null) {
+
+            path = "my/postscript";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+        return path;
     }
 
     @GetMapping("secession")
-    public String secession(Model model, HttpSession session){
+    public String secession(Model model, HttpSession session, RedirectAttributes ra){
         model.addAttribute("css", "my/secession");
 
-        Naver naver = ((Naver)session.getAttribute("naver"));
-        model.addAttribute("naver", naver);
+        String path = "";
 
-        return "my/secession";
+        if(session.getAttribute("loginMember") != null) {
+
+
+            Naver naver = ((Naver)session.getAttribute("naver"));
+            model.addAttribute("naver", naver);
+
+            path = "my/secession";
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
+            path = "redirect:/";
+        }
+
+        return path;
     }
 
     @PostMapping("secessionMember")
@@ -379,13 +474,23 @@ public class MyController {
 
         String path = null;
         Image image = null;
-        if(naver == null){
-            image = service.getMyImage(loginMember.getMemberNo());
-            path = "my/updateMyInfo";
-        }else{
-            Util.swalSetMessage("소셜로그인 회원은 정보수정이 불가능합니다.", null, "info", ra);
+
+
+        if(session.getAttribute("loginMember") != null) {
+            if(naver == null){
+                image = service.getMyImage(loginMember.getMemberNo());
+                path = "my/postscript";
+            }else{
+                Util.swalSetMessage("소셜로그인 회원은 정보수정이 불가능합니다.", null, "info", ra);
+                path = "redirect:/";
+            }
+        } else {
+            Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
+
             path = "redirect:/";
         }
+
+
 
         model.addAttribute("memberImage", image);
         return path;

@@ -9,12 +9,21 @@ public class Scrap {
     private String imagePath;
     private String imageName;
     private int boardStatusCode;
+    private String boardCategoryName;
     private int readCount;
     private String enrollDate;
     private int maxValue;
 
 
     public Scrap(){}
+
+    public String getBoardCategoryName() {
+        return boardCategoryName;
+    }
+
+    public void setBoardCategoryName(String boardCategoryName) {
+        this.boardCategoryName = boardCategoryName;
+    }
 
     public void setMaxValue(int maxValue) {
         this.maxValue = maxValue;
