@@ -1,5 +1,6 @@
 package edu.kh.mind.board.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,9 +40,9 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.insertImgList", image);
 	}
 
-	public Board selectBoard(int boardNo) {
+	public Board selectBoard(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
+		return sqlSession.selectOne("boardMapper.selectBoard", map);
 	}
 
 	public int increaseReadCount(int boardNo) {
@@ -90,6 +91,16 @@ public class BoardDAO {
 	public String selectMuteMember(Map<String, String> param) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("boardMapper.selectMuteMember", param);
+	}
+
+	public int memberBlock(HashMap<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("secretMapper.memberBlock", map);
+	}
+
+	public Board selectBoard(int boardNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 	}
 
 
