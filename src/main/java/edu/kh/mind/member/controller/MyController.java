@@ -507,7 +507,11 @@ public class MyController {
         image.setMemberNo(loginMember.getMemberNo());
 
         member.setMemberPw(param.get("memberPw"));
-        member.setMemberFName(param.get("memberFName"));
+        if(param.get("memberFName").equals(loginMember.getMemberFName())){
+            member.setMemberFName(param.get("mobile_memberFName"));
+        }else if(param.get("mobile_memberFName").equals(loginMember.getMemberFName())){
+            member.setMemberFName(param.get("memberFName"));
+        }
         member.setMemberNo(loginMember.getMemberNo());
 
         // 2) 웹 접근 경로, 서버 저장 경로
@@ -526,6 +530,7 @@ public class MyController {
             loginMember.setMemberFName(member.getMemberFName());
             model.addAttribute("loginMember", loginMember);
         }else{
+
             path = "redirect:/";
             Util.swalSetMessage("회원 정보 수정 실패!", null, "error", ra);
         }
