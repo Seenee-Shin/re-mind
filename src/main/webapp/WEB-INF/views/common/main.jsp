@@ -76,7 +76,7 @@
             <c:forEach items="${listBoard}" var="board">
                 <div class="main_content2_content_board">
                     <%--<button>#우울증</button>--%>
-                    <button>${board.boardCategoryName}</button>
+                    <button type="button" onclick="locationPath(${board.boardCategoryCode}, ${board.boardNo})">${board.boardCategoryName}</button>
                     <%--<p>${board.boardTitle}</p>--%>
                     <p>${board.boardContent}</p>
                 </div>
@@ -97,55 +97,15 @@
         </div>
         <!-- Swiper -->
         <div class="swiper1 mySwiper1">
-            <div class="swiper-wrapper" style="justify-content: space-between;">
-                <div class="swiper-slide commu">
-                    <div class="mb_main_content2_content_board">
-                        <button>#우울증</button>
-                        <button>전문가답변</button>
-                        <p>불면증/수면장애 고치고 싶어요ㅠㅠ</p>
-                        <p>작년에 너무 힘들었고 그 동안은 스트레스를
-                            받아도 잠은 자려고 했는데 언젠가부터 밤 새려고
-                            하거나 새벽 늦게 자는 게 완전 습관이 돼
-                            버렸어요 누워있다가 해뜰 때 자는 경우가
-                            대부분이고 당연히 밤낮 바뀌고요. 그래서인지
-                            탈모도 약간 생긴 것 같고..일찍 자야겠다 마음
-                            먹고 누워서 휴대폰을 안 봐도 잠을 못 자는데
-                            정신과에서 약 처방받는 게 맞겠죠..?
-                        </p>
+            <div class="swiper-wrapper" style="justify-content: space-between; left:calc(50% - 140px)">
+                <c:forEach items="${listBoard}" var="board">
+                    <div class="swiper-slide commu">
+                        <div class="mb_main_content2_content_board">
+                            <button type="button" onclick="locationPath(${board.boardCategoryCode}, ${board.boardNo})">${board.boardCategoryName}</button>
+                            <p>${board.boardContent}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="swiper-slide commu">
-                    <div class="mb_main_content2_content_board">
-                        <button>#우울증</button>
-                        <button>전문가답변</button>
-                        <p>불면증/수면장애 고치고 싶어요ㅠㅠ</p>
-                        <p>작년에 너무 힘들었고 그 동안은 스트레스를
-                            받아도 잠은 자려고 했는데 언젠가부터 밤 새려고
-                            하거나 새벽 늦게 자는 게 완전 습관이 돼
-                            버렸어요 누워있다가 해뜰 때 자는 경우가
-                            대부분이고 당연히 밤낮 바뀌고요. 그래서인지
-                            탈모도 약간 생긴 것 같고..일찍 자야겠다 마음
-                            먹고 누워서 휴대폰을 안 봐도 잠을 못 자는데
-                            정신과에서 약 처방받는 게 맞겠죠..?
-                        </p>
-                    </div>
-                </div>
-                <div class="swiper-slide commu">
-                    <div class="mb_main_content2_content_board">
-                        <button>#우울증</button>
-                        <button>전문가답변</button>
-                        <p>불면증/수면장애 고치고 싶어요ㅠㅠ</p>
-                        <p>작년에 너무 힘들었고 그 동안은 스트레스를
-                            받아도 잠은 자려고 했는데 언젠가부터 밤 새려고
-                            하거나 새벽 늦게 자는 게 완전 습관이 돼
-                            버렸어요 누워있다가 해뜰 때 자는 경우가
-                            대부분이고 당연히 밤낮 바뀌고요. 그래서인지
-                            탈모도 약간 생긴 것 같고..일찍 자야겠다 마음
-                            먹고 누워서 휴대폰을 안 봐도 잠을 못 자는데
-                            정신과에서 약 처방받는 게 맞겠죠..?
-                        </p>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </div>
@@ -155,22 +115,22 @@
 <article class="main_content3">
     <p>나에게 딱 맞는 전문가</p>
     <p>무료 상담으로 자신에게 맞는 전문가를 찾아보세요</p>
-
+<%--${profession}--%>
     <div>
         <div>
-            <span>서승준</span>
+            <span>${profession.professionName}</span>
             <p>당신의 삶은 누가 통제합니까?</p>
             <p>누구든지 자신의 삶의 빛을 스스로 찾을 수 있습니다.</p>
             <span>#우울증</span> <span>#스트레스</span> <span>#가족/인간관계</span>
             <div>
-                <button><i class="fas fa-phone-alt"></i> 전화상담</button>
-                <button><i class="fas fa-comments"></i> 실시간 채팅</button>
+                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-phone-alt"></i> 전화상담</button>
+                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-comments"></i> 실시간 채팅</button>
             </div>
         </div>
 
         <!-- 이미지 영역 -->
         <div>
-            <div></div>
+            <div style="background:url(${contextPath}${profession.imagePath}/${profession.imageName}) no-repeat center center;"></div>
             <!-- <img src="http://dailymedi.com//wys2/file_attach/2020/02/02/1580643966-18.jpg"/>
                 백그라운드 이미지로 대체 ( 누끼를 딴 규격에 맞는 프로필 사진을 참조)
             -->
@@ -253,7 +213,48 @@
 <article class="main_content4">
     <div class="main_content4_bc"></div>
     <div class="main_content4_content">
-        <div class="main_content4_content_left">
+
+    <c:forEach items="${noticeList}" var="notice" varStatus="status">
+        <c:if test="${status.index == 0}">
+            <div class="main_content4_content_left">
+                <div>새소식</div>
+                <div>
+        </c:if>
+
+                    <div class="main_content4_content_left_item" data-notice_no="${notice.noticeNo}">
+                        <div>
+                            <span>${notice.noticeNo}</span>
+                            <span>${notice.createDate}</span>
+                        </div>
+                        <div>
+                            <p>
+                                ${notice.noticeTitle}
+<%--                                    지역사회서비스 제공 기관 / 바우처 서비스--%>
+                            </p>
+                        </div>
+                    </div>
+        <c:if test="${status.index == 2}">
+                </div>
+            </div>
+            <div class="main_content4_content_left">
+                <div>새소식</div>
+                    <div>
+        </c:if>
+        <c:if test="${status.last}">
+                </div>
+            </div>
+        </c:if>
+    </c:forEach>
+            <div>
+                <div class="main_content4_content_postit">
+                    <div>이달의 연구</div>
+                    <div>잊고 있었던 가치나 자신에 대한 생각을 해볼 수 있도록
+                        스스로를 돌아보는 질문에 답변을 해보세요.
+                    </div>
+                </div>
+            </div>
+
+<%--        <div class="main_content4_content_left">
             <div>새소식</div>
             <div>
                 <div class="main_content4_content_left_item">
@@ -279,21 +280,9 @@
                         </p>
                     </div>
                 </div>
-
-                <div class="main_content4_content_left_item">
-                    <div>
-                        <span>23</span>
-                        <span>2022.01</span>
-                    </div>
-                    <div>
-                        <p>
-                            지역사회서비스 제공 기관 / 바우처 서비스
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
-         <div class="main_content4_content_left">
+        <div class="main_content4_content_left">
             <div>새소식</div>
             <div>
                 <div class="main_content4_content_left_item">
@@ -341,7 +330,7 @@
                     스스로를 돌아보는 질문에 답변을 해보세요.
                 </div>
             </div>
-        </div>
+        </div>--%>
     </div>
 </article>
 
@@ -390,7 +379,7 @@
         </div>
         <div>
             <div class="mb_main_content4_content_postit2">
-                <div>마인드 포스트잇</div>
+                <div>이달의 연구</div>
                 <div>잊고 있었던 가치나 자신에 대한 생각을 해볼 수 있도록
                     스스로를 돌아보는 질문에 답변을 해보세요.
                 </div>

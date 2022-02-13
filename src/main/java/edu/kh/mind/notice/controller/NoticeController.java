@@ -21,15 +21,18 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping("list")
+
 	public String noticeList(Model model) {
-		
-		List<Notice> noticeList = service.noticeList();
+
+		String type = "";
+		List<Notice> noticeList = service.noticeList(type);
 		
 		model.addAttribute("css", "notice/noticeList");
 		model.addAttribute("noticeList", noticeList);
 		
 		return "notice/noticeList";
 	}
+	
 	
 	@RequestMapping("view/{noticeNo}")
 	public String selectNotice(Model model, @PathVariable("noticeNo") int noticeNo) {

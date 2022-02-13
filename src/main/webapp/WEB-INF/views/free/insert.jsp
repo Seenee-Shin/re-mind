@@ -339,6 +339,8 @@ function postingValidate(){
 		contentType: false,
 		success: function (result) {
 			if(result > 0){
+				
+				
                 swal({"title" : "글이 작성되었습니다." , 
                       "icon" : "success"});
    	    		$("#input_file").val("");
@@ -349,6 +351,7 @@ function postingValidate(){
 						imgWrap.firstChild
 					);
 				}
+				$(".free_board_list_wrap").empty();
 				getFreeList();
 				// 내용삭제
 				$("#post_textarea").val(""); 
@@ -468,9 +471,10 @@ function getFreeList(searchData) {
 			let iconCnt = {};
 
 			console.log(JSON.parse(result.result));
+
 			$.each(JSON.parse(result.result), function (i, item) {
-				
-	
+				console.log(item.profileImgList)
+			
 				// empathy 초기화
 				empathyArr = [];
 				empathyCntArr = [];
@@ -510,7 +514,7 @@ function getFreeList(searchData) {
 					+'			<div class="posting_info">'
 					+'				<div class="writer_id">'
 		            +'					<p class="userInfo">'+item.memberFn+'</p>'
-		            +'					<p>'+item.createDate+'</p>'
+		            +'					<p hr>'+item.createDate+'</p>'
 		            +'				</div>'
 		            +'				<div class="posting">'
 		            +'					<p>'+item.boardContent+'</p>'
