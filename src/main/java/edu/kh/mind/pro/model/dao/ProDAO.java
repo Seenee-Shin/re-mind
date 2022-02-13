@@ -9,6 +9,7 @@ import edu.kh.mind.member.model.vo.Review;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -138,7 +139,15 @@ public class ProDAO {
 		return sqlSession.selectOne("boardMapper.proImageNameSelect", professionNo);
 	}
 
-	// chat insert
+	public List<Review> reviewAdd(Review review) {
+		return sqlSession.selectList("reservationMapper.reviewAdd",review);
+	}
+	
+	
+	public int listCountSelect(Review review) {
+		return sqlSession.selectOne("reservationMapper.listCountSelect",review);
+	}
+	
 	public void insertChatting(Reservation reservation) {
 		sqlSession.insert("reservationMapper.insertChatting", reservation);
 	}

@@ -57,5 +57,13 @@ public interface ProService {
 
 	// 상담사 이미지, 이름 가지고 오기
 	Image proImageNameSelect(int professionNo);
+	
+	// 상담사 후기 더보기
+	List<Review> reviewAdd(Review review);
+
+	// 상담사 총 후기 count
+	int listCountSelect(Review review);
+
+	
 
 }
