@@ -13,14 +13,12 @@ $(".gender").on("click", function (){
         gender = 1;
     else if(thisId == "pro_famale")
         gender = 2;
-    else if(thisId == "unrelated2")
-        gender = null;
 
     ul.empty();
     makePro();
 });
 
-var therapy;
+var therapy = null;
 $(".therapy").on("click", function (){
     const thisId = $(this).attr("id");
 
@@ -30,8 +28,8 @@ $(".therapy").on("click", function (){
         therapy = 2;
     else if(thisId == "face_counseling")
         therapy = 3;
-    else if(thisId == "unrelated")
-        therapy = null;
+
+    console.log("therapy : " + therapy)
 
     ul.empty();
     makePro();
