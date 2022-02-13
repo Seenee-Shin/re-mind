@@ -129,6 +129,13 @@ $(".far").click(function(){
 });
 
 
+const media = matchMedia("screen and (min-width: 1290px)") 
+media.addListener((a) => {
+	swal({"text" : "이 달의 연구는 모바일 앱에서 지원되지 않습니다! " , 
+                 "icon" : "error"}); 
+	 })
+
+
 
 
 

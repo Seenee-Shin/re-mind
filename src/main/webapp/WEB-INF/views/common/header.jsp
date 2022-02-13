@@ -117,27 +117,31 @@
                         <li><a href="${contextPath}/my/updateMyInfo">마이 정보</a></li>
                     </ul>
                 </li>
-                <li ><!-- 로그인 했으면 로그아웃 버튼 보이기
+                <!-- 로그인 했으면 로그아웃 버튼 보이기
                             로그인 안했으면 회원가입 -->
                     <!-- <a href=""> 회원가입 </a>  -->
 
                     <c:choose>
                         <c:when test="${empty sessionScope.loginMember}">
-                            <a href="javascript:void(0);" class="login_btn">로그인</a>
+                        <li >
+                            <a href="javascript:void(0);" class="login_btn" style="">로그인</a>
+                        </li>
                         </c:when>
                         <c:otherwise>
-                            ${sessionScope.loginMember.memberName}
-                            <a href="${contextPath}/emailLogin/logout" class="logout_btn">로그아웃</a>
+                        <li style="bottom: 27px;">
+                            ${sessionScope.loginMember.memberFName}님<br>
+                            <a href="${contextPath}/emailLogin/logout" class="logout_btn" style="margin-top: 10px;">로그아웃</a>
+                         </li>
                         </c:otherwise>
                     </c:choose>
-                </li>
+                
             </ul>
             <a href="#" class="headermenu_togle">
                 <i class="fas fa-bars"></i>
             </a>
-            <a href="#" class="headermenu_bell">
+<!--             <a href="#" class="headermenu_bell">
                 <i class="far fa-bell"></i>
-            </a>
+            </a> -->
         </article>
     </section>
 </header>
@@ -151,7 +155,7 @@
 	        	<c:when test="${requestScope.header.equals('community')}">
 		            <section class="dark-brown side_menu">
 		                <h3>커뮤니티</h3>
-		                <hr>
+		                <hr style="margin:0px;]">
 		                <ul class="side_menu_dep1">
 		                    <li class="w_side_menu"><a href="${contextPath}/free/insert">자유게시판</a></li>
 		                    <li class="w_side_menu"><a href="${contextPath}/worry/worryList">고민상담 게시판</a> </li>

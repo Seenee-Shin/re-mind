@@ -11,7 +11,7 @@
                 <!-- 메인 -->
 
                 <div class="back_btn">
-                    <a href="">
+                    <a href="${contextPath}/free/insert">
                         <i class="fas fa-arrow-left"></i> 
                     </a>
                 </div>
@@ -28,7 +28,7 @@
                     </c:choose>
                     </div>
                     <div class="profile_wrap">
-                        <div class="writer_pic light_brown_bg" style="background-image: url();">
+                        <div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);">
                         </div>
 
                         <div class="writer_id">
@@ -105,9 +105,9 @@
 								<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
 							</a>    
 	    				</c:if>
-                        <a href="">
+                       <%--  <a href="">
 							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
-                        </a>
+                        </a> --%>
                     </div> 
                     
 
@@ -119,24 +119,24 @@
 					        <div>
 					            <i class="far fa-comment"></i>
 					            <span>댓글</span> 
-					            <span>(55)</span>
+					            <span>(${board.replyCount})</span>
 					        </div>
 					
 					        <div class="m_comment_wirte" onclick="openComment()">
 					            <i class="far fa-comment"></i>
 					            <span>댓글</span> 
-					            <span>(55)</span>
+					            <span>(${board.replyCount})</span>
 					        </div>
 					    </div>
 					
-				       <div class="write_comment">
+				       <div class="write_comment" id="write_comment">
 				           
 				           <div class="user_info">
-				               <div class="user_pic light_brown_bg" style="background-image: url();">
+				               <div class="user_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);">
 				               </div>
 				
 				               <div>
-				                   <p>아이디</p>
+				                   <p>${board.memberFn}</p>
 				               </div>
 				           </div>
 				           
@@ -190,6 +190,11 @@
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
 <script type="text/javascript">
+
+	function openComment() {
+		$('#write_comment').toggleClass('active');
+		$('#comment_list').toggleClass('active');
+	}
 
 	//수정버튼 클릭 시 동작
 	function updateForm(){
@@ -267,7 +272,7 @@
 	                      "icon" : "error"});
 					}else{
 						
-					$("#btnScrap").children().removeClass(".child")	
+					$("#btnScrap").children().removeClass('grey');	
 					swal({"title" : "스크랩 완료" , 
 	                      "icon" : "success"});
 					}
@@ -279,7 +284,7 @@
 		                      "icon" : "error"});
 						}
 					else{
-						$("#btnScrap").children().addClass(".child")	
+						$("#btnScrap").children().addClass('grey')	
 						swal({"title" : "스크랩 해제" , 
 	                      "icon" : "success"});
 					}

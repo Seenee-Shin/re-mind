@@ -2,6 +2,7 @@ package edu.kh.mind.pro.controller;
 
 import com.google.gson.Gson;
 
+import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.member.model.vo.Profession;
@@ -162,6 +163,11 @@ public class ProController {
 
 		model.addAttribute("professionNo", professionNo);
 		
+		// 상담사 이름, 사진 가지고오기
+		Image proImg = service.proImageNameSelect(professionNo);
+		
+		System.out.println(proImg);
+		
 		String path;
 		int memberNo = 0;
 		String memberId = null;
@@ -184,6 +190,7 @@ public class ProController {
 			model.addAttribute("memberId", memberId);
 			model.addAttribute("memberPhone", memberPhone);
 			model.addAttribute("memberNm", memberNm);
+			model.addAttribute("proImg",proImg);
 			path="pro/proReservation";
 		}
 	
