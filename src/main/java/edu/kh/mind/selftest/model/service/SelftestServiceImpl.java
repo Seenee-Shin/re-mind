@@ -21,16 +21,18 @@ public class SelftestServiceImpl implements SelftestService {
     public Map<String, Object> selectQ(Selftest selftest) {
 
         Map<String, Object> selectAll = new HashMap<>();
-
         List<Selftest> Answer = new ArrayList<>();
+        List<Selftest> Result = new ArrayList<>();
+
        List<Selftest> Quest = dao.selectQ(selftest) ;
        if (!Quest.isEmpty()){
            Answer = dao.selectA(selftest);
+           Result = dao.selectR(selftest);
        }
         selectAll.put("Quest", Quest);
         selectAll.put("Answer", Answer);
+        selectAll.put("Result", Result);
 
         return selectAll;
-
     }
 }

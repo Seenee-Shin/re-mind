@@ -1,5 +1,6 @@
 package edu.kh.mind.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,5 +35,7 @@ public interface BoardService {
     List<Board> selectMainBoardList();
 
 	int countFreeList();
+
+	int memberBlock(HashMap<String, Integer> map);
 
 }

@@ -100,6 +100,7 @@ function ajax(){
         success : function (result){
             //console.log(result);
             qwe = result.Quest.length;
+            // console.log(result.Result);
             // console.log(qwe);
             //console.log(result.Quest[count]);
             let html = '<div class="selfTest_title">'
@@ -122,11 +123,14 @@ function ajax(){
                 + '</div>'
 
             let html2 = "";
+            console.log(result.Answer.length);
 
-            //console.log(result.Answer[0]);
-            for(let i=0; i< result.Answer.length; i++){
-                html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +')">' + result.Answer[i].answerContent + '</div>';
+
+                for(let i=0; i< result.Answer.length; i++){
+                    html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +')">' + result.Answer[i].answerContent + '</div>';
+
             }
+
             //console.log(html2);
             //     +     '   <div id="btn1" class="selfTest_result">' result.Answer[0] '</div>'
             // +     '   <div id="btn2" class="selfTest_result">보통이다</div>'
@@ -134,8 +138,6 @@ function ajax(){
             // +       '<div id="btn4" class="selfTest_result">항상 그렇다</div>'
             $(".selfTest").html(html);
             $("#selfTest_content_option").append(html2);
-
-
 
         },
         error(request,status,error){

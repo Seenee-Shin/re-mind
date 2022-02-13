@@ -90,4 +90,9 @@ public class SecretDAO {
 		return sqlSession.insert("secretMapper.memberBlock", map);
 	}
 
+
+	public String selectMuteMember(Map<String, String> param) {
+		return sqlSession.selectOne("secretMapper.selectMuteMember", param);
+	}
+
 }

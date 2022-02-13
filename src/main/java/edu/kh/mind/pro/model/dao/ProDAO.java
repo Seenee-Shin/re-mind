@@ -124,7 +124,15 @@ public class ProDAO {
     public int selectProfessionCount() {
 		return sqlSession.selectOne("professionMapper.selectProfessionCount", null);
     }
-    
+
+	/**
+	 * 상담사 랜덤
+	 * @return result
+	 */
+	public Profession selectProRandom() {
+		return sqlSession.selectOne("professionMapper.selectProRandom");
+	}
+
     // 상담사 사진, 이름 가지고 오기
 	public Image proImageNameSelect(int professionNo) {
 		return sqlSession.selectOne("boardMapper.proImageNameSelect", professionNo);

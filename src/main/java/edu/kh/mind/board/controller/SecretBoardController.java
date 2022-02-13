@@ -52,25 +52,27 @@ public class SecretBoardController {
     // 털어놓기 게시글
     @ResponseBody
     @RequestMapping(value="list", method=RequestMethod.POST)
-    public String secretBoardList(@RequestParam Map<String, String> param) {
+    public	Map<String, String>  secretBoardList(@RequestParam Map<String, String> param, HttpSession session) {
       
-    	HashMap<String, Object> map = new HashMap<>();
+    	if(session.getAttribute("loginMember") != null) {
+			param.put("memberNo",((Member)session.getAttribute("loginMember")).getMemberNo()+"");
+		}
     	
-    	System.out.println(param.get("last") + param.get("first"));
+    	Map<String, String> map = new HashMap<>();
+    	
+    	//System.out.println(param.get("last") + param.get("first"));
 
         // 게시글 목록
         List<Board> secretBoardList = service.selectSecretList(param);
         
-        Board board = new Board();
-        int result = service.countSecretList();
-        board.setMaxValue(result);
+        int listCount = service.countSecretList();
         
-        secretBoardList.add(board);
+        map.put("listCount", listCount+"");
+
+        String gson = new Gson().toJson(secretBoardList);
+        map.put("result", gson);
         
-
-        map.put("secretList", secretBoardList);
-
-        return new Gson().toJson(secretBoardList);
+        return map;
     }
 
     
@@ -115,7 +117,7 @@ public class SecretBoardController {
     
     //게시판 상세조회
     @RequestMapping("view/{boardNo}")
-    public String SecretView(Model model, 
+    public String secretView(Model model, 
     							@PathVariable("boardNo") int boardNo,
     							RedirectAttributes ra, 
     							HttpSession session) {
@@ -148,7 +150,7 @@ public class SecretBoardController {
     
     //게시판 글수정 화면 전환
     @RequestMapping(value="updateForm")
-    public String freeBoardUpdate(int boardNo, Model model) {
+    public String secretBoardUpdate(int boardNo, Model model) {
     	model.addAttribute("css", "board/update");
     	model.addAttribute("header", "community");
     	
@@ -162,16 +164,12 @@ public class SecretBoardController {
 	// 수정
     @RequestMapping(value="update", method=RequestMethod.POST)
     public String secretUpdate(Model model, Board board,
-						@RequestParam("deleteImages") String deleteImages,
-						@RequestParam("images") List<MultipartFile> images,
-						RedirectAttributes ra, HttpSession session ) {
+			RedirectAttributes ra, HttpSession session, @ModelAttribute("loginMember") Member loginMember) {
 
-    	
-    			String webPath = "/resources/images/board/"; 
-    			String serverPath = session.getServletContext().getRealPath(webPath);
     			
-    			// 2) 게시글 수정 Service 호출 
-    			int result = service.updateBoard(board, images, webPath, serverPath, deleteImages);
+    	// 2) 게시글 수정 Service 호출 
+    	board.setMemberNo(loginMember.getMemberNo());
+		int result = service.updateBoard(board);
     			
     			
     			String path = null;
@@ -190,7 +188,7 @@ public class SecretBoardController {
     		
     //게시글 삭제
     @RequestMapping(value="delete")
-    public String freeBoarDelete(int boardNo, Model model, RedirectAttributes ra) {
+    public String secretBoarDelete(int boardNo, Model model, RedirectAttributes ra) {
     	model.addAttribute("header", "community");
     	model.addAttribute("css", "board/secretList");
     	
@@ -209,18 +207,6 @@ public class SecretBoardController {
     	return "redirect:" + path;
     }
     
-    //예외처리
-	@ExceptionHandler(Exception.class)
-	public String exceptionHandler(Exception e, Model model) {
-		
-		//Model : 데이터 전달용 객체(Map형식, request범위)
-		
-		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
-		model.addAttribute("e", e);
-		
-		return "/common/error";
-	}
-
     
     //스크랩하기 
     @ResponseBody
@@ -259,6 +245,19 @@ public class SecretBoardController {
     	return result;
     }
 	
+    
+    //예외처리
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e, Model model) {
+		
+		//Model : 데이터 전달용 객체(Map형식, request범위)
+		
+		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
+		model.addAttribute("e", e);
+		
+		return "/common/error";
+	}
+
 	
 	
     
