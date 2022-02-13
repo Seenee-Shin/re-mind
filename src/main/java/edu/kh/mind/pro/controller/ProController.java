@@ -49,25 +49,22 @@ public class ProController {
 	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<Integer> worryCtCd,
 							  @RequestParam Map<String, Integer> param){
 
-//		List<Profession> pList = new ArrayList<>();
-
-		System.out.println(param.get("last") + " / " + param.get("first") + " / " + param.get("proName"));
-
 		Map<String, Object> map = new HashMap<>();
 
 		map.put("categoryArr", worryCtCd);
 		map.put("first", param.get("first"));
 		map.put("last", param.get("last"));
 		map.put("proName", param.get("proName"));
-		map.put("gender", param.get("gender"));
-		map.put("therapy", param.get("therapy"));
+//		map.put("gender", param.get("gender"));
+//		map.put("therapy", param.get("therapy"));
 
-		System.out.println("성별은? : " + map.get("gender"));
+		System.out.println("성별은? : " + map.get("gender") + " / 테라피 : " + map.get("therapy"));
 
 		List<Profession> pList = service.selectProfession(map);
 
 		int result = 0;
-		if(pList.isEmpty())
+		// pList 결과가 비어있지 않으면 총 count를 가져옵니다.
+		if(!pList.isEmpty())
 			result = service.selectProfessionCount();
 
 
