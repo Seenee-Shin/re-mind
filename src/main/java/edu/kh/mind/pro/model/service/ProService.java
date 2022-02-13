@@ -52,4 +52,7 @@ public interface ProService {
 	int proLetterInsert(Letter letter);
 
 	int selectProfessionCount();
+
+	// 상담사 랜덤
+	Profession selectProRandom();
 }

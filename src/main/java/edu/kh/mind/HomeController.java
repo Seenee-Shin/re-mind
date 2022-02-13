@@ -1,6 +1,8 @@
 package edu.kh.mind;
 
 import edu.kh.mind.board.model.service.BoardService;
+import edu.kh.mind.notice.model.service.NoticeService;
+import edu.kh.mind.notice.model.vo.Notice;
 import edu.kh.mind.pro.model.service.ProService;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.member.model.vo.Profession;
@@ -29,6 +31,8 @@ public class HomeController {
 	@Autowired
 	private ProService proService;
 
+	@Autowired
+	private NoticeService noticeService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -39,14 +43,16 @@ public class HomeController {
 		// 커뮤니티
 		List<Board> listBoard = boardService.selectMainBoardList();
 
-		// 상담사
-		Profession profession = proService.selectPro(1);
+		// 상담사 랜덤
+		Profession profession = proService.selectProRandom();
 
-
+		// 공지사항
+		List<Notice> noticeList = noticeService.noticeList("main");
 
 
 		model.addAttribute("listBoard", listBoard);
 		model.addAttribute("profession", profession);
+		model.addAttribute("noticeList", noticeList);
 
 		model.addAttribute("header", "main");
 		model.addAttribute("css", "main");
