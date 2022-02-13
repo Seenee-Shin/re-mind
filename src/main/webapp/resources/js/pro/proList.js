@@ -49,7 +49,7 @@ $(".cate_btn").on("click", function (){
         currentPage = 1;
         calcPagination();
 
-        $(this).attr("id", val).css("backgroundColor", "rgb(166 166 168)").css("color", "white");
+        $(this).attr("id", val).css("backgroundColor", "rgb(166 166 168)").css("color", "white").css("border", "1px solid #ddd");
     }else if( $(this).attr("id") != undefined ){
         $(this).removeAttr("id").css("backgroundColor", "white").css("color", "black");
     }
