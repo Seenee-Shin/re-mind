@@ -19,7 +19,7 @@
 
 		<div style="    display: flex; align-items: center;  justify-content: space-between;">
        		<button style="margin-top: 20px;">로그인</button>
-        	<button type="button" style="margin-top: 20px;" onclick=""> 회원가입</button>
+        	<button type="button" style="margin-top: 20px;" onclick="location.href=${contextPath}/adminPro/proRegister"> 회원가입</button>
         </div>
     </form>
 
