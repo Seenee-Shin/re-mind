@@ -163,19 +163,19 @@
 	                <td colspan="3">
 	                    <ul class="pro_radio">
 	                        <li>
-	                            <input type="radio" id="unrelated" name="consultation_type" checked>
+	                            <input class="therapy" type="radio" id="unrelated" name="consultation_type" checked>
 	                            <label for="unrelated">무관</label>
 	                        </li>
 	                        <li>
-	                            <input type="radio" id="text_counseling" name="consultation_type">
+	                            <input class="therapy" type="radio" id="text_counseling" name="consultation_type">
 	                            <label for="text_counseling">텍스트테라피</label>
 	                        </li>
 	                        <li>
-	                            <input type="radio" id="voice_counseling" name="consultation_type">
+	                            <input class="therapy" type="radio" id="voice_counseling" name="consultation_type">
 	                            <label for="voice_counseling">보이스테라피</label>
 	                        </li>
 	                        <li>
-	                            <input type="radio" id="face_counseling" name="consultation_type">
+	                            <input class="therapy" type="radio" id="face_counseling" name="consultation_type">
 	                            <label for="face_counseling">페이스테라피</label>
 	                        </li>
 	                    </ul>
@@ -186,15 +186,15 @@
 	                <td>
 	                    <ul class="pro_radio">
 	                        <li>
-	                            <input type="radio" id="unrelated2" name="pro_gender" checked>
+	                            <input class="gender" type="radio" id="unrelated2" name="pro_gender" checked>
 	                            <label for="unrelated2">무관</label>
 	                        </li>
 	                        <li>
-	                            <input type="radio" id="pro_male" name="pro_gender">
+	                            <input class="gender" type="radio" id="pro_male" name="pro_gender">
 	                            <label for="pro_male">남자</label>
 	                        </li>
 	                        <li>
-	                            <input type="radio" id="pro_famale" name="pro_gender">
+	                            <input class="gender" type="radio" id="pro_famale" name="pro_gender">
 	                            <label for="pro_famale">여자</label>
 	                        </li>
 	                    </ul>
@@ -301,6 +301,7 @@
 
 	// 무한스크롤
 	function YesScroll () {
+		console.log(last, listCount)
 		if(last >= listCount)	return;
 
 		const pagination = document.querySelector('.paginaiton');
