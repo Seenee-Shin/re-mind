@@ -72,8 +72,8 @@
 		
 		<collection property="profileImgList" column="BOARD_NO"
 					javaType="java.util.ArrayList" ofType="Image" select="selectProfileImageList"/>
-		<!--<collection property="emList" column="BOARD_NO"
-						javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>-->
+		<collection property="emList" column="BOARD_NO"
+						javaType="java.util.ArrayList" ofType="Empathy" select="selectEmpathyList"/>
 	</resultMap>
 
 	<resultMap id="letter_rm" type="MyLetter">
@@ -303,16 +303,30 @@
 	
 	<!-- 게시글 상세조회 -->
 	<select id="selectBoard" resultMap="board_rm">
-	SELECT BOARD_NO, BOARD_CONTENT,
-		    MEMBER_NO, MEMBER_FN,
-		    TO_CHAR(BOARD_CREATE_DT, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"' ) BOARD_CREATE_DT,
-		    TO_CHAR(BOARD_MODIFY_DT, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"' ) BOARD_MODIFY_DT,
-		    BOARD_READ_COUNT, REPLY_CHECK_CD, SCRAP_CHECK_CD, EM_CHECK_CD, ANON_CHECK_CD,
-		    (SELECT COUNT(*) FROM REPLY WHERE BOARD_NO = BOARD.BOARD_NO) REPLY_COUNT
-		FROM BOARD 
-		JOIN MEMBER USING(MEMBER_NO)
-		WHERE BOARD_NO = #{boardNo}
+		SELECT BOARD.BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT,
+			MEMBER.MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_FN,
+			REPLY_CHECK_CD,SCRAP_CHECK_CD,EM_CHECK_CD,
+			e.EMPATHY_ARRAY, e.CNT_ARRAY,
+			IMAGE.IMAGE_NM, IMAGE.IMAGE_PATH,
+			(SELECT COUNT(*) FROM REPLY WHERE BOARD_NO = BOARD.BOARD_NO) REPLY_COUNT
+		FROM BOARD
+		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO = BOARD.MEMBER_NO
+		LEFT JOIN IMAGE ON IMAGE.MEMBER_NO = MEMBER.MEMBER_NO
+		LEFT JOIN(
+			SELECT a.BOARD_NO,
+				LISTAGG( a.EMPATHY_STATUS_CD, ',' ) WITHIN GROUP (ORDER BY a.EMPATHY_STATUS_CD) AS EMPATHY_ARRAY,
+				LISTAGG( a.cnt, ',' ) WITHIN GROUP (ORDER BY a.cnt) AS CNT_ARRAY
+			FROM (
+				SELECT BOARD_NO, EMPATHY_STATUS_CD, COUNT(EMPATHY_STATUS_CD) cnt
+				FROM EMPATHY
+				GROUP BY BOARD_NO, EMPATHY_STATUS_CD
+			) a
+			GROUP BY BOARD_NO
+		) e on e.BOARD_NO = BOARD.BOARD_NO
+		WHERE BOARD_CATEGORY_CD = 101
 		AND BOARD_STATUS_CD = 201
+    	AND BOARD.BOARD_NO = #{boardNo}
+		AND (IMAGE.IMAGE_LEVEL = 0 OR IMAGE.IMAGE_LEVEL IS NULL)
 	</select>
 	
 	<update id="increaseReadCount">
