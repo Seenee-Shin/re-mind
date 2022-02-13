@@ -108,7 +108,7 @@
 <%--<script src="${contextPath}/resources/js/my/updateMyInfo.js"></script>--%>
 <script>
     const updateCheckObj = {
-        passWord: false,
+        // passWord: false,
         memberFName:true
     }
 
@@ -118,8 +118,8 @@
 
         let pw = $(this).val();
 
-        if(pw.trim().length < 7)    updateCheckObj.passWord = false;
-        else                        updateCheckObj.passWord = true;
+        // if(pw.trim().length < 7)    updateCheckObj.passWord = false;
+        // else                        updateCheckObj.passWord = true;
 
         // if(reg.test(pw)){
         //     if(index == 0)  updateCheckObj.passWord = true;
