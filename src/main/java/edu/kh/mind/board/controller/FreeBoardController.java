@@ -1,5 +1,6 @@
 package edu.kh.mind.board.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,9 +132,33 @@ public class FreeBoardController {
     	if(board != null) {
     		// 댓글 
     		List<Reply> rList = rService.selectList(boardNo);
-    		model.addAttribute("rList", rList);
     		
+    		Map<String, Integer> empathyMap = new HashMap<>();
+            if (board.getWorryEmpathyArray() != null) {
+                String empathyArr[] = board.getWorryEmpathyArray().split(",");
+                String cntArr[] = board.getWorryCntArray().split(",");
+
+
+                for (int i=1001; i<1006; i++) {
+                    String keyStr = Integer.toString(i);
+                    System.out.println("keyStr : " + keyStr);
+
+
+                    int key = Arrays.asList(empathyArr).indexOf(keyStr);
+                    System.out.println("key : " + key);
+
+
+                    if (key >= 0) {
+                        empathyMap.put(keyStr, Integer.valueOf(cntArr[key]));
+                    } else {
+                        empathyMap.put(keyStr, 0);
+                    }
+                }
+            }
+
+    		model.addAttribute("rList", rList);
     		model.addAttribute("board", board);
+    		model.addAttribute("empathyMap", empathyMap);
     		return "free/view";
     		
     	}else {

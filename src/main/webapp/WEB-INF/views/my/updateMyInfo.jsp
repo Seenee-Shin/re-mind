@@ -47,7 +47,7 @@
             </tr>
             <tr>
                 <td>닉네임</td>
-                <td><input class="nickname" name="memberFName" type="text" value="${loginMember.memberFName}"></td>
+                <td><input class="nickname" name="mobile_memberFName" type="text" value="${loginMember.memberFName}"></td>
             </tr>
             <tr>
                 <c:set var="ph" value="${fn:split(loginMember.memberPhone, '-') }"/>
@@ -150,10 +150,10 @@
     }
 
     $(".nickname").on("input", function (){
-        if($(this).val().length < 3)
-            updateCheckObj.memberFName = false;
-        else
-            updateCheckObj.memberFName = true;
+        // if($(this).val().length < 3)
+        //     updateCheckObj.memberFName = false;
+        // else
+        //     updateCheckObj.memberFName = true;
     });
 
     function memberUpdateValidate(){
