@@ -104,7 +104,7 @@ public class MyController {
         String path = "";
 
         if(session.getAttribute("loginMember") != null) {
-            path = "my/appointment/past";
+            path = "my/appointmentPast";
         } else {
             Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
 
