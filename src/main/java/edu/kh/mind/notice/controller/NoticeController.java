@@ -21,7 +21,8 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping("list")
-	public String noticeList(Model model) {
+	public String noticeList( Model model) {
+		
 		
 		List<Notice> noticeList = service.noticeList();
 		
@@ -30,6 +31,7 @@ public class NoticeController {
 		
 		return "notice/noticeList";
 	}
+	
 	
 	@RequestMapping("view/{noticeNo}")
 	public String selectNotice(Model model, @PathVariable("noticeNo") int noticeNo) {
