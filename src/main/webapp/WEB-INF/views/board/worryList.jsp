@@ -48,7 +48,7 @@
 	                </div>
 				</div>
 
-				<form action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate()">
+				<form action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate();">
 	                <!-- 글작성 모달창 -->
 	                <div class="postModal hidden">
 	                    <div class="postModal_overlay"></div>
@@ -107,7 +107,7 @@
 	                    </div>
 	                </div>
 	            </form>
-	
+
 	            <article id="free_borad_wrap">
 	
 	                <!-- 게시판 리스트 -->
@@ -127,6 +127,9 @@
 	$(function () {
 		// list 가져오기
 		getWorryList();
+
+		// 파일 변경
+		$("#addFileBtn").on("change", fileCheck);
 	})
 
 	// 카테고리 선택
@@ -165,9 +168,9 @@
 				"searchCategory" : $("#search_category option:selected").val(),
 				"searchText" : searchText
 			}
-			getFreeList(data);
+			getWorryList(data);
 		} else {
-			getFreeList();
+			getWorryList();
 		}
 	});
 
@@ -179,11 +182,16 @@
 			data = searchData;
 		}
 
+		data.last = last;
+		data.first = first;
+
 		$.ajax({
 			url : "${contextPath}/worry/worryList",
 			type : "POST",
 			data : data,
 			success : function (result) {
+
+				YesScroll();
 
 				let html = "";
 				$.each(result.worryList, function (i, item) {
@@ -208,11 +216,17 @@
 						iconCnt[empathyArr[i]] = empathyCntArr[i];
 					}
 
+					// 프로필 이미지
+					let writerImg = "${contextPath}/resources/images/basicProfile.png";
+					if (item.imagePath != null) {
+						writerImg = "${contextPath}/" + item.imagePath + item.imageName;
+					}
+
 					html += `
 					<div class="board_list_content">
 						<div class="board_flex_wrap">
 							<div class="writer_pic_wrap">
-								<div class="writer_pic light_brown_bg" style="background-image: url();"></div>
+								<div class="writer_pic light_brown_bg" style="background-image: url(` + writerImg + `); background-size:cover;"></div>
 								<ul class="userMenu hidden">
 									<li> <a class="block">차단</a> </li>
 									<input class="hidden" value= ` + item.memberNo + `>
@@ -254,25 +268,15 @@
 				`;
 				});
 
-				$(".free_board_list_wrap").html(html);
-
-				// if (!$.isEmptyObject(data)) { // 카테고리 선택
-				//
-				// } else {
-				// 	$(".free_board_list_wrap").append(html);
-				// }
-
+				$(".free_board_list_wrap").append(html);
 
 			},
 			error : function(request, status, error){
 				console.log("ajax 통신 중 오류 발생");
 				console.log(request.responseText);
 			}
-
-
 		});
 	}
-
 
 	// 고민작성하기 카테고리 선택
 	const selectRadio = $(".postModal input[name='worryCategoryCode']");
@@ -318,6 +322,182 @@
 		}
 	});
 
+	// 파일 현재 필드 숫자 totalCount랑 비교값
+	var fileCount = 0;
+	// 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
+	var totalCount = 5;
+	// 파일 고유넘버
+	var fileNum = 0;
+	// 첨부파일 배열
+	var content_files = new Array();
+
+	var delete_files = new Array();
+
+	// 파일 추가
+	function fileCheck(e) {
+		var files = e.target.files;
+
+		// 파일 배열 담기
+		var filesArr = Array.prototype.slice.call(files);
+
+		// 파일 개수 확인 및 제한
+		if (fileCount + filesArr.length > totalCount) {
+			alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
+			return;
+		} else {
+			fileCount = fileCount + filesArr.length;
+		}
+
+		// 각각의 파일 배열담기 및 기타
+		filesArr.forEach(function (f) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+
+				content_files.push(f);
+
+				$('#imgWrap').append(
+						'<div id="img'+fileNum+'"class="boardImg"> <img src="'+ e.target.result+'">'
+						+'<div class="deleteImg" onclick="fileDelete(\'file' + fileNum + '\')"><i class="fas fa-times"></i></div>'
+						+'</div>'
+				);
+				fileNum ++;
+			};
+			reader.readAsDataURL(f);
+		});
+
+		//초기화 한다.
+		$("#input_file").val("");
+	}
+
+	// 파일 부분 삭제 함수
+	function fileDelete(fileNum){
+		var no = fileNum.replace(/[^0-9]/g, "");
+		content_files[no].is_delete = true;
+
+		$('#img' + no).remove();
+
+		fileCount --;
+	}
+
+	// 게시글 등록
+	function postingValidate(){
+		//사진 배열에 담기
+		const form = $("form")[0];
+		const formData = new FormData(form);
+
+		for (let i = 0; i < content_files.length; i++) {
+			// 삭제 안한것만 담아 준다.
+			if(!content_files[i].is_delete){
+				formData.append('images', content_files[i]);
+			}else{
+				delete_files.push(content_files[i]);
+				formData.append('deletImages',delete_files[i]);
+			}
+		}
+
+		//삽입
+		$.ajax({
+			type: "POST",
+			enctype: "multipart/form-data",
+			url: "insert",
+			data : formData,
+			processData: false,
+			contentType: false,
+			success: function (result) {
+				if(result > 0){
+
+
+					swal({"title" : "글이 작성되었습니다." ,
+						"icon" : "success"});
+					$("#input_file").val("");
+					const imgWrap = document.querySelector("#imgWrap");
+
+					while (imgWrap.hasChildNodes()) {	// 부모노드가 자식이 있는지 여부를 알아낸다
+						imgWrap.removeChild(
+							imgWrap.firstChild
+						);
+					}
+
+					// 내용삭제
+					$("#post_textarea").val("");
+					$("replyCheckCode").val("1");
+					$("scrapCheckCode").val("1");
+					$("empathyCheckCode").val("1");
+
+					// 리스트 첫페이지 호출
+					$(".free_board_list_wrap").empty();
+					getWorryList();
+
+					// 모달 창 닫기
+					closeModal();
+
+				} else
+					swal({"title" : "글작성 실패" ,
+						"icon" : "error"});
+			},
+			error: function (xhr, status, error) {
+				swal({"title" : "서버 연결 오류" ,
+					"icon" : "error"});
+			}
+		});
+
+		return false;
+	}
+
+	//페이지네이션(무한스크롤 변수 선언)
+	var currentPage = 1;
+	var infinityLimit = 5; // 한번에 보여질 result 수
+	var pageSize = 10;
+	var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
+	// 선 계산(ajax로 넘겨야됨)
+	last = currentPage * infinityLimit;
+	first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+	function calcPagination(){
+
+		maxPage = Number.parseInt(Math.floor(listCount / infinityLimit));
+		startPage = (currentPage-1) / pageSize * pageSize + 1;
+		endPage = startPage + pageSize - 1;
+
+		if(endPage > maxPage)   endPage = maxPage;
+
+		if(currentPage <= infinityLimit)   prevPage = 1;
+		else                    prevPage = startPage - 1;
+
+		if(endPage == maxPage) nextPage = maxPage;
+		else               nextPage = endPage + 1;
+
+		last = currentPage * infinityLimit;
+		first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+	}
+
+	// 무한스크롤
+	function YesScroll () {
+		console.log("scroll start");
+		if(last >= listCount)   return;
+
+		const pagination = document.querySelector('.paginaiton');
+		const fullContent = document.querySelector('.main_content');
+		const screenHeight = screen.height;
+
+		let oneTime = false;
+		document.addEventListener('scroll',OnScroll,{passive:true});
+		function OnScroll () {
+
+			const fullHeight = fullContent.clientHeight;
+			const scrollPosition = pageYOffset;
+
+			//이상함
+			console.log(fullHeight-screenHeight/2 - 100);
+
+			if (fullHeight-screenHeight/2 - 350<= scrollPosition && !oneTime) {
+				console.log("test");
+				oneTime = true;
+				currentPage = currentPage + 1;
+				calcPagination();
+				getWorryList();
+			}
+		}
+	}
 
 </script>
 

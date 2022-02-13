@@ -138,8 +138,12 @@
 
 				const liDiv_5 = $("<div class='category_div'>");
 				liDiv_5.text(value.counselCategoryNm);
+
 				if (dateFormat(today) == value.reservationEnrollDate && value.counselCategoryNo == 1) {
-					if (today.getHours() > (value.reservationEnrollTime - 1) && today.getHours() < (value.reservationEnrollTime + 2)) {
+					console.log(dateFormat(today) + " : " + value.reservationEnrollDate);
+					console.log(today.getHours() + " : " + (value.reservationEnrollTime - 1) + " : " +  (Number)(value.reservationEnrollTime + 2));
+					console.log("-----------------------------");
+					if (today.getHours() >= (value.reservationEnrollTime - 1) && today.getHours() < (Number)(value.reservationEnrollTime + 2)) {
 						liDiv_5.addClass("chatting");
 						liDiv_5.text("입장하기");
 						liDiv_5.attr("onclick", "inputChat(" + value.reservationNo + ")");

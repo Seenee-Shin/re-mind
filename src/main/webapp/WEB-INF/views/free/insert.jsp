@@ -50,20 +50,26 @@
 								</div>
 		                        
 		                        <div class="write_option_area">
-	                	            <div class="check_box_wrap">
-		                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
-		                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
-		                            </div>
-	
-		                            <div class="check_box_wrap">
-		                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩 허용</label>
-										<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
-		                            </div>
-		                            <div class="check_box_wrap">
-		                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active">공감 허용</label>
-		                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
-		                            </div>
+              	            		<div class="check_box_wrap">
+                                     	<select id="mReplyCheckCode" name="replyCheckCode">
+											<option value="1">댓글 허용</option>
+											<option value="2">댓글 비허용</option>
+										</select>  
+									</div>
 
+                                    <div class="check_box_wrap">
+                                       <select id="mScrapCheckCode" name="scrapCheckCode">
+										    <option value="1">스크랩 허용</option>
+										    <option value="2">스크랩 비허용</option>
+									    </select>  
+                                    </div>
+                                        
+                                    <div class="check_box_wrap">
+                                    	<select id="mEmpathyCheckCode" name="empathyCheckCode">
+										    <option value="1">공감 허용</option>
+										    <option value="2">공감 비허용</option>
+									    </select>  
+                                    </div>
 		                        </div>
 		                        
 		                        <hr>
@@ -339,6 +345,8 @@ function postingValidate(){
 		contentType: false,
 		success: function (result) {
 			if(result > 0){
+				
+				
                 swal({"title" : "글이 작성되었습니다." , 
                       "icon" : "success"});
    	    		$("#input_file").val("");
@@ -349,6 +357,7 @@ function postingValidate(){
 						imgWrap.firstChild
 					);
 				}
+				$(".free_board_list_wrap").empty();
 				getFreeList();
 				// 내용삭제
 				$("#post_textarea").val(""); 
@@ -468,9 +477,10 @@ function getFreeList(searchData) {
 			let iconCnt = {};
 
 			console.log(JSON.parse(result.result));
+
 			$.each(JSON.parse(result.result), function (i, item) {
-				
-	
+				console.log(item.profileImgList)
+			
 				// empathy 초기화
 				empathyArr = [];
 				empathyCntArr = [];
@@ -510,7 +520,7 @@ function getFreeList(searchData) {
 					+'			<div class="posting_info">'
 					+'				<div class="writer_id">'
 		            +'					<p class="userInfo">'+item.memberFn+'</p>'
-		            +'					<p>'+item.createDate+'</p>'
+		            +'					<p hr>'+item.createDate+'</p>'
 		            +'				</div>'
 		            +'				<div class="posting">'
 		            +'					<p>'+item.boardContent+'</p>'

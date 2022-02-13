@@ -17,12 +17,47 @@ $("#category_cancel_btn").on("click",function(){
     $("#header").css("display","block");
     $("#mobile_category_btn").css("display","block");
 }); 
+$(document).on("click", ".cate_btn_click", function (){
+    ul.empty();
+    currentPage = 1;
+    calcPagination();
+});
+
+var gender;
+$(".gender").on("click", function (){
+    const thisId = $(this).attr("id");
+    if(thisId == "pro_male")
+        gender = 1;
+    else if(thisId == "pro_famale")
+        gender = 2;
+
+    ul.empty();
+    makePro();
+});
+
+var therapy = null;
+$(".therapy").on("click", function (){
+    const thisId = $(this).attr("id");
+
+    if(thisId == "text_counseling")
+        therapy = 1;
+    else if(thisId == "voice_counseling")
+        therapy = 2;
+    else if(thisId == "face_counseling")
+        therapy = 3;
+
+    console.log("therapy : " + therapy)
+
+    ul.empty();
+    makePro();
+});
 
 $(".cate_btn").on("click", function (){
     let val = $(this).val();
 
     if(val.length == 1)	val = 100 + val;
     else				val = 10 + val;
+    console.log("val : " + val)
 
     if( $(this).attr("id") == undefined ){
         if(clickable.length > 4)	return;
@@ -65,10 +100,12 @@ let nameValue;
 $(document).on("input", "#pro_searchInput", function (){
     nameValue = $("#pro_searchInput").val();
 });
+
 $("#nameSearch").on("click", function (){
     ul.empty();
     makePro();
 });
+
 calcPagination();
 function makePro(){
 
@@ -78,11 +115,13 @@ function makePro(){
             "worryCtCd": clickable,
             "last":last,
             "first":first,
-            "proName":nameValue
+            "proName":nameValue,
+            "gender":gender,
+            "therapy":therapy
         },
         dataType:"JSON",
         success:function (result){
-            YesScroll();
+
             $.each(result, function (i, item){
 				
 				console.log(item);
@@ -139,24 +178,13 @@ function makePro(){
 				starpoint_box2.append(no_star_img,testdiv);
                 review.append(pro_reiew_count_span,starpoint_box2);
                 
-                // for(let i = 1; i <= 5; i++){
-                //     if(item.starAvg > i * 2){
-                //
-                //     }else{
-                //
-                //     }
-                // }
-                
-                
-               
+
                 pro_intro_wrap_div.append(pro_name, review);
                 const pro_intro = $('<div class="pro_intro">');
                 const pro_intro_p1 = $('<p>' + item.professionIntro + '</p>');
                 const pro_intro_p2 = $('<p>#가족 #대인관계 #자존감상실 #연인</p>');
                 pro_intro.append(pro_intro_p1, pro_intro_p2);
                 pro_intro_wrap.append(pro_intro_wrap_div, pro_intro);
-
-
 
 
                 const pro_price_wrap = $('<div class="pro_price_wrap">');
@@ -194,9 +222,10 @@ function makePro(){
                 aHref.append(pro_profile, pro_intro_wrap, pro_price_wrap);
                 li.append(aHref);
                 ul.append(li);
-
             });
         }
+    }).done(function (){
+        YesScroll();
     });
 }
 makePro();

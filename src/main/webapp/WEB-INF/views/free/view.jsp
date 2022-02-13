@@ -132,9 +132,16 @@
 				       <div class="write_comment" id="write_comment">
 				           
 				           <div class="user_info">
-				               <div class="user_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);">
-				               </div>
-				
+                           	<c:choose>
+                           		<c:when test="${!empty loginMember.imagePath}">
+                               		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+                           		</c:when>
+                           		<c:otherwise>
+                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
+                           		</c:otherwise>
+                           		
+                               </c:choose>
+	
 				               <div>
 				                   <p>${board.memberFn}</p>
 				               </div>

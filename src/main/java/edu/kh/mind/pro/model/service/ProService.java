@@ -16,8 +16,6 @@ public interface ProService {
 
     List<Profession> selectProfession(Map<String, Object> worryCtCd);
 
-    List<Profession> selectAllProfession(Map<String, Integer> param);
-
     // 총 가격 insert
     int priceInsert(ProfessionPrice pfp, ReservationPayMent rv);
     
@@ -53,7 +51,10 @@ public interface ProService {
 	int proLetterInsert(Letter letter);
 
 	int selectProfessionCount();
-	
+
+	// 상담사 랜덤
+	Profession selectProRandom();
+
 	// 상담사 이미지, 이름 가지고 오기
 	Image proImageNameSelect(int professionNo);
 	
@@ -64,4 +65,5 @@ public interface ProService {
 	int listCountSelect(Review review);
 
 	
+
 }

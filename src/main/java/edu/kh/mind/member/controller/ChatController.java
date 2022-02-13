@@ -30,13 +30,13 @@ public class ChatController {
 		if (session.getAttribute("loginMember") != null) {
 
 			int memberNo = ((Member) session.getAttribute("loginMember")).getMemberNo();
-			System.out.println(memberNo);
-			System.out.println(chat);
 
 			chat.setMemberNo(memberNo);
 			List<ChatMessage> list = service.joinChat(chat);
 			System.out.println(list);
 
+
+			System.out.println(chat);
 			if (list != null) {
 				model.addAttribute("chattingNo", chat.getChattingNo());
 

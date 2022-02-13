@@ -139,6 +139,10 @@
 		FROM REVIEW
 		WHERE PROFESSION_NO = #{professionNo}
 	</select>
+
+	<insert id="insertChatting">
+		INSERT INTO CHATTING VALUES(SEQ_CHATTING_NO.NEXTVAL, TO_DATE(#{reservationEnrollTime}, 'YYYY-MM-DD 00:00:00'), DEFAULT,  #{reservationNo})
+	</insert>
 	
 	<!-- 상담사 후기 더보기 -->
 	<select id="reviewAdd" resultMap="Review_rm">

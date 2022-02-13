@@ -23,15 +23,12 @@ public class ProServiceImpl implements ProService{
     @Autowired
     private ProDAO dao;
 
-    @Override
+
+	@Override
     public List<Profession> selectProfession(Map<String, Object> worryCtCd) {
         return dao.selectProfession(worryCtCd);
     }
 
-    @Override
-    public List<Profession> selectAllProfession(Map<String, Integer> param) {
-        return dao.selectAllProfession(param);
-    }
 
 	@Override
 	public int updateWish(Map<String, Integer> map) {
@@ -53,6 +50,15 @@ public class ProServiceImpl implements ProService{
 	@Override
 	public int selectProfessionCount() {
 		return dao.selectProfessionCount();
+	}
+
+	/**
+	 * 상담사 랜덤
+	 * @return
+	 */
+	@Override
+	public Profession selectProRandom() {
+		return dao.selectProRandom();
 	}
 
 	// 총 금액 insert
@@ -106,6 +112,14 @@ public class ProServiceImpl implements ProService{
 		reservation.setPayNo(payment.getPayNo());
 		
 		int result = dao.reservationInsert(reservation);
+
+		// chat insert
+		if (result > 0 && reservation.getCounselCategoryNm() == "텍스트테라피") {
+			dao.insertChatting(reservation);
+
+//[Reservation{reservationNo=130, reservationEnrollDate=2022-02-13, reservationEnrollTime=20, reservationStatusCode=0, reservationCancel='null', counselCategoryNo=1, reservationPayNo=183, counselCategoryNm='텍스트테라피', PayNo=183, memberNo=3, memberName='null', professionNo=24, professionName='null', statusCode=1}]
+
+		}
 		
 		return result;
 	}

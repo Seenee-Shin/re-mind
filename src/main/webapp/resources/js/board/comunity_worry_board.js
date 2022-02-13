@@ -17,6 +17,7 @@ const openModal = ()=>{
     $('body').css("overflow", "hidden");
 }
 const closeModal = ()=>{
+    console.log("!");
     postModal.classList.add("hidden")
     /*뒷창고정 해제*/
     $('body').css("overflow", "scroll");
@@ -41,9 +42,6 @@ function opneComment() {
 
 }
 
-
-
-
 $(" .posting > p").each(function () {
     var content = $('.posting > p');
     var content_txt = content.text();
@@ -62,7 +60,8 @@ $(" .posting > p").each(function () {
     }
 
 
-    btn_more.click(toggle_content());
+    btn_more.on("click", toggle_content());
+
     function toggle_content() {
         if ($(this).hasClass('short')) {
             // 접기 상태
@@ -104,6 +103,4 @@ $(".dark-brown").on("click", function(){
         text.css("display", "flex");
     }
 });
-
-
 

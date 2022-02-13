@@ -50,10 +50,6 @@ public class ProDAO {
         return sqlSession.selectList("professionMapper.selectProfession", worryCtCd);
     }
 
-    public List<Profession> selectAllProfession(Map<String, Integer> param) {
-        return sqlSession.selectList("professionMapper.selectAllProfession", param);
-    }
-
 	public Profession selectPro(int professionNo) {
 		return sqlSession.selectOne("professionMapper.selectProOne", professionNo);
 	}
@@ -129,20 +125,30 @@ public class ProDAO {
     public int selectProfessionCount() {
 		return sqlSession.selectOne("professionMapper.selectProfessionCount", null);
     }
-    
+
+	/**
+	 * 상담사 랜덤
+	 * @return result
+	 */
+	public Profession selectProRandom() {
+		return sqlSession.selectOne("professionMapper.selectProRandom");
+	}
+
     // 상담사 사진, 이름 가지고 오기
 	public Image proImageNameSelect(int professionNo) {
 		return sqlSession.selectOne("boardMapper.proImageNameSelect", professionNo);
 	}
 
 	public List<Review> reviewAdd(Review review) {
-		
 		return sqlSession.selectList("reservationMapper.reviewAdd",review);
 	}
 	
 	
 	public int listCountSelect(Review review) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("reservationMapper.listCountSelect",review);
+	}
+	
+	public void insertChatting(Reservation reservation) {
+		sqlSession.insert("reservationMapper.insertChatting", reservation);
 	}
 }

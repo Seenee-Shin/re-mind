@@ -25,4 +25,33 @@ var swiper2 = new Swiper(".mySwiper2", {
 $(".main_content1_cir").on("click", function () {
     const type = $(this).data("type");
     window.location.href = contextPath+"/selftest/selftestForm?type="+type;
+});
+
+// 커뮤니티 상세
+function locationPath(boardCategoryCode, boardNo) {
+    let path = contextPath;
+    switch (boardCategoryCode) {
+        case 101 :
+            path += "/free/view/"+boardNo;
+            break;
+        case 102 :
+            path += "/worry/view/"+boardNo;
+            break;
+        case 104 :
+            path += "/secret/view/"+boardNo;
+            break;
+    }
+
+    window.location.href = path;
+}
+
+// 마인드포스팃
+$(".main_content4_content_postit").on("click", function () {
+    window.location.href = contextPath + "/post/list";
+})
+
+// 공지사항 상세
+$(".main_content4_content_left_item").on("click", function () {
+    const noticeNo = $(this).data("notice_no");
+    window.location.href = contextPath + "/notice/view/"+noticeNo;
 })

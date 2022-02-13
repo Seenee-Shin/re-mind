@@ -85,22 +85,19 @@ submitBtn.addEventListener("click", () => {
 
 // 상세 조회
 $(".item").on("dblclick",function(e){
-	
-	$(this).css({"width": "25%","height": "25%"});
-	$(this).children(".nickname").removeClass("hidden");
-	$(this).children(".far").removeClass("hidden");
-	
-	
+
+	console.log($(this).css("width"))
+	if($(this).css("width") == '243.75px'){
+		$(this).css({"width": "15%","height": "15%"});
+		$(this).children(".nickname").addClass("hidden");
+		$(this).children(".far").addClass("hidden");
+	}else{
+		$(this).css({"width": "25%","height": "25%"});
+		$(this).children(".nickname").removeClass("hidden");
+		$(this).children(".far").removeClass("hidden");
+	}
+
 });
-
-// 아이템 크기 줄이기
-$(".naturally").on("click",function(e){
-	$(".item").css({"width" : "15%", "height" : "15%"});
-	$(".item").children(".nickname").addClass("hidden");
-	$(".item").children(".far").addClass("hidden");
-});
-
-
 
 
 // 아이템 삭제 

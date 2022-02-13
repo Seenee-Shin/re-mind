@@ -131,56 +131,51 @@
           )
     </select>
 	<!--    그그그머냐ㅐ 그거 검색 -->
+    <!-- 제발...제발...제발...제발...제발...제발...제발...제발...제발... 안되면 나락이다 -->
     <select id="selectProfession" resultMap="profession_rm">
         SELECT * FROM(
-            SELECT ROWNUM AS RNUM, TEMP.*,
-                (SELECT COUNT(*) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO) REVIEW_COUNT,
-                (SELECT NVL(AVG(REVIEW_STARPOINT), 0) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO) REVIEW_STARPOINT
-            FROM(
+        SELECT ROWNUM AS RNUM, TEMP.*,
+        (SELECT COUNT(*) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO) REVIEW_COUNT,
+        (SELECT NVL(AVG(REVIEW_STARPOINT), 0) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO)
+        REVIEW_STARPOINT
+        FROM(
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
-            PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
-            COUNSEL_CATEGORY_NO, COUNSEL_PRICE
+        PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
+        COUNSEL_CATEGORY_NO, COUNSEL_PRICE
         FROM (SELECT PP.PROFESSION_NO,
-                LISTAGG(PP.COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
-                LISTAGG(PP.COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_PRICE
+        LISTAGG(PP.COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
+        LISTAGG(PP.COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_PRICE
         FROM PROFESSION_PRICE PP
+        <if test="therapy != null">
+            WHERE COUNSEL_CATEGORY_NO = #{therapy}
+        </if>
         GROUP BY PP.PROFESSION_NO) PR
-            JOIN PROFESSION USING(PROFESSION_NO)
-            JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
-            LEFT JOIN IMAGE USING(PROFESSION_NO)
-        WHERE BOARD_NO IS NULL AND IMAGE_LEVEL = 1 AND PROFESSION.STATUS_CD = 4 AND PROFESSION_NO IN
-            (SELECT PROFESSION_NO FROM PROFESSION_INFORMATION
-            WHERE
-            <foreach collection="#{tt}" item="category" open="(" close=")" separator=" OR ">
-                PRO_TAG LIKE '%' || #{category} || '%'
-            </foreach>)
+        JOIN PROFESSION USING(PROFESSION_NO)
+        JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
+        LEFT JOIN IMAGE USING(PROFESSION_NO)
+        WHERE BOARD_NO IS NULL AND IMAGE_LEVEL = 1 AND PROFESSION.STATUS_CD = 4
+            <if test="categoryArr != null ">
+                  AND PROFESSION_NO IN
+                (SELECT PROFESSION_NO FROM PROFESSION_INFORMATION
+                WHERE
+                <foreach collection="categoryArr" item="category" open="(" close=")" separator=" OR ">
+                    PRO_TAG LIKE '%' || #{category} || '%'
+                </foreach>)
+            </if>
+            <if test="proName != null">
+                AND PROFESSION_NM LIKE '%'||#{proName}||'%'
+            </if>
+            <if test="gender != null and gender == 1">
+                AND PROFESSION_GENDER LIKE '%남%'
+            </if>
+            <if test="gender != null and gender == 2">
+                AND PROFESSION_GENDER LIKE '%여%'
+            </if>
         )TEMP)
         WHERE RNUM BETWEEN #{first} AND #{last}
     </select>
 
-    <select id="selectAllProfession" resultMap="profession_rm">
-        SELECT * FROM(
-                         SELECT ROWNUM AS RNUM, TEMP.*,
-                                (SELECT COUNT(*) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO) REVIEW_COUNT,
-                                (SELECT NVL(AVG(REVIEW_STARPOINT), 0) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO) REVIEW_STARPOINT
-                         FROM(
-                                 SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
-                                        PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
-                                        COUNSEL_CATEGORY_NO,
-                                        COUNSEL_PRICE
-                                 FROM (SELECT PP.PROFESSION_NO,
-                                              LISTAGG(PP.COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
-        LISTAGG(PP.COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_PRICE
-                                       FROM PROFESSION_PRICE PP
-                                       GROUP BY PP.PROFESSION_NO) PR
-                                          JOIN PROFESSION USING(PROFESSION_NO)
-                                          JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
-                                          LEFT JOIN IMAGE USING(PROFESSION_NO)
-                                 WHERE BOARD_NO IS NULL AND IMAGE_LEVEL = 1 AND PROFESSION.STATUS_CD = 4
-                             )TEMP)
-        WHERE RNUM BETWEEN #{first} AND #{last}
-    </select>
-    
+
     <select id="selectProOne" resultMap="profession_rm">
         SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
                PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
@@ -328,7 +323,7 @@
     <!-- 채팅방 입장 -->
     <select id="existsChat"  resultType="_int">
         SELECT NVL(MAX(CHATTING_NO), 0)
-        FROM CHATTING_TEST
+        FROM CHATTING
         WHERE RESERVATION_NO = #{reservationNo}
         AND PROFESSION_NO = #{professionNo}
         AND CHATTING_STATUS_CD = 1
@@ -339,7 +334,7 @@
         SELECT MESSAGE,
             TO_CHAR(CREATE_DT, 'AM', 'nls_date_language=korean') || ' ' || TO_CHAR(CREATE_DT, 'HH:MI') CREATE_DT,
             MEMBER_NO, PROFESSION_NO, MEMBER_NM
-        FROM CHATTING_MESSAGE_TEST
+        FROM CHATTING_MESSAGE
         LEFT JOIN MEMBER USING(MEMBER_NO)
         WHERE CHATTING_NO = #{chattingNo}
         ORDER BY CHAT_NO
@@ -349,8 +344,8 @@
     <!-- 예약리스트 조회 -->
     <select id="classList" resultMap="reservation_rm">
     SELECT r.RESERVATION_NO,
-    TO_CHAR(r.RESERVATION_ENROLL_DT,'YYYY-MM-DD')"RESERVATION_ENROLL_DT", r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
-	rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD
+        TO_CHAR(r.RESERVATION_ENROLL_DT,'YYYY-MM-DD') "RESERVATION_ENROLL_DT", r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
+	    rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD
 	FROM RESERVATION_PAYMENT rp
 	JOIN RESERVATION r ON r.RESERVATION_PAY_NO = RP.RESERVATION_PAY_NO
 	JOIN COUNSEL_CATEGORY cc ON CC.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO
@@ -382,6 +377,26 @@
     
     <select id="CounselCategoryCodeSelect" resultType="string">
     	SELECT PRO_TAG FROM PROFESSION_INFORMATION WHERE PROFESSION_NO = #{professionNo}
+    </select>
+
+    <select id="selectProRandom" resultMap="profession_rm">
+        <![CDATA[
+        SELECT * FROM (
+            SELECT PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR,
+                PRO_INTRO, PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM,
+                LISTAGG(COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
+                LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
+            FROM PROFESSION_PRICE
+            JOIN PROFESSION USING(PROFESSION_NO)
+            JOIN PROFESSION_INFORMATION USING(PROFESSION_NO)
+            LEFT JOIN IMAGE USING(PROFESSION_NO)
+            WHERE BOARD_NO IS NULL AND IMAGE_LEVEL = 1
+            GROUP BY PROFESSION_NO, PROFESSION_NM, PROFESSION_PHONE, PROFESSION_MAJOR, PRO_INTRO,
+                PRO_STORY, PRO_CARRER, PRO_TAG, IMAGE_PATH, IMAGE_NM
+            ORDER BY DBMS_RANDOM.RANDOM
+        )
+        WHERE ROWNUM < 2
+        ]]>
     </select>
 
 </mapper>

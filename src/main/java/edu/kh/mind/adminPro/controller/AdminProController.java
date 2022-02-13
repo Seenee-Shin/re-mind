@@ -106,6 +106,8 @@ public class AdminProController {
 			
 			// loginPro 객체에 고유 카테고리 번호 넣기
 			loginPro.setCounselCategoryCode(CounselCategoryCode);
+
+			System.out.println(loginPro);
 					
 			List<Board> proWorryList = service.proWorryListSelect(loginPro);
 			
