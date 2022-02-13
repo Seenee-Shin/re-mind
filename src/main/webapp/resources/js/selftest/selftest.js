@@ -24,6 +24,7 @@ $(function () {
     } else {
         $(".selfTest_op").eq(0).click();
     }
+
 });
 
 function next(){
@@ -36,7 +37,13 @@ function next(){
         $(".selfTest_prev_btn").css("display","none");
     }else{
         $(".selfTest_prev_btn").css("display","block");
+    }
 
+    if(count == (qwe-1)){
+        $("#selfTest_result_btn").css("display", "block");
+    }else{
+
+        $("#selfTest_result_btn").css("display", "none");
     }
 
 }
@@ -46,6 +53,8 @@ function prev(){
     ajax();
     // 이전 다음 버튼
     hiddenBtn();
+
+    $("#selfTest_result_btn").css("display", "none");
 }
 
 
@@ -88,6 +97,7 @@ $(".selfTest_op").on("click", function () {
     $(this).addClass("active");
 
     ajax();
+
 });
 let qwe = 0;
 function ajax(){
@@ -126,31 +136,15 @@ function ajax(){
             // console.log(result.Answer.length);   총 길이
 
 
-            if(ctCode == 4){
-                html3 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[0].answerType +')">' + result.Answer[0].answerContent + '</div>'
-                      + '<div class="selfTest_result" onclick="saveScore('+ result.Answer[1].answerType +')">' + result.Answer[1].answerContent + '</div>';
-
-            }else{
                 for(let i=0; i< result.Answer.length; i++){
                     html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +')">' + result.Answer[i].answerContent + '</div>';
 
                 }
-            }
 
-
-            //console.log(html2);
-            //     +     '   <div id="btn1" class="selfTest_result">' result.Answer[0] '</div>'
-            // +     '   <div id="btn2" class="selfTest_result">보통이다</div>'
-            // +     '   <div id="btn3" class="selfTest_result">대체로 그렇다</div>'
-            // +       '<div id="btn4" class="selfTest_result">항상 그렇다</div>'
             $(".selfTest").html(html);
-            if (ctCode == 4){
 
-                $("#selfTest_content_option").append(html3);
-            }else{
             $("#selfTest_content_option").append(html2);
 
-            }
 
         },
         error(request,status,error){
@@ -167,124 +161,6 @@ $(".selfTest_result").on("click", function (){
     $(".selfTest_result").removeClass("active");
     $(this).addClass("active");
 });
-
-
-/*
-*
-            if(ctCode == 1) {
-                allAnswerLen = 4; //  전체 답변 수
-                allQuestionLen = result.length - allAnswerLen;
-
-                // 카테고리 표시
-                $(".selfTest_title > h1").text(nm + " 자가진단 테스트");
-
-                // 현재 문제 번호 표시
-                $(".selfTest_content > span:first-child").text(nowQNo);
-
-                // 총 문항 갯수 표시
-                $(".selfTest_content > span:nth-child(3)").text("총 " + allQuestionLen + "문항");
-
-                // 1번문항을 ajax요청 후 보여줌
-                $(".selfTest_content > div:first-of-type").html(QUES[nowQNo + allAnswerLen - 1].answerContent);
-
-
-                addACount();
-
-            }else if(ctCode == 2){
-                allAnswerLen = 4;
-                allQuestionLen = result.length - allAnswerLen;
-
-                // 카테고리 표시
-                $(".selfTest_title > h1").text(nm + " 자가진단 테스트");
-
-                // 현재 문제 번호 표시
-                $(".selfTest_content > span:first-child").text(nowQNo);
-
-                // 총 문항 갯수 표시
-                $(".selfTest_content > span:nth-child(3)").text("총 " + allQuestionLen + "문항");
-
-                // 1번문항을 ajax요청 후 보여줌
-                $(".selfTest_content > div:first-of-type").html(QUES[nowQNo + allAnswerLen - 1].answerContent);
-
-
-                addACount();
-
-            }else if(ctCode == 3){
-
-                allAnswerLen = 5; // 응답 5개
-                allQuestionLen = result.length - allAnswerLen;
-
-                // 카테고리 표시
-                $(".selfTest_title > h1").text(nm + " 자가진단 테스트");
-
-                // 현재 문제 번호 표시
-                $(".selfTest_content > span:first-child").text(nowQNo);
-
-                // 총 문항 갯수 표시
-                $(".selfTest_content > span:nth-child(3)").text("총 " + allQuestionLen + "문항");
-
-                // 1번문항을 ajax요청 후 보여줌
-                $(".selfTest_content > div:first-of-type").html(QUES[nowQNo + allAnswerLen - 1].answerContent);
-
-
-                addACount();
-            }else if(ctCode == 4){
-
-            }else if(ctCode == 5){
-                allAnswerLen = 5; // 응답 5개
-                allQuestionLen = result.length - allAnswerLen;
-
-                // 카테고리 표시
-                $(".selfTest_title > h1").text(nm + " 자가진단 테스트");
-
-                // 현재 문제 번호 표시
-                $(".selfTest_content > span:first-child").text(nowQNo);
-
-                // 총 문항 갯수 표시
-                $(".selfTest_content > span:nth-child(3)").text("총 " + allQuestionLen + "문항");
-
-                // 1번문항을 ajax요청 후 보여줌
-                $(".selfTest_content > div:first-of-type").html(QUES[nowQNo + allAnswerLen - 1].answerContent);
-
-
-                addACount();
-
-            }else if(ctCode == 6){
-                allAnswerLen = 4; // 응답 4개
-                allQuestionLen = result.length - allAnswerLen;
-
-                // 카테고리 표시
-                $(".selfTest_title > h1").text(nm + " 자가진단 테스트");
-
-                // 현재 문제 번호 표시
-                $(".selfTest_content > span:first-child").text(nowQNo);
-
-                // 총 문항 갯수 표시
-                $(".selfTest_content > span:nth-child(3)").text("총 " + allQuestionLen + "문항");
-
-                // 1번문항을 ajax요청 후 보여줌
-                $(".selfTest_content > div:first-of-type").html(QUES[nowQNo + allAnswerLen - 1].answerContent);
-
-
-                addACount();
-
-            }else if(ctCode == 7){
-
-                allAnswerLen = 4; // 응답 4개
-                allQuestionLen = result.length - allAnswerLen;
-
-                // 카테고리 표시
-                $(".selfTest_title > h1").text(nm + " 자가진단 테스트");
-
-                // 현재 문제 번호 표시
-                $(".selfTest_content > span:first-child").text(nowQNo);
-
-                // 총 문항 갯수 표시
-                $(".selfTest_content > span:nth-child(3)").text("총 " + allQuestionLen + "문항");
-
-                // 1번문항을 ajax요청 후 보여줌
-                $(".selfTest_content > div:first-of-type").html(QUES[nowQNo + allAnswerLen - 1].answerContent);
-*/
 
 
 
