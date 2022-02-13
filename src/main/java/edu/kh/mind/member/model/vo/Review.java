@@ -14,10 +14,31 @@ public class Review {
 	
 	private String counselCategoryNm;
 	
+	//후기 페이지네이션
+	private int first;
+	private int last;
+	private int listCount;
+	
+	private String enrollDate;
+	
 	
 	public Review() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public String getEnrollDate() {
+		return enrollDate;
+	}
+
+
+
+	public void setEnrollDate(String enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+
+
 
 	public int getReviewNo() {
 		return reviewNo;
@@ -87,11 +108,37 @@ public class Review {
 		this.counselCategoryNm = counselCategoryNm;
 	}
 
+
+	public int getFirst() {
+		return first;
+	}
+
+	public void setFirst(int first) {
+		this.first = first;
+	}
+
+	public int getLast() {
+		return last;
+	}
+
+	public void setLast(int last) {
+		this.last = last;
+	}
+
+	public int getListCount() {
+		return listCount;
+	}
+
+	public void setListCount(int listCount) {
+		this.listCount = listCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", reviewContent=" + reviewContent + ", reviewStarPoint="
 				+ reviewStarPoint + ", professionNo=" + professionNo + ", memberNo=" + memberNo + ", reviewDate="
-				+ reviewDate + ", reservationNo=" + reservationNo + ", counselCategoryNm=" + counselCategoryNm + "]";
+				+ reviewDate + ", reservationNo=" + reservationNo + ", counselCategoryNm=" + counselCategoryNm
+				+ ", first=" + first + ", last=" + last + ", listCount=" + listCount + "]";
 	}
-	
+
 }

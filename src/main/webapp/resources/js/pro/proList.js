@@ -1,5 +1,23 @@
 var clickable = [];
 
+/*$("#mobile_pro_category_warp").on("click", function(){
+	
+	$("#mobile_pro_category").css("display", "block");
+	
+});*/
+$(document).on("click","#mobile_category_btn", function(){
+    $("#mobile_pro_category").css("display","block");
+    $("#header").css("display","none");
+    $("#mobile_category_btn").css("display","none");
+});    
+
+$("#category_cancel_btn").on("click",function(){
+    
+    $("#mobile_pro_category").css("display","none");
+    $("#header").css("display","block");
+    $("#mobile_category_btn").css("display","block");
+}); 
+
 $(".cate_btn").on("click", function (){
     let val = $(this).val();
 

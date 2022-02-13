@@ -174,4 +174,17 @@ public class ProServiceImpl implements ProService{
 		
 		return dao.proImageNameSelect(professionNo);
 	}
+	
+	// 후기 더보기
+	@Override
+	public List<Review> reviewAdd(Review review) {
+		return dao.reviewAdd(review);
+	}
+	
+	// 총 후기 count
+	@Override
+	public int listCountSelect(Review review) {
+		// TODO Auto-generated method stub
+		return dao.listCountSelect(review);
+	}
 }

@@ -116,7 +116,7 @@
 	    <div id="pro_content_warp">
 	        <ul id="detail-contents">
 	            <li class="detail_btn"><a href="#pro_talk">당신에게 한마디</a></li>
-	            <li class="detail_btn"><a href="#pro_revice">후기</a></li>
+	            <li class="detail_btn"><a href="#pro_review">후기</a></li>
 	        </ul>
 	        <ul class="pro_content" id="pro_talk">
 	            <li>
@@ -138,14 +138,14 @@
 	                     ${profession.proCarrer}
 	                </p>
 	            </li>
-	            <li id="pro_revice">
+	            <li id="pro_review">
 	                <h2>후기</h2>
 	                <ul class="pro_review_wrap">
 						<c:choose>
 							<c:when test="${empty reviewList}">
-							<li>
-								<p id="reveiw_no">아직 후기가 없어요!</p>
-							</li>
+								<li>
+									<p id="reveiw_no">아직 후기가 없어요!</p>
+								</li>
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${reviewList}" var="review">
@@ -193,12 +193,14 @@
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
-						
 	                </ul>
+	                <c:if test="${fn:length(reviewList) > 4}">
+		                <button type="button" id="reviewAddBtn" onclick="return reviewAdd();">
+		            		더보기
+		            	</button>
+	                </c:if>
 	            </li>
 	        </ul>
-
-
 	    </div>
 	</div>
 	<div class="pro_reservation_wrap">
@@ -381,6 +383,108 @@
 		}
     	
     }
-    
+	
+   	//페이지네이션(무한스크롤 변수 선언)
+	var currentPage = 2;
+	var infinityLimit = 5; // 한번에 보여질 result 수
+
+	var listCount, first, last;
+	// 선 계산(ajax로 넘겨야됨)
+	last = currentPage * infinityLimit;
+	first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+	
+	function calcPagination(){
+		
+	   last = currentPage * infinityLimit;
+	   first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+	   
+	}
+	
+	function reviewAdd(){
+		
+		// 총 갯수가 last 수와 같으면 reviewAdd 함수 실행 x
+		if(last >= listCount) {
+			return false;
+		}
+			
+		
+		calcPagination();
+		currentPage = currentPage + 1;
+		
+		 $.ajax({
+			url:contextPath+'/pro/reviewAdd',
+			data:{
+				"professionNo": professionNo,
+				"last": last,
+				"first": first},
+		
+			dataType:"JSON",
+			success:function(reviewAddList){
+				
+				$.each(reviewAddList,function(i,item){
+					
+					if(reviewAddList.length - 1 == i){
+						listCount = Number.parseInt(item.listCount);
+						return false;
+					}
+					
+					let li;
+					li = '<li class="pro_review_li">' +
+					 '<div class="review_top_box">' +
+						' <div class="float-left">' +
+						'	 <p>'+item.counselCategoryNm+' 이용고객님</p>' +
+						'	 <p>'+item.enrollDate+'</p>' +
+						 '</div>' +
+						 '<div class="float-right">' +
+							'<div class="starpoint_box">' +
+							'	<label for="starpoint_1" class="label_star" title="1"><span class="blind">1점</span></label>' +
+							'	<label for="starpoint_2" class="label_star" title="2"><span class="blind">2점</span></label>' +
+							'	<label for="starpoint_3" class="label_star" title="3"><span class="blind">3점</span></label>' +
+							'	<label for="starpoint_4" class="label_star" title="4"><span class="blind">4점</span></label>' +
+							'	<label for="starpoint_5" class="label_star" title="5"><span class="blind">5점</span></label>' +
+							'	<label for="starpoint_6" class="label_star" title="6"><span class="blind">6점</span></label>' +
+							'	<label for="starpoint_7" class="label_star" title="7"><span class="blind">7점</span></label>' +
+							'	<label for="starpoint_8" class="label_star" title="8"><span class="blind">8점</span></label>' +
+							'	<label for="starpoint_9" class="label_star" title="9"><span class="blind">9점</span></label>' +
+							'	<label for="starpoint_10" class="label_star" title="10"><span class="blind">10점</span></label>' +
+							'	<input type="radio" name="starpoint" id="starpoint_1" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_2" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_3" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_4" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_5" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_6" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_7" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_8" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_9" class="star_radio">' +
+							'	<input type="radio" name="starpoint" id="starpoint_10" class="star_radio">' +
+							'	<span class="starpoint_bg" style="width: 60%;"></span>' +
+							'</div>' +
+						' </div>' +
+					 '<div class="review_bottom_box clear-both">' +
+						' <p>'+item.reviewContent+'</p>' +
+					 '</div>' +
+				 '</li>';
+				 
+				 $(".pro_review_wrap").append(li);
+					
+					console.log(item);
+					
+					
+				});
+			}
+			
+			 
+		 }).done(function(){
+			 	if(last + infinityLimit >= listCount) {
+					$("#reviewAddBtn").remove();
+				} 
+		 });
+		
+	}
+	
+
+	
+	
+	
 
 </script>

@@ -9,6 +9,7 @@ import edu.kh.mind.member.model.vo.Review;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -132,5 +133,16 @@ public class ProDAO {
     // 상담사 사진, 이름 가지고 오기
 	public Image proImageNameSelect(int professionNo) {
 		return sqlSession.selectOne("boardMapper.proImageNameSelect", professionNo);
+	}
+
+	public List<Review> reviewAdd(Review review) {
+		
+		return sqlSession.selectList("reservationMapper.reviewAdd",review);
+	}
+	
+	
+	public int listCountSelect(Review review) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("reservationMapper.listCountSelect",review);
 	}
 }

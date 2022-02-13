@@ -129,8 +129,9 @@ $(document).on("click", "#calendar td", function (){
     }
 });
 
+//mobile_pro_category_warp
 // 상담사 목록페이지 카테고리 선택(모바일)
-$(document).on("click","#mobile_category_btn", function(){
+/*$(document).on("click","#mobile_category_btn", function(){
     alert("dddd")
     $("#mobile_pro_category").css("display","block");
     $("#header").css("display","none");
@@ -142,7 +143,7 @@ $("#category_cancel_btn").on("click",function(){
     $("#mobile_pro_category").css("display","none");
     $("#header").css("display","block");
     $("#mobile_category_btn").css("display","block");
-});    
+});    */
 
 
 // 결제

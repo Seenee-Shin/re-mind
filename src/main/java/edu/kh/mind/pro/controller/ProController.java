@@ -290,4 +290,23 @@ public class ProController {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="reviewAdd", method=RequestMethod.GET)
+	public String reviewAdd(Review review) {
+		
+		int listCount = 0;
+				
+		List<Review> reviewAddList = service.reviewAdd(review);
+		
+		if(!reviewAddList.isEmpty()) {
+			listCount = service.listCountSelect(review);
+			
+			Review r = new Review();
+			r.setListCount(listCount);
+			reviewAddList.add(r);
+		}
+		
+		return new Gson().toJson(reviewAddList);
+	}
+	
 }
