@@ -112,6 +112,14 @@ public class ProServiceImpl implements ProService{
 		reservation.setPayNo(payment.getPayNo());
 		
 		int result = dao.reservationInsert(reservation);
+
+		// chat insert
+		if (result > 0 && reservation.getCounselCategoryNm() == "텍스트테라피") {
+			dao.insertChatting(reservation);
+
+//[Reservation{reservationNo=130, reservationEnrollDate=2022-02-13, reservationEnrollTime=20, reservationStatusCode=0, reservationCancel='null', counselCategoryNo=1, reservationPayNo=183, counselCategoryNm='텍스트테라피', PayNo=183, memberNo=3, memberName='null', professionNo=24, professionName='null', statusCode=1}]
+
+		}
 		
 		return result;
 	}

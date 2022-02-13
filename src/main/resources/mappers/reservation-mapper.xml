@@ -137,5 +137,9 @@
 		FROM REVIEW
 		WHERE PROFESSION_NO = #{professionNo}
 	</select>
+
+	<insert id="insertChatting">
+		INSERT INTO CHATTING VALUES(SEQ_CHATTING_NO.NEXTVAL, TO_DATE(#{reservationEnrollTime}, 'YYYY-MM-DD 00:00:00'), DEFAULT,  #{reservationNo})
+	</insert>
 	
 </mapper>

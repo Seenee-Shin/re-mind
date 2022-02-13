@@ -44,6 +44,10 @@ public class ChatServiceImpl implements ChatService {
             cm.setMessage((Util.XSS(cm.getMessage())));
             cm.setMessage(Util.changeNewLine(cm.getMessage()));
 
+            System.out.println("----------------------------------------------");
+            System.out.println(cm);
+
+
             result = dao.insertMessage(cm);
         }
 
