@@ -22,8 +22,9 @@ public class NoticeController {
 	
 	@RequestMapping("list")
 	public String noticeList(Model model) {
-		
-		List<Notice> noticeList = service.noticeList();
+
+		String type = "";
+		List<Notice> noticeList = service.noticeList(type);
 		
 		model.addAttribute("css", "notice/noticeList");
 		model.addAttribute("noticeList", noticeList);

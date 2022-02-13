@@ -55,6 +55,15 @@ public class ProServiceImpl implements ProService{
 		return dao.selectProfessionCount();
 	}
 
+	/**
+	 * 상담사 랜덤
+	 * @return
+	 */
+	@Override
+	public Profession selectProRandom() {
+		return dao.selectProRandom();
+	}
+
 	// 총 금액 insert
     @Transactional
     @Override
