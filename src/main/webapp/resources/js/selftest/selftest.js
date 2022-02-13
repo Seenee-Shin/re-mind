@@ -27,6 +27,17 @@ $(function () {
 
 });
 
+function testResult(){
+
+    if(count == (qwe-1)){
+        $("#selfTest_result_btn").css("display", "block");
+    }else{
+
+        $("#selfTest_result_btn").css("display", "none");
+    }
+
+}
+
 function next(){
     count = count + 1;
 
@@ -38,13 +49,7 @@ function next(){
     }else{
         $(".selfTest_prev_btn").css("display","block");
     }
-
-    if(count == (qwe-1)){
-        $("#selfTest_result_btn").css("display", "block");
-    }else{
-
-        $("#selfTest_result_btn").css("display", "none");
-    }
+    testResult();
 
 }
 
@@ -76,6 +81,7 @@ function hiddenBtn() {
 function reset() {
     nowQNo = 1;
     allAnswerLen = undefined;
+
 }
 
 // 문항 번호
@@ -97,9 +103,13 @@ $(".selfTest_op").on("click", function () {
     $(this).addClass("active");
 
     ajax();
+    testResult();
 
 });
+
+// 총 문항 길이
 let qwe = 0;
+
 function ajax(){
     $.ajax({
         url : "selftestQuestion",
@@ -135,11 +145,11 @@ function ajax(){
             let html3 = "";
             // console.log(result.Answer.length);   총 길이
 
-
                 for(let i=0; i< result.Answer.length; i++){
-                    html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +')">' + result.Answer[i].answerContent + '</div>';
 
-                }
+                        html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +')">' + result.Answer[i].answerContent + '</div>';
+
+                    }
 
             $(".selfTest").html(html);
 
