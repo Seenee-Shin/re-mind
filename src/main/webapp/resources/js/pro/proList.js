@@ -52,7 +52,45 @@ $(".therapy").on("click", function (){
     makePro();
 });
 
-$(".cate_btn").on("click", function (){
+// 상담사 목록페이지 카테고리 선택(pc)
+$(".cate_btn").on("click",function(){
+    
+    if($(this).hasClass('cate_btn_click')){
+        $(this).removeClass('cate_btn_click'); 
+    }else{ 
+        if($(".cate_btn_click").length > 4){
+            alert("최대 5개만 선택할 수 있어요!");
+        }else{
+            $(this).addClass('cate_btn_click');
+        }    
+    }    
+});    
+
+// 상담사 목록페이지 카테고리 선택(모바일)
+$(".mobile_cate_btn").on("click",function(){
+
+    if($(this).hasClass('mobile_cate_btn_click')){
+        $(this).removeClass('mobile_cate_btn_click'); 
+    }else{ 
+        if($(".mobile_cate_btn_click").length > 4){
+            alert("최대 5개만 선택할 수 있어요!");
+        }else{
+            $(this).addClass('mobile_cate_btn_click');
+        }
+    }
+});
+
+// // 모바일 버튼
+// $(".mBtn").on("click",function(){
+//     $(".mBtn").removeClass("mBtn_ck");
+//     $(this).addClass("mBtn_ck");
+// });
+
+
+
+
+
+/* $(".cate_btn").on("click", function (){
     let val = $(this).val();
 
     if(val.length == 1)	val = 100 + val;
@@ -85,7 +123,7 @@ $(".cate_btn").on("click", function (){
     clickable.sort(function (a, b){return a-b;});
 
     makePro();
-});
+}); */
 
 function makeComma(str) {
     str = String(str);
