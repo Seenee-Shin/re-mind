@@ -98,6 +98,8 @@
 			                                        </div>
 			                                    </div>
 			                                </div>
+			                                <div id="imgWrap">
+											</div>
 			                                
 			                               <div class="m_write_option_area">
 			
@@ -501,10 +503,15 @@ function getFreeList(searchData) {
 					iconCnt[empathyArr[i]] = empathyCntArr[i];
 				}
 				
+				let writerImg = "${contextPath}/resources/images/basicProfile.png";
+				if (item.imagePath != null) {
+					writerImg = "${contextPath}/" + item.imagePath + item.imageName;
+				}
+				
 				html+=   '<div class="board_list_content">'
 	              		+'	<div class="board_flex_wrap">'
 	                   	+'		<div class="writer_pic_wrap">'
-	                    +'			<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>';
+	                    +'			<div class="writer_pic" style="background-image: url('+writerImg+'); background-size:cover;"></div>';
 	             if(loginMemberNo != item.memberNo){
 					html +='			<ul class="userMenu hidden">'
 						+'				<li> <a href="" class ="block"> 차단</a> </li>'
