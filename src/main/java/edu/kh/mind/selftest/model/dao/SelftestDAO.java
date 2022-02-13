@@ -19,4 +19,7 @@ public class SelftestDAO {
         return sqlSession.selectList("selftestMapper.selectQ", selftest);
     }
 
+    public List<Selftest> selectA(Selftest selftest) {
+        return sqlSession.selectList("selftestMapper.selectA", selftest);
+    }
 }

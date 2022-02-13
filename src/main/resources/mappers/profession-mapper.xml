@@ -379,5 +379,9 @@
     	INSERT INTO LETTER
     	VALUES(SEQ_LETTER_NO.NEXTVAL,#{letterContent},SYSDATE,0,1,0,#{memberNo},#{professionNo},NULL)
     </insert>
+    
+    <select id="CounselCategoryCodeSelect" resultType="string">
+    	SELECT PRO_TAG FROM PROFESSION_INFORMATION WHERE PROFESSION_NO = #{professionNo}
+    </select>
 
 </mapper>

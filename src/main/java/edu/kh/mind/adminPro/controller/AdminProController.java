@@ -90,16 +90,32 @@ public class AdminProController {
 	}
 	
 	// 상담사 고민 상담 페이지
-	@RequestMapping("proWorryList")
-	public String proWorryList(@ModelAttribute("loginPro") Profession pro, Model model) {
-		
-		// 리스트 model로 넘기기
-		
-		//List<Board> proWorryList = service.proWorryListSelect(pro.getProfessionNo());
-		
+	@RequestMapping(value="proWorryList", method = RequestMethod.GET)
+	public String proWorryList() {
 		
 		return "adminPro/proWorryList";
 	}
+	
+	// 상담사 고민 상담 페이지
+		@ResponseBody
+		@RequestMapping(value="proWorryList", method = RequestMethod.POST)
+		public List<Board> proWorryList(@ModelAttribute("loginPro") Profession loginPro) {
+			
+			// 상담사 고유 카테고리 번호 가지고오기
+			String CounselCategoryCode = service.CounselCategoryCodeSelect(loginPro.getProfessionNo());
+			
+			// loginPro 객체에 고유 카테고리 번호 넣기
+			loginPro.setCounselCategoryCode(CounselCategoryCode);
+					
+			List<Board> proWorryList = service.proWorryListSelect(loginPro);
+			
+			System.out.println(proWorryList);
+			
+			return proWorryList;
+		}
+	
+	
+	
 
 	
 	// 상담사 등록 신청

@@ -31,7 +31,15 @@
 	                   	 	<div class="board_write_warp grey_bg " >
 		                        <div id="free_board_write">
 		                            <div class="writer_pic_wrap">
-		                                <div class="my_pic" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});"> </div>
+		                            	<c:choose>
+		                            		<c:when test="${!empty loginMember.imagePath}">
+		                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+		                            		</c:when>
+		                            		<c:otherwise>
+		                                		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
+		                            		</c:otherwise>
+		                            		
+		                                </c:choose>
 		                            </div>
 		                            <div class="writing">
 		                                <textarea class="grey_bg" name="boardContent" id="post_textarea" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="무슨일이 있었나요?"></textarea>
@@ -77,7 +85,7 @@
 			                                <div id="m_free_board_write">
 			                                    <i class="fas fa-times" id="closeModal"></i>
 			                                    <div class="writer_wrap">
-			                                        <div class="my_pic" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});">
+			                                        <div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});">
 			                                        </div>
 			                                        <div class="m_writing">
 			                                            <textarea name="boardContent" id="m_post_text" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="무슨일이 있었나요?" ></textarea>
@@ -544,6 +552,8 @@ function getFreeList(searchData) {
 					+'</div>'
 			});
 			$(".free_board_list_wrap").append(html);
+			
+			
 		},
 		error : function(request, status, error){
 			console.log("ajax 통신 중 오류 발생");
