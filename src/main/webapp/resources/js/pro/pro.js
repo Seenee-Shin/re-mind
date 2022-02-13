@@ -1,4 +1,4 @@
-// 상담사 목록페이지 카테고리 선택(pc)
+/* // 상담사 목록페이지 카테고리 선택(pc)
 $(".cate_btn").on("click",function(){
     
     if($(this).hasClass('cate_btn_click')){
@@ -25,6 +25,17 @@ $(".mobile_cate_btn").on("click",function(){
         }
     }
 });
+
+// 모바일 버튼
+$(".mBtn").on("click",function(){
+    $(".mBtn").removeClass("mBtn_ck");
+    $(this).addClass("mBtn_ck");
+});
+
+
+ */
+
+
 
 // 상담사 상세페이지 네비게이션 (상담사 한마디, 후기)
 $(".detail_btn").on("click",function(){
