@@ -1,6 +1,7 @@
 package edu.kh.mind.pro.model.dao;
 
 
+import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.member.model.vo.Review;
@@ -134,5 +135,10 @@ public class ProDAO {
 	 */
 	public Profession selectProRandom() {
 		return sqlSession.selectOne("professionMapper.selectProRandom");
+	}
+
+    // 상담사 사진, 이름 가지고 오기
+	public Image proImageNameSelect(int professionNo) {
+		return sqlSession.selectOne("boardMapper.proImageNameSelect", professionNo);
 	}
 }

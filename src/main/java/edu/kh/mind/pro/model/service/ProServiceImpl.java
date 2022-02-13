@@ -1,5 +1,6 @@
 package edu.kh.mind.pro.model.service;
 
+import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.member.model.vo.Profession;
 
 import edu.kh.mind.member.model.vo.ProfessionPrice;
@@ -174,5 +175,12 @@ public class ProServiceImpl implements ProService{
 	@Override
 	public int proLetterInsert(Letter letter) {
 		return dao.proLetterInsert(letter);
+	}
+	
+	// 상담사 이름, 사진 가지고 오기
+	@Override
+	public Image proImageNameSelect(int professionNo) {
+		
+		return dao.proImageNameSelect(professionNo);
 	}
 }

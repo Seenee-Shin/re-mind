@@ -348,7 +348,8 @@
     
     <!-- 예약리스트 조회 -->
     <select id="classList" resultMap="reservation_rm">
-    SELECT r.RESERVATION_NO, r.RESERVATION_ENROLL_DT, r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
+    SELECT r.RESERVATION_NO,
+    TO_CHAR(r.RESERVATION_ENROLL_DT,'YYYY-MM-DD')"RESERVATION_ENROLL_DT", r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
 	rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD
 	FROM RESERVATION_PAYMENT rp
 	JOIN RESERVATION r ON r.RESERVATION_PAY_NO = RP.RESERVATION_PAY_NO
@@ -378,6 +379,10 @@
     	INSERT INTO LETTER
     	VALUES(SEQ_LETTER_NO.NEXTVAL,#{letterContent},SYSDATE,0,1,0,#{memberNo},#{professionNo},NULL)
     </insert>
+    
+    <select id="CounselCategoryCodeSelect" resultType="string">
+    	SELECT PRO_TAG FROM PROFESSION_INFORMATION WHERE PROFESSION_NO = #{professionNo}
+    </select>
 
     <select id="selectProRandom" resultMap="profession_rm">
         <![CDATA[

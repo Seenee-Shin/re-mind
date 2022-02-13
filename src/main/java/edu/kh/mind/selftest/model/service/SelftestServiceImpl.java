@@ -4,8 +4,12 @@ import edu.kh.mind.selftest.model.dao.SelftestDAO;
 import edu.kh.mind.selftest.model.vo.Selftest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SelftestServiceImpl implements SelftestService {
@@ -14,8 +18,19 @@ public class SelftestServiceImpl implements SelftestService {
     private SelftestDAO dao;
 
     @Override
-    public List<Selftest> selectQ(Selftest selftest) {
+    public Map<String, Object> selectQ(Selftest selftest) {
 
-        return dao.selectQ(selftest);
+        Map<String, Object> selectAll = new HashMap<>();
+
+        List<Selftest> Answer = new ArrayList<>();
+       List<Selftest> Quest = dao.selectQ(selftest) ;
+       if (!Quest.isEmpty()){
+           Answer = dao.selectA(selftest);
+       }
+        selectAll.put("Quest", Quest);
+        selectAll.put("Answer", Answer);
+
+        return selectAll;
+
     }
 }

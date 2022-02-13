@@ -6,7 +6,7 @@
 }
 
 .study{
-    padding-top: 80px;
+    padding-top: 50px;
 }
 
 .study p:nth-child(1){
@@ -26,11 +26,12 @@
 }
 
 .study_title p{
-    line-height: 120%;
+    line-height: 23px;
     
 }
 
 .study_title button{
+	width: 975px;
     margin-top: 10px;
     width: 80px;
     height: 40px;
@@ -43,14 +44,14 @@
 
 
 .study_content{
-    width: 100%;
+    width: 975px;
     margin-top : 45px;
     border-top : 1px solid #454545;
     padding-top: 35px;
 }
 
 .image_wrap{
-    width : 100%;
+    width : 975px;
     padding-bottom: 100%;
     background: url(../../images/board/mindPost/연구소.png) 100% 100% / 100% 100% no-repeat;
     position: relative;
@@ -328,22 +329,6 @@
 }*/
 
 
-@media screen and (max-width: 910px){
-	   .item{
-        width : 15%;
-        height: 15%;
-        font-size: 13px;
-    }
-    
-    .naturally{
-    font-size: 12px;
-    width: 15%;
-    height: 5%;
-    top : -5%;
-    padding-top : 2px;
-    }
-	
-}
 
 
 
@@ -351,7 +336,7 @@
 
 
 
-/* ----------모바일 --------------- */
+/* ----------모바일 --------------- 
 @media screen and (max-width: 768px){
 
 
@@ -420,4 +405,4 @@
 
 
 
-}
+}*/

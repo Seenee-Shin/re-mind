@@ -32,29 +32,7 @@
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
       </div>
     </div>
-    <div class="selfTest">
-      <div class="selfTest_title">
-        <h1>자존감 자가진단 테스트</h1>
-        <div>
-          이 검사는 자신에 대해서 어떻게 느끼는 지를 
-          알아보기 위한 것입니다.<br>
-          각 문자를 읽고, 자신에게 해당되는 정도를
-          나타내는 항목에 체크하여 주십시오.
-        </div>
-      </div>
-      <div class="selfTest_content">
-        <span>0</span>
-        <span></span>
-        <span>총 0문항</span>
-        <div>나는 내가 적어도 다른 사람만큼은 가치있는 사람이라고 느낀다.</div>
-        <div id="selfTest_content_option">
-          <div id="btn1" class="selfTest_result">대체로 그렇지 않다</div>
-          <div id="btn2" class="selfTest_result">보통이다</div>
-          <div id="btn3" class="selfTest_result">대체로 그렇다</div>
-          <div id="btn4" class="selfTest_result">항상 그렇다</div>
-        </div>
-      </div>
-    </div>
+    <div class="selfTest"></div>
     <!-- 버튼 -->
     <div class="selfTest_btn">
       <button class="selfTest_prev_btn hidden" onclick="prev()" type="button">이전</button>
@@ -62,7 +40,7 @@
     </div>
     <button type="button" class="mb_selfTest_btn">테스트 진행</button>
   </form>
-  <button type="button" id="selfTest_result_btn" style="display:block;">테스트 결과</button>
+  <button type="button" id="selfTest_result_btn" style="display:block;" onclick="resultScore()">테스트 결과</button>
 </article>
 
 <!-- footer include -->

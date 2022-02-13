@@ -70,6 +70,7 @@ select:disabled {
     border: 0px solid;
     margin-top: 15px;
     margin-left: 15px;
+    background-size: cover;
 
 }
 
@@ -90,7 +91,7 @@ select:disabled {
     display: block;
     width: 100%;
     border: 0px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 #free_board_write >.writing >textarea::placeholder{
@@ -118,7 +119,7 @@ select:disabled {
     display: none;
 }
 
-.check_box_wrap> .checkBtn{
+.check_box_wrap>label{
     display: inline-block;
     border-radius: 15px;
     min-width: 90px;
@@ -132,6 +133,13 @@ select:disabled {
     line-height: 27px;
 }
 
+.check_box_wrap>label.dark_brown_border{
+    border: 1px solid #A59999;
+    color:#A59999;
+}
+
+.check_box_wrap>label.dark_brown_border:hover{background-color:#E5D4C5; color: white; border-color:#E5D4C5;}
+.check_box_wrap>label.dark_brown_border.active{background-color:#A59999; color: white; border-color:#A59999;}
 
 .write_option_area{
     margin-top: 10px;
@@ -344,7 +352,9 @@ display: inline-block;
         line-height: 23px;
     }
 
-
+	.reqLogin{
+		line-height: 80px;
+	} 
 
     
     /* 검색창 */

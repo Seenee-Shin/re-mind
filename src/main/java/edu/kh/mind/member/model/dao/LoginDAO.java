@@ -37,4 +37,9 @@ public class LoginDAO {
     public int selectToken(Naver naver) {
         return sqlSession.selectOne("memberMapper.selectToken", naver);
     }
+
+	public Member selectPic(String memberId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("memberMapper.selectUserPic", memberId);
+	}
 }

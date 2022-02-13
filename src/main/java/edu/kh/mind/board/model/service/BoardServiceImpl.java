@@ -2,6 +2,7 @@ package edu.kh.mind.board.model.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -141,7 +142,15 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board selectBoard(int boardNo, int memberNo) {
 		
-		Board board = dao.selectBoard(boardNo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("boardNo", boardNo);
+		map.put("memberNo", memberNo);
+		
+		
+		Board board = dao.selectBoard(map);
+		
+		
 		
 	      // 게시글 상세조회 성공 && 게시글 작성자(board.getMemberNo()) != 회원번호 
 	      if(board != null && board.getMemberNo() != memberNo ) {
@@ -218,6 +227,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Board> selectMainBoardList() {
 		return dao.selectMainBoardList();
+	}
+	@Override
+	public int memberBlock(HashMap<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return dao.memberBlock(map);
 	}
 
 }

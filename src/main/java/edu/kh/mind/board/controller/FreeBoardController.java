@@ -88,14 +88,14 @@ public class FreeBoardController {
 	
 	// 글작성 기능 
 	@ResponseBody
-    @RequestMapping(value = "insert", method = RequestMethod.POST)
-    public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, 
-    		@RequestPart(value = "images",required = false) List<MultipartFile> images,  HttpSession session,
-    		Board board, String contentFiles) throws Exception {
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, 
+			@RequestPart(value = "images",required = false) List<MultipartFile> images,  HttpSession session,
+			Board board, String contentFiles) throws Exception {
 		
-    	
+		
 		board.setMemberNo(loginMember.getMemberNo());
-		//웹 접근경로(web path), 서버 저장경로(serverPath)
+		//웹 접근경로(web path), 서버 저장경로(serverPath) 
 		String webPath = "/resources/images/board/";
 		
 		String serverPath= session.getServletContext().getRealPath(webPath);
@@ -104,11 +104,11 @@ public class FreeBoardController {
 		System.out.println(serverPath);
 		System.out.println(images);
 		
-		//게시글 작성 후 상세 조회(DB에 입력된 게시글)할 boardNo 
+		//게시글 작성 후 상세 조회(DB에 입력된 게시글)할 boardNo
 		int result = service.insertFreeBoard(board, images, webPath, serverPath);
 		
-    	return result;
-    }
+		return result;
+	}
 	
 	
     //게시판 상세조회
@@ -213,7 +213,29 @@ public class FreeBoardController {
     	return result;
     }
     
-    
+    // 회원 차단
+    @ResponseBody
+    @RequestMapping(value = "block", method = RequestMethod.GET)
+    public int memberBlock(@ModelAttribute("loginMember") Member loginMember, int muteMember) {
+    	
+    	System.out.println(loginMember.getMemberNo());
+    	System.out.println(muteMember);
+    	
+    	 HashMap<String, Integer> map = new HashMap<>();
+    	 map.put("loginMember", loginMember.getMemberNo());
+    	 map.put("memberNo", muteMember);
+    	 
+    	 int result = 0;
+    	 
+    	 if(loginMember.getMemberNo()== muteMember) {
+    		 result = 0;
+    	 }else {
+    		 result = service.memberBlock(map);
+    	 }
+    	 
+    	return result;
+    }
+	
     
     //예외처리
 	@ExceptionHandler(Exception.class)

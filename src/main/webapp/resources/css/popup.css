@@ -33,6 +33,8 @@
 @media screen and (max-width: 768px) {
     .signup_box{padding:0 40px;}
     .signup_box > .input_wrap > .input_area{width:100%;}
+    
+    .login_box{ padding:15px 40px 15px 40px;}
 }
 .signup_box > .input_wrap > .input_area.left_area{float:left;}
 .signup_box > .input_wrap > .input_area.right_area{float:right;}
