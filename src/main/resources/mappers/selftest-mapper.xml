@@ -38,18 +38,30 @@
         JOIN SELF_CHECK_RESULT C ON(C.CATEGORY_NO = A.CATEGORY_NO)
         WHERE S.CATEGORY_NO = #{categoryNo}
     </select>-->
+
+    <!-- 문항 -->
     <select id="selectQ" resultMap="selftest_rm">
         SELECT (
-            SELECT COUNT(*) FROM SELF_CHECK_QUESTION WHERE CATEGORY_NO = 1) Q_COUNT,
-            QUESTION_CONTENT
+                SELECT COUNT(*) FROM SELF_CHECK_QUESTION WHERE CATEGORY_NO = #{categoryNo}) Q_COUNT,
+                QUESTION_CONTENT
         FROM SELF_CHECK_QUESTION
         WHERE CATEGORY_NO = #{categoryNo}
+        ORDER BY QUESTION_NO ASC
     </select>
 
+    <!-- 응답 -->
     <select id="selectA" resultMap="selftest_rm">
         SELECT ANSWER_CONTENT, ANSWER_TYPE
         FROM SELF_CHECK_ANSWER
         WHERE CATEGORY_NO = #{categoryNo}
+        ORDER BY ANSWER_NO ASC
+    </select>
+
+    <!-- 결과 -->
+    <select id="selectR" resultMap="selftest_rm">
+        SELECT CATEGORY_NO, RESULT_CONTENT, RESULT_RATE FROM SELF_CHECK_RESULT
+        WHERE CATEGORY_NO = #{categoryNo}
+        ORDER BY RESULT_NO ASC
     </select>
 
 
