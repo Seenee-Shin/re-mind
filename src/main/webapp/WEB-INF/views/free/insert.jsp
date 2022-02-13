@@ -50,20 +50,26 @@
 								</div>
 		                        
 		                        <div class="write_option_area">
-	                	            <div class="check_box_wrap">
-		                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
-		                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
-		                            </div>
-	
-		                            <div class="check_box_wrap">
-		                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩 허용</label>
-										<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
-		                            </div>
-		                            <div class="check_box_wrap">
-		                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active">공감 허용</label>
-		                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
-		                            </div>
+              	            		<div class="check_box_wrap">
+                                     	<select id="mReplyCheckCode" name="replyCheckCode">
+											<option value="1">댓글 허용</option>
+											<option value="2">댓글 비허용</option>
+										</select>  
+									</div>
 
+                                    <div class="check_box_wrap">
+                                       <select id="mScrapCheckCode" name="scrapCheckCode">
+										    <option value="1">스크랩 허용</option>
+										    <option value="2">스크랩 비허용</option>
+									    </select>  
+                                    </div>
+                                        
+                                    <div class="check_box_wrap">
+                                    	<select id="mEmpathyCheckCode" name="empathyCheckCode">
+										    <option value="1">공감 허용</option>
+										    <option value="2">공감 비허용</option>
+									    </select>  
+                                    </div>
 		                        </div>
 		                        
 		                        <hr>
