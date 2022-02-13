@@ -526,6 +526,12 @@ public class MyController {
             loginMember.setMemberFName(member.getMemberFName());
             model.addAttribute("loginMember", loginMember);
         }else{
+
+            // 거진 돌팔이 의사급 처방전이다...
+            String[] strArr = loginMember.getMemberFName().split(",");
+            loginMember.setMemberFName(strArr[1]);
+            model.addAttribute("loginMember", loginMember);
+
             path = "redirect:/";
             Util.swalSetMessage("회원 정보 수정 실패!", null, "error", ra);
         }
