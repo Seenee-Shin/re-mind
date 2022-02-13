@@ -507,7 +507,6 @@ public class MyController {
         image.setMemberNo(loginMember.getMemberNo());
 
         member.setMemberPw(param.get("memberPw"));
-        System.out.println(param.get("mobile_memberFName") + " / " + param.get("memberFName") + loginMember.getMemberFName());
         if(param.get("memberFName").equals(loginMember.getMemberFName())){
             member.setMemberFName(param.get("mobile_memberFName"));
         }else if(param.get("mobile_memberFName").equals(loginMember.getMemberFName())){
