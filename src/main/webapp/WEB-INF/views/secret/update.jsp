@@ -9,73 +9,75 @@
             <section class="main_content">    
                 <!-- 메인 -->
 
-                <div class="back_btn">
-                    <a href="">
-                        <i class="fas fa-arrow-left"></i> 
-                    </a>
-                </div>
+                <form action="update" method="post" 
+			 	 enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">		
+	                <div class="back_btn">
+	                    <a href="">
+	                        <i class="fas fa-arrow-left"></i> 
+	                    </a>
+	                </div>
                 <article class="board_update_wrap">
                     <div class="profile_wrap">
                         <div class="writer_pic light_brown_bg" style="background-image: url();">
                         </div>
 
-                        <div class="writer_id">
-                            <p>아이디</p>
-                        </div>
-                    </div>
+                            <div class="writer_id">
+	                            <p>${loginMember.memberFName}</p>
+	                        </div>
+	                    </div>
+	                    
+                    <div id= "posting">
+	                        <textarea name="boardContent"  onkeydown="resize(this)" onkeyup="resize(this)">${board.boardContent}</textarea>
+	                        <div class="imgWrap">
+		                        <c:choose>
+		                        	<c:when test="${!empty board.imgList}">
+			                        	 <c:forEach items="${board.imgList}" var="img" varStatus="status">
+			             		       		<div id="img${status.index}" class="boardImg"> 
+			             		       		<img src="${contextPath}${img.imagePath}${img.imageName}">
+							       			</div>
+				                        </c:forEach>
+		                        	</c:when>
+		                        </c:choose>
+	                        </div>
+	                    </div> 
                     
+                      <div class="btn_area">
+                           	<!-- name="images" -->
+							<input type="file"  id='addFileBtn'  accept="audio/*, video/*, image/*" multiple onclick="loadImg()" style="display: none">
+							<input type="hidden" name="delete_files" id="delete_files">
+	                        <div class="write_option_area">
+	                            <div class="check_box_wrap">
+	                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
+	                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
+	                            </div>
 
-				<form action="update" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate()">
-                      	 	<div class="board_write_warp grey_bg " >
-		                        <div id="free_board_write">
-		                            <div class="writer_pic_wrap">
-		                                <div class="my_pic light_brown_bg" style="background-image: url(${contextPath}/resources/images/member/${loginMember.memberImage});"> </div>
-		                            </div>
-		                            <div class="writing">
-		                                <textarea class="grey_bg" name="boardContent" id="post_textarea" rows="5" placeholder="무슨일이 있었나요?"></textarea>
-		                            </div>
-		                        </div>
-		                        
-		                        <div id="imgWrap">
-								</div>
-		                        
-		                        <div class="write_option_area">
-		                            <div class="check_box_wrap">
-                                       <select id="replyCheckCode" name="replyCheckCode">
-										    <option value="1">댓글 허용</option>
-										    <option value="2">댓글 비허용</option>
-									    </select>  		                            
-		                            </div>
-		
-		                            <div class="check_box_wrap">
-                                       <select id="scrapCheckCode" name="scrapCheckCode">
-										    <option value="1">스크랩 허용</option>
-										    <option value="2">스크랩 비허용</option>
-									    </select>  		                            
-		                            </div>
-		                            
-		                            <div class="check_box_wrap">
-                                       <select id="empathyCheckCode" name="empathyCheckCode">
-										    <option value="1">공감 허용</option>
-										    <option value="2">공감 비허용</option>
-									    </select>  		                            
-		                            </div>
-		                        </div>
-		                        
-		                        <hr>
-		                        <div class="btn_area">
-		                            <label for="addFileBtn">
-		                                <i class="fas fa-image dark-brown" ></i>
-		                            </label>
-										<input type="file" name="images" id='addFileBtn' accept="audio/*, video/*, image/*" multiple style="display: none"> 
-		                            <button class="submit_btn light_brown_bg">작성</button>
-		                        </div>
-		                    </div>
+	                            <div class="check_box_wrap">
+	                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩 허용</label>
+									<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
+	                            </div>
+	                            <div class="check_box_wrap">
+	                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active">공감 허용</label>
+	                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
+	                            </div>
+	                            <div class="check_box_wrap">
+	                                <label for="anonCheckCode" class="light_brown_bg dark_brown_bg active">닉네임 공개</label>
+	                                <input type="checkbox"  name="anonCheckCode" value="1" id="anonCheckCode" checked>
+	                            </div>
+
+	                        </div>
+	                    </div>
+	                </article>
                         
-                <div class="edit_btn_wrap">
-                    <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
-                    <button type="button" class="dark-brown edit_btn" onclick=""> 취소  </button>
-                </div>
+	                <div class="edit_btn_wrap">
+	                    <button type="submit" class="dark-brown edit_btn"> 수정 </button>
+	                    <button type="button" class="dark-brown edit_btn" onclick=""> 목록으로  </button>
+	                </div>
+	             
+	              <!-- update 진행 시 사용할 게시글 번호 -->
+				<input type="hidden" name="boardNo" value="${board.boardNo}">
+				<input type="hidden" name="deleteImages" value="${memberNo}">
+	
+				</form>   
 
             </section>
         </div>
@@ -84,6 +86,58 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script>
+// 고민작성하기 댓글
+$("#replyCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
+		$(this).val(0);
+	}
+});
+
+// 고민작성하기 스크랩
+$("#scrapCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("스크랩 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("스크랩 비허용");
+		$(this).val(2);
+	}
+});
+
+// 고민작성하기 공감
+$("#empathyCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("공감 허용");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("공감 비허용");
+		$(this).val(2);
+	}
+});
+
+//고민작성하기 익명
+$("#anonCheckCode").on("click", function () {
+	if ($(this).is(":checked")) {
+		$(this).prev().addClass("dark_brown_bg").addClass("active").text("닉네임 공개");
+		$(this).val(1);
+	} else {
+		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("닉네임 비공개");
+		$(this).val(2);
+	}
+});
+
+
+</script>
+
+
+
+
+
 
 </body>
 </html>
