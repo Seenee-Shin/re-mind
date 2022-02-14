@@ -97,7 +97,7 @@
         </div>
         <!-- Swiper -->
         <div class="swiper1 mySwiper1">
-            <div class="swiper-wrapper" style="justify-content: space-between; left:calc(50% - 140px)">
+            <div class="swiper-wrapper" style="justify-content: space-between; left:calc(50% - 140px); overflow: hidden;">
                 <c:forEach items="${listBoard}" var="board">
                     <div class="swiper-slide commu">
                         <div class="mb_main_content2_content_board">

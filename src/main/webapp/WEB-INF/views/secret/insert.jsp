@@ -371,7 +371,7 @@ function YesScroll () {
       
       //console.log(fullHeight, scrollPosition, screenHeight)
 
-      if (fullHeight-screenHeight/2 - 200<= scrollPosition && !oneTime) {
+      if (fullHeight-screenHeight/2 - 350<= scrollPosition && !oneTime) {
          oneTime = true;
          currentPage = currentPage + 1;
          calcPagination();

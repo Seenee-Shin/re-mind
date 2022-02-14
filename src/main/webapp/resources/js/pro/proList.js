@@ -19,21 +19,20 @@ $("#category_cancel_btn").on("click",function(){
 }); 
 
 $(document).on("click", ".cate_btn_click", function (){
-    ul.empty();
-    currentPage = 1;
-    calcPagination();
-
-    // makePro();
-
+    // ul.empty();
+    // currentPage = 1;
+    // calcPagination();
 });
 
-var gender;
+var gender = 0;
 $(".gender").on("click", function (){
     const thisId = $(this).attr("id");
     if(thisId == "pro_male")
         gender = 1;
     else if(thisId == "pro_famale")
         gender = 2;
+    else if(thisId == "unrelated2")
+        gender = 0;
 
     console.log("gender : " + gender)
 
@@ -43,7 +42,7 @@ $(".gender").on("click", function (){
     makePro();
 });
 
-var therapy = null;
+var therapy = 0;
 $(".therapy").on("click", function (){
     const thisId = $(this).attr("id");
 
@@ -100,8 +99,9 @@ $(".mobile_cate_btn").on("click",function(){
 
 
 
-/* $(".cate_btn").on("click", function (){
+$(".cate_btn").on("click", function (){
     let val = $(this).val();
+
 
     if(val.length == 1)	val = 100 + val;
     else				val = 10 + val;
@@ -110,9 +110,6 @@ $(".mobile_cate_btn").on("click",function(){
     if( $(this).attr("id") == undefined ){
         if(clickable.length > 4)	return;
 
-        ul.empty();
-        currentPage = 1;
-        calcPagination();
 
         $(this).attr("id", val).css("backgroundColor", "rgb(166 166 168)").css("color", "white").css("border", "1px solid #ddd");
     }else if( $(this).attr("id") != undefined ){
@@ -132,8 +129,11 @@ $(".mobile_cate_btn").on("click",function(){
     // 정렬
     clickable.sort(function (a, b){return a-b;});
 
+    ul.empty();
+    currentPage = 1;
+    calcPagination();
     makePro();
-}); */
+});
 
 function makeComma(str) {
     str = String(str);

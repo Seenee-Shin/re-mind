@@ -490,7 +490,6 @@
 			console.log(fullHeight-screenHeight/2 - 100);
 
 			if (fullHeight-screenHeight/2 - 350<= scrollPosition && !oneTime) {
-				console.log("test");
 				oneTime = true;
 				currentPage = currentPage + 1;
 				calcPagination();

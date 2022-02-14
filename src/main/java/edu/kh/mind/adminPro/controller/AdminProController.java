@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -239,7 +240,7 @@ public class AdminProController {
     			
     			if(iResult > 0) { // insert 성공 
     				Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
-    				path = "proLogin";
+    				path = "/";
     			}else {
     				Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
     				path = "/adminPro/proRegisterDetail"+result.getProfessionNo();
@@ -361,6 +362,13 @@ public class AdminProController {
 		return path;
 
 	}
+	
+    @RequestMapping("logout")
+    public String logout(SessionStatus status) {
+        status.setComplete();
+
+        return "redirect:/adminPro/";
+    }
 	
     //예외처리
 	@ExceptionHandler(Exception.class)
