@@ -60,7 +60,7 @@ public class ProController {
 			map.put("gender", "남");
 		else if(Integer.parseInt(String.valueOf(param.get("gender"))) == 2)
 			map.put("gender", "여");
-		else
+		else if(Integer.parseInt(String.valueOf(param.get("gender"))) == 0)
 			map.put("gender", null);
 		map.put("therapy", param.get("therapy"));
 
