@@ -267,7 +267,11 @@ function postingValidate(){
 		}
 	}
 
-	
+	let boardContent = $(".writing [name='boardContent']").val();
+	if (boardContent == "") {
+		boardContent = $(".m_writing [name='boardContent']").val();
+	}
+	formData.set("boardContent", boardContent);
 
 	//삽입
 	$.ajax({

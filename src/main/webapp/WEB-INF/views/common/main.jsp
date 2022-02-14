@@ -74,7 +74,7 @@
         </div>
         <div>
             <c:forEach items="${listBoard}" var="board">
-                <div class="main_content2_content_board">
+                <div class="main_content2_content_board" data-category_code="${board.boardCategoryCode}" data-board_no="${board.boardNo}">
                     <%--<button>#우울증</button>--%>
                     <button type="button" onclick="locationPath(${board.boardCategoryCode}, ${board.boardNo})">${board.boardCategoryName}</button>
                     <%--<p>${board.boardTitle}</p>--%>
