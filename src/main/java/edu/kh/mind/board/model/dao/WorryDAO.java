@@ -67,7 +67,7 @@ public class WorryDAO {
 	 * @return result
 	 */
 	public int memberBlock(HashMap<String, Integer> map) {
-		return sqlSession.insert("boardMapper.memberBlock", map);
+		return sqlSession.insert("secretMapper.memberBlock", map);
 	}
 
 	

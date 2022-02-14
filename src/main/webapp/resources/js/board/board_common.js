@@ -22,6 +22,7 @@ $(document).on("click", ".block", function(){
 		muteMember = $(this).parent().next().val();
 		var answer = confirm("차단하시겠습니까?");	
 		
+		console.log(muteMember);
 		if(answer){
 			$.ajax({
 				url : "block",
