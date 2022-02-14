@@ -15,31 +15,34 @@ const userMenu = document.getElementsByClassName("userMenu")
 $(document).on("click", ".writer_pic", function() {
       $(this).next().toggle();
 });
-   
+   let muteMember;
 // 회원 차단    
 $(document).on("click", ".block", function(){
-	const muteMember = $(this).parent().next().val();
-	var answer = confirm("차단하시겠습니까?");	
 	
-	if(answer){
-		$.ajax({
-			url : "block",
-			data : {"muteMember" : muteMember},
-			success : function(result){
-			if(result > 0){
-                swal({"title" : "차단되었습니다." , 
-                      "icon" : "success"});
-
-            } else{
-                swal({"title" : "회원 차단 실패" , 
-                      "icon" : "error"});
-            }
-           }
-			
-		});
-	}
+		muteMember = $(this).parent().next().val();
+		var answer = confirm("차단하시겠습니까?");	
+		
+		if(answer){
+			$.ajax({
+				url : "block",
+				data : {"muteMember" : muteMember},
+				success : function(result){
+					console.log(result)
+					if(result > 0){
+		                swal({"title" : "차단되었습니다." , 
+		                      "icon" : "success"}).then(function(){
+									location.reload();
+							});
+		
+		            } else{
+		                swal({"title" : "회원 차단 실패" , 
+		                      "icon" : "error"});
+		            }
+		    	}
+			});
+		}
 	
-});
+	});
 
 
 /*//파일 업로드 스크립트
