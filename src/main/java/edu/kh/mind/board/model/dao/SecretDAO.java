@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.board.model.vo.WorryCategory;
@@ -93,6 +94,26 @@ public class SecretDAO {
 
 	public String selectMuteMember(Map<String, String> param) {
 		return sqlSession.selectOne("secretMapper.selectMuteMember", param);
+	}
+
+
+	public Empathy selectEmpathy(Empathy empathy) {
+		return sqlSession.selectOne("secretMapper.selectEmpathy",empathy);
+	}
+
+
+	public int insertEmpathy(Empathy empathy) {
+		return sqlSession.insert("secretMapper.insertEmpathy",empathy);
+	}
+
+
+	public int deleteEmpathy(Empathy empathy) {
+		return sqlSession.delete("secretMapper.deleteEmpathy",empathy);
+	}
+
+
+	public int countEmpathy(Empathy empathy) {
+		return sqlSession.selectOne("boardMapper.selectEmpathyList", empathy);
 	}
 
 }

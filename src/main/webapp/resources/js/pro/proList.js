@@ -21,21 +21,24 @@ $(document).on("click", ".cate_btn_click", function (){
     ul.empty();
     currentPage = 1;
     calcPagination();
+    makePro();
 });
 
-var gender;
+var gender = 0;
 $(".gender").on("click", function (){
     const thisId = $(this).attr("id");
     if(thisId == "pro_male")
         gender = 1;
     else if(thisId == "pro_famale")
         gender = 2;
+    else if(thisId == "unrelated2")
+        gender = 0;
 
     ul.empty();
     makePro();
 });
 
-var therapy = null;
+var therapy = 0;
 $(".therapy").on("click", function (){
     const thisId = $(this).attr("id");
 
@@ -45,6 +48,8 @@ $(".therapy").on("click", function (){
         therapy = 2;
     else if(thisId == "face_counseling")
         therapy = 3;
+    else if(thisId == "unrelated")
+        therapy = 0;
 
     console.log("therapy : " + therapy)
 
@@ -80,17 +85,8 @@ $(".mobile_cate_btn").on("click",function(){
     }
 });
 
-// // 모바일 버튼
-// $(".mBtn").on("click",function(){
-//     $(".mBtn").removeClass("mBtn_ck");
-//     $(this).addClass("mBtn_ck");
-// });
 
-
-
-
-
-/* $(".cate_btn").on("click", function (){
+$(document).on("click", ".cate_btn", function (){
     let val = $(this).val();
 
     if(val.length == 1)	val = 100 + val;
@@ -104,9 +100,11 @@ $(".mobile_cate_btn").on("click",function(){
         currentPage = 1;
         calcPagination();
 
-        $(this).attr("id", val).css("backgroundColor", "rgb(166 166 168)").css("color", "white").css("border", "1px solid #ddd");
+        $(this).attr("id", val);
+
     }else if( $(this).attr("id") != undefined ){
-        $(this).removeAttr("id").css("backgroundColor", "white").css("color", "black");
+
+        $(this).removeAttr("id");
     }
 
     let count = 0;
@@ -121,9 +119,10 @@ $(".mobile_cate_btn").on("click",function(){
     }
     // 정렬
     clickable.sort(function (a, b){return a-b;});
+    console.log("clickable : " + clickable);
 
     makePro();
-}); */
+});
 
 function makeComma(str) {
     str = String(str);

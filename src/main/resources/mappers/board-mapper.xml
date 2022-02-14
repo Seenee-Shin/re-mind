@@ -199,13 +199,13 @@
 	
 	    	
 	<!-- 공감조회 -->
-	<select id="selectEmpathyList" resultMap="empathy_rm">
-		<if test="boardNo != null">
-			SELECT EMPATHY_STATUS_NM, COUNT(MEMBER_NO)
-			FROM EMPATHY JOIN EMPATHY_STATUS USING(EMPATHY_STATUS_CD)
-			WHERE BOARD_NO = #{boardNo} GROUP BY EMPATHY_STATUS_NM
-		</if>
+	<select id="selectEmpathyList" resultType="_int">
+		SELECT COUNT(MEMBER_NO)
+			FROM EMPATHY 
+			WHERE BOARD_NO = #{boardNo} 
+			AND EMPATHY_STATUS_CD = #{empathyStatusCode}
 	</select>
+	
     <!-- 자유게시판 게시글 -->
 	<select id="selectFreeList" resultMap="board_rm">
 		SELECT * FROM (
