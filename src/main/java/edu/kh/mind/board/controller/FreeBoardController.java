@@ -93,18 +93,13 @@ public class FreeBoardController {
 	public int freeBoardInsert(Model model, @ModelAttribute("loginMember") Member loginMember, 
 			@RequestPart(value = "images",required = false) List<MultipartFile> images,  HttpSession session,
 			Board board, String contentFiles) throws Exception {
-		
-		
+
 		board.setMemberNo(loginMember.getMemberNo());
-		//웹 접근경로(web path), 서버 저장경로(serverPath) 
+
+		//웹 접근경로(web path), 서버 저장경로(serverPath)
 		String webPath = "/resources/images/board/";
-		
 		String serverPath= session.getServletContext().getRealPath(webPath);
-		//System.out.println(board);
-		System.out.println(webPath);
-		System.out.println(serverPath);
-		System.out.println(images);
-		
+
 		//게시글 작성 후 상세 조회(DB에 입력된 게시글)할 boardNo
 		int result = service.insertFreeBoard(board, images, webPath, serverPath);
 		

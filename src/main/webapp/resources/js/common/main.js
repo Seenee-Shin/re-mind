@@ -27,6 +27,12 @@ $(".main_content1_cir").on("click", function () {
     window.location.href = contextPath+"/selftest/selftestForm?type="+type;
 });
 
+$(".main_content2_content_board").on("click", function () {
+    const categoryCode = $(this).data("category_code");
+    const boardNo = $(this).data("board_no");
+    locationPath(categoryCode, boardNo);
+})
+
 // 커뮤니티 상세
 function locationPath(boardCategoryCode, boardNo) {
     let path = contextPath;
