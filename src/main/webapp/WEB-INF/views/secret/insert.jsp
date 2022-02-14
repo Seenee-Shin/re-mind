@@ -439,9 +439,9 @@ if (searchData != null) {
                   +'      <div class="writer_pic_wrap">';
                   
                   if(item.anonCheckCode == 1){
-                 	html += '			<div class="writer_pic light_brown_bg" style="background-image: url(' + writerImg + '); background-size:cover;"></div>';
+                 	html += '			<div class="writer_pic" style="background-image: url(' + writerImg + '); background-size:cover;"></div>';
                   }else{
-                	html += '			<div class="writer_pic light_brown_bg" style="background-image: url(${contextPath}/resources/images/basicProfile.png); background-size:cover;" ></div>';
+                	html += '			<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png); background-size:cover;" ></div>';
                   }
                   
                   
@@ -488,15 +488,15 @@ if (searchData != null) {
 
                if(item.empathyCheckCode == 1){
                   html+='      <div class="like_warp">'
-                     +'            <img src="${contextPath}/resources/images/icon/smile.png" alt="">'
+                     +'            <img src="${contextPath}/resources/images/icon/smile.png" alt="" data-icon="1001">'
                      +'            <p>'+iconCnt[1001]+'</p>'
-                     +'            <img src="${contextPath}/resources/images/icon/hug.png" alt="">'
+                     +'            <img src="${contextPath}/resources/images/icon/hug.png" alt="" data-icon="1002">'
                      +'            <p>'+iconCnt[1002]+'</p>'
-                     +'           <img src="${contextPath}/resources/images/icon/amazed.png" alt="">'
+                     +'           <img src="${contextPath}/resources/images/icon/amazed.png" alt="" data-icon="1003">'
                      +'           <p>'+iconCnt[1003]+'</p>'
-                     +'           <img src="${contextPath}/resources/images/icon/angry.png" alt="">'
+                     +'           <img src="${contextPath}/resources/images/icon/angry.png" alt="" data-icon="1004">'
                      +'           <p>'+iconCnt[1004]+'</p>'
-                     +'           <img src="${contextPath}/resources/images/icon/crying.png" alt="">'
+                     +'           <img src="${contextPath}/resources/images/icon/crying.png" alt="" data-icon="1005">'
                      +'           <p>'+iconCnt[1005]+'</p>'
                      +'        </div>';
                }else{
