@@ -141,6 +141,10 @@ select:disabled {
 .check_box_wrap>label.dark_brown_border:hover{background-color:#E5D4C5; color: white; border-color:#E5D4C5;}
 .check_box_wrap>label.dark_brown_border.active{background-color:#A59999; color: white; border-color:#A59999;}
 
+.check_box_wrap select{background-color:#A59999; color:#fff;}
+.check_box_wrap select option{background-color:#fff; color:#A59999;}
+
+
 .write_option_area{
     margin-top: 10px;
     margin-left: 15px;
