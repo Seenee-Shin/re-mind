@@ -1,18 +1,18 @@
 /* 카테고리 여닫기 */
-const categoryBtn = document.querySelector("#worryCategoryBtn")
-const openCategoryBtn = document.querySelector("#openCategoryBtn")
-const postCategory = document.querySelector("#openCategoryBtn + .worry_category_wrap")
-const category = document.querySelector(".worry_category_wrap")
+const categoryBtn = document.querySelector("#worryCategoryBtn");
+const openCategoryBtn = document.querySelector("#openCategoryBtn");
+const postCategory = document.querySelector("#openCategoryBtn + .worry_category_wrap");
+const category = document.querySelector(".worry_category_wrap");
 const togleModal = ()=>{
-    category.classList.toggle("hidden")
+    category.classList.toggle("hidden");
 }
 
 const postTogleModal = ()=>{
-    postCategory.classList.toggle("hidden")
+    postCategory.classList.toggle("hidden");
 }
 
 const openModal = ()=>{
-    postModal.classList.remove("hidden")
+    postModal.classList.remove("hidden");
     /*뒷창 고정*/
     $('body').css("overflow", "hidden");
 }
@@ -22,9 +22,12 @@ const closeModal = ()=>{
     /*뒷창고정 해제*/
     $('body').css("overflow", "scroll");
 }
-categoryBtn.addEventListener("click",togleModal)
-openCategoryBtn.addEventListener("click",postTogleModal)
-
+if (categoryBtn != null) {
+    categoryBtn.addEventListener("click",togleModal);
+}
+if (openCategoryBtn != null) {
+    openCategoryBtn.addEventListener("click",postTogleModal);
+}
 
 /* 모달창 열기 */
 
@@ -32,10 +35,13 @@ const openBtn = document.querySelector("#openModal")
 const postModal =  document.querySelector(".postModal")
 const closeBtn = document.querySelector("#closeModal")
 
-openBtn.addEventListener("click", openModal)
-closeBtn.addEventListener("click", closeModal)
+if (openBtn != null) {
+    openBtn.addEventListener("click", openModal);
+}
 
-
+if (closeBtn != null) {
+    closeBtn.addEventListener("click", closeModal);
+}
 
 /* 모바일 댓글창 열기 */
 function opneComment() {
