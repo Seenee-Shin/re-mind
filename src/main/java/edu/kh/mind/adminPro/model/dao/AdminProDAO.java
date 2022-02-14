@@ -172,6 +172,20 @@ public class AdminProDAO {
 		return sqlSession.selectList("boardMapper.proWorryListSelect", loginPro);
 	}
 
+
+	public ProfessionInformation selectProfessionInfo(int professionNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("professionMapper.selectProfessionInfo", professionNo);
+	}
+
+
+	public ProfessionHospital selectProfessionHospital(int professionNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("professionMapper.selectProfessionHospital", professionNo);
+	}
+
+
+
 	
 	
 	// 상담사 페이지 - 고민 카테고리 가지고 오기 

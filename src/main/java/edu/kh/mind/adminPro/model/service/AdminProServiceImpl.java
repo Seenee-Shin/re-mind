@@ -293,6 +293,20 @@ public class AdminProServiceImpl implements AdminProService{
 		return dao.proWorryListSelect(loginPro);
 	}
 
+
+	@Override
+	public ProfessionInformation selectProfessionInfo(int professionNo) {
+		// TODO Auto-generated method stub
+		return dao.selectProfessionInfo(professionNo);
+	}
+
+	@Override
+	public ProfessionHospital selectProfessionHospital(int professionNo) {
+		// TODO Auto-generated method stub
+		return dao.selectProfessionHospital(professionNo);
+	}
+
+
 	
 	//이메일 인증 키 검증
 
