@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.Gson;
+
 import edu.kh.mind.adminPro.model.service.AdminProService;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.common.util.Util;
