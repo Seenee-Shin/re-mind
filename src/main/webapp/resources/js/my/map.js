@@ -106,7 +106,7 @@ $(document).on("click", ".map-info", function () {
 
     // 선택한 요소 제목 $(".option-view")에 만들기
     $("#menu-view").css("visibility", "visible");
-    $(".option-view").html("<h2 style='font-size: 20px; font-weight: bold;'>" + proHospName[index] + "</h2>" + "심리상담센터");
+    $(".option-view").html("<a href='http://localhost:8080/mind/pro/proView/"+ professionNo[index] + "'><h2 style='font-size: 20px; font-weight: bold;'>" + proHospName[index] + "</h2></a>" +  "심리상담센터");
     $(".location-span").text(proAddress[index]);
     $(".location-tel").text(proHospPhone[index]);
     $(".location-internet").text("http://인터넷주소.com");
@@ -238,6 +238,7 @@ let proAddress = [];
 let proHospName = [];
 let proHospPhone = [];
 let proBusinessNo = [];
+let professionNo = [];
 let len;
 
 $.ajax({
@@ -248,7 +249,9 @@ $.ajax({
         len = result.length;
 
         $.each(result, function (i, item){
+			console.log(item)
 
+			professionNo[i] = item.professionNo;
             proAddress[i] = item.hospitalAddress;
             proHospName[i] = item.hospitalName;
             proHospPhone[i] = item.hospitalPhone;

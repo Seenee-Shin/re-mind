@@ -453,7 +453,6 @@ if (searchData != null) {
                html +='         <ul class="userMenu hidden">'
                   +'            <li> <a class="block"> 차단</a> </li>'
                   +'            <input class="hidden" value = '+ item.memberNo +'>'
-                  +'            <li> <a href=""> 검색</a> </li>'
                   +'         </ul>'
                   +'      </div>';
             }else{

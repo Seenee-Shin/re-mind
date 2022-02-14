@@ -220,7 +220,6 @@
                 <span class="talk-b-span2">발달검사, 진로/적성검사</span>
             </div>
             <div style="color: rgb(114, 114, 114);">· 모든 정보는 변경이 있을 수 있습니다. 반드시 전화 확인 후 방문해주세요.</div>
-            <a class="admin-query" href="#"><div style="color: rgb(114, 114, 114); float: right;">정보 수정 요청 →</div></a>
         </div>
 
     </div>
