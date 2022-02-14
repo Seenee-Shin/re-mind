@@ -230,7 +230,6 @@
 								<ul class="userMenu hidden">
 									<li> <a class="block">차단</a> </li>
 									<input class="hidden" value= ` + item.memberNo + `>
-									<li> <a>검색</a> </li>
 								</ul>
 							</div>
 							<a href="${contextPath}/worry/view/` + item.boardNo + `">
