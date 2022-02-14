@@ -33,10 +33,10 @@
 		                            <div class="writer_pic_wrap">
 		                            	<c:choose>
 		                            		<c:when test="${!empty loginMember.imagePath}">
-		                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+		                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName}); background-size:cover;"> </div>
 		                            		</c:when>
 		                            		<c:otherwise>
-		                                		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
+		                                		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png); background-size:cover;"> </div>
 		                            		</c:otherwise>
 		                            		
 		                                </c:choose>
