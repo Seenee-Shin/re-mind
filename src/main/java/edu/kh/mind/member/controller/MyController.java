@@ -98,12 +98,20 @@ public class MyController {
 
 
     @RequestMapping("appointment/past")
-    public String appointmentPast(Model model, HttpSession session, RedirectAttributes ra) {
+    public String appointmentPast(Model model, HttpSession session, RedirectAttributes ra,
+    		@ModelAttribute("loginMember") Member loginMember) {
     	model.addAttribute("css", "my");
 
         String path = "";
 
         if(session.getAttribute("loginMember") != null) {
+        	
+        	List<Reservation> rList = service.appointmentPast(loginMember.getMemberNo());
+        	
+        	model.addAttribute("rList",rList);
+        	
+        	System.out.println(rList);
+        	
             path = "my/appointmentPast";
         } else {
             Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);

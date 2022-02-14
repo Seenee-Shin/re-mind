@@ -239,6 +239,7 @@ public class AdminProController {
     			
     			if(iResult > 0) { // insert 성공 
     				Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
+    				
     				path = "/";
     			}else {
     				Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
@@ -278,10 +279,13 @@ public class AdminProController {
     public String AdminProProfile(@PathVariable int professionNo, Model model) {
 		List<WorryCategory> category = service.selectWorryCategory();
 		List<ProfessionPrice> price = service.selectPrice(professionNo);
-		
-//		List<ProfessionPrice> price = service.selectPrice(professionNo);
+    	ProfessionInformation proInfo = service.selectProfessionInfo(professionNo);
+    	ProfessionHospital proHospital = service.selectProfessionHospital(professionNo);
 		
 		//프로필 정보 조회해 오기
+		model.addAttribute("price", price);
+    	model.addAttribute("proInfo", proInfo);
+    	model.addAttribute("proHospital", proHospital);
 		model.addAttribute("category", category);
 		model.addAttribute("css", "proPage/proProfile");
 		
@@ -312,6 +316,8 @@ public class AdminProController {
     		int pResult = service.updatePrice(counselPrice,professionNo);
     		
     		if(pResult > 0) {
+    			model.addAttribute("proInfo", proInfo);
+    			model.addAttribute("price", price);
     			Util.swalSetMessage("관리자 승인을 기다려 주세요", null, "success", ra);
     			
     			
