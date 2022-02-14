@@ -185,6 +185,12 @@ public class AdminProDAO {
 	}
 
 
+	public ProfessionInformation updateProInfo(ProfessionInformation proInfo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 	
 	
