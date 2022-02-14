@@ -1,7 +1,6 @@
 package edu.kh.mind.selftest;
 
 import com.google.gson.Gson;
-import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.selftest.model.service.SelftestService;
 import edu.kh.mind.selftest.model.vo.Selftest;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -52,10 +50,8 @@ public class SelftestRestController {
     }
 
     @RequestMapping(value = "selftestResult", method = RequestMethod.GET)
-    public Map<String, Object> selftestResult(Model model,int categoryNo, int score, Selftest selftest
-            ,HttpSession session) {
-
-//        int memberNo = ((edu.kh.mind.member.model.vo.Member)session.getAttribute("loginMember")).getMemberNo();
+    public String  selftestResult(Model model, int categoryNo, int score, Selftest selftest
+            , HttpSession session) {
 
         model.addAttribute("css", "selftestResult");
         model.addAttribute("header", "main");
@@ -70,13 +66,14 @@ public class SelftestRestController {
 
         selftest.setCategoryNo(categoryNo);
         selftest.setMemberNo(memberNo);
-        selftest.setResultRate(score);
+        selftest.setRate(score);
 
-        Map<String, Object> selectResult = service.selectResult(selftest);
+        System.out.println(selftest);
 
+        List<Selftest> selfTest2 =  service.selectResult(selftest);
+        System.out.println(selfTest2);
 
-
-        return selectResult;
+        return new Gson().toJson(selfTest2);
     }
 
 
