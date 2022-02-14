@@ -268,8 +268,12 @@
 				`;
 				});
 
-				$(".free_board_list_wrap").append(html);
+				if (data.worryCategoryCode != undefined) {
+					$(".free_board_list_wrap").html(html);
+				} else {
+					$(".free_board_list_wrap").append(html);
 
+				}
 			},
 			error : function(request, status, error){
 				console.log("ajax 통신 중 오류 발생");

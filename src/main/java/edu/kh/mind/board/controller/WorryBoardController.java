@@ -45,9 +45,14 @@ public class WorryBoardController {
     // 고민상담 게시글
     @ResponseBody
     @RequestMapping(value="worryList", method=RequestMethod.POST)
-    public HashMap<String, Object> worryList(@RequestParam Map<String, String> param) {
+    public HashMap<String, Object> worryList(@RequestParam Map<String, String> param, HttpSession session) {
         HashMap<String, Object> map = new HashMap<>();
+	    System.out.println(param.get("worryCategoryCode"));
 
+
+		if (session.getAttribute("loginMember") != null) {
+			param.put("memberNo", ((Member)session.getAttribute("loginMember")).getMemberNo() +"");
+		}
         // 게시글 목록
         List<Board> worryList = service.selectWorryList(param);
         map.put("worryList", worryList);

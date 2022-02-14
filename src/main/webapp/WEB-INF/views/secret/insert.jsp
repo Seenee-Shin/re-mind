@@ -522,50 +522,41 @@ if (searchData != null) {
 
    });
 }
-//고민작성하기 댓글
-$("#replyCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
-		$(this).val(1);
+
+// 고민작성하기 댓글
+$("[name='replyCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
-		$(this).val(0);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
 // 고민작성하기 스크랩
-$("#scrapCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("스크랩 허용");
-		$(this).val(1);
+$("[name='scrapCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("스크랩 비허용");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
 // 고민작성하기 공감
-$("#empathyCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("공감 허용");
-		$(this).val(1);
+$("[name='empathyCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("공감 비허용");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
-
 
 //고민작성하기 익명
-$("#anonCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("닉네임 공개");
-		$(this).val(1);
+$("[name='anonCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("닉네임 비공개");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
-
 
 </script>
