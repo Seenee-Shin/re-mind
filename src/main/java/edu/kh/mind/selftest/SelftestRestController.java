@@ -71,7 +71,7 @@ public class SelftestRestController {
         System.out.println(selftest);
 
         List<Selftest> selfTest2 =  service.selectResult(selftest);
-        System.out.println(selfTest2);
+        System.out.println(selfTest2.toString());
 
         return new Gson().toJson(selfTest2);
     }
