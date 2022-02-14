@@ -16,53 +16,39 @@
 					<div>시간</div>
 					<div>상담사</div>
 					<div>유형</div>
-					<div>내용</div>
 					<div>후기</div>
 				</li>
-				<li>
-					<div class="img_div"><img src="../../images/sample1.jpg"></div>
-					<div class="date_div">2022-01-22</div>
-					<div class="time_div">15:00</div>
-					<div class="profession_div">이덕희</div>
-					<div class="category_div">채팅</div>
-					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
-					<div class="review_div">
-						<button type="button" class="btn">상세</button>
-					</div>
-				</li>
-				<li>
-					<div class="img_div"><img src="../../images/sample1.jpg"></div>
-					<div class="date_div">2022-01-12</div>
-					<div class="time_div">09:00</div>
-					<div class="profession_div">이덕희</div>
-					<div class="category_div">채팅</div>
-					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
-					<div class="review_div">
-						<button type="button" class="btn" onclick="proPostscript();">후기작성</button>
-					</div>
-				</li>
-				<li>
-					<div class="img_div"><img src="../../images/sample1.jpg"></div>
-					<div class="date_div">2022-01-05</div>
-					<div class="time_div">13:00</div>
-					<div class="profession_div">이덕희</div>
-					<div class="category_div">채팅</div>
-					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
-					<div class="review_div">
-						<button type="button" class="btn">상세내역</button>
-					</div>
-				</li>
-				<li>
-					<div class="img_div"><img src="../../images/sample1.jpg"></div>
-					<div class="date_div">2021-12-27</div>
-					<div class="time_div">11:00</div>
-					<div class="profession_div">이덕희</div>
-					<div class="category_div">채팅</div>
-					<div class="status_div"><a href="#">받기</a></div><!-- 상담 대기 일때 취소 가능-->
-					<div class="review_div">
-						<button type="button" class="btn">후기작성</button>
-					</div>
-				</li>
+				<c:forEach var="item" items="${rList}">
+					<li>
+						<div class="img_div"><img src="../../images/sample1.jpg"></div>
+						<div class="date_div">${item.reservationEnrollDate}</div>
+						
+						<c:choose>
+							<c:when test="${item.intEnrollDate < 10}">
+								<div class="time_div">0${item.intEnrollDate}:00</div>
+							</c:when>
+							<c:otherwise>
+								<div class="time_div">${item.intEnrollDate}:00</div>
+							</c:otherwise>
+						</c:choose>
+						
+						<div class="profession_div">${item.professionName}</div>
+						<div class="category_div">${item.counselCategoryNm}</div>
+						<!--  <div class="status_div"><a href="#">받기</a></div>--><!-- 상담 대기 일때 취소 가능-->
+						<div class="review_div">
+						<c:choose>
+							<c:when test="${item.checkReview == 0}">
+								<button type="button" class="btn" onclick="proPostscript(${item.professionNo},${item.reservationNo});">작성하기</button>
+							</c:when>
+							<c:otherwise>
+								작성완료
+							</c:otherwise>
+						</c:choose>
+						</div>
+					</li>
+				</c:forEach>
+				
+				
 			</ul>
 		</div>
 	</div>
@@ -73,13 +59,19 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript">
+
+	let professionNo;
+	let reservationNo;
 	
-    function proPostscript(){
+     function proPostscript(num,num2){
+    	
+    	professionNo = num;
+    	reservationNo = num2;
+    	
     	layerPopup("proPostscript");
-    }
+    	$("#proPostText").val(professionNo)
+    } 
     
 </script>
 
-</body>
-</html>
 

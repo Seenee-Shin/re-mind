@@ -112,4 +112,6 @@ public interface MyService {
 	List<Letter> myLetterList(int memberNo);
 
     int deleteCounselor(Board board);
+
+	List<Reservation> appointmentPast(int memberNo);
 }

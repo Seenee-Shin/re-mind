@@ -262,4 +262,9 @@ public class MyServiceImpl implements MyService {
     public List<Letter> myLetterList(int memberNo) {
         return dao.myLetterList(memberNo);
     }
+    
+    @Override
+    public List<Reservation> appointmentPast(int memberNo) {
+    	return dao.appointmentPast(memberNo);
+    }
 }
