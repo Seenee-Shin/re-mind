@@ -81,31 +81,66 @@
                         <div id="like_smile" class="like" >
                             <img src="${contextPath}/resources/images/icon/smile.png" alt="">
                             <p>좋아요</p>
-                            <p class="like_count">${empathyMap.get("1001")}</p>
+                            <c:choose>
+                            	<c:when test="${empty empathyMap}">
+                            		<p class="like_count">0</p>
+                            	</c:when>
+                        		<c:otherwise>
+                            		<p class="like_count">${empathyMap.get("1001")}</p>
+                       			</c:otherwise>
+                       		</c:choose>
                         </div>
 
                         <div id="like_hug" class="like" >
                             <img src="${contextPath}/resources/images/icon/hug.png" alt="">
                             <p>응원해요</p>
-                            <p  class="like_count">${empathyMap.get("1002")}</p>
-                        </div>
+	                          <c:choose>
+	                            	<c:when test="${empty empathyMap}">
+	                            		<p class="like_count">0</p>
+	                            	</c:when>
+	                        		<c:otherwise>
+	                            		<p class="like_count">${empathyMap.get("1002")}</p>
+	                       			</c:otherwise>
+	                       		</c:choose>
+	                        </div>
 
                         <div id="like_amazed" class="like" >
                             <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
                             <p>놀랐어요</p>
-                            <p  class="like_count">${empathyMap.get("1003")}</p>
+                            <c:choose>
+                            	<c:when test="${empty empathyMap}">
+                            		<p class="like_count">0</p>
+                            	</c:when>
+                        		<c:otherwise>
+                            		<p class="like_count">${empathyMap.get("1003")}</p>
+                       			</c:otherwise>
+                       		</c:choose>
                         </div>
                         
                         <div id="like_angry" class="like" >
                             <img src="${contextPath}/resources/images/icon/angry.png" alt="">
                             <p>화나요</p>
-                            <p  class="like_count">${empathyMap.get("1004")}</p>
+                            <c:choose>
+                            	<c:when test="${empty empathyMap}">
+                            		<p class="like_count">0</p>
+                            	</c:when>
+                        		<c:otherwise>
+                            		<p class="like_count">${empathyMap.get("1004")}</p>
+                       			</c:otherwise>
+                       		</c:choose>
                         </div>
 
                         <div id="like_crying" class="like" >
                             <img src="${contextPath}/resources/images/icon/crying.png" alt="">
                             <p>슬퍼요</p>
-                            <p  class="like_count">${empathyMap.get("1005")}</p>
+                            <c:choose>
+                            	<c:when test="${empty empathyMap}">
+                            		<p class="like_count">0</p>
+                            	</c:when>
+                        		<c:otherwise>
+                            		<p class="like_count">${empathyMap.get("1005")}</p>
+                       			</c:otherwise>
+                       		</c:choose>
                         </div>
                     </div>
 					</c:if>
@@ -368,7 +403,8 @@ $(".like").on("click", function(e){
 							"empathyStatusCode" : empathyStatusCode},
 					context: this,
 					success : function(result){
-						$(this).children(".like_count").text(result);
+						$(this).children(".like_count").text(result)
+						
 						
 					}
 				});

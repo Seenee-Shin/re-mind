@@ -295,8 +295,9 @@
 
 		last = currentPage * infinityLimit;
 		first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+		console.log("first : " + first, "last : " + last)
 	}
-	calcPagination()
+	calcPagination();
 
 
 	// 무한스크롤

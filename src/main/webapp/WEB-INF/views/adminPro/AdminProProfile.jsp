@@ -29,11 +29,11 @@
                </div>
                <div class="profile">
                    <h3>병원명</h3>
-                   <p>꿈을그리다 심리상담센터</p>
+                   <p>${proHospital.hospitalName}</p>
                </div>
                <div class="profile">
                    <h3>병원 주소</h3>
-                   <p>광주시 경인로 325길 35</p>
+                   <p>${proHospital.hospitalAddress}</p>
                </div>
            </article>
            <article class="profailPic">
@@ -47,7 +47,7 @@
        
        <section class="proDescrpiton">
            <article class="proInfo">
-               <h3>태그추가하기</h3>
+               <h3>상담태그</h3>
                <div class="checkBoxWrap">
                			<div class="checkBox" >
                    		</div>
@@ -56,32 +56,28 @@
 
            <article class="proInfo">
                <h3>하고싶은 말</h3>
-               <div class= proInfoDiv></div>
+               <div class= proInfoDiv>${proInfo.professionIntro}</div>
            </article>
 
            <article class="proInfo">
                <h3>상담사 소개</h3>
-               <div class= proInfoDiv></div>
+               <div class= proInfoDiv>${proInfo.professionStory}</div>
            </article>
            
            <article class="proInfo">
                <h3>경력</h3>
-               <div class= proInfoDiv></div>
+               <div class= proInfoDiv>${proInfo.professionCarrer}</div>
            </article>
        </section>
 
 
        <section class="priceWrap">
            <h3>가격 정보</h3>
+           
            <article class="proPrice">
-                   <label for = "tel">전화상담</label>
+                   <P>전화상담</P>>
            </article>
-           <article class="proPrice">
-                   <label for = "tel">전화상담</label>
-           </article>
-           <article class="proPrice">
-                   <label for = "tel">전화상담</label>
-           </article>
+
            
        </section>
        

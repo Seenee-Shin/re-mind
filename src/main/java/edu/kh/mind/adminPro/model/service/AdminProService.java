@@ -109,5 +109,10 @@ public interface AdminProService {
 	
 	// 고민 카테고리 리스트 가지고 오기
 	List<Board> proWorryListSelect(Profession loginPro);
+
+	ProfessionInformation selectProfessionInfo(int professionNo);
+
+	ProfessionHospital selectProfessionHospital(int professionNo);
+
 	
 }

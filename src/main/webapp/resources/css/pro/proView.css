@@ -132,21 +132,18 @@ html{
 
 /* 상담사 네비게이션 */
 
-#detail-contents,.pro_reservation_wrap{
-	width:100%;
+#detail-contents{
+	height:50px;
     position: sticky;
-    top: 0;
-    z-index: 2000;
+    top: 100;
+    z-index: 9000;
 }
-#pro_reservation_wrap{
-    position: sticky;
-    top: 0;
-}
+
 
 .detail_btn{
     font-size: 18px;
     font-weight: bold;
-    width:50%;
+    width:33%;
     line-height: 50px;
     float: left;
     text-align: center;
@@ -228,6 +225,13 @@ html{
     padding-top: 25px;
 }
 
+#reservation_info_ol > li{
+	font-size:18px;
+	line-height:25px;
+	margin-bottom:10px;
+	
+}
+
 /* 후기 더보기 버튼 */
 #reviewAddBtn{
 	width:100%;
@@ -270,6 +274,18 @@ html{
     border:1px solid #ddd;
     margin-top: 50px;
     padding: 20px;
+    box-shadow: 5px 0 40px rgb(0 0 0 / 8%);
+   
+}
+
+.pro_reservation_fixed{
+	width:360px;
+	height:300px;
+	position: fixed;
+    top:100px;
+	right:674;
+	margin-top: 0;
+	box-shadow: 5px 0 40px rgb(0 0 0 / 8%);
 }
 .pro_reservation{
     height:180px;

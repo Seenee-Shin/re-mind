@@ -150,7 +150,7 @@ public class FreeBoardController {
                     }
                 } 
             }
-
+            System.out.println(empathyMap);
     		model.addAttribute("rList", rList);
     		model.addAttribute("board", board);
     		model.addAttribute("empathyMap", empathyMap);
