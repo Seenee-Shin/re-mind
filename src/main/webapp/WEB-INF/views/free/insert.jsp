@@ -520,7 +520,7 @@ function getFreeList(searchData) {
 	                    +'			<div class="writer_pic" style="background-image: url('+writerImg+'); background-size:cover;"></div>';
 	             if(loginMemberNo != item.memberNo){
 					html +='			<ul class="userMenu hidden">'
-						+'				<li> <a href="" class ="block"> 차단</a> </li>'
+						+'				<li> <a class ="block"> 차단</a> </li>'
 						+'				<input class="hidden" value = '+ item.memberNo +'>'
 						+'				<li> <a href=""> 검색</a> </li>'
 	                    +'			</ul>'
@@ -586,6 +586,7 @@ function getFreeList(searchData) {
 	
 	});
 }
+
 // 고민작성하기 댓글
 $("[name='replyCheckCode']").on("change", function () {
 	if ($(this).children("option:selected").val() == "1") {

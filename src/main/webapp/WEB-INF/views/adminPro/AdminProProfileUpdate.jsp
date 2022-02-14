@@ -67,17 +67,17 @@
 
            <article class="proInfo">
                <h3>하고싶은 말</h3>
-               <textarea name="professionIntro" id="professionIntro" rows="8"></textarea>
+               <textarea name="professionIntro" id="professionIntro" rows="8">${proInfo.professionIntro}</textarea>
            </article>
 
            <article class="proInfo">
                <h3>상담사 소개</h3>
-               <textarea name="professionStory" id="professionStory"  rows="8"></textarea>
+               <textarea name="professionStory" id="professionStory"  rows="8">${proInfo.professionStory}</textarea>
            </article>
            
            <article class="proInfo">
                <h3>경력</h3>
-               <textarea name="professionCarrer" id="professionCarrer"  rows="8"></textarea>
+               <textarea name="professionCarrer" id="professionCarrer"  rows="8">${proInfo.professionCarrer}</textarea>
            </article>
        </section>
 

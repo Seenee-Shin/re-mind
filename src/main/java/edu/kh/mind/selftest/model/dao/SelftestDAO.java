@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class SelftestDAO {
@@ -25,5 +26,10 @@ public class SelftestDAO {
     // 결과
     public List<Selftest> selectR(Selftest selftest) {
         return sqlSession.selectList("selftestMapper.selectR", selftest);
+    }
+
+    // 결과 조회
+    public List<Selftest> selectResult(Selftest selftest) {
+        return sqlSession.selectList("selftestMapper.selectResult", selftest);
     }
 }

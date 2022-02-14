@@ -589,7 +589,7 @@
 	</select>
 
 	<insert id="memberBlock">
-		INSERT INTO MUTE VALUES(#{memberNo}, #{loginMember})
+		INSERT INTO MUTE VALUES(#{memberNo}, #{loginMember},)
 	</insert>
 
 	<!-- 스크랩 여부 조회 -->

@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import edu.kh.mind.board.model.service.ReplyService;
 import edu.kh.mind.board.model.service.WorryService;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.member.model.vo.Member;
@@ -44,9 +45,14 @@ public class WorryBoardController {
     // 고민상담 게시글
     @ResponseBody
     @RequestMapping(value="worryList", method=RequestMethod.POST)
-    public HashMap<String, Object> worryList(@RequestParam Map<String, String> param) {
+    public HashMap<String, Object> worryList(@RequestParam Map<String, String> param, HttpSession session) {
         HashMap<String, Object> map = new HashMap<>();
+	    System.out.println(param.get("worryCategoryCode"));
 
+
+		if (session.getAttribute("loginMember") != null) {
+			param.put("memberNo", ((Member)session.getAttribute("loginMember")).getMemberNo() +"");
+		}
         // 게시글 목록
         List<Board> worryList = service.selectWorryList(param);
         map.put("worryList", worryList);
@@ -160,6 +166,43 @@ public class WorryBoardController {
         }
     }
 
+    
+    // 공감 
+    @ResponseBody
+    @RequestMapping(value = "insertEmpathy")
+    public int insertEmpathy(@RequestParam int memberNo, @RequestParam int boardNo, 
+    						@RequestParam int empathyStatusCode) {
+    	
+    	Empathy empathy =new Empathy();
+    	empathy.setBoardNo(boardNo);
+    	empathy.setMemberNo(memberNo);
+    	empathy.setEmpathyStatusCode(empathyStatusCode);
+    	
+    	int result = service.insertEmpathy(empathy);
+    	
+    	return result;
+    }
+    
+    
+    // 공감 수 
+    @ResponseBody
+    @RequestMapping(value = "countEmpathy")
+    public int countEmpathy( @RequestParam int boardNo, 
+    						@RequestParam int empathyStatusCode) {
+    	
+    	Empathy empathy =new Empathy();
+    	empathy.setBoardNo(boardNo);
+    	empathy.setEmpathyStatusCode(empathyStatusCode);
+    	
+    	int result = service.countEmpathy(empathy);
+    	
+    	return result;
+    }
+    
+    
+    
+    
+    
     //예외처리
     @ExceptionHandler(Exception.class)
     public String exceptionHandler(Exception e, Model model) {

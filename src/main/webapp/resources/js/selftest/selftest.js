@@ -31,10 +31,13 @@ function testResult(){
 
     if(count == (qwe-1)){
         $("#selfTest_result_btn").css("display", "block");
+
     }else{
 
         $("#selfTest_result_btn").css("display", "none");
     }
+
+
 
 }
 
@@ -42,7 +45,7 @@ function next(){
     count = count + 1;
 
     $(".selfTest_prev_btn").css("display","none");
-    ajax();
+    selftestQuestion();
 
     if (count == '0'){
         $(".selfTest_prev_btn").css("display","none");
@@ -55,7 +58,7 @@ function next(){
 
 function prev(){
     count = count - 1;
-    ajax();
+    selftestQuestion();
     // 이전 다음 버튼
     hiddenBtn();
 
@@ -102,7 +105,7 @@ $(".selfTest_op").on("click", function () {
     $(".selfTest_op").removeClass("active");
     $(this).addClass("active");
 
-    ajax();
+    selftestQuestion();
     testResult();
 
 });
@@ -110,7 +113,7 @@ $(".selfTest_op").on("click", function () {
 // 총 문항 길이
 let qwe = 0;
 
-function ajax(){
+function selftestQuestion(){
     $.ajax({
         url : "selftestQuestion",
         type : "POST",
@@ -141,8 +144,7 @@ function ajax(){
                 +'    </div>'
                 + '</div>'
 
-            let html2 = "";
-            let html3 = "";
+                 let html2 = "";
             // console.log(result.Answer.length);   총 길이
 
                 for(let i=0; i< result.Answer.length; i++){
@@ -151,17 +153,15 @@ function ajax(){
 
                     }
 
-            $(".selfTest").html(html);
+                 $(".selfTest").html(html);
 
-            $("#selfTest_content_option").append(html2);
+                    $("#selfTest_content_option").append(html2);
 
+                }, error(request,status,error){
+                     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                } //error
 
-        },
-        error(request,status,error){
-            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-        } //error
-
-    });
+         });
 }
 
 // 딥변
@@ -174,21 +174,21 @@ $(".selfTest_result").on("click", function (){
 
 
 
-let score = 0;
 // 점수 누적
+let score = 0;
 function saveScore(score){
     jumsuu[count] = score;
     console.log(jumsuu);
 
 }
 
-// 합산 값 추출
+// 합산 검사
 function resultScore(){
     for(let i= 0; i<jumsuu.length; i++){
         if(jumsuu[i] == undefined){
             alert("선택하지 않은 번호가 있습니다.");
             count = i;
-            ajax();
+            selftestQuestion();
             return false;
         }else{
             if(jumsuu.length == qwe){
@@ -204,8 +204,37 @@ function resultScore(){
         if(jumsuu[i] == undefined) {
             alert("선택하지 않은 번호가 있습니다.");
             count = i;
-            ajax();
+            selftestQuestion();
             return false;
         }
     }
+
+
+    $.ajax({
+        url : "selftestResult",
+        type : "GET",
+        data : {"categoryNo":ctCode, "score":score},
+        dataType : "json",
+        success : function (result2){
+            // console.log(score);
+            // console.log(ctCode);
+
+            console.log("result2 : " + result2);
+            let htmlHtml = '<div class="selftest_modal_title">'
+                         +'   자존감 자가진단 결과'
+                        + '</div>'
+                    + '<div class="selftest_modal_content">'
+                    + '<div>'
+                    // + "result2.selftest"
+                   +'     </div>'
+                   +' </div>'
+                   +' <button id="selfTest_btn">확인</button>'
+
+
+
+        }
+
+    })
+
+
 }

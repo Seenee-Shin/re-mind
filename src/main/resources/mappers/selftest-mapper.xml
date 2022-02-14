@@ -11,7 +11,7 @@
         <result property="questionContent" column="QUESTION_CONTENT"/>
         <result property="resultNo" column="RESULT_NO"/>
         <result property="resultContent" column="RESULT_CONTENT"/>
-        <result property="resultRate" column="RESULT_RATE"/>
+        <result property="score" column="RESULT_RATE"/>
         <result property="resultGender" column="RESULT_GENDER"/>
         <result property="answerNo" column="ANSWER_NO"/>
         <result property="answerType" column="ANSWER_TYPE"/>
@@ -19,6 +19,8 @@
         <result property="categoryNo" column="CATEGORY_NO"/>
         <result property="categoryName" column="CATEGORY_NM"/>
         <result property="queCount" column="Q_COUNT"/>
+        <result property="rate" column="RATE"/>
+
     </resultMap>
 
     <!-- 결과창 리절트 맵 -->
@@ -59,9 +61,25 @@
 
     <!-- 결과 -->
     <select id="selectR" resultMap="selftest_rm">
-        SELECT CATEGORY_NO, RESULT_CONTENT, RESULT_RATE FROM SELF_CHECK_RESULT
+        SELECT ROWNUM, CATEGORY_NO, RESULT_CONTENT, RESULT_RATE, RESULT_NO
+        FROM SELF_CHECK_RESULT
         WHERE CATEGORY_NO = #{categoryNo}
         ORDER BY RESULT_NO ASC
+    </select>
+
+    <!-- 결과창 화면 -->
+    <select id="selectResult" resultMap="selftest_rm">
+        <![CDATA[
+            SELECT * FROM(
+            SELECT ROWNUM AS RNUM, R.* FROM (
+            SELECT CATEGORY_NO, RESULT_CONTENT, RESULT_RATE, RESULT_NO, (RESULT_RATE-#{score}) RATE
+            FROM SELF_CHECK_RESULT
+            WHERE CATEGORY_NO = #{categoryNo}
+            AND RESULT_RATE > #{score}
+            ORDER BY RATE ASC
+            ) R)
+            WHERE RNUM < 2
+        ]]>
     </select>
 
 

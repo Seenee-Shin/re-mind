@@ -4,6 +4,8 @@ import org.apache.ibatis.session.RowBounds;
 
 public class Selftest{
 
+    private int memberNo;
+
     private int answerNo;
     private int answerType;
     private String answerContent;
@@ -21,16 +23,35 @@ public class Selftest{
 
     private int queCount;
 
+    private int rate;
+
+    private int score;
+
     public Selftest() {
-        super();
     }
 
-    public int getQueCount() {
-        return queCount;
+    public int getScore() {
+        return score;
     }
 
-    public void setQueCount(int queCount) {
-        this.queCount = queCount;
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    public int getMemberNo() {
+        return memberNo;
+    }
+
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
     }
 
     public int getAnswerNo() {
@@ -121,23 +142,11 @@ public class Selftest{
         this.resultGender = resultGender;
     }
 
-    @Override
-    public String toString() {
-        return "SelftestVO{" +
-                "answerNo=" + answerNo +
-                ", answerType=" + answerType +
-                ", answerContent='" + answerContent + '\'' +
-                ", questionNo=" + questionNo +
-                ", questionContent='" + questionContent + '\'' +
-                ", categoryNo=" + categoryNo +
-                ", categoryName='" + categoryName + '\'' +
-                ", resultNo=" + resultNo +
-                ", resultContent='" + resultContent + '\'' +
-                ", resultRate=" + resultRate +
-                ", resultGender='" + resultGender + '\'' +
-                '}';
+    public int getQueCount() {
+        return queCount;
     }
 
-
-
+    public void setQueCount(int queCount) {
+        this.queCount = queCount;
+    }
 }

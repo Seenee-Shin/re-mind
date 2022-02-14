@@ -29,7 +29,7 @@ import edu.kh.mind.pro.model.vo.WorryCategory;
 
 @Controller
 @RequestMapping("adminPro/*")
-@SessionAttributes({"loginPro", "chattingNo"})
+@SessionAttributes({"loginPro", "chattingNo", "price", "proInfo", "proHospital"})
 public class AdminProController {
 	
 	@Autowired
@@ -48,16 +48,15 @@ public class AdminProController {
 	}
 
 	// 로그인 페이지
-//	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
-//	public String proLoginForm(HttpSession session) {
-//
-//		String path = "adminPro/proLogin";
-//		if (session.getAttribute("loginPro") != null) {
-//			path = "redirect:/adminPro/proReservation";
-//		}
-//		
-//		return path;
-//	}
+	@RequestMapping(value = "proLogin", method = RequestMethod.GET )
+	public String proLoginForm(HttpSession session) {
+
+		String path = "adminPro/proLogin";
+		if (session.getAttribute("loginPro") != null) {
+			path = "redirect:/adminPro/proReservation";
+		}
+		
+		return path;	}
 
 	// 로그인
 	@RequestMapping(value="proLogin", method = RequestMethod.POST)
@@ -169,7 +168,7 @@ public class AdminProController {
 		service.proRegister(profession);
 		
 			
-       return "redirect:proLogin";
+       return "redirect:/";
 		
 	}
 	
@@ -243,13 +242,13 @@ public class AdminProController {
     				path = "/";
     			}else {
     				Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
-    				path = "/adminPro/proRegisterDetail"+result.getProfessionNo();
+    				path = "/adminPro/proRegisterDetail";
     				
     			}
     		}
     	}else {
     		Util.swalSetMessage("이미 승인 완료된 상담사입니다. 로그인 해주세요", null, "error", ra);
-			path = "/adminPro/proRegisterDetail"+result.getProfessionNo();
+			path = "/";
     	}
     	
  
@@ -278,11 +277,11 @@ public class AdminProController {
     @RequestMapping(value = "update/{professionNo}" , method = RequestMethod.GET)
     public String AdminProProfile(@PathVariable int professionNo, Model model) {
 		List<WorryCategory> category = service.selectWorryCategory();
+		List<ProfessionPrice> price = service.selectPrice(professionNo);
 		
 //		List<ProfessionPrice> price = service.selectPrice(professionNo);
 		
 		//프로필 정보 조회해 오기
-		
 		model.addAttribute("category", category);
 		model.addAttribute("css", "proPage/proProfile");
 		
@@ -316,7 +315,7 @@ public class AdminProController {
     			Util.swalSetMessage("관리자 승인을 기다려 주세요", null, "success", ra);
     			
     			
-    			path = "/AdminProProfile/"+loginPro.getProfessionNo();
+    			path = "adminPro/AdminProProfile/"+loginPro.getProfessionNo();
     			
     			
     		}else {

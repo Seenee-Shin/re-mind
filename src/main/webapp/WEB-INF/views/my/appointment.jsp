@@ -39,38 +39,75 @@
 		$(".reservation_select").on("change", function () {
 			reservationList($(this).val());
 		})
-	});
 
-	// 예약 취소
-	$(".reservationCancel").on("click", function () {
+		/*const reservationCancel = document.querySelectorAll(".reservationCancel");
+		for(let i =0; i< reservationCancel.length; i++) {
+			reservationCancel[i].addEventListener("click", () => {
+				const _this = $(this);
+				if(confirm("예약 취소하시겠습니까?")) {
 
-		const _this = $(this);
-		if(confirm("예약 취소하시겠습니까?")) {
+					$.ajax({
+						url : "appointmentCancel",
+						type : "POST",
+						data : {
+							"reservationNo" : _this.data("value")
+						},
+						success : function (result) {
+							if (result == 1) {
+								swal({title : "예약 취소 되었습니다.", icon  : "success"});
 
-			$.ajax({
-				url : "appointmentCancel",
-				type : "POST",
-				data : {
-					"reservationNo" : _this.data("value")
-				},
-				success : function (result) {
-					if (result == 1) {
-						swal({title : "예약 취소 되었습니다.", icon  : "success"});
+								const div = $("<div class='status_div'>");
+								div.text("예약 취소");
+								_this.parent().html(div);
+							} else {
+								swal({title : "취소할 수 없습니다.", icon  : "error"});
+							}
+						},
+						error : function () {
 
-						const div = $("<div class='status_div'>");
-						div.text("예약 취소");
-						_this.parent().html(div);
-					} else {
-						swal({title : "취소할 수 없습니다.", icon  : "error"});
-					}
-				},
-				error : function () {
-
+						}
+					});
 				}
 			});
-		}
+		}*/
+	});
 
-	})
+
+
+
+	// 예약 취소
+	// $(".reservationCancel").on("click", function () {
+	// 	console.log("TEST");
+	//
+	// 	const _this = $(this);
+	// 	if(confirm("예약 취소하시겠습니까?")) {
+	//
+	// 		$.ajax({
+	// 			url : "appointmentCancel",
+	// 			type : "POST",
+	// 			data : {
+	// 				"reservationNo" : _this.data("value")
+	// 			},
+	// 			success : function (result) {
+	// 				if (result == 1) {
+	// 					swal({title : "예약 취소 되었습니다.", icon  : "success"});
+	//
+	// 					const div = $("<div class='status_div'>");
+	// 					div.text("예약 취소");
+	// 					_this.parent().html(div);
+	// 				} else {
+	// 					swal({title : "취소할 수 없습니다.", icon  : "error"});
+	// 				}
+	// 			},
+	// 			error : function () {
+	//
+	// 			}
+	// 		});
+	// 	}
+	//
+	// })
+
+
 
 	// 상담 예약 조회
 	function reservationList(reservationStatusCode) {
@@ -153,15 +190,16 @@
 
 				const liDiv_6 = $("<div class='status_div'>");
 				if (value.reservationStatusCode == 1) {
-					const tbodyButton = $("<button type='button' class='reservationCancel'>");
+					// const tbodyButton = $("<button type='button' class='reservationCancel'>");
+					const tbodyButton = $("<div class='reservationCancel' style='display:inline-block; cursor:pointer;'>");
 					tbodyButton.data("value", value.reservationNo);
-					tbodyButton.text("취소하기");
+					tbodyButton.text("취소");
 
-					liDiv_6.text("예약 ");
+					liDiv_6.text("예약 | ");
 					liDiv_6.append(tbodyButton);
 
 				} else if (value.reservationStatusCode == 3) {
-					liDiv_6.text("예약 취소");
+					liDiv_6.text("취소 완료");
 
 				} else {
 					liDiv_6.text("상담 완료");
@@ -169,7 +207,39 @@
 				}
 				tbodyLi.append(liDiv_6);
 				appointListUl.append(tbodyLi);
+
 			})
+
+			const reservationCancel = document.querySelectorAll(".reservationCancel");
+			for(let i =0; i< reservationCancel.length; i++) {
+				reservationCancel[i].addEventListener("click", () => {
+					const _this = $(reservationCancel[i]);
+					if(confirm("예약 취소하시겠습니까?")) {
+
+						$.ajax({
+							url : "appointmentCancel",
+							type : "POST",
+							data : {
+								"reservationNo" : _this.data("value")
+							},
+							success : function (result) {
+								if (result == 1) {
+									swal({title : "예약 취소 되었습니다.", icon  : "success"});
+
+									const div = $("<div class='status_div'>");
+									div.text("취소 완료");
+									_this.parent().html(div);
+								} else {
+									swal({title : "취소할 수 없습니다.", icon  : "error"});
+								}
+							},
+							error : function () {
+
+							}
+						});
+					}
+				});
+			}
 		} else {
 			const noneData = $("<li>");
 			noneData.css("width", "100%").css("text-align", "center");

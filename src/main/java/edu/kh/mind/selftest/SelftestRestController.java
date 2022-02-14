@@ -1,13 +1,14 @@
 package edu.kh.mind.selftest;
 
 import com.google.gson.Gson;
+import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.selftest.model.service.SelftestService;
 import edu.kh.mind.selftest.model.vo.Selftest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Type;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +21,12 @@ public class SelftestRestController {
     private SelftestService service;
 
     @RequestMapping(value = "selftestQuestion", method = RequestMethod.POST)
-    public Map<String, Object> selftestForm(Model model, int categoryNo, Selftest selftest){
+    public Map<String, Object> selftestForm(Model model, int categoryNo, Selftest selftest
+                                            ,HttpSession session){
 
         model.addAttribute("css", "selftestForm");
         model.addAttribute("header", "main");
 
-//        System.out.println(questionNo);
 
         selftest.setCategoryNo(categoryNo);
 
@@ -49,15 +50,32 @@ public class SelftestRestController {
     }
 
     @RequestMapping(value = "selftestResult", method = RequestMethod.GET)
-    public String selftestResult(Model model) {
+    public String  selftestResult(Model model, int categoryNo, int score, Selftest selftest
+            , HttpSession session) {
 
         model.addAttribute("css", "selftestResult");
         model.addAttribute("header", "main");
 
-        System.out.println(selftestResult(model));
+        Member loginMember = (Member)session.getAttribute("loginMember");
 
-        return "selftestResult";
+        int memberNo = loginMember.getMemberNo();
+
+        System.out.println(memberNo);
+        System.out.println(score);
+        System.out.println(categoryNo);
+
+        selftest.setCategoryNo(categoryNo);
+        selftest.setMemberNo(memberNo);
+        selftest.setRate(score);
+
+        System.out.println(selftest);
+
+        List<Selftest> selfTest2 =  service.selectResult(selftest);
+        System.out.println(selfTest2);
+
+        return new Gson().toJson(selfTest2);
     }
+
 
 
 }
