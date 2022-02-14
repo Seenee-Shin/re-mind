@@ -5,7 +5,6 @@
 
  <link rel="stylesheet" href="${contextPath}/resources/css/selftestResult.css">
 
-    <form method="GET">
         <div class="selftest_modal">
             <div class="selftest_modal_title">
                 자존감 자가진단 결과
@@ -24,4 +23,3 @@
             </div>
             <button id="selfTest_btn">확인</button>
         </div>
-    </form>

@@ -4,46 +4,46 @@
 const userMenu = document.getElementsByClassName("userMenu")
 
 	for (let i = 0; i < elements.length; i++) {
-		
+
 	    elements[i].addEventListener('click',  () =>{
 	    userMenu[i].classList.toggle("hidden");
-		
+
 	});
 }*/
 
 // 프로필 누를 시 유저 메뉴
 $(document).on("click", ".writer_pic", function() {
-      $(this).next().toggle();
+	$(this).next().toggle();
 });
-   let muteMember;
-// 회원 차단    
+let muteMember;
+// 회원 차단
 $(document).on("click", ".block", function(){
-	
-		muteMember = $(this).parent().next().val();
-		var answer = confirm("차단하시겠습니까?");	
-		
-		console.log(muteMember);
-		if(answer){
-			$.ajax({
-				url : "block",
-				data : {"muteMember" : muteMember},
-				success : function(result){
-					console.log(result)
-					if(result > 0){
-		                swal({"title" : "차단되었습니다." , 
-		                      "icon" : "success"}).then(function(){
-									location.reload();
-							});
-		
-		            } else{
-		                swal({"title" : "회원 차단 실패" , 
-		                      "icon" : "error"});
-		            }
-		    	}
-			});
-		}
-	
-	});
+
+	muteMember = $(this).parent().next().val();
+	var answer = confirm("차단하시겠습니까?");
+
+	console.log(muteMember);
+	if(answer){
+		$.ajax({
+			url : "block",
+			data : {"muteMember" : muteMember},
+			success : function(result){
+				console.log(result)
+				if(result > 0){
+					swal({"title" : "차단되었습니다." ,
+						"icon" : "success"}).then(function(){
+						location.reload();
+					});
+
+				} else{
+					swal({"title" : "회원 차단 실패" ,
+						"icon" : "error"});
+				}
+			}
+		});
+	}
+
+});
 
 
 /*//파일 업로드 스크립트
@@ -52,7 +52,7 @@ $(document).ready(function()
 		{
 			$("#addFileBtn").on("change", fileCheck);
 		});
-		
+
 
 // 파일 현재 필드 숫자 totalCount랑 비교값
 var fileCount = 0;
@@ -67,10 +67,10 @@ var delete_files = new Array();
 
 function fileCheck(e) {
     var files = e.target.files;
-    
+
     // 파일 배열 담기
     var filesArr = Array.prototype.slice.call(files);
-    
+
     // 파일 개수 확인 및 제한
     if (fileCount + filesArr.length > totalCount) {
       alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
@@ -78,14 +78,14 @@ function fileCheck(e) {
     } else {
     	 fileCount = fileCount + filesArr.length;
     }
-    
+
     // 각각의 파일 배열담기 및 기타
     filesArr.forEach(function (f) {
       var reader = new FileReader();
       reader.onload = function (e) {
-	
+
         content_files.push(f);
-        
+
         $('#imgWrap').append(
        		'<div id="img'+fileNum+'"class="boardImg"> <img src="'+ e.target.result+'">'
        		+'<div class="deleteImg" onclick="fileDelete(\'file' + fileNum + '\')"><i class="fas fa-times"></i></div>'
@@ -104,9 +104,9 @@ function fileCheck(e) {
 function fileDelete(fileNum){
     var no = fileNum.replace(/[^0-9]/g, "");
     content_files[no].is_delete = true;
-    
+
 	$('#img' + no).remove();
-	
+
 	fileCount --;
     console.log(content_files);
 }
@@ -119,7 +119,7 @@ function postingValidate(){
  	const formData = new FormData(form);
 
 	for (let i = 0; i < content_files.length; i++) {
-		// 삭제 안한것만 담아 준다. 
+		// 삭제 안한것만 담아 준다.
 		if(!content_files[i].is_delete){
 			formData.append('images', content_files[i]);
 		}else{
@@ -138,7 +138,7 @@ function postingValidate(){
 		contentType: false,
 		success: function (result) {
 			if(result > 0){
-                swal({"title" : "글이 작성되었습니다." , 
+                swal({"title" : "글이 작성되었습니다." ,
                       "icon" : "success"});
    	    		$("#input_file").val("");
    	    		const imgWrap = document.querySelector("#imgWrap");
@@ -150,29 +150,29 @@ function postingValidate(){
 				}
 
 				// 내용삭제
-				$("#post_textarea").val(""); 
+				$("#post_textarea").val("");
 				$("replyCheckCode").val("1");
 				$("scrapCheckCode").val("1");
 				$("empathyCheckCode").val("1");
 
 				// 새로 고침
-				
-				
+
+
 				;
 			} else
-			    swal({"title" : "글작성 실패" , 
+			    swal({"title" : "글작성 실패" ,
                       "icon" : "error"});
 			},
 		error: function (xhr, status, error) {
-			    swal({"title" : "서버 연결 오류" , 
+			    swal({"title" : "서버 연결 오류" ,
                       "icon" : "error"});
 		}
     });
 
 	return false;
 }*/
-	
-	
+
+
 
 
 /*시간 몇분전 표시 */

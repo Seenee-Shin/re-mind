@@ -1,6 +1,7 @@
 package edu.kh.mind.board.model.service;
 
 import edu.kh.mind.adminPro.model.exception.InsertCertificationFailException;
+import edu.kh.mind.board.model.dao.SecretDAO;
 import edu.kh.mind.board.model.dao.WorryDAO;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Empathy;
@@ -25,10 +26,20 @@ public class WorryServiceImpl implements WorryService {
 	@Autowired
 	private WorryDAO dao;
 
+	@Autowired
+	private SecretDAO secretDAO;
+
 	// 고민상담 게시글
 	@Override
 	public List<Board> selectWorryList(Map<String, String> param) {
 		param.put("boardCategoryCode", "102");
+
+		if(param.get("memberNo") != null) {
+
+			String muteMember  = secretDAO.selectMuteMember(param);
+			param.put("muteMember", muteMember);
+
+		}
 
 		return dao.selectWorryList(param);
 	}

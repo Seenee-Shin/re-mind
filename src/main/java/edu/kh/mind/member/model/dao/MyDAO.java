@@ -208,4 +208,9 @@ public class MyDAO {
 	public List<Letter> myLetterList(int memberNo) {
 		return sqlSession.selectList("boardMapper.myLetterList", memberNo);
 	}
+
+	public List<Reservation> appointmentPast(int memberNo) {
+
+		return sqlSession.selectList("reservationMapper.appointmentPast", memberNo);
+	}
 }

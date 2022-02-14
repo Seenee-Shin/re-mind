@@ -98,12 +98,20 @@ public class MyController {
 
 
     @RequestMapping("appointment/past")
-    public String appointmentPast(Model model, HttpSession session, RedirectAttributes ra) {
+    public String appointmentPast(Model model, HttpSession session, RedirectAttributes ra,
+    		@ModelAttribute("loginMember") Member loginMember) {
     	model.addAttribute("css", "my");
 
         String path = "";
 
         if(session.getAttribute("loginMember") != null) {
+        	
+        	List<Reservation> rList = service.appointmentPast(loginMember.getMemberNo());
+        	
+        	model.addAttribute("rList",rList);
+        	
+        	System.out.println(rList);
+        	
             path = "my/appointmentPast";
         } else {
             Util.swalSetMessage("로그인 후 이용해주시기 바랍니다.", null, "info", ra);
@@ -181,7 +189,6 @@ public class MyController {
             map.put("selectDate", todayFormat());
             EmotionDiary emotionRecordData = service.selectEmotionRecord(map);
             String gsonData = new Gson().toJson(emotionRecordData);
-            System.out.println(gsonData);
 
             model.addAttribute("emotionRecordData", gsonData);
             model.addAttribute("emotionCategoryList", emotionCategoryList);
@@ -199,18 +206,6 @@ public class MyController {
     // 감정기록 등록
     @RequestMapping(value="emotionDiary", method=RequestMethod.POST)
     public String emotionDiaryInsert(EmotionDiary emotionDiary, @ModelAttribute("loginMember") Member loginMember, HttpServletRequest req, HttpSession session, RedirectAttributes ra) {
-
-        if (req.getParameter("stressAgree") != null) {
-            emotionDiary.setStressAgree(1);
-        } else {
-            emotionDiary.setStressAgree(0);
-        }
-
-        if (req.getParameter("diaryAgree") != null) {
-            emotionDiary.setDiaryAgree(1);
-        } else {
-            emotionDiary.setDiaryAgree(0);
-        }
 
         emotionDiary.setEmotionDate(todayFormat());
 

@@ -112,6 +112,16 @@
 
 			// content
 			$(".emotionContent").val(XSS(emotionDiary.emotionContent));
+
+			// 스트레스 상담사 공개
+			if (emotionDiary.stressAgree == 1) {
+				$("#stressAgree").prop("checked", true);
+			}
+
+			// 감정일기 상담사 공개
+			if (emotionDiary.diaryAgree == 1) {
+				$("#diaryAgree").prop("checked", true);
+			}
 		}
 	});
 
@@ -151,6 +161,18 @@
 
 		$(".emotion_array").val(JSON.stringify(emotion));
 		$(".stress_array").val(stress);
+
+		if ($("#stressAgree:checked").val() == "on") {
+			$("#stressAgree").val(1);
+		} else {
+			$("#stressAgree").val(0);
+		}
+
+		if ($("#diaryAgree:checked").val() == "on") {
+			$("#diaryAgree").val(1);
+		} else {
+			$("#diaryAgree").val(0);
+		}
 
 		const emotionContent = $(".emotionContent");
 		const loginMember = "${loginMember.memberNo}";

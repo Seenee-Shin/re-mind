@@ -11,7 +11,6 @@ public class Reservation {
 	private String reservationCancel;
 	private int counselCategoryNo;
 	private int reservationPayNo;
-	
 	private String counselCategoryNm;
 	private int PayNo;
 
@@ -20,6 +19,10 @@ public class Reservation {
 	private int professionNo;
 	private String professionName;
 	private int statusCode;
+	
+	private int intEnrollDate;
+	private int checkReview;
+	
 
 	public Reservation() {
 	}
@@ -134,6 +137,23 @@ public class Reservation {
 
 	public void setProfessionName(String professionName) {
 		this.professionName = professionName;
+	}
+	
+
+	public int getIntEnrollDate() {
+		return intEnrollDate;
+	}
+
+	public void setIntEnrollDate(int intEnrollDate) {
+		this.intEnrollDate = intEnrollDate;
+	}
+
+	public int getCheckReview() {
+		return checkReview;
+	}
+
+	public void setCheckReview(int checkReview) {
+		this.checkReview = checkReview;
 	}
 
 	@Override
