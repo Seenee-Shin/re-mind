@@ -1,153 +1,53 @@
 
-let QUES = [];
-let ctCode;
-let nowQNo = 1;
-
-let allAnswerLen;
-let allQuestionLen;
-
-
+// 문항 번호
+let _questionNo = 0;
+// 답변수
+let _answerNo = 0;
+// 점수
+let _score = 0;
+// 문항별 점수
+let _answerScore = [];
+// 카테 고리 번호
+let _categoryNo;
+// 문항 전체 수
+let _fullQuestionCount = 0;
+// 답변선택
 let flag = false;
-/*
-카테고리 코드 ctCode
-현재 문항 번호 nowQNo
-
-총 답변 갯수 allAnswerLen
-총 문항 갯수 allQuestionLen
-*/
 
 $(function () {
     // 자가진단 선택
     if (type) {
-        ctCode = type;
+        _categoryNo = type;
         $(".selfTest_op").eq(type-1).click();
     } else {
-        $(".selfTest_op").eq(0).click();
+        // $(".selfTest_op").eq(0).click();
+        $(".selfTest_op").eq(5).click();
     }
 });
-
-function testResult(){
-
-    if(count == (qwe-1)){
-        $("#selfTest_result_btn").css("display", "block");
-
-    }else{
-
-        $("#selfTest_result_btn").css("display", "none");
-    }
-
-
-
-}
-
-function next(){
-    let flag = false;
-    for(let i=0; i<$(".selfTest_result").length; i++) {
-        if( $(".selfTest_result").eq(i).hasClass("active") ) {
-            flag = true;
-        }
-    }
-
-    // 문항 번호
-    count = count + 1;
-    console.log(count);
-
-    if (flag) {
-        // 문항 가져오는것
-        selftestQuestion();
-
-        // 결과 가져오는거
-        // testResult();
-    } else {
-        alert("답변을 선택해주세요.");
-    }
-
-    return false;
-
-
-
-    // $(".selfTest_prev_btn").css("display","none");
-
-
-    // if (count == '0'){
-    //     $(".selfTest_prev_btn").css("display","none");
-    // }else{
-    //     $(".selfTest_prev_btn").css("display","block");
-    // }
-
-
-}
-
-function prev(){
-    count = count - 1;
-    selftestQuestion();
-    // 이전 다음 버튼
-    hiddenBtn();
-
-    $("#selfTest_result_btn").css("display", "none");
-}
-
-
-// 이전 다음 버튼 노출
-function hiddenBtn() {
-    // if (count == '0') {
-    //     $(".selfTest_prev_btn").addClass("hidden");
-    // } else  if (count == (qwe-1)) {
-    //     $(".selfTest_next_btn").addClass("hidden");
-    // } else {
-    //     $(".selfTest_prev_btn").removeClass("hidden");
-    //     $(".selfTest_next_btn").removeClass("hidden");
-    // }
-
-
-}
-
-// 초기화
-function reset() {
-    nowQNo = 1;
-    allAnswerLen = undefined;
-
-}
-
-// 문항 번호
-let count = 0;
-// 점수
-let jumsuu = [];
 
 // 증상 선택
 $(".selfTest_op").on("click", function () {
-
-    reset();
-    count = 0;
-    jumsuu = [];
-    ctCode = $(this).attr("id");
-    const index = $(this).index($(this));
-    const nm = $(this).text();
-
     $(".selfTest_op").removeClass("active");
     $(this).addClass("active");
+    reset();
+
+    _categoryNo = $(this).data("type");
 
     selftestQuestion();
-    testResult();
-
 });
 
-// 총 문항 길이
-let qwe = 0;
-
 // 문항 가져오기
-function selftestQuestion(){
+async function selftestQuestion(next=1){
     $.ajax({
         url : "selftestQuestion",
         type : "POST",
-        data : {"categoryNo":ctCode},// 증상번호
+        data : {"categoryNo":_categoryNo},// 증상번호
         dataType : "json",
         success : function (result){
-            //console.log(result);
-            qwe = result.Quest.length;
-            // console.log(result.Result);
-            // console.log(qwe);
-            //console.log(result.Quest[count]);
+            _fullQuestionCount = result.Quest.length;
+
+            _questionNo = _questionNo + next;
+
             let html = '<div class="selfTest_title">'
                 + '<h1>자존감 자가진단 테스트</h1>'
                 + '<div>'
@@ -158,112 +58,139 @@ function selftestQuestion(){
                 + '</div>'
                 + '</div>'
                 + '<div class="selfTest_content">'
-                +  '  <span>'+(count+1)+'</span>'
+                +  '  <span>'+(_questionNo)+'</span>'
                 +  '  <span></span>'
-                +   ' <span>총 '+ qwe +'문항</span>'
-                +  '  <div>'+ result.Quest[count].questionContent +'</div>'
+                +   ' <span>총 '+ _fullQuestionCount +'문항</span>'
+                +  '  <div>'+ result.Quest[_questionNo-1].questionContent +'</div>'
                 +   ' <div id="selfTest_content_option">'
-
                 +'    </div>'
                 + '</div>'
 
-                 let html2 = "";
-            // console.log(result.Answer.length);   총 길이
+            let html2 = "";
 
-                for(let i=0; i< result.Answer.length; i++){
+            for(let i=0; i< result.Answer.length; i++){
+                html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +', '+i+')">' + result.Answer[i].answerContent + '</div>';
+            }
 
-                        html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +', '+i+')">' + result.Answer[i].answerContent + '</div>';
+            $(".selfTest").html(html);
+            $("#selfTest_content_option").append(html2);
 
-                    }
+        }, error(request,status,error){
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        } //error
 
-                 $(".selfTest").html(html);
-
-                    $("#selfTest_content_option").append(html2);
-
-                }, error(request,status,error){
-                     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                } //error
-
-         });
+    });
 }
 
-// 딥변
-$(".selfTest_result").on("click", function (){
-    flag = true;
-
-    $(".selfTest_result").removeClass("active");
-    $(this).addClass("active");
-});
-
-
-
-// 점수 누적
-let score = 0;
+// 답변 선택
 function saveScore(score, btnIndex){
     // 초기화
     $(".selfTest_result").removeClass("active");
-
     // 선택
     $(".selfTest_result").eq(btnIndex).addClass("active");
 
-    // 문항 점수
-    jumsuu[count] = score;
+    // 답변 체크
+    flag = true;
+
+    // 문항별 점수 합산
+    if (_answerNo == "0") {
+        _answerScore[_answerNo] = score;
+    } else {
+        _answerScore[_answerNo] = _answerScore[_answerNo-1] + score;
+    }
+
+    // 마지막 문항 답변 선택 -  테스트 결과 보임
+    if (_fullQuestionCount == (_answerNo+1)) {
+        $("#selfTest_result_btn").css("display", "block");
+    }
 }
 
-// 합산 검사
+// 다음
+function next(){
+    if (flag) {
+        // 문항 가져오는것
+        selftestQuestion();
+
+        // 답변 수 증가
+        _answerNo += 1;
+
+        // 답변 초기화
+        flag = false;
+
+        // 마지막 문항 다음 버튼 사라짐
+        btnShowHide();
+    } else {
+        alert("답변을 선택해주세요.");
+    }
+
+    return false;
+}
+
+// 이전
+function prev(){
+    // 현재 점수 초기화
+    _answerScore[_answerNo] = undefined;
+
+    _answerNo -= 1;
+
+    selftestQuestion(-1);
+
+    // 마지막 문항 다음 버튼 사라짐
+    btnShowHide();
+
+    // 테스트 결과 숨김
+    $("#selfTest_result_btn").css("display", "none");
+
+    return false;
+}
+
+// 이전, 다음 show hide
+function btnShowHide() {
+    // 이전
+    if (_answerNo == "0") {
+        $(".selfTest_prev_btn").addClass("hidden");
+    } else {
+        $(".selfTest_prev_btn").removeClass("hidden");
+    }
+
+    // 다음
+    if (_fullQuestionCount == (_questionNo+1) ) {
+        $(".selfTest_next_btn").addClass("hidden");
+    } else {
+        $(".selfTest_next_btn").removeClass("hidden");
+    }
+}
+
+// 테스트 결과
+let resultHtml = "";
 function resultScore(){
-    for(let i= 0; i<jumsuu.length; i++){
-        if(jumsuu[i] == undefined){
-            alert("선택하지 않은 번호가 있습니다.");
-            count = i;
-            selftestQuestion();
-            return false;
-        }else{
-            if(jumsuu.length == qwe){
 
-                score += jumsuu[i];
-
-                console.log(score);
-                layerPopup("selftestResult");
-            }
-        }
-    }
-    for(let i=jumsuu.length; i<qwe; i++){
-        if(jumsuu[i] == undefined) {
-            alert("선택하지 않은 번호가 있습니다.");
-            count = i;
-            selftestQuestion();
-            return false;
-        }
-    }
-
-
-    // 테스트 결과 보기
     $.ajax({
         url : "selftestResult",
         type : "GET",
-        data : {"categoryNo":ctCode, "score":score}, // 증상번호, 합산 값
+        data : {"categoryNo":_categoryNo, "score":_answerScore[_fullQuestionCount-1]}, // 증상번호, 합산 값
         dataType : "json",
-        success : function (result2){
-            // console.log(score);
-            // console.log(ctCode);
+        success : function (result){
 
-            console.log("result2 : " + result2);
-            let htmlHtml = '<div class="selftest_modal_title">'
-                         +'   자존감 자가진단 결과'
-                        + '</div>'
-                    + '<div class="selftest_modal_content">'
-                    + '<div>'
-                    // + "result2.selftest"
-                   +'     </div>'
-                   +' </div>'
-                   +' <button id="selfTest_btn">확인</button>'
+            layerPopup("selftestResult");
 
-
-
-        }
-
+            resultHtml = `
+                <div>
+                    다른사람과 비교해서 당신의 자존감은
+                    <div>다소 낮은 편입니다.</div>
+                </div>
+                <div>
+                    어쩔티비 저쩔티비
+                </div>
+            `;
+        },
     })
-
-
 }
+
+// 초기화
+function reset() {
+    _questionNo = 0;
+    _answerNo = 0;
+    _score = 0;
+}
+

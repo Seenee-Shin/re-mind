@@ -18,15 +18,15 @@
   <form method="POST" class="self_content_form">
     <div class="self_content_option">
       <div class="self_content_option1">
-        <div id="1" class="selfTest_op <c:if test="${type == '1'}">active</c:if>">우울증</div>
-        <div id="2" class="selfTest_op <c:if test="${type == '2'}">active</c:if>">불안장애</div>
-        <div id="3" class="selfTest_op <c:if test="${type == '3'}">active</c:if>">폭식증</div>
-        <div id="4" class="selfTest_op <c:if test="${type == '4'}">active</c:if>">알코올의존</div>
-        <div id="5" class="selfTest_op <c:if test="${type == '5'}">active</c:if>">스트레스</div>
+        <div id="type_1" data-type="1" class="selfTest_op <c:if test="${type == '1'}">active</c:if>">우울증</div>
+        <div id="type_2" data-type="2" class="selfTest_op <c:if test="${type == '2'}">active</c:if>">불안장애</div>
+        <div id="type_3" data-type="3" class="selfTest_op <c:if test="${type == '3'}">active</c:if>">폭식증</div>
+        <div id="type_4" data-type="4" class="selfTest_op <c:if test="${type == '4'}">active</c:if>">알코올의존</div>
+        <div id="type_5" data-type="5" class="selfTest_op <c:if test="${type == '5'}">active</c:if>">스트레스</div>
       </div>
       <div class="self_content_option2">
-        <div id="6" class="selfTest_op <c:if test="${type == '6'}">active</c:if>">자존감</div>
-        <div id="7" class="selfTest_op <c:if test="${type == '7'}">active</c:if>">인터넷중독</div>
+        <div id="type_6" data-type="6" class="selfTest_op <c:if test="${type == '6'}">active</c:if>">자존감</div>
+        <div id="type_7" data-type="7" class="selfTest_op <c:if test="${type == '7'}">active</c:if>">인터넷중독</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
         <div style="color: rgb(0 0 0 / 0.5); cursor: no-drop;">추가준비중</div>
@@ -40,7 +40,7 @@
     </div>
     <button type="button" class="mb_selfTest_btn">테스트 진행</button>
   </form>
-  <button type="button" id="selfTest_result_btn"  onclick="resultScore()">테스트 결과</button>
+  <button type="button" class="hidden" id="selfTest_result_btn" onclick="resultScore()">테스트 결과</button>
 </article>
 
 <!-- footer include -->
