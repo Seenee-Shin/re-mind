@@ -6,7 +6,9 @@
 
 .main_content22{
     max-width:1200px;
+    height:100%;
     margin: 0 auto;
+    position: relative;
 }
 
 html{
@@ -266,6 +268,8 @@ html{
 /* --------------------------------------- */
 
 /* 오른쪽 상담 예약 영역 */
+
+
 .pro_reservation_wrap{
     float: right;
     width:30%;
@@ -274,8 +278,6 @@ html{
     border:1px solid #ddd;
     margin-top: 50px;
     padding: 20px;
-    box-shadow: 5px 0 40px rgb(0 0 0 / 8%);
-   
 }
 
 .pro_reservation_fixed{
@@ -283,9 +285,9 @@ html{
 	height:300px;
 	position: fixed;
     top:100px;
-	right:674;
+    right:0;
 	margin-top: 0;
-	box-shadow: 5px 0 40px rgb(0 0 0 / 8%);
+	
 }
 .pro_reservation{
     height:180px;
