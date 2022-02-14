@@ -149,6 +149,7 @@ public class WorryBoardController {
 
 
             model.addAttribute("css", "board/worryView");
+            model.addAttribute("header", "community");
             model.addAttribute("replyList", replyList);
             model.addAttribute("board", board);
             model.addAttribute("empathyMap", empathyMap);

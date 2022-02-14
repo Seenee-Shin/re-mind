@@ -396,4 +396,13 @@
         ]]>
     </select>
 
+	<select id="selectProfessionInfo">
+		SELECT * FROM PROFESSION_INFORMATION WHERE PROFESSION_NO = #{professionNo}
+	</select>
+	
+	<select id="selectProfessionHospital">
+		SELECT * FROM PROFESSION_HOSPITAL WHERE PROFESSION_NO = #{professionNo}
+	
+	</select>
+	
 </mapper>
