@@ -29,7 +29,7 @@ import edu.kh.mind.pro.model.vo.WorryCategory;
 
 @Controller
 @RequestMapping("adminPro/*")
-@SessionAttributes({"loginPro", "chattingNo"})
+@SessionAttributes({"loginPro", "chattingNo", "price", "proInfo", "proHospital"})
 public class AdminProController {
 	
 	@Autowired
@@ -277,11 +277,11 @@ public class AdminProController {
     @RequestMapping(value = "update/{professionNo}" , method = RequestMethod.GET)
     public String AdminProProfile(@PathVariable int professionNo, Model model) {
 		List<WorryCategory> category = service.selectWorryCategory();
+		List<ProfessionPrice> price = service.selectPrice(professionNo);
 		
 //		List<ProfessionPrice> price = service.selectPrice(professionNo);
 		
 		//프로필 정보 조회해 오기
-		
 		model.addAttribute("category", category);
 		model.addAttribute("css", "proPage/proProfile");
 		
@@ -315,7 +315,7 @@ public class AdminProController {
     			Util.swalSetMessage("관리자 승인을 기다려 주세요", null, "success", ra);
     			
     			
-    			path = "/AdminProProfile/"+loginPro.getProfessionNo();
+    			path = "adminPro/AdminProProfile/"+loginPro.getProfessionNo();
     			
     			
     		}else {
