@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,18 +56,28 @@ public class ProController {
 		map.put("first", param.get("first"));
 		map.put("last", param.get("last"));
 		map.put("proName", param.get("proName"));
-//		map.put("gender", param.get("gender"));
-//		map.put("therapy", param.get("therapy"));
+		if(Integer.parseInt(String.valueOf(param.get("gender"))) == 1)
+			map.put("gender", "남");
+		else if(Integer.parseInt(String.valueOf(param.get("gender"))) == 2)
+			map.put("gender", "여");
+		else
+			map.put("gender", null);
+		map.put("therapy", param.get("therapy"));
 
-		System.out.println("성별은? : " + map.get("gender") + " / 테라피 : " + map.get("therapy"));
+		System.out.println("카테고리는? : " + worryCtCd);
+		System.out.println("이름은? : " + map.get("proName"));
+		System.out.println("성별은? : " + map.get("gender") + " / 테라피는? : " + map.get("therapy"));
 
 		List<Profession> pList = service.selectProfession(map);
+
+		for(Profession p : pList){
+			System.out.println("for : " + p.getMemberName());
+		}
 
 		int result = 0;
 		// pList 결과가 비어있지 않으면 총 count를 가져옵니다.
 		if(!pList.isEmpty())
 			result = service.selectProfessionCount();
-
 
 		Profession p = new Profession();
 		p.setMaxValue(result);

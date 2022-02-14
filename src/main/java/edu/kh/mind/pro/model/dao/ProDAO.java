@@ -47,7 +47,7 @@ public class ProDAO {
 	}
 	
     public List<Profession> selectProfession(Map<String, Object> worryCtCd) {
-        return sqlSession.selectList("professionMapper.selectProfession", worryCtCd);
+        return sqlSession.selectList("professionMapper.selectProfessionAll", worryCtCd);
     }
 
 	public Profession selectPro(int professionNo) {

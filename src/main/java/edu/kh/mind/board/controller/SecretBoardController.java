@@ -1,5 +1,6 @@
 package edu.kh.mind.board.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import com.google.gson.Gson;
 import edu.kh.mind.board.model.service.ReplyService;
 import edu.kh.mind.board.model.service.SecretService;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.board.model.vo.WorryCategory;
@@ -136,9 +138,33 @@ public class SecretBoardController {
     		
     		// 댓글 
     		List<Reply> rList = replyService.selectList(boardNo);
-    		model.addAttribute("rList", rList);
     		
+    		 Map<String, Integer> empathyMap = new HashMap<>();
+
+             if (board.getWorryEmpathyArray() != null) {
+                 String empathyArr[] = board.getWorryEmpathyArray().split(",");
+                 String cntArr[] = board.getWorryCntArray().split(",");
+
+
+                 for (int i=1001; i<1006; i++) {
+                     String keyStr = Integer.toString(i);
+                     System.out.println("keyStr : " + keyStr);
+
+                     int key = Arrays.asList(empathyArr).indexOf(keyStr);
+                     System.out.println("key : " + key);
+
+                     if (key >= 0) {
+                         empathyMap.put(keyStr, Integer.valueOf(cntArr[key]));
+                     } else {
+                         empathyMap.put(keyStr, 0);
+                     }
+                 }
+             }
+    		
+    		model.addAttribute("rList", rList);
     		model.addAttribute("board", board);
+    		model.addAttribute("empathyMap", empathyMap);
+
     		return "secret/view";
     		
     	}else {
@@ -246,18 +272,55 @@ public class SecretBoardController {
     }
 	
     
+    @ResponseBody
+    @RequestMapping(value = "insertEmpathy")
+    public int insertEmpathy(@RequestParam int memberNo, @RequestParam int boardNo, 
+    						@RequestParam int empathyStatusCode) {
+    	
+    	Empathy empathy =new Empathy();
+    	empathy.setBoardNo(boardNo);
+    	empathy.setMemberNo(memberNo);
+    	empathy.setEmpathyStatusCode(empathyStatusCode);
+    	
+    	int result = service.insertEmpathy(empathy);
+    	
+    	return result;
+    }
+    
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "countEmpathy")
+    public int countEmpathy( @RequestParam int boardNo, 
+    						@RequestParam int empathyStatusCode) {
+    	
+    	Empathy empathy =new Empathy();
+    	empathy.setBoardNo(boardNo);
+    	empathy.setEmpathyStatusCode(empathyStatusCode);
+    	
+    	int result = service.countEmpathy(empathy);
+    	
+    	return result;
+    }
+    
+    
+    
+    
     //예외처리
-	@ExceptionHandler(Exception.class)
-	public String exceptionHandler(Exception e, Model model) {
+	//@ExceptionHandler(Exception.class)
+	//public String exceptionHandler(Exception e, Model model) {
 		
 		//Model : 데이터 전달용 객체(Map형식, request범위)
 		
-		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
-		model.addAttribute("e", e);
+		//model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
+		//model.addAttribute("e", e);
 		
-		return "/common/error";
-	}
+		//return "/common/error";
+	//}
 
+	
+	
+	
 	
 	
     
