@@ -24,7 +24,6 @@ $(function () {
     } else {
         $(".selfTest_op").eq(0).click();
     }
-
 });
 
 function testResult(){
@@ -42,17 +41,40 @@ function testResult(){
 }
 
 function next(){
-    count = count + 1;
-
-    $(".selfTest_prev_btn").css("display","none");
-    selftestQuestion();
-
-    if (count == '0'){
-        $(".selfTest_prev_btn").css("display","none");
-    }else{
-        $(".selfTest_prev_btn").css("display","block");
+    let flag = false;
+    for(let i=0; i<$(".selfTest_result").length; i++) {
+        if( $(".selfTest_result").eq(i).hasClass("active") ) {
+            flag = true;
+        }
     }
-    testResult();
+
+    // 문항 번호
+    count = count + 1;
+    console.log(count);
+
+    if (flag) {
+        // 문항 가져오는것
+        selftestQuestion();
+
+        // 결과 가져오는거
+        // testResult();
+    } else {
+        alert("답변을 선택해주세요.");
+    }
+
+    return false;
+
+
+
+    // $(".selfTest_prev_btn").css("display","none");
+
+
+    // if (count == '0'){
+    //     $(".selfTest_prev_btn").css("display","none");
+    // }else{
+    //     $(".selfTest_prev_btn").css("display","block");
+    // }
+
 
 }
 
@@ -113,11 +135,12 @@ $(".selfTest_op").on("click", function () {
 // 총 문항 길이
 let qwe = 0;
 
+// 문항 가져오기
 function selftestQuestion(){
     $.ajax({
         url : "selftestQuestion",
         type : "POST",
-        data : {"categoryNo":ctCode},
+        data : {"categoryNo":ctCode},// 증상번호
         dataType : "json",
         success : function (result){
             //console.log(result);
@@ -149,7 +172,7 @@ function selftestQuestion(){
 
                 for(let i=0; i< result.Answer.length; i++){
 
-                        html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +')">' + result.Answer[i].answerContent + '</div>';
+                        html2 += '<div class="selfTest_result" onclick="saveScore('+ result.Answer[i].answerType +', '+i+')">' + result.Answer[i].answerContent + '</div>';
 
                     }
 
@@ -176,10 +199,15 @@ $(".selfTest_result").on("click", function (){
 
 // 점수 누적
 let score = 0;
-function saveScore(score){
-    jumsuu[count] = score;
-    console.log(jumsuu);
+function saveScore(score, btnIndex){
+    // 초기화
+    $(".selfTest_result").removeClass("active");
 
+    // 선택
+    $(".selfTest_result").eq(btnIndex).addClass("active");
+
+    // 문항 점수
+    jumsuu[count] = score;
 }
 
 // 합산 검사
@@ -210,10 +238,11 @@ function resultScore(){
     }
 
 
+    // 테스트 결과 보기
     $.ajax({
         url : "selftestResult",
         type : "GET",
-        data : {"categoryNo":ctCode, "score":score},
+        data : {"categoryNo":ctCode, "score":score}, // 증상번호, 합산 값
         dataType : "json",
         success : function (result2){
             // console.log(score);
