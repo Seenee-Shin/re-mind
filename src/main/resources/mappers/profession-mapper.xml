@@ -396,11 +396,11 @@
         ]]>
     </select>
 
-	<select id="selectProfessionInfo">
+	<select id="selectProfessionInfo" resultMap="professionInfo_rm" >
 		SELECT * FROM PROFESSION_INFORMATION WHERE PROFESSION_NO = #{professionNo}
 	</select>
 	
-	<select id="selectProfessionHospital">
+	<select id="selectProfessionHospital" resultMap="professionHospital_rm">
 		SELECT * FROM PROFESSION_HOSPITAL WHERE PROFESSION_NO = #{professionNo}
 	
 	</select>
