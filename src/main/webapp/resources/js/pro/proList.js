@@ -22,6 +22,9 @@ $(document).on("click", ".cate_btn_click", function (){
     ul.empty();
     currentPage = 1;
     calcPagination();
+
+    // makePro();
+
 });
 
 var gender;
@@ -32,6 +35,10 @@ $(".gender").on("click", function (){
     else if(thisId == "pro_famale")
         gender = 2;
 
+    console.log("gender : " + gender)
+
+    currentPage = 1;
+    calcPagination();
     ul.empty();
     makePro();
 });
@@ -49,6 +56,8 @@ $(".therapy").on("click", function (){
 
     console.log("therapy : " + therapy)
 
+    currentPage = 1;
+    calcPagination();
     ul.empty();
     makePro();
 });
@@ -141,6 +150,8 @@ $(document).on("input", "#pro_searchInput", function (){
 });
 
 $("#nameSearch").on("click", function (){
+    currentPage = 1;
+    calcPagination();
     ul.empty();
     makePro();
 });

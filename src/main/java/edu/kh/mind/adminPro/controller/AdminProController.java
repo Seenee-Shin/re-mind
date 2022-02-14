@@ -259,7 +259,14 @@ public class AdminProController {
     @RequestMapping(value = "AdminProProfile/{professionNo}")
     public String AdminProProfileView(@ModelAttribute("loginPro") Profession loginPro,
     		@PathVariable int professionNo, Model model) {
+    	ProfessionInformation proInfo = service.selectProfessionInfo(professionNo);
+    	ProfessionHospital proHospital = service.selectProfessionHospital(professionNo);
+    	List<ProfessionPrice> price = service.selectPrice(professionNo);
+    	
     			
+    	model.addAttribute("proInfo", proInfo);
+    	model.addAttribute("proHospital", proHospital);
+    	model.addAttribute("price", price);
     	model.addAttribute("css", "proPage/proProfile");
     	
     	return "adminPro/AdminProProfile";
@@ -271,12 +278,11 @@ public class AdminProController {
     public String AdminProProfile(@PathVariable int professionNo, Model model) {
 		List<WorryCategory> category = service.selectWorryCategory();
 		
-		List<ProfessionPrice> price = service.selectPrice(professionNo);
+//		List<ProfessionPrice> price = service.selectPrice(professionNo);
 		
 		//프로필 정보 조회해 오기
 		
 		model.addAttribute("category", category);
-		model.addAttribute("price", price);
 		model.addAttribute("css", "proPage/proProfile");
 		
     	 return "adminPro/AdminProProfileUpdate";
