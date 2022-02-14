@@ -145,7 +145,7 @@ html{
 .detail_btn{
     font-size: 18px;
     font-weight: bold;
-    width:33%;
+    width:33.33%;
     line-height: 50px;
     float: left;
     text-align: center;
@@ -228,7 +228,7 @@ html{
 }
 
 #reservation_info_ol > li{
-	font-size:18px;
+	font-size:16px;
 	line-height:25px;
 	margin-bottom:10px;
 	
