@@ -52,6 +52,8 @@ $(".therapy").on("click", function (){
         therapy = 2;
     else if(thisId == "face_counseling")
         therapy = 3;
+    else if(thisId == "unrelated")
+        therapy = 0;
 
     console.log("therapy : " + therapy)
 
