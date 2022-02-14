@@ -141,8 +141,7 @@ function ajax(){
                 +'    </div>'
                 + '</div>'
 
-            let html2 = "";
-            let html3 = "";
+                 let html2 = "";
             // console.log(result.Answer.length);   총 길이
 
                 for(let i=0; i< result.Answer.length; i++){
@@ -151,17 +150,15 @@ function ajax(){
 
                     }
 
-            $(".selfTest").html(html);
+                 $(".selfTest").html(html);
 
-            $("#selfTest_content_option").append(html2);
+                    $("#selfTest_content_option").append(html2);
 
+                }, error(request,status,error){
+                     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                } //error
 
-        },
-        error(request,status,error){
-            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-        } //error
-
-    });
+         });
 }
 
 // 딥변
@@ -174,15 +171,15 @@ $(".selfTest_result").on("click", function (){
 
 
 
-let score = 0;
 // 점수 누적
+let score = 0;
 function saveScore(score){
     jumsuu[count] = score;
     console.log(jumsuu);
 
 }
 
-// 합산 값 추출
+// 합산 검사
 function resultScore(){
     for(let i= 0; i<jumsuu.length; i++){
         if(jumsuu[i] == undefined){
@@ -208,4 +205,14 @@ function resultScore(){
             return false;
         }
     }
+
+    $.ajax({
+        url : "selftestResult",
+        type : "GET",
+        data : {"categoryNo":ctCode, "score":score},
+        success : function (result){
+
+        }
+
+    })
 }

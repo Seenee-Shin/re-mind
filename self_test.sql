@@ -308,145 +308,139 @@ INSERT INTO SELF_CHECK_QUESTION VALUES (69, 3,
 --'당신의 성별은 무엇입니까?');
 
 INSERT INTO SELF_CHECK_QUESTION VALUES (70, 4, 
-'당신의 성별은 무엇입니까?');
-
-INSERT INTO SELF_CHECK_QUESTION VALUES (71, 4, 
 '얼마나 술을 자주 마십니까?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (72, 4, 
-'술을 마시는 날은 한 번에 몇 잔 정도 마십니까?<br>(소주, 맥주 등 술의 종류에 상관없이 각각의 잔 수로 계산)');
-
-INSERT INTO SELF_CHECK_QUESTION VALUES (73, 4, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (71, 4, 
 '한 번의 좌석에서 소주 한 병 또는 맥주 4병 이상 마시는 경우는 얼마나 자주 있습니까?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (74, 4, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (72, 4, 
 '지난 1년간 한번 술을 마시기 시작하면 멈출 수 없었던 때가 얼마나 자주 있었습니까?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (75, 4, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (73, 4, 
 '지난 1년간 평소 같으면 할 수 있던 일을 음주 때문에 실패한 적이 얼마나 자주 있었습니까?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (76, 4, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (74, 4, 
 '지난 1년간 술을 마신 다음날 일어나기 위해 해장술이 필요했던 적은 얼마나 자주 있었습니까?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (77, 4, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (75, 4, 
 '지난 1년간 음주 후에 죄책감이 든 적이 얼마나 자주 있었습니까?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (78, 4, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (76, 4, 
 '지난 1년간 음주 때문에 전날 밤에 있었던 일이 기억나지 않았던 적이 얼마나 자주 있었습니까?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (79, 4, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (77, 4, 
 '음주로 인해 자신이나 다른 사람이 다친 적이 있었습니까?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (80, 4, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (78, 4, 
 '친척이나 친구, 의사가 당신이 술 마시는 것을 걱정하거나 당신에게 술 끊기를 권유하는 적이 있었습니까?');
 
 -----------------5555555555555555555555555555555555------------------------
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (81, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (79, 5, 
 '지난 한 달 동안, 예상치 못한 일이 생겨서 기분 나빠진 적이 얼마나 있나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (82, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (80, 5, 
 '지난 한 달 동안, 중요한 일들을 통제할 수 없다고 느낀 적은 얼마나 있나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (83, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (81, 5, 
 '지난 한 달 동안, 초조하거나 스트레스가 쌓인다고 느낀 적은 얼마나 있었나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (84, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (82, 5, 
 '지난 한 달 동안, 짜증나고 성가신 일들을 성공적으로 처리한 적이 얼마나 있었나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (85, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (83, 5, 
 '지난 한 달 동안, 생활 속에서 일어난 중요한 변화들을 효과적으로 대처한 적이 얼마나 있었나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (86, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (84, 5, 
 '지난 한 달 동안, 개인적인 문제를 처리하는 능력에 대해 자신감을 느낀 적은 얼마나 있었나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (87, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (85, 5, 
 '지난 한 달 동안, 자신의 뜻대로 일이 진행된다고 느낀 적은 얼마나 있었나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (88, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (86, 5, 
 '지난 한 달 동안, 매사를 잘 컨트롤하고 있다고 느낀 적이 얼마나 있었나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (89, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (87, 5, 
 '지난 한 달 동안, 당신이 통제할 수 없는 범위에서 발생한 일 때문에 화가난 적이 얼마나 있었나요?');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (90, 5, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (88, 5, 
 '지난 한 달 동안, 어려운 일이 너무 많이 쌓여서 극복할 수 없다고 느낀 적이 얼마나 있었나요?');
 
 ----------66666666666666666666666666666666666666666666666666666---------------
-INSERT INTO SELF_CHECK_QUESTION VALUES (91, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (89, 6, 
 '나는 내가 적어도 다른 사람만큼은 가치있는 사람이라고 느낀다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (92, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (90, 6, 
 '나는 좋은 자질들을 많이 가지고 있는 것 같다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (93, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (91, 6, 
 '대체로 나는 내가 실패자라고 생각하는 경향이 있다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (94, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (92, 6, 
 '나는 대부분의 다른 사람들만큼 일을 잘할 수 있다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (95, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (93, 6, 
 '나는 자랑할 만한 것이 별로 없는 것 같다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (96, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (94, 6, 
 '나는 나 자신에 대해 긍정적인 태도를 가지고 있다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (97, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (95, 6, 
 '대체로 나 자신에 대해 만족하고 있다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (98, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (96, 6, 
 '나 자신을 좀 더 존중할 수 있었으면 좋겠다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (99, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (97, 6, 
 '나는 때때로 내가 정말 쓸모없는 사람이라고 느낀다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (100, 6, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (98, 6, 
 '때때로 나에게 좋은 점이라곤 전혀 없다는 생각이 든다.');
 
 --------------------7777777777777777777777777777777777------------------
-INSERT INTO SELF_CHECK_QUESTION VALUES (101, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (99, 7, 
 '인터넷 사용으로 인해 학교 성적(업무 실적)이 떨어졌다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (102, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (100, 7, 
 '인터넷을 하는 동안 더욱 자신감이 생긴다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (103, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (101, 7, 
 '인터넷을 하지 못하면 무슨 일이 있었는지 궁금해서 다른 일을 할 수 가 없다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (104, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (102, 7, 
 '"그만해야지"하면서도 번번이 인터넷을 계속하게 된다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (105, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (103, 7, 
 '인터넷 사용 때문에 피곤해서 수업(업무)시간에 잔다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (106, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (104, 7, 
 '인터넷을 하다가 계획한 일을 제대로 못한 적이 있다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (107, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (105, 7, 
 '인터넷을 하면 기분이 좋아지고 쉽게 흥분한다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (108, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (106, 7, 
 '인터넷을 할 때 마음대로 되지 않으면 짜증이 난다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (109, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (107, 7, 
 '인터넷 사용시간을 스스로 조절할 수 있다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (110, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (108, 7, 
 '피곤할 만큼 인터넷을 하지 않는다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (111, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (109, 7, 
 '인터넷을 하지 못하면 안절부절 못하고 초조해진다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (112, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (110, 7, 
 '일단 인터넷을 시작하면 처음에 마음먹었던 것보다 오랜 시간 인터넷을 하게된다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (113, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (111, 7, 
 '인터넷을 하더라도 계획한 일들을 제대로 한다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (114, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (112, 7, 
 '인터넷을 하지 못해도 불안하지 않다.');
 
-INSERT INTO SELF_CHECK_QUESTION VALUES (115, 7, 
+INSERT INTO SELF_CHECK_QUESTION VALUES (113, 7, 
 '인터넷 사용을 줄여야 한다는 생각을 끊임없이 한다.');
 
 
@@ -1529,68 +1523,57 @@ INSERT INTO SELF_CHECK_RESULT VALUES (11, 3,
 
 INSERT INTO SELF_CHECK_RESULT VALUES (12, 4, 
 '정상 비교적 정상적인 음주습관을 가지고 있습니다.'
-, 9, 'm');
+, 8, NULL);
 
 INSERT INTO SELF_CHECK_RESULT VALUES (13, 4, 
 '위험 주량과 사용패턴에 변화가 필요합니다. 과음이나 폭음으로 인해 발생한 나쁜 경험이 있다면<br> 앞으로 주의해야 합니다.'
-, 19, 'm');
+, 18, NULL);
 
 INSERT INTO SELF_CHECK_RESULT VALUES (14, 4, 
 '알코올 의존추정 주량과 음주횟수 조절이 어려운 상태 입니다. 술을 줄이는 단계가 아니라 끊어야 합니다.<br>알코올 의존에서 벗어나기 위한 상담이나<br>정신과전문의의 도움이 필요하다면 반드시 요청하세요.'
-, 19, 'm');
-
-INSERT INTO SELF_CHECK_RESULT VALUES (15, 4, 
-'정상 비교적 정상적인 음주습관을 가지고 있습니다.'
-, 5, 'w');
-
-INSERT INTO SELF_CHECK_RESULT VALUES (16, 4, 
-'위험 주량과 사용패턴에 변화가 필요합니다. 과음이나 폭음으로 인해 발생한 나쁜 경험이 있다면<br> 앞으로 주의해야 합니다.'
-, 9, 'w');
-
-INSERT INTO SELF_CHECK_RESULT VALUES (17, 4, 
-'알코올 의존추정 주량과 음주횟수 조절이 어려운 상태 입니다. 술을 줄이는 단계가 아니라 끊어야 합니다.<br>알코올 의존에서 벗어나기 위한 상담이나<br>정신과전문의의 도움이 필요하다면 반드시 요청하세요.'
-, 9, 'w');
+, 18, NULL);
 
 
-INSERT INTO SELF_CHECK_RESULT VALUES (18, 5, 
+INSERT INTO SELF_CHECK_RESULT VALUES (15, 5, 
 '낮음 정상적인 상태입니다.</em>스트레스 요인 자체가 심각하지 않거나<br>좋은 스트레스로 받아들인 경우입니다.'
 , 13, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (19, 5, 
+INSERT INTO SELF_CHECK_RESULT VALUES (16, 5, 
 '보통 스트레스의 영향을 받기 시작했습니다.</em>현재의 스트레스를 잘 관리하는 것이 중요합니다.'
 , 16, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (20, 5, 
+INSERT INTO SELF_CHECK_RESULT VALUES (17, 5, 
 '높음 스트레스 수준이 높습니다.</em>현재와 같은 스트레스 상태가 유지된다면<br>정신과적인 어려움으로 발전할 가능성이 있기 때문에<br>우울증이나 불안장애 등의 다양한 검사를 추가로 권합니다.'
 , 18, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (21, 5, 
+INSERT INTO SELF_CHECK_RESULT VALUES (18, 5, 
 '위험 도움이 필요한 상태입니다.</em>심리상담사 또는 정신과 전문의의<br>도움을 요청하시기를 바랍니다.'
 , 18, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (22, 6, 
+INSERT INTO SELF_CHECK_RESULT VALUES (19, 6, 
 '보통 정상적인 상태입니다.</em>자존감 요인 자체가 심각하지 않거나<br>좋은 상태로 받아들인 경우입니다.'
 , 22, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (23, 6, 
+INSERT INTO SELF_CHECK_RESULT VALUES (20, 6, 
 '다른 사람과 비교해서 다소 낮은 편입니다.</em>당신을 격려하고 칭찬해주십시오.<br>조그만 성취 경험이라도 좋습니다.<br>당신이 자신에게 얼마나 소중하고 아름다운 존재인지를<br>스스로에게 일깨워주는 것이 필요합니다.'
 , 31, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (24, 6, 
+INSERT INTO SELF_CHECK_RESULT VALUES (21, 6, 
 '자존감 수준이 매우 낮습니다.</em>현재와 같은 자존감 상태가 유지된다면<br>정신과적인 어려움으로 발전할 가능성이 있기 때문에<br>우울증이나 불안장애 등의 다양한 검사를 추가로 권합니다.'
 , 31, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (25, 7, 
+INSERT INTO SELF_CHECK_RESULT VALUES (22, 7, 
 '당신은 평균적인 인터넷사용자입니다. 때로는 긴 시간동안 웹 서핑을 하지만<br>자신의 인터넷 사용을 적절히 조절할 수 있어 보입니다.'
 , 38, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (26, 7, 
+INSERT INTO SELF_CHECK_RESULT VALUES (23, 7, 
 '당신은 인터넷 사용으로 인한 문제들을<br>종종 경험하고 있습니다. 인터넷 사용이 당 신의 삶에 미치는 부정적인 영향을<br>진지하게 살펴보는 것이 좋겠습니다.'
 , 41, NULL);
 
-INSERT INTO SELF_CHECK_RESULT VALUES (27, 7, 
+INSERT INTO SELF_CHECK_RESULT VALUES (24, 7, 
 '당신은 인터넷의 과도한 사용으로 인해 일상에서<br>심각한 문제들을 경험하고 있습니다. 가능하면 전문가의 도움을 받는 것이 좋으며,<br>인터넷 사용을 자제하기 위해서<br>노력을 각별히 기울일 필요가 있어 보입니다.'
 , 41, NULL);
+
 
 -- 
 SELECT * FROM SELF_CHECK_QUESTION
@@ -1656,30 +1639,6 @@ where category_no = 3;
 -- 5 / 5 / 5 / 3
 
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (14, 1, '남성', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (15, 2, '여성', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (16, 0, '전혀 안 마심', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (17, 1, '월 1회 미만', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (18, 2, '월 2-4회', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (19, 3, '주 2-3회', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (20, 4, '주 4회이상', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (21, 0, '1 ~ 2잔', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (22, 1, '3 ~ 4잔', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (23, 2, '5 ~ 6잔', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (24, 3, '7 ~ 9잔', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (25, 4, '10잔 이상', NULL, 4);
-
 INSERT INTO SELF_CHECK_ANSWER VALUES (26, 0, '없음', NULL, 4);
 
 INSERT INTO SELF_CHECK_ANSWER VALUES (27, 1, '월 1회 미만', NULL, 4);
@@ -1690,40 +1649,34 @@ INSERT INTO SELF_CHECK_ANSWER VALUES (29, 3, '주 1회', NULL, 4);
 
 INSERT INTO SELF_CHECK_ANSWER VALUES (30, 4, '거의 매일', NULL, 4);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (31, 0, '없음', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (32, 2, '있지만 지난 일년간은 없었다', NULL, 4);
-
-INSERT INTO SELF_CHECK_ANSWER VALUES (33, 4, '지난 일년간 있었다', NULL, 4);
-
 -- 5번 문항 응답 5555555555555555555555555555----------------------------
-INSERT INTO SELF_CHECK_ANSWER VALUES (34, 0, '전혀 없음', null, 5);
+INSERT INTO SELF_CHECK_ANSWER VALUES (31, 0, '전혀 없음', null, 5);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (35, 1, '거의 없음', null, 5);
+INSERT INTO SELF_CHECK_ANSWER VALUES (32, 1, '거의 없음', null, 5);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (36, 2, '때때로 있음', null, 5);
+INSERT INTO SELF_CHECK_ANSWER VALUES (33, 2, '때때로 있음', null, 5);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (37, 3, '자주 있음', null, 5);
+INSERT INTO SELF_CHECK_ANSWER VALUES (34, 3, '자주 있음', null, 5);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (38, 4, '매우 자주', null, 5);
+INSERT INTO SELF_CHECK_ANSWER VALUES (35, 4, '매우 자주', null, 5);
 
 -- 6번 문항 응답 666666666666666666666666666666666----------------------------
-INSERT INTO SELF_CHECK_ANSWER VALUES (39, 1, '대체로 그렇지 않다', null, 6);
+INSERT INTO SELF_CHECK_ANSWER VALUES (36, 1, '대체로 그렇지 않다', null, 6);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (40, 2, '보통이다', null, 6);
+INSERT INTO SELF_CHECK_ANSWER VALUES (37, 2, '보통이다', null, 6);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (41, 3, '대체로 그렇다', null, 6);
+INSERT INTO SELF_CHECK_ANSWER VALUES (38, 3, '대체로 그렇다', null, 6);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (42, 4, '항상 그렇다', null, 6);
+INSERT INTO SELF_CHECK_ANSWER VALUES (39, 4, '항상 그렇다', null, 6);
 
 -- 7번 문항 응답 77777777777777777777777777777----------------------------
-INSERT INTO SELF_CHECK_ANSWER VALUES (43, 1, '전혀 그렇지 않다', null, 7);
+INSERT INTO SELF_CHECK_ANSWER VALUES (40, 1, '전혀 그렇지 않다', null, 7);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (44, 2, '그렇지 않다', null, 7);
+INSERT INTO SELF_CHECK_ANSWER VALUES (41, 2, '그렇지 않다', null, 7);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (45, 3, '그렇다', null, 7);
+INSERT INTO SELF_CHECK_ANSWER VALUES (42, 3, '그렇다', null, 7);
 
-INSERT INTO SELF_CHECK_ANSWER VALUES (46, 4, '매우 그렇다', null, 7);
+INSERT INTO SELF_CHECK_ANSWER VALUES (43, 4, '매우 그렇다', null, 7);
 commit;
 
 SELECT A.QUESTION_NO, A.CATEGORY_NO, A.QUESTION_CONTENT, B.ANSWER_TYPE, B.ANSWER_CONTENT
@@ -1745,7 +1698,8 @@ WHERE CATEGORY_NO = 4
 ORDER BY QUESTION_NO ASC;
 
 -- 결과
-SELECT CATEGORY_NO, RESULT_CONTENT, RESULT_RATE FROM SELF_CHECK_RESULT
+SELECT ROWNUM, CATEGORY_NO, RESULT_CONTENT, RESULT_RATE, RESULT_NO
+FROM SELF_CHECK_RESULT
 WHERE CATEGORY_NO = 4
 ORDER BY RESULT_NO ASC;
 
