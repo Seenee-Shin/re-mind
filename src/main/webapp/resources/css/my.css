@@ -88,7 +88,7 @@ progress::-moz-progress-bar{background:#E5D4C5;}
 
 
 /* 감정 기록(s) */
-.highlight a{background-color : #E5D4C5 !important;background-image :none !important; color: #000 !important; font-weight:bold !important; border-color: #E5D4C5;}
+.highlight a{background-color : #A59999 !important;background-image :none !important; color: #000 !important; font-weight:bold !important; border-color: #E5D4C5;}
 .emotion_record{margin:40px;}
 .emotion_record .sub_title{margin:20px auto; width: 100%; text-align: center; font-size: 20px;}
 

@@ -181,7 +181,7 @@
 			                    <ul>
 			                        <li><a href="${contextPath}/my/appointment">상담 예약 조회</a></li>
 			                        <li><a href="${contextPath}/my/appointment/past">지난 상담 내역</a></li>
-			                        <li><a href="${contextPath}/my/postscript">상담후기</a></li>
+			                        <%--<li><a href="${contextPath}/my/postscript">상담후기</a></li>--%>
 			                        <li><a href="${contextPath}/my/counselor">찜한 상담사</a></li>
 			                    </ul>
 			                </li>
@@ -190,7 +190,7 @@
 			                    <ul>
 			                        <li><a href="${contextPath}/my/myBoardList">게시글 내역</a></li>
 			                        <li><a href="${contextPath}/my/letterList">쪽지</a></li>
-			                        <li><a href="${contextPath}/my/enquiry">문의사항</a></li>
+			                        <%--<li><a href="${contextPath}/my/enquiry">문의사항</a></li>--%>
 			                        <li><a href="${contextPath}/my/muteMember">차단한 회원</a></li>
 			                    </ul>
 			                </li>
