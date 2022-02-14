@@ -55,10 +55,12 @@ public class ProController {
 		map.put("first", param.get("first"));
 		map.put("last", param.get("last"));
 		map.put("proName", param.get("proName"));
-//		map.put("gender", param.get("gender"));
-//		map.put("therapy", param.get("therapy"));
+		map.put("gender", param.get("gender"));
+		map.put("therapy", param.get("therapy"));
 
-		System.out.println("성별은? : " + map.get("gender") + " / 테라피 : " + map.get("therapy"));
+		System.out.println("카테고리는? : " + worryCtCd);
+		System.out.println("이름은? : " + map.get("proName"));
+		System.out.println("성별은? : " + map.get("gender") + " / 테라피는? : " + map.get("therapy"));
 
 		List<Profession> pList = service.selectProfession(map);
 

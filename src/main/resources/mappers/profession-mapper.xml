@@ -128,7 +128,7 @@
                        LEFT JOIN IMAGE USING(PROFESSION_NO)
               WHERE BOARD_NO IS NULL AND IMAGE_LEVEL = 1 AND PROFESSION.STATUS_CD = 4
               GROUP BY PROFESSION_NO
-          )
+        )
     </select>
 	<!--    그그그머냐ㅐ 그거 검색 -->
     <!-- 제발...제발...제발...제발...제발...제발...제발...제발...제발... 안되면 나락이다 -->
@@ -165,10 +165,10 @@
             <if test="proName != null">
                 AND PROFESSION_NM LIKE '%'||#{proName}||'%'
             </if>
-            <if test="gender != null and gender == 1">
+            <if test="gender != 0 and gender == 1">
                 AND PROFESSION_GENDER LIKE '%남%'
             </if>
-            <if test="gender != null and gender == 2">
+            <if test="gender != 0 and gender == 2">
                 AND PROFESSION_GENDER LIKE '%여%'
             </if>
         )TEMP)
