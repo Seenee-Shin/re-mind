@@ -402,9 +402,8 @@ $(".like").on("click", function(e){
 					data : { "boardNo": boardNo,
 							"empathyStatusCode" : empathyStatusCode},
 					context: this,
-					success : function(result){
-						$(this).children(".like_count").text(result)
-						
+					success : function(count){
+						$(this).children(".like_count").text(count)
 						
 					}
 				});

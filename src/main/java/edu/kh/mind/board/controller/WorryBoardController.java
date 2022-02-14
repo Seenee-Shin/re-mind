@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import edu.kh.mind.board.model.service.ReplyService;
 import edu.kh.mind.board.model.service.WorryService;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.member.model.vo.Member;
@@ -160,6 +161,43 @@ public class WorryBoardController {
         }
     }
 
+    
+    // 공감 
+    @ResponseBody
+    @RequestMapping(value = "insertEmpathy")
+    public int insertEmpathy(@RequestParam int memberNo, @RequestParam int boardNo, 
+    						@RequestParam int empathyStatusCode) {
+    	
+    	Empathy empathy =new Empathy();
+    	empathy.setBoardNo(boardNo);
+    	empathy.setMemberNo(memberNo);
+    	empathy.setEmpathyStatusCode(empathyStatusCode);
+    	
+    	int result = service.insertEmpathy(empathy);
+    	
+    	return result;
+    }
+    
+    
+    // 공감 수 
+    @ResponseBody
+    @RequestMapping(value = "countEmpathy")
+    public int countEmpathy( @RequestParam int boardNo, 
+    						@RequestParam int empathyStatusCode) {
+    	
+    	Empathy empathy =new Empathy();
+    	empathy.setBoardNo(boardNo);
+    	empathy.setEmpathyStatusCode(empathyStatusCode);
+    	
+    	int result = service.countEmpathy(empathy);
+    	
+    	return result;
+    }
+    
+    
+    
+    
+    
     //예외처리
     @ExceptionHandler(Exception.class)
     public String exceptionHandler(Exception e, Model model) {
