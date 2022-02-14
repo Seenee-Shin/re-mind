@@ -11,7 +11,7 @@
         <result property="questionContent" column="QUESTION_CONTENT"/>
         <result property="resultNo" column="RESULT_NO"/>
         <result property="resultContent" column="RESULT_CONTENT"/>
-        <result property="resultRate" column="RESULT_RATE"/>
+        <result property="score" column="RESULT_RATE"/>
         <result property="resultGender" column="RESULT_GENDER"/>
         <result property="answerNo" column="ANSWER_NO"/>
         <result property="answerType" column="ANSWER_TYPE"/>
@@ -58,11 +58,15 @@
     </select>
 
     <!-- 결과 -->
-    <select id="selectR" resultMap="selftest_rm">
-        SELECT CATEGORY_NO, RESULT_CONTENT, RESULT_RATE FROM SELF_CHECK_RESULT
-        WHERE CATEGORY_NO = #{categoryNo}
-        ORDER BY RESULT_NO ASC
-    </select>
+<!--    <select id="selectR" resultMap="selftest_rm">-->
+<!--        SELECT ROWNUM, CATEGORY_NO, RESULT_CONTENT, RESULT_RATE, RESULT_NO-->
+<!--        FROM SELF_CHECK_RESULT-->
+<!--          <if test="categoryNo == 1">-->
+<!--                CATEGORY_NO = #{categoryNo}-->
+<!--            <if test=""-->
+<!--        </if>-->
+<!--        ORDER BY RESULT_NO ASC-->
+<!--    </select>-->
 
 
 
