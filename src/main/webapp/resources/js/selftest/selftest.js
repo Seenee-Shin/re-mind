@@ -31,10 +31,13 @@ function testResult(){
 
     if(count == (qwe-1)){
         $("#selfTest_result_btn").css("display", "block");
+
     }else{
 
         $("#selfTest_result_btn").css("display", "none");
     }
+
+
 
 }
 
@@ -42,7 +45,7 @@ function next(){
     count = count + 1;
 
     $(".selfTest_prev_btn").css("display","none");
-    ajax();
+    selftestQuestion();
 
     if (count == '0'){
         $(".selfTest_prev_btn").css("display","none");
@@ -55,7 +58,7 @@ function next(){
 
 function prev(){
     count = count - 1;
-    ajax();
+    selftestQuestion();
     // 이전 다음 버튼
     hiddenBtn();
 
@@ -102,7 +105,7 @@ $(".selfTest_op").on("click", function () {
     $(".selfTest_op").removeClass("active");
     $(this).addClass("active");
 
-    ajax();
+    selftestQuestion();
     testResult();
 
 });
@@ -110,7 +113,7 @@ $(".selfTest_op").on("click", function () {
 // 총 문항 길이
 let qwe = 0;
 
-function ajax(){
+function selftestQuestion(){
     $.ajax({
         url : "selftestQuestion",
         type : "POST",
@@ -185,7 +188,7 @@ function resultScore(){
         if(jumsuu[i] == undefined){
             alert("선택하지 않은 번호가 있습니다.");
             count = i;
-            ajax();
+            selftestQuestion();
             return false;
         }else{
             if(jumsuu.length == qwe){
@@ -201,18 +204,37 @@ function resultScore(){
         if(jumsuu[i] == undefined) {
             alert("선택하지 않은 번호가 있습니다.");
             count = i;
-            ajax();
+            selftestQuestion();
             return false;
         }
     }
+
 
     $.ajax({
         url : "selftestResult",
         type : "GET",
         data : {"categoryNo":ctCode, "score":score},
-        success : function (result){
+        dataType : "json",
+        success : function (result2){
+            // console.log(score);
+            // console.log(ctCode);
+
+            console.log("result2 : " + result2);
+            let htmlHtml = '<div class="selftest_modal_title">'
+                         +'   자존감 자가진단 결과'
+                        + '</div>'
+                    + '<div class="selftest_modal_content">'
+                    + '<div>'
+                    // + "result2.selftest"
+                   +'     </div>'
+                   +' </div>'
+                   +' <button id="selfTest_btn">확인</button>'
+
+
 
         }
 
     })
+
+
 }
