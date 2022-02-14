@@ -23,8 +23,27 @@ public class Selftest{
 
     private int queCount;
 
+    private int rate;
+
+    private int score;
+
     public Selftest() {
-        super();
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
     public int getMemberNo() {

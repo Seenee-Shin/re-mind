@@ -28,8 +28,8 @@ public class SelftestDAO {
         return sqlSession.selectList("selftestMapper.selectR", selftest);
     }
 
-    // 결과 삽입
-    public Map<String, Object> selectResult(Selftest selftest) {
-        return null;
+    // 결과 조회
+    public List<Selftest> selectResult(Selftest selftest) {
+        return sqlSession.selectList("selftestMapper.selectResult", selftest);
     }
 }
