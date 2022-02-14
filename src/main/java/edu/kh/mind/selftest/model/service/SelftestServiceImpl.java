@@ -35,4 +35,11 @@ public class SelftestServiceImpl implements SelftestService {
 
         return selectAll;
     }
+
+    // 결과 조회
+    @Override
+    public Map<String, Object> selectResult(Selftest selftest) {
+
+        return dao.selectResult(selftest);
+    }
 }

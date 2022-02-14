@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.kh.mind.adminPro.model.exception.InsertCertificationFailException;
 import edu.kh.mind.board.model.dao.BoardDAO;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.common.util.Util;
@@ -228,11 +229,50 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> selectMainBoardList() {
 		return dao.selectMainBoardList();
 	}
+	
+	// 멤버 차단
 	@Override
 	public int memberBlock(HashMap<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return dao.memberBlock(map);
 	}
+	
+	// 공감
+	@Override
+	public int insertEmpathy(Empathy empathy) {
+Empathy selectEmpathy = dao.selectEmpathy(empathy);
+		
+		int result = 0;
+		if(selectEmpathy == null) {
+			result = dao.insertEmpathy(empathy);
+			
+			if(result > 0) {
+				result = 1;
+			}else {
+				result = 0;
+			}
+		}else {
+			result = dao.deleteEmpathy(empathy);
+			if(result > 0){
+				result =2;
+			}else {
+				result =0; 
+			}
+		}
+		
+		return result;
+	}
+	
+	// 공감 수 
+	@Override
+	public int countEmpathy(Empathy empathy) {
+		return dao.countEmpathy(empathy);
+	}
 
+	
+	
+	
+	
+	
 }
 

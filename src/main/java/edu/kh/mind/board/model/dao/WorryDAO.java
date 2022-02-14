@@ -1,6 +1,7 @@
 package edu.kh.mind.board.model.dao;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.member.model.vo.Member;
@@ -66,7 +67,7 @@ public class WorryDAO {
 	 * @return result
 	 */
 	public int memberBlock(HashMap<String, Integer> map) {
-		return sqlSession.insert("boardMapper.memberBlock", map);
+		return sqlSession.insert("secretMapper.memberBlock", map);
 	}
 
 	
@@ -84,4 +85,24 @@ public class WorryDAO {
 		return sqlSession.update("boardMapper.increaseReadCount",boardNo);
 	}
 
+	public Empathy selectEmpathy(Empathy empathy) {
+		return sqlSession.selectOne("secretMapper.selectEmpathy",empathy);
+	}
+
+
+	public int insertEmpathy(Empathy empathy) {
+		return sqlSession.insert("secretMapper.insertEmpathy",empathy);
+	}
+
+
+	public int deleteEmpathy(Empathy empathy) {
+		return sqlSession.delete("secretMapper.deleteEmpathy",empathy);
+	}
+
+
+	public int countEmpathy(Empathy empathy) {
+		return sqlSession.selectOne("boardMapper.selectEmpathyList", empathy);
+	}
+	
+	
 }

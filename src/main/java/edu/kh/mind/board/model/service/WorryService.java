@@ -1,6 +1,7 @@
 package edu.kh.mind.board.model.service;
 
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.member.model.vo.Member;
 
@@ -43,5 +44,9 @@ public interface WorryService {
 	 * @return result
 	 */
     Board selectWorryBoard(int boardNo, int memberNo);
+
+	int insertEmpathy(Empathy empathy);
+
+	int countEmpathy(Empathy empathy);
 
 }

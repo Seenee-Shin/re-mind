@@ -60,38 +60,72 @@
 	                </div>
 
 					<c:if test="${board.empathyCheckCode == 1}">
+                    <div class="like_warp">
+                        <div id="like_smile" class="like" >
+                            <img src="${contextPath}/resources/images/icon/smile.png" alt="">
+                            <p>좋아요</p>
+                            <c:choose>
+                            	<c:when test="${empty empathyMap}">
+                            		<p class="like_count">0</p>
+                            	</c:when>
+                        		<c:otherwise>
+                            		<p class="like_count">${empathyMap.get("1001")}</p>
+                       			</c:otherwise>
+                       		</c:choose>
+                        </div>
 
-						<div class="like_warp">
-							<div id="like_smile" onclick="">
-								<img src="${contextPath}/resources/images/icon/smile.png" alt="">
-								<p>좋아요</p>
-								<p class="like_count">${empathyMap.get("1001")}</p>
-							</div>
+                        <div id="like_hug" class="like" >
+                            <img src="${contextPath}/resources/images/icon/hug.png" alt="">
+                            <p>응원해요</p>
+	                          <c:choose>
+	                            	<c:when test="${empty empathyMap}">
+	                            		<p class="like_count">0</p>
+	                            	</c:when>
+	                        		<c:otherwise>
+	                            		<p class="like_count">${empathyMap.get("1002")}</p>
+	                       			</c:otherwise>
+	                       		</c:choose>
+	                        </div>
 
-							<div id="like_hug" onclick="">
-								<img src="${contextPath}/resources/images/icon/hug.png" alt="">
-								<p>응원해요</p>
-								<p  class="like_count">${empathyMap.get("1002")}</p>
-							</div>
-
-							<div id="like_amazed" onclick="">
-								<img src="${contextPath}/resources/images/icon/amazed.png" alt="">
-								<p>놀랐어요</p>
-								<p  class="like_count">${empathyMap.get("1003")}</p>
-							</div>
-
-							<div id="like_angry" onclick="">
-								<img src="${contextPath}/resources/images/icon/angry.png" alt="">
-								<p>화나요</p>
-								<p  class="like_count">${empathyMap.get("1004")}</p>
-							</div>
-
-							<div id="like_crying" onclick="">
-								<img src="${contextPath}/resources/images/icon/crying.png" alt="">
-								<p>슬퍼요</p>
-								<p  class="like_count">${empathyMap.get("1005")}</p>
-							</div>
-						</div>
+                        <div id="like_amazed" class="like" >
+                            <img src="${contextPath}/resources/images/icon/amazed.png" alt="">
+                            <p>놀랐어요</p>
+                            <c:choose>
+                            	<c:when test="${empty empathyMap}">
+                            		<p class="like_count">0</p>
+                            	</c:when>
+                        		<c:otherwise>
+                            		<p class="like_count">${empathyMap.get("1003")}</p>
+                       			</c:otherwise>
+                       		</c:choose>
+                        </div>
+                        
+                        <div id="like_angry" class="like" >
+                            <img src="${contextPath}/resources/images/icon/angry.png" alt="">
+                            <p>화나요</p>
+                            <c:choose>
+                            	<c:when test="${empty empathyMap}">
+                            		<p class="like_count">0</p>
+                            	</c:when>
+                        		<c:otherwise>
+                            		<p class="like_count">${empathyMap.get("1004")}</p>
+                       			</c:otherwise>
+                       		</c:choose>
+                        </div>
+                        
+                         <div id="like_crying" class="like" >
+                            <img src="${contextPath}/resources/images/icon/crying.png" alt="">
+                            <p>슬퍼요</p>
+                            <c:choose>
+                            	<c:when test="${empty empathyMap}">
+                            		<p class="like_count">0</p>
+                            	</c:when>
+                        		<c:otherwise>
+                            		<p class="like_count">${empathyMap.get("1005")}</p>
+                       			</c:otherwise>
+                       		</c:choose>
+                        </div>
+                    </div>
 					</c:if>
 
 	                <%--<div class="report_scrap_wrap">
@@ -149,26 +183,33 @@
 							<div>
 								<i class="far fa-comment"></i>
 								<span>댓글</span>
-								<span>(55)</span>
+								<span>(${board.replyCount})</span>
 							</div>
 
 							<div class="m_comment_wirte" onclick="openComment()">
 								<i class="far fa-comment"></i>
 								<span>댓글</span>
-								<span>(55)</span>
+								<span>(${board.replyCount})</span>
 							</div>
 						</div>
 
 						<div class="write_comment">
 
 							<div class="user_info">
-								<div class="user_pic light_brown_bg" style="background-image: url();">
-								</div>
-
-								<div>
-									<p>아이디</p>
-								</div>
-							</div>
+                           	<c:choose>
+                           		<c:when test="${!empty loginMember.imagePath}">
+                               		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+                           		</c:when>
+                           		<c:otherwise>
+                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
+                           		</c:otherwise>
+                           		
+                               </c:choose>
+	
+				               <div>
+				                   <p>${board.memberFn}</p>
+				               </div>
+				           </div>
 
 							<textarea name="replyContent" id="replyContent" rows="3"></textarea>
 							<button class="option_btn dark_brown_bg" id="addReply" onclick="addComment();"> 등록 </button>
@@ -363,6 +404,118 @@
                 }
               });
             } */
+            
+            function boardScrap() {
+         		
+         		$.ajax({
+         			url : "${contextPath}/secret/boardScrap",
+         			type : "get",
+         			data : {"boardNo" : boardNo,
+         					"memberNo" : loginMemberNo },
+        			success : function (result) {
+        				
+        				console.log(result)
+        				if(result == 1){
+        					
+        					if(!loginMemberNo){
+        					swal({"title" : "로그인 후 이용해 주세요." , 
+        	                      "icon" : "error"});
+        					}else{
+        						
+        					$("#btnScrap").children().removeClass(".child")	
+        					swal({"title" : "스크랩 완료" , 
+        	                      "icon" : "success"});
+        					}
+
+        				}else if (result == 2){
+        					
+        					if(!loginMemberNo){
+        						swal({"title" : "로그인 후 이용해 주세요." , 
+        		                      "icon" : "error"});
+        						}
+        					else{
+        						$("#btnScrap").children().addClass(".child")	
+        						swal({"title" : "스크랩 해제" , 
+        	                      "icon" : "success"});
+        					}
+        					
+        				}else{
+        					
+        				}
+        			},
+        			
+        			error: function (xhr, status, error) {
+        			    swal({"title" : "서버 연결 오류" , 
+                              "icon" : "error"});
+        		}
+         			
+         		})
+        		
+        	}
+        		
+        		
+        $(".like").on("click", function(e){
+        	
+        			var tagId = $(this).attr('id');
+        			var empathyStatusCode;
+        			
+        			if(tagId == "like_smile"){
+        				empathyStatusCode = 1001;
+        			}else if(tagId == "like_hug"){
+        				empathyStatusCode = 1002;
+        			}else if(tagId == "like_amazed"){
+        				empathyStatusCode = 1003;
+        			}else if(tagId == "like_angry"){
+        				empathyStatusCode = 1004;
+        			}else{
+        				empathyStatusCode = 1005;
+        			};
+        			
+        			$.ajax({
+        	 			url : "${contextPath}/secret/insertEmpathy",
+        	 			data : {"boardNo" : boardNo,
+        	 					"memberNo" : loginMemberNo,
+        	 					"empathyStatusCode" : empathyStatusCode},
+        	 			context: this,
+        				success : function (result) {
+        				if(result >=1){
+        					
+        				$.ajax({
+        					url : "${contextPath}/secret/countEmpathy",
+        					data : { "boardNo": boardNo,
+        							"empathyStatusCode" : empathyStatusCode},
+        					context: this,
+        					success : function(count){
+        						$(this).children(".like_count").text(count)
+        						
+        					}
+        				});
+        				
+        					
+        				}else{
+        					console.log("실패");
+        				}
+        				
+        				},
+        				
+        				error: function (xhr, status, error) {
+        				    swal({"title" : "서버 연결 오류" , 
+        	                      "icon" : "error"});
+        			}
+        	 			
+        	 		});
+        			       
+        		
+        			
+        			
+        });
+        	
+        	
+            
+            
+            
+            
+            
 </script>
 
 

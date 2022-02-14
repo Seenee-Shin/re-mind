@@ -4,6 +4,8 @@ import org.apache.ibatis.session.RowBounds;
 
 public class Selftest{
 
+    private int memberNo;
+
     private int answerNo;
     private int answerType;
     private String answerContent;
@@ -25,12 +27,12 @@ public class Selftest{
         super();
     }
 
-    public int getQueCount() {
-        return queCount;
+    public int getMemberNo() {
+        return memberNo;
     }
 
-    public void setQueCount(int queCount) {
-        this.queCount = queCount;
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
     }
 
     public int getAnswerNo() {
@@ -121,23 +123,11 @@ public class Selftest{
         this.resultGender = resultGender;
     }
 
-    @Override
-    public String toString() {
-        return "SelftestVO{" +
-                "answerNo=" + answerNo +
-                ", answerType=" + answerType +
-                ", answerContent='" + answerContent + '\'' +
-                ", questionNo=" + questionNo +
-                ", questionContent='" + questionContent + '\'' +
-                ", categoryNo=" + categoryNo +
-                ", categoryName='" + categoryName + '\'' +
-                ", resultNo=" + resultNo +
-                ", resultContent='" + resultContent + '\'' +
-                ", resultRate=" + resultRate +
-                ", resultGender='" + resultGender + '\'' +
-                '}';
+    public int getQueCount() {
+        return queCount;
     }
 
-
-
+    public void setQueCount(int queCount) {
+        this.queCount = queCount;
+    }
 }
