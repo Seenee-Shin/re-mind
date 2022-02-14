@@ -226,7 +226,7 @@
 					<div class="board_list_content">
 						<div class="board_flex_wrap">
 							<div class="writer_pic_wrap">
-								<div class="writer_pic light_brown_bg" style="background-image: url(` + writerImg + `); background-size:cover;"></div>
+								<div class="writer_pic" style="background-image: url(` + writerImg + `); background-size:cover;"></div>
 								<ul class="userMenu hidden">
 									<li> <a class="block">차단</a> </li>
 									<input class="hidden" value= ` + item.memberNo + `>
@@ -267,8 +267,12 @@
 				`;
 				});
 
-				$(".free_board_list_wrap").append(html);
+				if (data.worryCategoryCode != undefined) {
+					$(".free_board_list_wrap").html(html);
+				} else {
+					$(".free_board_list_wrap").append(html);
 
+				}
 			},
 			error : function(request, status, error){
 				console.log("ajax 통신 중 오류 발생");
@@ -295,7 +299,7 @@
 			$(this).val(1);
 		} else {
 			$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
-			$(this).val(0);
+			$(this).val(2);
 		}
 	});
 

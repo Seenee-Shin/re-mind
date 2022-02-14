@@ -586,6 +586,7 @@ function getFreeList(searchData) {
 	
 	});
 }
+
 // 고민작성하기 댓글
 $("[name='replyCheckCode']").on("change", function () {
 	if ($(this).children("option:selected").val() == "1") {
