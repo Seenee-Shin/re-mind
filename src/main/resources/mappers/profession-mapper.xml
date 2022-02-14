@@ -132,7 +132,7 @@
     </select>
 	<!--    그그그머냐ㅐ 그거 검색 -->
     <!-- 제발...제발...제발...제발...제발...제발...제발...제발...제발... 안되면 나락이다 -->
-    <select id="selectProfession" resultMap="profession_rm">
+    <select id="selectProfessionAll" resultMap="profession_rm">
         SELECT * FROM(
         SELECT ROWNUM AS RNUM, TEMP.*,
         (SELECT COUNT(*) FROM REVIEW WHERE REVIEW.PROFESSION_NO = TEMP.PROFESSION_NO) REVIEW_COUNT,
@@ -146,7 +146,7 @@
         LISTAGG(PP.COUNSEL_CATEGORY_NO,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_CATEGORY_NO,
         LISTAGG(PP.COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PP.PROFESSION_NO) AS COUNSEL_PRICE
         FROM PROFESSION_PRICE PP
-        <if test="therapy != null">
+        <if test="therapy != 0">
             WHERE COUNSEL_CATEGORY_NO = #{therapy}
         </if>
         GROUP BY PP.PROFESSION_NO) PR
@@ -155,7 +155,7 @@
         LEFT JOIN IMAGE USING(PROFESSION_NO)
         WHERE BOARD_NO IS NULL AND IMAGE_LEVEL = 1 AND PROFESSION.STATUS_CD = 4
             <if test="categoryArr != null ">
-                  AND PROFESSION_NO IN
+                AND PROFESSION_NO IN
                 (SELECT PROFESSION_NO FROM PROFESSION_INFORMATION
                 WHERE
                 <foreach collection="categoryArr" item="category" open="(" close=")" separator=" OR ">
@@ -165,11 +165,8 @@
             <if test="proName != null">
                 AND PROFESSION_NM LIKE '%'||#{proName}||'%'
             </if>
-            <if test="gender != 0 and gender == 1">
-                AND PROFESSION_GENDER LIKE '%남%'
-            </if>
-            <if test="gender != 0 and gender == 2">
-                AND PROFESSION_GENDER LIKE '%여%'
+            <if test="gender != null">
+                AND PROFESSION_GENDER LIKE '%'||#{gender}||'%'
             </if>
         )TEMP)
         WHERE RNUM BETWEEN #{first} AND #{last}
