@@ -280,7 +280,7 @@
     </insert>
 
 	<insert id="insertPrice">
-		INSERT INTO PROFESSION_PRICE VALUES(#{professionNo},#{categoryCode},0) 
+		INSERT INTO PROFESSION_PRICE VALUES(#{professionNo},#{categoryCode},20000) 
 	</insert>
     <!-- 로그인 -->
     <select id="proLogin" resultMap="profession_rm">
