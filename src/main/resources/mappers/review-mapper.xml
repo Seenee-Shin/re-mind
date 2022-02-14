@@ -15,6 +15,6 @@
     
     <insert id="reviewInsert">
     	INSERT INTO REVIEW
-    	VALUES(SEQ_REVIEW_NO.NEXTVAL,#{reviewContent},#{reviewStarPoint},1,#{memberNo},DEFAULT,101)
+    	VALUES(SEQ_REVIEW_NO.NEXTVAL,#{reviewContent},#{reviewStarPoint},#{memberNo},#{memberNo},DEFAULT,#{reservationNo})
     </insert>
 </mapper>
