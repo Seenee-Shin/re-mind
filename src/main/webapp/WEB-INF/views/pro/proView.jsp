@@ -212,20 +212,22 @@
 	        </ul>
 	    </div>
 	</div>
-		<div class="pro_reservation_wrap">
-		    <div class="pro_reservation">
-		        <h2>알려드립니다!</h2>
-		        <p><img src="${contextPath}/resources/images/pro/check.png">상담 1회당 50분 기준입니다.</p>
-		        <p><img src="${contextPath}/resources/images/pro/check.png">결제 후 바로 상담이 불가능 할 수 있습니다.</p>
-		        <p><img src="${contextPath}/resources/images/pro/check.png">제휴기관은 반드시 로그인 후 이용하여 주세요.</p>
-		    </div>
-		    <div class="pro_btn_wrap">
-		        <button type="button" class="consultation_inquiry_btn" onclick="proLetter();">
-		            <img src="${contextPath}/resources/images/pro/pro_consultation_inquiry.png">
-		        </button>
-		        <button type="button" class="pro_reservation_btn" onclick="proReservation();">예약하기</button>
-		    </div>
-		</div>
+
+	<div class="pro_reservation_wrap">
+	    <div class="pro_reservation">
+	        <h2>알려드립니다!</h2>
+	        <p><img src="${contextPath}/resources/images/pro/check.png">상담 1회당 50분 기준입니다.</p>
+	        <p><img src="${contextPath}/resources/images/pro/check.png">결제 후 바로 상담이 불가능 할 수 있습니다.</p>
+	        <p><img src="${contextPath}/resources/images/pro/check.png">제휴기관은 반드시 로그인 후 이용하여 주세요.</p>
+	    </div>
+	    <div class="pro_btn_wrap">
+	        <button type="button" class="consultation_inquiry_btn" onclick="proLetter();">
+	            <img src="${contextPath}/resources/images/pro/pro_consultation_inquiry.png">
+	        </button>
+	        <button type="button" class="pro_reservation_btn" onclick="proReservation();">예약하기</button>
+	    </div>
+	</div>
+	
 </article>
 
 <div class="mobile_pro_reservation_wrap">
@@ -496,7 +498,6 @@
        	console.log($(document).scrollTop());
         if(height > 25){ 
             $('.pro_reservation_wrap').addClass('pro_reservation_fixed'); 
-
         }else{ 
             $('.pro_reservation_wrap').removeClass('pro_reservation_fixed'); 
         } 
