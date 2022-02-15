@@ -213,10 +213,6 @@ a:hover{color:#A59999;}
 
 }
 
-.header_menu_wrap >.dep1{
- /*  margin-right: 15px; */
-  /* margin-top: 50px; */
-}
 
 .dep1_li{
   display: inline-block;
@@ -308,7 +304,9 @@ a:hover{color:#A59999;}
   font-weight: 200;
   margin-bottom: 15px;
 }
-
+.test{
+	margin:40px 0;
+}
 
 /* ----------- font-size 변경 ----------- */
 @media screen and (max-width: 950px) {
@@ -367,6 +365,10 @@ a:hover{color:#A59999;}
 
   padding: 0px;
 
+}
+
+.test{
+	margin:0;
 }
 
   /* ------ 헤더 ------- */
@@ -509,13 +511,9 @@ a:hover{color:#A59999;}
  	display:block;
  }
   
-  
-/*   .test:hover > .sub_ul{
-  	display:block;
-  }
-   */
+
   .sub_li:first-child{
-  	margin-left:40px;
+  	margin-left:28px;
   }
   
   .display_block{

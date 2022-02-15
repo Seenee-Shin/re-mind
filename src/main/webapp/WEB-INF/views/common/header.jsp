@@ -209,10 +209,3 @@
 	        </c:choose>
         </c:if>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script>
-	$(".side_menu_ul > li").hover(function() {
-		$(".sub_ul").remove('display_block');
-	  	$(this).find(".sub_ul").addClass('display_block');
-	}
-	
-</script>
