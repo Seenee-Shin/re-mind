@@ -3,6 +3,7 @@ package edu.kh.mind.pro.controller;
 import com.google.gson.Gson;
 
 import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.member.model.vo.Profession;
@@ -64,9 +65,9 @@ public class ProController {
 			map.put("gender", null);
 		map.put("therapy", param.get("therapy"));
 
-		System.out.println("카테고리는? : " + worryCtCd);
-		System.out.println("이름은? : " + map.get("proName"));
-		System.out.println("성별은? : " + map.get("gender") + " / 테라피는? : " + map.get("therapy"));
+//		System.out.println("카테고리는? : " + worryCtCd);
+//		System.out.println("이름은? : " + map.get("proName"));
+//		System.out.println("성별은? : " + map.get("gender") + " / 테라피는? : " + map.get("therapy"));
 
 		List<Profession> pList = service.selectProfession(map);
 
@@ -84,6 +85,27 @@ public class ProController {
 		pList.add(p);
 
 		return new Gson().toJson(pList);
+	}
+
+	@GetMapping("setCategory")
+	@ResponseBody
+	public String setCategory(@RequestParam(value = "professionNo[]", required = false) List<Integer> professionNo){
+
+		List<WorryCategory> wLis = new ArrayList<>();
+
+		for(int i = 0; i < professionNo.size(); i++){
+			System.out.println("i : " + i + " / 전문가번호 : " + professionNo.get(i));
+			int proNo = professionNo.get(i);
+
+			WorryCategory w = new WorryCategory();
+
+			w.setWorryName(service.setCategory(proNo));
+			w.setProfessionNo(proNo);
+
+			wLis.add(w);
+		}
+
+		return new Gson().toJson(wLis);
 	}
 
 	@GetMapping("proView/updateWish")

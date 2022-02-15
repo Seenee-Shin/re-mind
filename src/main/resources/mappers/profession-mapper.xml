@@ -64,6 +64,11 @@
     	<result property="counselPrice" column="COUNSEL_PRICE"/>
     </resultMap>
 
+    <resultMap id="worryCategory_rm" type="WorryCategory">
+        <result property="worryCategoryCode" column="WORRY_CT_CD"/>
+        <result property="worryName" column="WORRY_NM"/>
+    </resultMap>
+
     <resultMap id="chatMessage_rm" type="ChatMessage">
         <id property="chatNo" column="CHAT_NO"/>
 
@@ -404,5 +409,22 @@
 		SELECT * FROM PROFESSION_HOSPITAL WHERE PROFESSION_NO = #{professionNo}
 	
 	</select>
+
+
+    <select id="setCategory" resultType="string">
+        <![CDATA[
+        SELECT LISTAGG(WORRY_NM, ',') WITHIN GROUP(ORDER BY WORRY_CATEGORY_CD) AS WORRY_NM
+        FROM WORRY_CATEGORY
+        WHERE WORRY_CATEGORY_CD IN(
+        SELECT REGEXP_SUBSTR(A.MYDATAS,'[^,]+', 1, ROWNUM) AS MYDATA
+        FROM (
+        SELECT PI.PROFESSION_NO, PRO_TAG AS MYDATAS
+        FROM PROFESSION_INFORMATION PI
+        WHERE PI.PROFESSION_NO = #{professionNo}
+        ) A
+        CONNECT BY ROWNUM <= LENGTH(REGEXP_REPLACE(MYDATAS,'[^,]+')) + 1
+        )
+        ]]>
+    </select>
 	
 </mapper>

@@ -227,6 +227,7 @@ input:focus {outline:none;}
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    max-height: 21%;
 }
 
 /* --------------------------------- */
