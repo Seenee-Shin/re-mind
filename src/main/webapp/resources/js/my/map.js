@@ -9,6 +9,7 @@ if(navigator.userAgent.toLowerCase().indexOf("edg") !== -1){
     // parent.window.open('about:blank', '_self').close();
 }
 
+$("#placesList").empty();
 
 let backupWidth = window.innerWidth;
 window.onresize = function(){
@@ -86,10 +87,10 @@ function locationLoadSuccess(pos) {
 
 function locationLoadError(pos) {
     alert('위치 정보를 가져오는데 실패했습니다.');
-};
+}
 function getCurrentPosBtn() {
     navigator.geolocation.getCurrentPosition(locationLoadSuccess, locationLoadError);
-};
+}
 getCurrentPosBtn();
 
 
@@ -153,9 +154,8 @@ function AddrChangeCoords(){
     //     hospLocation[i] = $(".map-info").eq(i).children().last().children().last().prev().text();
     //     hospLocationSplit[i] = hospLocation[i].split("| ")[1];
     // }
-    let dis2 = [];
 
-    for(let i = 0; i < len; i++){
+    for(let i = first - 1; i < last; i++){
         // 주소로 좌표를 검색합니다
         geocoder.addressSearch(proAddress[i]/* 병원 주소 */, function (result, status) {
             // status == OK or ZERO_RESULT
@@ -184,22 +184,24 @@ function AddrChangeCoords(){
                 path: linePath[i] // 선을 구성하는 좌표배열 입니다
             });
             distance[i] = Math.round(polyline[i].getLength());
+
+            if(distance[i] > 1000){
+                distance[i] = Math.floor(distance[i] / 1000);
+                $(".distance").eq(i).text(distance[i] + 'km | ' + proAddress[i]);
+            }else{
+                $(".distance").eq(i).text(distance[i] + 'm | ' + proAddress[i]);
+            }
+
         });
-    }
-    // distance
-    for(let i = 0; i < len; i++){
-        distance[i] = dis2[i];
     }
 }
 
 
 function makeProList(){
-    $("#placesList").empty();
-    for(let i = 0; i < len; i++){
+    for(let i = first - 1; i < last; i++){
 
-        distance.sort(function (a, b){
-            return a - b;
-        });
+        if(i == listCount)
+            return;
 
         const ul = $("#placesList");
 
@@ -219,14 +221,12 @@ function makeProList(){
         let divDistance;
         if(distance[i] > 1000){
             distance[i] = Math.floor(distance[i] / 1000);
-            divDistance = $('<div style="margin-bottom: 10px;"> ' + distance[i] + 'km | ' + proAddress[i] + '</div>');
+            divDistance = $('<div class="distance" style="margin-bottom: 10px;"> ' + distance[i] + 'km | ' + proAddress[i] + '</div>');
         }else{
-            divDistance = $('<div style="margin-bottom: 10px;"> ' + distance[i] + 'm | ' + proAddress[i] + '</div>');
+            divDistance = $('<div class="distance" style="margin-bottom: 10px;"> ' + distance[i] + 'm | ' + proAddress[i] + '</div>');
         }
         const divPhone = $('<div style="margin-bottom: 10px;">' + proBusinessNo[i] + '</div>');
-
         divCon.append(divH3, divDepartment, divDistance, divPhone);
-
         divMap.append(divImg, divCon);
 
         li.append(divMap);
@@ -234,38 +234,101 @@ function makeProList(){
     }
 }
 
+
+// 페이지네이션(무한스크롤 변수 선언)
+var currentPage = 1;
+var infinityLimit = 10; // 한번에 보여질 result 수
+var pageSize = 10;
+var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
+// 선 계산(ajax로 넘겨야됨)
+last = currentPage * infinityLimit;
+first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+function calcPagination(){
+
+    maxPage = Number.parseInt(Math.floor(listCount / infinityLimit));
+    startPage = (currentPage-1) / pageSize * pageSize + 1;
+    endPage = startPage + pageSize - 1;
+
+    if(endPage > maxPage)   endPage = maxPage;
+
+    if(currentPage <= infinityLimit)	prevPage = 1;
+    else                    prevPage = startPage - 1;
+
+    if(endPage == maxPage) nextPage = maxPage;
+    else				   nextPage = endPage + 1;
+
+    last = currentPage * infinityLimit;
+    first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+}
+calcPagination();
+
+
+// 무한스크롤
+function YesScroll () {
+    if(last >= listCount)	return;
+
+    let oneTime = false;
+    $("#menu-warp").on("mousewheel", function (e){
+        const menu = $("#menu-warp");
+
+        const scrollLocation = menu.scrollTop(); //현재 스크롤 바 위치
+        const windowHeight = Number.parseInt(menu.css("height").split("px")[0]);  // 화면으로 보이는 스크린 화면의 높이
+        const scrollHeight = document.querySelector("#menu-warp").scrollHeight; // 스크롤 높이
+
+        if (scrollLocation + windowHeight >= scrollHeight && !oneTime) {
+            oneTime = true;
+            currentPage = currentPage + 1;
+            calcPagination();
+            getHospital();
+        }
+    });
+}
+
+
 let proAddress = [];
 let proHospName = [];
 let proHospPhone = [];
 let proBusinessNo = [];
 let professionNo = [];
 let len;
+function getHospital(){
+    $.ajax({
+        url:"loadProMap",
+        data:{
+            "last":last,
+            "first":first
+        },
+        type:"GET",
+        dataType : "json",
+        success:function (result){
+            len = result.length;
 
-$.ajax({
-    url:"loadProMap",
-    dataType : "json",
-    async: false,
-    success:function (result){
-        len = result.length;
+            $.each(result, function (i, item){
 
-        $.each(result, function (i, item){
-			console.log(item)
+                if(result.length - 1 == i){
+                    listCount = Number.parseInt(item.maxValue);
+                    return;
+                }
 
-			professionNo[i] = item.professionNo;
-            proAddress[i] = item.hospitalAddress;
-            proHospName[i] = item.hospitalName;
-            proHospPhone[i] = item.hospitalPhone;
-            proBusinessNo[i] = item.businessNo;
-        });
-
+                professionNo[first - 1 + i] = item.professionNo;
+                proAddress[first - 1 + i] = item.hospitalAddress;
+                proHospName[first - 1 + i] = item.hospitalName;
+                proHospPhone[first - 1 + i] = item.hospitalPhone;
+                proBusinessNo[first - 1 + i] = item.businessNo;
+            });
+        },
+        error:function (req, sta, er){
+            console.log(req.responseText);
+            console.log(er)
+        }
+    }).done(function (){
+        YesScroll();
         AddrChangeCoords();
-        setTimeout(makeProList, 200);
-
-    },
-    error:function (req, sta, er){
-
-    }
-});
+        makeProList();
+        // setTimeout(makeProList, 200);
+    });
+}
+getHospital();
 
 
 
@@ -337,7 +400,6 @@ if(window.innerWidth > 1200){
 // 이건뭐지? 이런거 만든적없는데...
 // var callback = function(result, status) {
 //     if (status === kakao.maps.services.Status.OK) {
-//         console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
 //     }
 // };
 // geocoder.coord2Address(currentPos.getLng(), currentPos.getLat(), callback);

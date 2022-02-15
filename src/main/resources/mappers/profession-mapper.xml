@@ -56,6 +56,7 @@
         <result property="hospitalAddress" column="HOSPITAL_ADDR"/>
         <result property="hospitalPhone" column="HOSPITAL_PHONE"/>
         <result property="businessNo" column="BUSINESS_NO"/>
+        <result property="maxValue" column="MAX_VALUE"/>
     </resultMap>
 
     <resultMap  id="professionPrice_rm" type="ProfessionPrice">
@@ -208,8 +209,11 @@
 
 	<!-- 지도 병원  -->
     <select id="loadProMap" resultMap="professionHospital_rm">
-        SELECT *
-        FROM PROFESSION_HOSPITAL
+        SELECT RESULT.* FROM(
+            SELECT ROWNUM AS RNUM, TEMP.* FROM(
+                SELECT PH.*
+                FROM PROFESSION_HOSPITAL PH)TEMP) RESULT
+        WHERE RNUM BETWEEN #{first} AND #{last}
     </select>
     
     <!-- 이메일 중복확인 -->
@@ -425,6 +429,10 @@
             CONNECT BY ROWNUM <= LENGTH(REGEXP_REPLACE(MYDATAS,'[^,]+')) + 1
             )
         ]]>
+    </select>
+    <select id="loadProMapCount" resultType="_int">
+        SELECT COUNT(*) MAX_VALUE
+        FROM PROFESSION_HOSPITAL
     </select>
 	
 </mapper>
