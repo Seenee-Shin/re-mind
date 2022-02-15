@@ -97,9 +97,9 @@
         </div>
         <!-- Swiper -->
         <div class="swiper1 mySwiper1">
-            <div class="swiper-wrapper" style="justify-content: space-between; left:calc(50% - 140px); overflow: hidden;">
+            <div class="swiper-wrapper">
                 <c:forEach items="${listBoard}" var="board">
-                    <div class="swiper-slide commu">
+                    <div class="swiper-slide">
                         <div class="mb_main_content2_content_board">
                             <button type="button" onclick="locationPath(${board.boardCategoryCode}, ${board.boardNo})">${board.boardCategoryName}</button>
                             <p>${board.boardContent}</p>
