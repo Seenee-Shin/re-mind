@@ -10,7 +10,7 @@
 	            <!-- 메인 -->
 	
 	            <div class="back_btn">
-	                <a href="">
+	                <a href="javascript:history.back();">
 	                    <i class="fas fa-arrow-left"></i> 
 	                </a>
 	            </div>
