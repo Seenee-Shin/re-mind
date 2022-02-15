@@ -4,6 +4,19 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my/counselor.css">
 <!-- header include -->
+<style>
+    .swal-button {
+        padding: 7px 19px;
+        border-radius: 2px;
+        background-color: #FFF;
+        font-size: 12px;
+        color: black;
+        border: 3px solid black;
+        border-radius: 10px;
+    }
+
+
+</style>
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <article class="main_content">
@@ -181,10 +194,10 @@ var flag;
 var swal;
     function deleteCounselor(professionNo){
 
-        swal = swal({
-            title: "Y/N?",
+        swal({
+            title: "정말 삭제하시겠습니까?",
             text: "",
-            icon: "info",
+            icon: "warning",
             buttons: ["NO", "YES"]
         }).then((YES) => {
             if (YES) {
@@ -197,11 +210,28 @@ var swal;
                         "memberNo": memberNo},
                     success:function (result){
                         // console.log(url);
-                        window.location.reload();
+                        swal({
+                            title : "온전히 삭제되었습니다.",
+                            text : "",
+                            icon : "success",
+                            button : "확인"
+                        })
+                        setTimeout(function(){
+                            location.reload();
+                        },2000);
                     }
                 });
+
             }else{
                 flag = false;
+                swal({
+                    title : "취소하셨습니다.",
+                    text : "",
+                    icon : "success",
+                    button : "확인"
+                })
+                // window.location.reload();
+
             }
         });
 

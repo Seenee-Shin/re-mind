@@ -270,8 +270,9 @@ main{
 }
 
 .main_content3 > div > div > span:first-child {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 500;
+
 }
 
 .main_content3 > div > div > p:first-of-type {
@@ -279,7 +280,7 @@ main{
 }
 
 .main_content3 > div > div > p {
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .main_content3 > div > div > p:last-of-type {
@@ -491,7 +492,7 @@ main{
     .main_wrap {
         text-align: center;
         justify-content: center;
-        align-items: center; margin-bottom: 100px;
+        align-items: center;
         clear: both;
     }
 
@@ -673,20 +674,25 @@ main{
     /* 커뮤니티 스와이퍼 카드형 */
     .swiper1 {
         position: relative;
-        width: 100%;
+        width: 65%;
         margin: 0 auto;
-        top: -80px;
-        height: 100%;
+        top: -30px;
+        height: 90%;
         text-align: center;
     }
 
-    .commu {
+    .mySwiper1 .swiper-slide {
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 18px;
-        width: 280px !important;
-        border-radius: 0px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .mySwiper1 .swiper-slide:nth-child(1n) {
+        background-color: rgba(209, 209, 209, 0.7);
     }
 
     /* 모바일 메인 컨텐트 3 */
@@ -697,17 +703,7 @@ main{
         width: 100%;
     }
 
-    .mb_main_content3 > p{
-        margin-left: 25px;
-        text-align: left;
-    }
     .mb_main_content3 > p:nth-child(1) {
-        margin: 0px 0 5px 25px;
-        font-size: 15px;
-        font-weight: 400;
-    }
-
-    .mb_main_content3 > p:nth-child(2) {
         font-size: 25px;
         font-weight: 550;
     }

@@ -6,7 +6,7 @@
 <!-- header include -->
 <jsp:include page="../procommon/header.jsp"></jsp:include>
 
-<main>
+<main style="padding-right: 260px;">
 	<h1>상담사 로그인</h1>
 
     <form  action="proLogin" method="post" style="width: 240px; margin: auto; display: flex; justify-content: center;    flex-direction: column;">

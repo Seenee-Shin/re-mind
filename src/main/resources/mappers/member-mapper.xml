@@ -29,6 +29,7 @@
         <id property="muteNo" column="MUTE_NO"/>
         <result property="memberNo" column="MEMBER_NO"/>
         <result property="memberName" column="MEMBER_NM"/>
+        <result property="memberFName" column="MEMBER_FN"/>
         <result property="memberPhone" column="MEMBER_PHONE"/>
         <result property="imagePath" column="IMAGE_PATH"/>
         <result property="imageName" column="IMAGE_NM"/>
@@ -114,7 +115,7 @@
     </select>
 
     <select id="selectMuteMember" resultMap="mute_rm">
-        SELECT T.MUTE_NO, T.MEMBER_NO, MEMBER_NM, MEMBER_PHONE, IMAGE_PATH, IMAGE_NM
+        SELECT T.MUTE_NO, T.MEMBER_NO, MEMBER_NM, MEMBER_FN, MEMBER_PHONE, IMAGE_PATH, IMAGE_NM
         FROM MUTE T
                  JOIN MEMBER ON(T.MUTE_NO = MEMBER.MEMBER_NO)
                  LEFT JOIN IMAGE ON(IMAGE.MEMBER_NO = T.MEMBER_NO)
@@ -153,7 +154,7 @@
         JOIN MEMBER m ON m.MEMBER_NO = rp.MEMBER_NO
         JOIN PROFESSION p ON p.PROFESSION_NO = rp.PROFESSION_NO
         WHERE rp.MEMBER_NO = #{memberNo}
-        AND r.RESERVATION_ENROLL_DT >= SYSDATE
+        AND r.RESERVATION_ENROLL_DT >= TO_CHAR(SYSDATE, 'YYYY-MM-DD')
         <if test="reservationStatusCode != 0">
             AND r.RESERVATION_STATUS_CD = #{reservationStatusCode}
         </if>

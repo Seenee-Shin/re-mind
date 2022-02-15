@@ -23,7 +23,7 @@
                                 <img class="profile" src="${contextPath}${muteMember.imagePath}/${muteMember.imageName}">
                             </c:otherwise>
                         </c:choose>
-                    <td class="mute-td">${muteMember.memberName}</td>
+                    <td class="mute-td">${muteMember.memberFName}</td>
                     <td><button class="mute-delete" id="${muteMember.muteNo}">해제</button></td>
                 </tr>
             </c:forEach>

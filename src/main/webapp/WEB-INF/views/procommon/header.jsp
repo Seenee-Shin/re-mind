@@ -27,7 +27,7 @@
 <body>
 	<header>
 	    <!-- 헤더 -->
-	    <section class="header_wrap">
+	    <section class="header_wrap" style="  display: flex; align-items: center;">
 	        <article class="header_logo_wrap">
 	        	<a href="${contextPath}">
 	            	<img src="${contextPath}/resources/images/remind_logo.png" alt="">
@@ -43,7 +43,7 @@
 	                    <c:choose>
 	                        <c:when test="${empty sessionScope.loginPro}">
 	                        <li >
-	                            <a href="javascript:void(0);" class="login_btn" style="">로그인</a>
+	                            <a href="${contextPath}/adminPro/" class="login_btn" style="">로그인</a>
 	                        </li>
 	                        </c:when>
 	                        <c:otherwise>
