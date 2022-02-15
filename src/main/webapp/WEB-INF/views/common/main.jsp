@@ -74,7 +74,7 @@
         </div>
         <div>
             <c:forEach items="${listBoard}" var="board">
-                <div class="main_content2_content_board">
+                <div class="main_content2_content_board" data-category_code="${board.boardCategoryCode}" data-board_no="${board.boardNo}">
                     <%--<button>#우울증</button>--%>
                     <button type="button" onclick="locationPath(${board.boardCategoryCode}, ${board.boardNo})">${board.boardCategoryName}</button>
                     <%--<p>${board.boardTitle}</p>--%>
@@ -97,7 +97,7 @@
         </div>
         <!-- Swiper -->
         <div class="swiper1 mySwiper1">
-            <div class="swiper-wrapper" style="justify-content: space-between; left:calc(50% - 140px)">
+            <div class="swiper-wrapper" style="justify-content: space-between; left:calc(50% - 140px); overflow: hidden;">
                 <c:forEach items="${listBoard}" var="board">
                     <div class="swiper-slide commu">
                         <div class="mb_main_content2_content_board">

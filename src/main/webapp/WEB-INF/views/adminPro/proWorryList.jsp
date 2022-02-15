@@ -61,74 +61,26 @@ $(function () {
 	   createTable();
 	})
 
-function createTable() {
-    // $.ajax({
-    //     url: "proWorryList",
-    //     type: "POST",
-    //     dataType : "json",
-    //     success: function (data) {
-    //         $('#table_id').DataTable({
-    //             data: data,
-    //             columns: [
-    //                 { data: "boardNo"},
-    //                 { data: "boardTitle" },
-    //                 { data: "worryCategoryName" },
-    //                 { data: "createDate"},
-    //             ],
-    //             language: {
-    //                 zeroRecords: "결과값이 없습니다."
-    //             }
-    //         })
-    //     }
-    // })
-
-    $('#table_id').DataTable({
-        autoWidth: false,
-        info: false,
-        lengthChange: false,
-        ordering: false,
-        paging: false,
-        searching: false,
-        serverSide: true,
-        ajax: {
-            type: 'POST',
-            url: 'proWorryList',
-        },
-        columns: [{
-            data: "boardNo",
-            width: '25%',
-            className: 'dt-body-center'
-        }, {
-            data: "boardTitle",
-            width: '25%',
-            className: 'dt-body-center'
-        }, {
-            data: "worryCategoryName",
-            width: '25%',
-            className: 'dt-body-center'
-        }, {
-            data: "createDate",
-            width: '25%',
-            className: 'dt-body-center'
-        }],
-            columnDefs: [{
-            render: function (data, type, row) {
-                return row.count.format();
-            },
-            targets: [1,2,3]
-        }, {
-            render: function (data, type, row) {
-                return row.amount.format();
-            },
-            targets: [4]
-        }],
-        language: {
-            zeroRecords: "결과값이 없습니다."
-        }
-    });
-
-
-
+function createTable(){
+	$.ajax({
+        url: "proWorryList",
+        type: "POST",
+         dataType : "json",
+         success: function (data) {
+             $('#table_id').DataTable({
+                data: data,
+                 columns: [
+                     { data: "boardNo"},
+                     { data: "boardTitle" },
+                     { data: "worryCategoryName" },
+                    { data: "createDate"},
+                 ],
+                 language: {
+                     zeroRecords: "결과값이 없습니다."
+                 }
+             })
+         }
+     })
 }
 
 </script>

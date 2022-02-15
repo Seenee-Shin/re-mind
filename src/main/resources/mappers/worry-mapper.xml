@@ -11,4 +11,5 @@
     <select id="selectWorryCategory" resultMap="worryCategory_rm">
     	SELECT WORRY_CATEGORY_CD,WORRY_NM FROM WORRY_CATEGORY
     </select>
+    
 </mapper>

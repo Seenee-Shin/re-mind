@@ -337,6 +337,12 @@ function postingValidate(){
 		}
 	}
 
+	let boardContent = $(".writing [name='boardContent']").val();
+	if (boardContent == "") {
+		boardContent = $(".m_writing [name='boardContent']").val();
+	}
+	formData.set("boardContent", boardContent);
+
 	//삽입
 	$.ajax({
 		type: "POST",
@@ -424,7 +430,7 @@ function YesScroll () {
 
 	   // console.log(fullHeight - screenHeight/2, scrollPosition)
       
-      if (fullHeight-screenHeight/2 - 100<= scrollPosition && !oneTime) {
+      if (fullHeight-screenHeight/2 - 350<= scrollPosition && !oneTime) {
     	  console.log("test");
          oneTime = true;
          currentPage = currentPage + 1;
@@ -514,7 +520,7 @@ function getFreeList(searchData) {
 	                    +'			<div class="writer_pic" style="background-image: url('+writerImg+'); background-size:cover;"></div>';
 	             if(loginMemberNo != item.memberNo){
 					html +='			<ul class="userMenu hidden">'
-						+'				<li> <a href="" class ="block"> 차단</a> </li>'
+						+'				<li> <a class ="block"> 차단</a> </li>'
 						+'				<input class="hidden" value = '+ item.memberNo +'>'
 						+'				<li> <a href=""> 검색</a> </li>'
 	                    +'			</ul>'
@@ -580,36 +586,31 @@ function getFreeList(searchData) {
 	
 	});
 }
+
 // 고민작성하기 댓글
-$("#replyCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
-		$(this).val(1);
+$("[name='replyCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
-		$(this).val(0);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
 // 고민작성하기 스크랩
-$("#scrapCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("스크랩 허용");
-		$(this).val(1);
+$("[name='scrapCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("스크랩 비허용");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
 // 고민작성하기 공감
-$("#empathyCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("공감 허용");
-		$(this).val(1);
+$("[name='empathyCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("공감 비허용");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 

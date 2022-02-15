@@ -149,4 +149,25 @@ public class Selftest{
     public void setQueCount(int queCount) {
         this.queCount = queCount;
     }
+
+    @Override
+    public String toString() {
+        return "Selftest{" +
+                "memberNo=" + memberNo +
+                ", answerNo=" + answerNo +
+                ", answerType=" + answerType +
+                ", answerContent='" + answerContent + '\'' +
+                ", questionNo=" + questionNo +
+                ", questionContent='" + questionContent + '\'' +
+                ", categoryNo=" + categoryNo +
+                ", categoryName='" + categoryName + '\'' +
+                ", resultNo=" + resultNo +
+                ", resultContent='" + resultContent + '\'' +
+                ", resultRate=" + resultRate +
+                ", resultGender='" + resultGender + '\'' +
+                ", queCount=" + queCount +
+                ", rate=" + rate +
+                ", score=" + score +
+                '}';
+    }
 }

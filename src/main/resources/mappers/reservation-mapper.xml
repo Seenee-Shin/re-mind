@@ -30,7 +30,11 @@
 		<result property="reservationStatusCode" column="RESERVATION_STATUS_CD"/>
 		<result property="reservationCancel" column="RESERVATION_CANCEL"/>
 		<result property="counselCategoryNo" column="COUNSEL_CATEGORY_NO"/>
-		<result property="reservationPayNo" column="RESERVATION_PAY_NO"/>
+		<result property="counselCategoryNm" column="COUNSEL_CATEGORY_NM"/>
+		<result property="professionName" column="PROFESSION_NM"/>
+		<result property="professionNo" column="PROFESSION_NO"/>
+		<result property="intEnrollDate" column="INTENROLLDT"/>
+		<result property="checkReview" column="CHECK_REVIEW"/>
 	</resultMap>
 	
 	<!-- 상담사 리뷰 vo -->
@@ -120,12 +124,13 @@
 	<!-- 후기 가지고오기 -->
 	<select id="reviewListSelect" resultMap="Review_rm">
 		SELECT ROWNUM,REVIEW_CONTENT, REVIEW_STARPOINT,
-		 TO_CHAR(REVIEW_DT, 'YYYY"-"MM"-"DD' ) REVIEW_DT, 
-		 COUNSEL_CATEGORY_NM
+			   TO_CHAR(REVIEW_DT, 'YYYY"-"MM"-"DD' ) REVIEW_DT,
+			   COUNSEL_CATEGORY_NM
 		FROM REVIEW
-		JOIN RESERVATION R USING(RESERVATION_NO)
-		JOIN COUNSEL_CATEGORY C ON(C.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO)
+				 JOIN RESERVATION R USING(RESERVATION_NO)
+				 JOIN COUNSEL_CATEGORY C ON(C.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO)
 		WHERE PROFESSION_NO = #{professionNo} AND ROWNUM BETWEEN 1 AND 5
+		ORDER BY REVIEW_DT DESC
 	</select>
 	
 	<!-- 별점만 가지고 오기 -->
@@ -155,7 +160,7 @@
 		      FROM REVIEW
 		      JOIN RESERVATION R USING(RESERVATION_NO)
 		      JOIN COUNSEL_CATEGORY C ON(C.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO)
-		       WHERE PROFESSION_NO = #{professionNo}) TEMP)
+		       WHERE PROFESSION_NO = #{professionNo} ORDER BY REVIEW_DT DESC) TEMP )
 		       WHERE RNUM BETWEEN ${first} AND ${last}
 	
 	</select>
@@ -164,4 +169,19 @@
 		SELECT COUNT(*) LIST_COUNT FROM REVIEW WHERE PROFESSION_NO = #{professionNo}	
 	</select>
 	
+	<select id="appointmentPast" resultMap="Reservation_rm">
+		<![CDATA[
+			
+			SELECT P.PROFESSION_NO,RESERVATION_NO,PROFESSION_NM,
+			TO_CHAR(RESERVATION_ENROLL_DT, 'YYYY"-"MM"-"DD' ) RESERVATION_ENROLL_DT
+			, RESERVATION_ENROLL_TIME AS INTENROLLDT,COUNSEL_CATEGORY_NM, NVL(REVIEW_NO, 0) CHECK_REVIEW
+			FROM RESERVATION 
+			    JOIN RESERVATION_PAYMENT USING(RESERVATION_PAY_NO)
+			    JOIN COUNSEL_CATEGORY USING(COUNSEL_CATEGORY_NO)
+			    JOIN PROFESSION P ON(P.PROFESSION_NO = RESERVATION_PAYMENT.PROFESSION_NO)
+			    LEFT JOIN REVIEW USING(RESERVATION_NO)
+			WHERE RESERVATION_PAYMENT.MEMBER_NO = #{memberNo} AND RESERVATION_ENROLL_DT < SYSDATE
+
+		]]>
+	</select>
 </mapper>

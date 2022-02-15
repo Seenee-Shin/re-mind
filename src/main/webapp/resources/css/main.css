@@ -189,6 +189,7 @@ main{
     box-shadow: 3px 3px 2px rgb(0, 0, 0, 0.2);
     display: inline-block;
     transition: 0.3s;
+    cursor:pointer;
 }
 
 .main_content2_content_board:hover {
@@ -391,6 +392,7 @@ main{
     border-bottom: 1px solid rgb(165 153 153);
     display: flex;
     align-items: center;
+    cursor:pointer;
 }
 
 .main_content4_content_left_item:hover {background:#f1f1f1}

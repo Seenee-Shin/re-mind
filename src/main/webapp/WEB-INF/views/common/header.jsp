@@ -87,7 +87,7 @@
             <ul class="dep1">
 
                 <li>
-                    <a href="javascript:void(0);">상담예약</a> <p class="menu_toggle">+</p>
+                    <a href="${contextPath}/pro/proList">상담예약</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
                         <li><a href="${contextPath}/pro/proList">상담사 찾기</a></li>
                         <li><a href="${contextPath}/my/map">상담센터 찾기</a></li>
@@ -96,7 +96,7 @@
 
                 </li>
                 <li>
-                    <a href="javascript:void(0);">커뮤니티</a> <p class="menu_toggle">+</p>
+                    <a href="${contextPath}/free/insert">커뮤니티</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
                         <li><a href="${contextPath}/free/insert">자유게시판</a></li>
                         <li><a href="${contextPath}/worry/worryList">고민상담 게시판</a></li>
@@ -109,7 +109,7 @@
                 </li>
                 <li><!-- 로그인 안했으면 로그인 버튼 -->
                     <!-- <a href="">로그인</a> -->
-                    <a href="javascript:void(0);">마이페이지</a> <p class="menu_toggle">+</p>
+                    <a href="${contextPath}/my/emotionRecord">마이페이지</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
                         <li><a href="${contextPath}/my/emotionRecord">감정기록</a></li>
                         <li><a href="${contextPath}/my/appointment">마이 상담</a></li>
@@ -181,7 +181,7 @@
 			                    <ul>
 			                        <li><a href="${contextPath}/my/appointment">상담 예약 조회</a></li>
 			                        <li><a href="${contextPath}/my/appointment/past">지난 상담 내역</a></li>
-			                        <li><a href="${contextPath}/my/postscript">상담후기</a></li>
+			                        <%--<li><a href="${contextPath}/my/postscript">상담후기</a></li>--%>
 			                        <li><a href="${contextPath}/my/counselor">찜한 상담사</a></li>
 			                    </ul>
 			                </li>
@@ -190,7 +190,7 @@
 			                    <ul>
 			                        <li><a href="${contextPath}/my/myBoardList">게시글 내역</a></li>
 			                        <li><a href="${contextPath}/my/letterList">쪽지</a></li>
-			                        <li><a href="${contextPath}/my/enquiry">문의사항</a></li>
+			                        <%--<li><a href="${contextPath}/my/enquiry">문의사항</a></li>--%>
 			                        <li><a href="${contextPath}/my/muteMember">차단한 회원</a></li>
 			                    </ul>
 			                </li>

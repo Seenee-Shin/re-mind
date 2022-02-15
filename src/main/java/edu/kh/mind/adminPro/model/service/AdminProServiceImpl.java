@@ -152,8 +152,8 @@ public class AdminProServiceImpl implements AdminProService{
 		
 		proInfo.setProfessionCarrer(Util.XSS(proInfo.getProfessionCarrer()));
 		proInfo.setProfessionCarrer(Util.changeNewLine(proInfo.getProfessionCarrer()));
-		
-		
+	
+	
 		Image img= new Image();
 		img.setImagePath(webPath);
 		img.setProfessionNo(proInfo.getProfessionNo());
@@ -236,13 +236,13 @@ public class AdminProServiceImpl implements AdminProService{
 	@Override
 	public ProfessionInformation selectProInfo(int professionNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.selectProfessionInfo(professionNo);
 	}
 
 	@Override
 	public ProfessionInformation updateProInfo(ProfessionInformation proInfo) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.updateProInfo(proInfo);
 	}
 
 	@Override
@@ -292,6 +292,20 @@ public class AdminProServiceImpl implements AdminProService{
 	public List<Board> proWorryListSelect(Profession loginPro) {
 		return dao.proWorryListSelect(loginPro);
 	}
+
+
+	@Override
+	public ProfessionInformation selectProfessionInfo(int professionNo) {
+		// TODO Auto-generated method stub
+		return dao.selectProfessionInfo(professionNo);
+	}
+
+	@Override
+	public ProfessionHospital selectProfessionHospital(int professionNo) {
+		// TODO Auto-generated method stub
+		return dao.selectProfessionHospital(professionNo);
+	}
+
 
 	
 	//이메일 인증 키 검증

@@ -116,6 +116,7 @@
 	    <div id="pro_content_warp">
 	        <ul id="detail-contents">
 	            <li class="detail_btn"><a href="#pro_talk">당신에게 한마디</a></li>
+	            <li class="detail_btn"><a href="#reservation_info">상담예약안내</a></li>
 	            <li class="detail_btn"><a href="#pro_review">후기</a></li>
 	        </ul>
 	        <ul class="pro_content" id="pro_talk">
@@ -137,6 +138,14 @@
 	                <p>
 	                     ${profession.proCarrer}
 	                </p>
+	            </li>
+	            <li id="reservation_info">
+	            	<h2>상담 예약 안내</h2>
+	            	<img src="${contextPath}/resources/images/pro/reservation_info.jpg" style="width:100%;">
+	            	<ol id="reservation_info_ol">
+	            		<li>- 다른 상담 진행 중인 경우 첫 대응까지 시간이 소요될 수 있습니다</li>
+	            		<li>- 원하는 일정이 맞지 않는 경우, 상담 문의에 예약 희망 일/시간을 남겨주세요. <br>  원하는 시간에 최대한 상담을 받으실 수 있도록 도움 드립니다.</li>
+	            	</ol>
 	            </li>
 	            <li id="pro_review">
 	                <h2>후기</h2>
@@ -203,6 +212,7 @@
 	        </ul>
 	    </div>
 	</div>
+
 	<div class="pro_reservation_wrap">
 	    <div class="pro_reservation">
 	        <h2>알려드립니다!</h2>
@@ -217,6 +227,7 @@
 	        <button type="button" class="pro_reservation_btn" onclick="proReservation();">예약하기</button>
 	    </div>
 	</div>
+	
 </article>
 
 <div class="mobile_pro_reservation_wrap">
@@ -482,9 +493,29 @@
 		
 	}
 	
+	$(window).scroll(function(){ 
+        var height = $(document).scrollTop(); //실시간으로 스크롤의 높이를 측정
+       	console.log($(document).scrollTop());
+        if(height > 25){ 
+            $('.pro_reservation_wrap').addClass('pro_reservation_fixed'); 
+        }else{ 
+            $('.pro_reservation_wrap').removeClass('pro_reservation_fixed'); 
+        } 
+    });
 
 	
+	/* $("html").on('mousewheel',function(e){
+		var wheel = e.originalEvent.wheelDelta;
 	
+		console.log(wheel);
+		//스크롤값을 가져온다.
+		if(wheel > 150){
+
+		$(".pro_reservation_wrap").css("position","fixed").css("top","0");
+		}
+
+		}); */
+
 	
 
 </script>

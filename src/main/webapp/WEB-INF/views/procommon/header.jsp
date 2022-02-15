@@ -49,7 +49,7 @@
 	                        <c:otherwise>
 	                        <li style="bottom: 27px;">
 	                            ${sessionScope.loginPro.professionName}님<br>
-	                            <a href="#" class="logout_btn" style="margin-top: 10px;">로그아웃</a>
+	                            <a href="${contextPath}/adminPro/logout" class="logout_btn" style="margin-top: 10px;">로그아웃</a>
 	                         </li>
 	                        </c:otherwise>
 	                    </c:choose>

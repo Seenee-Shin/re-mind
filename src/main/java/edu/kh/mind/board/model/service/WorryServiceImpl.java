@@ -1,8 +1,10 @@
 package edu.kh.mind.board.model.service;
 
 import edu.kh.mind.adminPro.model.exception.InsertCertificationFailException;
+import edu.kh.mind.board.model.dao.SecretDAO;
 import edu.kh.mind.board.model.dao.WorryDAO;
 import edu.kh.mind.board.model.vo.Board;
+import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.common.util.Util;
@@ -24,10 +26,20 @@ public class WorryServiceImpl implements WorryService {
 	@Autowired
 	private WorryDAO dao;
 
+	@Autowired
+	private SecretDAO secretDAO;
+
 	// 고민상담 게시글
 	@Override
 	public List<Board> selectWorryList(Map<String, String> param) {
 		param.put("boardCategoryCode", "102");
+
+		if(param.get("memberNo") != null) {
+
+			String muteMember  = secretDAO.selectMuteMember(param);
+			param.put("muteMember", muteMember);
+
+		}
 
 		return dao.selectWorryList(param);
 	}
@@ -139,4 +151,42 @@ public class WorryServiceImpl implements WorryService {
 		return board;
 	}
 
+	
+	@Override
+	public int insertEmpathy(Empathy empathy) {
+		
+		Empathy selectEmpathy = dao.selectEmpathy(empathy);
+		
+		int result = 0;
+		if(selectEmpathy == null) {
+			result = dao.insertEmpathy(empathy);
+			
+			if(result > 0) {
+				result = 1;
+			}else {
+				result = 0;
+			}
+		}else {
+			result = dao.deleteEmpathy(empathy);
+			if(result > 0){
+				result =2;
+			}else {
+				result =0; 
+			}
+		}
+		
+
+		return result;
+	}
+
+
+
+
+	@Override
+	public int countEmpathy(Empathy empathy) {
+		return dao.countEmpathy(empathy);
+	}
+
+	
+	
 }

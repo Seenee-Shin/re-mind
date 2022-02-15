@@ -117,7 +117,7 @@
         SELECT T.MUTE_NO, T.MEMBER_NO, MEMBER_NM, MEMBER_PHONE, IMAGE_PATH, IMAGE_NM
         FROM MUTE T
                  JOIN MEMBER ON(T.MUTE_NO = MEMBER.MEMBER_NO)
-                 LEFT JOIN IMAGE ON(IMAGE.MEMBER_NO = T.MUTE_NO)
+                 LEFT JOIN IMAGE ON(IMAGE.MEMBER_NO = T.MEMBER_NO)
         WHERE T.MEMBER_NO = #{memberNo} AND (IMAGE_LEVEL = 0 OR IMAGE_LEVEL IS NULL)
     </select>
 
@@ -153,7 +153,7 @@
         JOIN MEMBER m ON m.MEMBER_NO = rp.MEMBER_NO
         JOIN PROFESSION p ON p.PROFESSION_NO = rp.PROFESSION_NO
         WHERE rp.MEMBER_NO = #{memberNo}
-        AND r.RESERVATION_ENROLL_DT >= TO_DATE(SYSDATE, 'YYYY-MM-DD')
+        AND r.RESERVATION_ENROLL_DT >= SYSDATE
         <if test="reservationStatusCode != 0">
             AND r.RESERVATION_STATUS_CD = #{reservationStatusCode}
         </if>

@@ -33,10 +33,10 @@
 		                            <div class="writer_pic_wrap">
 		                            	<c:choose>
 		                            		<c:when test="${!empty loginMember.imagePath}">
-		                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+		                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName}); background-size:cover;"> </div>
 		                            		</c:when>
 		                            		<c:otherwise>
-		                                		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
+		                                		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png); background-size:cover;"> </div>
 		                            		</c:otherwise>
 		                            		
 		                                </c:choose>
@@ -49,25 +49,33 @@
 		                        <div id="imgWrap">
 								</div>
                               
-								<div class="write_option_area">
-	                	            <div class="check_box_wrap">
-		                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
-		                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
-		                            </div>
-	
-		                            <div class="check_box_wrap">
-		                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩 허용</label>
-										<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
-		                            </div>
-		                            <div class="check_box_wrap">
-		                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active">공감 허용</label>
-		                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
-		                            </div>
-		                            <div class="check_box_wrap">
-		                                <label for="anonCheckCode" class="light_brown_bg dark_brown_bg active">닉네임 공개</label>
-		                                <input type="checkbox"  name="anonCheckCode" value="1" id="anonCheckCode" checked>
-		                            </div>
+								  <div class="write_option_area">
+              	            		<div class="check_box_wrap">
+                                     	<select id="mReplyCheckCode" name="replyCheckCode">
+											<option value="1">댓글 허용</option>
+											<option value="2">댓글 비허용</option>
+										</select>  
+									</div>
 
+                                    <div class="check_box_wrap">
+                                       <select id="mScrapCheckCode" name="scrapCheckCode">
+										    <option value="1">스크랩 허용</option>
+										    <option value="2">스크랩 비허용</option>
+									    </select>  
+                                    </div>
+                                        
+                                    <div class="check_box_wrap">
+                                    	<select id="mEmpathyCheckCode" name="empathyCheckCode">
+										    <option value="1">공감 허용</option>
+										    <option value="2">공감 비허용</option>
+									    </select>  
+                                    </div>
+                                      <div class="check_box_wrap">
+                                    	<select id="manonCheckCode" name="anonCheckCode">
+										    <option value="1">닉네임 공개</option>
+										    <option value="2">닉네임 비공개</option>
+									    </select>  
+                                    </div>
 		                        </div>
                               
                               <hr>
@@ -267,7 +275,11 @@ function postingValidate(){
 		}
 	}
 
-	
+	let boardContent = $(".writing [name='boardContent']").val();
+	if (boardContent == "") {
+		boardContent = $(".m_writing [name='boardContent']").val();
+	}
+	formData.set("boardContent", boardContent);
 
 	//삽입
 	$.ajax({
@@ -359,7 +371,7 @@ function YesScroll () {
       
       //console.log(fullHeight, scrollPosition, screenHeight)
 
-      if (fullHeight-screenHeight/2 - 200<= scrollPosition && !oneTime) {
+      if (fullHeight-screenHeight/2 - 350<= scrollPosition && !oneTime) {
          oneTime = true;
          currentPage = currentPage + 1;
          calcPagination();
@@ -418,17 +430,29 @@ if (searchData != null) {
             for(i=0; i<empathyArr.length; i++) {
                iconCnt[empathyArr[i]] = empathyCntArr[i];
             }
+            
+        	// 프로필 이미지
+			let writerImg = "${contextPath}/resources/images/basicProfile.png";
+			if (item.imagePath != null) {
+				writerImg = "${contextPath}/" + item.imagePath + item.imageName;
+			}
+
 
             html+=   '<div class="board_list_content">'
                   +'   <div class="board_flex_wrap">'
-                  +'      <div class="writer_pic_wrap">'
-                  +'			<div class="writer_pic"><img class="writer_pic secret_pic" src="${contextPath}/resources/images/basicProfile.png"></div>';
-
+                  +'      <div class="writer_pic_wrap">';
+                  
+                  if(item.anonCheckCode == 1){
+                 	html += '			<div class="writer_pic" style="background-image: url(' + writerImg + '); background-size:cover;"></div>';
+                  }else{
+                	html += '			<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png); background-size:cover;" ></div>';
+                  }
+                  
+                  
              if(loginMemberNo != item.memberNo){
                html +='         <ul class="userMenu hidden">'
                   +'            <li> <a class="block"> 차단</a> </li>'
                   +'            <input class="hidden" value = '+ item.memberNo +'>'
-                  +'            <li> <a href=""> 검색</a> </li>'
                   +'         </ul>'
                   +'      </div>';
             }else{
@@ -437,9 +461,15 @@ if (searchData != null) {
 
             html+='      <a href="${contextPath}/secret/view/'+item.boardNo+'">'
                +'         <div class="posting_info">'
-               +'            <div class="writer_id">'
-               +'               <p class="userInfo">'+item.memberFn+'</p>'
-               +'               <p>'+item.createDate+'</p>'
+               +'            <div class="writer_id">';
+               
+               if(item.anonCheckCode == 1){
+              html +=  '               <p class="userInfo">'+item.memberFn+'</p>';
+               }else{
+              html +=  '               <p class="userInfo">익명</p>';
+               }
+               
+               html +=              '<p>'+item.createDate+'</p>'
                +'            </div>'
                +'            <div class="posting">'
                +'               <p>'+item.boardContent+'</p>'
@@ -461,15 +491,15 @@ if (searchData != null) {
 
                if(item.empathyCheckCode == 1){
                   html+='      <div class="like_warp">'
-                     +'            <img src="${contextPath}/resources/images/icon/smile.png" alt="">'
+                     +'            <img src="${contextPath}/resources/images/icon/smile.png" alt="" data-icon="1001">'
                      +'            <p>'+iconCnt[1001]+'</p>'
-                     +'            <img src="${contextPath}/resources/images/icon/hug.png" alt="">'
+                     +'            <img src="${contextPath}/resources/images/icon/hug.png" alt="" data-icon="1002">'
                      +'            <p>'+iconCnt[1002]+'</p>'
-                     +'           <img src="${contextPath}/resources/images/icon/amazed.png" alt="">'
+                     +'           <img src="${contextPath}/resources/images/icon/amazed.png" alt="" data-icon="1003">'
                      +'           <p>'+iconCnt[1003]+'</p>'
-                     +'           <img src="${contextPath}/resources/images/icon/angry.png" alt="">'
+                     +'           <img src="${contextPath}/resources/images/icon/angry.png" alt="" data-icon="1004">'
                      +'           <p>'+iconCnt[1004]+'</p>'
-                     +'           <img src="${contextPath}/resources/images/icon/crying.png" alt="">'
+                     +'           <img src="${contextPath}/resources/images/icon/crying.png" alt="" data-icon="1005">'
                      +'           <p>'+iconCnt[1005]+'</p>'
                      +'        </div>';
                }else{
@@ -491,50 +521,41 @@ if (searchData != null) {
 
    });
 }
-//고민작성하기 댓글
-$("#replyCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
-		$(this).val(1);
+
+// 고민작성하기 댓글
+$("[name='replyCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
-		$(this).val(0);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
 // 고민작성하기 스크랩
-$("#scrapCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("스크랩 허용");
-		$(this).val(1);
+$("[name='scrapCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("스크랩 비허용");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
 // 고민작성하기 공감
-$("#empathyCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("공감 허용");
-		$(this).val(1);
+$("[name='empathyCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("공감 비허용");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
-
-//고민작성하기 공감
-$("#anonCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("닉네임 공개");
-		$(this).val(1);
+//고민작성하기 익명
+$("[name='anonCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("닉네임 비공개");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
-
 
 </script>

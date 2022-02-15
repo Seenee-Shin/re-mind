@@ -10,7 +10,7 @@
                 자존감 자가진단 결과
             </div>
             <div class="selftest_modal_content">
-                <div>
+                <%--<div>
                     다른사람과 비교해서 당신의 자존감은
                     <div>다소 낮은 편입니다.</div>
                 </div>
@@ -19,7 +19,20 @@
                     조그만 성취 경향이라도 좋습니다.
                     당신이 자신에게 얼마나 소중하고 아름다운 존재인지를
                     스스로에게 일깨워주는 것이 필요합니다.
-                </div>
+                </div>--%>
             </div>
             <button id="selfTest_btn">확인</button>
         </div>
+<script>
+    $(".selftest_modal_content").html(resultHtml);
+
+    $("#selfTest_btn").on("click", function () {
+        // 모달 close
+        modal.style.display = "none";
+        popupWrap.style.display = "none";
+
+        // 팝업 내용 지우기
+        layerPopupContent.innerHTML = "";
+    });
+
+</script>
