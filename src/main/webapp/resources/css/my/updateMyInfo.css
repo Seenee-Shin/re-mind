@@ -69,7 +69,7 @@ input{outline: none;}
 
     .side_menu{display: inline-block;}
     .side_menu > ul{display: flex;}
-    .side_menu > ul > li{width: 25%; text-align: start;}
+    .side_menu > ul > li{width: 25%;}
     .side_menu > ul > hr{display: none;}
 
     .update-info > .update-img{display: none;}

@@ -156,4 +156,9 @@ public class ProDAO {
     public String setCategory(int professionNo) {
 		return sqlSession.selectOne("professionMapper.setCategory", professionNo);
     }
+
+	public String proPriceSelect(int professionNo) {
+
+		return sqlSession.selectOne("reservationMapper.proPriceSelect", professionNo);
+	}
 }

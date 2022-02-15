@@ -176,31 +176,31 @@
 	        	<c:otherwise>
 			        <article class="dark-brown side_menu">
 			            <h3>마이페이지</h3>
-			            <ul>
-			                <li><a href="${contextPath}/my/emotionRecord">증상기록</a></li>
-			                <hr>
-			                <li><a href="${contextPath}/my/appointment">상담권내역</a>
-			                    <ul>
-			                        <li><a href="${contextPath}/my/appointment">상담 예약 조회</a></li>
-			                        <li><a href="${contextPath}/my/appointment/past">지난 상담 내역</a></li>
+			            <ul class="side_menu_ul">
+			                <li class="test"><a href="${contextPath}/my/emotionRecord">증상기록</a></li>
+			              
+			                <li class="test"><a href="${contextPath}/my/appointment">상담권내역</a>
+			                    <ul class="sub_ul">
+			                        <li class="sub_li"><a href="${contextPath}/my/appointment">상담 예약 조회</a></li>
+			                        <li class="sub_li"><a href="${contextPath}/my/appointment/past">지난 상담 내역</a></li>
 			                        <%--<li><a href="${contextPath}/my/postscript">상담후기</a></li>--%>
-			                        <li><a href="${contextPath}/my/counselor">찜한 상담사</a></li>
+			                        <li class="sub_li"><a href="${contextPath}/my/counselor">찜한 상담사</a></li>
 			                    </ul>
 			                </li>
-			                <hr>
-			                <li><a href="${contextPath}/my/myBoardList">나의활동</a>
-			                    <ul>
-			                        <li><a href="${contextPath}/my/myBoardList">게시글 내역</a></li>
-			                        <li><a href="${contextPath}/my/letterList">쪽지</a></li>
+			               
+			                <li class="test"><a href="${contextPath}/my/myBoardList">나의활동</a>
+			                    <ul class="sub_ul"> 
+			                        <li class="sub_li"><a href="${contextPath}/my/myBoardList">게시글 내역</a></li>
+			                        <li class="sub_li"><a href="${contextPath}/my/letterList">쪽지</a></li>
 			                        <%--<li><a href="${contextPath}/my/enquiry">문의사항</a></li>--%>
-			                        <li><a href="${contextPath}/my/muteMember">차단한 회원</a></li>
+			                        <li class="sub_li"><a href="${contextPath}/my/muteMember">차단한 회원</a></li>
 			                    </ul>
 			                </li>
-			                <hr>
-			                <li><a href="${contextPath}/my/updateMyInfo">나의정보</a>
-			                    <ul>
-			                        <li><a href="${contextPath}/my/updateMyInfo">회원정보 수정</a></li>
-			                        <li><a href="${contextPath}/my/secession">회원탈퇴</a></li>
+			              
+			                <li class="test"><a href="${contextPath}/my/updateMyInfo">나의정보</a>
+			                    <ul class="sub_ul">
+			                        <li class="sub_li"><a href="${contextPath}/my/updateMyInfo">회원정보 수정</a></li>
+			                        <li class="sub_li"><a href="${contextPath}/my/secession">회원탈퇴</a></li>
 			                    </ul>
 			                </li>
 			            </ul>
@@ -208,3 +208,11 @@
 	        	</c:otherwise>
 	        </c:choose>
         </c:if>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script>
+	$(".side_menu_ul > li").hover(function() {
+		$(".sub_ul").remove('display_block');
+	  	$(this).find(".sub_ul").addClass('display_block');
+	}
+	
+</script>

@@ -184,9 +184,9 @@ header{height: 100px;}
   float: left;
 }
 .header_logo_wrap>a>img{
-	    margin: auto;
+	margin: auto;
     width: 130px;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 0px;
 }
 
@@ -301,7 +301,7 @@ a:hover{color:#A59999;}
 .side_menu>ul>li>a{
   display: block;
   font-weight: 550;
-  margin-bottom: 20px;
+	margin-bottom: 20px;
   margin-top: 20px;
 }
 .side_menu>ul>li>ul>li>a{
@@ -309,6 +309,7 @@ a:hover{color:#A59999;}
   font-weight: 200;
   margin-bottom: 15px;
 }
+
 
 /* ----------- font-size 변경 ----------- */
 @media screen and (max-width: 950px) {
@@ -363,6 +364,11 @@ a:hover{color:#A59999;}
   main{
       width: 100%;
   }
+  .side_menu{
+
+  padding: 0px;
+
+}
 
   /* ------ 헤더 ------- */
   .header_wrap{
@@ -461,9 +467,70 @@ a:hover{color:#A59999;}
       width: 100%;
       min-height: 200px;
       clear: both;
+      margin-top: 60px;
   }
   .side_menu{
-      display: none;
+      /* display: none; */
+      height:60px;
+  }
+  
+  .side_menu > h3{
+  	display: none;
+  }
+  
+  .side_menu_ul{
+  	width:100%;
+  }
+  
+  .side_menu_ul > li{
+  	float:left;
+  	width:25%;
+  	text-align: center;
+  	line-height:60px;
+  }
+  
+  .sub_ul{
+  	display:none;
+    position: absolute;
+    width:100%;
+    top: 150px;
+    left:0;
+    background-color:#fff;
+    border-bottom:1px solid #ddd;
+    margin-top:10px;
+  }
+	.sub_li{
+	width:20%;
+	float:left;
+	line-height:60px;
+	text-align:center;
+  }
+  
+   .side_menu_ul > li:hover > .sub_ul{
+ 	display:block;
+ }
+  
+  
+/*   .test:hover > .sub_ul{
+  	display:block;
+  }
+   */
+  .sub_li:first-child{
+  	margin-left:40px;
+  }
+  
+  .display_block{
+  	display: block;
+  }
+
+  .side_menu>ul>li>ul>li>a {
+  	margin:0px;
+  	font-size:15px;
+  	font-weight:500;
+  }
+  
+  .side_menu>ul>li>a {
+  	margin:0px;
   }
 
 	/* ------------게시판 사진 ---------- */
