@@ -29,7 +29,7 @@ public class SelftestDAO {
     }
 
     // 결과 조회
-    public List<Selftest> selectResult(Selftest selftest) {
-        return sqlSession.selectList("selftestMapper.selectResult", selftest);
+    public Selftest selectResult(Selftest selftest) {
+        return sqlSession.selectOne("selftestMapper.selectResult", selftest);
     }
 }
