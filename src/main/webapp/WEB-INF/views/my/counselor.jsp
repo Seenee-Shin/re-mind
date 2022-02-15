@@ -4,6 +4,19 @@
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/my/counselor.css">
 <!-- header include -->
+<style>
+    .swal-button {
+        padding: 7px 19px;
+        border-radius: 2px;
+        background-color: #FFF;
+        font-size: 12px;
+        color: black;
+        border: 3px solid black;
+        border-radius: 10px;
+    }
+
+
+</style>
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <article class="main_content">
