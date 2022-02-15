@@ -67,4 +67,6 @@ public interface ProService {
 
 
 	String setCategory(int professionNo);
+
+	String proPriceSelect(int professionNo);
 }
