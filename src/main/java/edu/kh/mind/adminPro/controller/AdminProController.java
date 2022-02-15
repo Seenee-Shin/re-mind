@@ -152,11 +152,11 @@ public class AdminProController {
 	// 아이디 중복 검사
 	@RequestMapping(value = "emailDupCheck", method=RequestMethod.GET)
 	@ResponseBody
-	public int emailDupCheck(String inputEmail) {
+	public int emailDupCheck(String professionId) {
 		
 		//아이디 중복검사 Service 호출
-		int result = service.idChk(inputEmail);
-		
+		int result = service.idChk(professionId);
+		System.out.println(result);
 		return result;
 	}
 	

@@ -42,8 +42,8 @@ public class AdminProServiceImpl implements AdminProService{
     
 	//아이디 중복확인 (이메일 중복확인)
 	@Override
-	public int idChk(String inputId) {
-		return dao.idCheck(inputId);
+	public int idChk(String professionId) {
+		return dao.idCheck(professionId);
 	}
 
     @Override

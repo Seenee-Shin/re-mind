@@ -19,7 +19,7 @@ public interface AdminProService {
 	 * @param inputId
 	 * @return
 	 */
-	int idChk(String inputId);
+	int idChk(String professionId);
 	
 	/**
 	 * 상담사 등록
