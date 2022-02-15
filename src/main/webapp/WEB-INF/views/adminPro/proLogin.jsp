@@ -12,10 +12,10 @@
     <form  action="proLogin" method="post" style="width: 240px; margin: auto; display: flex; justify-content: center;    flex-direction: column;">
 
         <label for="professionId"></label>아이디
-        <input type="text" name="professionId" id="professionId">
+        <input type="text" name="professionId" id="professionId" value="hqn53462@mzico.com">
 
         <label for="professionPw" style="margin-top: 20px;"></label>비밀번호
-        <input type="password" name="professionPw" id="professionPw">
+        <input type="password" name="professionPw" id="professionPw" value="123123">
 
 		<div style="    display: flex; align-items: center;  justify-content: space-between;">
        		<button style="margin-top: 20px;">로그인</button>
