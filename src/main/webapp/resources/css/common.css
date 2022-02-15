@@ -253,7 +253,8 @@ a:hover{color:#A59999;}
 
 .header_menu_wrap .dep2{
   display: none;
-  background: #f8f8f8;
+  background-color: #fff;
+  padding:0;
 }
 .header_menu_wrap .dep2 a{
   display: block;
