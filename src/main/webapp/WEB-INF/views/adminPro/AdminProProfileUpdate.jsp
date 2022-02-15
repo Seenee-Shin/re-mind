@@ -6,46 +6,46 @@
 <!-- header include -->
 <jsp:include page="../procommon/header.jsp"></jsp:include>
 
-<main>
-   <h2>상담사 프로필 : ${loginPro.professionNo}</h2>
+<main >
+   <h2>${loginPro.professionName} 상담사 프로필 </h2>
    <form action="../update/${loginPro.professionNo}" method="post" enctype="multipart/form-data" role="form" onsubmit="return getCheckBoxVal()">
 
        <section class="proflieWrap">
            <article class="proInfoWrap">
                <div class="profile">
                    <h3>등록일자</h3>
-                   <p> 2021-03-21</p>
+                   <p>${loginPro.professionEnrollDate}</p>
                </div>
                <div class="profile" >
                    <h3>상담사 이름</h3>
-                   <p>홍길동</p>
+                   <p>${loginPro.professionName}</p>
                </div>
                <div class="profile">
                    <h3>상담사 전화번호</h3>
-                   <p>010-2353-2342</p>
+                   <p>${proHospital.hospitalPhone}</p>
                </div>
                <div class="profile">
                    <h3>상담사 이메일</h3>
-                   <p>010-2353-2342</p>
+                   <p>${loginPro.professionId}</p>
                </div>
                <div class="profile">
                    <h3>병원명</h3>
-                   <p>꿈을그리다 심리상담센터</p>
+                   <p>${proHospital.hospitalName}</p>
                </div>
                <div class="profile">
                    <h3>병원 주소</h3>
-                   <p>광주시 경인로 325길 35</p>
+                   <p>${proHospital.hospitalAddress}</p>
                </div>
            </article>
            <article class="profailPic">
                <h3 style="text-align: center;">프로필 이미지</h3>
                <input type="file" accept=".png" name="proProfile" id="" onchange="loadImg(this)" style="display: none">
-               <div class="imgBox" >
+               <div class="imgBox" style="position: relative;" >
                	<img alt="" src="">
-               	<i class="fas fa-times deleteImg"></i>
-               	<span class ="imgDec"> 클릭하여 프로필 사진 추가</span>
+               	<i class="fas fa-times deleteImg" style=" position: absolute; top: 10px;  right: 10px;"></i>
+               	<span class ="imgDec" style="position: absolute; top: 120px; right: 30px;"> 클릭하여 프로필 사진 추가</span>
                </div>
-               <p>500x500 이상의 뒷배경이 투명인 png파일을 올려주세요</p>
+               <p style="font-size: 15px; margin-top: 20px;">500x500 이상의 뒷배경이 투명인 png파일을 올려주세요</p>
                <a href="https://www.remove.bg/ko" target="_blank">투명배경 만들기</a>
            </article>
        </section>
@@ -67,17 +67,17 @@
 
            <article class="proInfo">
                <h3>하고싶은 말</h3>
-               <textarea name="professionIntro" id="professionIntro" rows="8">${proInfo.professionIntro}</textarea>
+               <textarea name="professionIntro" id="professionIntro" rows="8" style="overflow: auto;">${proInfo.professionIntro}</textarea>
            </article>
 
            <article class="proInfo">
                <h3>상담사 소개</h3>
-               <textarea name="professionStory" id="professionStory"  rows="8">${proInfo.professionStory}</textarea>
+               <textarea name="professionStory" id="professionStory"  rows="8" style="overflow: auto;">${proInfo.professionStory}</textarea>
            </article>
            
            <article class="proInfo">
                <h3>경력</h3>
-               <textarea name="professionCarrer" id="professionCarrer"  rows="8">${proInfo.professionCarrer}</textarea>
+               <textarea name="professionCarrer" id="professionCarrer"  rows="8" style="overflow: auto;">${proInfo.professionCarrer}</textarea>
            </article>
        </section>
 
@@ -99,7 +99,7 @@
 	           </c:forEach>
        </section>
        
-       <button>수정하기</button>
+       <button style="margin-bottom: 150px;">수정하기</button>
    </form>
 </main>
 
