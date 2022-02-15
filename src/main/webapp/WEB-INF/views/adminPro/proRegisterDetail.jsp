@@ -66,7 +66,7 @@
 	        //카카오 지도 발생
 	        new daum.Postcode({
 	            oncomplete: function(data) { //선택시 입력값 세팅
-	                document.getElementById("hospitalAddress").value = data.zonecode+ " " +data.address; // 주소 넣기
+	                document.getElementById("hospitalAddress").value = data.address; // 주소 넣기
 	                document.querySelector("input[id=address_detail]").focus(); //상세입력 포커싱
 	            }
 	        }).open();
