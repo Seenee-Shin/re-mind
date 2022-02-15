@@ -64,13 +64,18 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public List<ProfessionHospital> loadProMap() {
-        return dao.loadProMap();
+    public List<ProfessionHospital> loadProMap(Map<String, Object> map) {
+        return dao.loadProMap(map);
     }
 
     @Override
     public List<EmotionCategory> emotionCategory() {
         return dao.emotionCategory();
+    }
+
+    @Override
+    public int loadProMapCount() {
+        return dao.loadProMapCount();
     }
 
     // 감정 기록 등록

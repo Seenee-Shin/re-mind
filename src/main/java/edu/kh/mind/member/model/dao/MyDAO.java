@@ -25,8 +25,8 @@ public class MyDAO {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
-    public List<ProfessionHospital> loadProMap() {
-        return sqlSession.selectList("professionMapper.loadProMap");
+    public List<ProfessionHospital> loadProMap(Map<String, Object> map) {
+        return sqlSession.selectList("professionMapper.loadProMap", map);
     }
 
 	public List<EmotionCategory> emotionCategory() {
@@ -212,5 +212,9 @@ public class MyDAO {
 	public List<Reservation> appointmentPast(int memberNo) {
 
 		return sqlSession.selectList("reservationMapper.appointmentPast", memberNo);
+	}
+
+	public int loadProMapCount() {
+		return sqlSession.selectOne("professionMapper.loadProMapCount");
 	}
 }

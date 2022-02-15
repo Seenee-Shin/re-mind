@@ -535,13 +535,23 @@ public class MyController {
 
     @GetMapping("loadProMap")
     @ResponseBody
-    public String loadProMap(){
+    public String loadProMap(@RequestParam Map<String, Integer> param){
 
-        List<ProfessionHospital> proList = service.loadProMap();
+        Map<String, Object> map = new HashMap<>();
 
-        for(ProfessionHospital p : proList){
-            System.out.println(p);
-        }
+        map.put("first", param.get("first"));
+        map.put("last", param.get("last"));
+
+        List<ProfessionHospital> proList = service.loadProMap(map);
+
+        int result = 0;
+        // pList 결과가 비어있지 않으면 총 count를 가져옵니다.
+        if(!proList.isEmpty())
+            result = service.loadProMapCount();
+
+        ProfessionHospital p = new ProfessionHospital();
+        p.setMaxValue(result);
+        proList.add(p);
 
         return new Gson().toJson(proList);
     }
