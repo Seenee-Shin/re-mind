@@ -14,11 +14,6 @@ let therapySelect;
 let therapyCount;
 let finallyPrice; // 최종 가격
 
-// ********** 상담사 별 가격 가지고 올 예정
-let textTherapy = 100;
-let faceTherapy = 100;
-let voiceTherapy = 100;
-// **********
 
 $("#therapy_select").change(function(){
     therapySelect = $(this).val();
@@ -30,9 +25,9 @@ $("#therapy_select").change(function(){
     }else if(therapySelect == 3){
         finallyPrice = voiceTherapy*therapyCount;
     }
-
-    
-
+	
+	
+	console.log(textTherapy);
     calc();
     
     therapySelectText = $("#therapy_select option:selected").text();
@@ -49,7 +44,6 @@ $("#therapy_count").on("change",function(){
     }else if(therapySelect == 3){
         finallyPrice = voiceTherapy*therapyCount;
     }
-
 
     calc();
     
