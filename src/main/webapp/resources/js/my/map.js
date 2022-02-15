@@ -192,6 +192,7 @@ function AddrChangeCoords(){
                 $(".distance").eq(i).text(distance[i] + 'm | ' + proAddress[i]);
             }
 
+            console.log("distance : " + distance)
         });
     }
 }
@@ -400,6 +401,7 @@ if(window.innerWidth > 1200){
 // 이건뭐지? 이런거 만든적없는데...
 // var callback = function(result, status) {
 //     if (status === kakao.maps.services.Status.OK) {
+//         console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
 //     }
 // };
 // geocoder.coord2Address(currentPos.getLng(), currentPos.getLat(), callback);
