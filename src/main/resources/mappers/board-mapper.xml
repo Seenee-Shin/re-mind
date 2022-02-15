@@ -232,6 +232,7 @@
 				) e on e.BOARD_NO = BOARD.BOARD_NO
 				WHERE BOARD_CATEGORY_CD = 101
 				AND BOARD_STATUS_CD =201
+				AND MEMBER.STATUS_CD != 1
 				AND (IMAGE.IMAGE_LEVEL = 0 OR IMAGE.IMAGE_LEVEL IS NULL)
 
 				<if test="muteMember != null">
@@ -362,7 +363,8 @@
 				) e on e.BOARD_NO = BOARD.BOARD_NO
 				WHERE BOARD_CATEGORY_CD = #{boardCategoryCode}
 				AND (IMAGE.IMAGE_LEVEL = 0 OR IMAGE.IMAGE_LEVEL IS NULL)
-
+				AND MEMBER.STATUS_CD != 1
+				
 				<if test="muteMember != null">
 					AND MEMBER.MEMBER_NO NOT IN (${muteMember})
 				</if>
