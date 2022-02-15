@@ -35,6 +35,6 @@ input{outline: none; border: 0px}
 
     .side_menu{display: inline-block;}
     .side_menu > ul{display: flex;  }
-    .side_menu > ul > li{width: 25%; text-align: start;}
+    .side_menu > ul > li{width: 25%; /* text-align: start; */}
     .side_menu > ul > hr{display: none;}
 }
