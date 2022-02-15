@@ -385,7 +385,6 @@
             const scrollLocation = document.scrollingElement.scrollTop; //현재 스크롤 바 위치
             const windowHeight = window.innerHeight;  // 화면으로 보이는 스크린 화면의 높이
             const scrollHeight = document.scrollingElement.scrollHeight;
-            console.log(scrollLocation, windowHeight, scrollHeight)
 
             if (scrollLocation + windowHeight >= scrollHeight && !oneTime) {
                 oneTime = true;
