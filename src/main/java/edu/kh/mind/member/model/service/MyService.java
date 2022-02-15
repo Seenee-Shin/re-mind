@@ -20,7 +20,7 @@ import java.util.Map;
 
 public interface MyService {
 
-    List<ProfessionHospital> loadProMap();
+    List<ProfessionHospital> loadProMap(Map<String, Object> map);
 
 	/**
 	 * 스트레스 증상 목록
@@ -114,4 +114,6 @@ public interface MyService {
     int deleteCounselor(Board board);
 
 	List<Reservation> appointmentPast(int memberNo);
+
+	int loadProMapCount();
 }
