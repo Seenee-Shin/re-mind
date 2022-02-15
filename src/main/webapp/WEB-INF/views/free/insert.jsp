@@ -418,25 +418,20 @@ calcPagination()
 function YesScroll () {
    if(last >= listCount)   return;
 
-   const pagination = document.querySelector('.paginaiton');
-   const fullContent = document.querySelector('.main_content');
-   const screenHeight = screen.height;
-
    let oneTime = false;
    document.addEventListener('scroll',OnScroll,{passive:true})
-   function OnScroll () {
-      const fullHeight = fullContent.clientHeight;
-      const scrollPosition = pageYOffset;
 
-	   // console.log(fullHeight - screenHeight/2, scrollPosition)
-      
-      if (fullHeight-screenHeight/2 - 350<= scrollPosition && !oneTime) {
-    	  console.log("test");
-         oneTime = true;
-         currentPage = currentPage + 1;
-         calcPagination();
-         getFreeList();
-      }
+   function OnScroll () {
+	   const scrollLocation = document.scrollingElement.scrollTop; //현재 스크롤 바 위치
+	   const windowHeight = window.innerHeight;  // 화면으로 보이는 스크린 화면의 높이
+	   const scrollHeight = document.scrollingElement.scrollHeight; // 스크롤 높이
+
+	   if (scrollLocation + windowHeight >= scrollHeight && !oneTime) {
+		   oneTime = true;
+		   currentPage = currentPage + 1;
+		   calcPagination();
+		   getFreeList();
+	   }
    }
 }
 // 검색

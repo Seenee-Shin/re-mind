@@ -413,17 +413,17 @@
 
     <select id="setCategory" resultType="string">
         <![CDATA[
-        SELECT LISTAGG(WORRY_NM, ',') WITHIN GROUP(ORDER BY WORRY_CATEGORY_CD) AS WORRY_NM
-        FROM WORRY_CATEGORY
-        WHERE WORRY_CATEGORY_CD IN(
-        SELECT REGEXP_SUBSTR(A.MYDATAS,'[^,]+', 1, ROWNUM) AS MYDATA
-        FROM (
-        SELECT PI.PROFESSION_NO, PRO_TAG AS MYDATAS
-        FROM PROFESSION_INFORMATION PI
-        WHERE PI.PROFESSION_NO = #{professionNo}
-        ) A
-        CONNECT BY ROWNUM <= LENGTH(REGEXP_REPLACE(MYDATAS,'[^,]+')) + 1
-        )
+            SELECT LISTAGG(WORRY_NM, ',') WITHIN GROUP(ORDER BY WORRY_CATEGORY_CD) AS WORRY_NM
+            FROM WORRY_CATEGORY
+            WHERE WORRY_CATEGORY_CD IN(
+                SELECT REGEXP_SUBSTR(A.MYDATAS,'[^,]+', 1, ROWNUM) AS MYDATA
+                FROM (
+                    SELECT PI.PROFESSION_NO, PRO_TAG AS MYDATAS
+                    FROM PROFESSION_INFORMATION PI
+                    WHERE PI.PROFESSION_NO = #{professionNo}
+                ) A
+            CONNECT BY ROWNUM <= LENGTH(REGEXP_REPLACE(MYDATAS,'[^,]+')) + 1
+            )
         ]]>
     </select>
 	

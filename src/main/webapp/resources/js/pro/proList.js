@@ -154,8 +154,6 @@ function makePro(){
 
             $.each(result, function (i, item){
 				
-				console.log(item);
-				
                 if(result.length - 1 == i){
                     listCount = Number.parseInt(item.maxValue);
                     return;
@@ -266,7 +264,6 @@ function makePro(){
             },
             success:function (result){
                 $.each(result, function (i, item){
-                    console.log(item)
                     const ctName = $(".category_name");
 
                     let str = item.worryName.split(",")
@@ -275,8 +272,6 @@ function makePro(){
                     for(let i = 0; i < str.length; i++){
                         tagName += "#" + str[i] + " ";
                     }
-                    console.log(tagName)
-
                     ctName.eq(first - 1 + i).text(tagName)
                 });
             }
