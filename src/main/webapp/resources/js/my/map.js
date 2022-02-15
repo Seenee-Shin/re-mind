@@ -154,9 +154,8 @@ function AddrChangeCoords(){
     //     hospLocation[i] = $(".map-info").eq(i).children().last().children().last().prev().text();
     //     hospLocationSplit[i] = hospLocation[i].split("| ")[1];
     // }
-    let dis2 = [];
 
-    for(let i = 0; i < len; i++){
+    for(let i = first - 1; i < last; i++){
         // 주소로 좌표를 검색합니다
         geocoder.addressSearch(proAddress[i]/* 병원 주소 */, function (result, status) {
             // status == OK or ZERO_RESULT
@@ -185,21 +184,24 @@ function AddrChangeCoords(){
                 path: linePath[i] // 선을 구성하는 좌표배열 입니다
             });
             distance[i] = Math.round(polyline[i].getLength());
+
+            if(distance[i] > 1000){
+                distance[i] = Math.floor(distance[i] / 1000);
+                $(".distance").eq(i).text(distance[i] + 'km | ' + proAddress[i]);
+            }else{
+                $(".distance").eq(i).text(distance[i] + 'm | ' + proAddress[i]);
+            }
+
         });
-    }
-    // distance
-    for(let i = 0; i < len; i++){
-        distance[i] = dis2[i];
     }
 }
 
 
 function makeProList(){
-    for(let i = 0; i < len; i++){
+    for(let i = first - 1; i < last; i++){
 
-        distance.sort(function (a, b){
-            return a - b;
-        });
+        if(i == listCount)
+            return;
 
         const ul = $("#placesList");
 
@@ -219,9 +221,9 @@ function makeProList(){
         let divDistance;
         if(distance[i] > 1000){
             distance[i] = Math.floor(distance[i] / 1000);
-            divDistance = $('<div style="margin-bottom: 10px;"> ' + distance[i] + 'km | ' + proAddress[i] + '</div>');
+            divDistance = $('<div class="distance" style="margin-bottom: 10px;"> ' + distance[i] + 'km | ' + proAddress[i] + '</div>');
         }else{
-            divDistance = $('<div style="margin-bottom: 10px;"> ' + distance[i] + 'm | ' + proAddress[i] + '</div>');
+            divDistance = $('<div class="distance" style="margin-bottom: 10px;"> ' + distance[i] + 'm | ' + proAddress[i] + '</div>');
         }
         const divPhone = $('<div style="margin-bottom: 10px;">' + proBusinessNo[i] + '</div>');
         divCon.append(divH3, divDepartment, divDistance, divPhone);
@@ -257,7 +259,6 @@ function calcPagination(){
 
     last = currentPage * infinityLimit;
     first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
-    console.log("first : " + first, "last : " + last)
 }
 calcPagination();
 
@@ -274,7 +275,6 @@ function YesScroll () {
         const windowHeight = Number.parseInt(menu.css("height").split("px")[0]);  // 화면으로 보이는 스크린 화면의 높이
         const scrollHeight = document.querySelector("#menu-warp").scrollHeight; // 스크롤 높이
 
-        console.log(scrollLocation, windowHeight, scrollHeight)
         if (scrollLocation + windowHeight >= scrollHeight && !oneTime) {
             oneTime = true;
             currentPage = currentPage + 1;
@@ -310,11 +310,11 @@ function getHospital(){
                     return;
                 }
 
-                professionNo[i] = item.professionNo;
-                proAddress[i] = item.hospitalAddress;
-                proHospName[i] = item.hospitalName;
-                proHospPhone[i] = item.hospitalPhone;
-                proBusinessNo[i] = item.businessNo;
+                professionNo[first - 1 + i] = item.professionNo;
+                proAddress[first - 1 + i] = item.hospitalAddress;
+                proHospName[first - 1 + i] = item.hospitalName;
+                proHospPhone[first - 1 + i] = item.hospitalPhone;
+                proBusinessNo[first - 1 + i] = item.businessNo;
             });
         },
         error:function (req, sta, er){
@@ -323,8 +323,8 @@ function getHospital(){
         }
     }).done(function (){
         YesScroll();
-        makeProList();
         AddrChangeCoords();
+        makeProList();
         // setTimeout(makeProList, 200);
     });
 }
@@ -400,7 +400,6 @@ if(window.innerWidth > 1200){
 // 이건뭐지? 이런거 만든적없는데...
 // var callback = function(result, status) {
 //     if (status === kakao.maps.services.Status.OK) {
-//         console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
 //     }
 // };
 // geocoder.coord2Address(currentPos.getLng(), currentPos.getLat(), callback);
