@@ -40,7 +40,7 @@ public class LoginFilter implements Filter{
         String contextPath = req.getContextPath();
         response.setContentType("text/html;charset=utf-8");
 
-        PrintWriter out = response.getWriter();
+//
 
 
         String[] arr = uri.substring( (contextPath +"/").length()).split("/");
@@ -65,17 +65,15 @@ public class LoginFilter implements Filter{
                             arr[1].equals("updateMyInfo")
                     ) {
                         System.out.println("[필터] : 잘못된 접근입니다. 로그인페이지로 이동합니다.");
+
+                        PrintWriter out = response.getWriter();
                         out.println("<script>");
-
                         out.println("alert('로그인 후 이용해주시기 바랍니다.');");
-
                         out.println("location.href='/mind';");
-
                         out.println("</script>");
-
                         out.close();
 
-                        resp.sendRedirect(req.getContextPath() + "/mind");
+                        resp.sendRedirect(req.getContextPath());
                     }else {
                         chain.doFilter(request, response);
                     }
@@ -112,8 +110,6 @@ public class LoginFilter implements Filter{
         }else {
             chain.doFilter(request, response);
         }
-
-
     }
 
 
