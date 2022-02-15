@@ -10,8 +10,8 @@
     <h1> 이메일 인증 완료 </h1>
 
         <div style="text-align: center;">
-            아래 링크로 이동하여 상담사 등록을 마무리해주세요
-        	<a href="proRegisterDetail/${loginPro.professionNo}">상담사 정보 등록하기</a>
+            아래 링크로 이동하여 상담사 등록을 마무리해주세요 <br>
+        	<a href="proRegisterDetail/${loginPro.professionNo}" style="margin-top: 30px; font-size: 25px; font-weight: 600;">상담사 정보 등록하기</a>
         </div>
 
 </main>

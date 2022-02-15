@@ -56,17 +56,17 @@
 
            <article class="proInfo">
                <h3>하고싶은 말</h3>
-               <div class= proInfoDiv style="text-align: left; border: 1px solid #ededed; height: 150px;">${proInfo.professionIntro}</div>
+               <div class= proInfoDiv style="text-align: left; border: 1px solid #ededed; height: 150px; overflow: auto;">${proInfo.professionIntro}</div>
            </article>
 
            <article class="proInfo">
                <h3>상담사 소개</h3>
-               <div class= proInfoDiv style="text-align: left; border: 1px solid #ededed; height: 150px;">${proInfo.professionStory}</div>
+               <div class= proInfoDiv style="text-align: left; border: 1px solid #ededed; height: 150px; overflow: auto;">${proInfo.professionStory}</div>
            </article>
            
            <article class="proInfo">
                <h3>경력</h3>
-               <div class= proInfoDiv style="text-align: left; border: 1px solid #ededed; height: 150px;">${proInfo.professionCarrer}</div>
+               <div class= proInfoDiv style="text-align: left; border: 1px solid #ededed; height: 150px; overflow: auto;">${proInfo.professionCarrer}</div>
            </article>
        </section>
 
@@ -78,19 +78,19 @@
 		           <article class="proPrice">
 	                   <label for = "${p.counselCategoryCode}">
 	                   		<c:choose>
-	                   			<c:when test="${p.counselCategoryCode == 1}">채팅상담</c:when>
-	                   			<c:when test="${p.counselCategoryCode == 2}">화상상담</c:when>
-	                   			<c:otherwise> 전화상담</c:otherwise>
+	                   			<c:when test="${p.counselCategoryCode == 1}">채팅상담 : </c:when>
+	                   			<c:when test="${p.counselCategoryCode == 2}">화상상담 :</c:when>
+	                   			<c:otherwise> 전화상담 :</c:otherwise>
 	                   		</c:choose>
 	                   </label>
-	                   <div> ${p.counselPrice}원 </div>
+	                   <div style="display: inline-block; margin-left: 10px; margin-bottom: 10px;"> ${p.counselPrice}원 </div>
 		           </article>
-	           </c:forEach>>
+	           </c:forEach>
 
            
        </section>
        
-       <button onclick="location.href='../update/${loginPro.professionNo}'">수정하기</button>
+       <button onclick="location.href='../update/${loginPro.professionNo}'" style="margin-bottom: 150px;">수정하기</button>
 
 </main>
 
