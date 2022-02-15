@@ -270,8 +270,9 @@ main{
 }
 
 .main_content3 > div > div > span:first-child {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 500;
+
 }
 
 .main_content3 > div > div > p:first-of-type {
@@ -279,7 +280,7 @@ main{
 }
 
 .main_content3 > div > div > p {
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .main_content3 > div > div > p:last-of-type {
@@ -491,7 +492,7 @@ main{
     .main_wrap {
         text-align: center;
         justify-content: center;
-        align-items: center; margin-bottom: 100px;
+        align-items: center;
         clear: both;
     }
 

@@ -45,7 +45,7 @@ public class HomeController {
 		List<Board> listBoard = boardService.selectMainBoardList();
 
 		// 상담사 랜덤
-		Profession profession = proService.selectProRandom();
+		List<Profession> profession = proService.selectProRandom();
 
 		// 공지사항
 		List<Notice> noticeList = noticeService.noticeList("main");

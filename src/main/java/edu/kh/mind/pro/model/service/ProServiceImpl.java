@@ -63,7 +63,7 @@ public class ProServiceImpl implements ProService{
 	 * @return
 	 */
 	@Override
-	public Profession selectProRandom() {
+	public List<Profession> selectProRandom() {
 		return dao.selectProRandom();
 	}
 

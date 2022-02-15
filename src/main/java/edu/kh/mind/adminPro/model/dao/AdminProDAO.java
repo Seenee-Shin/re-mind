@@ -24,7 +24,7 @@ public class AdminProDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
-	/** 이메일 중복 확인
+	/* 이메일 중복 확인
 	 * @param inputId
 	 * @return
 	 */
