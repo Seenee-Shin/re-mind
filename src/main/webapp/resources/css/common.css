@@ -131,6 +131,7 @@ main{
 
 .main_wrap{
   width: 100%;
+  overflow: hidden;
 }
 /* ---------------------------------------- */
 .side_menu{
@@ -426,6 +427,9 @@ a:hover{color:#A59999;}
   .dep1_li{
   line-height:50px;
   
+  }
+  .dep2_li{
+  	border:none;
   }
 
    /* ------ 헤더 ------- */
