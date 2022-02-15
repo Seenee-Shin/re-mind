@@ -229,6 +229,12 @@ main{
     padding: 0;
     word-spacing: 0px;
     line-height: 16px;
+      
+}
+
+.main_content2_content_board > p{
+	 height: 207px;
+    overflow: hidden;
 }
 
 /* 메인 컨텐트 3 */
