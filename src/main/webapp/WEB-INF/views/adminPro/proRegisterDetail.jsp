@@ -6,7 +6,7 @@
 <!-- header include -->
 <jsp:include page="../procommon/header.jsp"></jsp:include>
 
-<main>
+<main style="padding-right: 90px;">
     <h1>상담사 등록 신청 </h1>
     <br>
     <form action="../proRegisterDetail" method="post" enctype="multipart/form-data" role="form" name="proRegisterDetail" onsubmit="addressVal()"> 
@@ -15,32 +15,33 @@
             <div class="label">
             병원명
             </div>
-            <input type="text" name="hospitalName" id="hospitalName" required> <br>
+            <input type="text" name="hospitalName" id="hospitalName" value="kh 심리상담 센터" required> <br>
 
             <div class="label">
             병원주소 
             </div>
-            <input type="text" name="address" id="hospitalAddress" readonly="readonly"> <button type="button" id="address_kakao">주소 찾기</button> <br>
+            <input type="text" name="address" id="hospitalAddress" readonly="readonly"> <button type="button" id="address_kakao" style="display: inline-block;">주소 찾기</button> <br>
                <div class="label">
             </div>
-            <input type="text" name="address" id="address_detail"> 
+            <input type="text" name="address" id="address_detail" value="2층"> 
             <br>
 			<br>
             <div class="label">
             병원 전화번호
             </div>
-            <input type="text" name="hospitalPhone" id="hospitalPhone" required> <br>
+            <input type="text" name="hospitalPhone" id="hospitalPhone" value="02-3425-3523" required> <br>
             
             <div class="label">병원 개업번호</div>
-            <input type="text" name="businessNo" id="businessNo" required> <br>
+            <input type="text" name="businessNo" id="businessNo" value="12-4253-5235" required> <br>
             
             <br>
-            
+           
             <div class="label">학력사항</div> <br>
-            <div class="label child">학교명</div><input type="text" name="professionUniversity" id="schoolName" required> <br>
-            <div class="label child ">학과명</div> <input type="text" name="professionDepartment" id="schoolPart" required> <br>
-            <div class="label child">전공</div>  <input type="text" name="professionMajor" id="schoolMajor" required> <br>
-            <input type="file" name="certification" id="certification" accept="image/*, .pdf" required> <label for="certification">증명서 첨부</label>
+            <div class="label child">학교명</div><input type="text" name="professionUniversity" id="schoolName" value="kh대학교" required> <br>
+            <div class="label child ">학과명</div> <input type="text" name="professionDepartment" id="schoolPart" value="심리상담학부" required> <br>
+            <div class="label child">전공</div>  <input type="text" name="professionMajor" id="schoolMajor" value="심리학과" required> 
+            <input type="file" name="certification" id="certification" accept="image/*, .pdf" required> 
+            <label for="certification" style="font-size: 18px; font-weight: 500; color: #a59999">증명서 첨부</label>
             <br>
             <br>
             <br>
@@ -50,7 +51,7 @@
             <br>
             <br>
             <input type="hidden" name="professionNo" id="professionNo" value="${professionNo}">
-            <button style="display: inline-block; text-align: center;">등록하기</button>
+            <button style=" text-align: center; margin-bottom: 150px;">등록하기</button>
         </div>
     </form>
 </main>
