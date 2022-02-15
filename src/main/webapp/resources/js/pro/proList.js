@@ -188,7 +188,10 @@ function makePro(){
                 else // 있으면 경로로 이미지이름 추가로 가져와야됨
                     pro_profile_img2 = $('<img src="'+contextPath+item.imagePath+'/'+item.imageName+'" class="profile">');
 
-                pro_profile.append(pro_profile_img1, pro_profile_img2);
+                if (item.reviewCount > 0) {
+                    pro_profile.append(pro_profile_img1);
+                }
+                pro_profile.append(pro_profile_img2);
 
                 const pro_intro_wrap = $('<div class="pro_intro_wrap">');
                 const pro_intro_wrap_div = $("<div>");
