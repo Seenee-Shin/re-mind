@@ -643,6 +643,7 @@
 		FROM LETTER L
 			JOIN PROFESSION P ON (P.PROFESSION_NO = L.PROFESSION_NO)
 		WHERE L.MEMBER_NO = #{memberNo}
+		ORDER BY L.LETTER_NO DESC
 	</select>
 
 	<select id="selectMainBoardList" resultMap="board_rm">

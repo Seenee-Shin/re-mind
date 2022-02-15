@@ -187,6 +187,7 @@
                         "memberNo": memberNo},
                     success:function (result){
                         // console.log(url);
+                        window.location.reload();
                     }
                 });
         }
