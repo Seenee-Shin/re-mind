@@ -51,12 +51,18 @@ public class ProController {
 	public String proCategory(@RequestParam(value = "worryCtCd[]", required = false) List<Integer> worryCtCd,
 							  @RequestParam Map<String, Integer> param){
 
+		String proName = String.valueOf(param.get("proName"));
 		Map<String, Object> map = new HashMap<>();
 
 		map.put("categoryArr", worryCtCd);
 		map.put("first", param.get("first"));
 		map.put("last", param.get("last"));
-		map.put("proName", param.get("proName"));
+
+		if(proName.equals(""))
+			map.put("proName", null);
+		else
+			map.put("proName", param.get("proName"));
+
 		if(Integer.parseInt(String.valueOf(param.get("gender"))) == 1)
 			map.put("gender", "남");
 		else if(Integer.parseInt(String.valueOf(param.get("gender"))) == 2)
