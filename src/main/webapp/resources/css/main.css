@@ -697,17 +697,7 @@ main{
         width: 100%;
     }
 
-    .mb_main_content3 > p{
-        margin-left: 25px;
-        text-align: left;
-    }
     .mb_main_content3 > p:nth-child(1) {
-        margin: 0px 0 5px 25px;
-        font-size: 15px;
-        font-weight: 400;
-    }
-
-    .mb_main_content3 > p:nth-child(2) {
         font-size: 25px;
         font-weight: 550;
     }

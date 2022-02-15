@@ -140,66 +140,105 @@
 
 <!-- 모바일 메인 컨텐트 3 -->
 <article class="mb_main_content3">
-    <p>무료 상담으로 자신에게 맞는 전문가를 찾아보세요</p>
     <p>나에게 딱 맞는 전문가</p>
 
     <!-- Swiper -->
     <div class="swiper2 mySwiper2" style="overflow: hidden;">
         <div class="swiper-wrapper">
+            <%-- 프로필 시작--%>
             <div class="swiper-slide profile">
                 <div class="mb_main_profile">
                     <!-- 이미지 영역 -->
                     <div class="mb_main_profile_img">
-                        <div></div>
+                        <div style="background:url(${contextPath}${profession.imagePath}/${profession.imageName}) no-repeat center center; background-size: cover;"></div>
                     </div>
                     <div class="mb_main_profile_content">
-                        <span>서승준</span>
+                        <span>${profession.professionName}</span>
                         <p>당신의 삶은 누가 통제합니까?</p>
                         <p>누구든지 자신의 삶의 빛을 스스로 찾을 수 있습니다.</p>
                         <span>#우울증</span> <span>#스트레스</span> <span>#가족/인간관계</span>
                         <div>
-                            <button><i class="fas fa-phone-alt"></i> 전화상담</button>
-                            <button><i class="fas fa-comments"></i> 실시간 채팅</button>
+                            <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-phone-alt"></i> 전화상담</button>
+                            <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-comments"></i> 실시간 채팅</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide profile">
-                <div class="mb_main_profile">
-                    <!-- 이미지 영역 -->
-                    <div class="mb_main_profile_img">
-                        <div></div>
-                    </div>
-                    <div class="mb_main_profile_content">
-                        <span>서승준</span>
-                        <p>당신의 삶은 누가 통제합니까?</p>
-                        <p>누구든지 자신의 삶의 빛을 스스로 찾을 수 있습니다.</p>
-                        <span>#우울증</span> <span>#스트레스</span> <span>#가족/인간관계</span>
-                        <div>
-                            <button><i class="fas fa-phone-alt"></i> 전화상담</button>
-                            <button><i class="fas fa-comments"></i> 실시간 채팅</button>
+
+                <%-- 프로필 끝--%>
+                <div class="swiper-slide profile">
+                    <div class="mb_main_profile">
+                        <!-- 이미지 영역 -->
+                        <div class="mb_main_profile_img">
+                            <div style="background:url(${contextPath}${profession.imagePath}/${profession.imageName}) no-repeat center center;     background-size: cover;"></div>
+                        </div>
+                        <div class="mb_main_profile_content">
+                            <span>${profession.professionName}</span>
+                            <p>당신의 삶은 누가 통제합니까?</p>
+                            <p>누구든지 자신의 삶의 빛을 스스로 찾을 수 있습니다.</p>
+                            <span>#우울증</span> <span>#스트레스</span> <span>#가족/인간관계</span>
+                            <div>
+                                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-phone-alt"></i> 전화상담</button>
+                                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-comments"></i> 실시간 채팅</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="swiper-slide profile">
-                <div class="mb_main_profile">
-                    <!-- 이미지 영역 -->
-                    <div class="mb_main_profile_img">
-                        <div></div>
-                    </div>
-                    <div class="mb_main_profile_content">
-                        <span>서승준</span>
-                        <p>당신의 삶은 누가 통제합니까?</p>
-                        <p>누구든지 자신의 삶의 빛을 스스로 찾을 수 있습니다.</p>
-                        <span>#우울증</span> <span>#스트레스</span> <span>#가족/인간관계</span>
-                        <div>
-                            <button><i class="fas fa-phone-alt"></i> 전화상담</button>
-                            <button><i class="fas fa-comments"></i> 실시간 채팅</button>
+                <div class="swiper-slide profile">
+                    <div class="mb_main_profile">
+                        <!-- 이미지 영역 -->
+                        <div class="mb_main_profile_img">
+                            <div style="background:url(${contextPath}${profession.imagePath}/${profession.imageName}) no-repeat center center;     background-size: cover;"></div>
+                        </div>
+                        <div class="mb_main_profile_content">
+                            <span>${profession.professionName}</span>
+                            <p>당신의 삶은 누가 통제합니까?</p>
+                            <p>누구든지 자신의 삶의 빛을 스스로 찾을 수 있습니다.</p>
+                            <span>#우울증</span> <span>#스트레스</span> <span>#가족/인간관계</span>
+                            <div>
+                                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-phone-alt"></i> 전화상담</button>
+                                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-comments"></i> 실시간 채팅</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="swiper-slide profile">
+                    <div class="mb_main_profile">
+                        <!-- 이미지 영역 -->
+                        <div class="mb_main_profile_img">
+                            <div style="background:url(${contextPath}${profession.imagePath}/${profession.imageName}) no-repeat center center; background-size: cover;"></div>
+                        </div>
+                        <div class="mb_main_profile_content">
+                            <span>${profession.professionName}</span>
+                            <p>당신의 삶은 누가 통제합니까?</p>
+                            <p>누구든지 자신의 삶의 빛을 스스로 찾을 수 있습니다.</p>
+                            <span>#우울증</span> <span>#스트레스</span> <span>#가족/인간관계</span>
+                            <div>
+                                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-phone-alt"></i> 전화상담</button>
+                                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-comments"></i> 실시간 채팅</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide profile">
+                    <div class="mb_main_profile">
+                        <!-- 이미지 영역 -->
+                        <div class="mb_main_profile_img">
+                            <div style="background:url(${contextPath}${profession.imagePath}/${profession.imageName}) no-repeat center center;     background-size: cover;"></div>
+                        </div>
+                        <div class="mb_main_profile_content">
+                            <span>${profession.professionName}</span>
+                            <p>당신의 삶은 누가 통제합니까?</p>
+                            <p>누구든지 자신의 삶의 빛을 스스로 찾을 수 있습니다.</p>
+                            <span>#우울증</span> <span>#스트레스</span> <span>#가족/인간관계</span>
+                            <div>
+                                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-phone-alt"></i> 전화상담</button>
+                                <button onclick="window.location.href=contextPath + '/pro/proView/${profession.professionNo}'"><i class="fas fa-comments"></i> 실시간 채팅</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
         </div>
         <div class="swiper-button-next" style="top:1750px; color: #E5D4C5; width: 30px;"></div>
         <div class="swiper-button-prev" style="top: 1750px; color: #E5D4C5; width: 30px;"></div>
@@ -322,7 +361,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div>
             <div class="main_content4_content_postit">
                 <div>마인드 포스트잇</div>
