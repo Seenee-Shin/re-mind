@@ -7,7 +7,7 @@
 
  <div class="study_modal">
  	<div class="study_modal_title">
- 		<h2>오늘 점심은 무엇을 드시나요? <br>점심 메뉴 추천하기</h2>
+ 		<h2>여러분 모두 고생하셨습니다! <br>종강 소감 말하기</h2>
  	</div>
  	
 	<form action="insert" method="POST">
