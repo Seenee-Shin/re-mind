@@ -12,5 +12,5 @@ public interface SelftestService {
     Map<String, Object> selectQ(Selftest selftest);
 
     // 결과 조회
-    List<Selftest> selectResult(Selftest selftest);
+    Selftest selectResult(Selftest selftest);
 }
