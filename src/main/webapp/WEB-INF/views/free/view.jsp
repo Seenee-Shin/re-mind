@@ -28,9 +28,14 @@
                     </c:choose>
                     </div>
                     <div class="profile_wrap">
-                        <div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);">
-                        </div>
-
+						<c:choose>
+							<c:when test="${empty board.imageName}">
+								<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
+							</c:when>
+							<c:otherwise>
+								<div class="writer_pic" style="background-image: url(${contextPath}${board.imagePath}${board.imageName});"></div>
+							</c:otherwise>
+						</c:choose>
                         <div class="writer_id">
                             <p>${board.memberFn}</p>
                         </div>
