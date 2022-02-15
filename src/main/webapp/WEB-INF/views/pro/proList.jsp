@@ -264,7 +264,6 @@
 	    </div>
 
 </article>
-<div class="pagination"></div>
 <%--1001,1002,1003,1004,1005--%>
 <%--where categoryNo like '%' || #{categoryNo} || '%'--%>
 <!-- header include -->
@@ -302,19 +301,17 @@
 
 	// 무한스크롤
 	function YesScroll () {
-		console.log(last, listCount)
+		console.log("last : " + last, "listCount : " + listCount)
 		if(last >= listCount)	return;
-
-		const pagination = document.querySelector('.paginaiton');
-		const fullContent = document.querySelector('.main_content2');
-		const screenHeight = screen.height;
 
 		let oneTime = false;
 		document.addEventListener('scroll',OnScroll,{passive:true})
 		function OnScroll () {
-			const fullHeight = fullContent.clientHeight;
-			const scrollPosition = pageYOffset;
-			if (fullHeight-screenHeight/2 <= scrollPosition && !oneTime) {
+			const scrollLocation = document.scrollingElement.scrollTop; //현재 스크롤 바 위치
+			const windowHeight = window.innerHeight;  // 화면으로 보이는 스크린 화면의 높이
+			const scrollHeight = document.scrollingElement.scrollHeight; // 스크롤 높이
+
+			if (scrollLocation + windowHeight >= scrollHeight && !oneTime) {
 				oneTime = true;
 				currentPage = currentPage + 1;
 				calcPagination();
