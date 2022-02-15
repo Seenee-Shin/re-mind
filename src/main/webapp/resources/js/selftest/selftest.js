@@ -18,6 +18,9 @@ let titleHtml = "";
 // 결과 content html
 let resultHtml = "";
 
+// 카테고리 명
+let cName;
+
 $(function () {
     // 자가진단 선택
     if (type) {
@@ -31,6 +34,7 @@ $(function () {
 
 // 증상 선택
 $(".selfTest_op").on("click", function () {
+    cName = $(this).text();
     $(".selfTest_op").removeClass("active");
     $(this).addClass("active");
     reset();
@@ -54,8 +58,9 @@ async function selftestQuestion(next=1){
 
             _questionNo = _questionNo + next;
 
+
             let html = '<div class="selfTest_title">'
-                + '<h1>자존감 자가진단 테스트</h1>'
+                + '<h1>' + cName + ' 자가진단 테스트</h1>'
                 + '<div>'
                 +'    이 검사는 자신에 대해서 어떻게 느끼는 지를'
                 +'    알아보기 위한 것입니다.<br>'
@@ -188,4 +193,3 @@ function reset() {
     _answerNo = 0;
     _score = 0;
 }
-
