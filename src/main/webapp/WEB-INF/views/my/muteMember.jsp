@@ -17,12 +17,13 @@
                     <td class="mute-img">
                         <c:choose>
                             <c:when test="${empty muteMember.imageName}">
-                                <img class="profile" src="${contextPath}/resources/images/basicProfile.png"></td>
+                                <img class="profile" src="${contextPath}/resources/images/basicProfile.png">
                             </c:when>
                             <c:otherwise>
                                 <img class="profile" src="${contextPath}${muteMember.imagePath}${muteMember.imageName}">
                             </c:otherwise>
                         </c:choose>
+                        </td>
                     <td class="mute-td">${muteMember.memberFName}</td>
                     <td><button class="mute-delete" id="${muteMember.muteNo}">해제</button></td>
                 </tr>

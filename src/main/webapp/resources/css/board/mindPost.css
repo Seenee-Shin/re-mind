@@ -331,16 +331,37 @@
 
 
 
-
-
-
-
-
-/* ----------모바일 --------------- 
-@media screen and (max-width: 768px){
-
-
+@media screen and (max-width: 1120px){
+	
+	.side_menu{
+      display: none;
+    }
+    
     .main_content{
+	    width: 100%;
+	    padding-left: 0px;
+	}
+    
+}
+
+
+
+/*----------모바일 --------------- */
+@media screen and (max-width: 950px){
+	.study_title, .study_content, .pagination{
+	display : none;
+	}
+	
+	.study::after{
+	content:"이 달의 연구는 모바일 앱에서 지원되지 않습니다!";
+	
+	}
+}
+
+
+
+
+    /*.main_content{
        padding-left: 0;
        margin-left : 5px;
        padding-right: 5px;
