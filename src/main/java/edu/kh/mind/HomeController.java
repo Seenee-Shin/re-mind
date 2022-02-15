@@ -1,7 +1,6 @@
 package edu.kh.mind;
 
 import edu.kh.mind.board.model.service.BoardService;
-import edu.kh.mind.common.util.LoginFilter;
 import edu.kh.mind.notice.model.service.NoticeService;
 import edu.kh.mind.notice.model.vo.Notice;
 import edu.kh.mind.pro.model.service.ProService;

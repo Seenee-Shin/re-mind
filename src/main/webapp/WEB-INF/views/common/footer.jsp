@@ -19,7 +19,7 @@
 
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    
+
     <!-- sweetealert : 경고창 api -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -32,17 +32,7 @@
     <script src="${contextPath}/resources/js/common/main.js"></script>
 
     <script src="${contextPath}/resources/js/google/googleAPI.js"></script>
-    
-    <%-- request scope에 "title"이라는 키 값이 존재하는 경우 --%>
-	<c:if test="${ !empty requestScope.title }">
-	<script>
-		swal({
-			title : "${title}",
-			text : "${text}",
-			icon : "${icon}"
-		});
-	</script>
-	</c:if>
+
 
     <!-- sweetealert : 경고창 api -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

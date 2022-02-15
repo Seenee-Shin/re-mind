@@ -176,9 +176,19 @@
     const memberNo = ${loginMember.memberNo};
 
 <%--    const professionNo = ${counselorList.professionNo};--%>
+var flag;
 
+var swal;
     function deleteCounselor(professionNo){
-        if(confirm("찜을 해제하시겠습니까?")){
+
+        swal = swal({
+            title: "Y/N?",
+            text: "",
+            icon: "info",
+            buttons: ["NO", "YES"]
+        }).then((YES) => {
+            if (YES) {
+                flag = true;
                 $.ajax({
                     url:"deleteCounselor",
                     type:"POST",
@@ -190,7 +200,16 @@
                         window.location.reload();
                     }
                 });
-        }
-    }
-<%--    </c:if>--%>
+            }else{
+                flag = false;
+            }
+        });
+
+        Promise.all([swal]).then(function (){
+
+            // console.log(flag);
+        });
+
+
+    };
 </script>
