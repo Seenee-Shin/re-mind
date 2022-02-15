@@ -42,6 +42,10 @@ public class LoginFilter implements Filter{
 
         HttpServletRequest req = (HttpServletRequest)request;
         HttpServletResponse resp = (HttpServletResponse)response;
+        response.setContentType("text/html;charset=utf-8");
+
+        PrintWriter out = response.getWriter();
+
 
         String uri = req.getRequestURI();
         String contextPath = req.getContextPath();
@@ -74,7 +78,18 @@ public class LoginFilter implements Filter{
                             arr[1].equals("clearMember")
                     ) {
                         System.out.println("[필터] : 잘못된 접근입니다. 로그인 후 이용해주시기 바랍니다.");
+
+                        out.println("<script>");
+
+                        out.println("alert('로그인 후 이용해주시기 바랍니다.');");
+
+                        out.println("location.href='/mind';");
+
+                        out.println("</script>");
+
+                        out.close();
                         resp.sendRedirect(req.getContextPath() + "/");
+
                     }else {
                         chain.doFilter(request, response);
                     }
@@ -87,28 +102,6 @@ public class LoginFilter implements Filter{
                     resp.sendRedirect(req.getContextPath() + "/");
 
                 }
-                // 비회원 + admin/* 페이지
-                else if(arr[0].equals("adminPro")) {
-
-                    if(      arr[1].equals("member") ||
-                            arr[1].equals("ask") ||
-                            arr[1].equals("post") ||
-                            arr[1].equals("report") ||
-                            arr[1].equals("statistics")
-                    ) {
-                        System.out.println("[필터] : 잘못된 접근입니다. 관리자 로그인페이지로 이동합니다.");
-                        resp.sendRedirect(req.getContextPath() + "/");
-
-                    }else {
-                        chain.doFilter(request, response);
-                    }
-
-                }else if(arr[0].equals("board1")) {
-                    System.out.println("[필터] : 잘못된 접근입니다. 로그인페이지로 이동합니다.");
-                    resp.sendRedirect(req.getContextPath() + "/");
-
-
-                }
                 // 비회원 + 나머지 페이지
                 else {
                     chain.doFilter(request, response);
@@ -117,48 +110,6 @@ public class LoginFilter implements Filter{
 
 
                 // ---------------- 로그인 ----------------
-            }else {
-
-                if(arr[0].equals("member")) {
-
-                    // 회원 + /member/login , /member/signUp , member/findPw 인 경우
-                    if(arr[1].equals("login") || arr[1].equals("signUp") ||arr[1].equals("findPw") || arr[1].equals("resetPw") ) {
-                        resp.sendRedirect(req.getContextPath());
-                        // resp.sendRedirect(req.getContextPath()+"/main");
-                    }else {
-                        chain.doFilter(request, response);
-                    }
-
-                }
-                else if(arr[0].equals("admin")) {
-
-                    if(loginMember.getStatusCode() == 0) {
-
-                        // 일반 회원인 경우
-                        if(      arr[1].equals("member") ||
-                                arr[1].equals("ask") ||
-                                arr[1].equals("post") ||
-                                arr[1].equals("report") ||
-                                arr[1].equals("statistics")||
-                                arr[1].equals("main")
-                        ) {
-                            System.out.println("[필터] : 잘못된 접근입니다. 관리자 로그인페이지로 이동합니다.");
-                            resp.sendRedirect(req.getContextPath() + "/admin/login");
-                        }else {
-                            chain.doFilter(request, response);
-                        }
-
-                    }else if(loginMember.getStatusCode() != 0) {
-
-                        chain.doFilter(request, response);
-
-                    }
-
-                }
-                else {
-                    chain.doFilter(request, response);
-                }
-
             }
 
         }else {
