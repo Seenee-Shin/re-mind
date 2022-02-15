@@ -114,7 +114,7 @@ public class AdminProController {
 					
 			List<Board> proWorryList = service.proWorryListSelect(loginPro);
 			
-			System.out.println(proWorryList);
+			System.out.println("이거말하는거지"+proWorryList);
 			
 			return proWorryList;
 		}

@@ -126,6 +126,16 @@
     const loginMemberNm = '${memberNm}';
     const loginMemberId = '${memberId}';
     const loginMemberPhone = '${memberPhone}';
+    
+    let proPrice = "${proPrice}";
+    
+    let proPrice2 = proPrice.split(","); 
+    
+    let textTherapy = proPrice2[0];
+	let faceTherapy = proPrice2[1];
+	let voiceTherapy = proPrice2[2];
+
+    
 </script>
 <script type="text/javascript" src="${contextPath}/resources/js/pro/pro.js"></script>
 <!-- jQuery -->
@@ -151,7 +161,7 @@
         success:function (result){
             $.each(result, function (i, item){
 
-                console.log(item)
+                console.log(item);
 
                 const timeLength = item.reservationEnrollTime.split(",").length;
                 const date = item.reservationEnrollDate.split(" ")[0];

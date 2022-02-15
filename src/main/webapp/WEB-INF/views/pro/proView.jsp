@@ -298,6 +298,11 @@
 	const profession = "${profession.counselCategoryCode}";
 	const professionNo = "${profession.professionNo}";
 	const memberNo = "${loginMember.memberNo}";
+	
+	const textTherapy = "${splitPrice[0]}";
+	const faceTherapy = "${splitPrice[1]}";
+	const voiceTherapy = "${splitPrice[2]}";
+
 
 	function proReservation(){
 		
@@ -515,7 +520,5 @@
 		}
 
 		}); */
-
-	
-
 </script>
+<script type="text/javascript" src="${contextPath}/resources/js/pro/pro.js"></script>
