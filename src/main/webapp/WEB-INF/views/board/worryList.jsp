@@ -11,7 +11,10 @@
 	            <div  class="comunity_title">
 	                <h3>고민을 나눠보면 어떨까요?</h3>
 	                <p> 회원분들과 전문가분들이 여러분을 도와주실거에요.</p>
-	                <button id="openModal" class="submit_btn"> 고민 작성하기 </button>
+		            <c:if test="${loginMember.memberNo != null}">
+			            <button id="openModal" class="submit_btn"> 고민 작성하기 </button>
+		            </c:if>
+
 	            </div>
 
 				<div class="worry_search_area">
