@@ -28,8 +28,8 @@ public class AdminProDAO {
 	 * @param inputId
 	 * @return
 	 */
-	public int idCheck(String inputId) {
-		return sqlSession.selectOne("professionMapper.idCheck", inputId);
+	public int idCheck(String professionId) {
+		return sqlSession.selectOne("professionMapper.idCheck", professionId);
 	}
 
 	

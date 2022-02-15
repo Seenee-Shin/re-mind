@@ -48,22 +48,23 @@ function validate(){
 if (document.getElementById("professionId") != null) {
 	document.getElementById("professionId").addEventListener("input",(e)=>{
 
-		const inputEmail = e.target.value
+		const professionId = e.target.value
 		const regEmail = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
 		const checkEmail = document.getElementById("checkEmail")
 
-		if(inputEmail.length ==0){
+		if(professionId.length ==0){
 			checkEmail.innerText=""
 			registCheckObj.id = false
 
-		}else if(regEmail.test(inputEmail)){
+		}else if(regEmail.test(professionId)){
 			$.ajax({
 				url :"emailDupCheck",
 				type : "get",
-				data : {"inputEmail":inputEmail},
+				data : {"professionId":professionId},
 
 				success : function(result){
-
+					
+					console.log(result)
 					if(result == 0){
 						checkEmail.innerText = "사용가능한 이메일입니다."
 						checkEmail.style.color = "green"
