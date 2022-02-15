@@ -1,6 +1,7 @@
 package edu.kh.mind.pro.model.service;
 
 import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.board.model.vo.WorryCategory;
 import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.model.vo.ProfessionPrice;
 import edu.kh.mind.member.model.vo.Review;
@@ -64,6 +65,6 @@ public interface ProService {
 	// 상담사 총 후기 count
 	int listCountSelect(Review review);
 
-	
 
+	String setCategory(int professionNo);
 }

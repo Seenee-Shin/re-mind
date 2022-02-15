@@ -72,11 +72,11 @@
         <![CDATA[
             SELECT * FROM(
             SELECT ROWNUM AS RNUM, R.* FROM (
-            SELECT CATEGORY_NO, RESULT_CONTENT, RESULT_RATE, RESULT_NO, (RESULT_RATE-#{score}) RATE
+            SELECT CATEGORY_NO, RESULT_CONTENT, RESULT_RATE, RESULT_NO
             FROM SELF_CHECK_RESULT
             WHERE CATEGORY_NO = #{categoryNo}
             AND RESULT_RATE >= #{score}
-            ORDER BY RATE ASC
+            ORDER BY RESULT_RATE ASC
             ) R)
             WHERE RNUM < 2
         ]]>

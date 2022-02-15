@@ -18,12 +18,6 @@ $("#category_cancel_btn").on("click",function(){
     $("#mobile_category_btn").css("display","block");
 }); 
 
-$(document).on("click", ".cate_btn_click", function (){
-    // ul.empty();
-    // currentPage = 1;
-    // calcPagination();
-});
-
 var gender = 0;
 $(".gender").on("click", function (){
     const thisId = $(this).attr("id");
@@ -34,12 +28,7 @@ $(".gender").on("click", function (){
     else if(thisId == "unrelated2")
         gender = 0;
 
-    console.log("gender : " + gender)
-
-    currentPage = 1;
-    calcPagination();
-    ul.empty();
-    makePro();
+    paking();
 });
 
 var therapy = 0;
@@ -55,12 +44,7 @@ $(".therapy").on("click", function (){
     else if(thisId == "unrelated")
         therapy = 0;
 
-    console.log("therapy : " + therapy)
-
-    currentPage = 1;
-    calcPagination();
-    ul.empty();
-    makePro();
+    paking();
 });
 
 // 상담사 목록페이지 카테고리 선택(pc)
@@ -107,7 +91,6 @@ $(".cate_btn").on("click", function (){
 
     if(val.length == 1)	val = 100 + val;
     else				val = 10 + val;
-    console.log("val : " + val)
 
     if( $(this).attr("id") == undefined ){
         if(clickable.length > 4)	return;
@@ -131,10 +114,7 @@ $(".cate_btn").on("click", function (){
     // 정렬
     clickable.sort(function (a, b){return a-b;});
 
-    ul.empty();
-    currentPage = 1;
-    calcPagination();
-    makePro();
+    paking();
 });
 
 function makeComma(str) {
@@ -152,12 +132,10 @@ $(document).on("input", "#pro_searchInput", function (){
 });
 
 $("#nameSearch").on("click", function (){
-    currentPage = 1;
-    calcPagination();
-    ul.empty();
-    makePro();
+    paking();
 });
 
+var proNo = [];
 calcPagination();
 function makePro(){
 
@@ -176,12 +154,12 @@ function makePro(){
 
             $.each(result, function (i, item){
 				
-				console.log(item);
-				
                 if(result.length - 1 == i){
                     listCount = Number.parseInt(item.maxValue);
                     return;
                 }
+
+                proNo[i] = item.professionNo;
 
                 let category = item.counselCategoryCode.split(",");
                 let price = item.counselPrice.split(",");
@@ -234,7 +212,7 @@ function makePro(){
                 pro_intro_wrap_div.append(pro_name, review);
                 const pro_intro = $('<div class="pro_intro">');
                 const pro_intro_p1 = $('<p>' + item.professionIntro + '</p>');
-                const pro_intro_p2 = $('<p>#가족 #대인관계 #자존감상실 #연인</p>');
+                const pro_intro_p2 = $('<p class="category_name">#가족 #대인관계 #자존감상실 #연인</p>');
                 pro_intro.append(pro_intro_p1, pro_intro_p2);
                 pro_intro_wrap.append(pro_intro_wrap_div, pro_intro);
 
@@ -277,9 +255,36 @@ function makePro(){
             });
         }
     }).done(function (){
+
+        $.ajax({
+            url:"setCategory",
+            dataType:"JSON",
+            data:{
+                "professionNo":proNo
+            },
+            success:function (result){
+                $.each(result, function (i, item){
+                    const ctName = $(".category_name");
+
+                    let str = item.worryName.split(",")
+                    let tagName = "";
+
+                    for(let i = 0; i < str.length; i++){
+                        tagName += "#" + str[i] + " ";
+                    }
+                    ctName.eq(first - 1 + i).text(tagName)
+                });
+            }
+        });
+
         YesScroll();
     });
 }
 makePro();
 
-
+function paking(){
+    ul.empty();
+    currentPage = 1;
+    calcPagination();
+    makePro();
+}

@@ -13,6 +13,13 @@ let _categoryNo;
 let _fullQuestionCount = 0;
 // 답변선택
 let flag = false;
+// 결과 title html
+let titleHtml = "";
+// 결과 content html
+let resultHtml = "";
+
+// 카테고리 명
+let cName;
 
 $(function () {
     // 자가진단 선택
@@ -27,9 +34,12 @@ $(function () {
 
 // 증상 선택
 $(".selfTest_op").on("click", function () {
+    cName = $(this).text();
     $(".selfTest_op").removeClass("active");
     $(this).addClass("active");
     reset();
+
+    titleHtml = $(this).text() + " 자가진단 결과";
 
     _categoryNo = $(this).data("type");
 
@@ -48,8 +58,9 @@ async function selftestQuestion(next=1){
 
             _questionNo = _questionNo + next;
 
+
             let html = '<div class="selfTest_title">'
-                + '<h1>자존감 자가진단 테스트</h1>'
+                + '<h1>' + cName + ' 자가진단 테스트</h1>'
                 + '<div>'
                 +'    이 검사는 자신에 대해서 어떻게 느끼는 지를'
                 +'    알아보기 위한 것입니다.<br>'
@@ -162,7 +173,6 @@ function btnShowHide() {
 }
 
 // 테스트 결과
-let resultHtml = "";
 function resultScore(){
 
     $.ajax({
@@ -171,18 +181,8 @@ function resultScore(){
         data : {"categoryNo":_categoryNo, "score":_answerScore[_fullQuestionCount-1]}, // 증상번호, 합산 값
         dataType : "json",
         success : function (result){
-
             layerPopup("selftestResult");
-
-            resultHtml = `
-                <div>
-                    다른사람과 비교해서 당신의 자존감은
-                    <div>다소 낮은 편입니다.</div>
-                </div>
-                <div>
-                    어쩔티비 저쩔티비
-                </div>
-            `;
+            resultHtml = result.resultContent;
         },
     })
 }
@@ -193,4 +193,3 @@ function reset() {
     _answerNo = 0;
     _score = 0;
 }
-
