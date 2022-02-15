@@ -178,7 +178,7 @@ header{height: 100px;}
 }
 
 .header_logo_wrap{
-  width: 30%;
+  width: 20%;
   height: 100px;
   float: left;
 }
@@ -206,7 +206,7 @@ a{
 a:hover{color:#A59999;}
 
 .header_menu_wrap{
-  float: left;
+  float: right;
   text-align: right;
   width: 70%;
   position: relative;
@@ -214,18 +214,24 @@ a:hover{color:#A59999;}
 }
 
 .header_menu_wrap >.dep1{
-  margin-right: 15px;
-  margin-top: 50px;
+ /*  margin-right: 15px; */
+  /* margin-top: 50px; */
 }
 
-.header_menu_wrap .dep1 > li{
+.dep1_li{
   display: inline-block;
   width:17%;
+  line-height:99px;
   vertical-align: top;
   font-size: 15px;
   text-align: center;
   cursor: pointer;
   position: relative;
+}
+
+.dep2_li{
+	line-height:30px;
+	background-color:#fff;
 }
 
 .header_menu_wrap .dep1 > li:nth-child(4){
@@ -244,7 +250,7 @@ a:hover{color:#A59999;}
 }}
 .header_menu_wrap .dep1 > li > a{
   display: inline-block;
-  padding: 10px 0;
+ /*  padding: 10px 0; */
 
 } 
 
@@ -416,6 +422,12 @@ a:hover{color:#A59999;}
       font-size: 24px;
       color: #A59999;
   }
+  
+  .dep1_li{
+  line-height:50px;
+  
+  }
+
    /* ------ 헤더 ------- */
   .main_wrap{
       width: 100%;
@@ -461,4 +473,7 @@ a:hover{color:#A59999;}
 
 }
 
+#logoutmember{
+	display:none;
+}
 
