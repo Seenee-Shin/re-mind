@@ -86,35 +86,35 @@
         <article class="header_menu_wrap">
             <ul class="dep1">
 
-                <li>
+                <li class="dep1_li">
                     <a href="${contextPath}/pro/proList">상담예약</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
-                        <li><a href="${contextPath}/pro/proList">상담사 찾기</a></li>
-                        <li><a href="${contextPath}/my/map">상담센터 찾기</a></li>
-                        <li><a href="${contextPath}/selftest/selftestForm">자가진단</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/pro/proList">상담사 찾기</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/my/map">상담센터 찾기</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/selftest/selftestForm">자가진단</a></li>
                     </ul>
 
                 </li>
-                <li>
+                <li class="dep1_li">
                     <a href="${contextPath}/free/insert">커뮤니티</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
-                        <li><a href="${contextPath}/free/insert">자유게시판</a></li>
-                        <li><a href="${contextPath}/worry/worryList">고민상담 게시판</a></li>
-                        <li><a href="${contextPath}/post/list">이 달의 연구</a></li>
-                        <li><a href="${contextPath}/secret/insert">털어놓기</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/free/insert">자유게시판</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/worry/worryList">고민상담 게시판</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/post/list">이 달의 연구</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/secret/insert">털어놓기</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="dep1_li">
                     <a href="${contextPath}/notice/list">공지사항</a> <p class="menu_toggle">+</p>
                 </li>
-                <li><!-- 로그인 안했으면 로그인 버튼 -->
+                <li class="dep1_li"><!-- 로그인 안했으면 로그인 버튼 -->
                     <!-- <a href="">로그인</a> -->
                     <a href="${contextPath}/my/emotionRecord">마이페이지</a> <p class="menu_toggle">+</p>
                     <ul class="dep2">
-                        <li><a href="${contextPath}/my/emotionRecord">감정기록</a></li>
-                        <li><a href="${contextPath}/my/appointment">마이 상담</a></li>
-                        <li><a href="${contextPath}/my/myBoardList">마이 활동</a></li>
-                        <li><a href="${contextPath}/my/updateMyInfo">마이 정보</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/my/emotionRecord">감정기록</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/my/appointment">마이 상담</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/my/myBoardList">마이 활동</a></li>
+                        <li class="dep2_li"><a href="${contextPath}/my/updateMyInfo">마이 정보</a></li>
                     </ul>
                 </li>
                 <!-- 로그인 했으면 로그아웃 버튼 보이기
@@ -123,14 +123,16 @@
 
                     <c:choose>
                         <c:when test="${empty sessionScope.loginMember}">
-                        <li >
+                        <li class="dep1_li">
                             <a href="javascript:void(0);" class="login_btn" style="">로그인</a>
                         </li>
                         </c:when>
                         <c:otherwise>
-                        <li style="bottom: 27px;">
-                            ${sessionScope.loginMember.memberFName}님<br>
-                            <a href="${contextPath}/emailLogin/logout" class="logout_btn" style="margin-top: 10px;">로그아웃</a>
+                        <li class="dep1_li">
+                            ${sessionScope.loginMember.memberFName}님
+                            <ul class="dep2">
+                            	<li class="dep2_li"><a href="${contextPath}/emailLogin/logout" class="logout_btn">로그아웃</a></li>
+                            </ul>
                          </li>
                         </c:otherwise>
                     </c:choose>
@@ -177,7 +179,7 @@
 			            <ul>
 			                <li><a href="${contextPath}/my/emotionRecord">증상기록</a></li>
 			                <hr>
-			                <li><a href="${contextPath}/my/appointment">마이상담</a>
+			                <li><a href="${contextPath}/my/appointment">상담권내역</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/appointment">상담 예약 조회</a></li>
 			                        <li><a href="${contextPath}/my/appointment/past">지난 상담 내역</a></li>
@@ -186,7 +188,7 @@
 			                    </ul>
 			                </li>
 			                <hr>
-			                <li><a href="${contextPath}/my/myBoardList">마이활동</a>
+			                <li><a href="${contextPath}/my/myBoardList">나의활동</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/myBoardList">게시글 내역</a></li>
 			                        <li><a href="${contextPath}/my/letterList">쪽지</a></li>
@@ -195,7 +197,7 @@
 			                    </ul>
 			                </li>
 			                <hr>
-			                <li><a href="${contextPath}/my/updateMyInfo">마이정보</a>
+			                <li><a href="${contextPath}/my/updateMyInfo">나의정보</a>
 			                    <ul>
 			                        <li><a href="${contextPath}/my/updateMyInfo">회원정보 수정</a></li>
 			                        <li><a href="${contextPath}/my/secession">회원탈퇴</a></li>
