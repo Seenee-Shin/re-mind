@@ -27,8 +27,7 @@ $(function () {
         _categoryNo = type;
         $(".selfTest_op").eq(type-1).click();
     } else {
-        // $(".selfTest_op").eq(0).click();
-        $(".selfTest_op").eq(5).click();
+        $(".selfTest_op").eq(0).click();
     }
 });
 
