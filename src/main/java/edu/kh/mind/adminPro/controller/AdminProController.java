@@ -167,8 +167,10 @@ public class AdminProController {
 		
 		service.proRegister(profession);
 		
+		
+		
 			
-       return "redirect:/";
+       return "redirect:/adminPro/";
 		
 	}
 	
@@ -238,9 +240,9 @@ public class AdminProController {
     			
     			
     			if(iResult > 0) { // insert 성공 
-    				Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
+    				Util.swalSetMessage("아직 끝나지 않았어요!","프로필을 작성해 주세요", "success", ra);
     				
-    				path = "/";
+    				path = "/adminPro/AdminProProfile/"+proInfo.getProfessionNo();
     			}else {
     				Util.swalSetMessage("게시글 등록 실패", null, "error", ra);
     				path = "/adminPro/proRegisterDetail";
@@ -318,15 +320,15 @@ public class AdminProController {
     		if(pResult > 0) {
     			model.addAttribute("proInfo", proInfo);
     			model.addAttribute("price", price);
-    			Util.swalSetMessage("관리자 승인을 기다려 주세요", null, "success", ra);
+    			Util.swalSetMessage("상담사 등록 신청 완료","상담사 승인이 완료되면 이메일로 알려드립니다.", "success", ra);
     			
     			
-    			path = "adminPro/AdminProProfile/"+loginPro.getProfessionNo();
+    			path = "../AdminProProfile/"+loginPro.getProfessionNo();
     			
     			
     		}else {
     			Util.swalSetMessage("프로필 수정 실패", null, "error", ra);
-    			path = "/update/"+loginPro.getProfessionNo();
+    			path = "/update/"+proInfo.getProfessionNo();
     		}
     	}
     	
