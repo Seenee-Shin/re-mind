@@ -9,6 +9,7 @@ if(navigator.userAgent.toLowerCase().indexOf("edg") !== -1){
     // parent.window.open('about:blank', '_self').close();
 }
 
+$("#placesList").empty();
 
 let backupWidth = window.innerWidth;
 window.onresize = function(){
@@ -86,10 +87,10 @@ function locationLoadSuccess(pos) {
 
 function locationLoadError(pos) {
     alert('위치 정보를 가져오는데 실패했습니다.');
-};
+}
 function getCurrentPosBtn() {
     navigator.geolocation.getCurrentPosition(locationLoadSuccess, locationLoadError);
-};
+}
 getCurrentPosBtn();
 
 
@@ -194,7 +195,6 @@ function AddrChangeCoords(){
 
 
 function makeProList(){
-    $("#placesList").empty();
     for(let i = 0; i < len; i++){
 
         distance.sort(function (a, b){
@@ -224,9 +224,7 @@ function makeProList(){
             divDistance = $('<div style="margin-bottom: 10px;"> ' + distance[i] + 'm | ' + proAddress[i] + '</div>');
         }
         const divPhone = $('<div style="margin-bottom: 10px;">' + proBusinessNo[i] + '</div>');
-
         divCon.append(divH3, divDepartment, divDistance, divPhone);
-
         divMap.append(divImg, divCon);
 
         li.append(divMap);
@@ -234,38 +232,103 @@ function makeProList(){
     }
 }
 
+
+// 페이지네이션(무한스크롤 변수 선언)
+var currentPage = 1;
+var infinityLimit = 10; // 한번에 보여질 result 수
+var pageSize = 10;
+var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
+// 선 계산(ajax로 넘겨야됨)
+last = currentPage * infinityLimit;
+first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+function calcPagination(){
+
+    maxPage = Number.parseInt(Math.floor(listCount / infinityLimit));
+    startPage = (currentPage-1) / pageSize * pageSize + 1;
+    endPage = startPage + pageSize - 1;
+
+    if(endPage > maxPage)   endPage = maxPage;
+
+    if(currentPage <= infinityLimit)	prevPage = 1;
+    else                    prevPage = startPage - 1;
+
+    if(endPage == maxPage) nextPage = maxPage;
+    else				   nextPage = endPage + 1;
+
+    last = currentPage * infinityLimit;
+    first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+    console.log("first : " + first, "last : " + last)
+}
+calcPagination();
+
+
+// 무한스크롤
+function YesScroll () {
+    if(last >= listCount)	return;
+
+    let oneTime = false;
+    $("#menu-warp").on("mousewheel", function (e){
+        const menu = $("#menu-warp");
+
+        const scrollLocation = menu.scrollTop(); //현재 스크롤 바 위치
+        const windowHeight = Number.parseInt(menu.css("height").split("px")[0]);  // 화면으로 보이는 스크린 화면의 높이
+        const scrollHeight = document.querySelector("#menu-warp").scrollHeight; // 스크롤 높이
+
+        console.log(scrollLocation, windowHeight, scrollHeight)
+        if (scrollLocation + windowHeight >= scrollHeight && !oneTime) {
+            oneTime = true;
+            currentPage = currentPage + 1;
+            calcPagination();
+            getHospital();
+        }
+    });
+}
+
+
 let proAddress = [];
 let proHospName = [];
 let proHospPhone = [];
 let proBusinessNo = [];
 let professionNo = [];
 let len;
+function getHospital(){
+    $.ajax({
+        url:"loadProMap",
+        data:{
+            "last":last,
+            "first":first
+        },
+        type:"GET",
+        dataType : "json",
+        success:function (result){
+            len = result.length;
 
-$.ajax({
-    url:"loadProMap",
-    dataType : "json",
-    async: false,
-    success:function (result){
-        len = result.length;
+            $.each(result, function (i, item){
 
-        $.each(result, function (i, item){
-			console.log(item)
+                if(result.length - 1 == i){
+                    listCount = Number.parseInt(item.maxValue);
+                    return;
+                }
 
-			professionNo[i] = item.professionNo;
-            proAddress[i] = item.hospitalAddress;
-            proHospName[i] = item.hospitalName;
-            proHospPhone[i] = item.hospitalPhone;
-            proBusinessNo[i] = item.businessNo;
-        });
-
+                professionNo[i] = item.professionNo;
+                proAddress[i] = item.hospitalAddress;
+                proHospName[i] = item.hospitalName;
+                proHospPhone[i] = item.hospitalPhone;
+                proBusinessNo[i] = item.businessNo;
+            });
+        },
+        error:function (req, sta, er){
+            console.log(req.responseText);
+            console.log(er)
+        }
+    }).done(function (){
+        YesScroll();
+        makeProList();
         AddrChangeCoords();
-        setTimeout(makeProList, 200);
-
-    },
-    error:function (req, sta, er){
-
-    }
-});
+        // setTimeout(makeProList, 200);
+    });
+}
+getHospital();
 
 
 

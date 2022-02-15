@@ -7,9 +7,17 @@ public class ProfessionHospital {
     private String hospitalAddress;
     private String hospitalPhone;
     private String businessNo;
+    private int maxValue;
 
     public ProfessionHospital(){}
 
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
+    }
 
     public void setHospitalName(String hospitalName) {
         this.hospitalName = hospitalName;
