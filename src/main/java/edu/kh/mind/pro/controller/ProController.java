@@ -57,7 +57,7 @@ public class ProController {
 		map.put("categoryArr", worryCtCd);
 		map.put("first", param.get("first"));
 		map.put("last", param.get("last"));
-		
+
 		if(proName.equals(""))
 			map.put("proName", null);
 		else
