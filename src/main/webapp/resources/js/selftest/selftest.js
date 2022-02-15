@@ -13,6 +13,10 @@ let _categoryNo;
 let _fullQuestionCount = 0;
 // 답변선택
 let flag = false;
+// 결과 title html
+let titleHtml = "";
+// 결과 content html
+let resultHtml = "";
 
 $(function () {
     // 자가진단 선택
@@ -30,6 +34,8 @@ $(".selfTest_op").on("click", function () {
     $(".selfTest_op").removeClass("active");
     $(this).addClass("active");
     reset();
+
+    titleHtml = $(this).text() + " 자가진단 결과";
 
     _categoryNo = $(this).data("type");
 
@@ -162,7 +168,6 @@ function btnShowHide() {
 }
 
 // 테스트 결과
-let resultHtml = "";
 function resultScore(){
 
     $.ajax({
@@ -171,18 +176,8 @@ function resultScore(){
         data : {"categoryNo":_categoryNo, "score":_answerScore[_fullQuestionCount-1]}, // 증상번호, 합산 값
         dataType : "json",
         success : function (result){
-
             layerPopup("selftestResult");
-
-            resultHtml = `
-                <div>
-                    다른사람과 비교해서 당신의 자존감은
-                    <div>다소 낮은 편입니다.</div>
-                </div>
-                <div>
-                    어쩔티비 저쩔티비
-                </div>
-            `;
+            resultHtml = result.resultContent;
         },
     })
 }
