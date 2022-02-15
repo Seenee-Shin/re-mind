@@ -6,7 +6,6 @@
 <!-- header include -->
 <jsp:include page="../common/header.jsp"></jsp:include>
 
-<form method="get">
     <article class="mb-selftest-top">
         <div class="mb-selftest-q">
             <span>01</span>
@@ -31,7 +30,6 @@
             <button class="selfTest-next-btn selfTestBtn">다음</button>
         </div>
     </article>
-</form>
 
 <!-- footer include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>

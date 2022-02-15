@@ -23,6 +23,8 @@
 
         // 팝업 내용 지우기
         layerPopupContent.innerHTML = "";
+
+        window.location.reload();
     });
 
 </script>
