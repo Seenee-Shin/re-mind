@@ -46,7 +46,7 @@ $(".selfTest_op").on("click", function () {
 });
 
 // 문항 가져오기
-async function selftestQuestion(next=1){
+function selftestQuestion(next=1){
     $.ajax({
         url : "selftestQuestion",
         type : "POST",

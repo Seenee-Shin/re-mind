@@ -409,6 +409,8 @@
 	last = currentPage * infinityLimit;
 	first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
 	
+	console.log(last,first);
+	
 	function calcPagination(){
 		
 	   last = currentPage * infinityLimit;
@@ -438,6 +440,8 @@
 			success:function(reviewAddList){
 				
 				$.each(reviewAddList,function(i,item){
+					
+					console.log(item);
 					
 					if(reviewAddList.length - 1 == i){
 						listCount = Number.parseInt(item.listCount);
