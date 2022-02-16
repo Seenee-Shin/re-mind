@@ -184,4 +184,10 @@
 
 		]]>
 	</select>
+	
+	<select id="proPriceSelect" resultType="string">
+		SELECT LISTAGG(COUNSEL_PRICE,',') WITHIN GROUP(ORDER BY PROFESSION_NO) AS COUNSEL_PRICE
+		FROM PROFESSION_PRICE
+		WHERE PROFESSION_NO = #{professionNo}
+	</select>
 </mapper>

@@ -201,6 +201,8 @@ public class ProController {
 		// 상담사 이름, 사진 가지고오기
 		Image proImg = service.proImageNameSelect(professionNo);
 		
+		String proPrice = service.proPriceSelect(professionNo);
+		
 		System.out.println(proImg);
 		
 		String path;
@@ -226,6 +228,7 @@ public class ProController {
 			model.addAttribute("memberPhone", memberPhone);
 			model.addAttribute("memberNm", memberNm);
 			model.addAttribute("proImg",proImg);
+			model.addAttribute("proPrice",proPrice);
 			path="pro/proReservation";
 		}
 	

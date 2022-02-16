@@ -298,6 +298,11 @@
 	const profession = "${profession.counselCategoryCode}";
 	const professionNo = "${profession.professionNo}";
 	const memberNo = "${loginMember.memberNo}";
+	
+	const textTherapy = "${splitPrice[0]}";
+	const faceTherapy = "${splitPrice[1]}";
+	const voiceTherapy = "${splitPrice[2]}";
+
 
 	function proReservation(){
 		
@@ -404,6 +409,8 @@
 	last = currentPage * infinityLimit;
 	first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
 	
+	console.log(last,first);
+	
 	function calcPagination(){
 		
 	   last = currentPage * infinityLimit;
@@ -433,6 +440,8 @@
 			success:function(reviewAddList){
 				
 				$.each(reviewAddList,function(i,item){
+					
+					console.log(item);
 					
 					if(reviewAddList.length - 1 == i){
 						listCount = Number.parseInt(item.listCount);
@@ -515,7 +524,5 @@
 		}
 
 		}); */
-
-	
-
 </script>
+<script type="text/javascript" src="${contextPath}/resources/js/pro/pro.js"></script>

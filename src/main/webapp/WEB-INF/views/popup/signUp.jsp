@@ -24,19 +24,19 @@
 					</div>
 					<div class="input_div">
 						<div><label for="pw">비밀번호</label>  <div class="check" id="checkPwd1"></div></div>
-						<input type="password" name="memberPw" id="pwd1" placeholder = "6~20글자"class="login_input" required>
+						<input type="password" name="memberPw" id="pwd1" placeholder = "6~20글자"class="login_input" value="123123" required>
 					</div>
 					<div class="input_div">
 						<div><label for="pw2">비밀번호 확인</label>  <div class="check" id="checkPwd2"></div></div>
-						<input type="password" id="pwd2" class="login_input" required>
+						<input type="password" id="pwd2" class="login_input" value="123123" required>
 					</div>
 					<div class="input_div">
 						<div><label for="name">이름</label><div class="check" id="checkName"></div></div>
-						<input type="text"  name="memberName" id="name" class="login_input" required>
+						<input type="text"  name="memberName" id="name" class="login_input" value="차은우" required>
 					</div>
 					<div class="input_div">
 						<div><label for="nickname">닉네임</label> <div class="check" id="checkNickNm"></div></div>
-						<input type="text" name="memberFName" id="nickname" placeholder = "2~20글자" class="login_input" required>
+						<input type="text" name="memberFName" id="nickname" placeholder = "2~20글자" class="login_input" value="최최차차" required>
 					</div>
 				</div>
 					<div class="input_area right_area">
@@ -51,7 +51,7 @@
 					</div>
 					<div class="input_div">
 						<div><label for="address2">상세 주소</label></div>
-						<input type="text" name="address" id="address_input_3" class="login_input" >
+						<input type="text" name="address" id="address_input_3" class="login_input" value="은우야 집주소 좀 알려줘">
 					</div>
 					<div class="input_div">
 						<div><label for="phone2">핸드폰 번호</label><div class="check" id="checkPhone"></div></div>
@@ -62,8 +62,8 @@
 								<option>017</option>
 								<option>019</option>
 							</select>
-						<input type="text" name="phone" id="phone2" class="login_input phone" required>
-						<input type="text" name="phone" id="phone3" class="login_input phone" required>
+						<input type="text" name="phone" id="phone2" class="login_input phone" value="2344" required>
+						<input type="text" name="phone" id="phone3" class="login_input phone" value="2344" required>
 					</div>
 					
 					<div class="input_div">

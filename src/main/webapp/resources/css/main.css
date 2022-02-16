@@ -229,6 +229,12 @@ main{
     padding: 0;
     word-spacing: 0px;
     line-height: 16px;
+      
+}
+
+.main_content2_content_board > p{
+	 height: 207px;
+    overflow: hidden;
 }
 
 /* 메인 컨텐트 3 */
@@ -674,20 +680,25 @@ main{
     /* 커뮤니티 스와이퍼 카드형 */
     .swiper1 {
         position: relative;
-        width: 100%;
+        width: 65%;
         margin: 0 auto;
-        top: -80px;
-        height: 100%;
+        top: -30px;
+        height: 90%;
         text-align: center;
     }
 
-    .commu {
+    .mySwiper1 .swiper-slide {
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 18px;
-        width: 280px !important;
-        border-radius: 0px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .mySwiper1 .swiper-slide:nth-child(1n) {
+        background-color: rgba(209, 209, 209, 0.7);
     }
 
     /* 모바일 메인 컨텐트 3 */

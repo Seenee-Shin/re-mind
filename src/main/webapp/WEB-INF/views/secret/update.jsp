@@ -12,19 +12,25 @@
                 <form action="update" method="post" 
 			 	 enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">		
 	                <div class="back_btn">
-	                    <a href="">
+	                    <a href="javascript:history.back();">
 	                        <i class="fas fa-arrow-left"></i> 
 	                    </a>
 	                </div>
                 <article class="board_update_wrap">
                     <div class="profile_wrap">
-                        <div class="writer_pic light_brown_bg" style="background-image: url();">
-                        </div>
+						<c:choose>
+							<c:when test="${empty board.imageName}">
+								<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
+							</c:when>
+							<c:otherwise>
+								<div class="writer_pic" style="background-image: url(${contextPath}${board.imagePath}${board.imageName});"></div>
+							</c:otherwise>
+						</c:choose>
 
-                            <div class="writer_id">
-	                            <p>${loginMember.memberFName}</p>
-	                        </div>
-	                    </div>
+						<div class="writer_id">
+							<p>${loginMember.memberFName}</p>
+						</div>
+					</div>
 	                    
                     <div id= "posting">
 	                        <textarea name="boardContent"  onkeydown="resize(this)" onkeyup="resize(this)">${board.boardContent}</textarea>
@@ -70,7 +76,7 @@
                         
 	                <div class="edit_btn_wrap">
 	                    <button type="submit" class="dark-brown edit_btn"> 수정 </button>
-	                    <button type="button" class="dark-brown edit_btn" onclick=""> 목록으로  </button>
+	                    <button type="button" class="dark-brown edit_btn" onclick="location.href='${contextPath}/secret/insert'"> 목록으로  </button>
 	                </div>
 	             
 	              <!-- update 진행 시 사용할 게시글 번호 -->
@@ -94,7 +100,7 @@ $("#replyCheckCode").on("click", function () {
 		$(this).val(1);
 	} else {
 		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
-		$(this).val(0);
+		$(this).val(2);
 	}
 });
 

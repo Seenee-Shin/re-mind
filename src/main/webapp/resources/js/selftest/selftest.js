@@ -27,8 +27,7 @@ $(function () {
         _categoryNo = type;
         $(".selfTest_op").eq(type-1).click();
     } else {
-        // $(".selfTest_op").eq(0).click();
-        $(".selfTest_op").eq(5).click();
+        $(".selfTest_op").eq(0).click();
     }
 });
 
@@ -47,7 +46,7 @@ $(".selfTest_op").on("click", function () {
 });
 
 // 문항 가져오기
-async function selftestQuestion(next=1){
+function selftestQuestion(next=1){
     $.ajax({
         url : "selftestQuestion",
         type : "POST",

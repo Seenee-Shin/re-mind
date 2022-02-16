@@ -146,15 +146,15 @@
 		const _this = $(this);
 		_this.prev().addClass("active");
 
-		const data = {
-			"worryCategoryCode" : _this.val()
-		}
+		// 초기화
+		pagingReset();
 
-		if (_this.val() != '0') {
-			getWorryList(data);
-		} else {
-			getWorryList();
-		}
+		// 조건 세팅
+		_searchCategory = null;
+		_searchText = null;
+		_worryCategoryCode = _this.val();
+
+		getWorryList("search");
 	});
 
 	// 검색
@@ -165,28 +165,28 @@
 		$(".worry_search_area .dark_brown_border").eq(0).addClass("active");
 		$(".worry_search_area input[name='worryCategory']").eq(0).prop("checked", true);
 
+		// 초기화
+		pagingReset();
+
+		// 조건 세팅
 		const searchText = $("[name='freeboard_search']").val().trim();
 		if (searchText != "") {
-			const data = {
-				"searchCategory" : $("#search_category option:selected").val(),
-				"searchText" : searchText
-			}
-			getWorryList(data);
-		} else {
-			getWorryList();
+			_searchCategory = $("#search_category option:selected").val();
+			_searchText = searchText;
 		}
+
+		getWorryList("search");
 	});
 
 	// list 가져오기
-	function getWorryList(searchData) {
+	function getWorryList(search) {
 		let data = {};
 
-		if (searchData != null) {
-			data = searchData;
-		}
-
-		data.last = last;
-		data.first = first;
+		data.last = _last;
+		data.first = _first;
+		data.searchCategory = _searchCategory;
+		data.searchText = _searchText;
+		data.worryCategoryCode = _worryCategoryCode;
 
 		$.ajax({
 			url : "${contextPath}/worry/worryList",
@@ -194,7 +194,8 @@
 			data : data,
 			success : function (result) {
 
-				YesScroll();
+				// YesScroll();
+
 
 				let html = "";
 				$.each(result.worryList, function (i, item) {
@@ -226,55 +227,60 @@
 					}
 
 					html += `
-					<div class="board_list_content">
-						<div class="board_flex_wrap">
-							<div class="writer_pic_wrap">
-								<div class="writer_pic" style="background-image: url(` + writerImg + `); background-size:cover;"></div>
-								<ul class="userMenu hidden">
-									<li> <a class="block">차단</a> </li>
-									<input class="hidden" value= ` + item.memberNo + `>
-								</ul>
-							</div>
-							<a href="${contextPath}/worry/view/` + item.boardNo + `">
-								<div class="posting_info">
-									<div class="writer_id">
-										<p class="userInfo">` + item.memberFn + `</p>
-										<p> ` + item.createDate + `</p>
-									</div>
-									<div class="posting">
-										<p class="listTitle">` + item.boardTitle + `</p> </br>
-										<p>` + item.boardContent + `</p>
-									</div>
+						<div class="board_list_content">
+							<div class="board_flex_wrap">
+								<div class="writer_pic_wrap">
+									<div class="writer_pic" style="background-image: url(` + writerImg + `); background-size:cover;"></div>
+									<ul class="userMenu hidden">
+										<li> <a class="block">차단</a> </li>
+										<input class="hidden" value= ` + item.memberNo + `>
+									</ul>
 								</div>
-							</a>
+								<a href="${contextPath}/worry/view/` + item.boardNo + `">
+									<div class="posting_info">
+										<div class="writer_id">
+											<p class="userInfo">` + item.memberFn + `</p>
+											<p> ` + item.createDate + `</p>
+										</div>
+										<div class="posting">
+											<p class="listTitle">` + item.boardTitle + `</p> </br>
+											<p>` + item.boardContent + `</p>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="board_icon_wrap">
+								<div class="comment_wrap">
+									<i class="far fa-comment dark-brown"></i>
+									<p>` + item.replyCount + `</p>
+								</div>
+								<div class="like_warp">
+									<img src="${contextPath}/resources/images/icon/smile.png" alt="" data-icon="1001">
+									<p>`+ iconCnt[1001] +`</p>
+									<img src="${contextPath}/resources/images/icon/hug.png" alt="" data-icon="1002">
+									<p>`+ iconCnt[1002] +`</p>
+									<img src="${contextPath}/resources/images/icon/amazed.png" alt="" data-icon="1003">
+									<p>`+ iconCnt[1003] +`</p>
+									<img src="${contextPath}/resources/images/icon/angry.png" alt="" data-icon="1004">
+									<p>`+ iconCnt[1004] +`</p>
+									<img src="${contextPath}/resources/images/icon/crying.png" alt="" data-icon="1005">
+									<p>`+ iconCnt[1005] +`</p>
+								</div>
+							</div>
 						</div>
-						<div class="board_icon_wrap">
-							<div class="comment_wrap">
-                                <i class="far fa-comment dark-brown"></i>
-                                <p>` + item.replyCount + `</p>
-                            </div>
-							<div class="like_warp">
-                                <img src="${contextPath}/resources/images/icon/smile.png" alt="" data-icon="1001">
-                                <p>`+ iconCnt[1001] +`</p>
-                                <img src="${contextPath}/resources/images/icon/hug.png" alt="" data-icon="1002">
-                                <p>`+ iconCnt[1002] +`</p>
-                                <img src="${contextPath}/resources/images/icon/amazed.png" alt="" data-icon="1003">
-                                <p>`+ iconCnt[1003] +`</p>
-                                <img src="${contextPath}/resources/images/icon/angry.png" alt="" data-icon="1004">
-                                <p>`+ iconCnt[1004] +`</p>
-                                <img src="${contextPath}/resources/images/icon/crying.png" alt="" data-icon="1005">
-                                <p>`+ iconCnt[1005] +`</p>
-                            </div>
-                        </div>
-					</div>
-				`;
+					`;
 				});
 
-				if (data.worryCategoryCode != undefined) {
+				// 카테고리, 검색 일때
+				if (search != undefined && search != null) {
 					$(".free_board_list_wrap").html(html);
 				} else {
 					$(".free_board_list_wrap").append(html);
+				}
 
+				// 리스트 없을때 스크롤 멈춤
+				if (result.worryList.length <= 0) {
+					_scrollFlag = false;
 				}
 			},
 			error : function(request, status, error){
@@ -412,7 +418,6 @@
 			success: function (result) {
 				if(result > 0){
 
-
 					swal({"title" : "글이 작성되었습니다." ,
 						"icon" : "success"});
 					$("#input_file").val("");
@@ -450,59 +455,49 @@
 		return false;
 	}
 
-	//페이지네이션(무한스크롤 변수 선언)
-	var currentPage = 1;
-	var infinityLimit = 5; // 한번에 보여질 result 수
-	var pageSize = 10;
-	var listCount, maxPage, startPage, endPage, prevPage, nextPage, first, last;
-	// 선 계산(ajax로 넘겨야됨)
-	last = currentPage * infinityLimit;
-	first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
-	function calcPagination(){
+	// 페이징
+	const _infinityLimit = 5; // 한번에 보여질 result 수
+	let _page = 1;
+	let _last = _page * _infinityLimit;
+	let _first = _last - (_infinityLimit - 1);
+	// 검색
+	let _searchCategory = null;
+	let _searchText = null;
+	// 카테고리
+	let _worryCategoryCode = null;
+	// 스크롤
+	let _scrollFlag = true;
 
-		maxPage = Number.parseInt(Math.floor(listCount / infinityLimit));
-		startPage = (currentPage-1) / pageSize * pageSize + 1;
-		endPage = startPage + pageSize - 1;
+	// 페이지 초기화
+	function pagingReset() {
+		_page = 1;
+		_last = _page * _infinityLimit;
+		_first = _last - (_infinityLimit - 1);
 
-		if(endPage > maxPage)   endPage = maxPage;
+		// 카테고리, 검색 초기화
+		_searchCategory = null;
+		_searchText = null;
+		_worryCategoryCode = null;
 
-		if(currentPage <= infinityLimit)   prevPage = 1;
-		else                    prevPage = startPage - 1;
-
-		if(endPage == maxPage) nextPage = maxPage;
-		else               nextPage = endPage + 1;
-
-		last = currentPage * infinityLimit;
-		first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
+		// 스크롤 초기화
+		_scrollFlag = true;
 	}
 
-	// 무한스크롤
-	function YesScroll () {
-		console.log("scroll start");
-		if(last >= listCount)   return;
+	// 페이징 세팅
+	function pagingSelected(currentPage) {
+		_last = currentPage * _infinityLimit;
+		_first = _last - (_infinityLimit - 1);
+	}
 
-		const pagination = document.querySelector('.paginaiton');
-		const fullContent = document.querySelector('.main_content');
-		const screenHeight = screen.height;
+	window.onscroll= function(e) {
+		// +100 footer 높이
+		if ((window.innerHeight + window.scrollY) + 100 >= document.body.offsetHeight && _scrollFlag) {
+			_page++;
+			pagingSelected(_page);
 
-		let oneTime = false;
-		document.addEventListener('scroll',OnScroll,{passive:true});
-		function OnScroll () {
-
-			const fullHeight = fullContent.clientHeight;
-			const scrollPosition = pageYOffset;
-
-			//이상함
-			console.log(fullHeight-screenHeight/2 - 100);
-
-			if (fullHeight-screenHeight/2 - 350<= scrollPosition && !oneTime) {
-				oneTime = true;
-				currentPage = currentPage + 1;
-				calcPagination();
-				getWorryList();
-			}
+			// 리스트 가져오기
+			getWorryList();
 		}
 	}
-
 </script>
 

@@ -133,7 +133,7 @@ height: 40px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 75%;
+    width: 85%;
     margin: 30px 0;
 }
 
@@ -144,7 +144,7 @@ height: 40px;
     height: 45px;
     text-align: center;
     line-height: 42px;
-    margin-right: 50px;
+    margin-right: 25px;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
@@ -265,6 +265,7 @@ height: 40px;
         .self_content_option1 div,
         .self_content_option2 div{
             height: 50%;
+            font-size: 18px;
         }
 
         .selfTest_title{
@@ -272,7 +273,7 @@ height: 40px;
         }
 
         .selfTest_title h1{
-            font-size: 6vw;
+            font-size: 25px;
         }
 
         .selfTest{
@@ -281,8 +282,8 @@ height: 40px;
 
         .selfTest_title div{
             margin-top: 3vh;
-            line-height: 1.9vh;
-            font-size: 0.9em;
+            line-height: 15px;
+            font-size: 15px;
             word-spacing: 0vw;
         }
 
@@ -290,7 +291,7 @@ height: 40px;
             border-bottom: 1px solid rgb(237 237 237);
             border-top: 1px solid rgb(237 237 237);
             padding: 20px 0;
-            margin: 30px 0;
+            margin: 50px 0;
             margin-bottom: 15px;
         }
 
@@ -313,6 +314,7 @@ height: 40px;
             margin: 20px 0;
             font-size: 18px;
             font-weight: bold;
+            line-height: 23px;
         }
 
         .selfTest_content > div:first-of-type{
@@ -325,7 +327,7 @@ height: 40px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            width: 85%;
+            width: 100%;
             margin: 0 auto;
             text-align: center;
         }
@@ -358,6 +360,9 @@ height: 40px;
             margin-top: 5vh;
             margin-bottom: 3vh;
             cursor: pointer;
+        }
+        .selfTest_btn{
+        	margin-bottom: 30px;
         }
         .selfTest_prev_btn{
             margin-left: 0;
