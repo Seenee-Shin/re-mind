@@ -561,15 +561,16 @@ public class MyController {
 
 
 
-    // @ExceptionHandler(처리할 예외.class)
-    @ExceptionHandler(Exception.class)
-    public String exceptionHandler(Exception e, Model model) {
-
-        // Model : 데이터 전달용 객체 (Map형식, request범위)
-        model.addAttribute("errorMessage", "회원 관련 서비스 이용중 문제가 발생했습니다.");
-        model.addAttribute("e", e);
-
-        return "common/error";
-    }
+	/*
+	 * // @ExceptionHandler(처리할 예외.class)
+	 * 
+	 * @ExceptionHandler(Exception.class) public String exceptionHandler(Exception
+	 * e, Model model) {
+	 * 
+	 * // Model : 데이터 전달용 객체 (Map형식, request범위) model.addAttribute("errorMessage",
+	 * "회원 관련 서비스 이용중 문제가 발생했습니다."); model.addAttribute("e", e);
+	 * 
+	 * return "common/error"; }
+	 */
 
 }
