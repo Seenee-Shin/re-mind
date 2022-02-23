@@ -146,12 +146,13 @@
 								<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
 							</a>    
 	    				</c:if>
-                       <%--  <a href="">
-							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
-                        </a> --%>
+	    				
+	    				<c:if test="${loginMember.memberNo != board.memberNo }">
+	                       <a id="report" href="javascript:openReportPopup();">
+								<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
+	                        </a>
+                        </c:if>
                     </div> 
-                    
-
                 </article>
 				
 				<c:if test="${board.replyCheckCode == 1}">
@@ -237,6 +238,7 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 
 	function openComment() {
@@ -282,10 +284,10 @@
 	    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 	}
 
-/*  	function shareKakao() {
-		 
+/* 	function shareKakao() {
 		  // 사용할 앱의 JavaScript 키 설정
 		  Kakao.init('6218050ca27459717c1f03b78a03958d');
+		 
 		 
 		  // 카카오링크 버튼 생성
 		  Kakao.Link.createDefaultButton({
@@ -301,7 +303,7 @@
 		      }
 		    }
 		  });
-		}  */
+		}   */
  	
  	function boardScrap() {
  		
@@ -407,6 +409,13 @@
 					
 		});
 			
+// 신고하기 팝업
+
+
+function openReportPopup() {
+	   layerPopup("report");
+}
+
 			
 					
 		
