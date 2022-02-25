@@ -340,7 +340,8 @@
 					}
 					
 				}else{
-					
+					swal({"title" : "다시 시도해주세요" , 
+	                      "icon" : "error"});
 				}
 			},
 			
@@ -354,69 +355,66 @@
 	}
 		
 		
+	
+	$(".like").on("click", function(e){
 		
-		$(".like").on("click", function(e){
-			
-					var tagId = $(this).attr('id');
-					var empathyStatusCode;
-					
-					if(tagId == "like_smile"){
-						empathyStatusCode = 1001;
-					}else if(tagId == "like_hug"){
-						empathyStatusCode = 1002;
-					}else if(tagId == "like_amazed"){
-						empathyStatusCode = 1003;
-					}else if(tagId == "like_angry"){
-						empathyStatusCode = 1004;
-					}else{
-						empathyStatusCode = 1005;
-					};
-					
+				var tagId = $(this).attr('id');
+				var empathyStatusCode;
+				
+				if(tagId == "like_smile"){
+					empathyStatusCode = 1001;
+				}else if(tagId == "like_hug"){
+					empathyStatusCode = 1002;
+				}else if(tagId == "like_amazed"){
+					empathyStatusCode = 1003;
+				}else if(tagId == "like_angry"){
+					empathyStatusCode = 1004;
+				}else{
+					empathyStatusCode = 1005;
+				};
+				
+				$.ajax({
+		 			url : "${contextPath}/free/insertEmpathy",
+		 			data : {"boardNo" : boardNo,
+		 					"memberNo" : loginMemberNo,
+		 					"empathyStatusCode" : empathyStatusCode},
+		 			context: this,
+					success : function (result) {
+					if(result >=1){
+						
 					$.ajax({
-			 			url : "${contextPath}/free/insertEmpathy",
-			 			data : {"boardNo" : boardNo,
-			 					"memberNo" : loginMemberNo,
-			 					"empathyStatusCode" : empathyStatusCode},
-			 			context: this,
-						success : function (result) {
-						if(result >=1){
+						url : "${contextPath}/free/countEmpathy",
+						data : { "boardNo": boardNo,
+								"empathyStatusCode" : empathyStatusCode},
+						context: this,
+						success : function(count){
+							$(this).children(".like_count").text(count)
 							
-						$.ajax({
-							url : "${contextPath}/free/countEmpathy",
-							data : { "boardNo": boardNo,
-									"empathyStatusCode" : empathyStatusCode},
-							context: this,
-							success : function(count){
-								$(this).children(".like_count").text(count)
-								
-							}
-						});
-						
-							
-						}else{
-							console.log("실패");
 						}
-						
-						},
-						
-						error: function (xhr, status, error) {
-						    swal({"title" : "서버 연결 오류" , 
-			                      "icon" : "error"});
-					}
-			 			
-			 		});
-					       
+					});
 					
-		});
+						
+					}else{
+						console.log("실패");
+					}
+					
+					},
+					
+					error: function (xhr, status, error) {
+					    swal({"title" : "서버 연결 오류" , 
+		                      "icon" : "error"});
+				}
+		 			
+		 		});
+				       
+				
+	});
 			
 // 신고하기 팝업
-
-
 function openReportPopup() {
 	   layerPopup("report");
 }
 
-			
 					
 		
 		
