@@ -292,10 +292,31 @@ public class FreeBoardController {
     }
     
     //신고하기
-    @RequestMapping(value = "report", method = RequestMethod.POST)
-    public String report(Report report,  @ModelAttribute("loginMember") Member loginMember) {
-    	System.out.println(report.getReportContent());
-    	return null;
+    @ResponseBody
+    @RequestMapping(value = "insertReport", method = RequestMethod.POST)
+    public int insertReport(Report report,  @ModelAttribute("loginMember") Member loginMember, HttpSession session,
+    		RedirectAttributes ra) {
+    	int result =0;
+    	if(session.getAttribute("loginMember") != null) {
+    		report.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    		//같은 게시글or 댓글 신고 이력 조회
+    		Report selectReport = service.selectReport(report);
+    		
+    		if(selectReport == null) {
+    			//조회 결과 없으면 insert 진행 
+    			result = service.insertReport(report);
+    			
+    			if(result > 0) {
+    				result = 1;
+    			}else{
+    				result = 2;
+    			}
+    		}else {
+    			result = 3;
+    		}
+    	}
+    	
+    	return result;
     }
     
     

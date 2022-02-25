@@ -10,8 +10,7 @@
     <div class="top_title_wrap">
         <h2 class="title">신고하기</h2>
     </div>
- 	
-	<form action="report" method="POST">
+ 	<form action="insertReport" method="POST">
 	 	<div class="letter_box">
 	 		<div id="content_counter" style="text-align: right;">
 	        	<p><span id = "content_count">0</span>/200</p>
@@ -19,9 +18,9 @@
 	        
 	 		<textarea class="report_textarea" name="reportContent" id="reportContent" rows="3" required></textarea>
 		     
-			<button type="submit" class="study_submit_btn" id="proReview">신고</button>
 		</div>
- 	</form>
+	</form>
+	<button type="button" class="study_submit_btn" id="proReview" onclick="insertReport();">신고</button>
  	
  
  
@@ -49,41 +48,56 @@
  
 
 	// 클릭시
-	function proLetter(){
+	function insertReport(){
 		
-		reportContent = $("#reportContent").val();
+		let reportContent = $("#reportContent").val();
 		
 		console.log(reportContent);
 		
-		const formData = new FormData();
-		formData.append("boardNo",boardNo);
-		formData.append("memberNo",memberNo);
+		const form = $("form")[0];
+	 	const formData = new FormData(form);
+	 	
+	 	formData.append("boardNo",boardNo);
+	 	formData.append("memberNo",loginMemberNo);
+	 	formData.set("reportContent", reportContent);
 		
-		console.log(formData)
 		
 		$.ajax({
-			url :  "${contextPath}/free/report",
+			url :  "${contextPath}/free/insertReport",
 			type : "POST",
 			// 쪽지내용, 회원번호, 전문가번호
 			data : formData,
+			processData: false,
+			contentType: false,
 			success:function(result){
-				if (result > 0){
+				
+				if(!loginMemberNo){
+					 swal({"title" : "로그인해주세요" , 
+	                      "icon" : "error"});
+				}else{
+					if(result == 1 ){
+						swal({"title" : "신고 되었습니다." , 
+		                      "icon" : "success"});
+					}else if(result ==2){
+						swal({"title" : "다시시도해주세요." , 
+		                      "icon" : "error"});
+					}else if(result == 3){
+						swal({"title" : "이미 신고된 게시글입니다." , 
+							   "icon" : "error"});
+					}
 					
-					alert("문의 등록이 완료되었습니다.");
-					
-					// 모달창 닫기
+					/* 팝업 닫기 */
 					$("#letter_area_wrap").css("display","none");
 					$(".close_popup_btn").css("display","none");
-					
+	
 				}
-			},
 		
+			},
+			error: function (xhr, status, error) {
+			    swal({"title" : "서버 연결 오류" , 
+                      "icon" : "error"});
+			}
 		});
-
 	}
-
- 
- 
- 
- </script>
+</script>
 

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.board.model.vo.Report;
 import edu.kh.mind.board.model.vo.Scrap;
 
 @Repository
@@ -121,6 +122,16 @@ public class BoardDAO {
 
 	public int countEmpathy(Empathy empathy) {
 		return sqlSession.selectOne("boardMapper.selectEmpathyList", empathy);
+	}
+
+	public int insertReport(Report report) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("boardMapper.insertReport",report);
+	}
+
+	public Report selectReport(Report report) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.selectReport", report);
 	}
 
 }

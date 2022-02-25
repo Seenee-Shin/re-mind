@@ -15,6 +15,7 @@ import edu.kh.mind.board.model.dao.BoardDAO;
 import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Image;
+import edu.kh.mind.board.model.vo.Report;
 import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.common.util.Util;
 
@@ -267,6 +268,19 @@ Empathy selectEmpathy = dao.selectEmpathy(empathy);
 	@Override
 	public int countEmpathy(Empathy empathy) {
 		return dao.countEmpathy(empathy);
+	}
+	@Override
+	public int insertReport(Report report) {
+		
+		
+		report.setReportContent(Util.XSS(report.getReportContent()));
+		report.setReportContent(Util.changeNewLine(report.getReportContent()));
+		
+		return dao.insertReport(report) ;
+	}
+	@Override
+	public Report selectReport(Report report) {
+		return dao.selectReport(report);
 	}
 
 	
