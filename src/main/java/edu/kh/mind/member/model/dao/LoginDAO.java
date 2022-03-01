@@ -1,6 +1,7 @@
 package edu.kh.mind.member.model.dao;
 
 import edu.kh.mind.member.model.vo.Member;
+import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.social.naver.vo.Naver;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,17 @@ public class LoginDAO {
 
     public int rollbackMember(Map<String, Integer> map) {
         return sqlSession.update("memberMapper.rollbackMember", map);
+    }
+
+    public List<Profession> getGmProfession() {
+        return sqlSession.selectList("professionMapper.getGmProfession");
+    }
+
+    public int stopProfession(Map<String, Integer> map) {
+        return sqlSession.update("professionMapper.stopProfession", map);
+    }
+
+    public int rollbackProfession(Map<String, Integer> map) {
+        return sqlSession.update("professionMapper.rollbackProfession", map);
     }
 }

@@ -186,24 +186,26 @@
         WHERE MEMBER_NO = #{memberNo} AND STATUS_CD = 0
     </update>
 
+<!--    관리자 페이지 -->
     <select id="selectAuthority" resultType="_int">
         SELECT STATUS_CD
         FROM MEMBER
-        WHERE MEMBER_NO = #{memberNo}
+        <where>
+            MEMBER_NO = #{memberNo}
+        </where>
     </select>
-
     <select id="selectMember" resultMap="member_rm">
         SELECT MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_ADDR, MEMBER_FN, MEMBER_PHONE, MEMBER_ENROLL_DT, STATUS_CD
         FROM MEMBER
-        WHERE STATUS_CD IN(0, 2)
+        <where>
+            STATUS_CD IN(0, 2)
+        </where>
     </select>
-
     <update id="stopMember">
         UPDATE MEMBER SET
             STATUS_CD = 2
         WHERE MEMBER_NO = #{memberNo}
     </update>
-
     <update id="rollbackMember">
         UPDATE MEMBER SET
             STATUS_CD = 0

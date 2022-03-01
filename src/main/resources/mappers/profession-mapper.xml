@@ -33,6 +33,7 @@
         <result property="memberPhone" column="MEMBER_PHONE"/>
         <result property="reservationEnrollDate" column="RESERVATION_ENROLL_DT"/>
         <result property="reservationEnrollTime" column="RESERVATION_ENROLL_TIME"/>
+        <result property="hospitalName" column="HOSPITAL_NM"/>
 
         <result property="starAvg" column="REVIEW_STARPOINT"/>
         <result property="reviewCount" column="REVIEW_COUNT"/>
@@ -433,5 +434,24 @@
         SELECT COUNT(*) MAX_VALUE
         FROM PROFESSION_HOSPITAL
     </select>
+
+    <select id="getGmProfession" resultMap="profession_rm">
+        SELECT PROFESSION_NO, PROFESSION_ID, PROFESSION_NM, PROFESSION_PHONE,
+               PROFESSION_ENROLL_DT, STATUS_CD, AUTH_STATUS, HOSPITAL_NM, HOSPITAL_ADDR
+        FROM PROFESSION
+                 JOIN PROFESSION_HOSPITAL USING(PROFESSION_NO)
+        WHERE STATUS_CD IN (3, 4)
+    </select>
+
+    <update id="stopProfession">
+        UPDATE PROFESSION
+        SET STATUS_CD = 3
+        WHERE PROFESSION_NO = #{professionNo}
+    </update>
+    <update id="rollbackProfession">
+        UPDATE PROFESSION
+        SET STATUS_CD = 4
+        WHERE PROFESSION_NO = #{professionNo}
+    </update>
 	
 </mapper>
