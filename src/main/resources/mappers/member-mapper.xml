@@ -58,7 +58,7 @@
     <select id="emailLogin" resultMap="member_rm">
         SELECT * FROM MEMBER
         WHERE MEMBER_ID = #{memberId}
-        AND STATUS_CD = 0
+        AND STATUS_CD IN(0, 9)
     </select>
     
     <!-- 프로필 사진  -->
@@ -184,6 +184,30 @@
         UPDATE MEMBER SET
             MEMBER_FN = #{memberFName}
         WHERE MEMBER_NO = #{memberNo} AND STATUS_CD = 0
+    </update>
+
+    <select id="selectAuthority" resultType="_int">
+        SELECT STATUS_CD
+        FROM MEMBER
+        WHERE MEMBER_NO = #{memberNo}
+    </select>
+
+    <select id="selectMember" resultMap="member_rm">
+        SELECT MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_ADDR, MEMBER_FN, MEMBER_PHONE, MEMBER_ENROLL_DT, STATUS_CD
+        FROM MEMBER
+        WHERE STATUS_CD IN(0, 2)
+    </select>
+
+    <update id="stopMember">
+        UPDATE MEMBER SET
+            STATUS_CD = 2
+        WHERE MEMBER_NO = #{memberNo}
+    </update>
+
+    <update id="rollbackMember">
+        UPDATE MEMBER SET
+            STATUS_CD = 0
+        WHERE MEMBER_NO = #{memberNo}
     </update>
 
 </mapper>

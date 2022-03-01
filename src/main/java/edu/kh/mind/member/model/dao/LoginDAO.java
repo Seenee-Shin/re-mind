@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -42,4 +43,20 @@ public class LoginDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("memberMapper.selectUserPic", memberId);
 	}
+
+    public int selectAuthority(int memberNo) {
+        return sqlSession.selectOne("memberMapper.selectAuthority", memberNo);
+    }
+
+    public List<Member> selectMember() {
+        return sqlSession.selectList("memberMapper.selectMember");
+    }
+
+    public int stopMember(Map<String, Integer> map) {
+        return sqlSession.update("memberMapper.stopMember", map);
+    }
+
+    public int rollbackMember(Map<String, Integer> map) {
+        return sqlSession.update("memberMapper.rollbackMember", map);
+    }
 }
