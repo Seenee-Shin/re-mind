@@ -12,7 +12,7 @@
 			<div class="input_wrap">
 				<div class="input_div">
 					<div>이메일</div>
-					<input type="text" class="login_input" name="memberId" value="nyk63151@qopow.com">
+					<input type="text" class="login_input" name="memberId" value="stage107@naver.com">
 				</div>
 				<div class="input_div">
 					<div>비밀번호</div>

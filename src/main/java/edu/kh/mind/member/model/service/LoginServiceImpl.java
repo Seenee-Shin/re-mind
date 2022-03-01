@@ -2,6 +2,7 @@ package edu.kh.mind.member.model.service;
 
 import edu.kh.mind.member.model.dao.LoginDAO;
 import edu.kh.mind.member.model.vo.Member;
+import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.social.naver.vo.Naver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,6 +34,23 @@ public class LoginServiceImpl implements LoginService{
     @Override
     public int selectAuthority(int memberNo) {
         return dao.selectAuthority(memberNo);
+    }
+
+    @Override
+    public int changePro(Map<String, Integer> map) {
+        int result = 0;
+
+        if(Integer.parseInt(String.valueOf(map.get("statusCode"))) == 4)
+            result = dao.stopProfession(map);
+        else
+            result = dao.rollbackProfession(map);
+
+        return result;
+    }
+
+    @Override
+    public List<Profession> getGmProfession() {
+        return dao.getGmProfession();
     }
 
     @Override

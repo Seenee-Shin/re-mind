@@ -11,20 +11,18 @@
         <tr>
             <th style="width: 10%;">Email</th>
             <th style="width: 10%;">Name</th>
-            <th style="width: 10%;">FName</th>
-            <th style="width: 35%;">Address</th>
             <th style="width: 10%;">Phone</th>
             <th style="width: 10%;">Register Date</th>
-            <th style="width: 15%;">여부</th>
+            <th style="width: 10%;">HospitalName</th>
+            <th style="width: 15%;">전문가 등록 상태</th>
+            <th style="width: 15%;">변경</th>
         </tr>
         </thead>
-        <tbody>
-
-        </tbody>
+        <tbody></tbody>
     </table>
 </div>
 
 <script>
-    let pageIndex = 0;
+    let pageIndex = 1;
 </script>
 <jsp:include page="gmFooter.jsp"/>

@@ -31,6 +31,8 @@ public class Profession {
    private String memberName;
    private String memberPhone;
 
+   private String hospitalName;
+
    private String reservationEnrollDate;
    private String reservationEnrollTime;
 
@@ -38,7 +40,16 @@ public class Profession {
    private int starAvg;
    private int reviewCount;
 
+
     public Profession(){}
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
 
     public void setReviewCount(int reviewCount) {
         this.reviewCount = reviewCount;

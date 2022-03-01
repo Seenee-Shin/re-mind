@@ -1,6 +1,7 @@
 package edu.kh.mind.member.model.service;
 
 import edu.kh.mind.member.model.vo.Member;
+import edu.kh.mind.member.model.vo.Profession;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
 import java.util.List;
@@ -25,4 +26,8 @@ public interface LoginService {
     List<Member> selectMember();
 
     int isPrime(Map<String, Integer> map);
+
+    List<Profession> getGmProfession();
+
+    int changePro(Map<String, Integer> map);
 }
