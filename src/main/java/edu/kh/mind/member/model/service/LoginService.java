@@ -3,6 +3,7 @@ package edu.kh.mind.member.model.service;
 import edu.kh.mind.member.model.vo.Member;
 import edu.kh.mind.member.social.naver.vo.Naver;
 
+import java.util.List;
 import java.util.Map;
 
 public interface LoginService {
@@ -18,4 +19,10 @@ public interface LoginService {
     int insertToken(Naver naver);
 
     int selectToken(Naver naver);
+
+    int selectAuthority(int memberNo);
+
+    List<Member> selectMember();
+
+    int isPrime(Map<String, Integer> map);
 }

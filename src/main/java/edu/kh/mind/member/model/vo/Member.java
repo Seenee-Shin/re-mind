@@ -12,6 +12,7 @@ public class Member {
     private String memberPhone;
     private String memberGender;
     private Date memberEnrollDate;
+    private String memberDate;
     
     //프로필 사진 imagePath
     private String memberImage;
@@ -21,6 +22,13 @@ public class Member {
     private String imageName;
     public Member(){}
 
+    public void setMemberDate(String memberDate) {
+        this.memberDate = memberDate;
+    }
+
+    public String getMemberDate() {
+        return memberDate;
+    }
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
