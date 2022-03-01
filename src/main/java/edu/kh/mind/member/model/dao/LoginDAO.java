@@ -72,4 +72,8 @@ public class LoginDAO {
     public int rollbackProfession(Map<String, Integer> map) {
         return sqlSession.update("professionMapper.rollbackProfession", map);
     }
+
+    public Member detailMember(int memberNo) {
+        return sqlSession.selectOne("memberMapper.detailMember", memberNo);
+    }
 }

@@ -212,4 +212,12 @@
         WHERE MEMBER_NO = #{memberNo}
     </update>
 
+    <select id="detailMember" resultMap="member_rm">
+        SELECT M.MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_FN, MEMBER_ADDR, MEMBER_PHONE,
+               MEMBER_GENDER, MEMBER_ENROLL_DT, STATUS_CD, IMAGE_PATH, IMAGE_NM
+        FROM MEMBER M
+                 LEFT JOIN IMAGE ON(M.MEMBER_NO = IMAGE.MEMBER_NO)
+        WHERE M.MEMBER_NO = #{memberNo}
+    </select>
+
 </mapper>

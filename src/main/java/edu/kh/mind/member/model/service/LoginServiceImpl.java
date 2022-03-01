@@ -49,6 +49,11 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
+    public Member detailMember(int memberNo) {
+        return dao.detailMember(memberNo);
+    }
+
+    @Override
     public List<Profession> getGmProfession() {
         return dao.getGmProfession();
     }
