@@ -25,6 +25,7 @@
 		<typeAlias type="edu.kh.mind.board.model.vo.Image" alias="Image"/>
 		<typeAlias type="edu.kh.mind.board.model.vo.Scrap" alias="Scrap"/>
 		<typeAlias type="edu.kh.mind.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="edu.kh.mind.board.model.vo.Report" alias="Report"/>
 
 
 		<typeAlias type="edu.kh.mind.selftest.model.vo.Selftest" alias="Selftest"/>

@@ -298,6 +298,11 @@
 	const profession = "${profession.counselCategoryCode}";
 	const professionNo = "${profession.professionNo}";
 	const memberNo = "${loginMember.memberNo}";
+	
+	const textTherapy = "${splitPrice[0]}";
+	const faceTherapy = "${splitPrice[1]}";
+	const voiceTherapy = "${splitPrice[2]}";
+
 
 	function proReservation(){
 		
@@ -351,7 +356,6 @@
 			"professionNo": professionNo,
 			"memberNo": memberNo},
 		success:function (result){
-			console.log(result)
 			if(result > 0) {
 				$(".wishHeart img").attr("src", contextPath + "/resources/images/pro/redHeart.png");
 				wishCheck = 1;
@@ -403,50 +407,50 @@
 	// 선 계산(ajax로 넘겨야됨)
 	last = currentPage * infinityLimit;
 	first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
-	
+
 	function calcPagination(){
 		
 	   last = currentPage * infinityLimit;
 	   first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
 	   
 	}
-	
+
+	let flag = true;
 	function reviewAdd(){
 		
 		// 총 갯수가 last 수와 같으면 reviewAdd 함수 실행 x
-		if(last >= listCount) {
-			return false;
+		if (listCount != undefined && last >= listCount) {
+			flag = false;
 		}
-			
-		
+
 		calcPagination();
 		currentPage = currentPage + 1;
-		
-		 $.ajax({
-			url:contextPath+'/pro/reviewAdd',
-			data:{
-				"professionNo": professionNo,
-				"last": last,
-				"first": first},
-		
-			dataType:"JSON",
-			success:function(reviewAddList){
-				
-				$.each(reviewAddList,function(i,item){
-					
-					if(reviewAddList.length - 1 == i){
-						listCount = Number.parseInt(item.listCount);
-						return false;
-					}
-					
-					let li;
-					li = '<li class="pro_review_li">' +
-					 '<div class="review_top_box">' +
-						' <div class="float-left">' +
-						'	 <p>'+item.counselCategoryNm+' 이용고객님</p>' +
-						'	 <p>'+item.enrollDate+'</p>' +
-						 '</div>' +
-						 '<div class="float-right">' +
+
+		if (flag) {
+			$.ajax({
+				url:contextPath+'/pro/reviewAdd',
+				data:{"professionNo": professionNo,
+					"last": last,
+					"first": first},
+
+				dataType:"JSON",
+				success:function(reviewAddList){
+
+					$.each(reviewAddList,function(i,item){
+
+						if(reviewAddList.length - 1 == i){
+							listCount = Number.parseInt(item.listCount);
+							return false;
+						}
+
+						let li;
+						li = '<li class="pro_review_li">' +
+							'<div class="review_top_box">' +
+							' <div class="float-left">' +
+							'	 <p>'+item.counselCategoryNm+' 이용고객님</p>' +
+							'	 <p>'+item.enrollDate+'</p>' +
+							'</div>' +
+							'<div class="float-right">' +
 							'<div class="starpoint_box">' +
 							'	<label for="starpoint_1" class="label_star" title="1"><span class="blind">1점</span></label>' +
 							'	<label for="starpoint_2" class="label_star" title="2"><span class="blind">2점</span></label>' +
@@ -468,35 +472,31 @@
 							'	<input type="radio" name="starpoint" id="starpoint_8" class="star_radio">' +
 							'	<input type="radio" name="starpoint" id="starpoint_9" class="star_radio">' +
 							'	<input type="radio" name="starpoint" id="starpoint_10" class="star_radio">' +
-							'	<span class="starpoint_bg" style="width: 60%;"></span>' +
+							'	<span class="starpoint_bg" style="width: ' + item.reviewStarPoint + '0%;"></span>' +
 							'</div>' +
-						' </div>' +
-					 '<div class="review_bottom_box clear-both">' +
-						' <p>'+item.reviewContent+'</p>' +
-					 '</div>' +
-				 '</li>';
-				 
-				 $(".pro_review_wrap").append(li);
-					
-					console.log(item);
-					
-					
-				});
-			}
-			
-			 
-		 }).done(function(){
-			 	if(last + infinityLimit >= listCount) {
+							' </div>' +
+							'<div class="review_bottom_box clear-both">' +
+							' <p>'+item.reviewContent+'</p>' +
+							'</div>' +
+							'</li>';
+
+						$(".pro_review_wrap").append(li);
+
+					});
+				}
+
+
+			}).done(function(){
+				if(last>= listCount) {
 					$("#reviewAddBtn").remove();
-				} 
-		 });
-		
+				}
+			});
+		}
 	}
 	
 	$(window).scroll(function(){ 
         var height = $(document).scrollTop(); //실시간으로 스크롤의 높이를 측정
-       	console.log($(document).scrollTop());
-        if(height > 25){ 
+        if(height > 25){
             $('.pro_reservation_wrap').addClass('pro_reservation_fixed'); 
         }else{ 
             $('.pro_reservation_wrap').removeClass('pro_reservation_fixed'); 
@@ -515,7 +515,5 @@
 		}
 
 		}); */
-
-	
-
 </script>
+<script type="text/javascript" src="${contextPath}/resources/js/pro/pro.js"></script>

@@ -62,7 +62,8 @@ public class LoginFilter implements Filter{
                     if(      arr[1].equals("emotionRecord") ||
                             arr[1].equals("appointment") ||
                             arr[1].equals("myBoardList") ||
-                            arr[1].equals("updateMyInfo")
+                            arr[1].equals("updateMyInfo") ||
+                            arr[1].equals("map")
                     ) {
                         System.out.println("[필터] : 잘못된 접근입니다. 로그인페이지로 이동합니다.");
 

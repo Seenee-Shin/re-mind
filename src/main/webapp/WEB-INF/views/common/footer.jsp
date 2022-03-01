@@ -20,8 +20,6 @@
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <!-- sweetealert : 경고창 api -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
     <script>

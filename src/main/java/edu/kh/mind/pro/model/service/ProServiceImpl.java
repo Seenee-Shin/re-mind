@@ -14,6 +14,7 @@ import edu.kh.mind.pro.model.vo.ReservationPayMent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class ProServiceImpl implements ProService{
 	 * @return
 	 */
 	@Override
-	public Profession selectProRandom() {
+	public List<Profession> selectProRandom() {
 		return dao.selectProRandom();
 	}
 
@@ -206,5 +207,11 @@ public class ProServiceImpl implements ProService{
 	public int listCountSelect(Review review) {
 		// TODO Auto-generated method stub
 		return dao.listCountSelect(review);
+	}
+	
+	@Override
+	public String proPriceSelect(int professionNo) {
+
+		return dao.proPriceSelect(professionNo);
 	}
 }

@@ -28,9 +28,14 @@
                     </c:choose>
                     </div>
                     <div class="profile_wrap">
-                        <div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);">
-                        </div>
-
+						<c:choose>
+							<c:when test="${empty board.imageName}">
+								<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
+							</c:when>
+							<c:otherwise>
+								<div class="writer_pic" style="background-image: url(${contextPath}${board.imagePath}${board.imageName});"></div>
+							</c:otherwise>
+						</c:choose>
                         <div class="writer_id">
                             <p>${board.memberFn}</p>
                         </div>
@@ -141,12 +146,13 @@
 								<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
 							</a>    
 	    				</c:if>
-                       <%--  <a href="">
-							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
-                        </a> --%>
+	    				
+	    				<c:if test="${loginMember.memberNo != board.memberNo }">
+	                       <a id="report" href="javascript:openReportPopup();">
+								<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
+	                        </a>
+                        </c:if>
                     </div> 
-                    
-
                 </article>
 				
 				<c:if test="${board.replyCheckCode == 1}">
@@ -232,6 +238,7 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 
 	function openComment() {
@@ -277,10 +284,10 @@
 	    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 	}
 
-/*  	function shareKakao() {
-		 
+/* 	function shareKakao() {
 		  // 사용할 앱의 JavaScript 키 설정
 		  Kakao.init('6218050ca27459717c1f03b78a03958d');
+		 
 		 
 		  // 카카오링크 버튼 생성
 		  Kakao.Link.createDefaultButton({
@@ -296,7 +303,7 @@
 		      }
 		    }
 		  });
-		}  */
+		}   */
  	
  	function boardScrap() {
  		
@@ -333,7 +340,8 @@
 					}
 					
 				}else{
-					
+					swal({"title" : "다시 시도해주세요" , 
+	                      "icon" : "error"});
 				}
 			},
 			
@@ -347,62 +355,66 @@
 	}
 		
 		
+	
+	$(".like").on("click", function(e){
 		
-		$(".like").on("click", function(e){
-			
-					var tagId = $(this).attr('id');
-					var empathyStatusCode;
-					
-					if(tagId == "like_smile"){
-						empathyStatusCode = 1001;
-					}else if(tagId == "like_hug"){
-						empathyStatusCode = 1002;
-					}else if(tagId == "like_amazed"){
-						empathyStatusCode = 1003;
-					}else if(tagId == "like_angry"){
-						empathyStatusCode = 1004;
-					}else{
-						empathyStatusCode = 1005;
-					};
-					
+				var tagId = $(this).attr('id');
+				var empathyStatusCode;
+				
+				if(tagId == "like_smile"){
+					empathyStatusCode = 1001;
+				}else if(tagId == "like_hug"){
+					empathyStatusCode = 1002;
+				}else if(tagId == "like_amazed"){
+					empathyStatusCode = 1003;
+				}else if(tagId == "like_angry"){
+					empathyStatusCode = 1004;
+				}else{
+					empathyStatusCode = 1005;
+				};
+				
+				$.ajax({
+		 			url : "${contextPath}/free/insertEmpathy",
+		 			data : {"boardNo" : boardNo,
+		 					"memberNo" : loginMemberNo,
+		 					"empathyStatusCode" : empathyStatusCode},
+		 			context: this,
+					success : function (result) {
+					if(result >=1){
+						
 					$.ajax({
-			 			url : "${contextPath}/free/insertEmpathy",
-			 			data : {"boardNo" : boardNo,
-			 					"memberNo" : loginMemberNo,
-			 					"empathyStatusCode" : empathyStatusCode},
-			 			context: this,
-						success : function (result) {
-						if(result >=1){
+						url : "${contextPath}/free/countEmpathy",
+						data : { "boardNo": boardNo,
+								"empathyStatusCode" : empathyStatusCode},
+						context: this,
+						success : function(count){
+							$(this).children(".like_count").text(count)
 							
-						$.ajax({
-							url : "${contextPath}/free/countEmpathy",
-							data : { "boardNo": boardNo,
-									"empathyStatusCode" : empathyStatusCode},
-							context: this,
-							success : function(count){
-								$(this).children(".like_count").text(count)
-								
-							}
-						});
-						
-							
-						}else{
-							console.log("실패");
 						}
-						
-						},
-						
-						error: function (xhr, status, error) {
-						    swal({"title" : "서버 연결 오류" , 
-			                      "icon" : "error"});
-					}
-			 			
-			 		});
-					       
+					});
 					
-		});
+						
+					}else{
+						console.log("실패");
+					}
+					
+					},
+					
+					error: function (xhr, status, error) {
+					    swal({"title" : "서버 연결 오류" , 
+		                      "icon" : "error"});
+				}
+		 			
+		 		});
+				       
+				
+	});
 			
-			
+// 신고하기 팝업
+function openReportPopup() {
+	   layerPopup("report");
+}
+
 					
 		
 		

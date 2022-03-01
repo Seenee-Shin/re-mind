@@ -4,6 +4,7 @@ public class Mute {
     private int muteNo;
     private int memberNo;
     private String memberName;
+    private String memberFName;
     private String memberPhone;
     private String imagePath;
     private String imageName;
@@ -66,4 +67,14 @@ public class Mute {
     public int getImageLevel() {
         return imageLevel;
     }
+
+	public String getMemberFName() {
+		return memberFName;
+	}
+
+	public void setMemberFName(String memberFName) {
+		this.memberFName = memberFName;
+	}
+    
+    
 }

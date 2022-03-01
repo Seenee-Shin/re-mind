@@ -131,8 +131,8 @@ public class ProDAO {
 	 * 상담사 랜덤
 	 * @return result
 	 */
-	public Profession selectProRandom() {
-		return sqlSession.selectOne("professionMapper.selectProRandom");
+	public List<Profession> selectProRandom() {
+		return sqlSession.selectList("professionMapper.selectProRandom");
 	}
 
     // 상담사 사진, 이름 가지고 오기
@@ -156,4 +156,9 @@ public class ProDAO {
     public String setCategory(int professionNo) {
 		return sqlSession.selectOne("professionMapper.setCategory", professionNo);
     }
+
+	public String proPriceSelect(int professionNo) {
+
+		return sqlSession.selectOne("reservationMapper.proPriceSelect", professionNo);
+	}
 }

@@ -47,7 +47,9 @@ public class WorryBoardController {
     @RequestMapping(value="worryList", method=RequestMethod.POST)
     public HashMap<String, Object> worryList(@RequestParam Map<String, String> param, HttpSession session) {
         HashMap<String, Object> map = new HashMap<>();
-	    System.out.println(param.get("worryCategoryCode"));
+
+        System.out.println("___________________________________");
+	    System.out.println(param);
 
 
 		if (session.getAttribute("loginMember") != null) {

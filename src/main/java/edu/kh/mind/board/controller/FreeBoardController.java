@@ -24,6 +24,7 @@ import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Reply;
+import edu.kh.mind.board.model.vo.Report;
 import edu.kh.mind.board.model.vo.Scrap;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Member;
@@ -290,20 +291,47 @@ public class FreeBoardController {
     	return result;
     }
     
+    //신고하기
+    @ResponseBody
+    @RequestMapping(value = "insertReport", method = RequestMethod.POST)
+    public int insertReport(Report report,  @ModelAttribute("loginMember") Member loginMember, HttpSession session,
+    		RedirectAttributes ra) {
+    	int result =0;
+    	if(session.getAttribute("loginMember") != null) {
+    		report.setMemberNo(((Member)session.getAttribute("loginMember")).getMemberNo());
+    		//같은 게시글or 댓글 신고 이력 조회
+    		Report selectReport = service.selectReport(report);
+    		
+    		if(selectReport == null) {
+    			//조회 결과 없으면 insert 진행 
+    			result = service.insertReport(report);
+    			
+    			if(result > 0) {
+    				result = 1;
+    			}else{
+    				result = 2;
+    			}
+    		}else {
+    			result = 3;
+    		}
+    	}
+    	
+    	return result;
+    }
     
     
     //예외처리
-	@ExceptionHandler(Exception.class)
-	public String exceptionHandler(Exception e, Model model) {
-		
-		//Model : 데이터 전달용 객체(Map형식, request범위)
-		
-		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
-		model.addAttribute("e", e);
-		
-		return "/common/error";
-	}
-  
+//	@ExceptionHandler(Exception.class)
+//	public String exceptionHandler(Exception e, Model model) {
+//		
+//		//Model : 데이터 전달용 객체(Map형식, request범위)
+//		
+//		model.addAttribute("errorMessage", "회원 관련 서비스 이용 중 문제가 발생했습니다.");
+//		model.addAttribute("e", e);
+//		
+//		return "/common/error";
+//	}
+//  
 	
 	
 	
