@@ -30,4 +30,6 @@ public interface LoginService {
     List<Profession> getGmProfession();
 
     int changePro(Map<String, Integer> map);
+
+    Member detailMember(int memberNo);
 }

@@ -81,4 +81,16 @@ public class GMController {
     public int changePro(@RequestParam Map<String, Integer> map){
         return service.changePro(map);
     }
+
+    @GetMapping("detailMember/{memberNo}")
+    public String detailMember(@PathVariable("memberNo") int memberNo, Model model){
+
+        Member member = service.detailMember(memberNo);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+        member.setMemberDate(sdf.format(member.getMemberEnrollDate()));
+
+        model.addAttribute("member", member);
+
+        return "generalManager/detailMember";
+    }
 }
