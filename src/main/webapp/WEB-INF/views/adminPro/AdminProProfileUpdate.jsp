@@ -41,9 +41,13 @@
                <h3 style="text-align: center;">프로필 이미지</h3>
                <input type="file" accept=".png" name="proProfile" id="" onchange="loadImg(this)" style="display: none">
                <div class="imgBox" style="position: relative;" >
-               	<img alt="" src="">
+               	<img alt="" src="${contextPath}${proInfo.imagePath}/${proInfo.imageName}">
                	<i class="fas fa-times deleteImg" style=" position: absolute; top: 10px;  right: 10px;"></i>
-               	<span class ="imgDec" style="position: absolute; top: 120px; right: 30px;"> 클릭하여 프로필 사진 추가</span>
+               	
+               	<c:if test="${empty proInfo.imageName}">
+               		<span class ="imgDec" style="position: absolute; top: 120px; right: 30px;"> 클릭하여 프로필 사진 추가</span>
+               	</c:if>
+               	
                </div>
                <p style="font-size: 15px; margin-top: 20px;">500x500 이상의 뒷배경이 투명인 png파일을 올려주세요</p>
                <a href="https://www.remove.bg/ko" target="_blank">투명배경 만들기</a>
@@ -61,7 +65,7 @@
                   			<label for="${c.worryName}">${c.worryName}</label>
                    		</div>
                    </c:forEach>
-             		<input type="text" name="worryCategoryCode" id="worryCategory" value=""/>
+             		<input type="hidden" name="worryCategoryCode" id="worryCategory" value=""/>
                </div>
            </article>
 

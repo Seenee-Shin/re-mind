@@ -49,6 +49,8 @@
         <result property="professionStory" column="PRO_STORY"/>
         <result property="professionCarrer" column="PRO_CARRER"/>
         <result property="professionTag" column="PRO_TAG"/>
+        <result property="imagePath" column="IMAGE_PATH"/>
+        <result property="imageName" column="IMAGE_NM"/>
     </resultMap>
     
     <resultMap id="professionHospital_rm" type="ProfessionHospital">
@@ -294,9 +296,10 @@
 	</insert>
     <!-- 로그인 -->
     <select id="proLogin" resultMap="profession_rm">
-        SELECT * FROM PROFESSION
+        SELECT *
+        FROM PROFESSION
         WHERE PROFESSION_ID = #{professionId}
-        AND STATUS_CD in(3,4)
+        AND STATUS_CD in(3,4) AND AUTH_STATUS =1
     </select>
 
     <update id="updatePrice">
@@ -406,12 +409,14 @@
     </select>
 
 	<select id="selectProfessionInfo" resultMap="professionInfo_rm" >
-		SELECT * FROM PROFESSION_INFORMATION WHERE PROFESSION_NO = #{professionNo}
+  		SELECT PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR,PRO_INTRO,PRO_STORY,PRO_CARRER,PRO_TAG,IMAGE_PATH,IMAGE_NM
+		FROM PROFESSION_INFORMATION
+    	JOIN IMAGE USING(PROFESSION_NO)
+    	WHERE PROFESSION_NO = #{professionNo} AND IMAGE_LEVEL = 1
 	</select>
 	
 	<select id="selectProfessionHospital" resultMap="professionHospital_rm">
 		SELECT * FROM PROFESSION_HOSPITAL WHERE PROFESSION_NO = #{professionNo}
-	
 	</select>
 
 
