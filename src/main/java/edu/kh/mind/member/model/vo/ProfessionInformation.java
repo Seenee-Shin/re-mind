@@ -9,9 +9,27 @@ public class ProfessionInformation {
     private String professionStory;
     private String professionCarrer;
     private String professionTag;
+    private String imagePath;
+    private String imageName;
     
 
-    public ProfessionInformation(){}
+    public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public ProfessionInformation(){}
 
     public void setProfessionNo(int professionNo) {
         this.professionNo = professionNo;
