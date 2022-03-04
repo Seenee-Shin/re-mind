@@ -262,12 +262,20 @@ public class AdminProController {
     @RequestMapping(value = "AdminProProfile/{professionNo}")
     public String AdminProProfileView(@ModelAttribute("loginPro") Profession loginPro,
     		@PathVariable int professionNo, Model model) {
+    	
+    	WorryCategory worryCategory = new WorryCategory();
+    	
     	ProfessionInformation proInfo = service.selectProfessionInfo(professionNo);
+    	if(proInfo.getProfessionTag() != null) {
+    		worryCategory.setWorryName(service.setCategory(professionNo));
+    	}
+    	
     	ProfessionHospital proHospital = service.selectProfessionHospital(professionNo);
     	List<ProfessionPrice> price = service.selectPrice(professionNo);
     	
     			
     	model.addAttribute("proInfo", proInfo);
+    	model.addAttribute("worryCategory", worryCategory);
     	model.addAttribute("proHospital", proHospital);
     	model.addAttribute("price", price);
     	model.addAttribute("css", "proPage/proProfile");
@@ -282,6 +290,9 @@ public class AdminProController {
 		List<WorryCategory> category = service.selectWorryCategory();
 		List<ProfessionPrice> price = service.selectPrice(professionNo);
     	ProfessionInformation proInfo = service.selectProfessionInfo(professionNo);
+    	proInfo.setProfessionIntro(Util.changeNewLine2(proInfo.getProfessionIntro()));
+		proInfo.setProfessionStory(Util.changeNewLine2(proInfo.getProfessionStory()));
+		proInfo.setProfessionCarrer(Util.changeNewLine2(proInfo.getProfessionCarrer()));
     	ProfessionHospital proHospital = service.selectProfessionHospital(professionNo);
 		
 		//프로필 정보 조회해 오기
