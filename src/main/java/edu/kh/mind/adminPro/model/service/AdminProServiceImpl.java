@@ -296,10 +296,10 @@ public class AdminProServiceImpl implements AdminProService{
 
 	@Override
 	public ProfessionInformation selectProfessionInfo(int professionNo) {
+		
 		ProfessionInformation proInfo = dao.selectProfessionInfo(professionNo);
-		proInfo.setProfessionIntro(Util.changeNewLine2(proInfo.getProfessionIntro()));
-		proInfo.setProfessionStory(Util.changeNewLine2(proInfo.getProfessionStory()));
-		proInfo.setProfessionCarrer(Util.changeNewLine2(proInfo.getProfessionCarrer()));
+		
+	
 		// TODO Auto-generated method stub
 		return proInfo;
 	}
@@ -308,6 +308,12 @@ public class AdminProServiceImpl implements AdminProService{
 	public ProfessionHospital selectProfessionHospital(int professionNo) {
 		// TODO Auto-generated method stub
 		return dao.selectProfessionHospital(professionNo);
+	}
+
+	@Override
+	public String setCategory(int professionNo) {
+		// TODO Auto-generated method stub
+		return dao.setCategory(professionNo);
 	}
 
 

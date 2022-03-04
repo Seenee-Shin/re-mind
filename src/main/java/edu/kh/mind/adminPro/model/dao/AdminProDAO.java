@@ -191,6 +191,10 @@ public class AdminProDAO {
 	}
 
 
+    public String setCategory(int professionNo) {
+		return sqlSession.selectOne("professionMapper.setCategory", professionNo);
+    }
+
 
 	
 	

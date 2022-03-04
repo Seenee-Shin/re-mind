@@ -48,10 +48,8 @@
        <section class="proDescrpiton">
            <article class="proInfo">
                <h3>상담태그</h3>
-               <div class="checkBoxWrap">
-					<div class="checkBox">
-						${proInfo.professionTag}
-               		</div>
+               <div class="worryCategory">
+					${worryCategory.worryName}
                </div>
            </article>
 

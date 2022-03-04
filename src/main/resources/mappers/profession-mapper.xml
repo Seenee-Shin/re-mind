@@ -435,6 +435,7 @@
             )
         ]]>
     </select>
+    
     <select id="loadProMapCount" resultType="_int">
         SELECT COUNT(*) MAX_VALUE
         FROM PROFESSION_HOSPITAL
