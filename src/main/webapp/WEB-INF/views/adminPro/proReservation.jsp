@@ -15,8 +15,8 @@
         <thead>
         <tr>
             <th>예약번호</th>
-            <th>회원번호</th>
-            <th>상태코드</th>
+            <th>예약자 성명</th>
+            <th>예약상태</th>
             <th>예약날짜</th>
             <th>예약시간</th>
             <th>예약구분</th>
@@ -75,8 +75,32 @@
                     data: data,
                     columns: [
                         { data: "reservationNo"},
-                        { data: "memberNo" },
-                        { data: "reservationStatusCode" },
+                        { data: null,
+                        	render: function(data){
+                        		
+                        		return '<a href="reservationDetail/'+ data.memberNo +'">'+data.memberName+'</a>';
+                        	}
+                        },
+                        { data: null,
+                            render: function(data){
+                            	
+                            	let book = '';
+                            	const statusCode = data.reservationStatusCode; 
+                            	 // 1:예약신청, 2:예약결정, 3:예약취소, 4:상담완료
+                            	 
+                            	 switch(statusCode){
+                            	 	case 1 : book ='예약신청'; break;
+                            	 	case 2 : book ='예약결정'; break;
+                            	 	case 3 : book ='예약취소'; break;
+                            	 	case 4 : book ='상담완료'; break;
+                            	 	default : book ='에러'; break;
+                            	 }
+                            	console.log(book)
+                            	console.log(statusCode)
+                            	
+                                return book;
+                            }
+                        },
                         { data: null,
                             render : function(data){
                                 var d = new Date(data.reservationEnrollDate),
@@ -112,6 +136,7 @@
                                 return btn;
                             }
                         }
+
                     ]
                 })
             }

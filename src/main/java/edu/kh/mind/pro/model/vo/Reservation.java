@@ -12,6 +12,9 @@ public class Reservation {
 	private int counselCategoryNo;
 	private int reservationPayNo;
 	private String counselCategoryNm;
+	private String  symptom;
+
+
 	private int PayNo;
 
 	private int memberNo;
@@ -154,6 +157,13 @@ public class Reservation {
 
 	public void setCheckReview(int checkReview) {
 		this.checkReview = checkReview;
+	}
+	public String getSymptom() {
+		return symptom;
+	}
+
+	public void setSymptom(String symptom) {
+		this.symptom = symptom;
 	}
 
 	@Override

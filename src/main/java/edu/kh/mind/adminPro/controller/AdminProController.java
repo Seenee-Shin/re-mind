@@ -134,7 +134,7 @@ public class AdminProController {
 	// 클래스 
 	@ResponseBody
 	@RequestMapping(value ="reservationList", method=RequestMethod.GET)
-	public List<Profession> reservationList(HttpSession session, Model model ) {
+	public List<Profession> reservationList(HttpSession session, Model model) {
 		
 		int professionNo = ((Profession)session.getAttribute("loginPro")).getProfessionNo();
 		
