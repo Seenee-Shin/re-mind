@@ -108,6 +108,7 @@
         <result property="counselCategoryNm" column="COUNSEL_CATEGORY_NM"/>
         <result property="PayNo" column="RESERVATION_PAY_NO"/>
         <result property="memberNo" column="MEMBER_NO"/>
+        <result property="memberName" column="MEMBER_NM"/>
         <result property="professionNo" column="PROFESSION_NO"/>
         <result property="statusCode" column="STATUS_CD"/>
     </resultMap>
@@ -353,12 +354,13 @@
     
     <!-- 예약리스트 조회 -->
     <select id="classList" resultMap="reservation_rm">
-    SELECT r.RESERVATION_NO,
+ 	SELECT r.RESERVATION_NO,
         TO_CHAR(r.RESERVATION_ENROLL_DT,'YYYY-MM-DD') "RESERVATION_ENROLL_DT", r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
-	    rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD
+        rp.RESERVATION_PAY_NO, m.MEMBER_NM, rp.PROFESSION_NO, r.RESERVATION_STATUS_CD
 	FROM RESERVATION_PAYMENT rp
 	JOIN RESERVATION r ON r.RESERVATION_PAY_NO = RP.RESERVATION_PAY_NO
 	JOIN COUNSEL_CATEGORY cc ON CC.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO
+	JOIN MEMBER m ON rp.MEMBER_NO = m.MEMBER_NO
 	WHERE PROFESSION_NO = #{professionNo}
 	AND rp.STATUS_CD = 1
 	ORDER BY RESERVATION_ENROLL_DT, RESERVATION_ENROLL_TIME
