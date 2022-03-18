@@ -157,14 +157,14 @@
 				
 				<c:if test="${board.replyCheckCode == 1}">
 					<article class="comment_view_wrap">
-					    <div class="comment_top dark-brown">
+					    <div class="comment_top">
 					        <div>
 					            <i class="far fa-comment"></i>
 					            <span>댓글</span> 
 					            <span>(${board.replyCount})</span>
 					        </div>
 					
-					        <div class="m_comment_wirte" onclick="openComment()">
+					        <div class="dark-brown m_comment_wirte" onclick="openComment();">
 					            <i class="far fa-comment"></i>
 					            <span>댓글</span> 
 					            <span>(${board.replyCount})</span>
@@ -237,13 +237,12 @@
     </main>
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
-<script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 
-	function openComment() {
-		$('#write_comment').toggleClass('active');
-		$('#comment_list').toggleClass('active');
+	function openComment(){
+		$('.write_comment').toggleClass('active');
+		$('.comment_list').toggleClass('active');
 	}
 
 	//수정버튼 클릭 시 동작
@@ -419,7 +418,4 @@ function openReportPopup() {
 		
 		
 </script>
-
-
-
 <script src="${contextPath}/resources/js/board/replyCopy.js"></script>

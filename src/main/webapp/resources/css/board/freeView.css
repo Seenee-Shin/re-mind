@@ -277,10 +277,14 @@ p{
 
 /* ----------모바일 --------------- */
 @media screen and (max-width: 768px){
+		.main_content{
+	    width: 100%;
+	    margin-top: 0;
+}
     /* 사이드 메뉴 */
     .side_menu{
         display: block;
-        height: 105px;
+        height: 55px;
     }
     .side_menu>h3{
         margin-bottom: 15px;
@@ -315,15 +319,14 @@ p{
     }
     /* 댓글 */
     .comment_view_wrap{
-        height: 50px;
         margin-top: 10px;
         margin-left: 0px;
-        background-color: #A59999;
     }
-     .write_comment, .comment_list {
-        display: none;
-    } 
-    
+
+	.write_comment,.comment_list{
+	 display: none;
+	}
+	
     .write_comment.active{
     	display: flex;
     	padding: 10px;
@@ -335,7 +338,7 @@ p{
     }
     .comment_top> div:nth-child(1){
         display: none;
-    }
+    } 
 
     .comment_top{
         display: block;
@@ -349,6 +352,7 @@ p{
         color: white;
         width: 100%;
         cursor: pointer;
+        background-color: #A59999;
     }
     /* 본문내용 */
     .posting{
