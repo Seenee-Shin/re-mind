@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.kh.mind.board.model.dao.ReplyDAO;
+import edu.kh.mind.board.model.vo.Image;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.common.util.Util;
 
@@ -17,7 +18,16 @@ public class ReplyServiceImpl implements ReplyService {
 
 	// 댓글 목록 조회
 	public List<Reply> selectList(int boardNo) {
-		return dao.selectList(boardNo);
+		List<Reply> result = dao.selectList(boardNo);
+		
+		for (Reply r : result) {
+			Reply image = dao.selectReplyPic(r.getReplyNo());
+			
+			r.setImageName(image.getImageName());
+			r.setImagePath(image.getImagePath());
+		}
+		
+		return result;
 	}
 
 	@Override

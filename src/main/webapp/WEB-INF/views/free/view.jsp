@@ -179,13 +179,13 @@
                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
                            		</c:when>
                            		<c:otherwise>
-                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
+                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
                            		</c:otherwise>
                            		
                                </c:choose>
 	
 				               <div>
-				                   <p>${board.memberFn}</p>
+				                   <p>${loginMember.memberFName}</p>
 				               </div>
 				           </div>
 				           
@@ -199,8 +199,16 @@
 							<c:forEach items="${rList}" var="reply">
 			                     <div class="comment_view  <c:if test="${reply.parentReplyNo != 0}"> child </c:if>">
 			                         <div class="user_info">
-			                             <div class="user_pic light_brown_bg" style="background-image: url();">
-			                             </div>
+			                         	<c:choose>
+			                         		<c:when test="${!empty reply.imagePath}">
+					                        	<div class="user_pic" style="background-image: url(${contextPath}${reply.imagePath}${reply.imageName});">
+					                            </div>
+			                         		</c:when>
+			                         		<c:otherwise>
+					                        	<div class="user_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);">
+					                            </div>
+			                         		</c:otherwise>
+			                         	</c:choose>
 			
 			                             <div>
 			                                 <p>${reply.memberFn}</p>
@@ -268,6 +276,7 @@
 	const boardNo = ${board.boardNo};
 	// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 	let beforeReplyRow;
+	
 </script>
 <script>
 	//트위터 공유 
@@ -413,9 +422,5 @@
 function openReportPopup() {
 	   layerPopup("report");
 }
-
-					
-		
-		
 </script>
 <script src="${contextPath}/resources/js/board/replyCopy.js"></script>
