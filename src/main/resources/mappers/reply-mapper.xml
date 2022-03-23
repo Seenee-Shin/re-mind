@@ -21,6 +21,8 @@
 		<result property="boardCategoryName" column="BOARD_CATEGORY_NM"/>
 		<result property="memberFn" column="MEMBER_FN"/>
 		<result property="maxValue" column="MAX_VALUE"/>
+        <result property="imagePath" column="IMAGE_PATH"/>
+        <result property="imageName" column="IMAGE_NM"/>
 
 	</resultMap>
 
@@ -43,10 +45,11 @@
 		   ) TEMP)
 		WHERE RNUM BETWEEN #{first} AND #{last}
 	</select>
+	
 	<select id="countReplyList" resultType="_int">
 		SELECT COUNT(*) MAX_VALUE FROM REPLY
 		   JOIN BOARD USING(BOARD_NO)
-		WHERE REPLY.MEMBER_NO = #{memberNo} AND BOARD.BOARD_STATUS_CD = 201
+		WHERE REPLY.MEMBER_NO = #{memberNo} AND BOARD.BOARD_STATUS_CD = 201 AND REPLY_STATUS_CD =301
 	</select>
 	
 	<!-- 댓글 목록 조회 -->
@@ -62,6 +65,12 @@
 	START WITH PARENT_REPLY_NO IS NULL
 	CONNECT BY PRIOR REPLY_NO = PARENT_REPLY_NO
 	ORDER SIBLINGS BY REPLY_NO
+	</select>
+	
+	<select id="selectReplyPic" resultMap="reply_rm">
+	    SELECT IMAGE_PATH, IMAGE_NM 
+	    FROM IMAGE
+    	WHERE MEMBER_NO = (SELECT MEMBER_NO FROM REPLY WHERE REPLY_NO = #{replyNo})
 	</select>
 
 	<!-- 댓글 삽입 -->

@@ -17,8 +17,26 @@ public class Reply {
     private String boardCategoryName;
     private String memberFn;
     private int maxValue;
+    private String imagePath;
+    private String imageName;
 
-    public int getReadCount() {
+    public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public int getReadCount() {
         return readCount;
     }
 

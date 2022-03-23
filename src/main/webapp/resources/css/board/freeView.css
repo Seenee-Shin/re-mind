@@ -135,7 +135,11 @@ input:focus, textarea:focus, select:focus{
 .comment_top>i{
     font-size: 18px;
 }
-
+.my_pic{
+	width: 50px;
+	height: 50px;
+	background-size: cover;
+}
 .write_comment{
     display: flex;
     justify-content: space-between;
