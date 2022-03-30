@@ -29,8 +29,14 @@ function selectReplyList(){
 
 
                 const userInfo = $('<div class="user_info">');
-
-                const rWriterPic = $('<div class="user_pic light_brown_bg"  style="background-image: url();">') ;
+                const rWriterPic = $('<div class="user_pic">');
+                if(reply.imagePath != null){
+					rWriterPic.css({"background-image":"url("+contextPath+reply.imagePath+reply.imageName+")"})
+					
+				}else{
+					rWriterPic.css({"background-image":"url("+contextPath+"/resources/images/basicProfile.png)"})
+				}
+                
                 const rWriterFnWrap = $('<div>')  ;
                 const rWriterFn = $('<p>').html(reply.memberFn);
                 //const rDate = $('<p class="rDate">').text('작성일 : ' + reply.replyCreateDate);
@@ -113,7 +119,7 @@ function selectReplyList(){
 //댓글 삽입
 function addComment(){
 	
-	if(loginMemberNo == ""){ // 로그인이 되어 있지 않은 경우
+	if(loginMemberNo == ''){ // 로그인이 되어 있지 않은 경우
         alert("로그인 후 이용해 주세요.");
   
     }else{ // 로그인한 경우

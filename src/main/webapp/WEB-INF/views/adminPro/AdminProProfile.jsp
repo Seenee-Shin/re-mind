@@ -39,7 +39,7 @@
            <article class="profailPic">
                <h3 style="text-align: center;">프로필 이미지</h3>
                <div class="imgBox" >
-               	<img alt="" src="">
+               	<img alt="" src="${contextPath}${proInfo.imagePath}/${proInfo.imageName}">
                	<i class="fas fa-times deleteImg"></i>
                </div>
            </article>
@@ -48,9 +48,8 @@
        <section class="proDescrpiton">
            <article class="proInfo">
                <h3>상담태그</h3>
-               <div class="checkBoxWrap">
-               			<div class="checkBox" >
-                   		</div>
+               <div class="worryCategory">
+					${worryCategory.worryName}
                </div>
            </article>
 
@@ -100,7 +99,7 @@
 
 <script type="text/javascript">
 
-	$(function() {
+/* 	$(function() {
 		$(".imgBox").on("click", function() {
 	
 			$(".imgDec").text("");
@@ -147,7 +146,7 @@
 			
 			let index = 0;		}
 		
-	}
+	} */
 	
 
 </script>

@@ -33,6 +33,7 @@
         <result property="memberPhone" column="MEMBER_PHONE"/>
         <result property="reservationEnrollDate" column="RESERVATION_ENROLL_DT"/>
         <result property="reservationEnrollTime" column="RESERVATION_ENROLL_TIME"/>
+        <result property="hospitalName" column="HOSPITAL_NM"/>
 
         <result property="starAvg" column="REVIEW_STARPOINT"/>
         <result property="reviewCount" column="REVIEW_COUNT"/>
@@ -48,6 +49,8 @@
         <result property="professionStory" column="PRO_STORY"/>
         <result property="professionCarrer" column="PRO_CARRER"/>
         <result property="professionTag" column="PRO_TAG"/>
+        <result property="imagePath" column="IMAGE_PATH"/>
+        <result property="imageName" column="IMAGE_NM"/>
     </resultMap>
     
     <resultMap id="professionHospital_rm" type="ProfessionHospital">
@@ -105,6 +108,7 @@
         <result property="counselCategoryNm" column="COUNSEL_CATEGORY_NM"/>
         <result property="PayNo" column="RESERVATION_PAY_NO"/>
         <result property="memberNo" column="MEMBER_NO"/>
+        <result property="memberName" column="MEMBER_NM"/>
         <result property="professionNo" column="PROFESSION_NO"/>
         <result property="statusCode" column="STATUS_CD"/>
     </resultMap>
@@ -293,9 +297,10 @@
 	</insert>
     <!-- 로그인 -->
     <select id="proLogin" resultMap="profession_rm">
-        SELECT * FROM PROFESSION
+        SELECT *
+        FROM PROFESSION
         WHERE PROFESSION_ID = #{professionId}
-        AND STATUS_CD in(3,4)
+        AND STATUS_CD in(3,4) AND AUTH_STATUS =1
     </select>
 
     <update id="updatePrice">
@@ -349,12 +354,13 @@
     
     <!-- 예약리스트 조회 -->
     <select id="classList" resultMap="reservation_rm">
-    SELECT r.RESERVATION_NO,
+ 	SELECT r.RESERVATION_NO,
         TO_CHAR(r.RESERVATION_ENROLL_DT,'YYYY-MM-DD') "RESERVATION_ENROLL_DT", r.RESERVATION_ENROLL_TIME, r.COUNSEL_CATEGORY_NO, cc.COUNSEL_CATEGORY_NM,
-	    rp.RESERVATION_PAY_NO, rp.MEMBER_NO, rp.PROFESSION_NO, rp.STATUS_CD
+        rp.RESERVATION_PAY_NO, m.MEMBER_NM, rp.PROFESSION_NO, r.RESERVATION_STATUS_CD
 	FROM RESERVATION_PAYMENT rp
 	JOIN RESERVATION r ON r.RESERVATION_PAY_NO = RP.RESERVATION_PAY_NO
 	JOIN COUNSEL_CATEGORY cc ON CC.COUNSEL_CATEGORY_NO = R.COUNSEL_CATEGORY_NO
+	JOIN MEMBER m ON rp.MEMBER_NO = m.MEMBER_NO
 	WHERE PROFESSION_NO = #{professionNo}
 	AND rp.STATUS_CD = 1
 	ORDER BY RESERVATION_ENROLL_DT, RESERVATION_ENROLL_TIME
@@ -405,12 +411,14 @@
     </select>
 
 	<select id="selectProfessionInfo" resultMap="professionInfo_rm" >
-		SELECT * FROM PROFESSION_INFORMATION WHERE PROFESSION_NO = #{professionNo}
+  		SELECT PROFESSION_NO,PROFESSION_UNIVERSITY,PROFESSION_DEPARTMENT,PROFESSION_MAJOR,PRO_INTRO,PRO_STORY,PRO_CARRER,PRO_TAG,IMAGE_PATH,IMAGE_NM
+		FROM PROFESSION_INFORMATION
+    	JOIN IMAGE USING(PROFESSION_NO)
+    	WHERE PROFESSION_NO = #{professionNo} AND IMAGE_LEVEL = 1
 	</select>
 	
 	<select id="selectProfessionHospital" resultMap="professionHospital_rm">
 		SELECT * FROM PROFESSION_HOSPITAL WHERE PROFESSION_NO = #{professionNo}
-	
 	</select>
 
 
@@ -429,9 +437,29 @@
             )
         ]]>
     </select>
+    
     <select id="loadProMapCount" resultType="_int">
         SELECT COUNT(*) MAX_VALUE
         FROM PROFESSION_HOSPITAL
     </select>
+
+    <select id="getGmProfession" resultMap="profession_rm">
+        SELECT PROFESSION_NO, PROFESSION_ID, PROFESSION_NM, PROFESSION_PHONE,
+               PROFESSION_ENROLL_DT, STATUS_CD, AUTH_STATUS, HOSPITAL_NM, HOSPITAL_ADDR
+        FROM PROFESSION
+                 JOIN PROFESSION_HOSPITAL USING(PROFESSION_NO)
+        WHERE STATUS_CD IN (3, 4)
+    </select>
+
+    <update id="stopProfession">
+        UPDATE PROFESSION
+        SET STATUS_CD = 3
+        WHERE PROFESSION_NO = #{professionNo}
+    </update>
+    <update id="rollbackProfession">
+        UPDATE PROFESSION
+        SET STATUS_CD = 4
+        WHERE PROFESSION_NO = #{professionNo}
+    </update>
 	
 </mapper>

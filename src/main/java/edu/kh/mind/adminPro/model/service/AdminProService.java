@@ -114,5 +114,7 @@ public interface AdminProService {
 
 	ProfessionHospital selectProfessionHospital(int professionNo);
 
+	String setCategory(int professionNo);
+
 	
 }

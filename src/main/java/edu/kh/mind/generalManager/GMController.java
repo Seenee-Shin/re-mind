@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.service.LoginService;
 import edu.kh.mind.member.model.vo.Member;
+import edu.kh.mind.member.model.vo.Profession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class GMController {
     @Autowired
     private LoginService service;
 
-    @GetMapping("gm")
+    @GetMapping({"gm", "gm/member"})
     public String generalManager(@ModelAttribute("loginMember") Member loginMember,
                                  RedirectAttributes ra, HttpSession session){
 
@@ -44,7 +45,6 @@ public class GMController {
         }
         return path;
     }
-
     @GetMapping("getGmMember")
     @ResponseBody
     public String getGmMember(){
@@ -55,10 +55,42 @@ public class GMController {
         }
         return new Gson().toJson(mList);
     }
-
     @PostMapping("isPrime")
     @ResponseBody
     public int isPrime(@RequestParam Map<String, Integer> map){
         return service.isPrime(map);
+    }
+
+    @GetMapping("gm/profession")
+    public String gmProfession(){
+        return "generalManager/gmProfession";
+    }
+
+    @GetMapping("getGmProfession")
+    @ResponseBody
+    public String getGmProfession(){
+        List<Profession> pList = service.getGmProfession();
+        for(Profession p : pList){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+            p.setReservationEnrollDate(sdf.format(p.getProfessionEnrollDate()));
+        }
+        return new Gson().toJson(pList);
+    }
+    @PostMapping("changePro")
+    @ResponseBody
+    public int changePro(@RequestParam Map<String, Integer> map){
+        return service.changePro(map);
+    }
+
+    @GetMapping("detailMember/{memberNo}")
+    public String detailMember(@PathVariable("memberNo") int memberNo, Model model){
+
+        Member member = service.detailMember(memberNo);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+        member.setMemberDate(sdf.format(member.getMemberEnrollDate()));
+
+        model.addAttribute("member", member);
+
+        return "generalManager/detailMember";
     }
 }

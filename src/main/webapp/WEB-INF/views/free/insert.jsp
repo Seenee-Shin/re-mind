@@ -426,7 +426,7 @@ function YesScroll () {
 	   const windowHeight = window.innerHeight;  // 화면으로 보이는 스크린 화면의 높이
 	   const scrollHeight = document.scrollingElement.scrollHeight; // 스크롤 높이
 
-	   if (scrollLocation + windowHeight >= scrollHeight && !oneTime) {
+	   if (scrollLocation + windowHeight+150 >= scrollHeight && !oneTime) {
 		   oneTime = true;
 		   currentPage = currentPage + 1;
 		   calcPagination();
@@ -517,7 +517,6 @@ function getFreeList(searchData) {
 					html +='			<ul class="userMenu hidden">'
 						+'				<li> <a class ="block"> 차단</a> </li>'
 						+'				<input class="hidden" value = '+ item.memberNo +'>'
-						+'				<li> <a href=""> 검색</a> </li>'
 	                    +'			</ul>'
 	                    +'		</div>';
 				}else{

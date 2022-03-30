@@ -9,7 +9,7 @@
 <main style="padding-right: 90px;">
     <h1>상담사 등록 신청 </h1>
     <br>
-    <form action="../proRegisterDetail" method="post" enctype="multipart/form-data" role="form" name="proRegisterDetail" onsubmit="addressVal()"> 
+    <form action="../proRegisterDetail" method="post" enctype="multipart/form-data" role="form" name="proRegisterDetail"> 
 
         <div class="proWrap">
             <div class="label">
@@ -20,10 +20,10 @@
             <div class="label">
             병원주소 
             </div>
-            <input type="text" name="address" id="hospitalAddress" readonly="readonly"> <button type="button" id="address_kakao" style="display: inline-block;">주소 찾기</button> <br>
+            <input type="text" name="address" id="hospitalAddress" readonly="readonly" required>> <button type="button" id="address_kakao" style="display: inline-block;">주소 찾기</button> <br>
                <div class="label">
             </div>
-            <input type="text" name="address" id="address_detail" value="2층"> 
+            <input type="text" name="address" id="address_detail" required> 
             <br>
 			<br>
             <div class="label">
@@ -40,8 +40,9 @@
             <div class="label child">학교명</div><input type="text" name="professionUniversity" id="schoolName" value="kh대학교" required> <br>
             <div class="label child ">학과명</div> <input type="text" name="professionDepartment" id="schoolPart" value="심리상담학부" required> <br>
             <div class="label child">전공</div>  <input type="text" name="professionMajor" id="schoolMajor" value="심리학과" required> 
-            <input type="file" name="certification" id="certification" accept="image/*, .pdf" required> 
+            <input type="file" name="certification" id="certification" accept="image/*, .pdf" onchange="fileUpload()" required> 
             <label for="certification" style="font-size: 18px; font-weight: 500; color: #a59999">증명서 첨부</label>
+            <div id="certification_name"></div>
             <br>
             <br>
             <br>
@@ -74,7 +75,7 @@
 	    });
 	}
 	
-	function addressVal() {
+	document.getElementById("hospitalAddress").addEventListener("change",function(){
 		//주소 병합
 		//input type="hidden" 태그 생성 및 추가
 	 	const address = document.getElementById("hospitalAddress")
@@ -87,9 +88,14 @@
 	    input.value = address.value + address1.value 
 	    
 		document.proRegisterDetail.append(input)
+	})
+
+	function fileUpload() {
+		const fileInput = document.getElementById("certification").files;
+		const name = document.getElementById("certification_name")
+		name.innerText = fileInput[0].name;
+
 	}
-
-
 
 </script>
 
