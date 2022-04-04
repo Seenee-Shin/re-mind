@@ -4,8 +4,6 @@ GitHub: https://github.com/NA-JAVAVARA/mind.git
 言語: Java, JavaScript, Oracle, Spring
 開発期間: 2021.12 ~ 2022.02
 
-![발표용-001 (3).jpg](%E5%BF%83%E3%81%AE%E7%A0%94%E7%A9%B6%E6%89%80%20re%20m%20168b6/%EB%B0%9C%ED%91%9C%EC%9A%A9-001_(3).jpg)
-
 [](https://github.com/NA-JAVAVARA/mind.git)
 
 # 💡 Topic
@@ -58,7 +56,5 @@ NA JAVAVARAは **『いかなる病気も嫌悪の対象であってはならな
 # 📷 Screenshot
 
 ### メインページ
-
-![localhost_8080_mind_.png](%E5%BF%83%E3%81%AE%E7%A0%94%E7%A9%B6%E6%89%80%20re%20m%20168b6/localhost_8080_mind_.png)
 
 ### 自由開示版
