@@ -69,30 +69,36 @@ NA JAVAVARAは **『いかなる病気も嫌悪の対象であってはならな
 誤訳がある可能性がございますのでご了承ください。
 
 ### メインページ
+<hr></hr>
 
 ![localhost_8080_mind__(2)](https://user-images.githubusercontent.com/86164711/161535801-8f5f3a01-d912-4792-8624-3157c29c85c6.png)
 
 ### 相談予約
+<hr></hr>
 
 ![localhost_8080_mind_pro_proList_(1)](https://user-images.githubusercontent.com/86164711/161535944-e624d19c-048a-4a98-b3da-593d9f7aa10d.png)
-
+![localhost_8080_mind_pro_proView_174](https://user-images.githubusercontent.com/86164711/161542258-20b557c2-fad6-45fb-9d16-a77564a9ca8e.png)
 
 ### **自己心理診断**テスト
+<hr></hr>
 
 ![localhost_8080_mind_selftest_selftestForm](https://user-images.githubusercontent.com/86164711/161536078-6f23e182-b899-4ed5-bc2c-0305606467bb.png)
 
-
-
 ### 開示版
+<hr></hr>
 
 ![localhost_8080_mind_free_insert_(4)](https://user-images.githubusercontent.com/86164711/161536341-717558c8-18ae-40e9-a489-b333d4c295a8.png)
+
 ![localhost_8080_mind_free_view_2322_(5)](https://user-images.githubusercontent.com/86164711/161536384-8b347bd8-9b6f-4c9c-a7e1-a2200c3a6a07.png)
 
 ### 今月の研究
+<hr></hr>
 
 ![localhost_8080_mind_post_list](https://user-images.githubusercontent.com/86164711/161536547-cae20c55-dad6-4053-89a3-2e000f63b20c.png)
 
 ### 感情記録
+<hr></hr>
 
 ![localhost_8080_mind_my_emotionRecord](https://user-images.githubusercontent.com/86164711/161536597-21c8619b-7fa4-486f-9af9-d31c0f2b8dce.png)
+
 ![localhost_8080_mind_my_emotionDiary_(1)](https://user-images.githubusercontent.com/86164711/161536604-f98bd0b6-3ee5-4e0f-bdd3-9af0663dae26.png)
