@@ -18,25 +18,29 @@
 				<div class="progress_statistic">
 					<div class="progress_bar">
 						<div class="name">
-							행복 <span>0%</span>
+							행복 
+							<span>0%</span>
 						</div>
 						<progress class="type01 happy" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							불안 <span>0%</span>
+							불안 
+							<span>0%</span>
 						</div>
 						<progress class="type02 misery" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							우울 <span>0%</span>
+							우울 
+							<span>0%</span>
 						</div>
 						<progress class="type03 depression" max="100" value="0"></progress>
 					</div>
 					<div class="progress_bar">
 						<div class="name">
-							스트레스 <span>0%</span>
+							스트레스 
+							<span>0%</span>
 						</div>
 						<progress class="type04 stress" max="100" value="0"></progress>
 					</div>
