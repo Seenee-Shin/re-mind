@@ -223,7 +223,7 @@
 					// 프로필 이미지
 					let writerImg = "${contextPath}/resources/images/basicProfile.png";
 					if (item.imagePath != null) {
-						writerImg = "${contextPath}/" + item.imagePath + item.imageName;
+						writerImg = "${contextPath}"+ item.imagePath + item.imageName;
 					}
 
 					html += `
