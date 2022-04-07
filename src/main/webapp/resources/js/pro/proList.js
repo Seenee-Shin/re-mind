@@ -181,7 +181,7 @@ function makePro(){
                 const aHref = $('<a href= '+contextPath+'/pro/proView/'+item.professionNo+' onclick="reviewList();">');
 
                 const pro_profile = $('<div class="pro_profile">');
-                const pro_profile_img1 = $('<img src="/mind/resources/images/pro/best.png" class="pro_best">');
+                const pro_profile_img1 = $('<img src="'+contextPath+'/resources/images/pro/best.png" class="pro_best">');
                 let pro_profile_img2;
                 if(item.imagePath == undefined)//기본프로필이 없으면
                     pro_profile_img2 = $('<img src="'+contextPath+'/resources/images/basicProfile.png" class="profile">');
@@ -204,8 +204,8 @@ function makePro(){
 				const starpoint_box2 = $('<div class="starpoint_box2">');
 				//const starpoint_bg = $('<span class="starpoint_bg" style = "width : 100% ">');
 				const testdiv = $('<div  style="width:'+Number.parseInt(item.starAvg)*10+'%" class="testdiv">');
-				const no_star_img = $('<img src="/mind/resources/images/pro/no_star.png" class="no_star">');
-				const star_img = $('<img src="/mind/resources/images/pro/all_star.png" class="star">');
+				const no_star_img = $('<img src="'+contextPath+'/resources/images/pro/no_star.png" class="no_star">');
+				const star_img = $('<img src="'+contextPath+'/resources/images/pro/all_star.png" class="star">');
 				testdiv.append(star_img);
 				//starpoint_bg.append(star_img);
 				starpoint_box2.append(no_star_img,testdiv);
@@ -222,7 +222,7 @@ function makePro(){
 
                 const pro_price_wrap = $('<div class="pro_price_wrap">');
                 const text_price = $('<div class="text_price">');
-                const text_price_img = $('<img src="/mind/resources/images/pro/text_therapy.png" class="float-left">');
+                const text_price_img = $('<img src="'+contextPath+'/resources/images/pro/text_therapy.png" class="float-left">');
                 let text_price_p;
                 if(category[0] == 1){
                     text_price_p = $('<p class="float-right">'+makeComma(price[0])+'<span>원</span></p>');
@@ -232,7 +232,7 @@ function makePro(){
                 text_price.append(text_price_img, text_price_p);
 
                 const voice_price = $('<div class="voice_price clear-both">');
-                const voice_price_img = $('<img src="/mind/resources/images/pro/voice_therapy.png" class="float-left">');
+                const voice_price_img = $('<img src="'+contextPath+'/resources/images/pro/voice_therapy.png" class="float-left">');
                 let voice_price_p;
                 if(category[1] == 2){
                     voice_price_p = $('<p class="float-right">'+makeComma(price[1])+'<span>원</span></p>');
@@ -242,7 +242,7 @@ function makePro(){
                 voice_price.append(voice_price_img, voice_price_p);
 
                 const face_price = $('<div class="face_price clear-both">');
-                const face_price_img = $('<img src="/mind/resources/images/pro/face_therapy.png" class="float-left">');
+                const face_price_img = $('<img src="'+contextPath+'/resources/images/pro/face_therapy.png" class="float-left">');
                 let face_price_p;
                 if(category[2] == 3){
                     face_price_p = $('<p class="float-right">'+makeComma(price[2])+'<span>원</span></p>');
