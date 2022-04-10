@@ -70,7 +70,7 @@ public class LoginFilter implements Filter{
                         PrintWriter out = response.getWriter();
                         out.println("<script>");
                         out.println("alert('로그인 후 이용해주시기 바랍니다.');");
-                        out.println("location.href='/mind';");
+                        out.println("location.href='/remind';");
                         out.println("</script>");
                         out.close();
 
