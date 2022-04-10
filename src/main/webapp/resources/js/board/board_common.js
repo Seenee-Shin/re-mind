@@ -194,12 +194,3 @@ function displayedAt(createdAt) {
 	return `${Math.floor(years)}년 전`
 }
 
-/*loading*/
-//AJAX 통신 시작
-$( document ).ajaxStart(function() {
-    $('html').css("cursor", "wait"); 
-});
-//AJAX 통신 종료
-$( document ).ajaxStop(function() {
-    $('html').css("cursor", "auto"); 
-});
