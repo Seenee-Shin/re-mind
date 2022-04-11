@@ -193,3 +193,4 @@ function displayedAt(createdAt) {
 	const years = days / 365
 	return `${Math.floor(years)}년 전`
 }
+
