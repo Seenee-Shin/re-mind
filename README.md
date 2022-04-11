@@ -1,6 +1,3 @@
-
-# re-mind
-=======
 # 心の研究所 re:mind
 
 ![발표용-001_(3)](https://user-images.githubusercontent.com/86164711/161535504-7effbb5c-1ce6-4067-9d12-c23ef8811865.jpg)
