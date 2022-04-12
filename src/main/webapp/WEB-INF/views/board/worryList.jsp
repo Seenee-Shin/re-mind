@@ -125,6 +125,7 @@
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/board_common.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_worry_board.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/board/replyCopy.js"></script>
 
 <script>
 	$(function () {
@@ -500,4 +501,4 @@
 		}
 	}
 </script>
-
+<script src=""></script>

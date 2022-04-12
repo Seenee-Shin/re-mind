@@ -23,7 +23,14 @@
 								<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
 							</c:when>
 							<c:otherwise>
-								<div class="writer_pic" style="background-image: url(${contextPath}${board.imagePath}${board.imageName});"></div>
+								<c:choose>
+									<c:when test="${anonCheckCode == 1}">
+										<div class="writer_pic" style="background-image: url(${contextPath}${board.imagePath}${board.imageName});"></div>
+									</c:when>
+									<c:otherwise>
+										<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 
@@ -48,8 +55,6 @@
 	                    </div> 
                     
                       <div class="btn_area">
-                           	<!-- name="images" -->
-							<input type="file"  id='addFileBtn'  accept="audio/*, video/*, image/*" multiple onclick="loadImg()" style="display: none">
 							<input type="hidden" name="delete_files" id="delete_files">
 	                        <div class="write_option_area">
 	                            <div class="check_box_wrap">

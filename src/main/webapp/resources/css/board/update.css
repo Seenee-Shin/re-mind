@@ -226,6 +226,12 @@ textarea{
 .check_box_wrap>label>input[type="radio"]{
     display: none;
 }
+.check_box_wrap>input[type="radio"]{
+    display: none;
+}
+
+
+
 
 .check_box_wrap>label{
     display: inline-block;

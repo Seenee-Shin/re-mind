@@ -12,11 +12,11 @@
 			<div class="input_wrap">
 				<div class="input_div">
 					<div>이메일</div>
-					<input type="text" class="login_input" name="memberId" value="stage107@naver.com">
+					<input type="text" class="login_input" name="memberId" value="">
 				</div>
 				<div class="input_div">
 					<div>비밀번호</div>
-					<input type="password" class="login_input" name="memberPw" value="123123">
+					<input type="password" class="login_input" name="memberPw" value="">
 				</div>
 			</div>
 			<div class="submit_area">
