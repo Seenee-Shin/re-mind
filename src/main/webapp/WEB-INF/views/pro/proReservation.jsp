@@ -80,12 +80,12 @@
                 </div>
             </div>
             
-            <div id="tuition_time_wrap" class="box_style">
+       <!-- <div id="tuition_time_wrap" class="box_style">
                 <p class="tuition_font">증상을 간략하게 작성해주세요</p>
                 <div id="tuition_reason">
                 	<textarea name="" rows="" cols=""></textarea>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div id="reservation_pay_wrap" class="float-right">

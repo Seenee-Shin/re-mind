@@ -33,7 +33,15 @@
 								<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
 							</c:when>
 							<c:otherwise>
-								<div class="writer_pic" style="background-image: url(${contextPath}${board.imagePath}${board.imageName});"></div>
+								<c:choose>
+									<c:when test="${board.anonCheckCode == 1 || loginMember.memberNo == board.memberNo }}">
+										<div class="writer_pic" style="background-image: url(${contextPath}${board.imagePath}${board.imageName});"></div>
+									</c:when>
+									
+									<c:otherwise>
+										<div class="writer_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 
@@ -194,7 +202,7 @@
 				           
 				          <div class="user_info">
                            	<c:choose>
-                           		<c:when test="${!empty loginMember.imagePath}">
+                           		<c:when test="${empty loginMember.imagePath}">
                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
                            		</c:when>
                            		<c:otherwise>
@@ -204,7 +212,7 @@
                                </c:choose>
 	
 				               <div>
-				                   <p>${board.memberFn}</p>
+				                   <p>${loginMember.memberFName}</p>
 				               </div>
 				           </div>
 				           

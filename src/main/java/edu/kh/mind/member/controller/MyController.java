@@ -523,6 +523,9 @@ public class MyController {
             Util.swalSetMessage("회원 정보 수정 성공!", null, "success", ra);
 
             loginMember.setMemberFName(member.getMemberFName());
+            loginMember.setImagePath(image.getImagePath());
+            loginMember.setImageName(image.getImageName());
+            
             model.addAttribute("loginMember", loginMember);
         }else{
 
