@@ -319,46 +319,27 @@
 <!-- 모바일 화면 메인 컨텐트4 -->
 <article class="mb_main_content4">
     <div class="mb_main_content4_content">
-        <div class="mb_main_content4_content_left">
+        <c:forEach items="${noticeList}" var="notice" varStatus="status">
+        <c:if test="${status.index == 0}">
+    	    <div class="mb_main_content4_content_left">
             <div>새소식</div>
-            <div>
-                <div class="mb_main_content4_content_left_item">
-                    <div>
-                        <span>23</span>
-                        <span>2022.01</span>
-                    </div>
-                    <div>
-                        <p>
-                            지역사회서비스 제공 기관 / 바우처 서비스
-                        </p>
-                    </div>
-                </div>
-
-                <div class="mb_main_content4_content_left_item">
-                    <div>
-                        <span>23</span>
-                        <span>2022.01</span>
-                    </div>
-                    <div>
-                        <p>
-                            지역사회서비스 제공 기관 / 바우처 서비스
-                        </p>
-                    </div>
-                </div>
-
-                <div class="mb_main_content4_content_left_item">
-                    <div>
-                        <span>23</span>
-                        <span>2022.01</span>
-                    </div>
-                    <div>
-                        <p>
-                            지역사회서비스 제공 기관 / 바우처 서비스
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+       	</c:if>
+	            <div>
+	                <div class="mb_main_content4_content_left_item">
+	                    <div>
+	                        <span>${notice.noticeNo}</span>
+	                        <span>${notice.createDate}</span>
+	                    </div>
+	                    <div>
+	                        <p>
+	                            ${notice.noticeTitle}
+	                        </p>
+	                    </div>
+	                </div>
+	
+            	</div>
+        </c:forEach>
+ 	</div>
         <div>
             <div class="mb_main_content4_content_postit2">
                 <div>이달의 연구</div>

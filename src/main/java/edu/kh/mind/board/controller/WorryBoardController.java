@@ -19,7 +19,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/worry/*")
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember","categoryList"})
 public class WorryBoardController {
 
     @Autowired
@@ -200,6 +200,19 @@ public class WorryBoardController {
     	
     	return result;
     }
+    
+    //수정 화면 연결 
+    @RequestMapping(value="updateForm")
+    public String freeBoardUpdate(int boardNo, Model model, @ModelAttribute("loginMember") Member loginMember) {
+    	model.addAttribute("css", "board/update");
+    	model.addAttribute("header", "community");
+    	
+    	Board board = service.selectWorryBoard(boardNo, loginMember.getMemberNo());
+    	model.addAttribute("board", board);
+    	return "board/worryUpdate";
+    }
+    
+    //글 수정하기 
     
     
     

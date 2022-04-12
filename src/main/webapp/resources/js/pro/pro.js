@@ -179,7 +179,6 @@ function requestPay(){
                                     formData.append('reservationEnrollDate',reservationEnrollDate); // 날짜
                                     formData.append('reservationEnrollTime',reservationEnrollTime); // 시간
                                     formData.append('counselCategoryNm',counselCategoryNm); // 테라피 종류
-                                    formData.append('symptom',symptom); // 증상
 
                                     // update와 insert 동시 진행
                                     $.ajax({

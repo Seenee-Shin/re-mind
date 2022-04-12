@@ -19,53 +19,17 @@
 	            <button type="button" class="submit_btn dark_brown_bg" id="worryCategoryBtn">카테고리</button>
 	
 	
-	            <form action="">
+	            <form action="update" method="post" 
+			 	 enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
+			 	 
 	                <div class="worry_category_wrap hidden">
 	                    <div class="worry_category">
-	
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark-brown dark_brown_border"> 
-	                                일반고민
-	                                <input type="radio" id="normal" name="worryCategory" value="normal">
-	                            </label>
-	                        </div>
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark-brown dark_brown_border"> 
-	                                일반고민
-	                                <input type="radio" id="normal" name="worryCategory" value="normal">
-	                            </label>
-	                        </div>
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark-brown dark_brown_border"> 
-	                                일반고민
-	                                <input type="radio" id="normal" name="worryCategory" value="normal">
-	                            </label>
-	                        </div>
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark-brown dark_brown_border"> 
-	                                일반고민
-	                                <input type="radio" id="normal" name="worryCategory" value="normal">
-	                            </label>
-	                        </div>
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark-brown dark_brown_border"> 
-	                                일반고민
-	                                <input type="radio" id="normal" name="worryCategory" value="normal">
-	                            </label>
-	                        </div>
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark-brown dark_brown_border"> 
-	                                일반고민
-	                                <input type="radio" id="normal" name="worryCategory" value="normal">
-	                            </label>
-	                        </div>
-	                        <div class="check_box_wrap">
-	                            <label for="normal" class="dark-brown dark_brown_border"> 
-	                                일반고민
-	                                <input type="radio" id="normal" name="worryCategory" value="normal">
-	                            </label>
-	                        </div>
-	                        
+							<c:forEach items="${categoryList}" var="category" varStatus="status">
+								<div class="check_box_wrap">
+									<label for="normal_${status.index}" class="dark_brown_border ${status.index == 0 ? "active" : ""}">${category.worryName}</label>
+									<input type="radio" id="normal_${status.index}" name="worryCategoryCode" value="${category.worryCategoryCode}" ${status.index == 0 ? "checked" : ""}>
+								</div>
+							</c:forEach>
 	                    </div>
 	                </div>
 	
@@ -81,17 +45,13 @@
 	                    
 	
 	
-	                    <div class=" posting">
-	                        <textarea>dlknfa'wiendl/gnper</textarea>
+	                    <div id="posting" style="margin-top: 0px;">
+	                        <textarea>${board.boardContent}</textarea>
 	                        <div class="post_img"></div>
 	                    </div> 
 	                    
 	                    
 	                    <div class="btn_area">
-	                        <a>
-	                            <i class="fas fa-image dark-brown"></i>
-	                        </a>
-	                        
 	                        <div class="write_option_area">
 		                        <div class="check_box_wrap">
 	                                <label for="comment" class="option_btn light_brown_bg">댓글허용
