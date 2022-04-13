@@ -157,34 +157,28 @@
 	                </div>--%>
 
 					<div class="report_scrap_wrap">
-						<div class="comment_wrap">
-							<c:if test="${board.replyCheckCode == 1}">
-							<i class="far fa-comment dark-brown"> '+item.replyCount+'</i>
-							<p></p>
-							</c:if>
-						</div>
-
-						<!-- 스크랩 허용 했을 경우만 -->
-						<a id="btnTwitter" class="link-icon twitter"  href="javascript:shareTwitter();">
-							<img alt="" src="${contextPath}/resources/images/icon/icon-twitter.png;">
-						</a>
-						<a id="btnFacebook" class="link-icon facebook"  href="javascript:shareFacebook();">
-							<img alt="" src="${contextPath}/resources/images/icon/icon-facebook.png;">
-						</a>
-						<%--<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao(); ">
-							<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
-						</a>
-
-						<a href="">
-							<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
-						</a>--%>
+						 <c:if test="${board.scrapCheckCode == 0}">
+                        <!-- 스크랩 허용 했을 경우만 -->
+	                      	<a id="btnScrap" class="link-icon scrap"   href="javascript:boardScrap(); ">
+	                      		<img alt="" src="${contextPath}/resources/images/icon/bookmark.png;" class="grey">
+	                      	</a>
+	                      	<a id="btnTwitter" class="link-icon twitter"  href="javascript:shareTwitter();">
+	                      		<img alt="" src="${contextPath}/resources/images/icon/icon-twitter.png;">
+	                      	</a>
+							<a id="btnFacebook" class="link-icon facebook"  href="javascript:shareFacebook();">
+								<img alt="" src="${contextPath}/resources/images/icon/icon-facebook.png;">
+							</a>    
+							<a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao(); ">
+								<img alt="" src="${contextPath}/resources/images/icon/icon-kakao.png">
+							</a>    
+	    				</c:if>
 					</div>
 
 				</article>
 
 					<!-- /////////////////////////////////////////////////////////////////////// -->
 
-				<c:if test="${board.replyCheckCode == 1}">
+				<c:if test="${board.replyCheckCode == 0}">
 					<article class="comment_view_wrap">
 						<div class="comment_top dark-brown">
 							<div>
@@ -206,16 +200,16 @@
                            	<c:choose>
                            		<c:when test="${!empty loginMember.imagePath}">
                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+					               <div>
+					                   <p>${loginMember.memberFName}</p>
+					               </div>
                            		</c:when>
                            		<c:otherwise>
                                		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
+					                <p>로그인하기</p>
                            		</c:otherwise>
-                           		
                                </c:choose>
 	
-				               <div>
-				                   <p>${board.memberFn}</p>
-				               </div>
 				           </div>
 
 							<textarea name="replyContent" id="replyContent" rows="3"></textarea>
@@ -349,6 +343,7 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_worry_board.js"></script>
+<script src="${contextPath}/resources/js/board/replyCopy.js"></script>
 
 <script type="text/javascript">
 
@@ -412,119 +407,102 @@
               });
             } */
             
-            function boardScrap() {
-         		
-         		$.ajax({
-         			url : "${contextPath}/secret/boardScrap",
-         			type : "get",
-         			data : {"boardNo" : boardNo,
-         					"memberNo" : loginMemberNo },
-        			success : function (result) {
-        				
-        				console.log(result)
-        				if(result == 1){
-        					
-        					if(!loginMemberNo){
-        					swal({"title" : "로그인 후 이용해 주세요." , 
-        	                      "icon" : "error"});
-        					}else{
-        						
-        					$("#btnScrap").children().removeClass(".child")	
-        					swal({"title" : "스크랩 완료" , 
-        	                      "icon" : "success"});
-        					}
+function boardScrap() {
+	$.ajax({
+		url : "${contextPath}/secret/boardScrap",
+		type : "get",
+		data : {"boardNo" : boardNo,
+				"memberNo" : loginMemberNo },
+		success : function (result) {
+					if(result == 1){
+						
+						if(!loginMemberNo){
+						swal({"title" : "로그인 후 이용해 주세요." , 
+		                      "icon" : "error"});
+						}else{
+							
+						$("#btnScrap").children().removeClass('grey')	
+						swal({"title" : "스크랩 완료" , 
+		                      "icon" : "success"});
+						}
 
-        				}else if (result == 2){
-        					
-        					if(!loginMemberNo){
-        						swal({"title" : "로그인 후 이용해 주세요." , 
-        		                      "icon" : "error"});
-        						}
-        					else{
-        						$("#btnScrap").children().addClass(".child")	
-        						swal({"title" : "스크랩 해제" , 
-        	                      "icon" : "success"});
-        					}
-        					
-        				}else{
-        					
-        				}
-        			},
-        			
-        			error: function (xhr, status, error) {
-        			    swal({"title" : "서버 연결 오류" , 
-                              "icon" : "error"});
-        		}
-         			
-         		})
-        		
-        	}
+					}else if (result == 2){
+			
+						if(!loginMemberNo){
+							swal({"title" : "로그인 후 이용해 주세요." , 
+			                      "icon" : "error"});
+						}else{
+							$("#btnScrap").children().addClass('grey')	
+							swal({"title" : "스크랩 해제" , 
+		                      "icon" : "success"});
+						}	
+			
+					}
+				},
+	
+	error: function (xhr, status, error) {
+				swal({"title" : "서버 연결 오류" , 
+                     "icon" : "error"});
+				}
+		
+	})
+
+}
         		
         		
-        $(".like").on("click", function(e){
+$(".like").on("click", function(e){
+    	
+	var tagId = $(this).attr('id');
+	var empathyStatusCode;
+	
+	if(tagId == "like_smile"){
+		empathyStatusCode = 1001;
+	}else if(tagId == "like_hug"){
+		empathyStatusCode = 1002;
+	}else if(tagId == "like_amazed"){
+		empathyStatusCode = 1003;
+	}else if(tagId == "like_angry"){
+		empathyStatusCode = 1004;
+	}else{
+		empathyStatusCode = 1005;
+	};
+			
+	$.ajax({
+			url : "${contextPath}/secret/insertEmpathy",
+			data : {"boardNo" : boardNo,
+					"memberNo" : loginMemberNo,
+					"empathyStatusCode" : empathyStatusCode},
+			context: this,
+			success : function (result) {
+				
+				if(result >=1){
+			
+					$.ajax({
+						url : "${contextPath}/secret/countEmpathy",
+						data : { "boardNo": boardNo,
+								 "empathyStatusCode" : empathyStatusCode},
+						context: this,
+						success : function(count){
+									$(this).children(".like_count").text(count)
+								}
+					});
+		
+			
+				}else{
+					console.log("실패");
+				}
+		
+			},
+		
+			error: function (xhr, status, error) {
+		    		swal({"title" : "서버 연결 오류" , 
+	                    "icon" : "error"});
+					}
+			
+	});
+});
         	
-        			var tagId = $(this).attr('id');
-        			var empathyStatusCode;
-        			
-        			if(tagId == "like_smile"){
-        				empathyStatusCode = 1001;
-        			}else if(tagId == "like_hug"){
-        				empathyStatusCode = 1002;
-        			}else if(tagId == "like_amazed"){
-        				empathyStatusCode = 1003;
-        			}else if(tagId == "like_angry"){
-        				empathyStatusCode = 1004;
-        			}else{
-        				empathyStatusCode = 1005;
-        			};
-        			
-        			$.ajax({
-        	 			url : "${contextPath}/secret/insertEmpathy",
-        	 			data : {"boardNo" : boardNo,
-        	 					"memberNo" : loginMemberNo,
-        	 					"empathyStatusCode" : empathyStatusCode},
-        	 			context: this,
-        				success : function (result) {
-        				if(result >=1){
-        					
-        				$.ajax({
-        					url : "${contextPath}/secret/countEmpathy",
-        					data : { "boardNo": boardNo,
-        							"empathyStatusCode" : empathyStatusCode},
-        					context: this,
-        					success : function(count){
-        						$(this).children(".like_count").text(count)
-        						
-        					}
-        				});
-        				
-        					
-        				}else{
-        					console.log("실패");
-        				}
-        				
-        				},
-        				
-        				error: function (xhr, status, error) {
-        				    swal({"title" : "서버 연결 오류" , 
-        	                      "icon" : "error"});
-        			}
-        	 			
-        	 		});
-        			       
-        		
-        			
-        			
-        });
-        	
-        	
-            
-            
-            
-            
-            
 </script>
 
 
 
-<script src="${contextPath}/resources/js/board/replyCopy.js"></script>
