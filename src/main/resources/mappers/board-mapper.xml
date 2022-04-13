@@ -4,8 +4,7 @@
 
 	<resultMap type="Board" id="board_rm">
 		<id property="boardNo" column="BOARD_NO"/>
-
-
+		
 		<result property="boardTitle" column="BOARD_TITLE"/>
 		<result property="boardContent" column="BOARD_CONTENT"/>
 		<result property="createDate" column="BOARD_CREATE_DT"/>
@@ -451,6 +450,7 @@
 		REPLY_CHECK_CD = #{replyCheckCode},
 		SCRAP_CHECK_CD =#{scrapCheckCode},
 		EM_CHECK_CD= #{empathyCheckCode},
+		WORRY_CATEGORY_CD =#{worryCategoryCode},
 		BOARD_MODIFY_DT = SYSDATE
 		WHERE BOARD_NO = #{boardNo} 
 	</update>	
@@ -604,6 +604,8 @@
 		AND BOARD.BOARD_STATUS_CD = 201
 		AND (IMAGE.IMAGE_LEVEL = 0 OR IMAGE.IMAGE_LEVEL IS NULL)
 	</select>
+	
+
 
 	<insert id="memberBlock">
 		INSERT INTO MUTE VALUES(#{memberNo}, #{loginMember},)

@@ -26,7 +26,7 @@
 	                    <div class="worry_category">
 							<c:forEach items="${categoryList}" var="category" varStatus="status">
 								<div class="check_box_wrap">
-									<label for="normal_${status.index}" class="dark_brown_border ${status.index == 0 ? "active" : ""}">${category.worryName}</label>
+									<label for="normal_${status.index}" class="dark_brown_border ${status.index == 0 ? 'active' : ''}">${category.worryName}</label>
 									<input type="radio" id="normal_${status.index}" name="worryCategoryCode" value="${category.worryCategoryCode}" ${status.index == 0 ? "checked" : ""}>
 								</div>
 							</c:forEach>
@@ -45,9 +45,20 @@
 	                    
 	
 	
-	                    <div id="posting" style="margin-top: 0px;">
-	                        <textarea>${board.boardContent}</textarea>
-	                        <div class="post_img"></div>
+                    	<input name ="boardTitle" value="${board.boardTitle}"> 
+	                    <div id="posting"  style="margin-top: 0px;">
+	                        <textarea name="boardContent"  onkeydown="resize(this)" onkeyup="resize(this)" >${board.boardContent}</textarea>
+	                        <div class="post_img">
+                		    	<c:choose>
+		                        	<c:when test="${!empty board.imgList}">
+			                        	 <c:forEach items="${board.imgList}" var="img" varStatus="status">
+			             		       		<div id="img${status.index}" class="boardImg"> 
+			             		       		<img src="${contextPath}${img.imagePath}${img.imageName}">
+							       			</div>
+				                        </c:forEach>
+		                        	</c:when>
+		                        </c:choose>
+	                        </div>
 	                    </div> 
 	                    
 	                    
@@ -55,20 +66,20 @@
 	                        <div class="write_option_area">
 		                        <div class="check_box_wrap">
 	                                <label for="comment" class="option_btn light_brown_bg">댓글허용
-	                                    <input type="checkbox" name="writeOption" value="" id="comment">
+	                                    <input type="checkbox" name="replyCheckCode" value="" id="replyCheckCode">
 	                                </label>
 	                            </div>
 	
 	                            <div class="check_box_wrap">
 	                                <label for="scrap" class="option_btn light_brown_bg">스크랩허용
-	                                    <input type="checkbox"  name="writeOption" value="" id="scarp">
+	                                    <input type="checkbox"  name="scrapCheckCode" value="" id="scrapCheckCode">
 	                                    
 	                                </label>
 	                            </div>
 	                            
 	                            <div class="check_box_wrap">
 	                                <label for="like" class="option_btn light_brown_bg"> 공감 허용
-	                                    <input type="checkbox"  name="writeOption" value="" id="like">
+	                                    <input type="checkbox"  name="empathyCheckCode" value="" id="empathyCheckCode">
 	
 	                                </label>
 	                        	</div>	
@@ -78,9 +89,11 @@
 	                </article>
 	
 	                <div class="edit_btn_wrap">
-	                    <button type="button" class="dark-brown edit_btn" onclick=""> 수정 </button>
-	                    <button type="button" class="dark-brown edit_btn" onclick=""> 취소  </button>
+	                    <button type="submit" class="dark-brown edit_btn" > 수정 </button>
+	                    <button type="button" class="dark-brown edit_btn" onclick="location.href='${contextPath}/worry/worryList'"> 목록으로  </button>
 	                </div>
+	                	             <!-- update 진행 시 사용할 게시글 번호 -->
+					<input type="hidden" name="boardNo" value="${board.boardNo}">
 	            </form>
 	
 	        </section>
