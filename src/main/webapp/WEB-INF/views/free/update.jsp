@@ -78,7 +78,6 @@
 	                
 	             <!-- update 진행 시 사용할 게시글 번호 -->
 				<input type="hidden" name="boardNo" value="${board.boardNo}">
-				<input type="hidden" name="deleteImages" value="${memberNo}">
 	
 				</form>
             </section>

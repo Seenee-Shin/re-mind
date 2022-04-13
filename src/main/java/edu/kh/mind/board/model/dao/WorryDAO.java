@@ -103,6 +103,16 @@ public class WorryDAO {
 	public int countEmpathy(Empathy empathy) {
 		return sqlSession.selectOne("boardMapper.selectEmpathyList", empathy);
 	}
+
+	public int updateWorryBoard(Board board) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.updateBoard",board);
+	}
+
+//	public WorryCategory seletedCategory(int boardNo) {
+//		// TODO Auto-generated method stub
+//		return sqlSession.selectOne("boardMapper.selectedCategory", sqlSession);
+//	}
 	
 	
 }

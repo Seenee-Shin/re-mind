@@ -7,12 +7,14 @@ import edu.kh.mind.board.model.vo.Board;
 import edu.kh.mind.board.model.vo.Empathy;
 import edu.kh.mind.board.model.vo.Reply;
 import edu.kh.mind.board.model.vo.WorryCategory;
+import edu.kh.mind.common.util.Util;
 import edu.kh.mind.member.model.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -208,11 +210,30 @@ public class WorryBoardController {
     	model.addAttribute("header", "community");
     	
     	Board board = service.selectWorryBoard(boardNo, loginMember.getMemberNo());
+//    	WorryCategory selectedCatedory = service.selectedWorryCategory(boardNo);
+    	
     	model.addAttribute("board", board);
     	return "board/worryUpdate";
     }
     
     //글 수정하기 
+    @RequestMapping(value = "update" , method = RequestMethod.POST)
+    public String worryUpdate(@ModelAttribute("loginMember") Member loginMember, Model model, Board board, 
+    							RedirectAttributes ra, HttpSession session) {
+    	board.setMemberNo(loginMember.getMemberNo());
+    	int result = service.updateWorryBoard(board);
+    	
+    	String path = "";
+    	
+    	if(result < 0 ) {
+    		Util.swalSetMessage("게시글 수정 성공", null, "success", ra);
+		 	path = "view/" + board.getBoardNo();
+    	}else {
+				Util.swalSetMessage("게시글 수정 실패", null, "error", ra);
+				path = "updateForm";
+    	}
+    	return "redirect:"+path;
+    }
     
     
     

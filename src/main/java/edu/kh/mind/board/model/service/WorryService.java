@@ -49,4 +49,8 @@ public interface WorryService {
 
 	int countEmpathy(Empathy empathy);
 
+	int updateWorryBoard(Board board);
+
+//	WorryCategory selectedWorryCategory(int boardNo);
+
 }
