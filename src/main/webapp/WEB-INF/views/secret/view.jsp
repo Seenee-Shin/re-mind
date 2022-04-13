@@ -202,7 +202,7 @@
 				           
 				          <div class="user_info">
                            	<c:choose>
-                           		<c:when test="${empty loginMember.imagePath}">
+                           		<c:when test="${!empty loginMember.imagePath}">
                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
                            		</c:when>
                            		<c:otherwise>
@@ -334,15 +334,15 @@ function openComment() {
 		  });
 		}  */
  	
- 	function boardScrap() {
- 		
- 		$.ajax({
- 			url : "${contextPath}/secret/boardScrap",
- 			type : "get",
- 			data : {"boardNo" : boardNo,
- 					"memberNo" : loginMemberNo },
-			success : function (result) {
-				
+function boardScrap() {
+		
+	$.ajax({
+		url : "${contextPath}/secret/boardScrap",
+		type : "get",
+		data : {"boardNo" : boardNo,
+				"memberNo" : loginMemberNo },
+		success : function (result) {
+		
 				console.log(result)
 				if(result == 1){
 					
@@ -351,102 +351,88 @@ function openComment() {
 	                      "icon" : "error"});
 					}else{
 						
-					$("#btnScrap").children().removeClass(".child")	
+					$("#btnScrap").children().removeClass('grey');	
 					swal({"title" : "스크랩 완료" , 
 	                      "icon" : "success"});
 					}
 
 				}else if (result == 2){
-					
+			
 					if(!loginMemberNo){
 						swal({"title" : "로그인 후 이용해 주세요." , 
 		                      "icon" : "error"});
 						}
 					else{
-						$("#btnScrap").children().addClass(".child")	
+						$("#btnScrap").children().addClass('grey')	
 						swal({"title" : "스크랩 해제" , 
 	                      "icon" : "success"});
 					}
-					
-				}else{
-					
-				}
-			},
 			
-			error: function (xhr, status, error) {
-			    swal({"title" : "서버 연결 오류" , 
-                      "icon" : "error"});
-		}
- 			
- 		})
+				}	
+		},
+	
+		error: function (xhr, status, error) {
+			   swal({"title" : "서버 연결 오류" , 
+		                    "icon" : "error"});
+				}
+	
+	})
+	
+}
 		
-	}
-		
-		
+// 공감기능
 $(".like").on("click", function(e){
 	
-			var tagId = $(this).attr('id');
-			var empathyStatusCode;
+	var tagId = $(this).attr('id');
+	var empathyStatusCode;
+	
+	if(tagId == "like_smile"){
+		empathyStatusCode = 1001;
+	}else if(tagId == "like_hug"){
+		empathyStatusCode = 1002;
+	}else if(tagId == "like_amazed"){
+		empathyStatusCode = 1003;
+	}else if(tagId == "like_angry"){
+		empathyStatusCode = 1004;
+	}else{
+		empathyStatusCode = 1005;
+	};
 			
-			if(tagId == "like_smile"){
-				empathyStatusCode = 1001;
-			}else if(tagId == "like_hug"){
-				empathyStatusCode = 1002;
-			}else if(tagId == "like_amazed"){
-				empathyStatusCode = 1003;
-			}else if(tagId == "like_angry"){
-				empathyStatusCode = 1004;
-			}else{
-				empathyStatusCode = 1005;
-			};
-			
-			$.ajax({
-	 			url : "${contextPath}/secret/insertEmpathy",
-	 			data : {"boardNo" : boardNo,
-	 					"memberNo" : loginMemberNo,
-	 					"empathyStatusCode" : empathyStatusCode},
-	 			context: this,
-				success : function (result) {
-				if(result >=1){
-					
-				$.ajax({
-					url : "${contextPath}/secret/countEmpathy",
-					data : { "boardNo": boardNo,
-							"empathyStatusCode" : empathyStatusCode},
-					context: this,
-					success : function(count){
-						$(this).children(".like_count").text(count)
-						
-					}
-				});
+	$.ajax({
+			url : "${contextPath}/secret/insertEmpathy",
+			data : {"boardNo" : boardNo,
+					"memberNo" : loginMemberNo,
+					"empathyStatusCode" : empathyStatusCode},
+			context:this,
+			success:function (result) {
 				
-					
+				if(result >=1){
+		
+					$.ajax({
+						url : "${contextPath}/secret/countEmpathy",
+						data : { "boardNo": boardNo,
+								"empathyStatusCode" : empathyStatusCode},
+						context: this,
+						success : function(count){
+							$(this).children(".like_count").text(count)
+							
+						}
+					});
+	
+		
 				}else{
 					console.log("실패");
 				}
-				
-				},
-				
-				error: function (xhr, status, error) {
-				    swal({"title" : "서버 연결 오류" , 
-	                      "icon" : "error"});
-			}
-	 			
-	 		});
-			       
 		
-			
-			
+			},
+		
+			error: function (xhr, status, error) {
+			    swal({"title" : "서버 연결 오류" , 
+	                     "icon" : "error"});
+				}
+		
+		});
+	       
 });
-	
-	
-	
-		
-		
-		
 </script>
-
-
-
-
 <script src="${contextPath}/resources/js/board/replyCopy.js"></script>
