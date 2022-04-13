@@ -130,7 +130,7 @@ public class WorryServiceImpl implements WorryService {
 	
 	
 
-	// 고민상담 등록
+	// 고민상담 tk
 	@Override
 	public Board selectWorryBoard(int boardNo, int memberNo) {
 		Map<String, Integer> map = new HashMap<>();
@@ -186,6 +186,21 @@ public class WorryServiceImpl implements WorryService {
 	public int countEmpathy(Empathy empathy) {
 		return dao.countEmpathy(empathy);
 	}
+
+	@Override
+	public int updateWorryBoard(Board board) {
+		board.setBoardContent(Util.XSS(board.getBoardContent()));
+		board.setBoardContent(Util.changeNewLine(board.getBoardContent()));
+		board.setBoardTitle(Util.XSS(board.getBoardTitle()));
+		board.setBoardTitle(Util.changeNewLine(board.getBoardTitle()));
+		return dao.updateWorryBoard(board);
+	}
+
+//	@Override
+//	public WorryCategory selectedWorryCategory(int boardNo) {
+//		// TODO Auto-generated method stub
+//		return dao.seletedCategory(boardNo);
+//	}
 
 	
 	
