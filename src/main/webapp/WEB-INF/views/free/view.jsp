@@ -247,50 +247,48 @@
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
+// 로그인한 회원의 회원 번호, 비로그인 시 "" (빈문자열)
+const loginMemberNo = "${loginMember.memberNo}";
+// 현재 게시글 번호
+const boardNo = ${board.boardNo};
+// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
+let beforeReplyRow;
 
-	function openComment(){
-		$('.write_comment').toggleClass('active');
-		$('.comment_list').toggleClass('active');
-	}
+function openComment(){
+	$('.write_comment').toggleClass('active');
+	$('.comment_list').toggleClass('active');
+}
 
-	//수정버튼 클릭 시 동작
-	function updateForm(){
-		document.requestForm.action = "../updateForm";
-		document.requestForm.method = "POST";
-		document.requestForm.submit();
+//수정버튼 클릭 시 동작
+function updateForm(){
+	document.requestForm.action = "../updateForm";
+	document.requestForm.method = "POST";
+	document.requestForm.submit();
+}
+
+//닫기 버튼시 동작
+function deleteBoard(){
+	if(confirm("정말 삭제하시겠습니까?")){
+	document.requestForm.action = "../delete";
+	document.requestForm.method = "POST";
+	document.requestForm.submit();
 	}
+}
+
 	
-	//닫기 버튼시 동작
-	function deleteBoard(){
-		if(confirm("정말 삭제하시겠습니까?")){
-		document.requestForm.action = "../delete";
-		document.requestForm.method = "POST";
-		document.requestForm.submit();
-		}
-	}
-	
-	
-	// 로그인한 회원의 회원 번호, 비로그인 시 "" (빈문자열)
-	const loginMemberNo = "${loginMember.memberNo}";
-	// 현재 게시글 번호
-	const boardNo = ${board.boardNo};
-	// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
-	let beforeReplyRow;
-	
-</script>
-<script>
-	//트위터 공유 
-	function shareTwitter() {
-	    var sendText = "re:maind 게시글 공유"; // 전달할 텍스트
-	    var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
-	    window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
-	}
-	
-	function shareFacebook() {
-	    var sendUrl = "https://www.naver.com/"; // 전달할 URL
-//	    var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
-	    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
-	}
+
+
+//트위터 공유 
+function shareTwitter() {
+    var sendText = "re:maind 게시글 공유"; // 전달할 텍스트
+    var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
+    window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+}
+
+function shareFacebook() {
+    var sendUrl = "https://www.naver.com/"; // 전달할 URL
+    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+}
 
 /* 	function shareKakao() {
 		  // 사용할 앱의 JavaScript 키 설정
@@ -313,110 +311,107 @@
 		  });
 		}   */
  	
- 	function boardScrap() {
- 		
- 		$.ajax({
- 			url : "${contextPath}/free/boardScrap",
- 			type : "get",
- 			data : {"boardNo" : boardNo,
- 					"memberNo" : loginMemberNo },
-			success : function (result) {
+function boardScrap() {
+		
+	$.ajax({
+		url : "${contextPath}/free/boardScrap",
+		type : "get",
+		data : {"boardNo" : boardNo,
+				"memberNo" : loginMemberNo },
+		success : function (result) {
+		
+			if(result == 1){
 				
-				console.log(result)
-				if(result == 1){
+				if(!loginMemberNo){
+				swal({"title" : "로그인 후 이용해 주세요." , 
+	                     "icon" : "error"});
+				}else{
 					
-					if(!loginMemberNo){
+				$("#btnScrap").children().removeClass('grey');	
+				swal({"title" : "스크랩 완료" , 
+	                     "icon" : "success"});
+				}
+	
+			}else if (result == 2){
+				
+				if(!loginMemberNo){
 					swal({"title" : "로그인 후 이용해 주세요." , 
 	                      "icon" : "error"});
-					}else{
-						
-					$("#btnScrap").children().removeClass('grey');	
-					swal({"title" : "스크랩 완료" , 
-	                      "icon" : "success"});
 					}
-
-				}else if (result == 2){
-					
-					if(!loginMemberNo){
-						swal({"title" : "로그인 후 이용해 주세요." , 
-		                      "icon" : "error"});
-						}
-					else{
-						$("#btnScrap").children().addClass('grey')	
-						swal({"title" : "스크랩 해제" , 
-	                      "icon" : "success"});
-					}
-					
-				}else{
-					swal({"title" : "다시 시도해주세요" , 
-	                      "icon" : "error"});
+				else{
+					$("#btnScrap").children().addClass('grey')	
+					swal({"title" : "스크랩 해제" , 
+	                     "icon" : "success"});
 				}
-			},
-			
-			error: function (xhr, status, error) {
-			    swal({"title" : "서버 연결 오류" , 
-                      "icon" : "error"});
-		}
- 			
- 		})
-		
-	}
-		
-		
+				
+			}else{
+				swal({"title" : "다시 시도해주세요" , 
+	                     "icon" : "error"});
+			}
+		},
 	
-	$(".like").on("click", function(e){
+		error: function (xhr, status, error) {
+		    swal({"title" : "서버 연결 오류" , 
+	                    "icon" : "error"});
+		}
 		
-				var tagId = $(this).attr('id');
-				var empathyStatusCode;
-				
-				if(tagId == "like_smile"){
-					empathyStatusCode = 1001;
-				}else if(tagId == "like_hug"){
-					empathyStatusCode = 1002;
-				}else if(tagId == "like_amazed"){
-					empathyStatusCode = 1003;
-				}else if(tagId == "like_angry"){
-					empathyStatusCode = 1004;
-				}else{
-					empathyStatusCode = 1005;
-				};
-				
+	})
+	
+}
+		
+		
+//좋아요 기능 
+$(".like").on("click", function(e){
+	
+	var tagId = $(this).attr('id');
+	var empathyStatusCode;
+	
+	if(tagId == "like_smile"){
+		empathyStatusCode = 1001;
+	}else if(tagId == "like_hug"){
+		empathyStatusCode = 1002;
+	}else if(tagId == "like_amazed"){
+		empathyStatusCode = 1003;
+	}else if(tagId == "like_angry"){
+		empathyStatusCode = 1004;
+	}else{
+		empathyStatusCode = 1005;
+	};
+	
+	$.ajax({
+			url : "${contextPath}/free/insertEmpathy",
+			data : {"boardNo" : boardNo,
+					"memberNo" : loginMemberNo,
+					"empathyStatusCode" : empathyStatusCode},
+			context: this,
+		success : function (result) {
+			if(result >=1){
+			
 				$.ajax({
-		 			url : "${contextPath}/free/insertEmpathy",
-		 			data : {"boardNo" : boardNo,
-		 					"memberNo" : loginMemberNo,
-		 					"empathyStatusCode" : empathyStatusCode},
-		 			context: this,
-					success : function (result) {
-					if(result >=1){
-						
-					$.ajax({
-						url : "${contextPath}/free/countEmpathy",
-						data : { "boardNo": boardNo,
-								"empathyStatusCode" : empathyStatusCode},
-						context: this,
-						success : function(count){
-							$(this).children(".like_count").text(count)
-							
-						}
-					});
-					
-						
-					}else{
-						console.log("실패");
+					url : "${contextPath}/free/countEmpathy",
+					data : { "boardNo": boardNo,
+							"empathyStatusCode" : empathyStatusCode},
+					context: this,
+					success : function(count){
+						$(this).children(".like_count").text(count)
 					}
-					
-					},
-					
-					error: function (xhr, status, error) {
-					    swal({"title" : "서버 연결 오류" , 
-		                      "icon" : "error"});
-				}
-		 			
-		 		});
-				       
+				});
+			
 				
+			}else{
+				console.log("실패");
+			}
+			
+		},
+		
+		error: function (xhr, status, error) {
+		    swal({"title" : "서버 연결 오류" , 
+                     "icon" : "error"});
+		}
+			
 	});
+				
+});
 			
 // 신고하기 팝업
 function openReportPopup() {
