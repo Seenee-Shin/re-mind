@@ -197,7 +197,43 @@
 <jsp:include page="../common/footer.jsp"/>
 <script src="${contextPath}/resources/js/board/board_common.js"></script>
 <script src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
+<script>
+//댓글 색
+$("[name='replyCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		$(this).css("background-color", "#fff").css("color", "#A59999");
+	}
+});
 
+// 스크랩 색
+$("[name='scrapCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		$(this).css("background-color", "#fff").css("color", "#A59999");
+	}
+});
+
+// 공감 색
+$("[name='empathyCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		$(this).css("background-color", "#fff").css("color", "#A59999");
+	}
+});
+
+// 공감 색
+$("[name='anonCheckCode']").on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		$(this).css("background-color", "#fff").css("color", "#A59999");
+	}
+});
+</script>
 
 <script>
     const loginMemberNo = "${loginMember.memberNo}";

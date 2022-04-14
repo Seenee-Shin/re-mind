@@ -47,26 +47,53 @@
 	                        </div>
 	                    </div> 
 	                    
-	                    
 	                    <div class="btn_area">
-                           	<!-- name="images" -->
-							<input type="file"  id='addFileBtn'  accept="audio/*, video/*, image/*" multiple onclick="loadImg()" style="display: none">
-							<input type="hidden" name="delete_files" id="delete_files">
 	                        <div class="write_option_area">
-	                            <div class="check_box_wrap">
-	                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
-	                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
-	                            </div>
+           	            		<div class="check_box_wrap">
+                                   	<select id="replyCheckCode" name="replyCheckCode">
+	           	            			<c:choose>
+	           	            				<c:when test="${board.replyCheckCode == 1}">
+													<option value="1" selected="selected">댓글 허용</option>
+													<option value="2">댓글 비허용</option>
+	           	            				</c:when>
+	           	            				<c:otherwise>
+													<option value="1" >댓글 허용</option>
+													<option value="2" selected="selected">댓글 비허용</option>
+	           	            				</c:otherwise>
+	           	            			</c:choose>
+									</select>  
+								</div>
 
-	                            <div class="check_box_wrap">
-	                                <label for="scrapCheckCode" class="light_brown_bg dark_brown_bg active">스크랩 허용</label>
-									<input type="checkbox"  name="scrapCheckCode" value="1" id="scrapCheckCode" checked>
-	                            </div>
-	                            <div class="check_box_wrap">
-	                                <label for="empathyCheckCode" class="light_brown_bg dark_brown_bg active">공감 허용</label>
-	                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
-	                            </div>
-
+                                <div class="check_box_wrap">
+	                                 <select id="scrapCheckCode" name="scrapCheckCode">
+	                                 	<c:choose>
+	                                 		<c:when test="${board.scrapCheckCode == 1}">
+											    <option value="1" selected="selected">스크랩 허용</option>
+											    <option value="2">스크랩 비허용</option>
+	                                 		</c:when>
+	                                 		
+	                                 		<c:otherwise>
+											    <option value="1">스크랩 허용</option>
+											    <option value="2" selected="selected">스크랩 비허용</option>
+	                                 		</c:otherwise>
+	                                 	</c:choose>
+								    </select>  
+                                </div>
+                                       
+                                <div class="check_box_wrap">
+                                  	<select id="empathyCheckCode" name="empathyCheckCode">
+                                  		<c:choose>
+	                                 		<c:when test="${board.empathyCheckCode == 1}">
+										    	<option value="1" selected="selected">공감 허용</option>
+												<option value="2">공감 비허용</option>
+	                                 		</c:when>
+	                                 		<c:otherwise>
+										    	<option value="1">공감 허용</option>
+												<option value="2" selected="selected">공감 비허용</option>
+	                                 		</c:otherwise>
+                                		</c:choose>
+									</select>  
+								</div>
 	                        </div>
 	                    </div>
 	                </article>
@@ -87,36 +114,53 @@
 <jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
 <script>
-// 고민작성하기 댓글
-$("#replyCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
-		$(this).val(1);
+//고민작성하기 댓글
+const reply = $("[name='replyCheckCode']")
+
+if (reply.children("option:selected").val() == "1") {
+		reply.css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("댓글 비허용");
-		$(this).val(2);
+		reply.css("background-color", "#fff").css("color", "#A59999");
+	}
+
+reply.on("change", function () {
+	if ($("[name='replyCheckCode']").children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
 // 고민작성하기 스크랩
-$("#scrapCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("스크랩 허용");
-		$(this).val(1);
+const scrap = $("[name='scrapCheckCode']")
+
+if (scrap.children("option:selected").val() == "1") {
+	scrap.css("background-color", "#A59999").css("color", "#fff");
+} else {
+	scrap.css("background-color", "#fff").css("color", "#A59999");
+}
+
+scrap.on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("스크랩 비허용");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
 // 고민작성하기 공감
-$("#empathyCheckCode").on("click", function () {
-	if ($(this).is(":checked")) {
-		$(this).prev().addClass("dark_brown_bg").addClass("active").text("공감 허용");
-		$(this).val(1);
+const empathy = $("[name='empathyCheckCode']")
+
+if (empathy.children("option:selected").val() == "1") {
+	empathy.css("background-color", "#A59999").css("color", "#fff");
+} else {
+	empathy.css("background-color", "#fff").css("color", "#A59999");
+}
+empathy.on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
 	} else {
-		$(this).prev().removeClass("dark_brown_bg").removeClass("active").text("공감 비허용");
-		$(this).val(2);
+		$(this).css("background-color", "#fff").css("color", "#A59999");
 	}
 });
 
