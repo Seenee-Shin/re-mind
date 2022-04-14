@@ -237,8 +237,6 @@ public class WorryBoardController {
     
     
     
-    
-    
     //예외처리
     @ExceptionHandler(Exception.class)
     public String exceptionHandler(Exception e, Model model) {
