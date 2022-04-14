@@ -14,6 +14,7 @@
 	                    <i class="fas fa-arrow-left"></i> 
 	                </a>
 	            </div>
+	            
 	
 	
 	            <button type="button" class="submit_btn dark_brown_bg" id="worryCategoryBtn">카테고리</button>
@@ -26,8 +27,8 @@
 	                    <div class="worry_category">
 							<c:forEach items="${categoryList}" var="category" varStatus="status">
 								<div class="check_box_wrap">
-									<label for="normal_${status.index}" class="dark_brown_border ${status.index == 0 ? 'active' : ''}">${category.worryName}</label>
-									<input type="radio" id="normal_${status.index}" name="worryCategoryCode" value="${category.worryCategoryCode}" ${status.index == 0 ? "checked" : ""}>
+									<label for="normal_${status.index}" class="dark_brown_border ${board.worryCategoryCode == category.worryCategoryCode ?  'active' : ''}">${category.worryName}</label>
+									<input type="radio" id="normal_${status.index}" name="worryCategoryCode" value="${category.worryCategoryCode}" ${board.worryCategoryCode == category.worryCategoryCode ? "checked" : ""}>
 								</div>
 							</c:forEach>
 	                    </div>
@@ -103,6 +104,21 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_worry_board.js"></script>
+
+<script>
+// 카테고리 선택
+	const selectRadio = $("input[name='worryCategoryCode']");
+	selectRadio.on("click", function () {
+		$(".postModal [name='freeboard_search']").val('');
+		$(".postModal [name='search_category']").val('id');
+		$(".dark_brown_border").removeClass("active");
+
+		const _this = $(this);
+		_this.prev().addClass("active");
+	});
+
+
+</script>
 
 </body>
 </html>
