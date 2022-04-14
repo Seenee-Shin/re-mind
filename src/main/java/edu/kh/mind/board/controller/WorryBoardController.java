@@ -225,7 +225,7 @@ public class WorryBoardController {
     	
     	String path = "";
     	
-    	if(result < 0 ) {
+    	if(result > 0 ) {
     		Util.swalSetMessage("게시글 수정 성공", null, "success", ra);
 		 	path = "view/" + board.getBoardNo();
     	}else {
