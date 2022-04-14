@@ -51,21 +51,21 @@
 		                        
 		                        <div class="write_option_area">
               	            		<div class="check_box_wrap">
-                                     	<select id="mReplyCheckCode" name="replyCheckCode">
+                                     	<select id="replyCheckCode" name="replyCheckCode">
 											<option value="1">댓글 허용</option>
 											<option value="2">댓글 비허용</option>
 										</select>  
 									</div>
 
                                     <div class="check_box_wrap">
-                                       <select id="mScrapCheckCode" name="scrapCheckCode">
+                                       <select id="scrapCheckCode" name="scrapCheckCode">
 										    <option value="1">스크랩 허용</option>
 										    <option value="2">스크랩 비허용</option>
 									    </select>  
                                     </div>
                                         
                                     <div class="check_box_wrap">
-                                    	<select id="mEmpathyCheckCode" name="empathyCheckCode">
+                                    	<select id="empathyCheckCode" name="empathyCheckCode">
 										    <option value="1">공감 허용</option>
 										    <option value="2">공감 비허용</option>
 									    </select>  

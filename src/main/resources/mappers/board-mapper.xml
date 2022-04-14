@@ -450,7 +450,13 @@
 		REPLY_CHECK_CD = #{replyCheckCode},
 		SCRAP_CHECK_CD =#{scrapCheckCode},
 		EM_CHECK_CD= #{empathyCheckCode},
-		WORRY_CATEGORY_CD =#{worryCategoryCode},
+		<if test="boardCategoryCode == 102 ">
+			WORRY_CATEGORY_CD =#{worryCategoryCode},
+		</if>
+		
+		<if test="boardCategoryCode == 104">
+			ANON_CHECK_CD = #{anonCheckCode},
+		</if>
 		BOARD_MODIFY_DT = SYSDATE
 		WHERE BOARD_NO = #{boardNo} 
 	</update>	

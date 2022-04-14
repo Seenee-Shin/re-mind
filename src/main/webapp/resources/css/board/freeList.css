@@ -20,23 +20,16 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  
   font-family: "Noto Sansf KR", sans-serif;
   padding: 4px;
   width:110px;
-  font-size: 15px;
+  height:28px;
+  font-size: 14px;
   text-align: center;
-  font-weight: 600;
+  font-weight: 550;
   color:#A59999;
   border: 1px solid #A59999;
   border-radius: 15px;
-}
-
-select:hover {
-	background-color:#E5D4C5;
-	color: white;
-	border-color:#E5D4C5 ;
-	
 }
 
 
