@@ -155,7 +155,6 @@ main{
   clear: both;
   line-height: 98px;
   text-align: center;
-  
     margin-top: 250px;
 }
 /* -------------푸터 고정 --------------- */
@@ -470,7 +469,7 @@ a:hover{color:#A59999;}
       width: 100%;
       min-height: 200px;
       clear: both;
-      margin-top: 60px;
+      margin-top: 10px;
   }
   .side_menu{
       /* display: none; */
