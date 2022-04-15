@@ -51,6 +51,7 @@ public interface WorryService {
 
 	int updateWorryBoard(Board board);
 
-//	WorryCategory selectedWorryCategory(int boardNo);
+	int worryDelete(Board board);
+
 
 }

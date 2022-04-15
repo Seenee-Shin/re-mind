@@ -70,6 +70,12 @@ select:disabled {
     background-size: cover;
 }
 
+/* boardTitle */
+#boardTitle{
+	border: 1px solid #ededed;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+}
 
 
 /* 본문 내용 */
@@ -281,6 +287,7 @@ textarea{
     .board_update_wrap, .back_btn{
         margin-left: 10px;
     }
+    
 
     .posting{
         margin-right: 10px;
