@@ -23,7 +23,7 @@
 	                        <button type="button" class="submit_btn dark_brown_bg" id="worryCategoryBtn" >카테고리</button>
 	                    </div>
 	
-	                    <div class="search_area">
+<!-- 	                    <div class="search_area">
 	                        <div class="search_wrap">
 	                            <select name="search_category" id="search_category">
 	                                <option value="id">닉네임</option>
@@ -32,7 +32,7 @@
 	                            <input type="text" name="freeboard_search">
 	                            <button type="button" class="submit_btn light_brown_bg" id="freeboard_search"> 검색 </button>
 	                        </div>
-	                    </div>
+	                    </div> -->
 	                </div>
 	                <!-- 카테고리 숨김 -->
 	                <div class="worry_category_wrap hidden">
@@ -51,7 +51,7 @@
 	                </div>
 				</div>
 
-				<form action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate();">
+				<form id ="postForm" action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return postingValidate();">
 	                <!-- 글작성 모달창 -->
 	                <div class="postModal hidden">
 	                    <div class="postModal_overlay"></div>
@@ -81,7 +81,7 @@
 
 							<div id="imgWrap"></div>
 
-	                        <div class="write_option_area">
+<!-- 	                        <div class="write_option_area">
 	                            <div class="check_box_wrap">
 	                                <label for="replyCheckCode" class="light_brown_bg dark_brown_bg active">댓글 허용</label>
 	                                <input type="checkbox"  name="replyCheckCode" value="1" id="replyCheckCode" checked>
@@ -96,7 +96,29 @@
 	                                <input type="checkbox"  name="empathyCheckCode" value="1" id="empathyCheckCode" checked>
 	                            </div>
 
-	                        </div>
+	                        </div> -->
+	                        	<div class="write_option_area">
+              	            		<div class="check_box_wrap">
+                                     	<select id="replyCheckCode" name="replyCheckCode">
+											<option value="1">댓글 허용</option>
+											<option value="2">댓글 비허용</option>
+										</select>  
+									</div>
+
+                                    <div class="check_box_wrap">
+                                       <select id="scrapCheckCode" name="scrapCheckCode">
+										    <option value="1">스크랩 허용</option>
+										    <option value="2">스크랩 비허용</option>
+									    </select>  
+                                    </div>
+                                        
+                                    <div class="check_box_wrap">
+                                    	<select id="empathyCheckCode" name="empathyCheckCode">
+										    <option value="1">공감 허용</option>
+										    <option value="2">공감 비허용</option>
+									    </select>  
+                                    </div>
+		                        </div>
 	                        
 	                        <hr>
 	                        <div class="btn_area">
@@ -128,6 +150,50 @@
 <script type="text/javascript" src="${contextPath}/resources/js/board/replyCopy.js"></script>
 
 <script>
+// 고민작성하기 스크랩
+const scrap = $("[name='scrapCheckCode']")
+
+if (scrap.children("option:selected").val() == "1") {
+	scrap.css("background-color", "#A59999").css("color", "#fff");
+} else {
+	scrap.css("background-color", "#fff").css("color", "#A59999");
+}
+
+scrap.on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		$(this).css("background-color", "#fff").css("color", "#A59999");
+	}
+});
+
+// 고민작성하기 공감
+const empathy = $("[name='empathyCheckCode']")
+
+if (empathy.children("option:selected").val() == "1") {
+	empathy.css("background-color", "#A59999").css("color", "#fff");
+} else {
+	empathy.css("background-color", "#fff").css("color", "#A59999");
+}
+empathy.on("change", function () {
+	if ($(this).children("option:selected").val() == "1") {
+		$(this).css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		$(this).css("background-color", "#fff").css("color", "#A59999");
+	}
+});
+
+
+// 고민작성하기 카테고리 선택
+const selectRadio = $(".postModal input[name='worryCategoryCode']");
+selectRadio.on("click", function () {
+	$(".postModal [name='freeboard_search']").val('');
+	$(".postModal [name='search_category']").val('id');
+	$(".postModal .dark_brown_border").removeClass("active");
+
+	const _this = $(this);
+	_this.prev().addClass("active");
+});
 	$(function () {
 		// list 가져오기
 		getWorryList();
@@ -290,19 +356,26 @@
 			}
 		});
 	}
+	//고민작성하기 댓글
+	const reply = $("[name='replyCheckCode']")
 
-	// 고민작성하기 카테고리 선택
-	const selectRadio = $(".postModal input[name='worryCategoryCode']");
-	selectRadio.on("click", function () {
-		$(".postModal [name='freeboard_search']").val('');
-		$(".postModal [name='search_category']").val('id');
-		$(".postModal .dark_brown_border").removeClass("active");
+	if (reply.children("option:selected").val() == "1") {
+			reply.css("background-color", "#A59999").css("color", "#fff");
+		} else {
+			reply.css("background-color", "#fff").css("color", "#A59999");
+		}
 
-		const _this = $(this);
-		_this.prev().addClass("active");
+	reply.on("change", function () {
+		if ($("[name='replyCheckCode']").children("option:selected").val() == "1") {
+			$(this).css("background-color", "#A59999").css("color", "#fff");
+		} else {
+			$(this).css("background-color", "#fff").css("color", "#A59999");
+		}
 	});
 
-	// 고민작성하기 댓글
+
+
+/* 	// 고민작성하기 댓글
 	$("#replyCheckCode").on("click", function () {
 		if ($(this).is(":checked")) {
 			$(this).prev().addClass("dark_brown_bg").addClass("active").text("댓글 허용");
@@ -334,7 +407,7 @@
 			$(this).val(2);
 		}
 	});
-
+ */
 	// 파일 현재 필드 숫자 totalCount랑 비교값
 	var fileCount = 0;
 	// 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.

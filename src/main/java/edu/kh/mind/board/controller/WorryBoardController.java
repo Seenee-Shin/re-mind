@@ -221,6 +221,11 @@ public class WorryBoardController {
     public String worryUpdate(@ModelAttribute("loginMember") Member loginMember, Model model, Board board, 
     							RedirectAttributes ra, HttpSession session) {
     	board.setMemberNo(loginMember.getMemberNo());
+
+        System.out.println("replyCheckCode"+board.getReplyCheckCode());
+        System.out.println("scrapCheckCode"+board.getScrapCheckCode());
+        System.out.println("empathyCheckCode"+board.getEmpathyCheckCode());
+        
     	int result = service.updateWorryBoard(board);
     	
     	String path = "";
@@ -236,8 +241,8 @@ public class WorryBoardController {
     }
     
     //글 삭제 
-    @RequestMapping(value ="delete")
-    public String wooryDelete(Model model, Board board, RedirectAttributes ra, HttpSession session) {
+    @RequestMapping(value ="delete" , method = RequestMethod.POST)
+    public String worryDelete(Model model, Board board, RedirectAttributes ra, HttpSession session) {
     	String path = "";
     	int result = service.worryDelete(board);
     	
