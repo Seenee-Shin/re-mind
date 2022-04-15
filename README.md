@@ -103,3 +103,7 @@ NA JAVAVARAは **『いかなる病気も嫌悪の対象であってはならな
 ![localhost_8080_mind_my_emotionRecord](https://user-images.githubusercontent.com/86164711/161536597-21c8619b-7fa4-486f-9af9-d31c0f2b8dce.png)
 
 ![localhost_8080_mind_my_emotionDiary_(1)](https://user-images.githubusercontent.com/86164711/161536604-f98bd0b6-3ee5-4e0f-bdd3-9af0663dae26.png)
+
+
+## 📝 Release notes
+2022.04.15 ‐　デプロイ
