@@ -196,6 +196,12 @@ public class WorryServiceImpl implements WorryService {
 		return dao.updateWorryBoard(board);
 	}
 
+	@Override
+	public int worryDelete(Board board) {
+		// TODO Auto-generated method stub
+		return dao.worryDelete(board);
+	}
+
 //	@Override
 //	public WorryCategory selectedWorryCategory(int boardNo) {
 //		// TODO Auto-generated method stub

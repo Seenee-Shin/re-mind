@@ -46,7 +46,7 @@
 	                    
 	
 	
-                    	<input name ="boardTitle" value="${board.boardTitle}"> 
+                    	<input name ="boardTitle" id="boardTitle" value="${board.boardTitle}"> 
 	                    <div id="posting"  style="margin-top: 0px;">
 	                        <textarea name="boardContent"  onkeydown="resize(this)" onkeyup="resize(this)" >${board.boardContent}</textarea>
 	                        <div class="post_img">

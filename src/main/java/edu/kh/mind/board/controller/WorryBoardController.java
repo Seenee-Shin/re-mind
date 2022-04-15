@@ -235,6 +235,23 @@ public class WorryBoardController {
     	return "redirect:"+path;
     }
     
+    //글 삭제 
+    @RequestMapping(value ="delete")
+    public String wooryDelete(Model model, Board board, RedirectAttributes ra, HttpSession session) {
+    	String path = "";
+    	int result = service.worryDelete(board);
+    	
+    	if(result > 0) {
+    		Util.swalSetMessage("삭제 완료", "게시물이 정상적으로 삭제되었습니다.", "success", ra);
+    		path = "insert";
+    	}else {
+			Util.swalSetMessage("삭제 실패", "잠시후 다시 시도해 주세요", "error", ra);
+			path = "view/"+board.getBoardNo();
+    	}
+    	
+    	return "redirect"+path;
+    }
+    
     
     
     //예외처리

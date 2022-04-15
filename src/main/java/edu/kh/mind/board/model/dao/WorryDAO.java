@@ -109,6 +109,11 @@ public class WorryDAO {
 		return sqlSession.update("boardMapper.updateBoard",board);
 	}
 
+	public int worryDelete(Board board) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("boardMapper.deleteBoard",board);
+	}
+
 //	public WorryCategory seletedCategory(int boardNo) {
 //		// TODO Auto-generated method stub
 //		return sqlSession.selectOne("boardMapper.selectedCategory", sqlSession);
