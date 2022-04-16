@@ -50,8 +50,7 @@ public class WorryBoardController {
     public HashMap<String, Object> worryList(@RequestParam Map<String, String> param, HttpSession session) {
         HashMap<String, Object> map = new HashMap<>();
 
-        System.out.println("___________________________________");
-	    System.out.println(param);
+//	    System.out.println(param);
 
 
 		if (session.getAttribute("loginMember") != null) {
@@ -221,6 +220,11 @@ public class WorryBoardController {
     public String worryUpdate(@ModelAttribute("loginMember") Member loginMember, Model model, Board board, 
     							RedirectAttributes ra, HttpSession session) {
     	board.setMemberNo(loginMember.getMemberNo());
+
+        System.out.println("replyCheckCode"+board.getReplyCheckCode());
+        System.out.println("scrapCheckCode"+board.getScrapCheckCode());
+        System.out.println("empathyCheckCode"+board.getEmpathyCheckCode());
+        
     	int result = service.updateWorryBoard(board);
     	
     	String path = "";
@@ -236,20 +240,20 @@ public class WorryBoardController {
     }
     
     //글 삭제 
-    @RequestMapping(value ="delete")
-    public String wooryDelete(Model model, Board board, RedirectAttributes ra, HttpSession session) {
+    @RequestMapping(value ="delete" , method = RequestMethod.POST)
+    public String worryDelete(Model model, Board board, RedirectAttributes ra, HttpSession session) {
     	String path = "";
     	int result = service.worryDelete(board);
     	
     	if(result > 0) {
     		Util.swalSetMessage("삭제 완료", "게시물이 정상적으로 삭제되었습니다.", "success", ra);
-    		path = "insert";
+    		path = "worryList";
     	}else {
 			Util.swalSetMessage("삭제 실패", "잠시후 다시 시도해 주세요", "error", ra);
 			path = "view/"+board.getBoardNo();
     	}
     	
-    	return "redirect"+path;
+    	return "redirect:" + path;
     }
     
     

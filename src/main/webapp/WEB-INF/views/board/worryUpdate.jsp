@@ -65,27 +65,52 @@
 	                    
 	                    <div class="btn_area">
 	                        <div class="write_option_area">
-		                        <div class="check_box_wrap">
-	                                <label for="comment" class="option_btn light_brown_bg">댓글허용
-	                                    <input type="checkbox" name="replyCheckCode" value="" id="replyCheckCode">
-	                                </label>
-	                            </div>
-	
-	                            <div class="check_box_wrap">
-	                                <label for="scrap" class="option_btn light_brown_bg">스크랩허용
-	                                    <input type="checkbox"  name="scrapCheckCode" value="" id="scrapCheckCode">
-	                                    
-	                                </label>
-	                            </div>
-	                            
-	                            <div class="check_box_wrap">
-	                                <label for="like" class="option_btn light_brown_bg"> 공감 허용
-	                                    <input type="checkbox"  name="empathyCheckCode" value="" id="empathyCheckCode">
-	
-	                                </label>
-	                        	</div>	
+           	            		<div class="check_box_wrap">
+                                   	<select id="replyCheckCode" name="replyCheckCode">
+	           	            			<c:choose>
+	           	            				<c:when test="${board.replyCheckCode == 1}">
+													<option value="1" selected="selected">댓글 허용</option>
+													<option value="2">댓글 비허용</option>
+	           	            				</c:when>
+	           	            				<c:otherwise>
+													<option value="1" >댓글 허용</option>
+													<option value="2" selected="selected">댓글 비허용</option>
+	           	            				</c:otherwise>
+	           	            			</c:choose>
+									</select>  
+								</div>
+
+                                <div class="check_box_wrap">
+	                                 <select id="scrapCheckCode" name="scrapCheckCode">
+	                                 	<c:choose>
+	                                 		<c:when test="${board.scrapCheckCode == 1}">
+											    <option value="1" selected="selected">스크랩 허용</option>
+											    <option value="2">스크랩 비허용</option>
+	                                 		</c:when>
+	                                 		
+	                                 		<c:otherwise>
+											    <option value="1">스크랩 허용</option>
+											    <option value="2" selected="selected">스크랩 비허용</option>
+	                                 		</c:otherwise>
+	                                 	</c:choose>
+								    </select>  
+                                </div>
+                                       
+                                <div class="check_box_wrap">
+                                  	<select id="empathyCheckCode" name="empathyCheckCode">
+                                  		<c:choose>
+	                                 		<c:when test="${board.empathyCheckCode == 1}">
+										    	<option value="1" selected="selected">공감 허용</option>
+												<option value="2">공감 비허용</option>
+	                                 		</c:when>
+	                                 		<c:otherwise>
+										    	<option value="1">공감 허용</option>
+												<option value="2" selected="selected">공감 비허용</option>
+	                                 		</c:otherwise>
+                                		</c:choose>
+									</select>  
+								</div>
 	                        </div>
-	                        
 	                    </div>
 	                </article>
 	
@@ -117,7 +142,55 @@
 		_this.prev().addClass("active");
 	});
 
+	//고민작성하기 댓글
+	const reply = $("[name='replyCheckCode']")
 
+	if (reply.children("option:selected").val() == "1") {
+			reply.css("background-color", "#A59999").css("color", "#fff");
+		} else {
+			reply.css("background-color", "#fff").css("color", "#A59999");
+		}
+
+	reply.on("change", function () {
+		if ($("[name='replyCheckCode']").children("option:selected").val() == "1") {
+			$(this).css("background-color", "#A59999").css("color", "#fff");
+		} else {
+			$(this).css("background-color", "#fff").css("color", "#A59999");
+		}
+	});
+
+	// 고민작성하기 스크랩
+	const scrap = $("[name='scrapCheckCode']")
+
+	if (scrap.children("option:selected").val() == "1") {
+		scrap.css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		scrap.css("background-color", "#fff").css("color", "#A59999");
+	}
+
+	scrap.on("change", function () {
+		if ($(this).children("option:selected").val() == "1") {
+			$(this).css("background-color", "#A59999").css("color", "#fff");
+		} else {
+			$(this).css("background-color", "#fff").css("color", "#A59999");
+		}
+	});
+
+	// 고민작성하기 공감
+	const empathy = $("[name='empathyCheckCode']")
+
+	if (empathy.children("option:selected").val() == "1") {
+		empathy.css("background-color", "#A59999").css("color", "#fff");
+	} else {
+		empathy.css("background-color", "#fff").css("color", "#A59999");
+	}
+	empathy.on("change", function () {
+		if ($(this).children("option:selected").val() == "1") {
+			$(this).css("background-color", "#A59999").css("color", "#fff");
+		} else {
+			$(this).css("background-color", "#fff").css("color", "#A59999");
+		}
+	});
 </script>
 
 </body>
