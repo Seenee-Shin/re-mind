@@ -157,7 +157,7 @@
 	                </div>--%>
 
 					<div class="report_scrap_wrap">
-						 <c:if test="${board.scrapCheckCode == 0}">
+						 <c:if test="${board.scrapCheckCode == 1}">
                         <!-- 스크랩 허용 했을 경우만 -->
 	                      	<a id="btnScrap" class="link-icon scrap"   href="javascript:boardScrap(); ">
 	                      		<img alt="" src="${contextPath}/resources/images/icon/bookmark.png;" class="grey">
@@ -178,7 +178,7 @@
 
 					<!-- /////////////////////////////////////////////////////////////////////// -->
 
-				<c:if test="${board.replyCheckCode == 0}">
+				<c:if test="${board.replyCheckCode == 1}">
 					<article class="comment_view_wrap">
 						<div class="comment_top dark-brown">
 							<div>

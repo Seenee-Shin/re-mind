@@ -50,8 +50,6 @@
         <%-- <a href="${header.referer}">이전 페이지</a> --%>
 
         <button onclick="history.back()">이전 페이지</button>
-
-        <!-- referer : 페이지 방문 흔적 -->
     </div>
 </div>
 
