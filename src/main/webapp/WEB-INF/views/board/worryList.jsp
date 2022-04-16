@@ -564,6 +564,7 @@ selectRadio.on("click", function () {
 	}
 
 	window.onscroll= function(e) {
+		
 		// +100 footer 높이
 		if ((window.innerHeight + window.scrollY) + 100 >= document.body.offsetHeight && _scrollFlag) {
 			_page++;

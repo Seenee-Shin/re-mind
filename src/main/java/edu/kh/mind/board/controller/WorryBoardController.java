@@ -50,8 +50,7 @@ public class WorryBoardController {
     public HashMap<String, Object> worryList(@RequestParam Map<String, String> param, HttpSession session) {
         HashMap<String, Object> map = new HashMap<>();
 
-        System.out.println("___________________________________");
-	    System.out.println(param);
+//	    System.out.println(param);
 
 
 		if (session.getAttribute("loginMember") != null) {
@@ -248,13 +247,13 @@ public class WorryBoardController {
     	
     	if(result > 0) {
     		Util.swalSetMessage("삭제 완료", "게시물이 정상적으로 삭제되었습니다.", "success", ra);
-    		path = "insert";
+    		path = "worryList";
     	}else {
 			Util.swalSetMessage("삭제 실패", "잠시후 다시 시도해 주세요", "error", ra);
 			path = "view/"+board.getBoardNo();
     	}
     	
-    	return "redirect"+path;
+    	return "redirect:" + path;
     }
     
     

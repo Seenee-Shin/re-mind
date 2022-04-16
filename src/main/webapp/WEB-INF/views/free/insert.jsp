@@ -411,6 +411,7 @@ function calcPagination(){
    last = currentPage * infinityLimit;
    first = last - (infinityLimit - 1) <= 0 ? 1 : last - (infinityLimit - 1);
 }
+
 calcPagination()
 
 
