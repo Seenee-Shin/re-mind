@@ -178,74 +178,82 @@
 
 					<!-- /////////////////////////////////////////////////////////////////////// -->
 
-				<c:if test="${board.replyCheckCode == 1}">
+              <c:if test="${board.replyCheckCode == 1}">
 					<article class="comment_view_wrap">
-						<div class="comment_top dark-brown">
-							<div>
-								<i class="far fa-comment"></i>
-								<span>댓글</span>
-								<span>(${board.replyCount})</span>
-							</div>
-
-							<div class="m_comment_wirte" onclick="openComment()">
-								<i class="far fa-comment"></i>
-								<span>댓글</span>
-								<span>(${board.replyCount})</span>
-							</div>
-						</div>
-
-						<div class="write_comment">
-
-							<div class="user_info">
+					    <div class="comment_top dark-brown">
+					        <div>
+					            <i class="far fa-comment"></i>
+					            <span>댓글</span> 
+					            <span>(${board.replyCount})</span>
+					        </div>
+					
+					        <div class="m_comment_wirte" onclick="openComment()">
+					            <i class="far fa-comment"></i>
+					            <span>댓글</span> 
+					            <span>(${board.replyCount})</span>
+					        </div>
+					    </div>
+					     
+					     <div class="write_comment" id="write_comment">
+				           
+				          <div class="user_info">
                            	<c:choose>
                            		<c:when test="${!empty loginMember.imagePath}">
                                		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
-					               <div>
-					                   <p>${loginMember.memberFName}</p>
-					               </div>
                            		</c:when>
                            		<c:otherwise>
                                		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
-					                <p>로그인하기</p>
                            		</c:otherwise>
-                               </c:choose>
+                           		
+                              </c:choose>
 	
+				               <div>
+				                   <p>${loginMember.memberFName}</p>
+				               </div>
 				           </div>
-
-							<textarea name="replyContent" id="replyContent" rows="3"></textarea>
-							<button class="option_btn dark_brown_bg" id="addReply" onclick="addComment();"> 등록 </button>
-						</div>
-						<hr style="border-color:grey; ">
-
-
-						<div class="comment_list" id="comment_list">
-							<c:forEach items="${rList}" var="reply">
-								<div class="comment_view  <c:if test="${reply.parentReplyNo != 0}"> child </c:if>">
-									<div class="user_info">
-										<div class="user_pic light_brown_bg" style="background-image: url();">
-										</div>
-
-										<div>
-											<p>${reply.memberFn}</p>
-										</div>
-									</div>
-
-									<div class="comment">
-										<p>${reply.replyContent}</p>
-									</div>
-
-									<div class="comment_btn">
-										<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
-										<c:if test="${loginMember.memberNo == reply.memberNo }">
-											<button class="dark-brown edit_btn " onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
-											<button class="dark-brown edit_btn " onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
-										</c:if>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
+				           
+				           <textarea name="replyContent" id="replyContent" rows="3"></textarea>
+				           <button class="option_btn dark_brown_bg" id="addReply" onclick="addComment();"> 등록 </button>
+				       	</div>
+					    <hr style="border-color:grey; ">       
+					       
+					       
+					     <div class="comment_list" id="comment_list">
+							<c:forEach items="${replyList}" var="reply">
+			                     <div class="comment_view  <c:if test="${reply.parentReplyNo != 0}"> child </c:if>">
+			                         <div class="user_info">
+			                         	<c:choose>
+			                         		<c:when test="${!empty reply.imagePath}">
+					                        	<div class="user_pic" style="background-image: url(${contextPath}${reply.imagePath}${reply.imageName});">
+					                            </div>
+			                         		</c:when>
+			                         		<c:otherwise>
+					                        	<div class="user_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);">
+					                            </div>
+			                         		</c:otherwise>
+			                         	</c:choose>
+			
+			                             <div>
+			                                 <p>${reply.memberFn}</p>
+			                             </div>
+			                         </div>
+			
+			                         <div class="comment">
+			                             <p>${reply.replyContent}</p>
+			                         </div>
+			
+			                         <div class="comment_btn">
+			                            	<button type="button" class="dark-brown edit_btn re-comment" onclick="showInsertReply(${reply.replyNo}, this)"> 답글 </button>
+				                         	<c:if test="${loginMember.memberNo == reply.memberNo }">
+				                            	<button class="dark-brown edit_btn " onclick="showUpdateReply(${reply.replyNo}, this)"> 수정 </button>
+				                            	<button class="dark-brown edit_btn " onclick="deleteReply(${reply.replyNo})"> 삭제 </button>
+				                            </c:if>	
+		                         	</div>
+		                     	</div>
+	                 		</c:forEach> 
+                		</div>
 					</article>
-				</c:if>
+                </c:if>
 
 	                <%--<div class="insertReply">
 	                    <textarea></textarea>
@@ -343,9 +351,13 @@
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
 <script type="text/javascript" src="${contextPath}/resources/js/board/comunity_worry_board.js"></script>
-<script src="${contextPath}/resources/js/board/replyCopy.js"></script>
+
 
 <script type="text/javascript">
+	function openComment(){
+		$('.write_comment').toggleClass('active');
+		$('.comment_list').toggleClass('active');
+	}
 
 	//수정버튼 클릭 시 동작
 	function updateForm(){
@@ -503,6 +515,7 @@ $(".like").on("click", function(e){
 });
         	
 </script>
+<script src="${contextPath}/resources/js/board/replyCopy.js"></script>
 
 
 

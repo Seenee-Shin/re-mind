@@ -62,7 +62,18 @@ textarea {
     overflow-y: hidden;
     resize: none;
 }
+.reload_btn{
+    height: 25px;
+    text-align: right;
+	margin-left: 20px;
+    width: 100%;
+}
 
+.reLoad_icon{
+	width: 25px;
+	cursor: pointer;
+	fill: #a59999;
+}
 .link-icon > img { position: relative; display: inline-block; width: 35px;  background-size: 30px;  font-size: 11px; font-weight: 500; color: #333; margin-right: 7px; }
 .link-icon.twitter {  background-repeat: no-repeat; }
 .link-icon.facebook {  background-repeat: no-repeat; } 
@@ -530,6 +541,13 @@ a:hover{color:#A59999;}
   .side_menu>ul>li>a {
   	margin:0px;
   }
+  
+  .reload_btn{
+	margin-right: 20px;
+	margin-left: 0px;
+	width:initial;
+}
+  
 
 	/* ------------게시판 사진 ---------- */
 	.post_img{

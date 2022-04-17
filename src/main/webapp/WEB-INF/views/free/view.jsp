@@ -147,11 +147,11 @@
 							</a>    
 	    				</c:if>
 	    				
-	    				<c:if test="${loginMember.memberNo != board.memberNo }">
+<%-- 	    				<c:if test="${loginMember.memberNo != board.memberNo }">
 	                       <a id="report" href="javascript:openReportPopup();">
 								<img alt=""  class="link-icon exclamation" src="${contextPath}/resources/images/icon/exclamation-mark.png">
 	                        </a>
-                        </c:if>
+                        </c:if> --%>
                     </div> 
                 </article>
 				
@@ -174,15 +174,15 @@
 				       <div class="write_comment" id="write_comment">
 				           
 				           <div class="user_info">
-                           	<c:choose>
-                           		<c:when test="${!empty loginMember.imagePath}">
-                               		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
-                           		</c:when>
-                           		<c:otherwise>
-                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
-                           		</c:otherwise>
-                           		
-                               </c:choose>
+	                           <c:choose>
+	                           		<c:when test="${!empty loginMember.imagePath}">
+	                               		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+	                           		</c:when>
+	                           		<c:otherwise>
+	                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
+	                           		</c:otherwise>
+	                           		
+	                           </c:choose>
 	
 				               <div>
 				                   <p>${loginMember.memberFName}</p>
