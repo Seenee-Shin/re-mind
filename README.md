@@ -3,6 +3,8 @@
 ![발표용-001_(3)](https://user-images.githubusercontent.com/86164711/161535504-7effbb5c-1ce6-4067-9d12-c23ef8811865.jpg)
 <br></br>
 
+http://remind.us-east-1.elasticbeanstalk.com/
+
 ## ⏱ 開発期間
 
 2021.12 ~ 2022.02
