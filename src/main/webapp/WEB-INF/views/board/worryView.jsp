@@ -388,13 +388,12 @@
 	//트위터 공유
 	function shareTwitter() {
 		var sendText = "re:maind 게시글 공유"; // 전달할 텍스트
-		var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
+		var sendUrl = "http://remind.us-east-1.elasticbeanstalk.com/worry/view/"+boardNo; // 전달할 URL
 		window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
 	}
 
 	function shareFacebook() {
-		var sendUrl = "https://www.naver.com/"; // 전달할 URL
-//	    var sendUrl = "http://localhost:8080"+contextPath+"/free/view/"+boardNo; // 전달할 URL
+	    var sendUrl = "http://remind.us-east-1.elasticbeanstalk.com/worry/view/"+boardNo; // 전달할 URL
 		window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 	}
 
