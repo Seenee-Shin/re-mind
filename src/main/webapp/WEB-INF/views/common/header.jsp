@@ -9,6 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="${contextPath}/resources/images/icon/love-potion.ico" />
     <title>마음연구소 re:mind</title>
     <%-- 카카오로그인 API JS 라이브러리 --%>
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -17,7 +18,7 @@
     
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/popup.css">
-    <link rel="stylesheet" href="${contextPath}/resources/css/${css}.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/${css}.css">
 
     <!--
     css 파일 추가 하지 말고
@@ -35,7 +36,7 @@
 
 
     <!-- 글꼴 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect"  href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- 애니메이션 효과 라이브러리 -->
@@ -76,7 +77,7 @@
     <!-- 헤더 -->
     <section class="header_wrap">
         <article class="header_logo_wrap">
-        	<a href="${contextPath}">
+        	<a href="http://remind.us-east-1.elasticbeanstalk.com/">
             	<img src="${contextPath}/resources/images/remind_logo.png" alt="">
             </a>
         </article>
