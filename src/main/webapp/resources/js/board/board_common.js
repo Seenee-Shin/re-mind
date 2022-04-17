@@ -33,4 +33,11 @@ $(document).on("click", ".block", function(){
 
 });
 
+//리로드 
+function reload() {
+	$(".free_board_list_wrap").empty();
+	getFreeList();
+}
+
+
 

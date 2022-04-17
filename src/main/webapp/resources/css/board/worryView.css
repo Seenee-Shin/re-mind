@@ -119,7 +119,7 @@ input:focus, textarea:focus, select:focus{
 
 .report_scrap_wrap>a{
     display: block;
-    margin-right: 20px;
+    margin-right: 10px;
     color: #828282;
     
 }
@@ -323,7 +323,7 @@ p{
     /* 사이드 메뉴 */
     .side_menu{
         display: block;
-        height: 105px;
+        height: 55px;
     }
     .side_menu>h3{
         margin-bottom: 15px;
@@ -356,27 +356,34 @@ p{
         margin-left: 10px;
         margin-right: 20px;
     }
-    /* 댓글 */
+     /* 댓글 */
     .comment_view_wrap{
-        height: 50px;
         margin-top: 10px;
         margin-left: 0px;
-        background-color: #A59999;
     }
 
-    .comment_view_wrap> form {
-        display: none;
+	.write_comment,.comment_list{
+	 display: none;
+	}
+	
+    .write_comment.active{
+    	display: flex;
+    	padding: 10px;
+    }
+        
+	.comment_list.active {
+    	display: block;
+    	padding: 0px 10px;
     }
     .comment_top> div:nth-child(1){
         display: none;
-    }
+    } 
 
     .comment_top{
         display: block;
         color: white;
         line-height: 48px;
         text-align: center;
-        margin-right: 100%;
     }
 
     .comment_top>.m_comment_wirte{ 
@@ -384,6 +391,7 @@ p{
         color: white;
         width: 100%;
         cursor: pointer;
+        background-color: #A59999;
     }
     /* 본문내용 */
     .post_title{

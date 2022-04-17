@@ -182,34 +182,34 @@
 
                 </article>
                 
-              <c:if test="${board.replyCheckCode == 1}">
+				<c:if test="${board.replyCheckCode == 1}">
 					<article class="comment_view_wrap">
-					    <div class="comment_top dark-brown">
+					    <div class="comment_top">
 					        <div>
 					            <i class="far fa-comment"></i>
 					            <span>댓글</span> 
 					            <span>(${board.replyCount})</span>
 					        </div>
 					
-					        <div class="m_comment_wirte" onclick="openComment()">
+					        <div class="dark-brown m_comment_wirte" onclick="openComment();">
 					            <i class="far fa-comment"></i>
 					            <span>댓글</span> 
 					            <span>(${board.replyCount})</span>
 					        </div>
 					    </div>
-					     
-					     <div class="write_comment" id="write_comment">
+					
+				       <div class="write_comment" id="write_comment">
 				           
-				          <div class="user_info">
-                           	<c:choose>
-                           		<c:when test="${!empty loginMember.imagePath}">
-                               		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
-                           		</c:when>
-                           		<c:otherwise>
-                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"> </div>
-                           		</c:otherwise>
-                           		
-                               </c:choose>
+				           <div class="user_info">
+	                           <c:choose>
+	                           		<c:when test="${!empty loginMember.imagePath}">
+	                               		<div class="my_pic" style="background-image: url(${contextPath}${loginMember.imagePath}${loginMember.imageName});"> </div>
+	                           		</c:when>
+	                           		<c:otherwise>
+	                               		<div class="my_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);"></div>
+	                           		</c:otherwise>
+	                           		
+	                           </c:choose>
 	
 				               <div>
 				                   <p>${loginMember.memberFName}</p>
@@ -226,8 +226,16 @@
 							<c:forEach items="${rList}" var="reply">
 			                     <div class="comment_view  <c:if test="${reply.parentReplyNo != 0}"> child </c:if>">
 			                         <div class="user_info">
-			                             <div class="user_pic light_brown_bg" style="background-image: url();">
-			                             </div>
+			                         	<c:choose>
+			                         		<c:when test="${!empty reply.imagePath}">
+					                        	<div class="user_pic" style="background-image: url(${contextPath}${reply.imagePath}${reply.imageName});">
+					                            </div>
+			                         		</c:when>
+			                         		<c:otherwise>
+					                        	<div class="user_pic" style="background-image: url(${contextPath}/resources/images/basicProfile.png);">
+					                            </div>
+			                         		</c:otherwise>
+			                         	</c:choose>
 			
 			                             <div>
 			                                 <p>${reply.memberFn}</p>
@@ -264,15 +272,15 @@
     </main>
 <!-- header include -->
 <jsp:include page="../common/footer.jsp"></jsp:include>
-<script type="text/javascript" src="${contextPath}/resources/js/board/comunity_freeboard.js"></script>
-<script type="text/javascript" src="${contextPath}/resources/js/board/secretBoard.js"></script>
+
+<%-- <script type="text/javascript" src="${contextPath}/resources/js/board/secretBoard.js"></script> --%>
 <script type="text/javascript">
 
 
-function openComment() {
-	$('#write_comment').toggleClass('active');
-	$('#comment_list').toggleClass('active');
-}
+	function openComment(){
+		$('.write_comment').toggleClass('active');
+		$('.comment_list').toggleClass('active');
+	}
 
 
 	//수정버튼 클릭 시 동작
