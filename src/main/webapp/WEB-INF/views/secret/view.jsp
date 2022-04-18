@@ -320,7 +320,7 @@
 	    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 	}
 
-  	function shareKakao() {
+/*   	function shareKakao() {
 		 
 		  // 사용할 앱의 JavaScript 키 설정
 		  Kakao.init('6218050ca27459717c1f03b78a03958d');
@@ -332,14 +332,14 @@
 		    content: {
 		      title: "re:mind", // 보여질 제목
 		      description: "자유게시판 게시글 공유", // 보여질 설명
-		      imageUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo", // 콘텐츠 URL
+		      imageUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo+",
 		      link: {
 		         mobileWebUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo",
 		         webUrl: "http://localhost:8080"+contextPath+"/free/view/"+boardNo;"
 		      }
 		    }
 		  });
-		}  
+		}   */
  	
 function boardScrap() {
 		

@@ -14,7 +14,7 @@
                  <button class="study_submit">작성하기</button>
               </div>
               <div class="study_content">
-                  <div class="image_wrap">
+                  <div class="image_wrap" style="background: url(${contextPath}/resources/images/board/mindPost/연구소.png) 100% 100% / 100% 100% no-repeat;">
 
                   	<c:choose>
                   		<c:when test="${empty postList}">
