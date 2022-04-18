@@ -20,14 +20,14 @@
 /* email login(e) */
 
 /* sign up(s) */
-.signup_box{padding:5px 50px 15px 50px;}
+.signup_box{padding:5px 50px 15px 40px;}
 .signup_box > .input_wrap{display:inline-block; width:100%;}
 .signup_box > .input_wrap > .input_area{display:inline-block; width:47%;}
 .check { float: right; font-size : 13px; padding-top: 2px; color:red;}
 .short { width: 64% !important}
 .shortBtn { width: 34%; font-size: 14px; background-color: #a59999; border: 0; color: #F1F0F0; border-radius: 13px; cursor: pointer; padding : 3px 7px 3px 7px; margin-bottom : 5px;}
-.phone { width: 20% !important; margin-left : 5px;}
-.signup_box > .input_wrap > .input_area select{ width:20%;  }
+.phone { width: 60px !important; margin-left : 5px;}
+.signup_box > .input_wrap > .input_area select{ width:60px;  }
 
 
 @media screen and (max-width: 768px) {

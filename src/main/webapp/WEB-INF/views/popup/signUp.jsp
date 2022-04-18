@@ -24,19 +24,19 @@
 					</div>
 					<div class="input_div">
 						<div><label for="pw">비밀번호</label>  <div class="check" id="checkPwd1"></div></div>
-						<input type="password" name="memberPw" id="pwd1" placeholder = "6~20글자"class="login_input" value="123123" required>
+						<input type="password" name="memberPw" id="pwd1" placeholder = "6~20글자"class="login_input" value="" required>
 					</div>
 					<div class="input_div">
 						<div><label for="pw2">비밀번호 확인</label>  <div class="check" id="checkPwd2"></div></div>
-						<input type="password" id="pwd2" class="login_input" value="123123" required>
+						<input type="password" id="pwd2" class="login_input" value="" required>
 					</div>
 					<div class="input_div">
 						<div><label for="name">이름</label><div class="check" id="checkName"></div></div>
-						<input type="text"  name="memberName" id="name" class="login_input" value="차은우" required>
+						<input type="text"  name="memberName" id="name" class="login_input" value="" required>
 					</div>
 					<div class="input_div">
 						<div><label for="nickname">닉네임</label> <div class="check" id="checkNickNm"></div></div>
-						<input type="text" name="memberFName" id="nickname" placeholder = "2~20글자" class="login_input" value="최최차차" required>
+						<input type="text" name="memberFName" id="nickname" placeholder = "2~20글자" class="login_input" value="" required>
 					</div>
 				</div>
 					<div class="input_area right_area">
@@ -51,7 +51,7 @@
 					</div>
 					<div class="input_div">
 						<div><label for="address2">상세 주소</label></div>
-						<input type="text" name="address" id="address_input_3" class="login_input" value="은우야 집주소 좀 알려줘">
+						<input type="text" name="address" id="address_input_3" class="login_input" value="">
 					</div>
 					<div class="input_div">
 						<div><label for="phone2">핸드폰 번호</label><div class="check" id="checkPhone"></div></div>
@@ -62,8 +62,8 @@
 								<option>017</option>
 								<option>019</option>
 							</select>
-						<input type="text" name="phone" id="phone2" class="login_input phone" value="2344" required>
-						<input type="text" name="phone" id="phone3" class="login_input phone" value="2344" required>
+						<input type="text" name="phone" id="phone2" class="login_input phone" value="" required>
+						<input type="text" name="phone" id="phone3" class="login_input phone" value="" required>
 					</div>
 					
 					<div class="input_div">
@@ -160,7 +160,7 @@ function validate(){
             case "nickname" : message = "닉네임이 유효하지 않습니다."; break;
             case "pwd1" : message = "비밀번호가 유효하지 않습니다."; break;
             case "pwd2" : message = "비밀번호가 일치하지 않습니다."; break;
-            case "phone3" : message = "전화번호가 유효하지 않습니다."; break;
+            case "phone3" : message = "다시 입력해주세요."; break;
             }
 
             alert(message);
@@ -435,7 +435,7 @@ $(".phone").on("input", function(){
 
     }else{
 
-        checkPhone.innerText = "유효하지 않은 전화번호 입니다.";
+        checkPhone.innerText = "다시 입력해주세요.";
         checkPhone.style.color = "red";
         signUpCheckObj.phone3 = false;
 

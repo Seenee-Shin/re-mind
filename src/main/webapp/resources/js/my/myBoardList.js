@@ -187,23 +187,35 @@ function makeList(){
         let td2 = $("<td>-</td>");
         let td3 = $("<td>-</td>");
         let td4 = $("<td>"+item.readCount+"</td>");
+        let boardCd = '';
+        
+        if(item.boardCategoryName == '털어놓기'){
+			boardCd='secret'
+		}else if(item.boardCategoryName == '자유게시판'){
+			boardCd='free'
+		}else if(item.boardCategoryName == '고민상담'){
+			boardCd='worry'
+		}else{
+			boardCd='post'
+		}
+        
 
         // 주소 이동시키야지
         if(btnNumber == 1){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 게시글입니다"+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/"+boardCd+"/view/"+item.boardNo+"'>"+item.boardCategoryName+" 게시글입니다"+"</a></td>");
             td3 = $("<td>"+timeForToday(item.createDate)+"</td>");
         }else if(btnNumber == 2){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 게시글의 댓글입니다"+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/"+boardCd+"/view/"+item.boardNo+"'>"+item.boardCategoryName+" 게시글의 댓글입니다"+"</a></td>");
             td3 = $("<td>"+timeForToday(item.replyCreateDate)+"</td>");
         }else if(btnNumber == 3){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 스크랩한 게시글입니다"+"</a></td>");
+            td2 = $("<td><a href='"+contextPath+"/"+boardCd+"/view/"+item.boardNo+"'>"+item.boardCategoryName+" 스크랩한 게시글입니다"+"</a></td>");
             td3 = $("<td>"+timeForToday(item.enrollDate)+"</td>");
         }else if(btnNumber == 4){
             td1 = $("<td>"+item.boardNo+"</td>");
-            td2 = $("<td><a href='"+contextPath+"/free/view/"+item.boardNo+"'>"+item.boardCategoryName+" 공감한 게시글입니다"+"</a></td>")
+            td2 = $("<td><a href='"+contextPath+"/"+boardCd+"/view/"+item.boardNo+"'>"+item.boardCategoryName+" 공감한 게시글입니다"+"</a></td>")
             td3 = $("<td>"+timeForToday(item.empEnrollDate)+"</td>");
         }
 

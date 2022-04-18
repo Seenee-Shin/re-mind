@@ -60,11 +60,6 @@ public class SignUpController {
  	}
  	
     
-    
-    
-    
-    
-    
     /* 이메일 인증 */
     @RequestMapping(value="mailCheck", method=RequestMethod.GET)
     @ResponseBody
