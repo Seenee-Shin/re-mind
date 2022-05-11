@@ -3,7 +3,7 @@
 ![발표용-001_(3)](https://user-images.githubusercontent.com/86164711/161535504-7effbb5c-1ce6-4067-9d12-c23ef8811865.jpg)
 <br></br>
 
-http://remind.us-east-1.elasticbeanstalk.com/
+http://remind-env.eba-m9figkvd.ap-northeast-1.elasticbeanstalk.com/
 
 ## ⏱ 開発期間
 
@@ -65,7 +65,9 @@ NA JAVAVARAは **『いかなる病気も嫌悪の対象であってはならな
   データベースの正規化と非正規化を勉強し処理速度や複雑度を改善したいと思います。
 - プロジェクト全般的に非同期処理を利用した結果、AJAXやJSONをより理解できることになりました。
 - JQueryの使用が多かったと思いますJJQueryで作成したコードをJavaScriptに変えて行きたいと思います。
+- データベースの設計ミスで速度が落ちたと思ったが、サーバーとクライアントの距離が遠くて起きた問題でした。アメリカだったサーバーを東京に変えて解決しました。　
 <br></br>
+
 
 ## 📷 Screenshot
 プロジェクトは韓国語で作成され、スクリーショットは日本語の自動翻訳を利用しました。 
