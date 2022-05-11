@@ -77,7 +77,7 @@
     <!-- 헤더 -->
     <section class="header_wrap">
         <article class="header_logo_wrap">
-        	<a href="http://remind.us-east-1.elasticbeanstalk.com/">
+        	<a href="http://remind-env.eba-m9figkvd.ap-northeast-1.elasticbeanstalk.com/">
             	<img src="${contextPath}/resources/images/remind_logo.png" alt="">
             </a>
         </article>
