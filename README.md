@@ -2,8 +2,11 @@
 
 ![발표용-001_(3)](https://user-images.githubusercontent.com/86164711/161535504-7effbb5c-1ce6-4067-9d12-c23ef8811865.jpg)
 <br></br>
-
+## 🖥Site
 http://remind-env.eba-m9figkvd.ap-northeast-1.elasticbeanstalk.com/
+
+## 📁Notion 
+https://www.notion.so/re-mind-f0ff3ac72f1e42ccb58e35b8b9792a0d
 
 ## ⏱ 開発期間
 
